@@ -179,7 +179,8 @@ class Simulation:
             }
             if act is None:
                 self.invalid_count += 1
-                ev.update({"action_type": "PARSE_FAIL", "outcome": "invalid",
+                ev.update({"action_type": "PARSE_FAIL",
+                           "outcome": {"kind": "parse_fail", "reason": "unparseable_response"},
                            "raw": (r.get("raw") or "")[:400]})
                 self.events.append(ev)
                 continue

@@ -17,12 +17,17 @@ def _payload(sim) -> Dict[str, Any]:
     parcels = [{"pid": p.pid, "x": p.x, "y": p.y, "block": p.block, "use": p.use,
                 "value": p.assessed_value} for p in sim.ledger.parcels.values()]
     agents = [{"id": a.agent_id, "name": a.name, "role": a.role} for a in sim.agents]
+    def _kind(e: Dict[str, Any]) -> str:
+        o = e.get("outcome")
+        if isinstance(o, dict):
+            return str(o.get("kind", ""))
+        return str(o or "")
+
     events = [{"step": e["step"], "id": e["agent_id"], "name": e.get("name", ""),
                "role": e["role"], "action": e.get("action_type", ""),
                "target": e.get("target", ""), "amount": e.get("amount", 0),
-               "ok": not str((e.get("outcome") or {}).get("kind", "")).endswith(
-                   ("_rejected", "invalid_action")),
-               "outcome": (e.get("outcome") or {}).get("kind", ""),
+               "ok": not _kind(e).endswith(("_rejected", "invalid_action", "parse_fail")),
+               "outcome": _kind(e),
                "utterance": e.get("utterance", ""),
                "reasoning": e.get("reasoning", "")} for e in sim.events]
     utter = getattr(sim, "classified", None) or sim.all_utterances
