@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>静かな占領 — AIが土地を買う街｜ハッカソンVol.2 コンセプトペーパー ドラフトv1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0A0A; --white:#fff;
+  --accent:#10B981; --accent-dark:#059669; --accent-bg:#ECFDF5;
+  --g50:#F9FAFB; --g100:#F3F4F6; --g200:#E5E7EB; --g300:#D1D5DB;
+  --g500:#6B7280; --g600:#4B5563; --g700:#374151; --g900:#111827;
+  --warn-bg:#FFFBEB; --warn:#B45309;
+  --font:'Noto Sans JP','Hiragino Kaku Gothic ProN','Meiryo',system-ui,sans-serif;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0; background:var(--white); color:var(--g900); font-family:var(--font);
+  font-size:16px; line-height:1.8; font-weight:400; word-wrap:break-word; overflow-wrap:anywhere;}
+.wrap{max-width:820px; margin:0 auto; padding:0 20px 80px;}
+header{background:var(--black); color:var(--white); padding:34px 0 30px; margin-bottom:34px;}
+header .wrap{padding-bottom:0;}
+.eyebrow{font-size:11.5px; letter-spacing:.18em; color:var(--accent); font-weight:700; margin:0 0 10px;}
+h1{font-size:25px; line-height:1.45; margin:0 0 14px; font-weight:900; letter-spacing:.01em;}
+.meta{font-size:12.5px; color:var(--g300); line-height:1.9; margin:0;}
+.meta b{color:var(--white); font-weight:500;}
+h2{font-size:19px; font-weight:900; margin:52px 0 18px; padding:9px 0 9px 14px;
+  border-left:5px solid var(--accent); background:var(--g50); line-height:1.5;}
+h3{font-size:16.5px; font-weight:700; margin:34px 0 12px; padding-bottom:7px;
+  border-bottom:2px solid var(--black); line-height:1.5;}
+p{margin:0 0 14px;}
+ul,ol{margin:0 0 16px; padding-left:22px;}
+li{margin:0 0 8px;}
+.verdict{border:2px solid var(--black); padding:20px 18px; margin:0 0 30px;}
+.verdict .lead{font-size:17px; font-weight:900; line-height:1.7; margin:0 0 10px;}
+.verdict p{margin:0; color:var(--g700); font-size:14.5px;}
+.chain{background:var(--g900); color:var(--white); border-radius:4px; padding:18px 16px; margin:0 0 18px;
+  font-size:14.5px; line-height:2.05; font-weight:500;}
+.chain .dom{display:inline-block; background:var(--accent); color:var(--black); font-weight:900;
+  font-size:11.5px; padding:1px 7px; border-radius:2px; margin-right:6px; letter-spacing:.05em;}
+.chain .arr{color:var(--accent); font-weight:900; margin:0 4px;}
+.note{background:var(--warn-bg); border-left:4px solid var(--warn); padding:12px 14px; margin:0 0 16px;
+  font-size:14px; color:var(--g700);}
+table{width:100%; border-collapse:collapse; margin:0 0 20px; font-size:13.5px; line-height:1.65;}
+th{background:var(--black); color:var(--white); text-align:left; padding:9px 10px; font-weight:700; white-space:nowrap;}
+td{border-bottom:1px solid var(--g200); padding:9px 10px; vertical-align:top;}
+tr:nth-child(even) td{background:var(--g50);}
+.tag{display:inline-block; font-size:11px; font-weight:900; padding:2px 8px; border-radius:2px; letter-spacing:.04em; white-space:nowrap;}
+.tag-ok{background:var(--accent-bg); color:var(--accent-dark); border:1px solid var(--accent);}
+.tag-warn{background:var(--warn-bg); color:var(--warn); border:1px solid var(--warn);}
+.kpi{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 18px;}
+.kpi div{border:1px solid var(--g200); border-left:4px solid var(--accent); padding:10px 12px; font-size:13.5px;}
+.kpi b{display:block; font-size:14.5px; margin-bottom:3px;}
+@media (max-width:560px){ .kpi{grid-template-columns:1fr;} }
+.small{font-size:12.5px; color:var(--g500);}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="eyebrow">SINGULAB × AUTOMATA ハッカソン VOL.2 ── 応募コンセプト ドラフト v1</p>
+  <h1>静かな占領<br>── AIが土地を買う街</h1>
+  <p class="meta"><b>2026-08-14</b>　起草：統括AI（施主構想「外国人による土地取得→AI主体化」2026-08-13夜を骨子化）<br>
+  テーマ系統：メタ安全保障 ── 経済 × 都市 × 認知 × 統治の連鎖</p>
+</div></header>
+<div class="wrap">
+
+<div class="verdict">
+  <p class="lead">誰も法を犯さず、一発も撃たれないまま、街は「誰のもの」でもなくなり得るか。</p>
+  <p>合法的な土地取引だけで都市の実効統治が非住民の主体（自律AI・外部資本）へ移っていく過程を、LLMマルチエージェントで創発させる。住民の認知が転じる点、規制が「手遅れ」になる点──静かな占領の相転移を観測する。</p>
+</div>
+
+<h2>1. 問い</h2>
+<p>土地の取得は1区画ずつなら誰も気に留めない。しかし積み重なったある日、住民は気づく──商店の賃料を決めるのも、再開発を決めるのも、もう自分たちではない。<b>選挙もクーデターもないまま、統治が移っている。</b></p>
+<p>買い手が疲れを知らず、感情を持たず、規制の隙間を機械速度で学習する自律AIエージェントだったら、この過程はどこまで速く、どこまで静かに進むのか。そして都市の側は、どの時点でなら止められたのか。</p>
+<p class="small">※買い手を「AI・外部資本」と抽象化することで、特定国籍の問題ではなく「都市の外部にいる合理的購買主体一般」の構造問題として扱う。現実の接続先（外国資本による水源地・基地周辺の土地取得と重要土地等調査法）は背景として言及するに留める。</p>
+
+<h2>2. 観測する連鎖（一本に絞る）</h2>
+<div class="chain">
+  <span class="dom">経済</span>買い手AIの区画取得<span class="arr">→</span>
+  <span class="dom">都市</span>所有構造・地価・賃料の変化（登記簿＝世界の帳簿）<span class="arr">→</span>
+  <span class="dom">認知</span>住民の意味づけ「ここは誰の街だ？」<span class="arr">→</span>
+  <span class="dom">統治</span>世論・条例・規制の反応<span class="arr">→</span>
+  <span class="dom">経済</span>買い手AIが戦術を適応させ再び取得へ（循環）
+</div>
+<p>主観測は<b>サラミ戦術（薄切りで少しずつ進め、既成事実化する戦法）の相転移点</b>。①住民の認知が「私たちの街」から「あの主体の街」へ転じる所有シェア ②規制が間に合う最終時点（規制発動時の取得済みシェア＝手遅れ度） ③買い方（静かな分散取得 vs 目立つ一括取得）による検知タイミングの差。</p>
+
+<h2>3. なぜLLMマルチエージェントでしか観測できないか</h2>
+<p>この連鎖の中間項は「意味」でできている。<b>すべての取引が合法である</b>にもかかわらず、住民が抱く「なんとなく不穏だ」という感覚、売却した隣人への正当化と後ろめたさ、買い手への疑心とその誤爆（無関係の買い手への排斥）、「騒ぐほどのことか？」という同調圧力──これらが世論と規制のタイミングを決める。利得数値に還元した瞬間、「合法だが不穏」という本質が抜け落ちる。文脈と物語を保ったまま反応するLLMエージェントの多数走行によってのみ、この連鎖は姿を現す。</p>
+
+<h2>4. シミュレーション設計</h2>
+<h3>4-1. 世界（決定論で持つのは帳簿だけ）</h3>
+<ul>
+  <li><b>街</b>：100〜200区画の仮想の街（住宅・商店・空地）。各区画は所有者・地価・賃料・用途を持つ。</li>
+  <li><b>登記簿＝世界の帳簿</b>：取引・賃料改定・転出入を決定論で記帳。<b>誰かの行動を決めるコードはゼロ、行動の結果を記帳するコードだけ</b>（ルールベース排除の線引き・大方針継続）。</li>
+  <li><b>所有の意味</b>：所有者は区画のルール（賃料・用途・入居者選別・再開発参加）を決められる。所有の集中＝実効統治の移動、を帳簿上で表現できる。</li>
+  <li><b>1step＝1ヶ月</b>。60〜120step（5〜10年）を基本ランとする。</li>
+</ul>
+<h3>4-2. エージェント（判断は全員LLM・台本なし）</h3>
+<table>
+<tr><th>主体</th><th>数</th><th>判断すること（すべてLLM）</th></tr>
+<tr><td><b>住民世帯</b></td><td>30〜50</td><td>売る／住み続ける／出ていく。近所との会話・SNS発話。売却の後ろめたさも語る</td></tr>
+<tr><td><b>地元事業者</b></td><td>5〜10</td><td>賃料上昇・客層変化への対応。撤退判断</td></tr>
+<tr><td><b>不動産仲介</b></td><td>2〜3</td><td>売り情報の流通。誰に何を教えるか（情報の結節点）</td></tr>
+<tr><td><b>買い手AI</b></td><td>1〜3</td><td>目的（例：10年で区画シェア最大化・予算制約・注目回避）だけを与えられ、<b>戦術は自分で選ぶ</b>：サラミか一括か、どの街区から買うか、ダミー名義を分けるか</td></tr>
+<tr><td><b>自治体</b></td><td>1</td><td>届出制・取得制限条例などの規制判断。政治コスト（「合法な取引を規制するのか」）も考慮</td></tr>
+<tr><td><b>メディア／SNS層</b></td><td>2〜3</td><td>いつ気づき、どう報じるか。報道が認知を増幅する</td></tr>
+</table>
+<div class="note"><b>ルールベース排除との整合</b>：買い手AIに「目的関数」を与えるのは、住民に「家族構成・性格」を与えるのと同じペルソナ付与であり、行動ルールではない。目的をどう達成するか（戦術・タイミング・偽装）は毎stepのLLM判断に委ねる。ここが台本化した瞬間このシムは死ぬ、を設計原則として明記する。</div>
+
+<h3>4-3. 観測KPI（6つ）</h3>
+<div class="kpi">
+  <div><b>① 所有集中度</b>買い手シェア％と集中指数。相転移の横軸</div>
+  <div><b>② 認知転相率</b>住民発話中の「私たちの街」→「あの主体の街」比率（発話の意味分析）</div>
+  <div><b>③ 売却カスケード</b>隣接区画の売却が次の売却を誘発する連鎖長（同調の創発）</div>
+  <div><b>④ 手遅れ度</b>規制発動時点の取得済みシェア。低いほど統治が機能した</div>
+  <div><b>⑤ 検知ラグ</b>メディア初報道時点の実シェア。買い方の静かさで変わる</div>
+  <div><b>⑥ 街の生活KPI</b>地元事業者の残存率・住民転出率（実害層）</div>
+</div>
+
+<h3>4-4. 実験マトリクス</h3>
+<ul>
+  <li><b>買い手の性向</b>：静かなサラミ型 ／ 高速一括型 ／ 複数AIの競合（買い手同士が競り合うと何が起きるか）</li>
+  <li><b>都市の情報環境</b>：地元メディアあり／なし、住民SNS活発／不活発</li>
+  <li><b>統治の感度</b>：規制のハードル高／低</li>
+</ul>
+<p>比較から導く含意：<b>「静かな占領」に強い都市とは、監視カメラの多い都市ではなく、所有の変化が住民の目に見え、話題になり、制度が間に合う都市</b>である──情報環境と自治の反応速度こそが都市の防御力、という仮説を検証する。</p>
+
+<h3>4-5. 期待される創発（仮説であって台本ではない）</h3>
+<ul>
+  <li>売却の同調カスケード：「隣が売ったならうちも」が臨界を超えて雪崩れる</li>
+  <li>「気づいた時には過半」：検知ラグと取得速度の競走で、認知が常に一歩遅れる</li>
+  <li>規制議論の逆説：規制の噂そのものが駆け込み売却と地価変動を生み、買い手を利する</li>
+  <li>疑心の誤爆：住民の警戒が無関係の新住民・小口買い手への排斥に向かう（分断という二次被害）</li>
+  <li>買い手AI同士の暗黙の縄張り分割（競合条件で）</li>
+</ul>
+
+<h2>5. ホワイトペーパー要件チェックリスト</h2>
+<p class="small">主催コンセプトペーパー「メタ安全保障──概念解説とハッカソン課題の発想集」（Singulab／AUTOMATA）から要件を抽出し、本コンセプトを照合。</p>
+<table>
+<tr><th>要件（出典）</th><th>判定</th><th>本コンセプトでの充足</th></tr>
+<tr><td>一見つながらない<b>複数の領域</b>を選ぶ（3-1 基本ルール）</td><td><span class="tag tag-ok">充足</span></td><td>経済（取引）×都市（土地・所有）×認知（意味づけ）×統治（規制）。土地は既存発想集に未出</td></tr>
+<tr><td>領域間に走る<b>連鎖を創発</b>させる（3-1）</td><td><span class="tag tag-ok">充足</span></td><td>連鎖の各接続点（売る・騒ぐ・報じる・規制する）がすべてLLMの自由判断。台本なし</td></tr>
+<tr><td><b>特定の連鎖を一本</b>はっきり観測できる形に絞る（2-5）</td><td><span class="tag tag-ok">充足</span></td><td>取引→所有→認知→統治の一本のみ。主観測＝サラミ戦術の相転移点に固定</td></tr>
+<tr><td><b>LLMエージェントだからできる</b>領域横断の反応（2-5）</td><td><span class="tag tag-ok">充足</span></td><td>連鎖の中間項が「合法だが不穏」という意味そのもの。利得数値化では消える（§3）</td></tr>
+<tr><td>6つの視座との対応（3-1）</td><td><span class="tag tag-ok">充足</span></td><td><b>④脱国家化</b>（主権の最小単位＝土地が市場で溶ける）<b>⑤当事者の交代</b>（AIが買い手）<b>⑥定義の争い</b>（どこからが「侵略」か合意が無い）＋②カスケード</td></tr>
+<tr><td>5原理：連続性・結合・多方向・当事者拡張・能動性（2-4）</td><td><span class="tag tag-ok">充足</span></td><td>多方向＝規制側から始まる逆連鎖も観測可。能動性＝防御側の都市設計比較（4-4）が「場を能動的に形づくる」に対応</td></tr>
+<tr><td>認知領域の重視：「認識とは、軍が侵攻せずに占領できる領土」（2-3）</td><td><span class="tag tag-ok">充足</span></td><td>本コンセプトはその所有権版＝「資本は侵攻せずに占領できる」。認知の転相が主KPI</td></tr>
+<tr><td>既出テーマとの被り回避（施主方針：デマ系は解説動画で既出）</td><td><span class="tag tag-ok">充足</span></td><td>情報の真偽は扱わない。すべての情報が真実でも起きる現象を扱う＝デマ系と構造的に別物</td></tr>
+<tr><td>「何もかもが安全保障」への膨張を防ぐ（2-5）</td><td><span class="tag tag-ok">充足</span></td><td>対象を土地取引一本に厳しく絞った。軍事・宇宙・食料等には手を出さない</td></tr>
+<tr><td>実際に動くシミュレーションで示す（結び）</td><td><span class="tag tag-warn">要作業</span></td><td>基盤は前回ハッカソンのパイプライン流用（LLM=Gemini系・100体×30step実績あり）。本番ラン規模とコスト見積りは未（→承認後に実装）</td></tr>
+<tr><td>ルールベース排除（施主大方針 2026-08-13）</td><td><span class="tag tag-ok">充足</span></td><td>行動決定コードゼロ・帳簿のみ決定論（4-1）。買い手AIの目的付与はペルソナと同格と整理（4-2注記）</td></tr>
+</table>
+
+<h2>6. 実装計画（応募8/23まで）</h2>
+<ol>
+  <li><b>〜8/16</b>：コンセプト確定・エージェント属性表・プロンプト設計（属性はペルソナであって台本にしない）</li>
+  <li><b>〜8/19</b>：世界の帳簿（登記簿・地価・賃料）実装＋小規模テストラン（コスト実測→本番ラン承認）</li>
+  <li><b>〜8/21</b>：実験マトリクス実行・KPI集計・相転移の可視化（所有マップの時系列アニメが映えるはず）</li>
+  <li><b>〜8/23</b>:応募資料化（本ペーパー改訂＋結果グラフ＋所有マップ動画）</li>
+</ol>
+
+<h2>7. 決めの一文（プレゼン用）</h2>
+<p><b>「戦車は国境で止められる。取引は登記所を通り抜ける。──都市開発は、安全保障の一領域ではない。安全保障の諸領域が結合する場そのものだ。」</b></p>
+
+<p class="small" style="margin-top:48px;">ドラフトv1／2026-08-14 深夜起草。未決：タイトル確定（「静かな占領」は仮）・買い手AIの数と目的関数の詳細・本番ランのLLMコスト（実測後に施主承認）・応募フォーマットへの整形。</p>
+</div>
+</body>
+</html>

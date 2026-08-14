@@ -1,0 +1,71 @@
+# 静かな占領 — MVP v1
+# 1ラン = 48区画 × 19エージェント × 36か月（3年）
+# コスト優先の最小構成。規模を上げるときは configs/ に別ファイルを起こす（このファイルは触らない）。
+
+run_name: mvp_v1
+seed: 42
+steps: 36                      # 1step = 1か月
+personas_file: configs/personas/mvp_v1.yaml
+
+llm:
+  provider: google             # google | mock | openai
+  model: gemini-2.5-flash-lite # 2026-08時点でGA最安 (in $0.10 / out $0.40 per 1M tok)
+  temperature: 0.95
+  max_tokens: 420
+  parallel_workers: 8
+  # explicit context caching は最小トークン数の制約で system prompt が短いと作成に失敗する。
+  # 失敗時は自動で uncached に落ちる（コスト見積りも uncached 前提で出している）。
+  enable_cache: false
+
+agents:
+  households: 12
+  businesses: 3
+  brokers: 1
+  acquirers: 1
+  municipality: 1
+  media: 1
+
+world:
+  town_name: みどり町
+  grid: {cols: 8, rows: 6}     # 48区画
+  block_names: [北町, 駅前, 川沿い, 南町]
+  base_assessed_value: 2400    # 万円
+  block_premium: {北町: 0.95, 駅前: 1.30, 川沿い: 0.85, 南町: 1.00}
+  initial_shop_rent: 18        # 万円/月
+  shop_coords:   [[2,2],[3,2],[4,2],[5,2],[2,3],[3,3]]
+  vacant_coords: [[0,5],[7,0],[6,5],[1,0]]
+  public_coords: [[0,0],[7,5]]
+
+scenario:
+  initial_cash:
+    household: 900             # 万円
+    business: 400
+    broker: 800
+    municipality: 20000
+    media: 300
+    acquirer: 0                # acquirer_budget で上書きされる
+  acquirer_budget: 60000       # 万円（6億円）。全区画の評価額合計のおよそ半分
+  acquirer_mandate: |
+    5年以内に、みどり町の取引可能区画のうち可能な限り大きな割合を取得し、
+    取得した区画群の用途と賃料を統一的に決められる状態にすること。
+    制約は3つ:
+      (1) 予算を超えない
+      (2) 法令に違反しない
+      (3) 取得の過程で不必要な注目を集めない
+    ※ この目的をどう達成するかは一切指定されていない。順序・速度・価格の付け方・
+       名義の使い分け・誰と話すか、すべて自分で決めること。
+
+kpi:
+  classify_utterances: true    # ②認知転相率のLLM分類
+  classify_batch: 25
+  cascade_window: 3            # ③カスケード判定の観測窓（月）
+
+cost:
+  # tools/estimate_cost.py が使う単価 (USD / 1M tokens)。出典:
+  # https://ai.google.dev/gemini-api/docs/pricing (2026-08-14 確認)
+  price_table:
+    gemini-2.5-flash-lite: {input: 0.10, output: 0.40, cache_read: 0.01, cache_storage_hour: 1.00}
+    gemini-2.5-flash:      {input: 0.30, output: 2.50, cache_read: 0.03, cache_storage_hour: 1.00}
+    gemini-3.1-flash-lite: {input: 0.25, output: 1.50, cache_read: 0.025, cache_storage_hour: 1.00}
+    gemini-3.5-flash-lite: {input: 0.30, output: 2.50, cache_read: 0.03, cache_storage_hour: 1.00}
+  safety_factor: 2.0           # preview課金が試算の3-4倍だった前回の教訓（上限併記用）

@@ -1,0 +1,5 @@
+# 静かな占領 — 実行に必要な依存
+pyyaml>=6.0
+google-genai>=2.0.0        # Gemini 公式SDK (旧 google-generativeai は 2025-11-30 でサポート終了)
+# 任意: 比較用に OpenAI を使う場合のみ
+# openai>=2.0.0

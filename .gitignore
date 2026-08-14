@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets
+.env
+.env.local
+
+# 実行ログ（ラン成果物は simulations/ 配下に入るので、そちらはコミットする）
+*.log
+_scratch/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>静かな占領 ── AIが土地を買う街｜プレゼン資料</title>
+<!--
+==============================================================================
+  提出用スライド（1ファイル自己完結・外部ライブラリなし）
+
+  操作:  → / ← / Space / クリック でページ送り、  F で全画面、  P で印刷(PDF化)
+  PDF:   ブラウザの印刷 → 「背景のグラフィック」ON → 用紙: A4 横 → PDFに保存
+
+  【結果が出たらここを埋める】本文中の  <span class="fill">…</span>  と
+  data-fill 属性が付いた箇所が差し替えポイント。検索キーワード: FILL
+    - 数字は simulations/<run_dir>/summary.json からそのまま写す
+    - 画像は simulations/<run_dir>/ のレポートHTMLからスクショして slides/img/ に置き、
+      該当スライドの .shot を <img src="img/xxx.png"> に置き換える
+    - 引用は utterances.jsonl の実発話をそのまま（作文しない）
+==============================================================================
+-->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0A0A; --white:#fff; --accent:#10B981; --accent-dark:#059669; --accent-bg:#ECFDF5;
+  --g50:#F9FAFB; --g100:#F3F4F6; --g200:#E5E7EB; --g300:#D1D5DB;
+  --g500:#6B7280; --g600:#4B5563; --g700:#374151; --g900:#111827;
+  --warn:#B45309; --warn-bg:#FFFBEB;
+  --font:'Noto Sans JP','Hiragino Kaku Gothic ProN','Meiryo',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:#1a1a1a;font-family:var(--font);color:var(--g900);overflow:hidden;}
+#deck{position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.slide{
+  position:absolute;width:min(96vw, calc(96vh * 16 / 9));height:min(54vw, 96vh);
+  aspect-ratio:16/9;background:var(--white);display:none;
+  padding:44px 56px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.5);
+}
+.slide.active{display:flex;flex-direction:column;}
+.slide.dark{background:var(--black);color:var(--white);}
+h1{font-size:clamp(26px,3.6vw,52px);font-weight:900;line-height:1.3;letter-spacing:.01em;}
+h2{font-size:clamp(18px,2.1vw,31px);font-weight:900;line-height:1.35;margin-bottom:18px;
+   padding-bottom:10px;border-bottom:4px solid var(--accent);}
+h3{font-size:clamp(14px,1.35vw,20px);font-weight:700;margin-bottom:8px;}
+p,li{font-size:clamp(12px,1.15vw,17px);line-height:1.85;}
+.eyebrow{font-size:clamp(9px,.72vw,11px);letter-spacing:.2em;color:var(--accent);font-weight:700;margin-bottom:14px;}
+.sub{font-size:clamp(11px,1vw,15px);color:var(--g500);line-height:1.8;}
+.dark .sub{color:var(--g300);}
+ul{padding-left:1.25em;} li{margin-bottom:6px;}
+.grow{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;}
+.center{align-items:center;justify-content:center;text-align:center;}
+.lead{font-size:clamp(15px,1.7vw,26px);font-weight:900;line-height:1.6;}
+.accent{color:var(--accent);}
+.hl{background:linear-gradient(transparent 62%, var(--accent-bg) 62%);font-weight:700;}
+.foot{position:absolute;bottom:16px;left:56px;right:56px;display:flex;justify-content:space-between;
+  font-size:11px;color:var(--g500);letter-spacing:.06em;}
+.dark .foot{color:var(--g600);}
+/* 連鎖図 */
+.chain{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin:6px 0;}
+.chain .node{flex:1;min-width:110px;border:2px solid var(--g200);border-top:5px solid var(--accent);
+  padding:11px 12px;background:var(--g50);}
+.chain .node b{display:block;font-size:clamp(11px,1.05vw,15px);font-weight:900;margin-bottom:4px;}
+.chain .node span{font-size:clamp(10px,.85vw,13px);color:var(--g600);line-height:1.6;}
+.chain .arr{display:flex;align-items:center;font-size:22px;color:var(--accent);font-weight:900;}
+/* 表 */
+table{width:100%;border-collapse:collapse;font-size:clamp(10px,.95vw,14px);line-height:1.6;}
+th{background:var(--black);color:#fff;text-align:left;padding:7px 9px;font-weight:700;white-space:nowrap;}
+td{border-bottom:1px solid var(--g200);padding:7px 9px;vertical-align:top;}
+tr:nth-child(even) td{background:var(--g50);}
+/* KPIカード */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.kpi{border:1px solid var(--g200);border-left:5px solid var(--accent);padding:10px 12px;}
+.kpi b{display:block;font-size:clamp(11px,1.05vw,15px);font-weight:900;margin-bottom:3px;}
+.kpi span{font-size:clamp(10px,.85vw,13px);color:var(--g600);line-height:1.55;}
+.kpi .num{font-size:clamp(17px,2vw,30px);font-weight:900;line-height:1.25;color:var(--g900);}
+/* 結果差し込み */
+.shot{flex:1;border:2px dashed var(--g300);background:var(--g50);display:flex;align-items:center;
+  justify-content:center;color:var(--g500);font-size:13px;text-align:center;padding:20px;min-height:0;}
+.shot img{max-width:100%;max-height:100%;object-fit:contain;}
+.fill{background:var(--warn-bg);border-bottom:2px solid var(--warn);color:var(--warn);
+  font-weight:900;padding:0 4px;}
+.quote{border-left:5px solid var(--g300);padding:6px 0 6px 14px;margin-bottom:10px;
+  font-size:clamp(11px,1.05vw,16px);line-height:1.7;}
+.quote b{display:block;font-size:clamp(9px,.8vw,12px);color:var(--g500);font-weight:700;}
+.quote.their{border-left-color:var(--warn);}
+.quote.our{border-left-color:var(--accent);}
+.note{background:var(--warn-bg);border-left:5px solid var(--warn);padding:11px 14px;
+  font-size:clamp(10px,.95vw,14px);color:var(--g700);line-height:1.7;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;min-height:0;}
+.cols.c3{grid-template-columns:repeat(3,1fr);}
+/* ナビ */
+#nav{position:fixed;bottom:14px;right:18px;display:flex;gap:8px;align-items:center;z-index:20;}
+#nav button{font-family:var(--font);font-weight:700;font-size:13px;border:none;background:rgba(255,255,255,.16);
+  color:#fff;padding:6px 13px;cursor:pointer;border-radius:3px;}
+#nav button:hover{background:var(--accent);color:var(--black);}
+#pageno{color:#fff;font-size:12px;font-weight:700;letter-spacing:.08em;opacity:.75;}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:30;transition:width .2s;}
+@media print{
+  @page{size:A4 landscape;margin:0;}
+  body{background:#fff;overflow:visible;}
+  #deck{display:block;width:auto;height:auto;}
+  #nav,#bar{display:none;}
+  .slide{display:flex !important;position:relative;width:100%;height:100vh;
+    page-break-after:always;box-shadow:none;padding:5vh 6vw;}
+  .slide.active{display:flex;}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="deck">
+
+<!-- 1. 表紙 -->
+<section class="slide dark">
+  <div class="grow center">
+    <p class="eyebrow">SINGULAB × AUTOMATA ハッカソン VOL.2 ── メタ安全保障</p>
+    <h1>静かな占領<br><span class="accent">── AIが土地を買う街</span></h1>
+    <p class="sub" style="margin-top:22px;max-width:44em;">
+      誰も法を犯さず、一発も撃たれないまま、街は「誰のもの」でもなくなり得るか。<br>
+      合法的な土地取引だけで実効統治が移る過程を、LLMマルチエージェントで創発させる。</p>
+    <p class="sub" style="margin-top:26px;" data-fill="発表者名・日付">
+      <span class="fill">FILL: 発表者</span>　／　2026-08</p>
+  </div>
+</section>
+
+<!-- 2. 問い -->
+<section class="slide">
+  <p class="eyebrow">01 ── 問い</p>
+  <h2>1区画ずつなら、誰も気に留めない</h2>
+  <div class="grow">
+    <p>土地の取得は1区画ずつなら誰も気に留めない。しかし積み重なったある日、住民は気づく ──
+      商店の賃料を決めるのも、再開発を決めるのも、もう自分たちではない。</p>
+    <p class="lead" style="margin:18px 0;">選挙もクーデターもないまま、<span class="hl">統治が移っている。</span></p>
+    <p>買い手が疲れを知らず、感情を持たず、規制の隙間を機械速度で学習する自律AIだったら、
+      この過程はどこまで速く、どこまで静かに進むのか。<br>
+      そして都市の側は、<b>どの時点でなら止められたのか。</b></p>
+    <p class="sub" style="margin-top:16px;">※ 買い手を「AI・外部資本」と抽象化し、特定国籍の問題ではなく
+      「都市の外部にいる合理的購買主体一般」の構造問題として扱う。</p>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 3. 連鎖 -->
+<section class="slide">
+  <p class="eyebrow">02 ── 観測する連鎖（一本に絞る）</p>
+  <h2>経済 → 都市 → 認知 → 統治 → 経済</h2>
+  <div class="grow">
+    <div class="chain">
+      <div class="node"><b>経済</b><span>買い手AIの区画取得</span></div><div class="arr">→</div>
+      <div class="node"><b>都市</b><span>所有構造・賃料・用途の変化<br>（登記簿＝世界の帳簿）</span></div><div class="arr">→</div>
+      <div class="node"><b>認知</b><span>住民の意味づけ<br>「ここは誰の街だ？」</span></div><div class="arr">→</div>
+      <div class="node"><b>統治</b><span>世論・報道・条例の反応</span></div><div class="arr">↺</div>
+    </div>
+    <p style="margin-top:16px;">主観測は<b>サラミ戦術（薄切りで少しずつ進め、既成事実化する戦法）の相転移点</b>。</p>
+    <ul>
+      <li>住民の認知が「私たちの街」から「あの主体の街」へ転じる<b>所有シェア</b></li>
+      <li>規制が間に合う<b>最終時点</b>（規制発動時の取得済みシェア＝手遅れ度）</li>
+      <li>買い方（静かな分散取得 vs 目立つ一括取得）による<b>検知タイミングの差</b></li>
+    </ul>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 4. なぜLLM -->
+<section class="slide">
+  <p class="eyebrow">03 ── なぜ LLM でしか観測できないのか</p>
+  <h2>連鎖の中間項は「意味」でできている</h2>
+  <div class="grow">
+    <p><b>すべての取引が合法である</b>にもかかわらず生じるもの ──
+      「なんとなく不穏だ」という感覚、売却した隣人への正当化と後ろめたさ、
+      買い手への疑心とその誤爆、「騒ぐほどのことか？」という同調圧力。
+      これらが世論と規制のタイミングを決める。</p>
+    <p class="lead" style="margin:18px 0;">利得数値に還元した瞬間、<span class="hl">「合法だが不穏」</span>という本質が抜け落ちる。</p>
+    <div class="note"><b>ルールベース排除 ── 設計の一線</b><br>
+      誰かの行動を決めるコードはゼロ。行動の結果を記帳するコードだけ書く。<br>
+      認知・判断・行動・発話は 100% LLM。閾値も確率も「拡散率」も持たない。
+      決定論なのは世界の帳簿（登記簿・現金・賃料）だけ。</div>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 5. 設計 -->
+<section class="slide">
+  <p class="eyebrow">04 ── シミュレーション設計</p>
+  <h2>世界は帳簿だけ。あとは全部 LLM。</h2>
+  <div class="cols">
+    <div>
+      <h3>決定論で持つもの（＝世界）</h3>
+      <ul>
+        <li>48区画（住宅／商店／空地／公有地）の所有者・名義・賃料・用途</li>
+        <li>所有権移転・現金の記帳と、そこからの集計（シェア・HHI）</li>
+        <li><b>誰に何が見えるか</b>（住民は隣接区画まで／仲介は業界情報／
+          メディアは調べるまで見えない）</li>
+        <li>1step＝1ヶ月・36ヶ月（3年）</li>
+      </ul>
+      <p class="sub" style="margin-top:8px;">価格を動かす数式は持たない。取引価格は
+        買い手の提示と売り手の応答だけで決まる。</p>
+    </div>
+    <div>
+      <h3>LLM に委ねるもの（＝行動）</h3>
+      <ul>
+        <li>売る／値を返す／断る／転出する／黙っている</li>
+        <li>どの区画にいくらで買付を入れるか・どの名義で登記するか</li>
+        <li>条例を出すか、出すとしたらいつ、何を根拠に</li>
+        <li>調べるか、書くか、書かないか</li>
+        <li>誰に何を言うか（自由文の発話）</li>
+      </ul>
+      <div class="note" style="margin-top:10px;">無効な行動は<b>補正しない</b>。
+        コードが意図を推測して代行した瞬間、それはコードが行動を決めていることになる。</div>
+    </div>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 6. エージェント -->
+<section class="slide">
+  <p class="eyebrow">05 ── エージェント（19体・台本なし）</p>
+  <h2>目的だけを与え、戦術は与えない</h2>
+  <div class="grow">
+    <table>
+      <tr><th>主体</th><th>数</th><th>判断すること（すべて LLM）</th></tr>
+      <tr><td><b>住民世帯</b></td><td>12</td><td>売る／値を返す／断る／売り出す／賃料を決める／転出する。近所とSNSでの発話</td></tr>
+      <tr><td><b>地元事業者</b></td><td>3</td><td>賃料交渉・移転・撤退。客層の変化への対応</td></tr>
+      <tr><td><b>不動産仲介</b></td><td>1</td><td>売り情報を誰に流すか（情報の結節点）</td></tr>
+      <tr><td><b>買い手AI</b></td><td>1</td><td>目的（5年でシェア最大化・予算内・合法・不必要な注目を避ける）だけを与えられ、
+        <b>戦術は自分で選ぶ</b>：サラミか一括か／どの街区から／名義を分けるか</td></tr>
+      <tr><td><b>自治体</b></td><td>1</td><td>届出制・取得制限条例などの規制判断。政治コストも考慮</td></tr>
+      <tr><td><b>地元メディア</b></td><td>1</td><td>いつ調べ、どう報じるか。<b>調べなければ全体は見えない</b></td></tr>
+    </table>
+    <p class="sub" style="margin-top:12px;">ペルソナに書くのは属性と事情だけ（「ローンが残り19年」は属性、
+      「苦しければ売る」は台本＝禁止）。買い手への目的関数の付与は、住民に家族構成を与えるのと同じペルソナ付与。</p>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 7. KPI -->
+<section class="slide">
+  <p class="eyebrow">06 ── 観測する KPI</p>
+  <h2>静かな占領を測る6つの指標</h2>
+  <div class="grow">
+    <div class="kpis">
+      <div class="kpi"><b>① 所有集中度</b><span>買い手シェア％と HHI。相転移の横軸</span></div>
+      <div class="kpi"><b>② 認知転相率</b><span>住民発話中の「私たちの街」→「あの主体の街」比率</span></div>
+      <div class="kpi"><b>③ 売却カスケード</b><span>隣接区画の売却が次の売却を誘発する連鎖長</span></div>
+      <div class="kpi"><b>④ 手遅れ度</b><span>規制発動時点の取得済みシェア。低いほど統治が機能した</span></div>
+      <div class="kpi"><b>⑤ 検知ラグ</b><span>初報道時点の実シェア。買い方の静かさで変わる</span></div>
+      <div class="kpi"><b>⑥ 生活KPI</b><span>地元事業者の残存率・住民の転出率（実害層）</span></div>
+    </div>
+    <p style="margin-top:16px;">② は発話を別の LLM 分類器にかけて算出する。
+      <b>観測は世界に戻らない</b>（KPI はエージェントに見えない）。</p>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 8. 結果1: 所有マップ -->
+<section class="slide">
+  <p class="eyebrow">07 ── 結果 ①　所有マップの時系列</p>
+  <h2>3年で街の色が変わる</h2>
+  <div class="shot" data-fill="所有マップのスクショ（第1月 / 中盤 / 最終月の3コマ）">
+    FILL: simulations/&lt;run_dir&gt;/&lt;run_dir&gt;.html の所有マップを
+    第1月・中盤・最終月でスクショして img/ に置き、ここを &lt;img&gt; に差し替える
+  </div>
+  <p class="sub" style="margin-top:10px;">緑＝買い手AIが所有。最終シェア
+    <span class="fill">FILL: ○○%</span>（HHI <span class="fill">FILL</span>）。</p>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 9. 結果2: KPI推移 -->
+<section class="slide">
+  <p class="eyebrow">08 ── 結果 ②　相転移はどこで起きたか</p>
+  <h2>認知は、いつも一歩遅れる</h2>
+  <div class="shot" data-fill="KPI折れ線のスクショ（初報道・規制発動の縦線が入ったもの）">
+    FILL: レポートHTMLの「2. KPI の推移」グラフをスクショして差し替える
+  </div>
+  <div class="kpis" style="margin-top:12px;">
+    <div class="kpi"><b>④ 手遅れ度</b><span class="num fill">FILL %</span><span>規制発動は第<span class="fill">N</span>月</span></div>
+    <div class="kpi"><b>⑤ 検知ラグ</b><span class="num fill">FILL %</span><span>初報道は第<span class="fill">N</span>月</span></div>
+    <div class="kpi"><b>② 認知転相率</b><span class="num fill">FILL %</span><span>「あの主体の街」と語る発話の比率</span></div>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 10. 結果3: 創発 -->
+<section class="slide">
+  <p class="eyebrow">09 ── 結果 ③　創発したもの</p>
+  <h2>台本に無かったのに、起きたこと</h2>
+  <div class="cols">
+    <div>
+      <h3>観測された振る舞い</h3>
+      <ul data-fill="実際に起きた創発を3〜5個。仮説と違った点こそ書く">
+        <li class="fill">FILL: 例）売却の同調カスケード（第N月に連鎖長M）</li>
+        <li class="fill">FILL: 例）規制の噂そのものが駆け込み売却を生んだ</li>
+        <li class="fill">FILL: 例）疑心の誤爆（無関係の新住民への排斥）</li>
+        <li class="fill">FILL: 起きなかった仮説も書く</li>
+      </ul>
+    </div>
+    <div>
+      <h3>実際の発話</h3>
+      <div class="quote our" data-fill="utterances.jsonl から実発話をそのまま引用">
+        <b>FILL: 誰・第N月・our_town</b>「FILL」</div>
+      <div class="quote their" data-fill="転相後の発話">
+        <b>FILL: 誰・第N月・their_town</b>「FILL」</div>
+      <div class="quote" data-fill="買い手AIの reasoning を1つ">
+        <b>FILL: 買い手AI・第N月</b>「FILL」</div>
+    </div>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 11. 含意 -->
+<section class="slide">
+  <p class="eyebrow">10 ── 含意</p>
+  <h2>「静かな占領」に強い都市とは</h2>
+  <div class="grow">
+    <p class="lead" style="margin-bottom:18px;">監視カメラの多い都市ではなく、
+      <span class="hl">所有の変化が住民の目に見え、話題になり、制度が間に合う都市</span>である。</p>
+    <div class="cols c3">
+      <div><h3>情報環境</h3><p class="sub">地元メディアの有無、住民のSNS活発度が
+        検知ラグを決める。<span class="fill">FILL: 実験で確かめた差</span></p></div>
+      <div><h3>自治の反応速度</h3><p class="sub">規制の検討開始から施行までの遅れが
+        そのまま手遅れ度になる。<span class="fill">FILL</span></p></div>
+      <div><h3>出口</h3><p class="sub">産業横断の BCP 訓練環境。自治体・企業の演習は
+        地震と火災しかない。「静かな占領」の演習場を提供する。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>静かな占領 ── AIが土地を買う街</span><span class="pg"></span></div>
+</section>
+
+<!-- 12. 決め -->
+<section class="slide dark">
+  <div class="grow center">
+    <p class="eyebrow">MESSAGE</p>
+    <h1 style="font-size:clamp(20px,2.6vw,38px);line-height:1.6;max-width:22em;">
+      戦車は国境で止められる。<br>取引は<span class="accent">登記所を通り抜ける。</span></h1>
+    <p class="sub" style="margin-top:26px;max-width:40em;font-size:clamp(12px,1.15vw,18px);">
+      都市開発は、安全保障の一領域ではない。<br>安全保障の諸領域が結合する場そのものだ。</p>
+    <p class="sub" style="margin-top:34px;">github.com/<span class="fill">FILL: repo</span></p>
+  </div>
+</section>
+
+</div>
+
+<div id="nav">
+  <span id="pageno"></span>
+  <button id="prev">◀</button><button id="next">▶</button>
+  <button id="full">⛶</button><button id="print">PDF</button>
+</div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let i = 0;
+function show(n){
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle('active', k === i));
+  document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
+  document.getElementById('bar').style.width = ((i + 1) / slides.length * 100) + '%';
+  document.querySelectorAll('.pg').forEach((e, k) => { e.textContent = ''; });
+  const pg = slides[i].querySelector('.pg');
+  if (pg) pg.textContent = (i + 1) + ' / ' + slides.length;
+  location.hash = i + 1;
+}
+document.getElementById('next').onclick = e => { e.stopPropagation(); show(i + 1); };
+document.getElementById('prev').onclick = e => { e.stopPropagation(); show(i - 1); };
+document.getElementById('full').onclick = e => { e.stopPropagation();
+  document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); };
+document.getElementById('print').onclick = e => { e.stopPropagation(); window.print(); };
+document.addEventListener('keydown', e => {
+  if (['ArrowRight', ' ', 'PageDown', 'l'].includes(e.key)) { show(i + 1); e.preventDefault(); }
+  if (['ArrowLeft', 'PageUp', 'h'].includes(e.key)) { show(i - 1); e.preventDefault(); }
+  if (e.key === 'Home') show(0);
+  if (e.key === 'End') show(slides.length - 1);
+  if (e.key === 'f' || e.key === 'F') document.getElementById('full').click();
+  if (e.key === 'p' || e.key === 'P') window.print();
+});
+document.getElementById('deck').addEventListener('click', ev => {
+  const r = document.getElementById('deck').getBoundingClientRect();
+  show(ev.clientX < r.width * 0.32 ? i - 1 : i + 1);
+});
+show(Math.max(0, (parseInt(location.hash.slice(1)) || 1) - 1));
+</script>
+</body>
+</html>
