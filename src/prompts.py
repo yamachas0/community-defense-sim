@@ -268,6 +268,21 @@ def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         body.append(_offers_for(agent, ledger, names))
 
     elif agent.role == "broker":
+        # 仲介は「誰にどう連絡を取れるか」を職業上知っている。連絡先ID が観測に無いと
+        # 売り情報を流す相手を指定できず、情報の結節点として機能しない。
+        # 街の外の買い手は「登記に出てくる名義」で認識される（実体名は知らない）。
+        body.append("[この街の関係者と連絡先ID]")
+        reg_name = {}
+        for p in ledger.parcels.values():
+            if p.registered_name:
+                reg_name.setdefault(p.owner_id, p.registered_name)
+        role_ja = {"HH": "住民世帯", "BZ": "地元事業者", "BR": "同業", "AQ": "街の外の買い手",
+                   "MU": "自治体", "MD": "地元メディア"}
+        for aid in sorted(names):
+            if aid == agent.agent_id:
+                continue
+            label = reg_name.get(aid, names[aid]) if aid in acquirer_ids else names[aid]
+            body.append(f"  {aid}: {label}（{role_ja.get(aid[:2], '')}）")
         body.append("[業界の手元情報：この街の売り出し一覧]")
         ls = ledger.listings()
         body.extend(["  " + _fmt_parcel_public(p, names) for p in ls[:14]]

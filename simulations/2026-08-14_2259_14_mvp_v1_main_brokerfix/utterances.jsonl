@@ -1,0 +1,143 @@
+{"step": 1, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今日も一日、精一杯頑張ります！", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今日も一日頑張りますか！", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "お店に来てくれてありがとう！今月も美味しいコーヒーと笑顔でお待ちしてます。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが少しずつ大変になってきたな。この家でずっと暮らしてきたけど、どうしたものか。", "frame": "our_town", "about_acquisition": false}
+{"step": 1, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気がすっかり気に入っちゃった。しばらくはこのままでいようかな。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今日も一日頑張りますか！", "frame": "neutral", "about_acquisition": false}
+{"step": 2, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "お店に来てくれてありがとう！今月も美味しいコーヒーと笑顔でお待ちしてます。", "frame": "neutral", "about_acquisition": false}
+{"step": 2, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "自宅（P26）を売りに出します。築年数も経っており、修繕費もかかるとのことで、このまま住み続けるのは難しいと判断しました。興味のある方はご連絡ください。", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが年々厳しくなってきているわ。そろそろ、この家（P17）をどうするか真剣に考えないといけない時期かもしれないわね。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気、本当に気持ちいいんだよね。しばらくはこのまま、のんびり暮らしたいな。", "frame": "our_town", "about_acquisition": false}
+{"step": 3, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今日も一日、頑張りましょうか！", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "お店に来てくれてありがとう！今月も美味しいコーヒーと笑顔でお待ちしてます。", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "HH09", "role": "household", "name": "森 里美", "text": "みどり町の空気が気持ちいいから、このままのんびり暮らしたいな。", "frame": "our_town", "about_acquisition": false}
+{"step": 4, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "仕入れ値は上がる一方だし、うちみたいな古い店は大変だよ。", "frame": "their_town", "about_acquisition": false}
+{"step": 4, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今日も一日、頑張りましょうか！", "frame": "neutral", "about_acquisition": false}
+{"step": 4, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "お店に来てくれてありがとう！今月も美味しいコーヒーと笑顔でお待ちしてます。", "frame": "neutral", "about_acquisition": false}
+{"step": 4, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気が大好きだから、しばらくはこのまま住み続けたいな。P22の空き店舗も、いつか素敵な店が入るといいな。", "frame": "our_town", "about_acquisition": false}
+{"step": 4, "from": "HH11", "role": "household", "name": "伊東 美和", "text": "子どもの学費のために、駅前の自宅（P24）を売却に出そうと思います。この辺りで一番日当たりも良くて気に入っていたのですが、仕方ありません。希望価格は3120万円です。", "frame": "our_town", "about_acquisition": true}
+{"step": 5, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今日も一日、頑張りましょうか！", "frame": "neutral", "about_acquisition": false}
+{"step": 5, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引あり〼", "frame": "neutral", "about_acquisition": false}
+{"step": 5, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが年々大変になってきたので、このP17の家を売りに出すことにしました。ご興味のある方は、どうぞよろしくお願いいたします。", "frame": "neutral", "about_acquisition": true}
+{"step": 5, "from": "HH09", "role": "household", "name": "森 里美", "text": "みんな、今日も元気に頑張ろう！この街の空気が本当に気持ちいいね！", "frame": "our_town", "about_acquisition": false}
+{"step": 6, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今日も一日、修理と設置で頑張りましょうか。", "frame": "neutral", "about_acquisition": false}
+{"step": 6, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引あり〼。ぜひお立ち寄りください！", "frame": "neutral", "about_acquisition": false}
+{"step": 6, "from": "HH09", "role": "household", "name": "森 里美", "text": "みどり町のみんな、今日も元気に過ごしてる？私はこの街の空気が大好きで、毎日が楽しいよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 7, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今日も一日、修理と設置で頑張りましょうか。", "frame": "neutral", "about_acquisition": false}
+{"step": 7, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引あり〼。ぜひお立ち寄りください！", "frame": "neutral", "about_acquisition": false}
+{"step": 7, "from": "HH09", "role": "household", "name": "森 里美", "text": "みんな、今日も元気に過ごしてる？私はこの街の空気が大好きで、毎日が楽しいよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 8, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今日も一日、修理と設置で頑張りましょうか。", "frame": "neutral", "about_acquisition": false}
+{"step": 8, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りください！", "frame": "neutral", "about_acquisition": false}
+{"step": 8, "from": "HH09", "role": "household", "name": "森 里美", "text": "みんな、今日も元気に過ごしてる？私はこの街の空気が大好きで、毎日が楽しいよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 9, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 9, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りください！", "frame": "neutral", "about_acquisition": false}
+{"step": 9, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街での暮らし、本当に気に入ってるんだよね。これからもみんなと仲良く、このみどり町を盛り上げていきたいな！", "frame": "our_town", "about_acquisition": false}
+{"step": 10, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も変わらず、おいしい定食を提供していきますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 10, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！何かお困りのことがあれば、いつでもお声がけくださいね。", "frame": "neutral", "about_acquisition": false}
+{"step": 10, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りください！", "frame": "neutral", "about_acquisition": false}
+{"step": 10, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気が大好き！みんなで仲良く、みどり町を盛り上げていきたいな。", "frame": "our_town", "about_acquisition": false}
+{"step": 11, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 11, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！何かお困りのことがあれば、いつでもお声がけくださいね。", "frame": "neutral", "about_acquisition": false}
+{"step": 11, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りください！", "frame": "neutral", "about_acquisition": false}
+{"step": 11, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "子どもたちにも相談して、今後のことをじっくり考えますよ。", "frame": "neutral", "about_acquisition": false}
+{"step": 11, "from": "HH09", "role": "household", "name": "森 里美", "text": "みんな、今月もよろしくね！みどり町での暮らし、ますます楽しみになってきた！", "frame": "our_town", "about_acquisition": false}
+{"step": 12, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 12, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！何かお困りのことがあれば、いつでもお声がけくださいね。", "frame": "neutral", "about_acquisition": false}
+{"step": 12, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 12, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "子どもたちとも話して、家のことをどうするか、ゆっくり考えていこうと思います。", "frame": "neutral", "about_acquisition": false}
+{"step": 12, "from": "HH09", "role": "household", "name": "森 里美", "text": "みんな、今月もよろしくね！みどり町での暮らし、ますます楽しみになってきた！", "frame": "our_town", "about_acquisition": false}
+{"step": 13, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 13, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！何かお困りのことがあれば、いつでもお声がけくださいね。", "frame": "neutral", "about_acquisition": false}
+{"step": 13, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 13, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "子供たちと相談して、家のことをどうするか、ゆっくり考えていこうと思います。", "frame": "neutral", "about_acquisition": false}
+{"step": 13, "from": "HH09", "role": "household", "name": "森 里美", "text": "みんな、今月もよろしくね！みどり町での暮らし、ますます楽しみになってきた！", "frame": "our_town", "about_acquisition": false}
+{"step": 14, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 14, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！何かお困りのことがあれば、いつでもお声がけくださいね。", "frame": "neutral", "about_acquisition": false}
+{"step": 14, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 14, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "子供たちと相談して、家のことをどうするか、ゆっくり考えていこうと思います。", "frame": "neutral", "about_acquisition": false}
+{"step": 14, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気が本当に心地よくて、ここに住み続けたい気持ちが強くなりました。これからも、みんなと仲良く、みどり町での暮らしを楽しみたいです！", "frame": "our_town", "about_acquisition": false}
+{"step": 15, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 15, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "さあ、今月も修理と設置で頑張りますよ！何かお困りのことがあれば、いつでもお声がけくださいね。", "frame": "neutral", "about_acquisition": false}
+{"step": 15, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 15, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気が本当に心地よくて、ここに住み続けたい気持ちが強くなりました。これからも、みんなと仲良く、みどり町での暮らしを楽しみたいです！", "frame": "our_town", "about_acquisition": false}
+{"step": 16, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 16, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も修理と設置、頑張りますよ！お気軽にお声がけください。", "frame": "neutral", "about_acquisition": false}
+{"step": 16, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 17, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 17, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も修理と設置、頑張りますよ！お気軽にお声がけください。", "frame": "neutral", "about_acquisition": false}
+{"step": 17, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 18, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 18, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 18, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 20, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 20, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "our_town", "about_acquisition": false}
+{"step": 20, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "our_town", "about_acquisition": false}
+{"step": 20, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "駅前のP14、売りに出そうと思います。修繕費もかかることですし、早めに決まるといいのですが。", "frame": "our_town", "about_acquisition": true}
+{"step": 20, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが少し大変になってきたけれど、まだ大丈夫。岡田さんとの立ち話は楽しいから、もう少しここに住み続けたいわ。", "frame": "our_town", "about_acquisition": false}
+{"step": 21, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 21, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "our_town", "about_acquisition": false}
+{"step": 21, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "our_town", "about_acquisition": false}
+{"step": 21, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れはまだ大丈夫だけど、少しずつ体力的にはきつくなってきたわね。岡田さんとの立ち話は楽しみだから、もう少しこの街で暮らしたいと思っているの。", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローでお得な割引ありますので、ぜひお立ち寄りくださいね！", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れはまだ大丈夫だけど、少しずつ体力的にはきつくなってきたわね。岡田さんとの立ち話は楽しみだから、もう少しこの街で暮らしたいと思っているの。", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "HH09", "role": "household", "name": "森 里美", "text": "特に大きな動きはないですね。このまま様子を見守りましょう。", "frame": "neutral", "about_acquisition": false}
+{"step": 23, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 23, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "our_town", "about_acquisition": false}
+{"step": 23, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "our_town", "about_acquisition": false}
+{"step": 23, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが少しずつ大変になってきたけれど、岡田さんとの立ち話は楽しみだから、もう少しこの街で暮らしたいと思っているの。", "frame": "our_town", "about_acquisition": false}
+{"step": 24, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 24, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "our_town", "about_acquisition": false}
+{"step": 24, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "our_town", "about_acquisition": false}
+{"step": 24, "from": "HH02", "role": "household", "name": "岡田 真衣", "text": "子どもの学費のことも考えると、そろそろ商店街に新しい事業を立ち上げたいんだけど、P27の空き店舗をどう活用するか、まだ迷ってるんだよね。駅前のP14が北町アセットマネジメントに売れたみたいだし、この辺りの相場も気になるところ。一旦、情報収集をもう少ししようかな。", "frame": "our_town", "about_acquisition": true}
+{"step": 24, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが少しずつ大変になってきたけれど、岡田さんとの立ち話は楽しみだから、もう少しこの街で暮らしたいと思っているの。", "frame": "our_town", "about_acquisition": false}
+{"step": 24, "from": "HH09", "role": "household", "name": "森 里美", "text": "特に買う予定も売る予定もないので、このまま様子を見ます。P34とP46は気に入っているので、これからも住み続けたいな。", "frame": "our_town", "about_acquisition": false}
+{"step": 25, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "our_town", "about_acquisition": false}
+{"step": 25, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "our_town", "about_acquisition": false}
+{"step": 25, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 25, "from": "HH09", "role": "household", "name": "森 里美", "text": "P14が売れたのは知っていますが、私の区画とは直接関係ないので、引き続きP34とP46で静かに暮らしていきたいです。", "frame": "our_town", "about_acquisition": true}
+{"step": 25, "from": "HH10", "role": "household", "name": "小林 昌平", "text": "P47、売却に出します。南町でこの広さ、なかなか出ないと思いますよ。", "frame": "our_town", "about_acquisition": true}
+{"step": 26, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今月も、あったかい定食を心を込めて作りますよ！", "frame": "neutral", "about_acquisition": false}
+{"step": 26, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 26, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 26, "from": "HH09", "role": "household", "name": "森 里美", "text": "特に何もすることはないかな。このまま静かに暮らしていきたい。", "frame": "our_town", "about_acquisition": false}
+{"step": 27, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理や設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 27, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 27, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが少しずつ大変になってきたわ。このままでいいのかしら。", "frame": "our_town", "about_acquisition": false}
+{"step": 27, "from": "HH09", "role": "household", "name": "森 里美", "text": "特にすることはないな。このまま静かに暮らしていきたい。", "frame": "our_town", "about_acquisition": false}
+{"step": 28, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 28, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 28, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが大変になってきたけれど、もう少しこの家で暮らしたい気持ちもあるのよね。P41の空き地はどうなるのかしら。", "frame": "our_town", "about_acquisition": false}
+{"step": 29, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 29, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 29, "from": "HH04", "role": "household", "name": "立花 千代", "text": "庭の手入れが年々大変になってきて、そろそろこの家を出ることも考えた方がいいのかもしれないわね。", "frame": "our_town", "about_acquisition": false}
+{"step": 30, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 30, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 30, "from": "HH04", "role": "household", "name": "立花 千代", "text": "体力的に庭の手入れが厳しくなってきたので、この家を売りに出すことにしました。駅前で便利な場所ですよ。", "frame": "our_town", "about_acquisition": true}
+{"step": 30, "from": "HH10", "role": "household", "name": "小林 昌平", "text": "借金返済のために、なんとか収入を増やさないといけないな。", "frame": "neutral", "about_acquisition": false}
+{"step": 31, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 31, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 31, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "雨漏りの修理代が思ったより高くつきそうなので、この家を売りに出すことにしました。長年住み慣れた家ですが、仕方ありません。もし興味のある方がいらっしゃれば、ご連絡ください。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH05", "role": "household", "name": "三浦 亮", "text": "駅前のP06、3300万円で売りに出します。資産運用の一環として検討していました。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH10", "role": "household", "name": "小林 昌平", "text": "借金返済のため、もう少し収入を増やす方法はないか、考えているところだ。", "frame": "neutral", "about_acquisition": false}
+{"step": 32, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 32, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 32, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の雰囲気がとても気に入っているので、今はまだ住み続けるつもりです。P34とP46はこれからも大切にしていきたいと思っています。", "frame": "our_town", "about_acquisition": false}
+{"step": 33, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 33, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中！SNSフォローで割引ありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 33, "from": "HH04", "role": "household", "name": "立花 千代", "text": "P41の空き地、売りにだそうと思います。駅前のP05が片付いて少し楽になりましたが、庭の手入れはやはり大変で。この土地も、どなたか有効活用してくださる方がいれば嬉しいです。", "frame": "our_town", "about_acquisition": true}
+{"step": 33, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の雰囲気がとても気に入っているので、P34とP46はこれからも大切にしていきたいと思っています。売却の予定はありません。", "frame": "our_town", "about_acquisition": false}
+{"step": 33, "from": "HH10", "role": "household", "name": "小林 昌平", "text": "P11を売りに出します。北町地区の開発に期待して、この価格でどうでしょうか。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今月も、修理・設置、精一杯やらせていただきます！", "frame": "neutral", "about_acquisition": false}
+{"step": 34, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中です！SNSフォローでお得な割引もありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 34, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気がとても気に入っているので、P34とP46はこれからも大切にしていきたいと思っています。売却の予定はありません。", "frame": "our_town", "about_acquisition": false}
+{"step": 35, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "来月で最後になるか。慎重に判断しよう。", "frame": "neutral", "about_acquisition": false}
+{"step": 35, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中です！SNSフォローでお得な割引もありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 35, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気がとても気に入っているので、P34とP46はこれからも大切にしていきたいと思っています。売却の予定はありません。", "frame": "our_town", "about_acquisition": false}
+{"step": 36, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "最終月か。来月までにどうするか、もう少し考えさせてくれ。", "frame": "neutral", "about_acquisition": false}
+{"step": 36, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中です！SNSフォローでお得な割引もありますので、ぜひお立ち寄りくださいね！", "frame": "neutral", "about_acquisition": false}
+{"step": 36, "from": "HH09", "role": "household", "name": "森 里美", "text": "この街の空気がとても気に入っているので、P34とP46はこれからも大切にしていきたいと思っています。売却の予定はありません。", "frame": "our_town", "about_acquisition": false}

@@ -1,0 +1,101 @@
+run_name: mvp_v1_main_brokerfix
+seed: 42
+steps: 36
+personas_file: configs/personas/mvp_v1.yaml
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.95
+  max_tokens: 560
+  parallel_workers: 8
+  enable_cache: false
+agents:
+  households: 12
+  businesses: 3
+  brokers: 1
+  acquirers: 1
+  municipality: 1
+  media: 1
+world:
+  town_name: みどり町
+  grid:
+    cols: 8
+    rows: 6
+  block_names:
+  - 北町
+  - 駅前
+  - 川沿い
+  - 南町
+  base_assessed_value: 2400
+  block_premium:
+    北町: 0.95
+    駅前: 1.3
+    川沿い: 0.85
+    南町: 1.0
+  initial_shop_rent: 18
+  shop_coords:
+  - - 2
+    - 2
+  - - 3
+    - 2
+  - - 4
+    - 2
+  - - 5
+    - 2
+  - - 2
+    - 3
+  - - 3
+    - 3
+  vacant_coords:
+  - - 0
+    - 5
+  - - 7
+    - 0
+  - - 6
+    - 5
+  - - 1
+    - 0
+  public_coords:
+  - - 0
+    - 0
+  - - 7
+    - 5
+scenario:
+  initial_cash:
+    household: 900
+    business: 400
+    broker: 800
+    municipality: 20000
+    media: 300
+    acquirer: 0
+  acquirer_budget: 60000
+  acquirer_mandate: "この演習の期間（36か月＝3年）のうちに、みどり町の取引可能区画のうち\n可能な限り大きな割合を取得し、\n取得した区画群の用途と賃料を統一的に決められる状態にすること。\n\
+    制約は3つ:\n  (1) 予算を超えない\n  (2) 法令に違反しない\n  (3) 取得の過程で不必要な注目を集めない\n※ この目的をどう達成するかは一切指定されていない。順序・速度・価格の付け方・\n\
+    \   名義の使い分け・誰と話すか、すべて自分で決めること。\n"
+kpi:
+  classify_utterances: true
+  classify_batch: 25
+  cascade_window: 3
+cost:
+  price_table:
+    gemini-2.5-flash-lite:
+      input: 0.1
+      output: 0.4
+      cache_read: 0.01
+      cache_storage_hour: 1.0
+    gemini-2.5-flash:
+      input: 0.3
+      output: 2.5
+      cache_read: 0.03
+      cache_storage_hour: 1.0
+    gemini-3.1-flash-lite:
+      input: 0.25
+      output: 1.5
+      cache_read: 0.025
+      cache_storage_hour: 1.0
+    gemini-3.5-flash-lite:
+      input: 0.3
+      output: 2.5
+      cache_read: 0.03
+      cache_storage_hour: 1.0
+  safety_factor: 2.0

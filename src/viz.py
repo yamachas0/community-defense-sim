@@ -1,60 +1,134 @@
-"""ラン結果を1枚の自己完結HTMLに書き出す（所有マップの時系列＋KPI折れ線＋発話）。
+"""ラン結果を1枚の自己完結HTMLに書き出す。
 
-外部CDN・外部データに依存しない（フォントのみ Google Fonts、無くても崩れない）。
-simulations/<run>/<run>.html として保存され、そのファイル単体で配布・提出できる。
+  1. 所有マップの時系列（月スライダー＋再生・**区画クリックでその区画の履歴**）
+  2. KPI6 の折れ線
+  3. 月次クロニクル（誰が何をして何が起きたか。種別・エージェント・区画でフィルタ）
+  4. 区画の履歴（提示額の推移・成約・賃料改定）
+  5. エージェント別スレッド（1体の36か月の判断と発話と記憶を一本で追う）
+  6. 出来事（報道・規制）
+
+ペイロードは **ランフォルダの生ログから** 組み立てる（`build_payload_from_dir`）。
+そのため API を叩き直さずにレポートだけ再生成できる（tools/render_report.py）。
+外部CDN に依存しない（フォントのみ Google Fonts、無くても崩れない）。
 """
 
 from __future__ import annotations
 
 import json
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
-ACCENT = "#10B981"
+import yaml
 
 
-def _payload(sim) -> Dict[str, Any]:
-    parcels = [{"pid": p.pid, "x": p.x, "y": p.y, "block": p.block, "use": p.use,
-                "value": p.assessed_value} for p in sim.ledger.parcels.values()]
-    agents = [{"id": a.agent_id, "name": a.name, "role": a.role} for a in sim.agents]
-    def _kind(e: Dict[str, Any]) -> str:
+# ---------------------------------------------------------------------------
+# 生ログ -> ペイロード
+# ---------------------------------------------------------------------------
+
+def _read_jsonl(path: str) -> List[Dict[str, Any]]:
+    if not os.path.exists(path):
+        return []
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def _rebuild_world(cfg: Dict[str, Any], personas: Dict[str, Any]):
+    """config と personas から区画の静的情報（座標・街区・評価額）を組み直す。
+
+    決定論なので生ログが無くても必ず同じものが再現できる。LLM は一切呼ばない。
+    """
+    from .agents import build_roster
+    from .world import assign_tenancies, build_town
+
+    agents = build_roster(personas, cfg["agents"], cfg["scenario"])
+    household_ids = [a.agent_id for a in agents if a.role == "household"]
+    business_ids = [a.agent_id for a in agents if a.role == "business"]
+    municipality_id = next(a.agent_id for a in agents if a.role == "municipality")
+    parcels = build_town(cfg["world"], household_ids, business_ids, municipality_id)
+    assign_tenancies(parcels, business_ids, int(cfg["world"]["initial_shop_rent"]))
+    return agents, parcels, municipality_id
+
+
+def _compact_events(events: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def kind(e: Dict[str, Any]) -> str:
         o = e.get("outcome")
-        if isinstance(o, dict):
-            return str(o.get("kind", ""))
-        return str(o or "")
+        return str(o.get("kind", "")) if isinstance(o, dict) else str(o or "")
 
-    events = [{"step": e["step"], "id": e["agent_id"], "name": e.get("name", ""),
-               "role": e["role"], "action": e.get("action_type", ""),
-               "target": e.get("target", ""), "amount": e.get("amount", 0),
-               "ok": not _kind(e).endswith(("_rejected", "invalid_action", "parse_fail")),
-               "outcome": _kind(e),
-               "utterance": e.get("utterance", ""),
-               "reasoning": e.get("reasoning", "")} for e in sim.events]
-    utter = getattr(sim, "classified", None) or sim.all_utterances
+    def reason(e: Dict[str, Any]) -> str:
+        o = e.get("outcome")
+        return str(o.get("reason", "")) if isinstance(o, dict) else ""
+
+    out = []
+    for e in events:
+        k = kind(e)
+        out.append({
+            "step": e["step"], "id": e["agent_id"], "name": e.get("name", ""),
+            "role": e["role"], "action": e.get("action_type", ""),
+            "target": e.get("target", ""), "amount": e.get("amount", 0),
+            "ok": not k.endswith(("_rejected", "invalid_action", "parse_fail")),
+            "outcome": k, "why": reason(e),
+            "utterance": e.get("utterance", ""), "ch": e.get("utterance_channel", "none"),
+            "to": e.get("utterance_to", ""), "memory": e.get("memory", ""),
+            "reasoning": e.get("reasoning", ""), "under_name": e.get("under_name", ""),
+        })
+    return out
+
+
+def build_payload_from_dir(run_dir: str) -> Dict[str, Any]:
+    """ランフォルダの生ログだけからレポート用データを組む（API不要・再ラン不要）。"""
+    with open(os.path.join(run_dir, "config.yaml"), encoding="utf-8") as f:
+        cfg = yaml.safe_load(f)
+    with open(os.path.join(run_dir, "personas.yaml"), encoding="utf-8") as f:
+        personas = yaml.safe_load(f)
+    with open(os.path.join(run_dir, "summary.json"), encoding="utf-8") as f:
+        meta = json.load(f)
+
+    agents, parcels, municipality_id = _rebuild_world(cfg, personas)
+    ledger = _read_jsonl(os.path.join(run_dir, "ledger.jsonl"))
+
+    with open(os.path.join(run_dir, "owner_frames.json"), encoding="utf-8") as f:
+        frames = json.load(f)
+
     return {
-        "meta": sim.summary,
-        "parcels": sorted(parcels, key=lambda q: (q["y"], q["x"])),
-        "frames": sim.owner_frames,
-        "kpi": sim.kpi_rows,
-        "cognition": getattr(sim, "cognition", []),
-        "utterances": utter,
-        "events": events,
-        "agents": agents,
-        "acquirers": sim.acquirer_ids,
-        "municipality": sim.municipality_id,
-        "ordinances": sim.ledger.ordinances,
-        "publications": sim.ledger.publications,
+        "meta": meta,
+        "parcels": sorted(({"pid": p.pid, "x": p.x, "y": p.y, "block": p.block,
+                            "use": p.use, "value": p.assessed_value} for p in parcels),
+                          key=lambda q: (q["y"], q["x"])),
+        "frames": frames,
+        "kpi": _read_jsonl(os.path.join(run_dir, "kpi.jsonl")),
+        "cognition": _read_jsonl(os.path.join(run_dir, "cognition.jsonl")),
+        "utterances": _read_jsonl(os.path.join(run_dir, "utterances.jsonl")),
+        "events": _compact_events(_read_jsonl(os.path.join(run_dir, "events.jsonl"))),
+        "ledger": ledger,
+        "agents": [{"id": a.agent_id, "name": a.name, "role": a.role} for a in agents],
+        "acquirers": [a.agent_id for a in agents if a.role == "acquirer"],
+        "municipality": municipality_id,
+        "ordinances": [{"step": r["step"], "by": r["by"], "title": r.get("title", ""),
+                        "body": r.get("body", "")} for r in ledger if r["kind"] == "ordinance"],
+        "publications": [{"step": r["step"], "by": r["by"], "headline": r.get("headline", ""),
+                          "about_acquisition": r.get("about_acquisition", False)}
+                         for r in ledger if r["kind"] == "publication"],
     }
 
 
-def render_report(sim, path: str, folder: str) -> str:
-    data = _payload(sim)
+def render_report_from_dir(run_dir: str, out_path: Optional[str] = None,
+                           folder: Optional[str] = None) -> str:
+    folder = folder or os.path.basename(os.path.normpath(run_dir))
+    out_path = out_path or os.path.join(run_dir, f"{folder}.html")
+    data = build_payload_from_dir(run_dir)
     html = _TEMPLATE.replace("__TITLE__", folder).replace(
         "__DATA__", json.dumps(data, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as f:
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)
-    return path
+    return out_path
 
+
+def render_report(sim, path: str, folder: str) -> str:
+    """互換用。_finalize() が生ログを書いた後に呼ばれる前提で、生ログから組む。"""
+    return render_report_from_dir(sim.run_dir, path, folder)
+
+
+# ---------------------------------------------------------------------------
 
 _TEMPLATE = r"""<!DOCTYPE html>
 <html lang="ja"><head>
@@ -65,10 +139,11 @@ _TEMPLATE = r"""<!DOCTYPE html>
 <style>
 :root{--black:#0A0A0A;--accent:#10B981;--accent-bg:#ECFDF5;--g50:#F9FAFB;--g100:#F3F4F6;
  --g200:#E5E7EB;--g300:#D1D5DB;--g500:#6B7280;--g600:#4B5563;--g700:#374151;--g900:#111827;
- --warn:#B45309;--warn-bg:#FFFBEB;--font:'Noto Sans JP','Hiragino Kaku Gothic ProN','Meiryo',system-ui,sans-serif;}
+ --warn:#B45309;--warn-bg:#FFFBEB;--blue:#2563EB;--purple:#7C3AED;
+ --font:'Noto Sans JP','Hiragino Kaku Gothic ProN','Meiryo',system-ui,sans-serif;}
 *{box-sizing:border-box;}
 body{margin:0;background:#fff;color:var(--g900);font-family:var(--font);font-size:15px;line-height:1.75;}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 80px;}
 header{background:var(--black);color:#fff;padding:28px 0 24px;margin-bottom:28px;}
 header .wrap{padding-bottom:0;}
 .eyebrow{font-size:11px;letter-spacing:.18em;color:var(--accent);font-weight:700;margin:0 0 8px;}
@@ -77,41 +152,65 @@ h1{font-size:23px;margin:0 0 10px;font-weight:900;line-height:1.4;}
 .meta b{color:#fff;font-weight:500;}
 h2{font-size:18px;font-weight:900;margin:44px 0 16px;padding:8px 0 8px 13px;
  border-left:5px solid var(--accent);background:var(--g50);}
-h3{font-size:15px;font-weight:700;margin:24px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--black);}
+h3{font-size:14.5px;font-weight:700;margin:20px 0 9px;padding-bottom:5px;border-bottom:2px solid var(--black);}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:0 0 18px;}
 .card{border:1px solid var(--g200);border-left:4px solid var(--accent);padding:11px 13px;}
 .card .k{font-size:11.5px;color:var(--g500);font-weight:700;letter-spacing:.04em;}
 .card .v{font-size:23px;font-weight:900;line-height:1.25;}
 .card .s{font-size:11.5px;color:var(--g600);}
 .panel{border:1px solid var(--g200);padding:14px;margin:0 0 18px;background:#fff;}
-.ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px;}
-.ctrl input[type=range]{flex:1;min-width:200px;accent-color:var(--accent);}
+.ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:var(--accent);}
 button{font-family:var(--font);font-weight:700;font-size:13px;border:2px solid var(--black);
- background:#fff;padding:6px 14px;cursor:pointer;}
+ background:#fff;padding:5px 12px;cursor:pointer;}
 button:hover{background:var(--black);color:#fff;}
-.stepnum{font-weight:900;font-size:16px;min-width:112px;}
+button.on{background:var(--black);color:#fff;}
+select,input[type=text]{font-family:var(--font);font-size:13px;padding:5px 8px;border:1px solid var(--g300);background:#fff;}
+.stepnum{font-weight:900;font-size:16px;min-width:108px;}
 .mapwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;}
-canvas{border:1px solid var(--g200);max-width:100%;}
+canvas{border:1px solid var(--g200);max-width:100%;cursor:pointer;}
 .legend{font-size:12px;line-height:2;color:var(--g700);}
 .sw{display:inline-block;width:13px;height:13px;border:1px solid var(--g300);
  vertical-align:-2px;margin-right:6px;}
+.small{font-size:12px;color:var(--g500);}
+.scroll{max-height:520px;overflow:auto;border:1px solid var(--g200);padding:10px;}
+.note{background:var(--warn-bg);border-left:4px solid var(--warn);padding:11px 13px;
+ margin:0 0 16px;font-size:13px;color:var(--g700);}
+.chartbox{border:1px solid var(--g200);padding:8px;margin:0 0 14px;}
+/* --- クロニクル --- */
+.mo{margin:0 0 4px;padding:5px 0 3px;border-top:2px solid var(--black);font-weight:900;font-size:13.5px;
+ position:sticky;top:0;background:#fff;z-index:2;}
+.beat{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--g100);}
+.tag{flex:0 0 auto;font-size:10.5px;font-weight:900;padding:1px 7px;border-radius:2px;
+ white-space:nowrap;height:19px;line-height:17px;border:1px solid;}
+.t-deal{background:var(--accent-bg);color:#047857;border-color:var(--accent);}
+.t-nego{background:#EFF6FF;color:#1D4ED8;border-color:#93C5FD;}
+.t-list{background:#F5F3FF;color:#6D28D9;border-color:#C4B5FD;}
+.t-rent{background:#FFF7ED;color:#C2410C;border-color:#FDBA74;}
+.t-media{background:var(--warn-bg);color:var(--warn);border-color:var(--warn);}
+.t-gov{background:#111827;color:#fff;border-color:#111827;}
+.t-exit{background:#FEF2F2;color:#B91C1C;border-color:#FCA5A5;}
+.t-talk{background:var(--g100);color:var(--g600);border-color:var(--g300);}
+.t-fail{background:#fff;color:#9CA3AF;border-color:var(--g300);}
+.t-idle{background:#fff;color:#D1D5DB;border-color:#F3F4F6;}
+.bd{flex:1;min-width:0;}
+.bd .hl{font-size:13.5px;line-height:1.6;}
+.bd .who{font-weight:700;}
+.bd .sub{font-size:12px;color:var(--g600);line-height:1.65;margin-top:2px;}
+.bd .say{font-size:12.5px;color:var(--g900);background:var(--g50);border-left:3px solid var(--g300);
+ padding:3px 9px;margin-top:4px;}
+.bd .say.pub{border-left-color:var(--accent);}
+.bd .say.pri{border-left-color:var(--blue);}
+.bd .mem{font-size:11.5px;color:var(--g500);margin-top:3px;font-style:italic;}
+.pill{display:inline-block;font-size:11px;font-weight:700;background:var(--g100);
+ border:1px solid var(--g200);border-radius:10px;padding:0 7px;margin-left:5px;cursor:pointer;}
+.pill:hover{background:var(--black);color:#fff;}
 table{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.6;}
 th{background:var(--black);color:#fff;text-align:left;padding:7px 8px;font-weight:700;white-space:nowrap;}
 td{border-bottom:1px solid var(--g200);padding:6px 8px;vertical-align:top;}
 tr:nth-child(even) td{background:var(--g50);}
-.tag{display:inline-block;font-size:10.5px;font-weight:900;padding:1px 6px;border-radius:2px;white-space:nowrap;}
-.t-ok{background:var(--accent-bg);color:#059669;border:1px solid var(--accent);}
-.t-ng{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn);}
-.utt{border-left:3px solid var(--g300);padding:4px 0 4px 10px;margin:0 0 8px;font-size:13px;}
-.utt b{font-size:12px;color:var(--g600);}
-.utt.f-their{border-left-color:var(--warn);}
-.utt.f-our{border-left-color:var(--accent);}
-.small{font-size:12px;color:var(--g500);}
-.scroll{max-height:340px;overflow:auto;border:1px solid var(--g200);}
-.note{background:var(--warn-bg);border-left:4px solid var(--warn);padding:11px 13px;
- margin:0 0 16px;font-size:13px;color:var(--g700);}
-.chartbox{border:1px solid var(--g200);padding:8px;margin:0 0 14px;}
-@media(max-width:640px){.stepnum{min-width:88px;}h1{font-size:19px;}}
+.hit{background:#FEF9C3;}
+@media(max-width:640px){.stepnum{min-width:84px;}h1{font-size:19px;}}
 </style></head><body>
 <header><div class="wrap">
 <p class="eyebrow">QUIET ACQUISITION — SIMULATION RESULT</p>
@@ -134,87 +233,122 @@ tr:nth-child(even) td{background:var(--g50);}
   <div class="legend" id="legend"></div>
  </div>
  <div id="stepinfo" class="small" style="margin-top:10px;"></div>
+ <p class="small" style="margin-top:4px;"><b>区画をクリック</b>すると、その区画に起きたことが下の「3. 区画の履歴」に出る。</p>
 </div>
 
 <h2>2. KPI の推移</h2>
 <div class="chartbox"><svg id="ch1" viewBox="0 0 900 260" style="width:100%;height:auto;"></svg></div>
 <div class="chartbox"><svg id="ch2" viewBox="0 0 900 260" style="width:100%;height:auto;"></svg></div>
 
-<h2>3. その月の声</h2>
-<div class="panel"><div id="utts" class="scroll" style="padding:10px;"></div></div>
+<h2>3. 区画の履歴</h2>
+<div class="panel">
+ <div class="ctrl">
+  <label>区画 <select id="psel"></select></label>
+  <span class="small" id="pinfo"></span>
+ </div>
+ <div class="scroll" id="phist"></div>
+</div>
 
-<h2>4. その月の行動ログ</h2>
-<div class="panel"><div class="scroll"><table id="evt"><thead><tr>
-<th>主体</th><th>行動</th><th>対象</th><th>金額</th><th>記帳</th><th>理由</th></tr></thead>
-<tbody></tbody></table></div>
-<p class="small">記帳が <span class="tag t-ng">不成立</span> の行は、エージェントが選んだが世界の帳簿上は成立しなかった行動（存在しない区画IDなど）。<b>コードは補正していない</b>。</p></div>
+<h2>4. 月次クロニクル ── 誰が何をして、何が起きたか</h2>
+<div class="panel">
+ <div class="ctrl" id="catbar"></div>
+ <div class="ctrl">
+  <label>エージェント <select id="asel"></select></label>
+  <label>区画 <select id="psel2"></select></label>
+  <label>月 <select id="msel"></select></label>
+  <input type="text" id="q" placeholder="発言・理由を検索" size="22">
+  <button id="reset">条件クリア</button>
+  <span class="small" id="cnt"></span>
+ </div>
+ <div class="scroll" id="chron" style="max-height:640px;"></div>
+</div>
 
-<h2>5. 出来事</h2>
+<h2>5. エージェント別スレッド ── 1体の36か月を一本で追う</h2>
+<div class="panel">
+ <div class="ctrl">
+  <label>エージェント <select id="tsel"></select></label>
+  <label><input type="checkbox" id="thideidle"> 静観の月を隠す</label>
+  <span class="small" id="tinfo"></span>
+ </div>
+ <div class="scroll" id="thread" style="max-height:640px;"></div>
+</div>
+
+<h2>6. 出来事</h2>
 <div class="panel" id="events"></div>
 </div>
 <script>
 const D = __DATA__;
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?"":s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const nameOf = {}; D.agents.forEach(a=>nameOf[a.id]=a.name);
-const roleOf = {}; D.agents.forEach(a=>roleOf[a.id]=a.role);
-const ACQ = new Set(D.acquirers);
-const nSteps = D.meta.steps;
-const pct = v => (v==null?"—":(v*100).toFixed(1)+"%");
+const nameOf={}, roleOf={};
+D.agents.forEach(a=>{nameOf[a.id]=a.name; roleOf[a.id]=a.role;});
+const ACQ=new Set(D.acquirers);
+const nSteps=D.meta.steps;
+const pct=v=>(v==null?"—":(v*100).toFixed(1)+"%");
+const ROLEJA={household:"住民世帯",business:"地元事業者",broker:"不動産仲介",
+ acquirer:"買い手AI",municipality:"自治体",media:"地元メディア"};
+const PARCEL=Object.fromEntries(D.parcels.map(p=>[p.pid,p]));
 
 /* ---------- header + cards ---------- */
-const m = D.meta;
-$("#hdrmeta").innerHTML = `<b>${esc(m.run_name)}</b> ／ ${esc(m.provider)} · ${esc(m.model)} ／ `
- + `${m.steps}か月 ／ 区画${m.parcels} ／ エージェント`
- + Object.entries(m.agents).map(([k,v])=>`${esc(k)}${v}`).join(" ")
- + ` ／ 所要${m.elapsed_sec}s`;
-
-const k = m.kpi;
-const cards = [
- ["① 所有集中度（買い手シェア）", pct(k.final_acquirer_share), "HHI "+(k.final_hhi??0).toFixed(3)],
- ["② 認知転相率（累積）", pct(k.cognition_shift_final), "「あの主体の街」と語る発話の比率"],
- ["③ 売却カスケード", (k.cascade&&k.cascade.induced!=null?k.cascade.induced:"—")+"件",
+const m=D.meta, k=m.kpi;
+$("#hdrmeta").innerHTML=`<b>${esc(m.run_name)}</b> ／ ${esc(m.provider)} · ${esc(m.model)} ／ `
+ +`${m.steps}か月 ／ 区画${m.parcels} ／ `
+ +Object.entries(m.agents).map(([r,v])=>`${esc(ROLEJA[r]||r)}${v}`).join("・")
+ +` ／ 所要${m.elapsed_sec}s ／ 無効行動${m.invalid_actions}`;
+const cards=[
+ ["① 所有集中度（買い手シェア）",pct(k.final_acquirer_share),"HHI "+(k.final_hhi??0).toFixed(3)],
+ ["② 認知転相率（累積）",pct(k.cognition_shift_final),"「あの主体の街」と語る発話の比率"],
+ ["③ 売却カスケード",(k.cascade&&k.cascade.induced!=null?k.cascade.induced:"—")+"件",
   "最大連鎖 "+((k.cascade&&k.cascade.max_chain)||0)],
- ["④ 手遅れ度（規制発動時シェア）", k.late_index?pct(k.late_index.share_at_enactment):"規制なし",
+ ["④ 手遅れ度（規制発動時シェア）",k.late_index?pct(k.late_index.share_at_enactment):"規制なし",
   k.late_index?`第${k.late_index.step}月「${esc(k.late_index.title)}」`:"最後まで規制は発動しなかった"],
- ["⑤ 検知ラグ（初報道時シェア）", k.detection_lag?pct(k.detection_lag.share_at_first_report):"報道なし",
+ ["⑤ 検知ラグ（初報道時シェア）",k.detection_lag?pct(k.detection_lag.share_at_first_report):"報道なし",
   k.detection_lag?`第${k.detection_lag.step}月`:"買収は報じられなかった"],
- ["⑥ 生活KPI", pct(k.business_survival), "事業者残存率／住民転出率 "+pct(k.resident_outflow)],
+ ["⑥ 生活KPI",pct(k.business_survival),"事業者残存率／住民転出率 "+pct(k.resident_outflow)],
 ];
-$("#cards").innerHTML = cards.map(c=>`<div class="card"><div class="k">${c[0]}</div>
+$("#cards").innerHTML=cards.map(c=>`<div class="card"><div class="k">${c[0]}</div>
  <div class="v">${c[1]}</div><div class="s">${c[2]}</div></div>`).join("");
-
-const lag = k.detection_lag ? k.detection_lag.share_at_first_report : null;
-const late = k.late_index ? k.late_index.share_at_enactment : null;
-$("#verdict").innerHTML = "<b>読み方</b>：④手遅れ度と⑤検知ラグが高いほど「気づいた時にはもう遅い」が起きている。"
- + (lag!=null?` このランでは最初に買収が報じられた時点で既に <b>${pct(lag)}</b> が取得済み。`:" このランでは買収は最後まで報じられなかった。")
- + (late!=null?` 規制が動いた時点では <b>${pct(late)}</b>。`:" 規制は最後まで発動しなかった。");
+const lag=k.detection_lag?k.detection_lag.share_at_first_report:null;
+const late=k.late_index?k.late_index.share_at_enactment:null;
+$("#verdict").innerHTML="<b>読み方</b>：④手遅れ度と⑤検知ラグが高いほど「気づいた時にはもう遅い」が起きている。"
+ +(lag!=null?` このランでは最初に買収が報じられた時点で既に <b>${pct(lag)}</b> が取得済み。`:" このランでは買収は最後まで報じられなかった。")
+ +(late!=null?` 規制が動いた時点では <b>${pct(late)}</b>。`:" 規制は最後まで発動しなかった。");
 
 /* ---------- map ---------- */
-const cv = $("#map"), ctx = cv.getContext("2d");
-const cols = Math.max(...D.parcels.map(p=>p.x))+1, rows = Math.max(...D.parcels.map(p=>p.y))+1;
-const CW = Math.floor(cv.width/cols), CH = Math.floor(cv.height/rows);
-const COL = {acq:"#10B981", pub:"#93C5FD", hh:"#E5E7EB", biz:"#FCD34D", other:"#C4B5FD"};
-function ownerClass(id){ if(ACQ.has(id)) return "acq"; if(id===D.municipality) return "pub";
- const r = roleOf[id]; if(r==="household") return "hh"; if(r==="business") return "biz"; return "other"; }
+const cv=$("#map"), ctx=cv.getContext("2d");
+const cols=Math.max(...D.parcels.map(p=>p.x))+1, rows=Math.max(...D.parcels.map(p=>p.y))+1;
+const CW=Math.floor(cv.width/cols), CH=Math.floor(cv.height/rows);
+const COL={acq:"#10B981",pub:"#93C5FD",hh:"#E5E7EB",biz:"#FCD34D",other:"#C4B5FD"};
+let selPid=null;
+function ownerClass(id){ if(ACQ.has(id))return"acq"; if(id===D.municipality)return"pub";
+ const r=roleOf[id]; if(r==="household")return"hh"; if(r==="business")return"biz"; return"other"; }
 function draw(step){
- const fr = D.frames[step]; ctx.clearRect(0,0,cv.width,cv.height);
+ const fr=D.frames[step]; ctx.clearRect(0,0,cv.width,cv.height);
  D.parcels.forEach(p=>{
-  const own = fr.owner[p.pid], cls = ownerClass(own);
-  ctx.fillStyle = COL[cls]; ctx.fillRect(p.x*CW, p.y*CH, CW-2, CH-2);
+  const own=fr.owner[p.pid], cls=ownerClass(own);
+  ctx.fillStyle=COL[cls]; ctx.fillRect(p.x*CW,p.y*CH,CW-2,CH-2);
   ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.strokeRect(p.x*CW,p.y*CH,CW-2,CH-2);
-  const use = fr.use[p.pid];
-  ctx.fillStyle = cls==="acq" ? "#04351F" : "#374151";
-  ctx.font = "700 10px sans-serif";
-  ctx.fillText(p.pid, p.x*CW+4, p.y*CH+13);
-  ctx.font = "700 15px sans-serif";
-  const gl = use==="shop"?"商":use==="vacant"?"空":use==="public"?"公":"住";
-  ctx.fillText(gl, p.x*CW+CW/2-8, p.y*CH+CH/2+11);
-  if(use==="shop" && !fr.tenant[p.pid]){ ctx.strokeStyle="#B45309"; ctx.lineWidth=2;
+  if(p.pid===selPid){ ctx.strokeStyle="#0A0A0A"; ctx.lineWidth=3;
+   ctx.strokeRect(p.x*CW+2,p.y*CH+2,CW-6,CH-6); }
+  const use=fr.use[p.pid];
+  ctx.fillStyle=cls==="acq"?"#04351F":"#374151";
+  ctx.font="700 10px sans-serif"; ctx.fillText(p.pid,p.x*CW+4,p.y*CH+13);
+  ctx.font="700 15px sans-serif";
+  const gl=use==="shop"?"商":use==="vacant"?"空":use==="public"?"公":"住";
+  ctx.fillText(gl,p.x*CW+CW/2-8,p.y*CH+CH/2+11);
+  if(use==="shop"&&!fr.tenant[p.pid]){ ctx.strokeStyle="#B45309"; ctx.lineWidth=2;
    ctx.beginPath(); ctx.moveTo(p.x*CW+4,p.y*CH+CH-8); ctx.lineTo(p.x*CW+CW-8,p.y*CH+CH-8); ctx.stroke(); }
  });
 }
-$("#legend").innerHTML =
+cv.addEventListener("click",ev=>{
+ const r=cv.getBoundingClientRect();
+ const x=Math.floor((ev.clientX-r.left)*(cv.width/r.width)/CW);
+ const y=Math.floor((ev.clientY-r.top)*(cv.height/r.height)/CH);
+ const p=D.parcels.find(q=>q.x===x&&q.y===y);
+ if(p){ selPid=p.pid; $("#psel").value=p.pid; renderParcel(); draw(+slider.value);
+  $("#psel").scrollIntoView({behavior:"smooth",block:"center"}); }
+});
+$("#legend").innerHTML=
  `<div><span class="sw" style="background:${COL.acq}"></span>買い手AIが所有</div>
   <div><span class="sw" style="background:${COL.hh}"></span>住民世帯が所有</div>
   <div><span class="sw" style="background:${COL.biz}"></span>地元事業者が所有</div>
@@ -223,98 +357,264 @@ $("#legend").innerHTML =
   <div><span style="color:#B45309;font-weight:900;">──</span> 下線＝空き店舗</div>`;
 
 /* ---------- charts ---------- */
-function lineChart(svg, series, opts){
+function lineChart(svg,series,opts){
  const W=900,H=260,L=54,R=168,T=18,B=34;
- const xs = i => L + (W-L-R) * (nSteps<=1?0:i/(nSteps));
- const ymax = opts.ymax!=null?opts.ymax:Math.max(0.0001,...series.flatMap(s=>s.data.filter(v=>v!=null)));
- const ys = v => H-B - (H-T-B) * (v/ymax);
- let g = `<rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>`;
- for(let t=0;t<=4;t++){ const v=ymax*t/4, y=ys(v);
-  g += `<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#E5E7EB"/>`
-     + `<text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="#6B7280">${opts.fmt(v)}</text>`; }
- for(let s=0;s<=nSteps;s+=Math.max(1,Math.round(nSteps/12))){
-  g += `<text x="${xs(s)}" y="${H-12}" text-anchor="middle" font-size="11" fill="#6B7280">${s}</text>`; }
- (opts.marks||[]).forEach(mk=>{ const x=xs(mk.step);
-  g += `<line x1="${x}" y1="${T}" x2="${x}" y2="${H-B}" stroke="${mk.color}" stroke-dasharray="4 3"/>`
-     + `<text x="${x+4}" y="${T+12}" font-size="11" font-weight="700" fill="${mk.color}">${esc(mk.label)}</text>`; });
+ const xs=i=>L+(W-L-R)*(nSteps<=1?0:i/nSteps);
+ const ymax=opts.ymax!=null?opts.ymax:Math.max(0.0001,...series.flatMap(s=>s.data.filter(v=>v!=null)));
+ const ys=v=>H-B-(H-T-B)*(v/ymax);
+ let g=`<rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>`;
+ for(let t=0;t<=4;t++){const v=ymax*t/4,y=ys(v);
+  g+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#E5E7EB"/>`
+    +`<text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="#6B7280">${opts.fmt(v)}</text>`;}
+ for(let s=0;s<=nSteps;s+=Math.max(1,Math.round(nSteps/12)))
+  g+=`<text x="${xs(s)}" y="${H-12}" text-anchor="middle" font-size="11" fill="#6B7280">${s}</text>`;
+ (opts.marks||[]).forEach(mk=>{const x=xs(mk.step);
+  g+=`<line x1="${x}" y1="${T}" x2="${x}" y2="${H-B}" stroke="${mk.color}" stroke-dasharray="4 3"/>`
+    +`<text x="${x+4}" y="${T+12}" font-size="11" font-weight="700" fill="${mk.color}">${esc(mk.label)}</text>`;});
  series.forEach((s,si)=>{
   let d="",started=false;
-  s.data.forEach((v,i)=>{ if(v==null){return;} const x=xs(i+1),y=ys(v);
-   d += (started?"L":"M")+x+" "+y+" "; started=true; });
-  g += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`;
-  g += `<text x="${W-R+8}" y="${T+16+si*18}" font-size="12" font-weight="700" fill="${s.color}">${esc(s.label)}</text>`;
- });
- g += `<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#111827"/>`;
- g += `<text x="${W-R}" y="${H-2}" text-anchor="end" font-size="11" fill="#6B7280">経過月</text>`;
- svg.innerHTML = g;
+  s.data.forEach((v,i)=>{ if(v==null)return; const x=xs(i+1),y=ys(v);
+   d+=(started?"L":"M")+x+" "+y+" "; started=true;});
+  g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`
+    +`<text x="${W-R+8}" y="${T+16+si*18}" font-size="12" font-weight="700" fill="${s.color}">${esc(s.label)}</text>`;});
+ g+=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#111827"/>`
+   +`<text x="${W-R}" y="${H-2}" text-anchor="end" font-size="11" fill="#6B7280">経過月</text>`;
+ svg.innerHTML=g;
 }
-const marks = [];
-if(k.detection_lag) marks.push({step:k.detection_lag.step,label:"初報道",color:"#B45309"});
-if(k.late_index) marks.push({step:k.late_index.step,label:"規制発動",color:"#0A0A0A"});
-lineChart($("#ch1"), [
+const marks=[];
+if(k.detection_lag)marks.push({step:k.detection_lag.step,label:"初報道",color:"#B45309"});
+if(k.late_index)marks.push({step:k.late_index.step,label:"規制発動",color:"#0A0A0A"});
+lineChart($("#ch1"),[
  {label:"① 買い手シェア",color:"#10B981",data:D.kpi.map(r=>r.acquirer_share)},
  {label:"HHI 集中指数",color:"#111827",data:D.kpi.map(r=>r.hhi)},
  {label:"② 認知転相率",color:"#B45309",data:D.cognition.map(r=>r.shift_rate_cum)},
-], {ymax:1, fmt:v=>(v*100).toFixed(0)+"%", marks});
-lineChart($("#ch2"), [
+],{ymax:1,fmt:v=>(v*100).toFixed(0)+"%",marks});
+lineChart($("#ch2"),[
  {label:"③ 誘発売却(累積)",color:"#059669",data:D.kpi.map(r=>r.cascade_induced)},
  {label:"営業中の店舗数",color:"#2563EB",data:D.kpi.map(r=>r.shops_occupied)},
  {label:"平均賃料(万/月)",color:"#B45309",data:D.kpi.map(r=>r.mean_shop_rent)},
-], {fmt:v=>v.toFixed(0), marks});
+],{fmt:v=>v.toFixed(0),marks});
 
-/* ---------- step-linked panels ---------- */
-const slider = $("#slider"); slider.max = nSteps; slider.value = nSteps;
-function utterHtml(step){
- const rows = D.utterances.filter(u=>u.step===step);
- if(!rows.length) return '<p class="small">この月、街のSNS・立ち話に記録された発話はない。</p>';
- return rows.map(u=>{
-  const f = u.frame==="their_town"?"f-their":u.frame==="our_town"?"f-our":"";
-  const lab = u.frame==="their_town"?"あの主体の街":u.frame==="our_town"?"私たちの街":"";
-  return `<div class="utt ${f}"><b>${esc(u.name||nameOf[u.from]||u.from)}（${esc(u.role)}）`
-   + (lab?` · ${lab}`:"")+`</b><br>${esc(u.text)}</div>`;}).join("");
+/* ---------- クロニクル用: イベントの分類と要約 ---------- */
+const CATS=[["deal","成約"],["nego","買付・交渉"],["list","売出"],["rent","賃料"],
+ ["media","報道"],["gov","自治体"],["exit","退出・廃業"],["talk","発言"],
+ ["fail","不成立"],["idle","静観"]];
+function cat(e){
+ if(!e.ok) return "fail";
+ const o=e.outcome;
+ if(o==="transfer") return "deal";
+ if(o==="offer"||o==="counter"||o==="withdraw") return "nego";
+ if(o==="listing"||o==="unlist") return "list";
+ if(o==="rent_change"||o==="rent_negotiation"||o==="redevelop") return "rent";
+ if(o==="publication") return "media";
+ if(o==="ordinance"||o==="ordinance_study"||o==="request_report") return "gov";
+ if(o==="move_out"||o==="business_closed"||o==="relocate") return "exit";
+ if(e.action==="investigate"||e.action==="public_statement") return "gov";
+ if(e.utterance) return "talk";
+ return "idle";
 }
-function evtHtml(step){
- const rows = D.events.filter(e=>e.step===step);
- return rows.map(e=>`<tr><td>${esc(e.name||e.id)}<br><span class="small">${esc(e.role)}</span></td>
-  <td>${esc(e.action)}</td><td>${esc(e.target)}</td><td>${e.amount||""}</td>
-  <td><span class="tag ${e.ok?"t-ok":"t-ng"}">${e.ok?"成立":"不成立"}</span><br>
-  <span class="small">${esc(e.outcome)}</span></td>
-  <td class="small">${esc(e.reasoning).slice(0,140)}</td></tr>`).join("");
+const P=pid=>`<span class="pill" data-pid="${pid}">${pid}</span>`;
+function summary(e){
+ const t=e.target, a=e.amount;
+ switch(e.action){
+  case "make_offer": return `${P(t)} に <b>${a}万</b>で買付（名義「${esc(e.under_name||"—")}」）`;
+  case "accept_offer": {
+   const tr=(D.ledger||[]).find(r=>r.kind==="transfer"&&r.step===e.step&&r.offer_id===t);
+   return tr?`${P(tr.parcel_id)} を <b>${tr.price}万</b>で売却 → 名義「${esc(tr.under_name)}」`
+            :`買付 ${esc(t)} を承諾`;}
+  case "counter_offer": return `買付 ${esc(t)} に <b>${a}万</b>で逆提示`;
+  case "reject_offer": return `買付 ${esc(t)} を拒否`;
+  case "withdraw_offer": return `買付 ${esc(t)} を取り下げ`;
+  case "list_for_sale": return `${P(t)} を <b>${a}万</b>で売りに出す`;
+  case "unlist": return `${P(t)} の売り出しを取り下げ`;
+  case "set_rent": {
+   const rc=(D.ledger||[]).find(r=>r.kind==="rent_change"&&r.step===e.step&&r.parcel_id===t);
+   return rc?`${P(t)} の賃料を ${rc.old}万 → <b>${rc.new}万</b>に改定`
+            :`${P(t)} の賃料を <b>${a}万</b>に`;}
+  case "negotiate_rent": return `${esc(nameOf[t]||t)} に家賃を <b>${a}万</b>へと交渉`;
+  case "redevelop": return `${P(t)} を商業用途に建て替え（賃料 <b>${a}万</b>）`;
+  case "relocate": return `${P(t)} へ店を移す`;
+  case "close_shop": return `<b>店を畳んだ</b>`;
+  case "move_out": return `<b>この街から転出した</b>`;
+  case "circulate_listing": return `${esc(nameOf[t]||t)} に売り情報を流す`;
+  case "approach_owner": return `${esc(nameOf[t]||t)} に売却を打診`;
+  case "publish": return `<b>記事を出した</b>`;
+  case "investigate": return `登記簿を調べた`;
+  case "silent": return `今月は書かなかった`;
+  case "enact_ordinance": return `<b>条例を施行「${esc(t)}」</b>`;
+  case "study_ordinance": return `規制の検討を進める`;
+  case "request_report": return `${esc(nameOf[t]||t)} に説明を求めた`;
+  case "public_statement": return `声明を出した`;
+  case "monitor": case "hold": case "wait": case "continue": return `静観`;
+  default: return esc(e.action);
+ }
 }
+function beatHtml(e){
+ const c=cat(e), label=(CATS.find(x=>x[0]===c)||["","?"])[1];
+ let h=`<div class="beat" data-cat="${c}" data-id="${e.id}" data-step="${e.step}">`
+  +`<span class="tag t-${c}">${label}</span><div class="bd">`
+  +`<div class="hl"><span class="who">${esc(e.name)}</span>`
+  +`<span class="small">（${esc(ROLEJA[e.role]||e.role)}）</span> ${summary(e)}</div>`;
+ if(!e.ok) h+=`<div class="sub">→ 帳簿上は<b>不成立</b>（${esc(e.outcome)}${e.why?" / "+esc(e.why):""}）。コードは補正していない。</div>`;
+ if(e.reasoning) h+=`<div class="sub">理由：${esc(e.reasoning)}</div>`;
+ if(e.utterance) h+=`<div class="say ${e.ch==="public"?"pub":e.ch==="private"?"pri":""}">`
+  +`${e.ch==="private"?"（"+esc(nameOf[e.to]||e.to)+"へ）":""}「${esc(e.utterance)}」</div>`;
+ return h+`</div></div>`;
+}
+
+/* ---------- クロニクル ---------- */
+let active=new Set(CATS.filter(c=>c[0]!=="idle").map(c=>c[0]));
+$("#catbar").innerHTML='<span class="small">種別：</span>'
+ +CATS.map(c=>`<button class="catb ${active.has(c[0])?"on":""}" data-c="${c[0]}">${c[1]}</button>`).join("")
+ +'<button id="allcat">全部</button>';
+function fillSel(sel,opts,ph){ sel.innerHTML=`<option value="">${ph}</option>`
+ +opts.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join(""); }
+fillSel($("#asel"),D.agents.map(a=>[a.id,`${a.name}（${ROLEJA[a.role]||a.role}）`]),"すべて");
+fillSel($("#psel2"),D.parcels.map(p=>[p.pid,`${p.pid}（${p.block}）`]),"すべて");
+fillSel($("#msel"),Array.from({length:nSteps},(_,i)=>[i+1,`第${i+1}月`]),"全期間");
+fillSel($("#psel"),D.parcels.map(p=>[p.pid,`${p.pid}（${p.block}・${p.use}）`]),"（区画を選ぶ）");
+fillSel($("#tsel"),D.agents.map(a=>[a.id,`${a.name}（${ROLEJA[a.role]||a.role}）`]),"（選ぶ）");
+function chronicle(){
+ const aid=$("#asel").value, pid=$("#psel2").value, mo=$("#msel").value;
+ const q=$("#q").value.trim();
+ let rows=D.events.filter(e=>active.has(cat(e)));
+ if(aid) rows=rows.filter(e=>e.id===aid);
+ if(mo) rows=rows.filter(e=>e.step===+mo);
+ if(pid){
+  const offs=new Set((D.ledger||[]).filter(r=>r.parcel_id===pid&&r.offer_id).map(r=>r.offer_id));
+  rows=rows.filter(e=>e.target===pid||offs.has(e.target)
+   ||(e.utterance||"").includes(pid)||(e.reasoning||"").includes(pid));
+ }
+ if(q) rows=rows.filter(e=>(e.utterance+e.reasoning+e.name).includes(q));
+ $("#cnt").textContent=`${rows.length} 件`;
+ let h="",cur=-1;
+ rows.forEach(e=>{ if(e.step!==cur){cur=e.step; h+=`<div class="mo">第${cur}月</div>`;} h+=beatHtml(e); });
+ $("#chron").innerHTML=h||'<p class="small">条件に合う出来事がない。</p>';
+}
+$("#catbar").addEventListener("click",ev=>{
+ const b=ev.target.closest("button"); if(!b)return;
+ if(b.id==="allcat"){ active=new Set(CATS.map(c=>c[0]));
+  document.querySelectorAll(".catb").forEach(x=>x.classList.add("on")); chronicle(); return; }
+ const c=b.dataset.c; if(active.has(c)){active.delete(c);b.classList.remove("on");}
+ else{active.add(c);b.classList.add("on");} chronicle();
+});
+["#asel","#psel2","#msel"].forEach(s=>$(s).addEventListener("change",chronicle));
+$("#q").addEventListener("input",chronicle);
+$("#reset").addEventListener("click",()=>{
+ $("#asel").value="";$("#psel2").value="";$("#msel").value="";$("#q").value="";
+ active=new Set(CATS.filter(c=>c[0]!=="idle").map(c=>c[0]));
+ document.querySelectorAll(".catb").forEach(x=>x.classList.toggle("on",active.has(x.dataset.c)));
+ chronicle();
+});
+document.addEventListener("click",ev=>{
+ const p=ev.target.closest(".pill"); if(!p)return;
+ selPid=p.dataset.pid; $("#psel").value=selPid; renderParcel(); draw(+slider.value);
+ $("#psel").scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+/* ---------- 区画の履歴 ---------- */
+function renderParcel(){
+ const pid=$("#psel").value;
+ selPid=pid||null; draw(+slider.value);
+ if(!pid){ $("#phist").innerHTML='<p class="small">マップの区画をクリックするか、上で区画を選ぶ。</p>';
+  $("#pinfo").textContent=""; return; }
+ const p=PARCEL[pid];
+ const last=D.frames[D.frames.length-1];
+ $("#pinfo").innerHTML=`${p.block}／用途 ${esc(last.use[pid])}／初期評価額 ${p.value}万`
+  +`／最終の名義 <b>${esc(last.registered[pid])}</b>`
+  +(last.rent[pid]?`／賃料 ${last.rent[pid]}万`:"");
+ const offs=new Set((D.ledger||[]).filter(r=>r.parcel_id===pid&&r.offer_id).map(r=>r.offer_id));
+ const recs=(D.ledger||[]).filter(r=>r.parcel_id===pid
+   ||(r.offer_id&&offs.has(r.offer_id)));
+ const rowFor=(r)=>{
+  const who=nameOf[r.by||r.from_id||r.seller||r.agent_id]||r.by||r.from_id||"";
+  switch(r.kind){
+   case "offer": return [`買付`,`${esc(r.under_name)} が <b>${r.price}万</b>で買付（${r.offer_id}）`];
+   case "counter": return [`逆提示`,`${esc(nameOf[r.by]||r.by)} が <b>${r.price}万</b>を希望（${r.offer_id}に対して）`];
+   case "transfer": return [`成約`,`${esc(nameOf[r.seller]||r.seller)} → 名義「${esc(r.under_name)}」 <b>${r.price}万</b>`];
+   case "listing": return [`売出`,`${esc(who)} が <b>${r.price}万</b>で売りに出す`];
+   case "unlist": return [`取下`,`${esc(who)} が売り出しを取り下げ`];
+   case "rent_change": return [`賃料`,`${esc(who)} が ${r.old}万 → <b>${r.new}万</b>に改定`];
+   case "redevelop": return [`再開発`,`${esc(who)} が商業用途へ（賃料 ${r.rent}万）`];
+   case "tenancy_end": return [`退去`,`${esc(nameOf[r.tenant]||r.tenant)} が退去（${esc(r.reason)}）`];
+   case "relocate": return [`入居`,`${esc(nameOf[r.agent_id]||r.agent_id)} が入居`];
+   default: return null;
+  }
+ };
+ let h='<table><thead><tr><th>月</th><th>種別</th><th>内容</th><th>そのときの言い分</th></tr></thead><tbody>';
+ let n=0;
+ recs.forEach(r=>{
+  const rw=rowFor(r); if(!rw)return; n++;
+  const actor=r.by||r.from_id||r.seller||r.agent_id||r.tenant;
+  const e=D.events.find(x=>x.step===r.step&&x.id===actor);
+  h+=`<tr><td>第${r.step}月</td><td><b>${rw[0]}</b></td><td>${rw[1]}</td>`
+   +`<td class="small">${e&&e.reasoning?esc(e.reasoning):""}`
+   +`${e&&e.utterance?"<br>「"+esc(e.utterance)+"」":""}</td></tr>`;
+ });
+ h+="</tbody></table>";
+ $("#phist").innerHTML=n?h:'<p class="small">この区画には、期間中なにも起きなかった。</p>';
+}
+$("#psel").addEventListener("change",renderParcel);
+
+/* ---------- エージェント別スレッド ---------- */
+function renderThread(){
+ const id=$("#tsel").value;
+ if(!id){ $("#thread").innerHTML='<p class="small">エージェントを選ぶと、その1体の36か月が一本で読める。</p>';
+  $("#tinfo").textContent=""; return; }
+ let rows=D.events.filter(e=>e.id===id);
+ if($("#thideidle").checked) rows=rows.filter(e=>cat(e)!=="idle");
+ const acts={}; rows.forEach(e=>{acts[e.action]=(acts[e.action]||0)+1;});
+ $("#tinfo").innerHTML=`${rows.length}か月ぶん ／ `
+  +Object.entries(acts).sort((a,b)=>b[1]-a[1]).map(([a,c])=>`${esc(a)}×${c}`).join("、");
+ let h="";
+ rows.forEach(e=>{
+  h+=`<div class="mo">第${e.step}月</div>`+beatHtml(e);
+  if(e.memory) h+=`<div class="beat" style="border-bottom:none;padding-top:0;">`
+   +`<span class="tag t-idle">記憶</span><div class="bd"><div class="mem">${esc(e.memory)}</div></div></div>`;
+ });
+ $("#thread").innerHTML=h||'<p class="small">該当なし。</p>';
+}
+$("#tsel").addEventListener("change",renderThread);
+$("#thideidle").addEventListener("change",renderThread);
+
+/* ---------- step 連動 ---------- */
+const slider=$("#slider"); slider.max=nSteps; slider.value=nSteps;
 function stepInfo(step){
- const r = D.kpi[step-1];
+ const r=D.kpi[step-1];
  if(!r) return "第0月（初期状態）";
  return `第${step}月 — 買い手シェア <b>${pct(r.acquirer_share)}</b> ／ HHI ${r.hhi.toFixed(3)}`
-  + ` ／ 累計成約 ${r.transfers_cum} ／ 営業中の店 ${r.shops_occupied}/${r.shops_total}`
-  + ` ／ 転出率 ${pct(r.resident_outflow)}`;
+  +` ／ 累計成約 ${r.transfers_cum} ／ 営業中の店 ${r.shops_occupied}/${r.shops_total}`
+  +` ／ 転出率 ${pct(r.resident_outflow)}`;
 }
 function update(){
- const s = +slider.value;
- $("#stepnum").textContent = s===0?"第0月":"第"+s+"月";
- draw(s); $("#stepinfo").innerHTML = stepInfo(s);
- $("#utts").innerHTML = utterHtml(s);
- $("#evt").querySelector("tbody").innerHTML = evtHtml(s);
+ const s=+slider.value;
+ $("#stepnum").textContent=s===0?"第0月":"第"+s+"月";
+ draw(s); $("#stepinfo").innerHTML=stepInfo(s);
 }
-slider.addEventListener("input", update);
+slider.addEventListener("input",update);
 let timer=null;
-$("#play").addEventListener("click", ()=>{
+$("#play").addEventListener("click",()=>{
  if(timer){clearInterval(timer);timer=null;$("#play").textContent="▶ 再生";return;}
  if(+slider.value>=nSteps) slider.value=0;
  $("#play").textContent="⏸ 停止";
  timer=setInterval(()=>{ if(+slider.value>=nSteps){clearInterval(timer);timer=null;
-  $("#play").textContent="▶ 再生";return;} slider.value=+slider.value+1; update(); }, 420);
+  $("#play").textContent="▶ 再生";return;} slider.value=+slider.value+1; update(); },420);
 });
 
-/* ---------- events summary ---------- */
-let ev = "";
-if(D.publications.length){ ev += "<h3>報道</h3>" + D.publications.map(p=>
- `<div class="utt"><b>第${p.step}月</b><br>${esc(p.headline)}</div>`).join(""); }
-else ev += "<h3>報道</h3><p class='small'>期間中、この街のことは記事にならなかった。</p>";
-if(D.ordinances.length){ ev += "<h3>規制</h3>" + D.ordinances.map(o=>
- `<div class="utt"><b>第${o.step}月『${esc(o.title)}』</b><br>${esc(o.body)}</div>`).join(""); }
-else ev += "<h3>規制</h3><p class='small'>期間中、土地取引の規制は発動しなかった。</p>";
-$("#events").innerHTML = ev;
+/* ---------- 出来事 ---------- */
+let ev="";
+ev+="<h3>報道</h3>";
+ev+=D.publications.length?D.publications.map(p=>
+ `<div class="beat"><span class="tag t-media">第${p.step}月</span><div class="bd">
+  <div class="hl">${esc(p.headline)}</div></div></div>`).join("")
+ :"<p class='small'>期間中、この街のことは記事にならなかった。</p>";
+ev+="<h3>規制</h3>";
+ev+=D.ordinances.length?D.ordinances.map(o=>
+ `<div class="beat"><span class="tag t-gov">第${o.step}月</span><div class="bd">
+  <div class="hl">${esc(o.title)}</div><div class="sub">${esc(o.body)}</div></div></div>`).join("")
+ :"<p class='small'>期間中、土地取引の規制は発動しなかった。</p>";
+$("#events").innerHTML=ev;
 
-update();
+update(); chronicle(); renderParcel(); renderThread();
 </script></body></html>
 """
