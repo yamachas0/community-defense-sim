@@ -89,11 +89,32 @@ class Ledger:
         self.records.append(row)
         return row
 
+    @staticmethod
+    def _valid_money(v: Any, allow_zero: bool = False) -> bool:
+        """金額として物理的に成立するか。
+
+        負の価格・負の賃料は「安く売る」ではなく帳簿を壊す入力なので成立しない。
+        これは行動の良し悪しの判断ではなく、取引が物理的に成立するかの判定である
+        （自分の持ち物でない区画を売れないのと同じ扱い）。
+        """
+        try:
+            iv = int(v)
+        except (TypeError, ValueError):
+            return False
+        if iv < 0:
+            return False
+        if iv == 0 and not allow_zero:
+            return False
+        return iv <= 100_000_000
+
     def record_listing(self, step: int, parcel_id: str, by: str, price: int) -> Dict[str, Any]:
         p = self.parcels.get(parcel_id)
         if p is None or p.owner_id != by:
             return self._rec(step, "listing_rejected", parcel_id=parcel_id, by=by,
                              reason="not_owner")
+        if not self._valid_money(price):
+            return self._rec(step, "listing_rejected", parcel_id=parcel_id, by=by,
+                             reason="invalid_amount", given=price)
         p.listed_price = int(price)
         p.listed_at_step = step
         return self._rec(step, "listing", parcel_id=parcel_id, by=by, price=int(price))
@@ -107,6 +128,13 @@ class Ledger:
         if p.owner_id == from_id:
             return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
                              reason="already_owner")
+        if not self._valid_money(price):
+            return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
+                             reason="invalid_amount", given=price)
+        if self.cash.get(from_id, 0) < int(price):
+            return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
+                             reason="insufficient_funds", given=price,
+                             budget=self.cash.get(from_id, 0))
         self._offer_seq += 1
         oid = f"O{self._offer_seq:04d}"
         offer = Offer(offer_id=oid, step=step, parcel_id=parcel_id, from_id=from_id,
@@ -124,6 +152,9 @@ class Ledger:
         if p.owner_id != by:
             return self._rec(step, "counter_rejected", offer_id=offer_id, by=by,
                              reason="not_owner")
+        if not self._valid_money(price):
+            return self._rec(step, "counter_rejected", offer_id=offer_id, by=by,
+                             reason="invalid_amount", given=price)
         offer.status = "rejected"
         # 逆向きの申し出として記帳する (売主 -> 買主の希望価格提示)
         p.listed_price = int(price)
@@ -186,6 +217,9 @@ class Ledger:
         p = self.parcels.get(parcel_id)
         if p is None or p.owner_id != by:
             return self._rec(step, "rent_rejected", parcel_id=parcel_id, by=by, reason="not_owner")
+        if not self._valid_money(rent, allow_zero=True):
+            return self._rec(step, "rent_rejected", parcel_id=parcel_id, by=by,
+                             reason="invalid_amount", given=rent)
         old = p.rent
         p.rent = int(rent)
         return self._rec(step, "rent_change", parcel_id=parcel_id, by=by, old=old, new=p.rent,
@@ -218,6 +252,9 @@ class Ledger:
         if p is None or p.owner_id != by:
             return self._rec(step, "redevelop_rejected", parcel_id=parcel_id, by=by,
                              reason="not_owner")
+        if not self._valid_money(new_rent, allow_zero=True):
+            return self._rec(step, "redevelop_rejected", parcel_id=parcel_id, by=by,
+                             reason="invalid_amount", given=new_rent)
         old_use, old_tenant = p.use, p.tenant_id
         if old_tenant:
             self.record_tenancy_end(step, old_tenant, reason="redevelopment")
@@ -253,6 +290,40 @@ class Ledger:
     def record_note(self, step: int, by: str, kind: str, note: str) -> Dict[str, Any]:
         """帳簿を動かさない行為 (静観・調査・発話のみ 等) の記帳。"""
         return self._rec(step, kind, by=by, note=note)
+
+    def settle_month(self, step: int, business_margins: Dict[str, int]) -> Dict[str, Any]:
+        """月次の清算。賃料が実際に借主から家主へ動く。
+
+        これは行動ではなく契約の履行＝会計処理。エージェントは誰も「払うかどうか」を
+        選ばない（契約しているから払う）。
+        粗利 (business_margins) は各事業者の初期条件として与えられる世界の数値であり、
+        評価額と同じ扱い。**資金が尽きても自動で閉店させない** — 続けるか畳むかは
+        その事業者 (LLM) が決める。ここで閉店させたらルールベースになる。
+        """
+        moved = []
+        for biz_id, margin in business_margins.items():
+            if biz_id in self.closed_businesses:
+                continue
+            self.cash[biz_id] = self.cash.get(biz_id, 0) + int(margin)
+            moved.append({"agent": biz_id, "margin": int(margin)})
+        rents = []
+        for p in self.parcels.values():
+            if p.use != "shop" or not p.tenant_id or p.rent <= 0:
+                continue
+            if p.tenant_id in self.closed_businesses:
+                continue
+            self.cash[p.tenant_id] = self.cash.get(p.tenant_id, 0) - p.rent
+            self.cash[p.owner_id] = self.cash.get(p.owner_id, 0) + p.rent
+            rents.append({"parcel": p.pid, "tenant": p.tenant_id,
+                          "owner": p.owner_id, "rent": p.rent})
+        return self._rec(step, "settlement", margins=moved, rents=rents)
+
+    def month_pl(self, agent_id: str, business_margins: Dict[str, int]) -> Dict[str, int]:
+        """その事業者の今月の収支内訳（観測に載せる用）。"""
+        margin = int(business_margins.get(agent_id, 0))
+        rent = sum(p.rent for p in self.parcels.values()
+                   if p.tenant_id == agent_id and p.use == "shop")
+        return {"margin": margin, "rent": rent, "net": margin - rent}
 
     # -- derived views (集計。記帳結果からの導出のみ) -----------------------
 

@@ -32,6 +32,26 @@ from .world import Ledger, assign_tenancies, build_town
 logger = logging.getLogger(__name__)
 
 _JSON_RE = re.compile(r"\{.*\}", re.S)
+_FIELD_RE = re.compile(r'"(\w+)"\s*:\s*(?:"((?:[^"\\]|\\.)*)"|(-?\d+))')
+
+
+def _repair_truncated_json(raw: str) -> Optional[Dict[str, Any]]:
+    """max_tokens で途中で切れた JSON から、拾える限りのフィールドを回収する。
+
+    切り捨ては LLM の落ち度でも我々の解釈でもなく単なる通信の欠落なので、
+    復元してよい（行動の中身を推測して補うことは一切しない）。
+    """
+    out: Dict[str, Any] = {}
+    for m in _FIELD_RE.finditer(raw):
+        key, sval, ival = m.group(1), m.group(2), m.group(3)
+        if ival is not None:
+            out[key] = int(ival)
+        else:
+            try:
+                out[key] = json.loads(f'"{sval}"')
+            except Exception:
+                out[key] = sval
+    return out if "action_type" in out else None
 
 
 def _parse_action(raw: str) -> Optional[Dict[str, Any]]:
@@ -42,12 +62,15 @@ def _parse_action(raw: str) -> Optional[Dict[str, Any]]:
     except Exception:
         pass
     m = _JSON_RE.search(raw)
-    if not m:
-        return None
-    try:
-        return json.loads(m.group(0))
-    except Exception:
-        return None
+    if m:
+        try:
+            return json.loads(m.group(0))
+        except Exception:
+            pass
+    repaired = _repair_truncated_json(raw)
+    if repaired is not None:
+        repaired["_truncated"] = True
+    return repaired
 
 
 def _as_int(v: Any) -> int:
@@ -96,6 +119,9 @@ class Simulation:
         self.kpi_rows: List[Dict[str, Any]] = []
         self.owner_frames: List[Dict[str, Any]] = []
         self.invalid_count = 0
+        self.truncated_count = 0
+        self.business_margins = {a.agent_id: int(a.extra.get("monthly_margin", 0))
+                                 for a in self.agents if a.role == "business"}
 
     # -- main loop ---------------------------------------------------------
 
@@ -119,7 +145,7 @@ class Simulation:
         prompts: List[Tuple[Agent, str, str]] = []
         for a in self.agents:
             up = build_user_prompt(a, self.ledger, step, self.n_steps, self.names,
-                                   self.timeline, self.acquirer_ids)
+                                   self.timeline, self.acquirer_ids, self.business_margins)
             prompts.append((a, self.system_prompts[a.agent_id], up))
 
         workers = int(self.cfg["llm"].get("parallel_workers", 8))
@@ -135,6 +161,11 @@ class Simulation:
         with ThreadPoolExecutor(max_workers=workers) as ex:
             for aid, raw, up, dt in ex.map(call, prompts):
                 results[aid] = {"raw": raw, "user_prompt": up, "latency": dt}
+
+        # 受信箱は「観測を作り終えた直後」に空にする。以降 _apply や私信で積まれたものは
+        # 翌月の観測に載る（ここより後ろでクリアすると _apply が入れた連絡が消える）。
+        for a in self.agents:
+            a.inbox = []
 
         # 記帳は agent_id 順（決定論）。先着順の競合は帳簿側で処理される。
         new_timeline: List[Dict[str, Any]] = []
@@ -175,10 +206,13 @@ class Simulation:
                         outcome.get("kind") == "invalid_action":
                     self.invalid_count += 1
 
+            if act.get("_truncated"):
+                self.truncated_count += 1
             ev.update({"action_type": action_type, "target": target, "amount": amount,
                        "utterance": utter, "utterance_channel": channel,
                        "utterance_to": utter_to, "memory": memory, "reasoning": reasoning,
-                       "under_name": under_name, "outcome": outcome})
+                       "under_name": under_name, "truncated": bool(act.get("_truncated")),
+                       "outcome": outcome})
             self.events.append(ev)
 
             if utter and channel == "public":
@@ -189,11 +223,12 @@ class Simulation:
             elif utter and channel == "private" and utter_to in self.by_id:
                 messages.append((a.agent_id, utter_to, utter))
 
-        for a in self.agents:
-            a.inbox = []
         for src, dst, text in messages:
             self.by_id[dst].inbox.append({"from": src, "text": text, "step": step})
         self.timeline = new_timeline
+
+        # 月次清算（契約の履行＝会計処理。誰も「払うか」を選ばない）
+        self.ledger.settle_month(step, self.business_margins)
 
     # -- 記帳 (行動 -> 帳簿) ------------------------------------------------
 
@@ -314,6 +349,7 @@ class Simulation:
             "provider": self.cfg["llm"].get("provider"),
             "elapsed_sec": round(elapsed, 1),
             "invalid_actions": self.invalid_count,
+            "truncated_responses": self.truncated_count,
             "usage": self.usage.as_dict(),
             "kpi": {
                 "final_acquirer_share": self.kpi_rows[-1]["acquirer_share"] if self.kpi_rows else 0,

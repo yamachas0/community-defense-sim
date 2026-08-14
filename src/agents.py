@@ -56,7 +56,12 @@ def build_roster(personas: Dict[str, Any], counts: Dict[str, int],
             agents.append(a)
 
     take("household", "HH", counts["households"])
-    take("business", "BZ", counts["businesses"])
+
+    def biz_extra(a: Agent, p: Dict[str, Any]) -> None:
+        # 家賃を払う前の月次粗利。評価額と同じ「世界の初期条件」であり行動ルールではない。
+        a.extra["monthly_margin"] = int(p.get("monthly_margin", 25))
+
+    take("business", "BZ", counts["businesses"], biz_extra)
     take("broker", "BR", counts["brokers"])
 
     def acq_extra(a: Agent, p: Dict[str, Any]) -> None:

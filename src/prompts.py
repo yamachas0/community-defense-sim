@@ -20,7 +20,9 @@ from .world import Ledger, Parcel, neighbors
 
 MAX_TIMELINE = 14
 MAX_UTTER_CHARS = 110
-MAX_MEMORY_CHARS = 700
+# memory は毎回の出力トークンに直撃する。長すぎると max_tokens で JSON が途中で切れて
+# その月の行動が丸ごと落ちる（実API で確認済み）。短く保つこと。
+MAX_MEMORY_CHARS = 200
 
 
 # ---------------------------------------------------------------------------
@@ -49,13 +51,14 @@ OUTPUT_RULES = """\
   utterance        : 誰かに向けた発言。言いたいことがなければ空文字にしてよい
   utterance_channel: "public"(街のSNS・立ち話。全員が読む) / "private"(特定の一人に伝える) / "none"
   utterance_to     : private のときの相手 agent_id
-  memory           : 来月の自分に残す短いメモ（{mem}字以内。事実と自分の受け止めを自由に）
-  reasoning        : なぜそうしたか（短く）
+  memory           : 来月の自分に残す短いメモ（**{mem}字以内**。事実と自分の受け止めを自由に）
+  reasoning        : なぜそうしたか（**80字以内**）
 {extra_fields}
 選べる行動:
 {verbs}
 
 発言は演説でなく、その人が実際に言いそうな長さと言葉づかいで。数字を出すなら見えている数字だけを使え。
+JSON全体は短く保て（utterance は120字以内、memory {mem}字以内、reasoning 80字以内）。長すぎると届かない。
 """
 
 ACQUIRER_EXTRA_FIELD = """\
@@ -199,7 +202,8 @@ def _offers_for(agent: Agent, ledger: Ledger, names: Dict[str, str]) -> str:
 
 def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                       names: Dict[str, str], timeline: List[Dict[str, Any]],
-                      acquirer_ids: List[str]) -> str:
+                      acquirer_ids: List[str],
+                      business_margins: Optional[Dict[str, int]] = None) -> str:
     head = [f"=== 第{step}月 / 全{n_steps}月 ==="]
     if agent.memory:
         head.append(f"[先月までのあなたのメモ]\n{agent.memory[:MAX_MEMORY_CHARS]}")
@@ -241,7 +245,12 @@ def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
             body.append("  （自己所有）" + _fmt_parcel_public(p, names))
         if not shops and not owned:
             body.append("  （店を構える場所がない）")
-        body.append(f"  手元資金 {ledger.cash.get(agent.agent_id, 0)}万円")
+        pl = ledger.month_pl(agent.agent_id, business_margins or {})
+        cash_now = ledger.cash.get(agent.agent_id, 0)
+        body.append(f"  手元資金 {cash_now}万円")
+        body.append(f"  今月の収支: 粗利 {pl['margin']}万 − 家賃 {pl['rent']}万 = "
+                    f"{pl['net']:+d}万/月"
+                    + ("（このままだと資金が減り続ける）" if pl["net"] < 0 else ""))
         allshops = [p for p in ledger.parcels.values() if p.use == "shop"]
         vacant = [p for p in allshops if p.tenant_id is None]
         body.append("[商店街の様子]")

@@ -1,0 +1,6 @@
+{"step": 1, "our_town": 2, "their_town": 7, "neutral": 2, "shift_rate": 0.7778, "shift_rate_cum": 0.7778}
+{"step": 2, "our_town": 3, "their_town": 1, "neutral": 3, "shift_rate": 0.25, "shift_rate_cum": 0.6154}
+{"step": 3, "our_town": 4, "their_town": 1, "neutral": 1, "shift_rate": 0.2, "shift_rate_cum": 0.5}
+{"step": 4, "our_town": 3, "their_town": 1, "neutral": 4, "shift_rate": 0.25, "shift_rate_cum": 0.4545}
+{"step": 5, "our_town": 1, "their_town": 1, "neutral": 3, "shift_rate": 0.5, "shift_rate_cum": 0.4583}
+{"step": 6, "our_town": 3, "their_town": 3, "neutral": 1, "shift_rate": 0.5, "shift_rate_cum": 0.4667}
