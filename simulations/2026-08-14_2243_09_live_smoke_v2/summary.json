@@ -1,0 +1,82 @@
+{
+  "run_name": "live_smoke_v2",
+  "steps": 2,
+  "agents": {
+    "acquirer": 1,
+    "broker": 1,
+    "business": 3,
+    "household": 12,
+    "media": 1,
+    "municipality": 1
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 8.5,
+  "invalid_actions": 1,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 39,
+    "input_tokens": 51957,
+    "cached_tokens": 0,
+    "output_tokens": 5979,
+    "errors": 0,
+    "by_tag": {
+      "agent:household": {
+        "calls": 24,
+        "input": 33848,
+        "cached": 0,
+        "output": 3515
+      },
+      "agent:business": {
+        "calls": 6,
+        "input": 6172,
+        "cached": 0,
+        "output": 943
+      },
+      "agent:broker": {
+        "calls": 2,
+        "input": 2055,
+        "cached": 0,
+        "output": 272
+      },
+      "agent:municipality": {
+        "calls": 2,
+        "input": 1879,
+        "cached": 0,
+        "output": 231
+      },
+      "agent:acquirer": {
+        "calls": 2,
+        "input": 5491,
+        "cached": 0,
+        "output": 371
+      },
+      "agent:media": {
+        "calls": 2,
+        "input": 2070,
+        "cached": 0,
+        "output": 303
+      },
+      "classify": {
+        "calls": 1,
+        "input": 442,
+        "cached": 0,
+        "output": 344
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.0217,
+    "final_hhi": 0.0813,
+    "cognition_shift_final": null,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 1
+    },
+    "late_index": null,
+    "detection_lag": null,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

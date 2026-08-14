@@ -119,7 +119,16 @@ python run.py --config configs/config_mvp_v1.yaml
 | `--run-name NAME` | 出力フォルダ名に使う実験名 |
 | `--no-classify` | KPI② の発話分類（LLM）をスキップ |
 
-### 3-4. 結果を見る
+### 3-4. テスト
+
+```bash
+python tests/test_ledger.py      # 57件。外部依存なし・API を叩かない
+```
+
+帳簿の整合性（二重売却の防止・資金の増減・逆提示・廃業後の扱い・月次清算）と、
+壊れた LLM 応答の扱い（配列や途中で切れた JSON を値の捏造なしに不成立にする）を固定している。
+
+### 3-5. 結果を見る
 
 `simulations/<run_dir>/<run_dir>.html` をブラウザで開くだけです。
 外部CDN に依存しない自己完結HTMLなので、そのまま配布・提出できます。
@@ -149,6 +158,7 @@ quiet-acquisition/
 │   ├── config_mvp_v1.yaml      ラン設定（バージョンごとにファイルを増やす）
 │   └── personas/mvp_v1.yaml    ペルソナ定義（属性のみ）
 ├── tools/estimate_cost.py      実プロンプトからのコスト見積り
+├── tests/test_ledger.py        帳簿と応答解析の回帰テスト（57件）
 ├── simulations/                ラン成果物（1ラン1フォルダ・自己完結）
 ├── docs/                       コンセプトペーパー・設計書
 └── slides/index.html           プレゼン資料（1ファイル）

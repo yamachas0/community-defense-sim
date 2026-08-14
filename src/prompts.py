@@ -18,7 +18,9 @@ from .agents import Agent
 from .schemas import verb_menu
 from .world import Ledger, Parcel, neighbors
 
-MAX_TIMELINE = 14
+# 全主体が発話しても打ち切られない上限にする。ここを小さくすると agent_id 順の
+# 若い側（買い手AI・仲介など）の発話が系統的に落ち、可視性に固定バイアスが入る。
+MAX_TIMELINE = 40
 MAX_UTTER_CHARS = 110
 # memory は毎回の出力トークンに直撃する。長すぎると max_tokens で JSON が途中で切れて
 # その月の行動が丸ごと落ちる（実API で確認済み）。短く保つこと。
@@ -47,7 +49,9 @@ OUTPUT_RULES = """\
 
   action_type      : 下の一覧から1つ選ぶ
   target           : 対象の区画ID / 買付ID / 相手のagent_id（不要なら空文字）
-  amount           : 価格・賃料などの金額（万円。不要なら0）
+  amount           : 価格・賃料などの金額。**単位は「万円」**（不要なら0）
+                     例: 2400万円 → 2400 と書く。24000000 のように円で書くな。
+                     観測に出てくる金額もすべて万円単位である。
   utterance        : 誰かに向けた発言。言いたいことがなければ空文字にしてよい
   utterance_channel: "public"(街のSNS・立ち話。全員が読む) / "private"(特定の一人に伝える) / "none"
   utterance_to     : private のときの相手 agent_id
@@ -152,7 +156,7 @@ def _inbox(agent: Agent, names: Dict[str, str]) -> str:
     if not agent.inbox:
         return "（先月あなた宛の連絡はなかった）"
     rows = []
-    for m in agent.inbox[-8:]:
+    for m in agent.inbox:   # 打ち切らない（読まれないまま消えるメッセージを作らない）
         who = names.get(m["from"], m["from"])
         rows.append(f"  {who}から:「{m['text'][:MAX_UTTER_CHARS]}」")
     return "\n".join(rows)
@@ -228,9 +232,10 @@ def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                 nb_rows.append("  " + _fmt_parcel_public(ledger.parcels[nid], names))
         body.append("[ご近所（あなたの区画の隣）で見えていること]")
         body.extend(nb_rows[:10] or ["  （特に変わったことはない）"])
-        my_blocks = sorted({p.block for p in mine}) or None
+        my_blocks = sorted({p.block for p in mine})
         body.append("[この辺りで最近成立した売買（噂で聞こえてくる範囲）]")
-        body.append(_recent_trades(ledger, step, names, blocks=my_blocks))
+        body.append(_recent_trades(ledger, step, names, blocks=my_blocks)
+                    if my_blocks else "（この街に土地を持っていないので、細かい話は入ってこない）")
         body.append("[あなたに届いている買付]")
         body.append(_offers_for(agent, ledger, names))
 
@@ -300,17 +305,24 @@ def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         oo = ledger.open_offers_from(agent.agent_id)
         body.extend([f"  {o.offer_id}: {o.parcel_id} に {o.price}万（名義{o.under_name}）"
                      for o in oo] or ["  （返事待ちの買付はない）"])
+        cs = ledger.counters_for(agent.agent_id)
+        body.append("[売主から返ってきた希望価格（あなたにだけ届いている）]")
+        body.extend([f"  {o.offer_id}: {o.parcel_id} — あなたの{o.price}万に対し "
+                     f"{o.counter_price}万を希望（第{o.counter_step}月）"
+                     for o in cs[-10:]]
+                    or ["  （逆提示はない）"])
         body.append("[先月の成約]")
         body.append(_recent_trades(ledger, step, names, limit=8))
 
     elif agent.role == "municipality":
         body.append("[窓口に上がっている情報]")
         if ledger.ordinances:
-            body.append("  届出制が施行済みのため、施行後の取得は届出で把握できる：")
             enact_step = ledger.ordinances[0]["step"]
+            body.append(f"  第{enact_step}月に施行した条例に基づき、施行後の取引は窓口に上がってくる："
+                        "（届け出られるのは登記の名義であって、その背後に誰がいるかではない）")
             tr = [t for t in ledger.transfers() if t["step"] >= enact_step]
-            body.extend([f"    第{t['step']}月 {t['parcel_id']} → 名義:{t['under_name']}"
-                         f"（実体:{t['buyer']}）{t['price']}万" for t in tr[-10:]]
+            body.extend([f"    第{t['step']}月 {t['parcel_id']} → 名義:{t['under_name']} "
+                         f"{t['price']}万" for t in tr[-10:]]
                         or ["    （施行後の届出はまだない）"])
         else:
             body.append("  土地取引を把握する仕組みは今のところ無い。"

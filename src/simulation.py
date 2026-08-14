@@ -22,8 +22,8 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Tuple
 
 from .agents import Agent, build_roster, index_by_id, name_map
-from .kpi import (classify_utterances, cognition_series, detection_lag, late_index,
-                  step_metrics)
+from .kpi import (classify_publications, classify_utterances, cognition_series,
+                  detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
 from .prompts import build_system_prompt, build_user_prompt
 from .schemas import action_schema, verbs_for
@@ -55,22 +55,56 @@ def _repair_truncated_json(raw: str) -> Optional[Dict[str, Any]]:
 
 
 def _parse_action(raw: str) -> Optional[Dict[str, Any]]:
+    """LLM 応答を dict にする。dict にならないものは全て None（＝PARSE_FAIL）。"""
     if not raw:
         return None
-    try:
-        return json.loads(raw)
-    except Exception:
-        pass
-    m = _JSON_RE.search(raw)
-    if m:
+    for candidate in (raw, (_JSON_RE.search(raw).group(0) if _JSON_RE.search(raw) else None)):
+        if not candidate:
+            continue
         try:
-            return json.loads(m.group(0))
+            obj = json.loads(candidate)
         except Exception:
-            pass
+            continue
+        if isinstance(obj, dict):
+            return obj
+        return None  # [] や "文字列" や 数値 が返ってきた場合は行動として成立しない
     repaired = _repair_truncated_json(raw)
     if repaired is not None:
         repaired["_truncated"] = True
     return repaired
+
+
+# 金額を伴う動詞。amount が欠けたまま 0 で成立させると「賃料0」等の値の捏造になるため、
+# これらの動詞では amount フィールドが実際に返ってきていることを必須にする。
+_AMOUNT_REQUIRED = {
+    "list_for_sale", "counter_offer", "set_rent", "negotiate_rent",
+    "make_offer", "redevelop",
+}
+# 対象を伴う動詞。target が空なら成立しない。
+_TARGET_REQUIRED = {
+    "list_for_sale", "unlist", "accept_offer", "counter_offer", "reject_offer", "set_rent",
+    "relocate", "negotiate_rent", "circulate_listing", "approach_owner",
+    "make_offer", "withdraw_offer", "redevelop", "request_report",
+}
+
+
+def _has_amount(act: Dict[str, Any]) -> bool:
+    """amount が実際に返ってきているか（欠損を 0 で代行しないための判定）。"""
+    if "amount" not in act:
+        return False
+    v = act.get("amount")
+    if v is None or v == "":
+        return False
+    try:
+        return int(float(v)) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def _is_rejected(outcome: Any) -> bool:
+    """帳簿上「成立しなかった」結果か。"""
+    kind = outcome.get("kind", "") if isinstance(outcome, dict) else str(outcome or "")
+    return str(kind).endswith(("_rejected", "invalid_action", "parse_fail"))
 
 
 def _as_int(v: Any) -> int:
@@ -198,14 +232,20 @@ class Simulation:
             a.memory = memory
 
             if action_type not in verbs_for(a.role):
-                self.invalid_count += 1
                 outcome = {"kind": "invalid_action", "reason": "unknown_verb",
                            "given": action_type}
+            elif action_type in _AMOUNT_REQUIRED and not _has_amount(act):
+                # 途中で切れた等で金額が返ってきていない。0 で代行しない＝不成立。
+                outcome = {"kind": "invalid_action", "reason": "missing_amount",
+                           "given": action_type}
+            elif action_type in _TARGET_REQUIRED and not target:
+                outcome = {"kind": "invalid_action", "reason": "missing_target",
+                           "given": action_type}
             else:
-                outcome = self._apply(step, a, action_type, target, amount, under_name, utter)
-                if str(outcome.get("kind", "")).endswith("_rejected") or \
-                        outcome.get("kind") == "invalid_action":
-                    self.invalid_count += 1
+                outcome = self._apply(step, a, action_type, target, amount, under_name,
+                                      utter, messages)
+            if _is_rejected(outcome):
+                self.invalid_count += 1
 
             if act.get("_truncated"):
                 self.truncated_count += 1
@@ -234,17 +274,14 @@ class Simulation:
     # -- 記帳 (行動 -> 帳簿) ------------------------------------------------
 
     def _apply(self, step: int, a: Agent, action: str, target: str, amount: int,
-               under_name: str, utter: str) -> Dict[str, Any]:
+               under_name: str, utter: str,
+               messages: List[Tuple[str, str, str]]) -> Dict[str, Any]:
         L = self.ledger
         # household -------------------------------------------------------
         if action == "list_for_sale":
             return L.record_listing(step, target, a.agent_id, amount)
         if action == "unlist":
-            p = L.parcels.get(target)
-            if p is None or p.owner_id != a.agent_id:
-                return {"kind": "invalid_action", "reason": "not_owner", "target": target}
-            p.listed_price = None
-            return L.record_note(step, a.agent_id, "unlist", target)
+            return L.record_unlist(step, target, a.agent_id)
         if action == "accept_offer":
             return L.record_accept(step, target, a.agent_id)
         if action == "reject_offer":
@@ -261,13 +298,19 @@ class Simulation:
         if action == "relocate":
             return L.record_relocate(step, a.agent_id, target)
         if action == "negotiate_rent":
-            if target in self.by_id:
-                self.by_id[target].inbox.append(
-                    {"from": a.agent_id, "step": step,
-                     "text": f"（賃料交渉）希望月額 {amount}万円。{utter[:100]}"})
-                return L.record_note(step, a.agent_id, "rent_negotiation",
-                                     f"to={target} ask={amount}")
-            return {"kind": "invalid_action", "reason": "no_such_agent", "target": target}
+            if target not in self.by_id:
+                return {"kind": "invalid_action", "reason": "no_such_agent", "target": target}
+            if not L._valid_money(amount):
+                return {"kind": "invalid_action", "reason": "invalid_amount", "given": amount}
+            landlord_of = {p.owner_id for p in L.parcels.values()
+                           if p.tenant_id == a.agent_id and p.use == "shop"}
+            if target not in landlord_of:
+                return {"kind": "invalid_action", "reason": "not_my_landlord",
+                        "target": target}
+            messages.append((a.agent_id, target,
+                             f"（賃料交渉）希望月額 {amount}万円。{utter[:100]}"))
+            return L.record_note(step, a.agent_id, "rent_negotiation",
+                                 f"to={target} ask={amount}")
         if action in ("continue", "hold", "wait", "monitor", "silent"):
             return L.record_note(step, a.agent_id, "no_ledger_change", action)
         # broker ----------------------------------------------------------
@@ -291,11 +334,10 @@ class Simulation:
         if action == "enact_ordinance":
             return L.record_ordinance(step, a.agent_id, target or "土地取引規制", utter[:400])
         if action == "request_report":
-            if target in self.by_id:
-                self.by_id[target].inbox.append(
-                    {"from": a.agent_id, "step": step, "text": f"（自治体からの照会）{utter[:140]}"})
-                return L.record_note(step, a.agent_id, "request_report", f"to={target}")
-            return {"kind": "invalid_action", "reason": "no_such_agent", "target": target}
+            if target not in self.by_id:
+                return {"kind": "invalid_action", "reason": "no_such_agent", "target": target}
+            messages.append((a.agent_id, target, f"（自治体からの照会）{utter[:140]}"))
+            return L.record_note(step, a.agent_id, "request_report", f"to={target}")
         # media -----------------------------------------------------------
         if action == "investigate":
             a.extra["investigated"] = True
@@ -329,15 +371,21 @@ class Simulation:
         })
 
     def _finalize(self, elapsed: float) -> Dict[str, Any]:
-        share_by_step = {r["step"]: r["acquirer_share"] for r in self.kpi_rows}
+        share_by_step = {0: 0.0}
+        share_by_step.update({r["step"]: r["acquirer_share"] for r in self.kpi_rows})
 
         classified: List[Dict[str, Any]] = []
         kcfg = self.cfg.get("kpi", {})
         targets = [u for u in self.all_utterances
                    if u["role"] in ("household", "business")]
+        pub_steps = None
         if kcfg.get("classify_utterances", True) and targets:
             classified = classify_utterances(
                 self.client, targets, batch=int(kcfg.get("classify_batch", 25)))
+        if kcfg.get("classify_utterances", True) and self.ledger.publications:
+            pub_steps = classify_publications(
+                self.client, self.ledger.publications,
+                batch=int(kcfg.get("classify_batch", 25)))
         cog = cognition_series(classified, self.n_steps)
 
         summary = {
@@ -360,7 +408,7 @@ class Simulation:
                             "max_chain": self.kpi_rows[-1]["cascade_max_chain"]}
                 if self.kpi_rows else {},
                 "late_index": late_index(self.ledger, self.acquirer_ids, share_by_step),
-                "detection_lag": detection_lag(self.ledger, share_by_step),
+                "detection_lag": detection_lag(self.ledger, share_by_step, pub_steps),
                 "business_survival": self.kpi_rows[-1]["business_survival"] if self.kpi_rows else None,
                 "resident_outflow": self.kpi_rows[-1]["resident_outflow"] if self.kpi_rows else None,
             },

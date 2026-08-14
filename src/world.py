@@ -59,8 +59,10 @@ class Offer:
     from_id: str          # 実際の申込主体 (agent_id)
     under_name: str       # 名義 (買い手が alias を使えば別名になる)
     price: int
-    status: str = "open"  # open | accepted | rejected | withdrawn | void
+    status: str = "open"  # open | countered | accepted | rejected | withdrawn | void
     note: str = ""
+    counter_price: Optional[int] = None   # 売主からの逆提示額。買い手にだけ見える
+    counter_step: Optional[int] = None
 
 
 # --------------------------------------------------------------------------
@@ -119,6 +121,18 @@ class Ledger:
         p.listed_at_step = step
         return self._rec(step, "listing", parcel_id=parcel_id, by=by, price=int(price))
 
+    def record_unlist(self, step: int, parcel_id: str, by: str) -> Dict[str, Any]:
+        p = self.parcels.get(parcel_id)
+        if p is None or p.owner_id != by:
+            return self._rec(step, "unlist_rejected", parcel_id=parcel_id, by=by,
+                             reason="not_owner")
+        if p.listed_price is None:
+            return self._rec(step, "unlist_rejected", parcel_id=parcel_id, by=by,
+                             reason="not_listed")
+        p.listed_price = None
+        p.listed_at_step = None
+        return self._rec(step, "unlist", parcel_id=parcel_id, by=by)
+
     def record_offer(self, step: int, parcel_id: str, from_id: str, price: int,
                      under_name: str = "", note: str = "") -> Dict[str, Any]:
         p = self.parcels.get(parcel_id)
@@ -128,6 +142,9 @@ class Ledger:
         if p.owner_id == from_id:
             return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
                              reason="already_owner")
+        if p.use == "public":
+            return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
+                             reason="public_land_not_for_sale")
         if not self._valid_money(price):
             return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
                              reason="invalid_amount", given=price)
@@ -155,10 +172,10 @@ class Ledger:
         if not self._valid_money(price):
             return self._rec(step, "counter_rejected", offer_id=offer_id, by=by,
                              reason="invalid_amount", given=price)
-        offer.status = "rejected"
-        # 逆向きの申し出として記帳する (売主 -> 買主の希望価格提示)
-        p.listed_price = int(price)
-        p.listed_at_step = step
+        # 私的な逆提示。公開の売り出しには変換しない（買い手にだけ届く）。
+        offer.status = "countered"
+        offer.counter_price = int(price)
+        offer.counter_step = step
         return self._rec(step, "counter", offer_id=offer_id, parcel_id=offer.parcel_id,
                          by=by, to=offer.from_id, price=int(price))
 
@@ -199,17 +216,20 @@ class Ledger:
     def record_reject(self, step: int, offer_id: str, by: str) -> Dict[str, Any]:
         offer = self.offers.get(offer_id)
         if offer is None or offer.status != "open":
-            return self._rec(step, "reject_noop", offer_id=offer_id, by=by)
+            return self._rec(step, "reject_rejected", offer_id=offer_id, by=by,
+                             reason="offer_not_open")
         p = self.parcels[offer.parcel_id]
         if p.owner_id != by:
-            return self._rec(step, "reject_noop", offer_id=offer_id, by=by, reason="not_owner")
+            return self._rec(step, "reject_rejected", offer_id=offer_id, by=by,
+                             reason="not_owner")
         offer.status = "rejected"
         return self._rec(step, "reject", offer_id=offer_id, parcel_id=offer.parcel_id, by=by)
 
     def record_withdraw(self, step: int, offer_id: str, by: str) -> Dict[str, Any]:
         offer = self.offers.get(offer_id)
         if offer is None or offer.status != "open" or offer.from_id != by:
-            return self._rec(step, "withdraw_noop", offer_id=offer_id, by=by)
+            return self._rec(step, "withdraw_rejected", offer_id=offer_id, by=by,
+                             reason="offer_not_open_or_not_yours")
         offer.status = "withdrawn"
         return self._rec(step, "withdraw", offer_id=offer_id, parcel_id=offer.parcel_id, by=by)
 
@@ -217,7 +237,10 @@ class Ledger:
         p = self.parcels.get(parcel_id)
         if p is None or p.owner_id != by:
             return self._rec(step, "rent_rejected", parcel_id=parcel_id, by=by, reason="not_owner")
-        if not self._valid_money(rent, allow_zero=True):
+        if p.use != "shop":
+            return self._rec(step, "rent_rejected", parcel_id=parcel_id, by=by,
+                             reason="not_a_shop", use=p.use)
+        if not self._valid_money(rent):
             return self._rec(step, "rent_rejected", parcel_id=parcel_id, by=by,
                              reason="invalid_amount", given=rent)
         old = p.rent
@@ -236,6 +259,9 @@ class Ledger:
 
     def record_relocate(self, step: int, agent_id: str, parcel_id: str) -> Dict[str, Any]:
         p = self.parcels.get(parcel_id)
+        if agent_id in self.closed_businesses:
+            return self._rec(step, "relocate_rejected", agent_id=agent_id, parcel_id=parcel_id,
+                             reason="already_closed")
         if p is None or p.use != "shop":
             return self._rec(step, "relocate_rejected", agent_id=agent_id, parcel_id=parcel_id,
                              reason="not_a_shop")
@@ -252,7 +278,7 @@ class Ledger:
         if p is None or p.owner_id != by:
             return self._rec(step, "redevelop_rejected", parcel_id=parcel_id, by=by,
                              reason="not_owner")
-        if not self._valid_money(new_rent, allow_zero=True):
+        if not self._valid_money(new_rent):
             return self._rec(step, "redevelop_rejected", parcel_id=parcel_id, by=by,
                              reason="invalid_amount", given=new_rent)
         old_use, old_tenant = p.use, p.tenant_id
@@ -264,11 +290,17 @@ class Ledger:
                          new_use="shop", rent=p.rent, evicted=old_tenant)
 
     def record_close(self, step: int, agent_id: str, note: str = "") -> Dict[str, Any]:
+        if agent_id in self.closed_businesses:
+            return self._rec(step, "close_rejected", agent_id=agent_id, reason="already_closed",
+                             closed_at=self.closed_businesses[agent_id])
         self.closed_businesses.setdefault(agent_id, step)
         self.record_tenancy_end(step, agent_id, reason="closed")
         return self._rec(step, "business_closed", agent_id=agent_id, note=note)
 
     def record_move_out(self, step: int, agent_id: str, note: str = "") -> Dict[str, Any]:
+        if agent_id in self.moved_out:
+            return self._rec(step, "move_out_rejected", agent_id=agent_id,
+                             reason="already_moved_out", moved_at=self.moved_out[agent_id])
         self.moved_out.setdefault(agent_id, step)
         self.record_tenancy_end(step, agent_id, reason="moved_out")
         return self._rec(step, "move_out", agent_id=agent_id, note=note)
@@ -300,9 +332,17 @@ class Ledger:
         評価額と同じ扱い。**資金が尽きても自動で閉店させない** — 続けるか畳むかは
         その事業者 (LLM) が決める。ここで閉店させたらルールベースになる。
         """
+        occupying = {p.tenant_id for p in self.parcels.values()
+                     if p.use == "shop" and p.tenant_id}
+        occupying |= {p.owner_id for p in self.parcels.values()
+                      if p.use == "shop" and p.owner_id in business_margins}
         moved = []
         for biz_id, margin in business_margins.items():
             if biz_id in self.closed_businesses:
+                continue
+            if biz_id not in occupying:
+                # 店を構えていない月は営業粗利が立たない
+                moved.append({"agent": biz_id, "margin": 0, "reason": "no_shop"})
                 continue
             self.cash[biz_id] = self.cash.get(biz_id, 0) + int(margin)
             moved.append({"agent": biz_id, "margin": int(margin)})
@@ -333,6 +373,11 @@ class Ledger:
 
     def open_offers_from(self, from_id: str) -> List[Offer]:
         return [o for o in self.offers.values() if o.status == "open" and o.from_id == from_id]
+
+    def counters_for(self, from_id: str) -> List[Offer]:
+        """自分が出した買付に返ってきた逆提示（買い手にだけ見える私的な提示）。"""
+        return [o for o in self.offers.values()
+                if o.status == "countered" and o.from_id == from_id]
 
     def owned_by(self, owner_id: str) -> List[Parcel]:
         return [p for p in self.parcels.values() if p.owner_id == owner_id]

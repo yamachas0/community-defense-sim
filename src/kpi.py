@@ -74,22 +74,37 @@ def cascade_stats(ledger: Ledger, until_step: int, window: int = 3) -> Dict[str,
 
 def late_index(ledger: Ledger, acquirer_ids: List[str],
                share_by_step: Dict[int, float]) -> Optional[Dict[str, Any]]:
-    """④手遅れ度: 最初の規制発動時点の買い手シェア。"""
+    """④手遅れ度: 最初の規制発動時点の買い手シェア。
+
+    2つ出す。全主体は月初の状態を見て同時に判断するので、判断者が実際に見えていたのは
+    **前月末**のシェア (share_observable)。同月末シェア (share_at_enactment) には、
+    その月に同時進行で成立した取得も含まれる。どちらも記録して取り違えを防ぐ。
+    """
     if not ledger.ordinances:
         return None
     o = ledger.ordinances[0]
     return {"step": o["step"], "title": o["title"],
-            "share_at_enactment": share_by_step.get(o["step"])}
+            "share_at_enactment": share_by_step.get(o["step"]),
+            "share_observable": share_by_step.get(o["step"] - 1, 0.0)}
 
 
-def detection_lag(ledger: Ledger, share_by_step: Dict[int, float]) -> Optional[Dict[str, Any]]:
-    """⑤検知ラグ: 買収を扱う初報道の時点の買い手シェア。"""
-    pubs = [p for p in ledger.publications if p["about_acquisition"]]
+def detection_lag(ledger: Ledger, share_by_step: Dict[int, float],
+                  about_steps: Optional[List[int]] = None) -> Optional[Dict[str, Any]]:
+    """⑤検知ラグ: 買収を扱う初報道の時点の買い手シェア。
+
+    about_steps を渡すと、そちら (LLM分類の結果) を「買収を扱った報道」の判定に使う。
+    渡さない場合は publish 時のキーワード判定にフォールバックする。
+    """
+    if about_steps is not None:
+        pubs = [p for p in ledger.publications if p["step"] in set(about_steps)]
+    else:
+        pubs = [p for p in ledger.publications if p["about_acquisition"]]
     if not pubs:
         return None
-    p = pubs[0]
+    p = min(pubs, key=lambda r: r["step"])
     return {"step": p["step"], "headline": p["headline"],
-            "share_at_first_report": share_by_step.get(p["step"])}
+            "share_at_first_report": share_by_step.get(p["step"]),
+            "share_observable": share_by_step.get(p["step"] - 1, 0.0)}
 
 
 # ---------------------------------------------------------------------------
@@ -129,6 +144,20 @@ def classify_utterances(client, utterances: List[Dict[str, Any]], batch: int = 2
                         "frame": r.get("frame", "unclassified"),
                         "about_acquisition": bool(r.get("about_acquisition", False))})
     return out
+
+
+def classify_publications(client, publications: List[Dict[str, Any]],
+                         batch: int = 25) -> List[int]:
+    """報道が土地取得を扱っているかを LLM に判定させ、該当する step のリストを返す。
+
+    publish 時のキーワード判定は取りこぼし・誤検知があるため、⑤検知ラグの確定には
+    こちらの事後分類を使う（観測であって世界には戻らない）。
+    """
+    if not publications:
+        return []
+    rows = [{"step": p["step"], "text": p["headline"]} for p in publications]
+    classified = classify_utterances(client, rows, batch=batch)
+    return sorted({c["step"] for c in classified if c.get("about_acquisition")})
 
 
 def cognition_series(classified: List[Dict[str, Any]], n_steps: int) -> List[Dict[str, Any]]:

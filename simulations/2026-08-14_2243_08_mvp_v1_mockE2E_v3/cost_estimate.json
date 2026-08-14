@@ -1,0 +1,20 @@
+{
+  "run": "2026-08-14_2243_08_mvp_v1_mockE2E_v3",
+  "model": "gemini-2.5-flash-lite",
+  "price": {
+    "input": 0.1,
+    "output": 0.4,
+    "cache_read": 0.01,
+    "cache_storage_hour": 1.0
+  },
+  "calls": 698,
+  "classify_calls": 14,
+  "input_tokens": 1100933,
+  "output_tokens": 249948,
+  "cost_input_usd": 0.11009,
+  "cost_output_usd": 0.09998,
+  "cost_total_usd": 0.2101,
+  "safety_factor": 2.0,
+  "cost_upper_usd": 0.4201,
+  "calibration": "countTokens 24本で校正: 実測 38144 tok / 推定 43964 tok → 係数 0.868"
+}
