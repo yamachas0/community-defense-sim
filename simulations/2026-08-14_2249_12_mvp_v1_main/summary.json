@@ -1,0 +1,87 @@
+{
+  "run_name": "mvp_v1_main",
+  "steps": 36,
+  "agents": {
+    "acquirer": 1,
+    "broker": 1,
+    "business": 3,
+    "household": 12,
+    "media": 1,
+    "municipality": 1
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 150.4,
+  "invalid_actions": 8,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 691,
+    "input_tokens": 1078942,
+    "cached_tokens": 221590,
+    "output_tokens": 115965,
+    "errors": 0,
+    "by_tag": {
+      "agent:household": {
+        "calls": 432,
+        "input": 695751,
+        "cached": 131468,
+        "output": 66978
+      },
+      "agent:business": {
+        "calls": 108,
+        "input": 130207,
+        "cached": 37101,
+        "output": 18933
+      },
+      "agent:broker": {
+        "calls": 36,
+        "input": 45361,
+        "cached": 14782,
+        "output": 5676
+      },
+      "agent:media": {
+        "calls": 36,
+        "input": 49792,
+        "cached": 12220,
+        "output": 6510
+      },
+      "agent:municipality": {
+        "calls": 36,
+        "input": 40789,
+        "cached": 12070,
+        "output": 5219
+      },
+      "agent:acquirer": {
+        "calls": 36,
+        "input": 111876,
+        "cached": 13949,
+        "output": 7875
+      },
+      "classify": {
+        "calls": 7,
+        "input": 5166,
+        "cached": 0,
+        "output": 4774
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.2391,
+    "final_hhi": 0.1096,
+    "cognition_shift_final": 0.0,
+    "cascade": {
+      "induced": 1,
+      "max_chain": 2
+    },
+    "late_index": null,
+    "detection_lag": {
+      "step": 28,
+      "headline": "佐々木靖夫様、P02、P26、P38の区画をお持ちの佐々木様が、築年数と修繕費を理由にP02の売却意向を表明されました。南町の静かな環境が魅力とのこと。みどり日",
+      "share_at_first_report": 0.1304,
+      "share_observable": 0.1304
+    },
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}
