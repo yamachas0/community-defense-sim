@@ -82,9 +82,14 @@ def action_schema(role: str) -> Dict[str, Any]:
         "utterance_to": {"type": "string"},
         "memory": {"type": "string"},
         "reasoning": {"type": "string"},
+        "evidence": {
+            "type": "array",
+            "items": {"type": "string"},
+        },
     }
     if role == "acquirer":
-        # 買い手だけが「どの名義で登記するか」を選べる (ダミー名義の分散は戦術の一部)
+        # 買い手だけが「どの名義で登記するか」を選べる。
+        # 別名義の目的（用途別SPC、共同投資等）はペルソナ側の属性であり、ここでは決めない。
         props["under_name"] = {"type": "string"}
     return {
         "type": "object",

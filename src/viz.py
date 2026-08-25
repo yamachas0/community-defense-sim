@@ -214,7 +214,7 @@ tr:nth-child(even) td{background:var(--g50);}
 </style></head><body>
 <header><div class="wrap">
 <p class="eyebrow">QUIET ACQUISITION — SIMULATION RESULT</p>
-<h1>静かな占領 ── AIが土地を買う街</h1>
+<h1>静かな占領 ── 不動産取得と地域認知の推移</h1>
 <p class="meta" id="hdrmeta"></p>
 </div></header>
 <div class="wrap">
@@ -286,7 +286,7 @@ const ACQ=new Set(D.acquirers);
 const nSteps=D.meta.steps;
 const pct=v=>(v==null?"—":(v*100).toFixed(1)+"%");
 const ROLEJA={household:"住民世帯",business:"地元事業者",broker:"不動産仲介",
- acquirer:"買い手AI",municipality:"自治体",media:"地元メディア"};
+ acquirer:"外部取得主体",municipality:"自治体",media:"地元メディア"};
 const PARCEL=Object.fromEntries(D.parcels.map(p=>[p.pid,p]));
 
 /* ---------- header + cards ---------- */
@@ -296,7 +296,9 @@ $("#hdrmeta").innerHTML=`<b>${esc(m.run_name)}</b> ／ ${esc(m.provider)} · ${e
  +Object.entries(m.agents).map(([r,v])=>`${esc(ROLEJA[r]||r)}${v}`).join("・")
  +` ／ 所要${m.elapsed_sec}s ／ 無効行動${m.invalid_actions}`;
 const cards=[
- ["① 所有集中度（買い手シェア）",pct(k.final_acquirer_share),"HHI "+(k.final_hhi??0).toFixed(3)],
+ ["① 所有集中度（取得主体シェア）",pct(k.final_acquirer_share),"HHI "+(k.final_hhi??0).toFixed(3)],
+ ...(k.final_acquirer_control_share==null?[]:
+   [["長期賃借・運営支配",pct(k.final_acquirer_control_share),"所有権とは別集計"]]),
  ["② 認知転相率（累積）",pct(k.cognition_shift_final),"「あの主体の街」と語る発話の比率"],
  ["③ 売却カスケード",(k.cascade&&k.cascade.induced!=null?k.cascade.induced:"—")+"件",
   "最大連鎖 "+((k.cascade&&k.cascade.max_chain)||0)],
@@ -349,7 +351,8 @@ cv.addEventListener("click",ev=>{
   $("#psel").scrollIntoView({behavior:"smooth",block:"center"}); }
 });
 $("#legend").innerHTML=
- `<div><span class="sw" style="background:${COL.acq}"></span>買い手AIが所有</div>
+ `<div><span class="sw" style="background:${COL.acq}"></span>外部取得主体が所有</div>
+  <div><span class="sw" style="background:#fff;border:3px solid ${COL.other}"></span>長期賃借・運営支配（所有とは別）</div>
   <div><span class="sw" style="background:${COL.hh}"></span>住民世帯が所有</div>
   <div><span class="sw" style="background:${COL.biz}"></span>地元事業者が所有</div>
   <div><span class="sw" style="background:${COL.pub}"></span>公有地</div>
@@ -385,7 +388,8 @@ const marks=[];
 if(k.detection_lag)marks.push({step:k.detection_lag.step,label:"初報道",color:"#B45309"});
 if(k.late_index)marks.push({step:k.late_index.step,label:"規制発動",color:"#0A0A0A"});
 lineChart($("#ch1"),[
- {label:"① 買い手シェア",color:"#10B981",data:D.kpi.map(r=>r.acquirer_share)},
+ {label:"① 取得主体シェア",color:"#10B981",data:D.kpi.map(r=>r.acquirer_share)},
+ ...(k.final_acquirer_control_share==null?[]:[{label:"長期賃借・運営支配",color:"#7C3AED",data:D.kpi.map(r=>r.acquirer_control_share)}]),
  {label:"HHI 集中指数",color:"#111827",data:D.kpi.map(r=>r.hhi)},
  {label:"② 認知転相率",color:"#B45309",data:D.cognition.map(r=>r.shift_rate_cum)},
 ],{ymax:1,fmt:v=>(v*100).toFixed(0)+"%",marks});
@@ -522,7 +526,10 @@ function renderParcel(){
  const last=D.frames[D.frames.length-1];
  $("#pinfo").innerHTML=`${p.block}／用途 ${esc(last.use[pid])}／初期評価額 ${p.value}万`
   +`／最終の名義 <b>${esc(last.registered[pid])}</b>`
-  +(last.rent[pid]?`／賃料 ${last.rent[pid]}万`:"");
+  +(last.rent[pid]?`／賃料 ${last.rent[pid]}万`:"")
+  +(last.controller&&last.controller[pid]
+    ?`／長期賃借・運営名義 <b>${esc(last.controller_name[pid])}</b>`
+      +`（${last.control_rent[pid]}万/月）`:"");
  const offs=new Set((D.ledger||[]).filter(r=>r.parcel_id===pid&&r.offer_id).map(r=>r.offer_id));
  const recs=(D.ledger||[]).filter(r=>r.parcel_id===pid
    ||(r.offer_id&&offs.has(r.offer_id)));
@@ -582,7 +589,7 @@ const slider=$("#slider"); slider.max=nSteps; slider.value=nSteps;
 function stepInfo(step){
  const r=D.kpi[step-1];
  if(!r) return "第0月（初期状態）";
- return `第${step}月 — 買い手シェア <b>${pct(r.acquirer_share)}</b> ／ HHI ${r.hhi.toFixed(3)}`
+ return `第${step}月 — 取得主体シェア <b>${pct(r.acquirer_share)}</b> ／ HHI ${r.hhi.toFixed(3)}`
   +` ／ 累計成約 ${r.transfers_cum} ／ 営業中の店 ${r.shops_occupied}/${r.shops_total}`
   +` ／ 転出率 ${pct(r.resident_outflow)}`;
 }

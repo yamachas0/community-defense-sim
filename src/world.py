@@ -38,6 +38,8 @@ class Parcel:
     use: str                     # "residential" | "shop" | "vacant" | "public"
     owner_id: str
     assessed_value: int          # 初期評価額 (万円)。世界の初期条件であり、以後コードは動かさない
+    area_sqm: int = 100           # 土地面積 (㎡)。世界の初期条件
+    unit_price: float = 24.0      # 地区・用途を反映した基準地価 (万円/㎡)
     rent: int = 0                # 月額賃料 (万円)。shop のみ。所有者(LLM)が改定する
     tenant_id: Optional[str] = None
     registered_name: str = ""    # 登記上の名義。買い手がalias を使えば実体(owner_id)と食い違う
@@ -453,6 +455,10 @@ def build_town(world_cfg: Dict[str, Any], household_ids: List[str],
     vacant_coords = {tuple(c) for c in world_cfg.get("vacant_coords", [])}
     public_coords = {tuple(c) for c in world_cfg.get("public_coords", [])}
     base_value = int(world_cfg.get("base_assessed_value", 2400))
+    base_unit_price = float(world_cfg.get("base_unit_price", 24.0))
+    area_pattern = [int(v) for v in world_cfg.get(
+        "area_pattern_sqm", [70, 90, 110, 140, 180, 240, 320, 450]
+    )]
     block_premium = world_cfg.get("block_premium", {})
 
     parcels: List[Parcel] = []
@@ -475,13 +481,16 @@ def build_town(world_cfg: Dict[str, Any], household_ids: List[str],
             else:
                 use, owner = "residential", household_ids[hh_cursor % len(household_ids)]
                 hh_cursor += 1
-            value = int(base_value * float(block_premium.get(block, 1.0)))
+            area = area_pattern[(idx - 1) % len(area_pattern)]
+            unit_price = base_unit_price * float(block_premium.get(block, 1.0))
             if use == "shop":
-                value = int(value * 1.25)
+                unit_price *= 1.25
             elif use == "vacant":
-                value = int(value * 0.7)
+                unit_price *= 0.7
+            value = int(round(area * unit_price))
             parcels.append(Parcel(pid=pid, x=x, y=y, block=block, use=use, owner_id=owner,
-                                  assessed_value=value))
+                                  assessed_value=value, area_sqm=area,
+                                  unit_price=round(unit_price, 2)))
     return parcels
 
 

@@ -16,6 +16,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.simulation import (_AMOUNT_REQUIRED, _has_amount, _is_rejected,  # noqa: E402
                             _parse_action, _repair_truncated_json)
+from src.agents import Agent  # noqa: E402
+from src.field_v3 import (action_schema_v3, build_system_prompt_v3, control_share,
+                          ensure_v3_state, list_for_lease, make_lease_offer,
+                          resolve_lease_offer)  # noqa: E402
+
+from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
+from src.schemas import action_schema  # noqa: E402
 from src.world import Ledger, Parcel  # noqa: E402
 
 PASS = 0
@@ -172,6 +179,85 @@ check("公有地はシェアの母数から除く（取引可能4区画）",
       f"got {L.ownership_share(['HH01'])}")
 check("HHI は 0-1", 0 < L.hhi() <= 1)
 
+print("== フィールドv2の構造化出力 ==")
+schema = action_schema("household")
+check("evidence は必須の配列",
+      "evidence" in schema["required"]
+      and schema["properties"]["evidence"]["type"] == "array"
+      and schema["properties"]["evidence"]["items"]["type"] == "string")
+acquirer = Agent("AQ01", "acquirer", "海外不動産投資会社", "長期保有型の投資会社",
+                 extra={"mandate": "長期収益を目指す", "aliases": ["国内SPC"]})
+system_prompt = build_system_prompt(
+    acquirer,
+    {"town_name": "A市", "background": "湾の反対側でスペースポート化が進む。"},
+    60,
+    48,
+)
+check("世界背景が全エージェントのsystem promptに入る",
+      "湾の反対側でスペースポート化が進む。" in system_prompt)
+check("買い手をAIに固定しない",
+      "買い手AI" not in acquirer.role_ja and "購買主体（AI）" not in system_prompt)
+
+print("== 観測IDの追跡可能性 ==")
+L = mk()
+offer = L.record_offer(1, "P01", "AQ01", 2500, under_name="国内SPC")
+names = {"HH01": "住民A", "HH02": "住民B", "BZ01": "店", "AQ01": "取得主体",
+         "MU01": "市"}
+household = Agent("HH01", "household", "住民A", "所有者")
+buyer_prompt = build_user_prompt(acquirer, L, 2, 60, names, [], ["AQ01"])
+owner_prompt = build_user_prompt(household, L, 2, 60, names, [], ["AQ01"])
+offer_obs_id = f"[OFFER-{offer['offer_id']}]"
+check("同じ買付IDが売主と取得主体の双方に表示される",
+      offer_obs_id in owner_prompt and offer_obs_id in buyer_prompt)
+L.record_accept(2, offer["offer_id"], "HH01")
+L.ordinances.append({"step": 2, "title": "届出条例", "body": "取引を届け出る"})
+municipality = Agent("MU01", "municipality", "市", "自治体担当")
+municipality_prompt = build_user_prompt(municipality, L, 3, 60, names, [], ["AQ01"])
+check("自治体の取引観測にも成約IDが表示される",
+      "[SALE-P01-M02]" in municipality_prompt)
+
+print("== フィールドv3の世界機構 ==")
+resident_v3 = Agent("HH01", "household", "R01", "日常生活を送る住民")
+buyer_v3 = Agent("AQ01", "acquirer", "X社", "海外の不動産会社",
+                 extra={"mandate": "A市で秘密裏に不動産を狙う",
+                        "aliases": ["A社", "B社", "C社", "D社"]})
+cfg_v3 = {
+    "world": {"town_name": "A市", "background": "日常が続く。"},
+    "social": {"venues": [{"id": "V01", "label": "飲食店"},
+                           {"id": "V02", "label": "公民館"}]},
+}
+resident_schema = action_schema_v3(resident_v3)
+buyer_schema = action_schema_v3(buyer_v3)
+check("住民には不動産以外の日常行動がある",
+      all(v in resident_schema["properties"]["action_type"]["enum"]
+          for v in ("routine", "work", "community_activity")))
+check("発話は同席か直接連絡だけ",
+      resident_schema["properties"]["utterance_channel"]["enum"]
+      == ["ambient", "direct", "none"])
+check("場所が構造化出力の必須項目", "location" in resident_schema["required"])
+check("X社の名義はX社とA社からD社だけ",
+      buyer_schema["properties"]["under_name"]["enum"]
+      == ["X社", "A社", "B社", "C社", "D社"])
+resident_system = build_system_prompt_v3(resident_v3, cfg_v3, 48)
+buyer_system = build_system_prompt_v3(buyer_v3, cfg_v3, 48)
+check("秘密目的はX社だけに表示",
+      "秘密裏に不動産を狙う" not in resident_system
+      and "秘密裏に不動産を狙う" in buyer_system)
+check("v3の利用者向けプロンプトにAI表記がない",
+      "AI" not in resident_system and "AI" not in buyer_system)
+
+L = mk()
+ensure_v3_state(L)
+listed = list_for_lease(L, 1, "P01", "HH01", 22)
+lease = make_lease_offer(L, 2, "P01", buyer_v3, 24, "C社", "長期利用希望")
+accepted = resolve_lease_offer(L, 3, lease.get("lease_offer_id", ""), "HH01", True)
+check("住民が自分の物件を賃貸募集できる", listed["kind"] == "lease_listing")
+check("長期賃貸申込みと受諾が成立",
+      lease["kind"] == "lease_offer" and accepted["kind"] == "lease_control")
+check("所有者を変えずに運営・賃借主体を別記録",
+      L.parcels["P01"].owner_id == "HH01"
+      and getattr(L.parcels["P01"], "controller_id", None) == "AQ01")
+check("所有率と別の支配率を集計", abs(control_share(L, ["AQ01"]) - 0.25) < 1e-9)
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
 sys.exit(1 if FAIL else 0)

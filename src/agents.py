@@ -14,7 +14,7 @@ ROLE_JA = {
     "household": "住民世帯",
     "business": "地元事業者",
     "broker": "不動産仲介",
-    "acquirer": "買い手AI",
+    "acquirer": "外部取得主体",
     "municipality": "自治体",
     "media": "地元メディア",
 }
@@ -51,6 +51,10 @@ def build_roster(personas: Dict[str, Any], counts: Dict[str, int],
             p = pool[i]
             aid = f"{prefix}{i + 1:02d}"
             a = Agent(agent_id=aid, role=role, name=p["name"], persona=p["persona"].strip())
+            # 行動規則ではなく、購読先・普段使う場所などの個体属性を保持する。
+            for key, value in p.items():
+                if key not in ("name", "persona"):
+                    a.extra[key] = value
             if extra_fn:
                 extra_fn(a, p)
             agents.append(a)

@@ -349,7 +349,9 @@ class OpenAIClient:
 _PARCEL_RE = re.compile(r"\bP\d{2}\b")
 _OFFER_RE = re.compile(r"\bO\d{4}\b")
 _AGENT_RE = re.compile(r"\b(?:HH|BZ|BR|AQ|MU|MD)\d{2}\b")
+_VENUE_RE = re.compile(r"\bV\d{2}\b")
 _STEP_RE = re.compile(r"第\s*(\d+)\s*月")
+_OBSERVATION_ID_RE = re.compile(r"\[((?:SALE|UTT|MSG|NEWS|OFFER|LEASE|TALK)-[^\]]+)\]")
 
 
 class MockClient:
@@ -391,7 +393,7 @@ class MockClient:
         if schema is not None and "results" in schema.get("properties", {}):
             return self._mock_classify(user_prompt)
         role = self._role_from_schema(schema)
-        return self._mock_action(role, system_prompt, user_prompt)
+        return self._mock_action(role, system_prompt, user_prompt, schema)
 
     @staticmethod
     def _role_from_schema(schema: Optional[Dict[str, Any]]) -> str:
@@ -413,17 +415,20 @@ class MockClient:
                     "about_acquisition": rng.random() < 0.6} for i in ids]
         return json.dumps({"results": results}, ensure_ascii=False)
 
-    def _mock_action(self, role: str, system_prompt: str, user_prompt: str) -> str:
+    def _mock_action(self, role: str, system_prompt: str, user_prompt: str,
+                     schema: Optional[Dict[str, Any]] = None) -> str:
         parcels = sorted(set(_PARCEL_RE.findall(user_prompt)))
         offers = sorted(set(_OFFER_RE.findall(user_prompt)))
         agents = sorted(set(_AGENT_RE.findall(user_prompt)))
+        observed_ids = list(dict.fromkeys(_OBSERVATION_ID_RE.findall(user_prompt)))
         m = _STEP_RE.search(user_prompt)
         step = int(m.group(1)) if m else 1
         rng = self._rng(f"{role}:{step}:{system_prompt[:48]}:{len(user_prompt)}")
         prog = min(1.0, step / 36.0)
 
         act = {"action_type": "hold", "target": "", "amount": 0, "utterance": "",
-               "utterance_channel": "none", "utterance_to": "", "memory": "", "reasoning": ""}
+               "utterance_channel": "none", "utterance_to": "", "memory": "",
+               "reasoning": "", "evidence": []}
 
         if role == "acquirer":
             if parcels and rng.random() < 0.85:
@@ -485,8 +490,38 @@ class MockClient:
             else:
                 act.update(action_type="silent")
 
+        # v3 の追加フィールドへ適合させる。Mockは配線確認専用で、世界の行動規則ではない。
+        properties = (schema or {}).get("properties", {})
+        allowed_actions = properties.get("action_type", {}).get("enum", [])
+        if allowed_actions and act["action_type"] not in allowed_actions:
+            fallback = {
+                "business": "operate",
+                "media": "routine_reporting",
+                "household": "hold",
+                "broker": "hold",
+                "municipality": "monitor",
+                "acquirer": "wait",
+            }
+            act["action_type"] = fallback[role]
+            act["target"] = ""
+            act["amount"] = 0
+        if "location" in properties:
+            venues = sorted(set(_VENUE_RE.findall(system_prompt)))
+            act["location"] = rng.choice(venues + ["HOME", "OFFICE"])
+            act["utterance_channel"] = {
+                "public": "ambient", "private": "direct",
+            }.get(act["utterance_channel"], act["utterance_channel"])
+        if "under_name" in properties:
+            legal_names = properties["under_name"].get("enum", [])
+            act["under_name"] = rng.choice(legal_names) if legal_names else ""
         act["memory"] = f"step{step}: {act['action_type']} を選んだ (mock)"
         act["reasoning"] = "mock client — 実際の判断はしていない"
+        evidence = []
+        if observed_ids:
+            evidence.append(rng.choice(observed_ids))
+        if act.get("target") in parcels:
+            evidence.append(act["target"])
+        act["evidence"] = list(dict.fromkeys(evidence))
         return json.dumps(act, ensure_ascii=False)
 
     def count_tokens(self, text: str) -> int:

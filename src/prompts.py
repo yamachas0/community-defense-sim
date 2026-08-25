@@ -57,6 +57,8 @@ OUTPUT_RULES = """\
   utterance_to     : private のときの相手 agent_id
   memory           : 来月の自分に残す短いメモ（**{mem}字以内**。事実と自分の受け止めを自由に）
   reasoning        : なぜそうしたか（**80字以内**）
+  evidence         : 判断に使った、今月の観測に表示されたIDの配列（無ければ []）
+                     SALE- / UTT- / MSG- / NEWS- / OFFER- または区画IDをそのまま引用する
 {extra_fields}
 選べる行動:
 {verbs}
@@ -84,8 +86,8 @@ ROLE_STANCE = {
 誰に何を伝えるかはあなたの裁量だ。仲介手数料はあなたの収入源である。
 """,
     "acquirer": """\
-あなたは自律的に動く購買主体（AI）だ。感情も疲労もなく、与えられた目的の達成度だけを見る。
-資金には限りがある。取引はすべて合法な範囲で行う。名義は選べる。
+あなたは街の外から不動産を取得・運用する主体だ。組織として与えられた目的と制約に基づいて判断する。
+資金には限りがある。取引はすべて合法な範囲で行う。利用可能な登記名義は選べる。
 """,
     "municipality": """\
 あなたはこの街を含む自治体の担当者だ。合法な取引を規制するには、法的な根拠と政治的な合意が要る。
@@ -106,6 +108,9 @@ def build_system_prompt(agent: Agent, world_cfg: Dict[str, Any], n_steps: int,
         n_steps=n_steps,
         n_years=round(n_steps / 12, 1),
     )
+    background = str(world_cfg.get("background", "")).strip()
+    if background:
+        brief += "\n\n--- この街の背景 ---\n" + background
     extra = ACQUIRER_EXTRA_FIELD if agent.role == "acquirer" else ""
     out = OUTPUT_RULES.format(mem=MAX_MEMORY_CHARS, verbs=verb_menu(agent.role),
                               extra_fields=extra)
@@ -148,7 +153,8 @@ def _timeline(public_utterances: List[Dict[str, Any]], names: Dict[str, str]) ->
     for u in public_utterances[-MAX_TIMELINE:]:
         who = names.get(u["from"], u["from"])
         txt = u["text"][:MAX_UTTER_CHARS]
-        rows.append(f"  {who}「{txt}」")
+        obs_id = f"UTT-M{u['step']:02d}-{u['from']}"
+        rows.append(f"  [{obs_id}] {who}「{txt}」")
     return "\n".join(rows)
 
 
@@ -158,7 +164,8 @@ def _inbox(agent: Agent, names: Dict[str, str]) -> str:
     rows = []
     for m in agent.inbox:   # 打ち切らない（読まれないまま消えるメッセージを作らない）
         who = names.get(m["from"], m["from"])
-        rows.append(f"  {who}から:「{m['text'][:MAX_UTTER_CHARS]}」")
+        obs_id = f"MSG-M{m['step']:02d}-{m['from']}-{agent.agent_id}"
+        rows.append(f"  [{obs_id}] {who}から:「{m['text'][:MAX_UTTER_CHARS]}」")
     return "\n".join(rows)
 
 
@@ -166,7 +173,16 @@ def _headlines(ledger: Ledger, step: int) -> str:
     pubs = [p for p in ledger.publications if p["step"] >= step - 6]
     if not pubs:
         return "（最近この街の記事は出ていない）"
-    return "\n".join(f"  第{p['step']}月『{p['headline']}』" for p in pubs[-6:])
+    rows = []
+    for p in pubs[-6:]:
+        seq = ledger.publications.index(p) + 1
+        rows.append(f"  [NEWS-{seq:03d}-M{p['step']:02d}] 第{p['step']}月『{p['headline']}』")
+    return "\n".join(rows)
+
+
+def _offer_observation_id(offer_id: str) -> str:
+    """同じ買付を観測経路によらず同一IDで参照できるようにする。"""
+    return f"OFFER-{offer_id}"
 
 
 def _ordinances(ledger: Ledger) -> str:
@@ -186,7 +202,8 @@ def _recent_trades(ledger: Ledger, step: int, names: Dict[str, str],
     rows = []
     for t in tr[-limit:]:
         p = ledger.parcels[t["parcel_id"]]
-        rows.append(f"  第{t['step']}月 {p.pid}({p.block}) {names.get(t['seller'], t['seller'])}"
+        obs_id = f"SALE-{t['parcel_id']}-M{t['step']:02d}"
+        rows.append(f"  [{obs_id}] 第{t['step']}月 {p.pid}({p.block}) {names.get(t['seller'], t['seller'])}"
                     f" → 名義:{t['under_name']} {t['price']}万")
     return "\n".join(rows)
 
@@ -198,7 +215,7 @@ def _offers_for(agent: Agent, ledger: Ledger, names: Dict[str, str]) -> str:
     rows = []
     for o in offers:
         p = ledger.parcels[o.parcel_id]
-        rows.append(f"  {o.offer_id}: {p.pid}({p.block}/{p.use}) に {o.under_name} から "
+        rows.append(f"  [{_offer_observation_id(o.offer_id)}] {o.offer_id}: {p.pid}({p.block}/{p.use}) に {o.under_name} から "
                     f"{o.price}万の買付（評価額{p.assessed_value}万）"
                     + (f" 伝言:「{o.note[:80]}」" if o.note else ""))
     return "\n".join(rows)
@@ -318,11 +335,13 @@ def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                         + f" 評価額{p.assessed_value}万")
         body.append("[あなたが出していて返事待ちの買付]")
         oo = ledger.open_offers_from(agent.agent_id)
-        body.extend([f"  {o.offer_id}: {o.parcel_id} に {o.price}万（名義{o.under_name}）"
+        body.extend([f"  [{_offer_observation_id(o.offer_id)}] {o.offer_id}: "
+                     f"{o.parcel_id} に {o.price}万（名義{o.under_name}）"
                      for o in oo] or ["  （返事待ちの買付はない）"])
         cs = ledger.counters_for(agent.agent_id)
         body.append("[売主から返ってきた希望価格（あなたにだけ届いている）]")
-        body.extend([f"  {o.offer_id}: {o.parcel_id} — あなたの{o.price}万に対し "
+        body.extend([f"  [{_offer_observation_id(o.offer_id)}] {o.offer_id}: "
+                     f"{o.parcel_id} — あなたの{o.price}万に対し "
                      f"{o.counter_price}万を希望（第{o.counter_step}月）"
                      for o in cs[-10:]]
                     or ["  （逆提示はない）"])
@@ -336,7 +355,8 @@ def build_user_prompt(agent: Agent, ledger: Ledger, step: int, n_steps: int,
             body.append(f"  第{enact_step}月に施行した条例に基づき、施行後の取引は窓口に上がってくる："
                         "（届け出られるのは登記の名義であって、その背後に誰がいるかではない）")
             tr = [t for t in ledger.transfers() if t["step"] >= enact_step]
-            body.extend([f"    第{t['step']}月 {t['parcel_id']} → 名義:{t['under_name']} "
+            body.extend([f"    [SALE-{t['parcel_id']}-M{t['step']:02d}] "
+                         f"第{t['step']}月 {t['parcel_id']} → 名義:{t['under_name']} "
                          f"{t['price']}万" for t in tr[-10:]]
                         or ["    （施行後の届出はまだない）"])
         else:
