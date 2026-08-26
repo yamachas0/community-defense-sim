@@ -22,12 +22,11 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Tuple
 
 from .agents import Agent, build_roster, index_by_id, name_map
-from .field_v3 import (action_schema_v3, attach_strategy_to_action_prompt,
-                       build_strategy_system_prompt_v3, build_strategy_user_prompt_v3,
+from .field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                        build_system_prompt_v3, build_user_prompt_v3, control_share,
                        effective_control_area_share, ensure_v3_state, list_for_lease,
-                       make_lease_offer, normalize_strategy_v3, resolve_lease_offer,
-                       settle_v3_control, strategy_schema_v3, verbs_for_v3)
+                       make_lease_offer, normalize_acquirer_plan_v3,
+                       resolve_lease_offer, settle_v3_control, verbs_for_v3)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -134,6 +133,21 @@ class Simulation:
         self.n_steps = int(cfg["steps"])
         self.usage = UsageMeter()
         self.client = create_llm_client({**cfg["llm"], "seed": cfg.get("seed", 42)}, self.usage)
+        acquirer_cfg = dict(cfg["llm"])
+        acquirer_model = str(acquirer_cfg.get("acquirer_model", "")).strip()
+        if self.field_v3 and acquirer_model:
+            acquirer_cfg["model"] = acquirer_model
+            acquirer_cfg["temperature"] = float(
+                acquirer_cfg.get("acquirer_temperature", acquirer_cfg.get("temperature", 0.7)))
+            acquirer_cfg["max_tokens"] = int(
+                acquirer_cfg.get("acquirer_max_tokens", acquirer_cfg.get("max_tokens", 720)))
+            if "acquirer_thinking_budget" in acquirer_cfg:
+                acquirer_cfg["thinking_budget"] = int(
+                    acquirer_cfg["acquirer_thinking_budget"])
+            self.acquirer_client = create_llm_client(
+                {**acquirer_cfg, "seed": cfg.get("seed", 42)}, self.usage)
+        else:
+            self.acquirer_client = self.client
         self.agents: List[Agent] = build_roster(personas, cfg["agents"], cfg["scenario"])
         self.by_id = index_by_id(self.agents)
         self.names = name_map(self.agents)
@@ -159,9 +173,6 @@ class Simulation:
         if self.field_v3:
             self.system_prompts = {a.agent_id: build_system_prompt_v3(a, cfg, len(parcels))
                                    for a in self.agents}
-            self.strategy_system_prompts = {
-                a.agent_id: build_strategy_system_prompt_v3(a, cfg)
-                for a in self.agents if a.role == "acquirer"}
         else:
             self.system_prompts = {
                 a.agent_id: build_system_prompt(a, cfg["world"], self.n_steps, len(parcels))
@@ -174,7 +185,6 @@ class Simulation:
         self.owner_frames: List[Dict[str, Any]] = []
         self.invalid_count = 0
         self.truncated_count = 0
-        self.strategy_parse_failures = 0
         self.business_margins = {a.agent_id: int(a.extra.get("monthly_margin", 0))
                                  for a in self.agents if a.role == "business"}
 
@@ -308,56 +318,28 @@ class Simulation:
         for a in self.agents:
             up = build_user_prompt_v3(a, self.ledger, step, self.n_steps,
                                       self.names, self.cfg)
+            if a.role == "acquirer":
+                up = build_acquirer_decision_prompt_v3(a, up)
             prompts.append((a, self.system_prompts[a.agent_id], up))
 
         workers = int(self.cfg["llm"].get("parallel_workers", 8))
         results: Dict[str, Dict[str, Any]] = {}
 
         def call(item):
-            a, sp, world_prompt = item
-            strategy: Dict[str, Any] = {}
-            strategy_error = ""
-            strategy_latency = 0.0
-            action_prompt = world_prompt
-            if a.role == "acquirer":
-                strategy_started = time.time()
-                strategy_raw = self.client.generate(
-                    self.strategy_system_prompts[a.agent_id],
-                    build_strategy_user_prompt_v3(a, world_prompt),
-                    schema=strategy_schema_v3(),
-                    tag="strategy:acquirer",
-                )
-                strategy_latency = time.time() - strategy_started
-                parsed_strategy = _parse_action(strategy_raw)
-                if parsed_strategy is None:
-                    strategy_error = "unparseable_strategy"
-                    strategy = dict(a.extra.get("strategy_state", {}))
-                else:
-                    strategy = normalize_strategy_v3(parsed_strategy)
-                    if not strategy.get("strategy"):
-                        strategy_error = "empty_strategy"
-                        strategy = dict(a.extra.get("strategy_state", {}))
-                    else:
-                        a.extra["strategy_state"] = strategy
-                action_prompt = attach_strategy_to_action_prompt(world_prompt, strategy)
-
-            action_started = time.time()
-            raw = self.client.generate(sp, action_prompt, schema=action_schema_v3(a),
-                                       tag=f"agent:{a.role}")
-            action_latency = time.time() - action_started
+            a, sp, up = item
+            client = self.acquirer_client if a.role == "acquirer" else self.client
+            started = time.time()
+            raw_action = client.generate(sp, up, schema=action_schema_v3(a),
+                                         tag=f"agent:{a.role}")
             return a.agent_id, {
-                "raw": raw,
-                "user_prompt": action_prompt,
-                "latency": action_latency + strategy_latency,
-                "strategy_latency": strategy_latency,
-                "strategy": strategy,
-                "strategy_error": strategy_error,
+                "raw": raw_action,
+                "user_prompt": up,
+                "latency": time.time() - started,
             }
 
         with ThreadPoolExecutor(max_workers=workers) as ex:
             for aid, result in ex.map(call, prompts):
                 results[aid] = result
-
         # 今月の観測は作成済み。ここから届く情報は翌月にだけ見える。
         for a in self.agents:
             a.inbox = []
@@ -373,12 +355,7 @@ class Simulation:
             event: Dict[str, Any] = {
                 "step": step, "agent_id": a.agent_id, "role": a.role, "name": a.name,
                 "latency_sec": round(result.get("latency", 0.0), 2),
-                "strategy_latency_sec": round(result.get("strategy_latency", 0.0), 2),
-                "strategy": result.get("strategy", {}),
-                "strategy_error": result.get("strategy_error", ""),
             }
-            if result.get("strategy_error"):
-                self.strategy_parse_failures += 1
             if act is None:
                 self.invalid_count += 1
                 event.update({
@@ -402,6 +379,9 @@ class Simulation:
             evidence = ([str(x).strip() for x in raw_evidence if str(x).strip()][:12]
                         if isinstance(raw_evidence, list) else [])
             under_name = str(act.get("under_name", "")).strip()
+            plan = (normalize_acquirer_plan_v3(act) if a.role == "acquirer" else {})
+            if a.role == "acquirer":
+                a.extra["strategy_state"] = plan
             a.memory = memory
 
             valid_location = location in venue_ids or location in ("HOME", "OFFICE")
@@ -432,7 +412,7 @@ class Simulation:
                 "utterance_channel": channel, "utterance_to": utterance_to,
                 "memory": memory, "reasoning": reasoning, "evidence": evidence,
                 "under_name": under_name, "truncated": bool(act.get("_truncated")),
-                "outcome": outcome,
+                "outcome": outcome, "plan": plan,
             })
             self.events.append(event)
 
@@ -486,13 +466,16 @@ class Simulation:
             )
             outcome = event.get("outcome", {})
             outcome_kind = outcome.get("kind", "") if isinstance(outcome, dict) else str(outcome)
-            a.extra.setdefault("execution_history", []).append({
+            history = a.extra.setdefault("execution_history", [])
+            previous_area = history[-1]["effective_area"] if history else 0
+            history.append({
                 "step": step,
                 "action_type": event.get("action_type", ""),
                 "target": event.get("target", ""),
                 "amount": event.get("amount", 0),
                 "outcome_kind": outcome_kind,
                 "effective_area": effective_area,
+                "control_delta": effective_area - previous_area,
                 "cash": self.ledger.cash.get(a.agent_id, 0),
             })
     def _agent_id(self, value: str) -> Optional[str]:
@@ -718,7 +701,7 @@ class Simulation:
             "model": getattr(self.client, "model", "?"),
             "provider": self.cfg["llm"].get("provider"),
             "elapsed_sec": round(elapsed, 1),
-            "strategy_parse_failures": self.strategy_parse_failures,
+            "acquirer_model": getattr(self.acquirer_client, "model", "?"),
             "invalid_actions": self.invalid_count,
             "truncated_responses": self.truncated_count,
             "usage": self.usage.as_dict(),

@@ -112,11 +112,13 @@ class GeminiClient:
 
     def __init__(self, model: str = "gemini-2.5-flash-lite", temperature: float = 0.9,
                  max_tokens: int = 420, enable_cache: bool = False,
+                 thinking_budget: Optional[int] = None,
                  usage: Optional[UsageMeter] = None, api_key_env: str = "GOOGLE_API_KEY"):
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.enable_cache = enable_cache
+        self.thinking_budget = thinking_budget
         self.usage = usage or UsageMeter()
         self._cache_handles: Dict[str, Any] = {}
         self._cache_lock = threading.Lock()
@@ -233,6 +235,9 @@ class GeminiClient:
             "temperature": temperature,
             "max_output_tokens": max_tokens,
         }
+        if self.thinking_budget is not None:
+            cfg["thinking_config"] = self._types.ThinkingConfig(
+                thinking_budget=self.thinking_budget)
         cache_name = self._get_cache(system_prompt) if self.enable_cache else None
         if cache_name:
             cfg["cached_content"] = cache_name
@@ -525,6 +530,15 @@ class MockClient:
         if "under_name" in properties:
             legal_names = properties["under_name"].get("enum", [])
             act["under_name"] = rng.choice(legal_names) if legal_names else ""
+        if "goal_assessment" in properties:
+            act.update({
+                "goal_assessment": "mock goal gap",
+                "strategy": "mock integrated plan",
+                "next_milestone": "mock milestone",
+                "expected_goal_effect": "mock expected effect",
+                "alternatives": ["mock alternative A", "mock alternative B"],
+                "revision_reason": "mock revision",
+            })
         act["memory"] = f"step{step}: {act['action_type']} を選んだ (mock)"
         act["reasoning"] = "mock client — 実際の判断はしていない"
         evidence = []
@@ -555,6 +569,8 @@ def create_llm_client(llm_config: Dict[str, Any], usage: Optional[UsageMeter] = 
         return GeminiClient(model=model or "gemini-2.5-flash-lite", temperature=temperature,
                             max_tokens=max_tokens,
                             enable_cache=bool(llm_config.get("enable_cache", False)),
+                            thinking_budget=(int(llm_config["thinking_budget"])
+                                             if "thinking_budget" in llm_config else None),
                             usage=usage)
     if provider == "openai":
         return OpenAIClient(model=model or "gpt-5.4-nano", temperature=temperature,

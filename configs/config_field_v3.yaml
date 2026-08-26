@@ -8,6 +8,10 @@ personas_file: configs/personas/field_v3.yaml
 llm:
   provider: google
   model: gemini-2.5-flash-lite
+  acquirer_model: gemini-2.5-flash
+  acquirer_temperature: 0.45
+  acquirer_max_tokens: 1400
+  acquirer_thinking_budget: 256
   temperature: 0.75
   max_tokens: 720
   parallel_workers: 8
