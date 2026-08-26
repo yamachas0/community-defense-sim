@@ -390,6 +390,17 @@ class MockClient:
             })
         self.usage.add(tag, input_tokens=0, output_tokens=0)
 
+        if schema is not None and "strategy" in schema.get("properties", {}) \
+                and "action_type" not in schema.get("properties", {}):
+            return json.dumps({
+                "situation_assessment": "mock strategy assessment",
+                "strategy": "mock strategy",
+                "next_milestone": "mock milestone",
+                "success_measure": "mock measure",
+                "alternatives": ["mock alternative A", "mock alternative B"],
+                "selection_basis": "mock basis",
+                "revision_reason": "mock revision",
+            }, ensure_ascii=False)
         if schema is not None and "results" in schema.get("properties", {}):
             return self._mock_classify(user_prompt)
         role = self._role_from_schema(schema)

@@ -17,8 +17,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.simulation import (_AMOUNT_REQUIRED, _has_amount, _is_rejected,  # noqa: E402
                             _parse_action, _repair_truncated_json)
 from src.agents import Agent  # noqa: E402
-from src.field_v3 import (action_schema_v3, build_system_prompt_v3, control_share,
-                          ensure_v3_state, list_for_lease, make_lease_offer,
+from src.field_v3 import (action_schema_v3, attach_strategy_to_action_prompt,
+                          build_strategy_system_prompt_v3, build_strategy_user_prompt_v3,
+                          build_system_prompt_v3, control_share, ensure_v3_state,
+                          list_for_lease, make_lease_offer, strategy_schema_v3,
                           resolve_lease_offer)  # noqa: E402
 
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
@@ -245,6 +247,24 @@ check("秘密目的はX社だけに表示",
       and "秘密裏に不動産を狙う" in buyer_system)
 check("v3の利用者向けプロンプトにAI表記がない",
       "AI" not in resident_system and "AI" not in buyer_system)
+strategy_schema = strategy_schema_v3()
+check("戦略レビューは世界内行動と別スキーマ",
+      "strategy" in strategy_schema["required"]
+      and "action_type" not in strategy_schema["properties"])
+strategy_system = build_strategy_system_prompt_v3(buyer_v3, cfg_v3)
+check("戦略担当は任務と複数案を比較する",
+      "秘密裏に不動産を狙う" in strategy_system and "複数" in strategy_system)
+buyer_v3.extra["strategy_state"] = {"strategy": "面積効率を比較する"}
+buyer_v3.extra["execution_history"] = [{
+    "step": 1, "action_type": "market_research", "target": "", "amount": 0,
+    "outcome_kind": "market_research", "effective_area": 0, "cash": 60000,
+}]
+strategy_user = build_strategy_user_prompt_v3(buyer_v3, "第2月の観測")
+check("自己要約と別に戦略・実行履歴が残る",
+      "面積効率を比較する" in strategy_user and "market_research" in strategy_user)
+check("実行担当へ戦略レビューを渡す",
+      "社内戦略レビュー" in attach_strategy_to_action_prompt(
+          "観測", buyer_v3.extra["strategy_state"]))
 
 L = mk()
 ensure_v3_state(L)

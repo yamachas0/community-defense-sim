@@ -22,10 +22,12 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Tuple
 
 from .agents import Agent, build_roster, index_by_id, name_map
-from .field_v3 import (action_schema_v3, build_system_prompt_v3, build_user_prompt_v3,
-                       control_share, effective_control_area_share, ensure_v3_state,
-                       list_for_lease, make_lease_offer,
-                       resolve_lease_offer, settle_v3_control, verbs_for_v3)
+from .field_v3 import (action_schema_v3, attach_strategy_to_action_prompt,
+                       build_strategy_system_prompt_v3, build_strategy_user_prompt_v3,
+                       build_system_prompt_v3, build_user_prompt_v3, control_share,
+                       effective_control_area_share, ensure_v3_state, list_for_lease,
+                       make_lease_offer, normalize_strategy_v3, resolve_lease_offer,
+                       settle_v3_control, strategy_schema_v3, verbs_for_v3)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -157,6 +159,9 @@ class Simulation:
         if self.field_v3:
             self.system_prompts = {a.agent_id: build_system_prompt_v3(a, cfg, len(parcels))
                                    for a in self.agents}
+            self.strategy_system_prompts = {
+                a.agent_id: build_strategy_system_prompt_v3(a, cfg)
+                for a in self.agents if a.role == "acquirer"}
         else:
             self.system_prompts = {
                 a.agent_id: build_system_prompt(a, cfg["world"], self.n_steps, len(parcels))
@@ -169,6 +174,7 @@ class Simulation:
         self.owner_frames: List[Dict[str, Any]] = []
         self.invalid_count = 0
         self.truncated_count = 0
+        self.strategy_parse_failures = 0
         self.business_margins = {a.agent_id: int(a.extra.get("monthly_margin", 0))
                                  for a in self.agents if a.role == "business"}
 
@@ -308,15 +314,49 @@ class Simulation:
         results: Dict[str, Dict[str, Any]] = {}
 
         def call(item):
-            a, sp, up = item
-            started = time.time()
-            raw = self.client.generate(sp, up, schema=action_schema_v3(a),
+            a, sp, world_prompt = item
+            strategy: Dict[str, Any] = {}
+            strategy_error = ""
+            strategy_latency = 0.0
+            action_prompt = world_prompt
+            if a.role == "acquirer":
+                strategy_started = time.time()
+                strategy_raw = self.client.generate(
+                    self.strategy_system_prompts[a.agent_id],
+                    build_strategy_user_prompt_v3(a, world_prompt),
+                    schema=strategy_schema_v3(),
+                    tag="strategy:acquirer",
+                )
+                strategy_latency = time.time() - strategy_started
+                parsed_strategy = _parse_action(strategy_raw)
+                if parsed_strategy is None:
+                    strategy_error = "unparseable_strategy"
+                    strategy = dict(a.extra.get("strategy_state", {}))
+                else:
+                    strategy = normalize_strategy_v3(parsed_strategy)
+                    if not strategy.get("strategy"):
+                        strategy_error = "empty_strategy"
+                        strategy = dict(a.extra.get("strategy_state", {}))
+                    else:
+                        a.extra["strategy_state"] = strategy
+                action_prompt = attach_strategy_to_action_prompt(world_prompt, strategy)
+
+            action_started = time.time()
+            raw = self.client.generate(sp, action_prompt, schema=action_schema_v3(a),
                                        tag=f"agent:{a.role}")
-            return a.agent_id, raw, up, time.time() - started
+            action_latency = time.time() - action_started
+            return a.agent_id, {
+                "raw": raw,
+                "user_prompt": action_prompt,
+                "latency": action_latency + strategy_latency,
+                "strategy_latency": strategy_latency,
+                "strategy": strategy,
+                "strategy_error": strategy_error,
+            }
 
         with ThreadPoolExecutor(max_workers=workers) as ex:
-            for aid, raw, up, latency in ex.map(call, prompts):
-                results[aid] = {"raw": raw, "user_prompt": up, "latency": latency}
+            for aid, result in ex.map(call, prompts):
+                results[aid] = result
 
         # 今月の観測は作成済み。ここから届く情報は翌月にだけ見える。
         for a in self.agents:
@@ -333,7 +373,12 @@ class Simulation:
             event: Dict[str, Any] = {
                 "step": step, "agent_id": a.agent_id, "role": a.role, "name": a.name,
                 "latency_sec": round(result.get("latency", 0.0), 2),
+                "strategy_latency_sec": round(result.get("strategy_latency", 0.0), 2),
+                "strategy": result.get("strategy", {}),
+                "strategy_error": result.get("strategy_error", ""),
             }
+            if result.get("strategy_error"):
+                self.strategy_parse_failures += 1
             if act is None:
                 self.invalid_count += 1
                 event.update({
@@ -425,6 +470,31 @@ class Simulation:
         self.ledger.settle_month(step, self.business_margins)
         settle_v3_control(self.ledger, step)
 
+        for a in self.agents:
+            if a.role != "acquirer":
+                continue
+            event = next((e for e in reversed(self.events)
+                          if e.get("step") == step and e.get("agent_id") == a.agent_id), None)
+            if event is None:
+                continue
+            effective_area = sum(
+                p.area_sqm for p in self.ledger.parcels.values()
+                if p.use != "public" and (
+                    p.owner_id == a.agent_id
+                    or getattr(p, "controller_id", None) == a.agent_id
+                )
+            )
+            outcome = event.get("outcome", {})
+            outcome_kind = outcome.get("kind", "") if isinstance(outcome, dict) else str(outcome)
+            a.extra.setdefault("execution_history", []).append({
+                "step": step,
+                "action_type": event.get("action_type", ""),
+                "target": event.get("target", ""),
+                "amount": event.get("amount", 0),
+                "outcome_kind": outcome_kind,
+                "effective_area": effective_area,
+                "cash": self.ledger.cash.get(a.agent_id, 0),
+            })
     def _agent_id(self, value: str) -> Optional[str]:
         if value in self.by_id:
             return value
@@ -648,6 +718,7 @@ class Simulation:
             "model": getattr(self.client, "model", "?"),
             "provider": self.cfg["llm"].get("provider"),
             "elapsed_sec": round(elapsed, 1),
+            "strategy_parse_failures": self.strategy_parse_failures,
             "invalid_actions": self.invalid_count,
             "truncated_responses": self.truncated_count,
             "usage": self.usage.as_dict(),

@@ -13,6 +13,7 @@ from .world import Ledger, Parcel
 
 MAX_MEMORY_CHARS = 240
 MAX_TEXT_CHARS = 140
+MAX_STRATEGY_TEXT_CHARS = 500
 
 V3_VERBS: Dict[str, Dict[str, str]] = {
     "household": {
@@ -136,6 +137,104 @@ def action_schema_v3(agent: Agent) -> Dict[str, Any]:
     return {"type": "object", "properties": props, "required": list(props)}
 
 
+def strategy_schema_v3() -> Dict[str, Any]:
+    """X社の内部戦略レビュー用スキーマ。
+
+    ここで世界内の行動は実行しない。行動を固定する規則ではなく、モデル自身が
+    長期目標と直近の結果を結び直すための、永続する計画状態を構造化する。
+    """
+    props: Dict[str, Any] = {
+        "situation_assessment": {"type": "string"},
+        "strategy": {"type": "string"},
+        "next_milestone": {"type": "string"},
+        "success_measure": {"type": "string"},
+        "alternatives": {"type": "array", "items": {"type": "string"}},
+        "selection_basis": {"type": "string"},
+        "revision_reason": {"type": "string"},
+    }
+    return {"type": "object", "properties": props, "required": list(props)}
+
+
+def normalize_strategy_v3(value: Dict[str, Any]) -> Dict[str, Any]:
+    keys = ("situation_assessment", "strategy", "next_milestone",
+            "success_measure", "selection_basis", "revision_reason")
+    out = {key: str(value.get(key, "")).strip()[:MAX_STRATEGY_TEXT_CHARS]
+           for key in keys}
+    alternatives = value.get("alternatives", [])
+    out["alternatives"] = (
+        [str(v).strip()[:MAX_STRATEGY_TEXT_CHARS]
+         for v in alternatives[:4] if str(v).strip()]
+        if isinstance(alternatives, list) else []
+    )
+    return out
+
+
+def build_strategy_system_prompt_v3(agent: Agent, cfg: Dict[str, Any]) -> str:
+    """X社内の戦略担当。世界の行動主体とは分離した思考レイヤー。"""
+    return f"""あなたは{agent.name}の社内戦略担当である。世界内では発言も行動もせず、
+実行担当が今月の行動を選ぶ前に、非公開任務の達成計画を更新する。
+
+--- 変更できない任務 ---
+{agent.extra['mandate']}
+
+観測された事実、残期間、残予算、実効支配面積、過去の実行結果だけを使う。
+複数の実質的に異なる戦略を比較し、最短で任務水準へ到達する観点と、予算・合法性・
+秘匿性・相手が応じない可能性を合わせて評価する。過去計画は前提ではなく、結果に応じて
+維持または改訂する。情報収集そのものを成果とせず、次の節目は観測可能な状態で表す。
+特定の行動を機械的に選ぶ規則や、将来の成約・相手の反応を作らない。
+
+各文字列は{MAX_STRATEGY_TEXT_CHARS}字以内、alternativesは2〜4件。説明文を付けずJSONだけ返す。"""
+
+
+def _strategy_text(strategy: Dict[str, Any]) -> str:
+    labels = (
+        ("situation_assessment", "現状評価"),
+        ("strategy", "採用戦略"),
+        ("next_milestone", "次の節目"),
+        ("success_measure", "成否の測り方"),
+        ("selection_basis", "選択根拠"),
+        ("revision_reason", "前月からの更新理由"),
+    )
+    rows = []
+    for key, label in labels:
+        value = str(strategy.get(key, "")).strip()[:MAX_STRATEGY_TEXT_CHARS]
+        if value:
+            rows.append(f"{label}: {value}")
+    alternatives = strategy.get("alternatives", [])
+    if isinstance(alternatives, list):
+        clean = [str(v).strip()[:MAX_STRATEGY_TEXT_CHARS]
+                 for v in alternatives[:4] if str(v).strip()]
+        if clean:
+            rows.append("比較した代替案: " + " / ".join(clean))
+    return "\n".join(rows) if rows else "（まだ計画なし）"
+
+
+def build_strategy_user_prompt_v3(agent: Agent, world_prompt: str) -> str:
+    previous = agent.extra.get("strategy_state", {})
+    history = agent.extra.get("execution_history", [])
+    rows = [world_prompt, "", "--- 前月までの内部戦略 ---", _strategy_text(previous)]
+    rows += ["", "--- 直近の実行結果（事実） ---"]
+    if history:
+        for item in history[-10:]:
+            rows.append(
+                f"第{item.get('step')}月 {item.get('action_type')} "
+                f"target={item.get('target') or '-'} amount={item.get('amount', 0)} "
+                f"outcome={item.get('outcome_kind') or '-'} "
+                f"支配={item.get('effective_area', 0)}㎡ cash={item.get('cash', 0)}万"
+            )
+    else:
+        rows.append("（実行履歴なし）")
+    rows += ["", "上記を踏まえ、今月の内部戦略を更新する。"]
+    return "\n".join(rows)
+
+
+def attach_strategy_to_action_prompt(world_prompt: str, strategy: Dict[str, Any]) -> str:
+    return (world_prompt + "\n\n--- 今月の社内戦略レビュー ---\n" +
+            _strategy_text(strategy) +
+            "\nこのレビューを判断材料に世界内の行動を1件選ぶ。新しい観測と矛盾する場合は、"
+            "reasoningに理由を書いて別の行動を選んでよい。")
+
+
 def build_system_prompt_v3(agent: Agent, cfg: Dict[str, Any], n_parcels: int) -> str:
     world = cfg["world"]
     venues = cfg.get("social", {}).get("venues", [])
@@ -177,14 +276,8 @@ direct発言はutterance_toで指定した一主体だけに届く。全員共�
 {agent.extra['mandate']}
 手段、価格、順序、速度、仲介利用、直接接触、名義の選択は自ら決める。
 利用可能な契約・登記名義: {' / '.join([agent.name] + list(agent.extra.get('aliases', [])))}
-目的は単なる希望ではなく、この期間に遂行する任務である。公開売出しがなくても、
-公開地図から対象を選ぶ、地区相場を調べる、個別登記を確認する、仲介や所有者へ接触する、
-買付・長期賃借を提案する等の手段がある。以前と同じ調査を成果なく反復せず、観測済みの
-面積・地価・名義・残予算・残期間を比較し、毎月の具体的な次の一手を自ら判断する。
-売出し・募集の有無は、所有者への直接買付や長期賃借申込みが帳簿上成立する条件ではない。
-市場調査済みと表示された後にmarket_researchを反復しても、新しい相場情報は増えない。
-任務未達のまま「公開案件がない」ことだけを理由に待機し続けるのは、できる限り早い実効支配
-という目的と整合しない。交渉結果は相手が決めるが、任務遂行の提案と接触は自ら決められる。
+今月は、別途行われた社内戦略レビューを判断材料として、世界内の行動を1件選ぶ。
+レビューは命令ではなく、新しい観測に応じて実行担当が異なる判断をしてよい。
 """
     text += f"""
 --- JSON出力 ---
@@ -320,6 +413,22 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         rows.append("[自社の長期賃借・運営]")
         rows.extend("  " + _parcel_text(p, names) for p in controlled)
         if not controlled:
+            rows.append("  （なし）")
+        own_sales = [o for o in ledger.offers.values() if o.from_id == agent.agent_id][-12:]
+        rows.append("[自社が出した直近の売買買付]")
+        rows.extend(
+            f"  {o.offer_id}: {o.parcel_id} 名義{o.under_name} {o.price}万 "
+            f"状態:{o.status}" + (f" 逆提示{o.counter_price}万" if o.counter_price else "")
+            for o in own_sales
+        )
+        if not own_sales:
+            rows.append("  （なし）")
+        own_leases = [o for o in ledger.v3_lease_offers.values()
+                      if o["from"] == agent.agent_id][-12:]
+        rows.append("[自社が出した直近の長期賃借・運営申込み]")
+        rows.extend(f"  {o['id']}: {o['parcel_id']} 名義{o['under_name']} "
+                    f"{o['rent']}万/月 状態:{o['status']}" for o in own_leases)
+        if not own_leases:
             rows.append("  （なし）")
         rows.append("[公開されている売出し・長期賃貸募集]")
         public = [p for p in ledger.parcels.values()
