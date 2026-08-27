@@ -24,6 +24,7 @@ from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                           acquirer_pipeline_text, answer_owner_inquiry,
                           client_inquiries_text,
                           check_land_registry_v3, inquire_owner_intent,
+                          registry_view_rows,
                           own_result_row, own_results_text, report_owner_intent,
                           request_owner_inquiry,
                           resolve_lease_offer, seed_acquirer_intelligence_v3)  # noqa: E402
@@ -532,6 +533,27 @@ check("報告が届いてはじめて意向と希望額が依頼主の観測に�
       and "状態:reported" in client_after)
 check("案件記録の相手最終返答も報告で更新される",
       "相手最終返答:inquiry_report(第4月)" in acquirer_pipeline_text(buyer_v, L4, names_q))
+
+print("== 案3: 登記は照会した時点の内容として見える ==")
+L5 = mk()
+L5.enable_on_demand_financing(["AQ01"])
+buyer_r5 = Agent("AQ01", "acquirer", "X社", "外部会社",
+                 extra={"mandate": "m", "aliases": ["A社"]})
+seed_acquirer_intelligence_v3(
+    buyer_r5, L5, {"acquirer_initial_intelligence": {
+        "market_research": True, "land_registry_scope": "non_public"}})
+before = " | ".join(registry_view_rows(buyer_r5, L5))
+check("参入前調査の内容と確認月が並ぶ",
+      "名義:住民A" in before and "確認:参入前調査" in before)
+o5 = L5.record_offer(2, "P01", "AQ01", 3000, under_name="A社")
+L5.record_accept(3, o5["offer_id"], "HH01")
+stale = " | ".join(registry_view_rows(buyer_r5, L5))
+check("再照会していない区画の名義変更は自動的には見えない",
+      "P01[北町] 名義:住民A" in stale)
+check_land_registry_v3(L5, 4, buyer_r5, "P01")
+fresh = " | ".join(registry_view_rows(buyer_r5, L5))
+check("再照会した区画だけ内容と確認月が更新される",
+      "P01[北町] 名義:A社" in fresh and "確認:第4月" in fresh)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")

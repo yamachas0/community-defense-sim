@@ -734,14 +734,10 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                  client_inquiries_text(agent, ledger, names)]
         rows += ["[自社の案件記録（機械記録・区画別・全件）]",
                  acquirer_pipeline_text(agent, ledger, names)]
-        registry_targets = set(agent.extra.get("land_registry_targets", []))
-        if registry_targets:
-            checked = agent.extra.get("land_registry_checked", {})
-            rows.append("[自分で調べた土地登記]")
-            rows.extend("  " + _parcel_text(p, names, True)
-                        + f" 確認:{checked.get(p.pid, '-')}"
-                        for p in sorted(ledger.parcels.values(), key=lambda x: x.pid)
-                        if p.pid in registry_targets)
+        registry_rows = registry_view_rows(agent, ledger)
+        if registry_rows:
+            rows.append("[自分で調べた土地登記（各行はその区画を照会した時点の内容）]")
+            rows.extend(registry_rows)
     elif agent.role in ("media", "municipality"):
         if agent.extra.get("land_registry_seen"):
             rows.append("[自分で調べた土地登記]")
@@ -1015,10 +1011,34 @@ def report_owner_intent(ledger: Ledger, step: int, broker_id: str, client_id: st
 # ---------------------------------------------------------------------------
 
 
+USE_JA = {"residential": "住宅", "shop": "店舗", "lodging": "宿泊",
+          "office": "事務所", "vacant": "空地", "public": "公共施設"}
+
+
 def registry_fact(parcel: Parcel) -> str:
-    """その区画の登記事実（照会で得られる内容）。"""
-    return (f"名義:{parcel.registered_name} 用途:{parcel.use} "
+    """その区画の登記事実（照会した時点で得られる内容）。"""
+    return (f"名義:{parcel.registered_name} 用途:{USE_JA.get(parcel.use, parcel.use)} "
             f"面積:{parcel.area_sqm}㎡")
+
+
+def registry_view_rows(agent: Agent, ledger: Ledger) -> List[str]:
+    """自分が照会して得た登記の内容を、照会時点の記録として出す。
+
+    ここで最新の登記を出すと、再照会していない区画の名義変更まで自動的に見えてしまう。
+    それは「自分で調べた事実」ではないので、保存してある照会時点の内容を出す。
+    """
+    targets = set(agent.extra.get("land_registry_targets", []))
+    snapshots = agent.extra.get("land_registry_snapshot", {})
+    checked = agent.extra.get("land_registry_checked", {})
+    rows = []
+    for parcel in sorted(ledger.parcels.values(), key=lambda x: x.pid):
+        if parcel.pid not in targets:
+            continue
+        fact = snapshots.get(parcel.pid) or registry_fact(parcel)
+        rows.append(f"  {parcel.pid}[{parcel.block}] {fact} "
+                    f"基準地価{parcel.unit_price:g}万/㎡ 評価額{parcel.assessed_value}万 "
+                    f"確認:{checked.get(parcel.pid, '-')}")
+    return rows
 
 
 def check_land_registry_v3(ledger: Ledger, step: int, agent: Agent,
