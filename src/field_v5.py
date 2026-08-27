@@ -54,7 +54,7 @@ SCENE_LABELS = {
 # (kind, 会場ID, 場面の説明)
 S4_ROTATION: List[Tuple[str, str, str]] = [
     ("assembly", "V02", "町内会（地区公民館の寄り合い）"),
-    ("counter", "V06", "市役所の窓口（待合と相談窓口）"),
+    ("counter", "V06", "市役所の窓口（待合と受付）"),
     ("broker_front", "V07", "仲介の店先（不動産仲介の事務所）"),
     ("press", "V08", "記者の取材（地域イベント会場に記者が来ている）"),
 ]

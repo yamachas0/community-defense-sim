@@ -28,6 +28,214 @@ def _read_jsonl(path: str) -> List[Dict[str, Any]]:
         return [json.loads(line) for line in f if line.strip()]
 
 
+# --- v5: 出来事はピン留め・観測するのは街の会話 ---------------------------
+# 判定と抽出の定義は docs/world_design_v5_impl.md 6章で**走行前に固定**したもの。
+# ここでは解釈も評価もしない。数えるのは記録に実在する事実だけ。
+
+S4_KINDS = ["assembly", "counter", "broker_front", "press"]
+V5_HOLDER_RE = re.compile(r"[A-Z]社")
+V5_PARCEL_RE = re.compile(r"P\d{2}")
+V5_WORDS = ("名義", "所有者が変わ", "売られ", "手放し", "買い取", "買われ",
+            "地上げ", "底地", "よそ者", "外の会社", "東京の会社")
+
+
+def _v5_s4_kind(step: int) -> str:
+    return S4_KINDS[(int(step) - 1) % len(S4_KINDS)]
+
+
+def _v5_mentions(text: str, holders) -> Dict[str, Any]:
+    """走行前に固定したルールベース1次抽出（絞り込みであって判定ではない）。"""
+    parcels = sorted(set(V5_PARCEL_RE.findall(text)))
+    named = sorted({h for h in holders if h and h in text})
+    words = [w for w in V5_WORDS if w in text]
+    return {"parcels": parcels, "holders": named, "words": words,
+            "hit": bool(parcels or named or words)}
+
+
+def metrics_v5(run_dir: str) -> Dict[str, Any]:
+    events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
+    ledger = _read_jsonl(os.path.join(run_dir, "ledger.jsonl"))
+    utts = _read_jsonl(os.path.join(run_dir, "utterances_v5.jsonl"))
+    traces = _read_jsonl(os.path.join(run_dir, "traces_v5.jsonl"))
+    stances = _read_jsonl(os.path.join(run_dir, "stances_v5.jsonl"))
+    articles = _read_jsonl(os.path.join(run_dir, "articles_v5.jsonl"))
+    directs = _read_jsonl(os.path.join(run_dir, "directs_v5.jsonl"))
+    plans = _read_jsonl(os.path.join(run_dir, "plans_v5.jsonl"))
+    classified = _read_jsonl(os.path.join(run_dir, "utterances.jsonl"))
+    with open(os.path.join(run_dir, "summary.json"), encoding="utf-8") as f:
+        summary = json.load(f)
+
+    # 取得（台本の実現）＝台帳の名義移転
+    acqs = [r for r in ledger if r.get("kind") == "transfer"]
+    holders = sorted({str(a.get("under_name", "")) for a in acqs if a.get("under_name")})
+    by_parcel = {a["parcel_id"]: a for a in acqs}
+    sellers = {a["parcel_id"]: a.get("seller", "") for a in acqs}
+
+    # LLM の事後分類（走行中の主体には一切見せていない）
+    about = {(int(r.get("step", 0)), r.get("from", ""), str(r.get("text", "")))
+             for r in classified if r.get("about_acquisition")}
+    llm_ran = any("about_acquisition" in r for r in classified)
+
+    first_mention: Dict[str, Any] = {}
+    edges = 0
+    mention_rows = []
+    knowers_by_month: Dict[int, set] = collections.defaultdict(set)
+    form = collections.Counter()
+    for u in sorted(utts, key=lambda r: (r["step"], r.get("utt_id", ""))):
+        text = str(u.get("text", ""))
+        hit = _v5_mentions(text, holders)
+        if not hit["hit"]:
+            continue
+        key = (int(u["step"]), u.get("from", ""), text)
+        if llm_ran and key not in about:
+            continue          # 1次抽出に掛かっても LLM が「取得の話ではない」としたものは数えない
+        mention_rows.append(u)
+        edges += len(u.get("heard_by", []))
+        knowers_by_month[int(u["step"])].add(u.get("from", ""))
+        # 噂の形（台帳と突き合わせた事後判定・LLMの主観を入れない）
+        step = int(u["step"])
+        if hit["parcels"]:
+            for pid in hit["parcels"]:
+                rec = by_parcel.get(pid)
+                if rec and int(rec.get("step", 0)) <= step:
+                    ok = (not hit["holders"]
+                          or rec.get("under_name") in hit["holders"])
+                    form["fact" if ok else "error"] += 1
+                else:
+                    form["error"] += 1
+        else:
+            form["unspecific"] += 1
+        # 初認知（当事者＝売主を除く）
+        for pid in (hit["parcels"] or [a["parcel_id"] for a in acqs
+                                       if hit["holders"]
+                                       and a.get("under_name") in hit["holders"]
+                                       and int(a["step"]) <= step]):
+            rec = by_parcel.get(pid)
+            if rec is None or int(rec.get("step", 0)) > step:
+                continue
+            acq_id = rec.get("acq_id") or pid
+            if acq_id in first_mention or u.get("from") == sellers.get(pid):
+                continue
+            seen = [t for t in traces
+                    if t.get("agent_id") == u.get("from")
+                    and t.get("parcel_id") == pid and int(t.get("step", 0)) <= step]
+            first_mention[acq_id] = {
+                "parcel_id": pid, "transfer_month": int(rec.get("step", 0)),
+                "month": step, "agent_id": u.get("from"), "role": u.get("role"),
+                "scene": u.get("scene"), "venue": u.get("venue"),
+                "lag_months": step - int(rec.get("step", 0)),
+                "trace_seen_first": (seen[0].get("kind") if seen else ""),
+            }
+
+    noticed = set(first_mention)
+    all_ids = [a.get("acq_id") or a["parcel_id"] for a in acqs]
+    unnoticed = [a for a in all_ids if a not in noticed]
+
+    # 明るみに出たか
+    article_months = sorted({int(a["step"]) for a in articles
+                             if _v5_mentions(str(a.get("text", "")), holders)["hit"]})
+    assembly, counter = collections.defaultdict(set), []
+    for u in mention_rows:
+        if u.get("scene") != "S4":
+            continue
+        kind = _v5_s4_kind(u["step"])
+        if kind == "assembly":
+            assembly[int(u["step"])].add(u.get("from"))
+        elif kind == "counter":
+            counter.append(int(u["step"]))
+    assembly_months = sorted(m for m, who in assembly.items() if len(who) >= 3)
+    counter_months = sorted(set(counter))
+
+    # 元所有者の沈黙・発言
+    seller_spoke = {}
+    for pid, seller in sellers.items():
+        rows = [u for u in mention_rows
+                if u.get("from") == seller
+                and (pid in str(u.get("text", ""))
+                     or by_parcel[pid].get("under_name") in str(u.get("text", "")))]
+        seller_spoke[f"{seller}/{pid}"] = (min(int(r["step"]) for r in rows)
+                                           if rows else None)
+
+    # D1: 当事者以外の3主体以上が言及した取得
+    by_acq_speakers: Dict[str, set] = collections.defaultdict(set)
+    for u in mention_rows:
+        text = str(u.get("text", ""))
+        for pid in V5_PARCEL_RE.findall(text):
+            rec = by_parcel.get(pid)
+            if rec is None or int(rec.get("step", 0)) > int(u["step"]):
+                continue
+            if u.get("from") == sellers.get(pid):
+                continue
+            by_acq_speakers[rec.get("acq_id") or pid].add(u.get("from"))
+    d1 = sorted(k for k, who in by_acq_speakers.items() if len(who) >= 3)
+    d2 = bool(article_months or assembly_months or counter_months)
+
+    scene_sizes = collections.Counter()
+    for u in utts:
+        scene_sizes[(u["step"], u["scene"], u["venue"])] = len(u.get("heard_by", [])) + 1
+    parse_fail = len([e for e in events if e.get("action_type") == "PARSE_FAIL"])
+    talk_events = [e for e in events if e.get("action_type") == "utterance"]
+    usage = summary.get("usage", {})
+
+    return {
+        "run": os.path.basename(run_dir),
+        "version": "field_v5",
+        "steps": summary.get("steps"),
+        "model": summary.get("model"),
+        "calls": usage.get("calls", 0),
+        "errors": usage.get("errors", 0),
+        "truncated": summary.get("truncated_responses", 0),
+        "parse_fail": parse_fail,
+        "invalid_actions": summary.get("invalid_actions", 0),
+        "llm_classified": llm_ran,
+        # 出来事（台本）
+        "acquisitions": len(acqs),
+        "acquisition_months": sorted(int(a["step"]) for a in acqs),
+        "holders": holders,
+        "final_acquirer_share": summary.get("kpi", {}).get("final_acquirer_share"),
+        # 会話
+        "utterance_turns": len(talk_events),
+        "utterances_spoken": len(utts),
+        "silence_rate": (round(1 - len(utts) / len(talk_events), 3)
+                         if talk_events else None),
+        "mean_scene_size": (round(sum(scene_sizes.values()) / len(scene_sizes), 2)
+                            if scene_sizes else 0),
+        "directs": len(directs),
+        "articles": len(articles),
+        # 気づき
+        "mention_utterances": len(mention_rows),
+        "propagation_edges": edges,
+        "knowers_by_month": {m: sorted(v) for m, v in sorted(knowers_by_month.items())},
+        "first_mention": first_mention,
+        "noticed_acquisitions": len(noticed),
+        "unnoticed_acquisitions": unnoticed,
+        "unnoticed_ratio": (round(len(unnoticed) / len(all_ids), 3) if all_ids else None),
+        "mean_detection_lag_months": (
+            round(sum(v["lag_months"] for v in first_mention.values())
+                  / len(first_mention), 2) if first_mention else None),
+        "rumor_form": dict(form),
+        # 明るみ
+        "article_months": article_months,
+        "assembly_months": assembly_months,
+        "counter_months": counter_months,
+        "registry_lookups": len([t for t in traces if t.get("kind") == "registry_lookup"]),
+        "traces_by_kind": dict(collections.Counter(t.get("kind") for t in traces)),
+        "seller_first_mention_of_own_sale": seller_spoke,
+        "sellers_silent": len([v for v in seller_spoke.values() if v is None]),
+        # 姿勢（台帳を動かさない観測値）
+        "stance_sell": len([s for s in stances if s.get("stance") == "sell"]),
+        "stance_keep": len([s for s in stances if s.get("stance") == "keep"]),
+        "plans_home_rate": (round(sum(1 for p in plans for s in ("S1", "S2", "S3", "S4")
+                                      if p.get(s) == "HOME")
+                                  / max(1, len(plans) * 4), 3) if plans else None),
+        # 判定（走行前に固定した定義）
+        "D1_exposed_acquisitions": d1,
+        "D2_town_exposed": d2,
+        "D3_wiring_ok": (parse_fail == 0 and summary.get("truncated_responses", 0) == 0
+                         and bool(utts)),
+    }
+
+
 def metrics_v41(run_dir: str) -> Dict[str, Any]:
     """v4.1（金額のない世界）の集計。判定基準は docs/world_design_v4_impl.md と同じ定義。"""
     events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
@@ -578,7 +786,9 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        if version == "field_v4_1b":
+        if version == "field_v5":
+            rows.append(metrics_v5(run))
+        elif version == "field_v4_1b":
             rows.append(metrics_v41b(run))
         elif version == "field_v4_1":
             rows.append(metrics_v41(run))

@@ -2060,6 +2060,9 @@ class Simulation:
         kcfg = self.cfg.get("kpi", {})
         targets = [u for u in self.all_utterances
                    if u["role"] in ("household", "business")]
+        if self.field_v5:
+            # v5 は仲介・行政・記者も同じ場で話す（会話が観測の本体）ので全主体を分類する。
+            targets = list(self.all_utterances)
         pub_steps = None
         if kcfg.get("classify_utterances", True) and targets:
             classified = classify_utterances(

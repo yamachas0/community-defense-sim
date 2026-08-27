@@ -1628,6 +1628,311 @@ check("v4.1b: 金額のない世界のレポートデータに amount を載せ�
       "amount" not in _compact_events(_ev, moneyless=True)[0]
       and _compact_events(_ev)[0]["amount"] == 3000)
 
+# ===========================================================================
+# v5: 出来事はピン留め・観測するのは街の会話
+#   設計の正は docs/world_design_v5_impl.md（受け入れ条件は 9.2）
+#   v1〜v4.1b の経路は不変であることも合わせて固定する。
+# ===========================================================================
+
+import json as _json          # noqa: E402
+import shutil as _shutil      # noqa: E402
+import tempfile as _tempfile  # noqa: E402
+
+from src.field_v5 import (HOME as HOME_V5, SCENE_IDS, ambient_traces_v5,  # noqa: E402
+                          apply_script_v5, build_plan_prompt_v5,
+                          build_scene_prompt_v5, build_system_prompt_v5,
+                          ensure_v5_state, plan_schema_v5, registry_rows_v5,
+                          s4_for_step, scene_schema_v5, validate_script_v5,
+                          venue_traces_v5)
+from src.simulation import Simulation  # noqa: E402
+
+
+def mk5() -> Ledger:
+    parcels = [
+        Parcel("P01", 0, 0, "北町", "residential", "HH01", 2400, area_sqm=100,
+               registered_name="住民A"),
+        Parcel("P02", 1, 0, "北町", "shop", "HH02", 3000, area_sqm=200,
+               tenant_id="BZ01", registered_name="住民B"),
+        Parcel("P03", 2, 0, "北町", "residential", "HH03", 2400, area_sqm=120,
+               registered_name="住民C"),
+        Parcel("P04", 3, 0, "北町", "public", "MU01", 2400, area_sqm=200,
+               registered_name="市"),
+    ]
+    ledger = Ledger(parcels, {})
+    ensure_v5_state(ledger)
+    return ledger
+
+
+SCRIPT5 = {
+    "meta": {"seed": 85, "months": 3, "holders": ["A社", "B社"]},
+    "acquisitions": [
+        {"id": "ACQ01", "month": 1, "parcel_id": "P01", "under_name": "A社",
+         "traces": [{"kind": "registry", "month": 1, "audience": "registry"},
+                    {"kind": "moving_out", "month": 1, "audience": "neighbors"},
+                    {"kind": "sign_change", "month": 1, "audience": "venue:V01"},
+                    {"kind": "broker_known", "month": 1, "audience": "agents:[BR01]"}]},
+        {"id": "ACQ02", "month": 2, "parcel_id": "P04", "under_name": "B社",
+         "traces": []},
+    ],
+}
+
+L5 = mk5()
+validate_script_v5(SCRIPT5)
+check("v5: 台本の検証が正しい台本を通す", True)
+try:
+    validate_script_v5({"acquisitions": [{"id": "X", "month": 1, "parcel_id": "P01",
+                                          "under_name": "A社",
+                                          "traces": [{"kind": "nope",
+                                                      "audience": "registry"}]}]})
+    check("v5: 未知の兆候を台本の検証がはじく", False, "例外が出なかった")
+except ValueError:
+    check("v5: 未知の兆候を台本の検証がはじく", True)
+try:
+    validate_script_v5({"acquisitions": [{"id": "X", "month": 1, "parcel_id": "P01",
+                                          "under_name": "A社",
+                                          "traces": [{"kind": "registry",
+                                                      "audience": "everyone"}]}]})
+    check("v5: 未知の可視範囲を台本の検証がはじく", False, "例外が出なかった")
+except ValueError:
+    check("v5: 未知の可視範囲を台本の検証がはじく", True)
+
+_old_names5 = {p.pid: p.registered_name for p in L5.parcels.values()}
+_done5 = apply_script_v5(L5, 1, SCRIPT5, "AQ01")
+check("v5: 台本の取得がその月に登記へ反映される",
+      len(_done5) == 1 and L5.parcels["P01"].owner_id == "AQ01"
+      and L5.parcels["P01"].registered_name == "A社")
+check("v5: 台本の名義移転に金額が付かない",
+      "price" not in _done5[0] and "amount" not in _done5[0])
+check("v5: 台本の名義移転は売主と旧名義を残す",
+      _done5[0]["seller"] == "HH01" and _done5[0]["old_name"] == "住民A")
+check("v5: 台本にない月には名義が動かない", not apply_script_v5(L5, 3, SCRIPT5, "AQ01"))
+_pub5 = apply_script_v5(L5, 2, SCRIPT5, "AQ01")
+check("v5: 公有地は台本でも動かない（不成立として記録される）",
+      not _pub5 and L5.parcels["P04"].owner_id == "MU01"
+      and any(r["kind"] == "script_rejected" for r in L5.records))
+
+_amb5 = ambient_traces_v5(L5, 1, SCRIPT5, _old_names5, "AQ01")
+check("v5: neighbors の兆候は隣接区画の所有者に見える",
+      any(t["kind"] == "moving_out" for t in _amb5.get("HH02", [])))
+check("v5: neighbors の兆候は隣接区画の利用者（店子）にも見える",
+      any(t["kind"] == "moving_out" for t in _amb5.get("BZ01", [])))
+check("v5: neighbors の兆候は隣接していない主体には見えない",
+      not any(t["kind"] == "moving_out" for t in _amb5.get("HH03", [])))
+check("v5: agents 指名の兆候は名指しされた主体だけに見える",
+      any(t["kind"] == "broker_known" for t in _amb5.get("BR01", []))
+      and not any(t["kind"] == "broker_known" for t in _amb5.get("HH02", [])))
+check("v5: venue と registry の兆候は会場に依らない配布に含まれない",
+      not any(t["kind"] in ("sign_change", "registry")
+              for rows in _amb5.values() for t in rows))
+check("v5: 買い手（X社）には兆候が配られない（主体ではない）", "AQ01" not in _amb5)
+check("v5: 兆候の文言に評価語が入らない（機械記録）",
+      all("べき" not in t["text"] and "危" not in t["text"]
+          for rows in _amb5.values() for t in rows))
+
+_ven5 = venue_traces_v5(1, SCRIPT5, "V01", _old_names5)
+check("v5: venue の兆候は指定の会場でだけ見える",
+      len(_ven5) == 1 and _ven5[0]["kind"] == "sign_change"
+      and not venue_traces_v5(1, SCRIPT5, "V02", _old_names5))
+check("v5: venue の兆候は指定の月だけ現れる",
+      not venue_traces_v5(2, SCRIPT5, "V01", _old_names5))
+
+_reg5 = registry_rows_v5(L5, 1)
+check("v5: 窓口の登記閲覧はその月までの名義変更を全件見せる",
+      len(_reg5) == 1 and "P01" in _reg5[0] and "A社" in _reg5[0])
+check("v5: 窓口の登記閲覧に金額が出ない",
+      not [w for w in MONEY_WORDS if any(w in r for r in _reg5)])
+
+check("v5: S4は町内会→窓口→仲介の店先→取材の順で月替わりになる",
+      [s4_for_step(m)[0] for m in (1, 2, 3, 4, 5)]
+      == ["assembly", "counter", "broker_front", "press", "assembly"])
+
+# --- スキーマ -------------------------------------------------------------
+_plan_sc = plan_schema_v5(["V01", "V02"], "V06", owns_parcel=True)
+check("v5: 計画の出力は thought が先頭",
+      list(_plan_sc["properties"])[0] == "thought")
+check("v5: S4の行き先はその月の会場か自宅だけ",
+      _plan_sc["properties"]["plan_s4"]["enum"] == ["V06", HOME_V5])
+check("v5: 区画を持たない主体には姿勢の欄が無い",
+      "stance" not in plan_schema_v5(["V01"], "V06", owns_parcel=False)["properties"])
+_HH5 = Agent("HH01", "household", "R01", "この主体の事情だけを書いた説明")
+_MD5 = Agent("MD01", "media", "J01", "この主体の事情だけを書いた説明")
+_sc5 = scene_schema_v5(_HH5, ["HH01", "HH02"], ["HH01", "HH02", "MD01"],
+                       owns_parcel=True, can_publish=False)
+check("v5: 発話の宛先は同席者からしか選べない",
+      _sc5["properties"]["talk_to"]["items"]["enum"] == ["HH01", "HH02"])
+check("v5: 記事を書けるのは記者だけ",
+      "publish" not in _sc5["properties"]
+      and "publish" in scene_schema_v5(_MD5, ["MD01", "HH01"], ["MD01", "HH01"],
+                                       can_publish=True)["properties"])
+check("v5: 出力スキーマに金額の欄が無い",
+      not [k for k in list(_sc5["properties"]) + list(_plan_sc["properties"])
+           if k in ("amount", "price", "rent", "value", "offer", "budget")])
+check("v5: 出力スキーマに打診・応答・条例の欄が無い",
+      not [k for k in _sc5["properties"]
+           if k in ("offers", "responses", "decision", "ordinance_title",
+                    "investigate", "consult")])
+
+# --- 実configの実ペルソナで、全主体のプロンプトに金額語が無いこと -------------
+_ROOT5 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+with io.open(os.path.join(_ROOT5, "configs/config_field_v5.yaml"), encoding="utf-8") as _f:
+    CFG5 = yaml.safe_load(_f)
+with io.open(os.path.join(_ROOT5, CFG5["personas_file"]), encoding="utf-8") as _f:
+    PERSONAS5 = yaml.safe_load(_f)
+
+from src.agents import build_roster as _build_roster5  # noqa: E402
+from src.world import assign_tenancies as _assign5, build_town as _build_town5  # noqa: E402
+
+_agents5 = _build_roster5(PERSONAS5, CFG5["agents"], CFG5["scenario"])
+_actors5 = [a for a in _agents5 if a.role != "acquirer"]
+_hh5 = [a.agent_id for a in _agents5 if a.role == "household"]
+_bz5 = [a.agent_id for a in _agents5 if a.role == "business"]
+_mu5 = next(a.agent_id for a in _agents5 if a.role == "municipality")
+_parcels5 = _build_town5(CFG5["world"], _hh5, _bz5, _mu5)
+_assign5(_parcels5, _bz5, 0)
+for _p in _parcels5:
+    _p.registered_name = next((a.name for a in _agents5 if a.agent_id == _p.owner_id),
+                              _p.owner_id)
+_L5real = Ledger(_parcels5, {})
+ensure_v5_state(_L5real)
+_names5 = {a.agent_id: a.name for a in _agents5}
+_venue_ids5 = [v["id"] for v in CFG5["social"]["venues"]]
+
+_prompts5 = []
+_prompts5_world = []
+for _a in _actors5:
+    _sys = build_system_prompt_v5(_a, CFG5, len(_parcels5))
+    _plan = build_plan_prompt_v5(_a, _L5real, 1, 12, _names5, [], "町内会", "V02", True)
+    _scene = build_scene_prompt_v5(_a, _L5real, 1, 12, _names5, "S1", "朝の商店街",
+                                   "V01 駅前の飲食店", [_a.agent_id, "HH02"], [], [],
+                                   1, 2, registry_rows_v5(_L5real, 1), True,
+                                   _a.role == "media", 2, 1)
+    _prompts5 += [_sys, _plan, _scene]
+    # ペルソナ本文は「その主体の事情」であり世界の説明ではないので、
+    # 機構・誘導の語の検査からは外す（金額語の検査は v4.1 で別途ペルソナも見ている）。
+    _stripped5 = [p.replace(_a.persona, "") for p in (_sys, _plan, _scene)]
+    _prompts5_world += _stripped5
+check("v5: 全26主体ぶんのプロンプトを組める（3種×26＝78本）",
+      len(_actors5) == 26 and len(_prompts5) == 78)
+for word in MONEY_WORDS:
+    check(f"v5: 実プロンプト全78本に金額の語が出ない（{word}）",
+          not [p for p in _prompts5 if word in p])
+for _forbidden in ("打診", "条例", "届出", "相談", "案件", "投資", "買収"):
+    check(f"v5: 世界の説明に v4系の機構が残っていない（{_forbidden}）",
+          not [p for p in _prompts5_world if _forbidden in p])
+check("v5: X社の非公開目的がどのプロンプトにも出ない",
+      not [p for p in _prompts5 if "過半" in p or "mandate" in p])
+check("v5: 世界の説明が主体に注目点・目的を指示していない",
+      not [p for p in _prompts5_world
+           if "注意して" in p or "警戒" in p or "気づ" in p or "疑" in p])
+
+# --- 私信の上限（配線の資源制約） -----------------------------------------
+_tmp5 = _tempfile.mkdtemp(prefix="qa_v5_")
+_cfg_run5 = _json.loads(_json.dumps(CFG5))
+_cfg_run5["steps"] = 2
+_cfg_run5["llm"] = {"provider": "mock", "model": "mock", "parallel_workers": 4}
+_cfg_run5.setdefault("kpi", {})["classify_utterances"] = False
+_sim5 = Simulation(_cfg_run5, PERSONAS5, _tmp5)
+_a_dir = _sim5.by_id["HH01"]
+_a_dir.extra["directs_used"] = 0
+for _i in range(3):
+    _sim5._v5_direct(_a_dir, {"direct_to": "HH02", "direct_text": "話がある"}, 1, "S1")
+check("v5: 私信は月2通まで（3通目は不成立として記録され届かない）",
+      _a_dir.extra["directs_used"] == 2
+      and len([r for r in _sim5.ledger.records
+               if r["kind"] == "direct_rejected" and r.get("reason") == "quota_exhausted"]) == 1
+      and len(_sim5.by_id["HH02"].inbox) == 2)
+_sim5._v5_direct(_sim5.by_id["HH03"], {"direct_to": "AQ01", "direct_text": "あ"}, 1, "S1")
+check("v5: X社宛の私信は成立しない（主体ではない）",
+      any(r["kind"] == "direct_rejected" and r.get("to") == "AQ01"
+          for r in _sim5.ledger.records))
+check("v5: X社のシステムプロンプトを作らない（LLMを呼ばない）",
+      "AQ01" not in _sim5.system_prompts and len(_sim5.system_prompts) == 26)
+
+# --- 姿勢は台帳を動かさない ------------------------------------------------
+_before5 = len(_sim5.ledger.transfers())
+_sim5._v5_stance(_sim5.by_id["HH01"], {"stance": "sell"}, 1, "S1")
+_sim5._v5_stance(_sim5.by_id["HH01"], {"stance": "keep"}, 1, "S4")
+check("v5: 姿勢は台帳を動かさない", len(_sim5.ledger.transfers()) == _before5)
+check("v5: 姿勢はその月の最後のコールの値だけが残る",
+      [r for r in _sim5.ledger.v5_stances if r["agent_id"] == "HH01"]
+      == [{"step": 1, "agent_id": "HH01", "role": "household", "stance": "keep",
+           "scene": "S4"}])
+
+# --- 実際に2か月まわして配線を見る（mock・APIは叩かない） -------------------
+_sim5.run()
+_utts5 = _sim5.ledger.v5_utterances
+_plans5 = {(r["step"], r["agent_id"]): r for r in _sim5.ledger.v5_plans}
+check("v5: 会話が実際に起きている（mock2か月）", len(_utts5) > 0)
+_bad_deliver = [u for u in _utts5
+                if sorted(u["heard_by"] + [u["from"]])
+                != sorted([aid for (st, aid), p in _plans5.items()
+                           if st == u["step"] and p[u["scene"]] == u["venue"]])]
+check("v5: 発話は同じ場所に居た者だけに届く（それ以外には届かない）", not _bad_deliver)
+check("v5: 発話に居合わせなかった主体が talk_to に入らない",
+      not [u for u in _utts5 if [t for t in u["talk_to"] if t not in u["heard_by"]]])
+check("v5: X社はどの発話にも現れない",
+      not [u for u in _utts5 if u["from"] == "AQ01" or "AQ01" in u["heard_by"]])
+check("v5: X社にコールが行かない（イベントに現れない）",
+      not [e for e in _sim5.events if e.get("agent_id") == "AQ01"])
+
+_r2 = [p for p in _sim5.client.prompt_log if ":S1r2" in p["tag"]]
+_r1_texts = [u["text"] for u in _utts5 if u["scene"] == "S1" and u["round"] == 1
+             and u["step"] == 1]
+check("v5: 2ラウンド目は1ラウンド目の発言を全文読んでから話す（往復になっている）",
+      bool(_r2) and bool(_r1_texts)
+      and any(any(t in p["user"] for t in _r1_texts) for p in _r2))
+
+_script_months = {(a["month"], a["parcel_id"]) for a in _sim5.script["acquisitions"]
+                  if a["month"] <= 2}
+_actual5 = {(t["step"], t["parcel_id"]) for t in _sim5.ledger.transfers()}
+check("v5: 登記が動くのは台本のとおりだけ（台本にない移転が1件も無い）",
+      _actual5 == _script_months and len(_actual5) > 0)
+check("v5: 台本の名義がそのまま登記名義になる",
+      all(_sim5.ledger.parcels[a["parcel_id"]].registered_name == a["under_name"]
+          for a in _sim5.script["acquisitions"] if a["month"] <= 2))
+
+_arts5 = _sim5.ledger.v5_articles
+if _arts5:
+    _first = _arts5[0]
+    _plan_next = [p for p in _sim5.client.prompt_log
+                  if p["tag"].endswith(":plan") and f"第{_first['step'] + 1}月" in p["user"]]
+    check("v5: 記事は翌月に全主体の観測へ入る",
+          bool(_plan_next)
+          and all(_first["text"][:20] in p["user"] for p in _plan_next))
+else:
+    check("v5: 記事は翌月に全主体の観測へ入る（mockでは記事なし＝配線のみ確認）",
+          True)
+check("v5: 記事は書いた月の同席者の観測には入らない",
+      not [p for p in _sim5.client.prompt_log
+           if ":S1r" in p["tag"] and "[記事・第1月]" in p["user"]])
+
+check("v5: 窓口の月に登記を閲覧した主体が観測に残る",
+      any(t["kind"] == "registry_lookup" for t in _sim5.ledger.v5_traces_seen)
+      == (s4_for_step(2)[0] == "counter"))
+check("v5: 会場に居なかった主体には venue の兆候が見えない",
+      not [t for t in _sim5.ledger.v5_traces_seen
+           if t.get("audience", "").startswith("venue:")
+           and _plans5.get((t["step"], t["agent_id"]), {}).get(t["scene"]) != t["venue"]])
+check("v5: 内心は全主体ぶん記録される（誰の内心も落ちない）",
+      {t["from"] for t in _sim5.thoughts} == {a.agent_id for a in _sim5.actors})
+check("v5: mock2か月で打切り・解釈不能が出ない",
+      _sim5.truncated_count == 0
+      and not [e for e in _sim5.events if e.get("action_type") == "PARSE_FAIL"])
+_shutil.rmtree(_tmp5, ignore_errors=True)
+
+# --- v1〜v4.1b が不変であること -------------------------------------------
+check("v5: v4.1 の経路は v5 のフラグで切り替わらない",
+      Simulation.__dict__["_step"].__doc__ is None
+      and "field_v5" in io.open(os.path.join(_ROOT5, "src/simulation.py"),
+                                encoding="utf-8").read())
+_src5 = io.open(os.path.join(_ROOT5, "src/simulation.py"), encoding="utf-8").read()
+check("v5: v4.1b の分岐が残っている（既存経路を消していない）",
+      "self._step_v41(step)" in _src5 and "_step_v4(step)" in _src5
+      and "_step_v3(step)" in _src5)
+_fv41 = io.open(os.path.join(_ROOT5, "src/field_v4_1.py"), encoding="utf-8").read()
+check("v5: field_v4_1.py に v5 の語が入り込んでいない", "v5" not in _fv41)
+
+
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
 sys.exit(1 if FAIL else 0)
