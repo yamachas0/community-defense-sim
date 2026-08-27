@@ -145,7 +145,8 @@ def normalize_price_value(value: Any) -> Any:
     if text in PRICE_UNKNOWN_VALUES:
         return text
     if text in ("", "-", "none", "null"):
-        return "unknown"
+        # 欄が空なのは「不明だと答えた」ことではない。欠損は補完せず不成立にする。
+        return None
     cleaned = text.replace(",", "").replace("万円", "").replace("万", "").strip()
     try:
         number = int(float(cleaned))
@@ -449,6 +450,10 @@ def own_result_row(step: int, action_type: str, target: str,
     """
     kind = outcome.get("kind", "") if isinstance(outcome, dict) else str(outcome or "")
     reason = outcome.get("reason", "") if isinstance(outcome, dict) else ""
+    if kind == "parse_fail":
+        # 世界の中で言えるのは「その行為は帳簿に記録されなかった」という事実まで。
+        kind, reason = "not_recorded", "no_action_recorded"
+        action_type = action_type or "-"
     refs: List[str] = []
     if isinstance(outcome, dict):
         for key in ("offer_id", "lease_offer_id", "inquiry_id", "parcel_id"):
@@ -594,6 +599,9 @@ def acquirer_pipeline_text(agent: Agent, ledger: Ledger,
         if pid not in rows or record.get("kind") not in INQUIRY_RESPONSE_KINDS:
             continue
         if aid in (record.get("by"), record.get("from_id"), record.get("broker")):
+            continue
+        if record.get("kind") == "inquiry_report" and record.get("to") != aid:
+            # 他の依頼主宛ての報告は、存在した事実すら自社の観測ではない。
             continue
         current = rows[pid]["response"]
         if current is None or record.get("step", 0) >= current["step"]:
@@ -821,7 +829,7 @@ def make_lease_offer(ledger: Ledger, step: int, parcel_id: str, by: Agent,
 def resolve_lease_offer(ledger: Ledger, step: int, offer_id: str, by: str,
                         accept: bool) -> Dict[str, Any]:
     ensure_v3_state(ledger)
-    offer_id = ledger._normalize_id(offer_id)
+    offer_id = ledger._normalize_id(offer_id, "L")
     offer = ledger.v3_lease_offers.get(offer_id)
     if not offer or offer["status"] != "open" or offer["to"] != by:
         return ledger._rec(step, "lease_response_rejected", lease_offer_id=offer_id,
@@ -899,7 +907,7 @@ def inquire_owner_intent(ledger: Ledger, step: int, broker_id: str,
     （`record_offer` が区画から所有者を解決するのと同じ物理）。
     """
     ensure_v3_state(ledger)
-    inquiry_id = ledger._normalize_id(inquiry_id)
+    inquiry_id = ledger._normalize_id(inquiry_id, "Q")
     row = ledger.v3_inquiries.get(inquiry_id) if inquiry_id else None
     if inquiry_id and row is None:
         return ledger._rec(step, "inquiry_rejected", by=broker_id,
@@ -907,6 +915,14 @@ def inquire_owner_intent(ledger: Ledger, step: int, broker_id: str,
     if row is not None and row["broker"] != broker_id:
         return ledger._rec(step, "inquiry_rejected", by=broker_id,
                            inquiry_id=inquiry_id, reason="not_your_inquiry")
+    if row is not None and row["status"] != "requested":
+        return ledger._rec(step, "inquiry_rejected", by=broker_id,
+                           inquiry_id=inquiry_id,
+                           reason="inquiry_" + str(row["status"]))
+    if row is not None and parcel_id and parcel_id != row["parcel_id"]:
+        return ledger._rec(step, "inquiry_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, given=parcel_id,
+                           reason="parcel_mismatch")
     target_parcel = parcel_id or (row["parcel_id"] if row else "")
     parcel = ledger.parcels.get(target_parcel)
     if parcel is None or parcel.use == "public":
@@ -941,7 +957,7 @@ def answer_owner_inquiry(ledger: Ledger, step: int, inquiry_id: str, by: str,
                          note: str) -> Dict[str, Any]:
     """照会を受けた所有者が、自分の意向と希望額を答える。"""
     ensure_v3_state(ledger)
-    inquiry_id = ledger._normalize_id(inquiry_id)
+    inquiry_id = ledger._normalize_id(inquiry_id, "Q")
     row = ledger.v3_inquiries.get(inquiry_id)
     if row is None:
         return ledger._rec(step, "inquiry_answer_rejected", by=by,
@@ -949,7 +965,7 @@ def answer_owner_inquiry(ledger: Ledger, step: int, inquiry_id: str, by: str,
     if row["owner"] != by:
         return ledger._rec(step, "inquiry_answer_rejected", by=by,
                            inquiry_id=inquiry_id, reason="not_asked_party")
-    if row["status"] not in ("asked", "answered", "reported"):
+    if row["status"] != "asked":
         return ledger._rec(step, "inquiry_answer_rejected", by=by,
                            inquiry_id=inquiry_id,
                            reason="inquiry_" + str(row["status"]))
@@ -975,7 +991,7 @@ def report_owner_intent(ledger: Ledger, step: int, broker_id: str, client_id: st
                         note: str) -> Dict[str, Any]:
     """仲介が依頼主へ、区画・意向・希望額を事実として報告する。"""
     ensure_v3_state(ledger)
-    inquiry_id = ledger._normalize_id(inquiry_id)
+    inquiry_id = ledger._normalize_id(inquiry_id, "Q")
     row = ledger.v3_inquiries.get(inquiry_id)
     if row is None:
         return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
@@ -986,6 +1002,15 @@ def report_owner_intent(ledger: Ledger, step: int, broker_id: str, client_id: st
     if client_id == broker_id:
         return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
                            inquiry_id=inquiry_id, reason="self_referential")
+    if row["status"] not in ("answered", "reported"):
+        # 届いていない回答は報告できない（存在しない事実を台帳に載せない）。
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id,
+                           reason="inquiry_" + str(row["status"]))
+    if row["client"] and row["client"] != client_id:
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, given=client_id,
+                           reason="not_the_client")
     if owner_intent not in OWNER_INTENT_VALUES:
         return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
                            inquiry_id=inquiry_id, reason="invalid_owner_intent",

@@ -725,6 +725,10 @@ class Simulation:
             if not destination:
                 return {"kind": "invalid_action", "reason": "no_such_agent",
                         "target": target}
+            if self.by_id[destination].role != "broker":
+                # 仲介でない相手はこの照会を実行できない＝依頼として成立しない。
+                return {"kind": "invalid_action", "reason": "not_a_broker",
+                        "target": target}
             return request_owner_inquiry(ledger, step, a.agent_id, destination,
                                          parcel_id, utterance)
         if action == "inquire_owner_intent":

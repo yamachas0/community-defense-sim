@@ -18,7 +18,7 @@ from src.simulation import (_AMOUNT_REQUIRED, _has_amount, _is_rejected,  # noqa
                             _parse_action, _repair_truncated_json)
 from src.agents import Agent  # noqa: E402
 from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
-                          normalize_acquirer_plan_v3,
+                          normalize_acquirer_plan_v3, normalize_price_value,
                           build_system_prompt_v3, build_user_prompt_v3, control_share,
                           ensure_v3_state, list_for_lease, make_lease_offer,
                           acquirer_pipeline_text, answer_owner_inquiry,
@@ -428,8 +428,9 @@ check("仲介は自分が扱う照会の進行状況を観測できる",
 L2 = mk()
 q2 = inquire_owner_intent(L2, 1, "BR01", "P01", "", "")["inquiry_id"]
 for value in ("unknown", "not_asked", "declined_to_answer"):
+    fresh = inquire_owner_intent(L2, 1, "BR01", "P01", "", "")["inquiry_id"]
     check(f"未回答・拒否も事実として運べる（{value}）",
-          answer_owner_inquiry(L2, 2, q2, "HH01", value, value, "")["kind"]
+          answer_owner_inquiry(L2, 2, fresh, "HH01", value, value, "")["kind"]
           == "inquiry_answer")
 check("依頼のない自発的な照会も成立する", L2.v3_inquiries[q2]["client"] == "")
 check("存在しない照会IDへの回答は不成立",
@@ -554,6 +555,48 @@ check_land_registry_v3(L5, 4, buyer_r5, "P01")
 fresh = " | ".join(registry_view_rows(buyer_r5, L5))
 check("再照会した区画だけ内容と確認月が更新される",
       "P01[北町] 名義:A社" in fresh and "確認:第4月" in fresh)
+
+print("== Codexレビュー反映: 状態遷移と情報配送の穴を塞ぐ ==")
+L6 = mk()
+buyer6 = Agent("AQ01", "acquirer", "X社", "外部会社",
+               extra={"mandate": "m", "aliases": ["A社"]})
+q6 = request_owner_inquiry(L6, 1, "AQ01", "BR01", "P01", "")["inquiry_id"]
+check("回答が届く前に報告はできない",
+      report_owner_intent(L6, 2, "BR01", "AQ01", q6, "willing_to_sell", "3000", "")["reason"]
+      == "inquiry_requested")
+inquire_owner_intent(L6, 2, "BR01", "P01", q6, "")
+check("照会しただけの段階でも報告はできない",
+      report_owner_intent(L6, 3, "BR01", "AQ01", q6, "willing_to_sell", "3000", "")["reason"]
+      == "inquiry_asked")
+answer_owner_inquiry(L6, 3, q6, "HH01", "undecided", "unknown", "")
+check("依頼済みの照会を別の相手へは報告できない",
+      report_owner_intent(L6, 4, "BR01", "HH02", q6, "undecided", "unknown", "")["reason"]
+      == "not_the_client")
+check("回答が届いた照会は依頼主へ報告できる",
+      report_owner_intent(L6, 4, "BR01", "AQ01", q6, "undecided", "unknown", "")["kind"]
+      == "inquiry_report")
+check("同じ回答を二度は返せない（再回答で状態を巻き戻さない）",
+      answer_owner_inquiry(L6, 5, q6, "HH01", "willing_to_sell", "5000", "")["reason"]
+      == "inquiry_reported")
+check("進行済みの照会は再照会で巻き戻せない",
+      inquire_owner_intent(L6, 5, "BR01", "P01", q6, "")["reason"] == "inquiry_reported")
+L7 = mk()
+q7 = request_owner_inquiry(L7, 1, "AQ01", "BR01", "P01", "")["inquiry_id"]
+check("依頼済み照会の区画は差し替えられない",
+      inquire_owner_intent(L7, 2, "BR01", "P03", q7, "")["reason"] == "parcel_mismatch")
+check("希望額の欄が空なら不成立（欠損をunknownに補完しない）",
+      normalize_price_value("") is None and normalize_price_value(None) is None)
+check("明示された unknown は事実として通る",
+      normalize_price_value("unknown") == "unknown")
+check("接頭辞と種別が食い違うIDは解決しない",
+      Ledger._normalize_id("[LEASE-O0001]", "O") == "LEASE-O0001")
+check("種別の合う旧表記はこれまでどおり解決する",
+      Ledger._normalize_id("[OFFER-O0001]", "O") == "O0001")
+parse_row = own_result_row(3, "", "", {"kind": "parse_fail",
+                                       "reason": "unparseable_response"})
+check("世界の中には帳簿の事実だけを返す（パース失敗の内部事情を出さない）",
+      parse_row["kind"] == "not_recorded"
+      and parse_row["reason"] == "no_action_recorded")
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")

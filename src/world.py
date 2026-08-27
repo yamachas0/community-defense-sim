@@ -91,7 +91,7 @@ class Ledger:
     # -- identifier normalization -----------------------------------------
 
     @staticmethod
-    def _normalize_id(value: Any) -> str:
+    def _normalize_id(value: Any, kind: str = "") -> str:
         """観測に表示された識別子を、台帳の鍵へ揃える。
 
         観測は買付を `[O0001]`、長期賃借申込みを `[L0001]` と角括弧付きで表示する。
@@ -105,12 +105,20 @@ class Ledger:
         while text.endswith("]") or text.endswith(")"):
             text = text[:-1].strip()
         upper = text.upper()
-        for prefix in ("OFFER-", "LEASE-", "OFFER_", "LEASE_"):
+        for prefix, letter in (("OFFER-", "O"), ("LEASE-", "L"),
+                               ("OFFER_", "O"), ("LEASE_", "L")):
             if upper.startswith(prefix):
-                text = text[len(prefix):]
-                upper = text.upper()
+                stripped = upper[len(prefix):].strip()
+                # 接頭辞と識別子の種別が食い違う指定（LEASE-O0001 等）は
+                # 表記ゆれではないので、剥がさずそのまま解決に失敗させる。
+                if stripped[:1] != letter:
+                    return upper.strip()
+                upper = stripped
                 break
-        return upper.strip()
+        upper = upper.strip()
+        if kind and upper[:1] != kind:
+            return upper
+        return upper
 
     # -- bookkeeping primitives -------------------------------------------
 
@@ -210,7 +218,7 @@ class Ledger:
                          under_name=offer.under_name, price=offer.price, to=p.owner_id, note=note)
 
     def record_counter(self, step: int, offer_id: str, by: str, price: int) -> Dict[str, Any]:
-        offer_id = self._normalize_id(offer_id)
+        offer_id = self._normalize_id(offer_id, "O")
         offer = self.offers.get(offer_id)
         if offer is None or offer.status != "open":
             return self._rec(step, "counter_rejected", offer_id=offer_id, by=by,
@@ -230,7 +238,7 @@ class Ledger:
                          by=by, to=offer.from_id, price=int(price))
 
     def record_accept(self, step: int, offer_id: str, by: str) -> Dict[str, Any]:
-        offer_id = self._normalize_id(offer_id)
+        offer_id = self._normalize_id(offer_id, "O")
         offer = self.offers.get(offer_id)
         if offer is None:
             return self._rec(step, "accept_rejected", offer_id=offer_id, by=by,
@@ -266,7 +274,7 @@ class Ledger:
                          price=offer.price)
 
     def record_reject(self, step: int, offer_id: str, by: str) -> Dict[str, Any]:
-        offer_id = self._normalize_id(offer_id)
+        offer_id = self._normalize_id(offer_id, "O")
         offer = self.offers.get(offer_id)
         if offer is None or offer.status != "open":
             return self._rec(step, "reject_rejected", offer_id=offer_id, by=by,
@@ -279,7 +287,7 @@ class Ledger:
         return self._rec(step, "reject", offer_id=offer_id, parcel_id=offer.parcel_id, by=by)
 
     def record_withdraw(self, step: int, offer_id: str, by: str) -> Dict[str, Any]:
-        offer_id = self._normalize_id(offer_id)
+        offer_id = self._normalize_id(offer_id, "O")
         offer = self.offers.get(offer_id)
         if offer is None or offer.status != "open" or offer.from_id != by:
             return self._rec(step, "withdraw_rejected", offer_id=offer_id, by=by,
