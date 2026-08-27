@@ -598,6 +598,15 @@ check("世界の中には帳簿の事実だけを返す（パース失敗の内�
       parse_row["kind"] == "not_recorded"
       and parse_row["reason"] == "no_action_recorded")
 
+print("== 依頼主の文面も仲介へ届く ==")
+L8 = mk()
+broker8 = Agent("BR01", "broker", "B01", "仲介")
+q8 = request_owner_inquiry(L8, 1, "AQ01", "BR01", "P01",
+                           "P01について売却または賃貸の意向を確認してほしい")["inquiry_id"]
+view8 = build_user_prompt_v3(broker8, L8, 2, 60, names_q, cfg_id)
+check("依頼主が書いた文面が仲介の観測に届く",
+      "売却または賃貸の意向を確認してほしい" in view8 and f"[{q8}] P01" in view8)
+
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
 sys.exit(1 if FAIL else 0)

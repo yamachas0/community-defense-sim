@@ -510,7 +510,11 @@ def _inquiry_state_text(row: Dict[str, Any], names: Dict[str, str]) -> str:
         to = names.get(row["reported_to"], row["reported_to"]) or "-"
         parts.append(f"報告:{to}(第{row['reported_step']}月) {row['reported_intent']} "
                      f"希望額:{price_text(row['reported_price'])}")
-    return "  " + " ".join(parts)
+    line = "  " + " ".join(parts)
+    if row.get("note"):
+        # 依頼主・所有者が実際に書いた文面も台帳の事実なので、扱う本人には渡す。
+        line += f"「{row['note']}」"
+    return line
 
 
 def owner_inquiries_text(agent: Agent, ledger: Ledger,
