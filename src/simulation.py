@@ -1746,6 +1746,9 @@ class Simulation:
         if self.field_v41:
             _write_jsonl(os.path.join(d, "thoughts.jsonl"),
                          classified_thoughts or self.thoughts)
+            # 分類対象は住民・事業者だけだが、内心そのものは全主体ぶん残す
+            # （X社・行政・記者・仲介の内心が記録から落ちないように）。
+            _write_jsonl(os.path.join(d, "thoughts_all.jsonl"), self.thoughts)
             _write_jsonl(os.path.join(d, "deliveries.jsonl"), self.deliveries)
         if self.field_v4:
             _write_jsonl(os.path.join(d, "feelings.jsonl"),
