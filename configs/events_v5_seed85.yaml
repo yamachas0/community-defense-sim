@@ -1,0 +1,328 @@
+meta:
+  seed: 85
+  months: 60
+  holders:
+  - A社
+  - B社
+  - C社
+  - D社
+  generated_by: tools/build_events_v5.py
+  note: 取得と兆候の台本。走行前に凍結し、結果を見て調整しない。主体の判断には一切触れない（世界で起きた事実のみ）。
+acquisitions:
+- id: ACQ01
+  month: 1
+  parcel_id: P17
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 1
+    audience: registry
+  - kind: sign_change
+    month: 1
+    audience: venue:V05
+- id: ACQ02
+  month: 2
+  parcel_id: P02
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 2
+    audience: registry
+  - kind: construction
+    month: 4
+    audience: neighbors
+  - kind: sign_change
+    month: 2
+    audience: venue:V04
+- id: ACQ03
+  month: 2
+  parcel_id: P10
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 2
+    audience: registry
+  - kind: broker_known
+    month: 2
+    audience: agents:[BR02]
+  - kind: construction
+    month: 4
+    audience: neighbors
+- id: ACQ04
+  month: 3
+  parcel_id: P04
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 3
+    audience: registry
+  - kind: survey
+    month: 3
+    audience: venue:V04
+  - kind: renovation_sweep
+    month: 44
+    audience: neighbors
+  - kind: renovation_sweep
+    month: 50
+    audience: neighbors
+- id: ACQ05
+  month: 4
+  parcel_id: P20
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 4
+    audience: registry
+  - kind: sign_change
+    month: 4
+    audience: venue:V03
+  - kind: broker_known
+    month: 4
+    audience: agents:[BR02]
+  - kind: renovation_sweep
+    month: 38
+    audience: neighbors
+- id: ACQ06
+  month: 5
+  parcel_id: P12
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 5
+    audience: registry
+  - kind: sign_change
+    month: 5
+    audience: venue:V04
+- id: ACQ07
+  month: 6
+  parcel_id: P18
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 6
+    audience: registry
+- id: ACQ08
+  month: 7
+  parcel_id: P11
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 7
+    audience: registry
+  - kind: strangers
+    month: 7
+    audience: venue:V03
+- id: ACQ09
+  month: 7
+  parcel_id: P03
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 7
+    audience: registry
+  - kind: moving_out
+    month: 8
+    audience: neighbors
+- id: ACQ10
+  month: 8
+  parcel_id: P19
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 8
+    audience: registry
+- id: ACQ11
+  month: 9
+  parcel_id: P09
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 9
+    audience: registry
+- id: ACQ12
+  month: 9
+  parcel_id: P05
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 9
+    audience: registry
+  - kind: strangers
+    month: 9
+    audience: venue:V05
+- id: ACQ13
+  month: 10
+  parcel_id: P06
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 10
+    audience: registry
+- id: ACQ14
+  month: 11
+  parcel_id: P07
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 11
+    audience: registry
+- id: ACQ15
+  month: 12
+  parcel_id: P16
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 12
+    audience: registry
+  - kind: tenant_swap
+    month: 43
+    audience: venue:V04
+- id: ACQ16
+  month: 13
+  parcel_id: P13
+  under_name: C社
+  traces:
+  - kind: registry
+    month: 13
+    audience: registry
+  - kind: survey
+    month: 13
+    audience: venue:V04
+- id: ACQ17
+  month: 14
+  parcel_id: P14
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 14
+    audience: registry
+  - kind: moving_out
+    month: 15
+    audience: neighbors
+  - kind: broker_known
+    month: 14
+    audience: agents:[BR01]
+  - kind: tenant_swap
+    month: 37
+    audience: venue:V01
+- id: ACQ18
+  month: 16
+  parcel_id: P24
+  under_name: D社
+  traces:
+  - kind: registry
+    month: 16
+    audience: registry
+  - kind: strangers
+    month: 16
+    audience: venue:V01
+- id: ACQ19
+  month: 17
+  parcel_id: P08
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 17
+    audience: registry
+  - kind: sign_change
+    month: 17
+    audience: venue:V01
+- id: ACQ20
+  month: 18
+  parcel_id: P22
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 18
+    audience: registry
+- id: ACQ21
+  month: 19
+  parcel_id: P21
+  under_name: C社
+  traces:
+  - kind: registry
+    month: 19
+    audience: registry
+  - kind: survey
+    month: 19
+    audience: venue:V03
+- id: ACQ22
+  month: 20
+  parcel_id: P15
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 20
+    audience: registry
+  - kind: construction
+    month: 22
+    audience: neighbors
+- id: ACQ23
+  month: 21
+  parcel_id: P23
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 21
+    audience: registry
+  - kind: construction
+    month: 23
+    audience: neighbors
+- id: ACQ24
+  month: 22
+  parcel_id: P33
+  under_name: A社
+  traces:
+  - kind: registry
+    month: 22
+    audience: registry
+- id: ACQ25
+  month: 22
+  parcel_id: P36
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 22
+    audience: registry
+  - kind: moving_out
+    month: 23
+    audience: neighbors
+  - kind: tenant_swap
+    month: 49
+    audience: venue:V03
+  - kind: renovation_sweep
+    month: 56
+    audience: neighbors
+- id: ACQ26
+  month: 23
+  parcel_id: P29
+  under_name: B社
+  traces:
+  - kind: registry
+    month: 23
+    audience: registry
+  - kind: sign_change
+    month: 23
+    audience: venue:V01
+  - kind: tenant_swap
+    month: 55
+    audience: venue:V03
+- id: ACQ27
+  month: 24
+  parcel_id: P42
+  under_name: D社
+  traces:
+  - kind: registry
+    month: 24
+    audience: registry
+- id: ACQ28
+  month: 24
+  parcel_id: P44
+  under_name: C社
+  traces:
+  - kind: registry
+    month: 24
+    audience: registry
+  - kind: sign_change
+    month: 24
+    audience: venue:V01

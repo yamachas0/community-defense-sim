@@ -50,6 +50,12 @@ from .field_v4_1b import (CONSULT_NONE, DEFAULT_ADVICE_CAPACITY,
                           build_phase1_prompt_v41b, build_phase2_prompt_v41b,
                           build_system_prompt_v41b, ensure_v41b_state,
                           phase1_schema_v41b, record_consult_v41b)
+from .field_v5 import (HOME as HOME_V5, SCENE_IDS, SCENE_LABELS,
+                       ambient_traces_v5, apply_script_v5, build_plan_prompt_v5,
+                       build_scene_prompt_v5, build_system_prompt_v5,
+                       ensure_v5_state, load_script_v5, plan_schema_v5,
+                       registry_rows_v5, s4_for_step, scene_schema_v5,
+                       venue_traces_v5)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -164,6 +170,7 @@ class Simulation:
         self.field_v3 = cfg.get("scenario_version") == "field_v3"
         self.field_v4 = cfg.get("scenario_version") == "field_v4"
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
+        self.field_v5 = cfg.get("scenario_version") == "field_v5"
         # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
         self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
@@ -233,7 +240,26 @@ class Simulation:
                 seed_acquirer_intelligence_v3(agent, self.ledger, cfg["scenario"])
 
         self.broker_ids = [a.agent_id for a in self.agents if a.role == "broker"]
-        if self.field_v41b:
+        if self.field_v5:
+            ensure_v5_state(self.ledger)
+            root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            events_file = str(cfg.get("events_file", ""))
+            if not os.path.isabs(events_file):
+                events_file = os.path.join(root, events_file)
+            self.script = load_script_v5(events_file)
+            # X社は v5 では主体ではない（一度も LLM を呼ばれない・誰の同席者にも出ない）
+            self.actors = [a for a in self.agents if a.role != "acquirer"]
+            self.actor_ids = [a.agent_id for a in self.actors]
+            venues = cfg.get("social", {}).get("venues", [])
+            self.venue_ids = [v["id"] for v in venues]
+            self.venue_labels = {v["id"]: f"{v['id']} {v['label']}" for v in venues}
+            scen = cfg.get("scenario", {})
+            self.scene_rounds = int(scen.get("scene_rounds", 2))
+            self.direct_quota = int(scen.get("direct_quota_per_month", 2))
+            self.article_quota = int(scen.get("article_quota_per_month", 1))
+            self.system_prompts = {a.agent_id: build_system_prompt_v5(a, cfg, len(parcels))
+                                   for a in self.actors}
+        elif self.field_v41b:
             self.system_prompts = {
                 a.agent_id: build_system_prompt_v41b(a, cfg, len(parcels),
                                                      self.broker_ids)
@@ -287,6 +313,9 @@ class Simulation:
         return self._finalize(elapsed)
 
     def _step(self, step: int) -> None:
+        if self.field_v5:
+            self._step_v5(step)
+            return
         if self.field_v41:
             self._step_v41(step)
             return
@@ -1353,6 +1382,257 @@ class Simulation:
                                                outcome.get("parcel_id", ""), outcome))
             a.extra["last_month_results"] = rows
 
+
+    # -- v5: 出来事はピン留め・観測するのは街の会話 -------------------------
+
+    def _v5_owns(self, agent: Agent) -> bool:
+        return any(p.owner_id == agent.agent_id for p in self.ledger.parcels.values())
+
+    def _v5_thought(self, agent: Agent, act: Dict[str, Any], step: int,
+                    scene: str, venue: str) -> None:
+        thought = str(act.get("thought", "") or "").strip()
+        if not thought:
+            return
+        agent.extra["thought"] = thought
+        self.thoughts.append({"step": step, "from": agent.agent_id, "role": agent.role,
+                              "name": agent.name, "text": thought,
+                              "scene": scene, "venue": venue})
+
+    def _v5_stance(self, agent: Agent, act: Dict[str, Any], step: int,
+                   scene: str) -> None:
+        if "stance" not in act:
+            return
+        stance = str(act.get("stance", "") or "").strip()
+        if stance not in ("sell", "keep"):
+            return
+        # その月の「最後のコール」の値を採る（同月の既存行を差し替える）。
+        rows = self.ledger.v5_stances
+        for i in range(len(rows) - 1, -1, -1):
+            if rows[i]["step"] == step and rows[i]["agent_id"] == agent.agent_id:
+                rows[i] = {"step": step, "agent_id": agent.agent_id, "role": agent.role,
+                           "stance": stance, "scene": scene}
+                return
+        rows.append({"step": step, "agent_id": agent.agent_id, "role": agent.role,
+                     "stance": stance, "scene": scene})
+
+    def _v5_direct(self, agent: Agent, act: Dict[str, Any], step: int,
+                   scene: str) -> None:
+        to = str(act.get("direct_to", "") or "").strip()
+        text = str(act.get("direct_text", "") or "").strip()
+        if not to and not text:
+            return
+        if to not in self.by_id or to == agent.agent_id or to in self.acquirer_ids:
+            self.ledger._rec(step, "direct_rejected", from_id=agent.agent_id,
+                             to=to, reason="no_such_recipient")
+            self.invalid_count += 1
+            return
+        if not text:
+            self.ledger._rec(step, "direct_rejected", from_id=agent.agent_id,
+                             to=to, reason="empty_text")
+            return
+        if agent.extra.get("directs_used", 0) >= self.direct_quota:
+            self.ledger._rec(step, "direct_rejected", from_id=agent.agent_id,
+                             to=to, reason="quota_exhausted")
+            return
+        agent.extra["directs_used"] = agent.extra.get("directs_used", 0) + 1
+        self.by_id[to].inbox.append({"kind": "direct", "from": agent.agent_id,
+                                     "text": text, "step": step})
+        self.ledger.v5_directs.append({"step": step, "from": agent.agent_id, "to": to,
+                                       "scene": scene, "text": text})
+        self.deliveries.append({"step": step, "to": to, "from": agent.agent_id,
+                                "kind": "direct", "location": scene, "text": text[:200]})
+
+    def _v5_publish(self, agent: Agent, act: Dict[str, Any], step: int,
+                    scene: str) -> None:
+        text = str(act.get("publish", "") or "").strip()
+        if not text:
+            return
+        if agent.extra.get("articles_used", 0) >= self.article_quota:
+            self.ledger._rec(step, "article_rejected", from_id=agent.agent_id,
+                             reason="quota_exhausted")
+            return
+        agent.extra["articles_used"] = agent.extra.get("articles_used", 0) + 1
+        self.ledger.record_publication(step, agent.agent_id, text[:40], text, False)
+        self.ledger.v5_articles.append({"step": step, "from": agent.agent_id,
+                                        "scene": scene, "text": text})
+        for other in self.actors:
+            other.inbox.append({"kind": "article", "from": agent.agent_id,
+                                "text": text, "step": step})
+            self.deliveries.append({"step": step, "to": other.agent_id,
+                                    "from": agent.agent_id, "kind": "article",
+                                    "location": scene, "text": text[:200]})
+
+    def _v5_parse(self, agent: Agent, results: Dict[str, Any], step: int,
+                  tag: str) -> Optional[Dict[str, Any]]:
+        raw = results.get(agent.agent_id, {}).get("raw", "")
+        act = _parse_action(raw)
+        if act is None:
+            self.invalid_count += 1
+            self.events.append({"step": step, "agent_id": agent.agent_id,
+                                "role": agent.role, "name": agent.name,
+                                "action_type": "PARSE_FAIL", "tag": tag,
+                                "outcome": {"kind": "parse_fail",
+                                            "reason": "unparseable_response"},
+                                "raw": (raw or "")[:400]})
+            return None
+        if act.get("_truncated"):
+            self.truncated_count += 1
+        return act
+
+    def _step_v5(self, step: int) -> None:
+        ensure_v5_state(self.ledger)
+        acquirer_id = self.acquirer_ids[0] if self.acquirer_ids else ""
+
+        # --- 0) 台本どおりに名義が移る（LLMは関与しない） --------------------
+        old_names = {p.pid: (p.registered_name or self.names.get(p.owner_id, p.owner_id))
+                     for p in self.ledger.parcels.values()}
+        for done in apply_script_v5(self.ledger, step, self.script, acquirer_id):
+            self.events.append({"step": step, "agent_id": "SCRIPT", "role": "script",
+                                "name": "台本", "action_type": "scripted_transfer",
+                                "outcome": {"kind": "transfer",
+                                            "acq_id": done.get("acq_id"),
+                                            "parcel_id": done.get("parcel_id"),
+                                            "seller": done.get("seller"),
+                                            "under_name": done.get("under_name")}})
+
+        # --- 1) 会場に依らない兆候を配る ------------------------------------
+        ambient = ambient_traces_v5(self.ledger, step, self.script, old_names, acquirer_id)
+        for a in self.actors:
+            a.extra["traces"] = list(ambient.get(a.agent_id, []))
+            a.extra["heard"] = []
+            a.extra["directs_used"] = 0
+            a.extra["articles_used"] = 0
+            for tr in a.extra["traces"]:
+                self.ledger.v5_traces_seen.append(
+                    {"step": step, "agent_id": a.agent_id, "scene": "", "venue": "", **tr})
+
+        kind4, venue4, label4 = s4_for_step(step)
+
+        # --- 2) 計画コール（月1回・全主体） ---------------------------------
+        items = []
+        for a in self.actors:
+            owns = self._v5_owns(a)
+            prompt = build_plan_prompt_v5(a, self.ledger, step, self.n_steps, self.names,
+                                          a.extra["traces"], label4, venue4, owns)
+            items.append((a, self.system_prompts[a.agent_id], prompt,
+                          plan_schema_v5(self.venue_ids, venue4, owns)))
+        results = self._call_batch(items, "plan")
+        for a in self.actors:
+            a.inbox = []      # 観測を作り終えた直後に空にする（以降は翌月ぶん）
+
+        plans: Dict[str, Dict[str, str]] = {}
+        for a in sorted(self.actors, key=lambda x: x.agent_id):
+            act = self._v5_parse(a, results, step, "plan")
+            plan = {sid: HOME_V5 for sid in SCENE_IDS}
+            if act is not None:
+                self._v5_thought(a, act, step, "plan", "")
+                self._v5_stance(a, act, step, "plan")
+                for sid in SCENE_IDS:
+                    value = str(act.get(f"plan_{sid.lower()}", "") or "").strip()
+                    allowed = [venue4] if sid == "S4" else self.venue_ids
+                    if value in allowed:
+                        plan[sid] = value
+                    elif value and value != HOME_V5:
+                        self.invalid_count += 1
+                        self.ledger._rec(step, "invalid_location", by=a.agent_id,
+                                         scene=sid, given=value)
+            plans[a.agent_id] = plan
+            self.ledger.v5_plans.append({"step": step, "agent_id": a.agent_id, **plan})
+
+        # --- 3) シーン（同席者だけの会話・各2ラウンド） ----------------------
+        for sid in SCENE_IDS:
+            scene_label = SCENE_LABELS.get(sid, label4)
+            groups: Dict[str, List[Agent]] = {}
+            for a in self.actors:
+                venue = plans[a.agent_id][sid]
+                if venue == HOME_V5:
+                    continue
+                groups.setdefault(venue, []).append(a)
+            groups = {v: m for v, m in groups.items() if len(m) >= 2}
+            if not groups:
+                continue
+            # 会場でだけ見える兆候（venue:）
+            for venue_id, members in sorted(groups.items()):
+                for tr in venue_traces_v5(step, self.script, venue_id, old_names):
+                    for a in members:
+                        a.extra["traces"].append(tr)
+                        self.ledger.v5_traces_seen.append(
+                            {"step": step, "agent_id": a.agent_id, "scene": sid,
+                             "venue": venue_id, **tr})
+            registry = (registry_rows_v5(self.ledger, step)
+                        if (sid == "S4" and kind4 == "counter") else None)
+
+            for rnd in range(1, self.scene_rounds + 1):
+                items = []
+                ctx: Dict[str, Tuple[str, List[str]]] = {}
+                for venue_id, members in sorted(groups.items()):
+                    present = sorted(m.agent_id for m in members)
+                    for a in members:
+                        owns = self._v5_owns(a)
+                        can_publish = a.role == "media"
+                        prompt = build_scene_prompt_v5(
+                            a, self.ledger, step, self.n_steps, self.names, sid,
+                            scene_label, self.venue_labels.get(venue_id, venue_id),
+                            present, a.extra["traces"], a.extra["heard"], rnd,
+                            self.scene_rounds, registry, owns, can_publish,
+                            self.direct_quota - a.extra.get("directs_used", 0),
+                            self.article_quota - a.extra.get("articles_used", 0))
+                        items.append((a, self.system_prompts[a.agent_id], prompt,
+                                      scene_schema_v5(a, present, self.actor_ids,
+                                                      owns, can_publish)))
+                        ctx[a.agent_id] = (venue_id, present)
+                results = self._call_batch(items, f"{sid}r{rnd}")
+
+                spoken: List[Dict[str, Any]] = []
+                for aid in sorted(ctx):
+                    a = self.by_id[aid]
+                    venue_id, present = ctx[aid]
+                    act = self._v5_parse(a, results, step, f"{sid}r{rnd}")
+                    if act is None:
+                        continue
+                    self._v5_thought(a, act, step, sid, venue_id)
+                    self._v5_stance(a, act, step, sid)
+                    self._v5_direct(a, act, step, sid)
+                    if a.role == "media":
+                        self._v5_publish(a, act, step, sid)
+                    text = str(act.get("text", "") or "").strip()
+                    talk_to = [t for t in (act.get("talk_to") or [])
+                               if t in present and t != aid]
+                    self.events.append({"step": step, "agent_id": aid, "role": a.role,
+                                        "name": a.name, "action_type": "utterance",
+                                        "scene": sid, "venue": venue_id, "round": rnd,
+                                        "text": text, "talk_to": talk_to,
+                                        "truncated": bool(act.get("_truncated")),
+                                        "outcome": {"kind": "spoke" if text else "silent",
+                                                    "heard_by": len(present) - 1}})
+                    if not text:
+                        continue
+                    self.ledger.v5_utt_seq += 1
+                    row = {"utt_id": f"U{self.ledger.v5_utt_seq:05d}", "step": step,
+                           "scene": sid, "venue": venue_id, "round": rnd,
+                           "from": aid, "role": a.role, "name": a.name,
+                           "text": text, "talk_to": talk_to,
+                           "heard_by": [p for p in present if p != aid]}
+                    self.ledger.v5_utterances.append(row)
+                    self.all_utterances.append({"step": step, "from": aid, "role": a.role,
+                                                "name": a.name, "text": text})
+                    spoken.append(row)
+
+                # ラウンド末に、その場に居た全員へ全文を配送する
+                for row in spoken:
+                    for pid_ in ctx[row["from"]][1]:
+                        self.by_id[pid_].extra.setdefault("heard", []).append(
+                            {"from": row["from"], "text": row["text"],
+                             "scene": sid, "venue": row["venue"],
+                             "venue_label": self.venue_labels.get(row["venue"],
+                                                                  row["venue"]),
+                             "talk_to": row["talk_to"], "step": step})
+                        if pid_ != row["from"]:
+                            self.deliveries.append(
+                                {"step": step, "to": pid_, "from": row["from"],
+                                 "kind": "scene", "location": row["venue"],
+                                 "obs_id": row["utt_id"], "text": row["text"][:200]})
+
     def _record_own_results(self, step: int) -> None:
         """今月自分が選んだ行為が帳簿でどうなったかを、本人の翌月観測へ渡す。
 
@@ -1780,7 +2060,8 @@ class Simulation:
                 self.client, self.ledger.publications,
                 batch=int(kcfg.get("classify_batch", 25)))
         classified_thoughts: List[Dict[str, Any]] = []
-        if self.field_v41 and kcfg.get("classify_utterances", True) and self.thoughts:
+        if ((self.field_v41 or self.field_v5)
+                and kcfg.get("classify_utterances", True) and self.thoughts):
             targets_thoughts = [t for t in self.thoughts
                                 if t["role"] in ("household", "business")]
             classified_thoughts = classify_utterances(
@@ -1842,6 +2123,17 @@ class Simulation:
             # 分類対象は住民・事業者だけだが、内心そのものは全主体ぶん残す
             # （X社・行政・記者・仲介の内心が記録から落ちないように）。
             _write_jsonl(os.path.join(d, "thoughts_all.jsonl"), self.thoughts)
+            _write_jsonl(os.path.join(d, "deliveries.jsonl"), self.deliveries)
+        if self.field_v5:
+            _write_jsonl(os.path.join(d, "thoughts.jsonl"),
+                         classified_thoughts or self.thoughts)
+            _write_jsonl(os.path.join(d, "thoughts_all.jsonl"), self.thoughts)
+            _write_jsonl(os.path.join(d, "utterances_v5.jsonl"), self.ledger.v5_utterances)
+            _write_jsonl(os.path.join(d, "traces_v5.jsonl"), self.ledger.v5_traces_seen)
+            _write_jsonl(os.path.join(d, "plans_v5.jsonl"), self.ledger.v5_plans)
+            _write_jsonl(os.path.join(d, "stances_v5.jsonl"), self.ledger.v5_stances)
+            _write_jsonl(os.path.join(d, "articles_v5.jsonl"), self.ledger.v5_articles)
+            _write_jsonl(os.path.join(d, "directs_v5.jsonl"), self.ledger.v5_directs)
             _write_jsonl(os.path.join(d, "deliveries.jsonl"), self.deliveries)
         if self.field_v4:
             _write_jsonl(os.path.join(d, "feelings.jsonl"),

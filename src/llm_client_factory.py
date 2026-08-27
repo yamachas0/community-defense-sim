@@ -400,12 +400,56 @@ class MockClient:
         if schema is not None and "results" in schema.get("properties", {}):
             return self._mock_classify(user_prompt)
         properties = (schema or {}).get("properties", {})
+        if schema is not None and ("plan_s1" in properties or "talk_to" in properties):
+            return self._mock_v5(system_prompt, user_prompt, schema)
         if schema is not None and "thought" in properties:
             return self._mock_v41(system_prompt, user_prompt, schema)
         if schema is not None and "action_type" not in properties:
             return self._mock_v4(system_prompt, user_prompt, schema)
         role = self._role_from_schema(schema)
         return self._mock_action(role, system_prompt, user_prompt, schema)
+
+    def _mock_v5(self, system_prompt: str, user_prompt: str,
+                 schema: Dict[str, Any]) -> str:
+        """v5（台本＋シーン会話）の配線確認用スタブ。世界の行動規則ではない。"""
+        properties = schema.get("properties", {})
+        m = _STEP_RE.search(user_prompt)
+        step = int(m.group(1)) if m else 1
+        rng = self._rng(f"v5:{step}:{system_prompt[:48]}:{len(user_prompt)}")
+        parcels = sorted(set(_PARCEL_RE.findall(user_prompt)))
+        out: Dict[str, Any] = {
+            "thought": (f"第{step}月。見聞きしたことを頭の中で並べている。"
+                        + (f"{parcels[0]}のことが少し気になる。" if parcels else "")),
+        }
+        if "plan_s1" in properties:
+            for key in ("plan_s1", "plan_s2", "plan_s3", "plan_s4"):
+                choices = list(properties[key].get("enum", ["HOME"]))
+                # 会話が成立する配線かを見るスタブなので、会場に寄せておく
+                venues = [c for c in choices if c != "HOME"]
+                out[key] = rng.choice(venues) if venues and rng.random() < 0.75 \
+                    else "HOME"
+        if "talk_to" in properties:
+            present = list(properties["talk_to"]["items"].get("enum", []))
+            speak = rng.random() < 0.8
+            out["text"] = (f"{parcels[0]}のあたり、なにか動きがあったみたいですね。"
+                           if (speak and parcels)
+                           else ("そういえば、最近この辺りは静かですね。" if speak else ""))
+            out["talk_to"] = ([rng.choice(present)]
+                              if (present and speak and rng.random() < 0.5) else [])
+            targets = list(properties.get("direct_to", {}).get("enum", []))
+            targets = [t for t in targets if t]
+            if targets and rng.random() < 0.12:
+                out["direct_to"] = rng.choice(targets)
+                out["direct_text"] = "少し話したいことがあります。"
+            else:
+                out["direct_to"] = ""
+                out["direct_text"] = ""
+        if "publish" in properties:
+            out["publish"] = ("この街で名義の移った土地がある、という話を聞いた。"
+                              if rng.random() < 0.15 else "")
+        if "stance" in properties:
+            out["stance"] = "keep" if rng.random() < 0.85 else "sell"
+        return json.dumps(out, ensure_ascii=False)
 
     def _mock_v41(self, system_prompt: str, user_prompt: str,
                   schema: Dict[str, Any]) -> str:
