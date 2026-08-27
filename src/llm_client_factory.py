@@ -593,7 +593,11 @@ class MockClient:
                 elif verb in ("contact_broker", "request_owner_inquiry"):
                     target = rng.choice(agents) if agents else ""
                 elif verb == "answer_broker_inquiry":
-                    target = rng.choice(inquiries) if inquiries else ""
+                    if not inquiries:
+                        # 届いていない照会に答える実務は作らない（Mockの都合であり世界規則ではない）
+                        verb = "internal_review"
+                    else:
+                        target = rng.choice(inquiries)
                 elif verb == "withdraw_offer":
                     target = rng.choice(offers) if offers else ""
                 elif index == 0:
