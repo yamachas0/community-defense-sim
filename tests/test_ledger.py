@@ -2041,7 +2041,7 @@ _shutil.rmtree(_tmp5, ignore_errors=True)
 # --- v1〜v4.1b が不変であること -------------------------------------------
 from src.viz import MONEYLESS_VERSIONS as _MLV5  # noqa: E402
 check("v5: レポートHTMLを金額のない版で描く（v4.1bで作った仕組みをv5にも当てる）",
-      "field_v5" in _MLV5 and "field_v4_1b" in _MLV5)
+      "field_v5" in _MLV5 and "field_v4_1b" in _MLV5 and "field_v5b" in _MLV5)
 check("v5: v4.1 の経路は v5 のフラグで切り替わらない",
       Simulation.__dict__["_step"].__doc__ is None
       and "field_v5" in io.open(os.path.join(_ROOT5, "src/simulation.py"),
