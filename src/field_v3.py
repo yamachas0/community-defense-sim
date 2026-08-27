@@ -482,9 +482,11 @@ def own_results_text(rows: List[Dict[str, Any]]) -> str:
 # 「再照会は不要」「確認が古い」「次はこうすべき」といった評価・当為・自動判定は書かない。
 # ---------------------------------------------------------------------------
 
+# 依頼主に見えてよい「相手からの返答」だけを数える。
+# 所有者が仲介へ返した回答（inquiry_answer）は、仲介が報告するまで依頼主の観測ではない。
 INQUIRY_RESPONSE_KINDS = {
     "counter", "reject", "transfer", "lease_control", "lease_reject",
-    "inquiry_answer", "inquiry_report",
+    "inquiry_report",
 }
 
 
@@ -530,6 +532,16 @@ def broker_inquiries_text(agent: Agent, ledger: Ledger,
     return "\n".join(_inquiry_state_text(r, names) for r in rows[-INQUIRY_ROWS:])
 
 
+def client_inquiry_status(row: Dict[str, Any]) -> str:
+    """依頼主の側から見た照会の状態。
+
+    仲介が所有者へ照会したことも、所有者が仲介へ何と答えたことも、
+    仲介が報告するまでは依頼主の観測ではない。よってここで出せるのは
+    「依頼した」「報告が届いた」の2状態だけである。
+    """
+    return "reported" if row.get("reported_step") else "requested"
+
+
 def client_inquiries_text(agent: Agent, ledger: Ledger,
                           names: Dict[str, str]) -> str:
     ensure_v3_state(ledger)
@@ -537,7 +549,20 @@ def client_inquiries_text(agent: Agent, ledger: Ledger,
             if r["client"] == agent.agent_id or r["reported_to"] == agent.agent_id]
     if not rows:
         return "  （なし）"
-    return "\n".join(_inquiry_state_text(r, names) for r in rows[-INQUIRY_ROWS:])
+    out = []
+    for r in rows[-INQUIRY_ROWS:]:
+        parts = [f"  [{r['id']}]", r["parcel_id"],
+                 f"仲介:{names.get(r['broker'], r['broker'])}",
+                 f"状態:{client_inquiry_status(r)}"]
+        if r.get("requested_step"):
+            parts.append(f"依頼:第{r['requested_step']}月")
+        if r.get("reported_step"):
+            parts.append(f"報告:第{r['reported_step']}月 {r['reported_intent']} "
+                         f"希望額:{price_text(r['reported_price'])}")
+        else:
+            parts.append("報告:なし")
+        out.append(" ".join(parts))
+    return "\n".join(out)
 
 
 def acquirer_pipeline_text(agent: Agent, ledger: Ledger,
@@ -597,7 +622,8 @@ def acquirer_pipeline_text(agent: Agent, ledger: Ledger,
         parts.append("提示額:" + ("/".join(prices) if prices else "-"))
         states = [f"{o.offer_id}={o.status}" for o in data["offers"]]
         states += [f"{o['id']}={o['status']}" for o in data["leases"]]
-        states += [f"{q['id']}={q['status']}" for q in data["inquiries"]]
+        states += [f"{q['id']}={client_inquiry_status(q)}"
+                   for q in data["inquiries"]]
         parts.append("状態:" + ("/".join(states) if states else "-"))
         label = checked.get(pid, "なし")
         result = results.get(pid, "")

@@ -22,6 +22,7 @@ from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                           build_system_prompt_v3, build_user_prompt_v3, control_share,
                           ensure_v3_state, list_for_lease, make_lease_offer,
                           acquirer_pipeline_text, answer_owner_inquiry,
+                          client_inquiries_text,
                           check_land_registry_v3, inquire_owner_intent,
                           own_result_row, own_results_text, report_owner_intent,
                           request_owner_inquiry,
@@ -506,6 +507,31 @@ check("任意欄が無くてもテレメトリの形は保たれる（無けれ�
       and sparse_plan["alternatives"] == [])
 check("計画欄の埋め方を書式で強制しない",
       "alternativesは2〜3件" not in build_system_prompt_v3(buyer_v3, cfg_v3, 48))
+
+print("== 案2: 仲介が報告するまで依頼主には回答が見えない ==")
+L4 = mk()
+buyer_v = Agent("AQ01", "acquirer", "X社", "外部会社",
+                extra={"mandate": "m", "aliases": ["A社"]})
+q4 = request_owner_inquiry(L4, 1, "AQ01", "BR01", "P01", "")["inquiry_id"]
+inquire_owner_intent(L4, 2, "BR01", "P01", q4, "")
+answer_owner_inquiry(L4, 3, q4, "HH01", "willing_to_sell", "4200", "")
+client_before = client_inquiries_text(buyer_v, L4, names_q)
+check("所有者の回答は、仲介の報告前は依頼主の観測に出ない",
+      "willing_to_sell" not in client_before and "4200" not in client_before
+      and "状態:requested" in client_before and "報告:なし" in client_before)
+buyer_v.extra["parcel_last_action"] = {
+    "P01": {"step": 1, "action": "request_owner_inquiry",
+            "outcome": "inquiry_request", "amount": 0}}
+pipe_before = acquirer_pipeline_text(buyer_v, L4, names_q)
+check("案件記録にも回答の存在は出ない",
+      "相手最終返答:-" in pipe_before and f"{q4}=requested" in pipe_before)
+report_owner_intent(L4, 4, "BR01", "AQ01", q4, "willing_to_sell", "4200", "")
+client_after = client_inquiries_text(buyer_v, L4, names_q)
+check("報告が届いてはじめて意向と希望額が依頼主の観測になる",
+      "willing_to_sell" in client_after and "希望額:4200万" in client_after
+      and "状態:reported" in client_after)
+check("案件記録の相手最終返答も報告で更新される",
+      "相手最終返答:inquiry_report(第4月)" in acquirer_pipeline_text(buyer_v, L4, names_q))
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
