@@ -26,7 +26,7 @@ from .field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                        build_system_prompt_v3, build_user_prompt_v3, control_share,
                        effective_control_area_share, ensure_v3_state, list_for_lease,
                        make_lease_offer, normalize_acquirer_plan_v3,
-                       resolve_lease_offer, settle_v3_control, verbs_for_v3)
+                       resolve_lease_offer, seed_acquirer_intelligence_v3, settle_v3_control, verbs_for_v3)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -165,10 +165,17 @@ class Simulation:
         for a in self.agents:
             cash[a.agent_id] = int(cfg["scenario"]["initial_cash"].get(a.role, 0))
         for a in self.agents:
-            if a.role == "acquirer":
+            if a.role == "acquirer" and "budget" in a.extra:
                 cash[a.agent_id] = int(a.extra["budget"])
         self.ledger = Ledger(parcels, cash)
+        self.ledger.enable_on_demand_financing([
+            a.agent_id for a in self.agents
+            if a.role == "acquirer" and a.extra.get("financing") == "on_demand"
+        ])
         ensure_v3_state(self.ledger)
+        if self.field_v3:
+            for agent in (a for a in self.agents if a.role == "acquirer"):
+                seed_acquirer_intelligence_v3(agent, self.ledger, cfg["scenario"])
 
         if self.field_v3:
             self.system_prompts = {a.agent_id: build_system_prompt_v3(a, cfg, len(parcels))
@@ -489,6 +496,7 @@ class Simulation:
                 "effective_area": effective_area,
                 "control_delta": effective_area - previous_area,
                 "cash": self.ledger.cash.get(a.agent_id, 0),
+                "financing_raised": self.ledger.financing_raised.get(a.agent_id, 0),
             })
 
     def _process_acquirer_portfolio(

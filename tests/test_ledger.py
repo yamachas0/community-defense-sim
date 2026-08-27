@@ -20,7 +20,7 @@ from src.agents import Agent  # noqa: E402
 from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                           build_system_prompt_v3, control_share, ensure_v3_state,
                           list_for_lease, make_lease_offer,
-                          resolve_lease_offer)  # noqa: E402
+                          resolve_lease_offer, seed_acquirer_intelligence_v3)  # noqa: E402
 
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
 from src.schemas import action_schema  # noqa: E402
@@ -61,6 +61,12 @@ check("0円の買付は不成立",
       L.record_offer(1, "P01", "AQ01", 0)["kind"] == "offer_rejected")
 check("予算超過の買付は不成立",
       L.record_offer(1, "P01", "AQ01", 999999)["kind"] == "offer_rejected")
+L.enable_on_demand_financing(["AQ01"])
+fo = L.record_offer(1, "P01", "AQ01", 999999)
+check("随時調達主体は残高超過の買付を提示できる", fo["kind"] == "offer")
+ft = L.record_accept(2, fo["offer_id"], "HH01")
+check("受諾時に不足資金を調達して成約する", ft["kind"] == "transfer")
+check("外部調達額が台帳に残る", L.financing_raised["AQ01"] == 939999)
 check("負の賃料は不成立",
       L.record_rent_change(1, "P02", "HH01", -10)["kind"] == "rent_rejected")
 check("賃料0は不成立（欠損の0が通らないこと）",
@@ -264,6 +270,16 @@ check("自己要約と別に計画・実行実績が残る",
       and "market_research" in decision_prompt and "増減=0㎡" in decision_prompt)
 check("実行と計画の分離したレビューを使わない",
       "一つの意思決定として同時に返す" in decision_prompt)
+intel_ledger = mk()
+seed_acquirer_intelligence_v3(
+    buyer_v3, intel_ledger,
+    {"acquirer_initial_intelligence": {
+        "market_research": True, "land_registry_scope": "non_public"}})
+check("X社は参入前に一定の公開市場・登記情報を把握",
+      buyer_v3.extra.get("market_research_seen") is True
+      and set(buyer_v3.extra.get("land_registry_targets", []))
+      == {p.pid for p in intel_ledger.parcels.values() if p.use != "public"})
+
 L = mk()
 ensure_v3_state(L)
 listed = list_for_lease(L, 1, "P01", "HH01", 22)

@@ -217,7 +217,8 @@ def build_acquirer_decision_prompt_v3(agent: Agent, world_prompt: str) -> str:
                 f"operations={item.get('operations') or '-'} "
                 f"outcome={item.get('outcome_kind') or '-'} "
                 f"支配={item.get('effective_area', 0)}㎡ "
-                f"増減={item.get('control_delta', 0)}㎡ cash={item.get('cash', 0)}万"
+                f"増減={item.get('control_delta', 0)}㎡ "
+                f"調達累計={item.get('financing_raised', 0)}万"
             )
     else:
         rows.append("（実行履歴なし）")
@@ -362,7 +363,12 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     if agent.memory:
         rows += ["[自分の前月までの記憶]", agent.memory[:MAX_MEMORY_CHARS]]
     rows += ["[自分に実際に届いた情報]", _observations(agent, names)]
-    rows += [f"[手元資金] {ledger.cash.get(agent.agent_id, 0)}万円"]
+    if agent.agent_id in ledger.on_demand_financing:
+        rows += [f"[資金条件] 必要資金は案件成立時に調達可能。"
+                 f"調達累計{ledger.financing_raised.get(agent.agent_id, 0)}万円。"
+                 "固定予算上限はない。"]
+    else:
+        rows += [f"[手元資金] {ledger.cash.get(agent.agent_id, 0)}万円"]
 
     if agent.role == "household":
         mine = ledger.owned_by(agent.agent_id)
@@ -469,6 +475,24 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     return "\n".join(rows)
 
 
+def seed_acquirer_intelligence_v3(
+        agent: Agent, ledger: Ledger, scenario: Dict[str, Any]) -> None:
+    """参入前に取得済みの公開情報を、X社の初期観測として設定する。"""
+    initial = scenario.get("acquirer_initial_intelligence", {})
+    if not isinstance(initial, dict):
+        return
+    if initial.get("market_research"):
+        agent.extra["market_research_seen"] = True
+    scope = str(initial.get("land_registry_scope", "")).strip()
+    if scope == "all":
+        targets = [p.pid for p in ledger.parcels.values()]
+    elif scope == "non_public":
+        targets = [p.pid for p in ledger.parcels.values() if p.use != "public"]
+    else:
+        targets = []
+    agent.extra["land_registry_targets"] = targets
+
+
 def ensure_v3_state(ledger: Ledger) -> None:
     if not hasattr(ledger, "v3_lease_offers"):
         ledger.v3_lease_offers = {}
@@ -540,7 +564,7 @@ def settle_v3_control(ledger: Ledger, step: int) -> None:
         rent = int(getattr(p, "control_rent", 0) or 0)
         if not controller or rent <= 0:
             continue
-        if ledger.cash.get(controller, 0) < rent:
+        if not ledger.fund_payment(step, controller, rent, "control_rent", p.pid):
             ledger._rec(step, "control_rent_missed", parcel_id=p.pid,
                         controller=controller, owner=p.owner_id, amount=rent)
             continue

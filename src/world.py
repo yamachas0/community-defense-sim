@@ -85,6 +85,8 @@ class Ledger:
         self.moved_out: Dict[str, int] = {}             # agent_id -> step (転出)
         self.closed_businesses: Dict[str, int] = {}     # agent_id -> step (廃業/撤退)
         self.seed_note = seed_note
+        self.on_demand_financing: set[str] = set()
+        self.financing_raised: Dict[str, int] = {}
 
     # -- bookkeeping primitives -------------------------------------------
 
@@ -92,6 +94,26 @@ class Ledger:
         row = {"step": step, "kind": kind, **kw}
         self.records.append(row)
         return row
+
+    def enable_on_demand_financing(self, agent_ids: List[str]) -> None:
+        self.on_demand_financing.update(agent_ids)
+        for agent_id in agent_ids:
+            self.financing_raised.setdefault(agent_id, 0)
+
+    def fund_payment(self, step: int, agent_id: str, amount: int,
+                     purpose: str, reference: str = "") -> bool:
+        """随時調達型なら決済時の不足額を調達し、台帳に残す。"""
+        available = self.cash.get(agent_id, 0)
+        if available >= amount:
+            return True
+        if agent_id not in self.on_demand_financing:
+            return False
+        raised = amount - available
+        self.cash[agent_id] = available + raised
+        self.financing_raised[agent_id] = self.financing_raised.get(agent_id, 0) + raised
+        self._rec(step, "financing_raised", agent_id=agent_id, amount=raised,
+                  purpose=purpose, reference=reference)
+        return True
 
     @staticmethod
     def _valid_money(v: Any, allow_zero: bool = False) -> bool:
@@ -150,7 +172,8 @@ class Ledger:
         if not self._valid_money(price):
             return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
                              reason="invalid_amount", given=price)
-        if self.cash.get(from_id, 0) < int(price):
+        if (from_id not in self.on_demand_financing
+                and self.cash.get(from_id, 0) < int(price)):
             return self._rec(step, "offer_rejected", parcel_id=parcel_id, from_id=from_id,
                              reason="insufficient_funds", given=price,
                              budget=self.cash.get(from_id, 0))
@@ -193,11 +216,12 @@ class Ledger:
         if p.owner_id != by:
             return self._rec(step, "accept_rejected", offer_id=offer_id, by=by,
                              reason="not_owner")
-        buyer_cash = self.cash.get(offer.from_id, 0)
-        if buyer_cash < offer.price:
+        if not self.fund_payment(step, offer.from_id, offer.price,
+                                 "property_purchase", offer.offer_id):
             offer.status = "void"
             return self._rec(step, "accept_rejected", offer_id=offer_id, by=by,
                              reason="buyer_insufficient_funds")
+        buyer_cash = self.cash.get(offer.from_id, 0)
         # 所有権移転を記帳
         seller = p.owner_id
         p.owner_id = offer.from_id
@@ -427,6 +451,7 @@ class Ledger:
         return {
             "parcels": {pid: asdict(p) for pid, p in self.parcels.items()},
             "cash": dict(self.cash),
+            "financing_raised": dict(self.financing_raised),
         }
 
     def owner_map(self) -> Dict[str, str]:

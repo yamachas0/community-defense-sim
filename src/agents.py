@@ -70,7 +70,9 @@ def build_roster(personas: Dict[str, Any], counts: Dict[str, int],
 
     def acq_extra(a: Agent, p: Dict[str, Any]) -> None:
         a.extra["mandate"] = scenario["acquirer_mandate"].strip()
-        a.extra["budget"] = int(scenario["acquirer_budget"])
+        if "acquirer_budget" in scenario:
+            a.extra["budget"] = int(scenario["acquirer_budget"])
+        a.extra["financing"] = str(scenario.get("acquirer_financing", "fixed_budget"))
         a.extra["aliases"] = list(p.get("aliases", [a.name]))
         a.extra["monthly_operation_capacity"] = int(
             scenario.get("acquirer_monthly_operation_capacity", 6))
