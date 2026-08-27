@@ -57,7 +57,8 @@ from .field_v5 import (DIRECT_NONE as DIRECT_NONE_V5, HOME as HOME_V5,
                        ensure_v5_state, load_script_v5, plan_schema_v5,
                        registry_rows_v5, s4_for_step, scene_schema_v5,
                        venue_traces_v5)
-from .kpi import (classify_publications, classify_utterances, cognition_series,
+from .kpi import (classify_occupation, classify_publications, classify_utterances,
+                  cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
 from .prompts import build_system_prompt, build_user_prompt
@@ -171,7 +172,8 @@ class Simulation:
         self.field_v3 = cfg.get("scenario_version") == "field_v3"
         self.field_v4 = cfg.get("scenario_version") == "field_v4"
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
-        self.field_v5 = cfg.get("scenario_version") == "field_v5"
+        self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b")
+        self.field_v5b = cfg.get("scenario_version") == "field_v5b"
         # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
         self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
@@ -1493,11 +1495,15 @@ class Simulation:
                      for p in self.ledger.parcels.values()}
         for done in apply_script_v5(self.ledger, step, self.script, acquirer_id):
             self.events.append({"step": step, "agent_id": "SCRIPT", "role": "script",
-                                "name": "台本", "action_type": "scripted_transfer",
-                                "outcome": {"kind": "transfer",
+                                "name": "台本",
+                                "action_type": ("scripted_lease"
+                                                if done.get("kind") == "lease"
+                                                else "scripted_transfer"),
+                                "outcome": {"kind": done.get("kind", "transfer"),
                                             "acq_id": done.get("acq_id"),
                                             "parcel_id": done.get("parcel_id"),
                                             "seller": done.get("seller"),
+                                            "lessor": done.get("lessor"),
                                             "under_name": done.get("under_name")}})
 
         # --- 1) 会場に依らない兆候を配る ------------------------------------
@@ -2131,6 +2137,8 @@ class Simulation:
             "agents": {r: sum(1 for a in self.agents if a.role == r)
                        for r in sorted({a.role for a in self.agents})},
             "parcels": len(self.ledger.parcels),
+            "parcels_tradable": len([p for p in self.ledger.parcels.values()
+                                     if p.use != "public"]),
             "model": getattr(self.client, "model", "?"),
             "provider": self.cfg["llm"].get("provider"),
             "elapsed_sec": round(elapsed, 1),
@@ -2176,6 +2184,17 @@ class Simulation:
             _write_jsonl(os.path.join(d, "thoughts_all.jsonl"), self.thoughts)
             _write_jsonl(os.path.join(d, "deliveries.jsonl"), self.deliveries)
         if self.field_v5:
+            # 「占領の認知」の事後分類。発話と内心の両方を対象にする（走行中の主体には
+            # 一切見せない・世界には戻らない）。判定の定義は実装仕様6章で走行前に固定。
+            occ_rows = ([{"kind": "utterance", **u} for u in self.ledger.v5_utterances]
+                        + [{"kind": "thought", **t} for t in self.thoughts]
+                        + [{"kind": "article", **a} for a in self.ledger.v5_articles])
+            if self.field_v5b and kcfg.get("classify_utterances", True) and occ_rows:
+                _write_jsonl(os.path.join(d, "occupation_labels.jsonl"),
+                             classify_occupation(
+                                 self.client, occ_rows,
+                                 batch=int(kcfg.get("classify_batch", 25))))
+            _write_jsonl(os.path.join(d, "deals_v5.jsonl"), self.ledger.v5_deals)
             _write_jsonl(os.path.join(d, "thoughts.jsonl"),
                          classified_thoughts or self.thoughts)
             _write_jsonl(os.path.join(d, "thoughts_all.jsonl"), self.thoughts)

@@ -185,3 +185,62 @@ def cognition_series(classified: List[Dict[str, Any]], n_steps: int) -> List[Dic
             "shift_rate_cum": round(cum_their / cum_denom, 4) if cum_denom else None,
         })
     return rows
+
+# ---------------------------------------------------------------------------
+# v5b: 「占領の認知」の事後分類（観測であって世界には戻らない）
+# ---------------------------------------------------------------------------
+
+OCCUPATION_SYSTEM = """あなたは会話ログの分類器である。架空都市A市の住民たちの発言・内心を読み、
+2つの点だけを判定する。判定に使ってよいのは渡された文そのものだけで、背景を推測しない。
+
+links_multiple: その文が、2つ以上の会社名（A社・B社・C社・D社など）または2つ以上の区画（P01形式）を
+  「同じ相手の動き」「関連する一連の出来事」として結びつけているなら true。
+  単に1件の取引や1社に触れているだけなら false。並べただけで関連づけていないなら false。
+intent: その文が、地区や街ぐるみで買い集める・地上げ・乗っ取り・支配・「この辺一帯」「街ごと」
+  といった、広がりのある意図や動きに言及しているなら true。個別の売買や空き家の話だけなら false。
+
+JSONだけを返す。"""
+
+
+OCCUPATION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "results": {"type": "array", "items": {"type": "object", "properties": {
+            "id": {"type": "integer"},
+            "links_multiple": {"type": "boolean"},
+            "intent": {"type": "boolean"},
+        }, "required": ["id", "links_multiple", "intent"]}},
+    },
+    "required": ["results"],
+}
+
+
+def build_occupation_prompt(rows: List[Dict[str, Any]]) -> str:
+    out = ["次の文をそれぞれ判定して results を返す。"]
+    for i, r in enumerate(rows, start=1):
+        out.append(f"{i}. {str(r.get('text', ''))[:400]}")
+    return "\n".join(out)
+
+
+def classify_occupation(client, rows: List[Dict[str, Any]],
+                        batch: int = 25) -> List[Dict[str, Any]]:
+    """発話・内心が『複数を結びつけているか』『街ぐるみの意図に触れたか』を事後分類する。"""
+    out: List[Dict[str, Any]] = []
+    for i in range(0, len(rows), batch):
+        chunk = rows[i:i + batch]
+        raw = client.generate(OCCUPATION_SYSTEM, build_occupation_prompt(chunk),
+                              schema=OCCUPATION_SCHEMA, temperature=0.0,
+                              max_tokens=1400, tag="classify_occupation")
+        parsed: Dict[int, Dict[str, Any]] = {}
+        try:
+            for r in (json.loads(raw) if raw else {}).get("results", []):
+                parsed[int(r["id"])] = r
+        except Exception:
+            parsed = {}
+        for j, row in enumerate(chunk, start=1):
+            r = parsed.get(j)
+            out.append({**row,
+                        "links_multiple": bool(r.get("links_multiple")) if r else None,
+                        "intent": bool(r.get("intent")) if r else None,
+                        "classified": r is not None})
+    return out

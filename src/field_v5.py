@@ -97,6 +97,7 @@ def ensure_v5_state(ledger: Ledger) -> None:
         ledger.v5_articles = []        # 記者の記事
         ledger.v5_directs = []         # 私信
         ledger.v5_utt_seq = 0
+        ledger.v5_deals = []           # 当事者が知っている自分の取引（売買・賃借）
         # 開始時点で街の人が知っている名前（以後この辞書は更新しない）
         ledger.v5_initial_names = {p.pid: p.registered_name
                                    for p in ledger.parcels.values()}
@@ -115,7 +116,8 @@ def load_script_v5(path: str) -> Dict[str, Any]:
 
 
 def validate_script_v5(script: Dict[str, Any]) -> None:
-    seen = set()
+    seen, parcels_seen = set(), set()
+    months = int((script.get("meta") or {}).get("months", 60))
     for acq in script.get("acquisitions", []):
         for key in ("id", "month", "parcel_id", "under_name"):
             if key not in acq:
@@ -123,6 +125,19 @@ def validate_script_v5(script: Dict[str, Any]) -> None:
         if acq["id"] in seen:
             raise ValueError(f"台本のIDが重複している: {acq['id']}")
         seen.add(acq["id"])
+        if not (1 <= int(acq["month"]) <= months):
+            raise ValueError(f"台本の月が範囲外: {acq}")
+        if acq["parcel_id"] in parcels_seen:
+            raise ValueError(f"同じ区画が2度取得されている: {acq['parcel_id']}")
+        parcels_seen.add(acq["parcel_id"])
+        if "kind" in acq:
+            if acq["kind"] not in ("sale", "lease"):
+                raise ValueError(f"未知の取引種別: {acq}")
+            if not str(acq.get("note", "")).strip():
+                raise ValueError(f"取引の事情(note)が無い: {acq['id']}")
+            if acq["kind"] == "lease" and [t for t in acq.get("traces", [])
+                                           if t.get("kind") == "registry"]:
+                raise ValueError(f"賃借に登記の兆候が付いている: {acq['id']}")
         for tr in acq.get("traces", []):
             if tr.get("kind") not in TRACE_TEXTS:
                 raise ValueError(f"未知の兆候: {tr}")
@@ -155,13 +170,30 @@ def apply_script_v5(ledger: Ledger, step: int, script: Dict[str, Any],
             ledger._rec(step, "script_rejected", acq_id=acq["id"],
                         parcel_id=parcel.pid, reason="public_land")
             continue
-        seller = parcel.owner_id
-        old_name = parcel.registered_name or seller
-        parcel.owner_id = acquirer_id
-        parcel.registered_name = str(acq["under_name"])
-        rec = ledger._rec(step, "transfer", acq_id=acq["id"], parcel_id=parcel.pid,
-                          seller=seller, buyer=acquirer_id,
-                          under_name=parcel.registered_name, old_name=old_name)
+        deal = str(acq.get("kind", "sale"))
+        holder = str(acq["under_name"])
+        note = str(acq.get("note", ""))
+        party = parcel.owner_id            # 取引の当事者（売主／貸主）
+        old_name = parcel.registered_name or party
+        if deal == "lease":
+            # 賃借は登記が動かない（施主追記 2026-08-27 22:27）。使い手だけが変わる。
+            parcel.tenant_id = acquirer_id
+            rec = ledger._rec(step, "lease", acq_id=acq["id"], parcel_id=parcel.pid,
+                              lessor=party, lessee=acquirer_id, under_name=holder,
+                              old_name=old_name)
+        else:
+            parcel.owner_id = acquirer_id
+            parcel.registered_name = holder
+            rec = ledger._rec(step, "transfer", acq_id=acq["id"], parcel_id=parcel.pid,
+                              seller=party, buyer=acquirer_id,
+                              under_name=holder, old_name=old_name)
+        # 当事者は自分の取引を知っている（他人事の「名義が変わった」ではない）。
+        # kind を持つ台本（v5b）だけの挙動にして、v5 の再実行結果を変えない
+        # （Codexレビュー 2026-08-28）。
+        if "kind" in acq:
+            ledger.v5_deals.append({"step": step, "agent_id": party,
+                                    "acq_id": acq["id"], "parcel_id": parcel.pid,
+                                    "holder": holder, "kind": deal, "note": note})
         done.append({**rec, "acq": acq})
     return done
 
@@ -264,7 +296,12 @@ def own_parcels_rows_v5(agent: Agent, ledger: Ledger,
         line = (f"  {parcel.pid}[{USE_JA.get(parcel.use, parcel.use)}/{parcel.block}] "
                 f"{parcel.area_sqm}㎡ 名義:{parcel.registered_name}")
         if parcel.tenant_id:
-            line += f" 利用者:{names.get(parcel.tenant_id, parcel.tenant_id)}"
+            tenant = names.get(parcel.tenant_id, parcel.tenant_id)
+            for deal in getattr(ledger, "v5_deals", []):
+                if deal.get("parcel_id") == parcel.pid and deal.get("kind") == "lease":
+                    tenant = deal["holder"]
+                    break
+            line += f" 利用者:{tenant}"
         rows.append(line)
     occupied = [p for p in ledger.parcels.values() if p.tenant_id == agent.agent_id]
     for parcel in sorted(occupied, key=lambda p: p.pid):
@@ -274,15 +311,31 @@ def own_parcels_rows_v5(agent: Agent, ledger: Ledger,
 
 
 def own_history_rows_v5(agent: Agent, ledger: Ledger, step: int) -> List[str]:
-    """自分が手放した区画（自分の登記上の事実）。"""
+    """自分がした取引（当事者としての事実）。
+
+    施主追記 2026-08-27 22:27：所有者の知らないうちに登記が変わるのは詐欺なので、
+    取引は所有者との間で成立している。当事者は「自分が売った／貸した」ことと、
+    その事情を知っている。誰かに話すかどうかは本人の thought が決める。
+    """
     rows = []
-    for rec in ledger.records:
-        if rec.get("kind") != "transfer" or rec.get("seller") != agent.agent_id:
+    for deal in getattr(ledger, "v5_deals", []):
+        if deal.get("agent_id") != agent.agent_id or int(deal.get("step", 0)) > step:
             continue
-        if rec.get("step", 0) > step:
-            continue
-        rows.append(f"  第{rec['step']}月　{rec['parcel_id']}　"
-                    f"の名義が{rec.get('under_name', '')}に移った")
+        verb = "賃貸した" if deal.get("kind") == "lease" else "売却した"
+        line = (f"  第{deal['step']}月　あなたは {deal['parcel_id']} を "
+                f"{deal['holder']} へ{verb}")
+        if deal.get("note"):
+            line += f"（事情：{deal['note']}）"
+        rows.append(line)
+    # 台本に kind を持たない旧版（v5）の互換：登記の記録から拾う
+    if not rows:
+        for rec in ledger.records:
+            if rec.get("kind") != "transfer" or rec.get("seller") != agent.agent_id:
+                continue
+            if rec.get("step", 0) > step:
+                continue
+            rows.append(f"  第{rec['step']}月　{rec['parcel_id']}　"
+                        f"の名義が{rec.get('under_name', '')}に移った")
     return rows
 
 
@@ -481,7 +534,7 @@ def build_plan_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     rows += ["[自分の所有・使用している物件]"] + own_parcels_rows_v5(agent, ledger, names)
     history = own_history_rows_v5(agent, ledger, step)
     if history:
-        rows += ["[自分が手放した区画（登記上の事実）]"] + history
+        rows += ["[自分がした取引（当事者として知っていること）]"] + history
     rows += ["[隣接する区画の名義（日ごろ目に入る範囲）]"] + neighbourhood_rows_v5(agent, ledger, names)
     rows += ["", f"今月のS4は「{s4_label}」（会場 {s4_venue}）。行くかどうかは自分で決める。",
              "まず thought（内心）を書き、それを踏まえて S1〜S4 をどこで過ごすかをJSONで返す。"]
@@ -512,7 +565,7 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     rows += ["[自分の所有・使用している物件]"] + own_parcels_rows_v5(agent, ledger, names)
     history = own_history_rows_v5(agent, ledger, step)
     if history:
-        rows += ["[自分が手放した区画（登記上の事実）]"] + history
+        rows += ["[自分がした取引（当事者として知っていること）]"] + history
     rows += [""]
     rows += [f"この場面のやりとりは{rounds}回で、今は{round_no}回目である。",
              "まず thought（内心）を書き、それを踏まえてこの場で話すことを書く。",

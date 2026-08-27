@@ -415,6 +415,9 @@ class MockClient:
         self.usage.add(tag, input_tokens=0, output_tokens=0)
 
         if schema is not None and "results" in schema.get("properties", {}):
+            item = schema["properties"]["results"].get("items", {})
+            if "links_multiple" in item.get("properties", {}):
+                return self._mock_occupation(user_prompt)
             return self._mock_classify(user_prompt)
         properties = (schema or {}).get("properties", {})
         if schema is not None and ("plan_s1" in properties or "talk_to" in properties):
@@ -638,6 +641,22 @@ class MockClient:
             if marker in enum:
                 return role_key
         return "household"
+
+    def _mock_occupation(self, user_prompt: str) -> str:
+        """占領の認知の分類スタブ。文中の会社名・区画IDの数で機械的に決める。
+
+        これはシミュレーションの一部ではない（配線確認用のテストダブル）。
+        """
+        rows = [x for x in user_prompt.split("\n") if x and x[0].isdigit()]
+        out = []
+        for i, line in enumerate(rows, start=1):
+            holders = len(set(re.findall(r"[A-D]社", line)))
+            parcels = len(set(re.findall(r"P\d{2}", line)))
+            out.append({"id": i,
+                        "links_multiple": bool(holders >= 2 or parcels >= 2),
+                        "intent": any(w in line
+                                      for w in ("買い占め", "一帯", "次々"))})
+        return json.dumps({"results": out}, ensure_ascii=False)
 
     def _mock_classify(self, user_prompt: str) -> str:
         ids = [int(m) for m in re.findall(r"^\s*(\d+)\.", user_prompt, flags=re.M)]

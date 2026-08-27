@@ -69,6 +69,186 @@ def _v5_mentions(text, holders):
             "hit": bool(parcels or named or words)}
 
 
+
+# --- v5b: 「占領の認知」の判定（主判定・走行前に固定） ---------------------
+# 施主 2026-08-27 22:18「観測したいのは X社が実質占領しようとしてるんじゃないか
+# ということに気づくかどうかであって、1件1件の売買について気づくかどうかではない」
+# ルールベース1次抽出と、走行後にLLMで付けたラベル（occupation_labels.jsonl）の
+# 両方を出し、and / or の感度も併記する。「出なかった」も同じ重みで記録する。
+
+V5B_INTENT_WORDS = ("買い占め", "買い集め", "地上げ", "乗っ取り", "支配", "一帯",
+                    "街ごと", "町ごと", "次々", "相次", "まとめて買", "計画的",
+                    "組織的", "同じ会社", "同一", "裏で", "占領")
+
+
+def _v5b_rule_links(text, holders, acquired_pids):
+    hs = {h for h in holders if h and h in text}
+    ps = {p for p in V5_PARCEL_RE.findall(text) if p in acquired_pids}
+    return len(hs) >= 2 or len(ps) >= 2 or (len(hs) >= 1 and len(ps) >= 2)
+
+
+def _v5b_rule_intent(text):
+    return any(w in text for w in V5B_INTENT_WORDS)
+
+
+
+def _v5b_control_share(summary, n_owned, n_leased):
+    """所有＋賃借で X社が実際に握っている非公共区画の割合。
+
+    分母は summary の非公共区画数を直接使う（所有率からの逆算はしない）。
+    旧ランで欠けている場合だけ所有率から復元する。
+    """
+    tradable = summary.get("parcels_tradable")
+    if not tradable:
+        share = (summary.get("kpi") or {}).get("final_acquirer_share") or 0
+        if not share or not n_owned:
+            return None
+        tradable = round(n_owned / share)
+    return round((n_owned + n_leased) / tradable, 3) if tradable else None
+
+
+def occupation_metrics(run_dir, holders_by_step, acquired_by_step, deals_by_agent,
+                       n_steps, n_actors):
+    """占領の認知 O1〜O4。定義は docs/world_design_v5_impl.md 12章で走行前に固定。
+
+    Codexレビュー 2026-08-28 を受けた点：
+      ・分類に失敗した行は false ではなく **unknown** として数え、主値から外す
+        （欠損を「気づかなかった」に化けさせない）
+      ・その月までに成立した取引・名義だけで判定する（未来の取得を参照しない）
+      ・O3 は「口にした人数」と「内心にとどめた人数」を分ける
+    """
+    labels = _read_jsonl(os.path.join(run_dir, "occupation_labels.jsonl"))
+    if not labels:
+        return {"O_available": False}
+    rows = []
+    for r in labels:
+        text = str(r.get("text", ""))
+        step = int(r.get("step", 0))
+        hs = holders_by_step.get(step, set())
+        ps = acquired_by_step.get(step, set())
+        classified = bool(r.get("classified", True)) and r.get("links_multiple") is not None
+        speaker = r.get("from", "")
+        own = deals_by_agent.get(speaker, [])
+        rows.append({
+            "step": step, "from": speaker, "kind": r.get("kind", ""),
+            "scene": r.get("scene", ""), "text": text,
+            "rule_links": _v5b_rule_links(text, hs, ps),
+            "rule_intent": _v5b_rule_intent(text),
+            "llm_links": bool(r.get("links_multiple")) if classified else None,
+            "llm_intent": bool(r.get("intent")) if classified else None,
+            "classified": classified,
+            "party_any": bool([d for d in own if int(d.get("step", 0)) <= step]),
+            "party_of_mentioned": bool([d for d in own
+                                        if int(d.get("step", 0)) <= step
+                                        and d.get("parcel_id") in text]),
+        })
+    rows.sort(key=lambda r: (r["step"], r["kind"], r["from"]))
+    unknown = len([r for r in rows if not r["classified"]])
+
+    def o1(r):
+        return r["classified"] and r["rule_links"] and r["llm_links"]
+
+    def o2(r):
+        return r["classified"] and r["rule_intent"] and r["llm_intent"]
+
+    def any_o(r):
+        return o1(r) or o2(r)
+
+    def first(sel):
+        for r in rows:
+            if sel(r):
+                return {"month": r["step"], "agent_id": r["from"], "kind": r["kind"],
+                        "scene": r["scene"], "party_any": r["party_any"],
+                        "party_of_mentioned": r["party_of_mentioned"],
+                        "text": r["text"][:180]}
+        return None
+
+    public = ("utterance", "article")
+    pub_series, priv_series = {}, {}
+    cum_pub, cum_priv = set(), set()
+    for step in range(1, n_steps + 1):
+        for r in rows:
+            if r["step"] != step or not any_o(r):
+                continue
+            (cum_pub if r["kind"] in public else cum_priv).add(r["from"])
+        pub_series[step] = len(cum_pub)
+        priv_series[step] = len(cum_priv - cum_pub)
+
+    assembly, counter = set(), set()
+    for r in rows:
+        if not any_o(r) or r["kind"] != "utterance" or r["scene"] != "S4":
+            continue
+        kind = _v5_s4_kind(r["step"])
+        if kind == "counter":
+            counter.add(r["step"])
+        elif kind == "assembly":
+            assembly.add(r["step"])
+
+    def months(sel, kinds=None):
+        return sorted({r["step"] for r in rows
+                       if sel(r) and (not kinds or r["kind"] in kinds)})
+
+    return {
+        "O_available": True,
+        "O_rows_total": len(rows),
+        "O_rows_classified": len(rows) - unknown,
+        "O_unknown": unknown,
+        "O_measurable": unknown == 0,
+        # O1 連結（2つ以上の名義／区画を同じ動きとして結びつけた）
+        "O1_first": first(o1),
+        "O1_first_public": first(lambda r: o1(r) and r["kind"] in public),
+        "O1_first_non_party": first(lambda r: o1(r) and not r["party_any"]),
+        "O1_count": len([r for r in rows if o1(r)]),
+        "O1_public_count": len([r for r in rows if o1(r) and r["kind"] in public]),
+        "O1_by_party": {
+            "party_of_mentioned": len([r for r in rows if o1(r)
+                                       and r["party_of_mentioned"]]),
+            "party_other_deal": len([r for r in rows if o1(r) and r["party_any"]
+                                     and not r["party_of_mentioned"]]),
+            "non_party": len([r for r in rows if o1(r) and not r["party_any"]]),
+        },
+        "O1_rule_only": len([r for r in rows if r["classified"]
+                             and r["rule_links"] and not r["llm_links"]]),
+        "O1_llm_only": len([r for r in rows if r["classified"]
+                            and r["llm_links"] and not r["rule_links"]]),
+        "O1_or_count": len([r for r in rows if r["classified"]
+                            and (r["rule_links"] or r["llm_links"])]),
+        "O1_agents": sorted({r["from"] for r in rows if o1(r)}),
+        "O1_months": months(o1),
+        # O2 意図（街ぐるみの買い集め・地上げ等）
+        "O2_first": first(o2),
+        "O2_first_public": first(lambda r: o2(r) and r["kind"] in public),
+        "O2_count": len([r for r in rows if o2(r)]),
+        "O2_public_count": len([r for r in rows if o2(r) and r["kind"] in public]),
+        "O2_rule_only": len([r for r in rows if r["classified"]
+                             and r["rule_intent"] and not r["llm_intent"]]),
+        "O2_llm_only": len([r for r in rows if r["classified"]
+                            and r["llm_intent"] and not r["rule_intent"]]),
+        "O2_or_count": len([r for r in rows if r["classified"]
+                            and (r["rule_intent"] or r["llm_intent"])]),
+        "O2_agents": sorted({r["from"] for r in rows if o2(r)}),
+        "O2_months": months(o2),
+        "O1_and_O2_same_row": len([r for r in rows if o1(r) and o2(r)]),
+        "O1_and_O2_same_agent": len(({r["from"] for r in rows if o1(r)}
+                                     & {r["from"] for r in rows if o2(r)})),
+        # O3 広がり（口にした人／内心にとどめた人を分ける）
+        "O3_public_agents_by_month": pub_series,
+        "O3_public_agents_final": pub_series.get(n_steps, 0),
+        "O3_public_share_final": (round(pub_series.get(n_steps, 0) / n_actors, 3)
+                                  if n_actors else None),
+        "O3_public_agents_at_12": pub_series.get(min(12, n_steps), 0),
+        "O3_private_only_agents_final": priv_series.get(n_steps, 0),
+        # O4 公の場
+        "O4_article_months": months(any_o, kinds=("article",)),
+        "O4_assembly_months": sorted(assembly),
+        "O4_counter_months": sorted(counter),
+        "O4_O1_public_months": months(lambda r: o1(r) and r["kind"] in public),
+        "O4_O2_public_months": months(lambda r: o2(r) and r["kind"] in public),
+        "O4_private_only": (not months(any_o, kinds=public)
+                            and bool(months(any_o, kinds=("thought",)))),
+    }
+
+
 def metrics_v5(run_dir: str) -> Dict[str, Any]:
     events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
     ledger = _read_jsonl(os.path.join(run_dir, "ledger.jsonl"))
@@ -83,9 +263,18 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
     with open(os.path.join(run_dir, "summary.json"), encoding="utf-8") as f:
         summary = json.load(f)
     n_steps = int(summary.get("steps") or 0)
+    scen_version = "field_v5"
+    cfgp = os.path.join(run_dir, "config.yaml")
+    if os.path.exists(cfgp):
+        for line in open(cfgp, encoding="utf-8"):
+            if line.startswith("scenario_version:"):
+                scen_version = line.split(":",1)[1].strip(); break
 
+    deals = _read_jsonl(os.path.join(run_dir, "deals_v5.jsonl"))
+    leases = [r for r in ledger if r.get("kind") == "lease"]
     acqs = [r for r in ledger if r.get("kind") == "transfer"]
-    holders = sorted({str(a.get("under_name", "")) for a in acqs if a.get("under_name")})
+    holders = sorted({str(a.get("under_name", "")) for a in acqs + leases
+                      if a.get("under_name")})
     by_parcel = {a["parcel_id"]: a for a in acqs}
     acq_id_of = {a["parcel_id"]: (a.get("acq_id") or a["parcel_id"]) for a in acqs}
     sellers = {a["parcel_id"]: a.get("seller", "") for a in acqs}
@@ -280,6 +469,25 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
     scenes_with_talk = {(u["step"], u["scene"]) for u in utts}
     parse_fail = len([e for e in events if e.get("action_type") == "PARSE_FAIL"])
     max_tok = summary.get("max_token_finishes", 0)
+    # 判定はその月までに成立した取引・名義だけを使う（未来の取得を参照しない）。
+    holders_by_step, acquired_by_step = {}, {}
+    hs, ps = set(), set()
+    for step in range(1, n_steps + 1):
+        for r in acqs + leases:
+            if int(r.get("step", 0)) <= step:
+                hs.add(str(r.get("under_name", "")))
+                ps.add(r.get("parcel_id"))
+        holders_by_step[step] = set(hs)
+        acquired_by_step[step] = set(ps)
+    deals_by_agent = collections.defaultdict(list)
+    for d in deals:
+        deals_by_agent[d.get("agent_id")].append(d)
+    acquired_pids = ({a["parcel_id"] for a in acqs} | {r["parcel_id"] for r in leases})
+    n_actors = sum(v for k, v in (summary.get("agents") or {}).items()
+                   if k != "acquirer")
+    occ = occupation_metrics(run_dir, holders_by_step, acquired_by_step,
+                             deals_by_agent, n_steps, n_actors)
+
     n_classified = len([r for r in classified if "about_acquisition" in r])
     d3 = {
         "api_errors": summary.get("usage", {}).get("errors", 0),
@@ -293,10 +501,12 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "conversation_groups": len(conv_groups),
         "scenes_with_conversation": len(scenes_with_talk),
         "rounds_max": max(rounds_seen.values()) if rounds_seen else 0,
+        "occupation_unknown": occ.get("O_unknown", 0),
         "ok": (parse_fail == 0 and max_tok == 0 and not missing_turns
                and not bad_delivery and bool(conv_groups)
                and summary.get("usage", {}).get("errors", 0) == 0
-               and (not llm_ran or (n_classified == len(utts) and unknown_cls == 0))),
+               and (not llm_ran or (n_classified == len(utts) and unknown_cls == 0))
+               and occ.get("O_unknown", 0) == 0),
     }
 
     with open(os.path.join(run_dir, "edges_v5.jsonl"), "w", encoding="utf-8") as f:
@@ -314,7 +524,7 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
     lags = [v["lag_months"] for v in first_mention.values()]
     return {
         "run": os.path.basename(run_dir),
-        "version": "field_v5",
+        "version": scen_version,
         "steps": n_steps,
         "model": summary.get("model"),
         "calls": usage.get("calls", 0),
@@ -326,7 +536,11 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "classifier_unknown": unknown_cls,
         # 出来事（台本）
         "acquisitions": len(acqs),
+        "leases": len(leases),
+        "deals": len(deals),
         "acquisition_months": sorted(int(a["step"]) for a in acqs),
+        "lease_months": sorted(int(r["step"]) for r in leases),
+        "control_share": _v5b_control_share(summary, len(acqs), len(leases)),
         "holders": holders,
         "final_acquirer_share": summary.get("kpi", {}).get("final_acquirer_share"),
         # 会話
@@ -385,6 +599,7 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "D2_concentration": bool(concentration),
         "D2_common_buyer": bool(common_buyer),
         "D3_wiring": d3,
+        **occ,
     }
 
 
@@ -938,7 +1153,7 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        if version == "field_v5":
+        if version in ("field_v5", "field_v5b"):
             rows.append(metrics_v5(run))
         elif version == "field_v4_1b":
             rows.append(metrics_v41b(run))
@@ -949,7 +1164,7 @@ def main() -> int:
         else:
             rows.append(metrics(run))
     for run, row in zip(args.run, rows):
-        if row.get("version") == "field_v5":
+        if str(row.get("version", "")).startswith("field_v5"):
             with open(os.path.join(run, "metrics_v5.json"), "w", encoding="utf-8") as f:
                 json.dump(row, f, ensure_ascii=False, indent=2)
     if args.json:

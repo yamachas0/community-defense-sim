@@ -1640,7 +1640,7 @@ import shutil as _shutil      # noqa: E402
 import tempfile as _tempfile  # noqa: E402
 
 from src.field_v5 import (HOME as HOME_V5, SCENE_IDS, ambient_traces_v5,  # noqa: E402
-                          neighbourhood_rows_v5,
+                          neighbourhood_rows_v5, own_history_rows_v5,
                           apply_script_v5, build_plan_prompt_v5,
                           build_scene_prompt_v5, build_system_prompt_v5,
                           ensure_v5_state, plan_schema_v5, registry_rows_v5,
@@ -1927,9 +1927,27 @@ check("v5: 台本の名義がそのまま登記名義になる",
           for a in _sim5.script["acquisitions"] if a["month"] <= 2))
 
 _arts5 = _sim5.ledger.v5_articles
+# 記事は「その記者の今月最後のターン」でしか書けないので、短い mock では
+# 1本も出ないことがある（rng）。配線そのものは直接呼んで固定する。
+_pubdir = _tempfile.mkdtemp(prefix="qa_v5_pub_")
+_pubsim = Simulation(_cfg_run5, PERSONAS5, _pubdir)
+_pubmd = _pubsim.by_id["MD01"]
+_pubsim._v5_publish(_pubmd, {"publish": "この街の登記が動いているという話を聞いた"},
+                    1, "S4")
 check("v5: 記事は書いた月に全主体へ配送される（記事＝公開発話）",
-      bool(_arts5) and all(
-          {d["to"] for d in _sim5.deliveries
+      len(_pubsim.ledger.v5_articles) == 1
+      and {d["to"] for d in _pubsim.deliveries if d.get("kind") == "article"}
+      == {x.agent_id for x in _pubsim.actors})
+_pubsim._v5_publish(_pubmd, {"publish": "2本目"}, 1, "S4")
+check("v5: 記事は1か月に1本まで（超過は不成立として記録される）",
+      len(_pubsim.ledger.v5_articles) == 1
+      and any(r["kind"] == "article_rejected" for r in _pubsim.ledger.records))
+check("v5: 記事は書いた本人以外にも必ず届く（本人だけに閉じない）",
+      len({d["to"] for d in _pubsim.deliveries
+           if d.get("kind") == "article"}) > 1)
+_shutil.rmtree(_pubdir, ignore_errors=True)
+check("v5: mock でも記事の経路が壊れていない（出た場合は全員に届く）",
+      all({d["to"] for d in _sim5.deliveries
            if d.get("kind") == "article" and d["step"] == _a["step"]
            and d["from"] == _a["from"]} == {x.agent_id for x in _sim5.actors}
           for _a in _arts5))
@@ -2011,7 +2029,7 @@ check("v5: 姿勢は1主体につき月1回までしか記録されない",
 check("v5: 記事は1主体につき月1本までしか記録されない",
       all(v == 1 for v in collections.Counter(
           (r["step"], r["from"]) for r in _sim5.ledger.v5_articles).values()))
-check("v5: 記事の棄却（quota超過）が起きていない＝最後のターンで1回だけ書かせている",
+check("v5: 記事の棄却（quota超過）が走行中に起きていない＝最後のターンで1回だけ書かせている",
       not [r for r in _sim5.ledger.records if r.get("kind") == "article_rejected"])
 check("v5: 内心は全主体ぶん記録される（誰の内心も落ちない）",
       {t["from"] for t in _sim5.thoughts} == {a.agent_id for a in _sim5.actors})
@@ -2034,6 +2052,195 @@ check("v5: v4.1b の分岐が残っている（既存経路を消していない
       and "_step_v3(step)" in _src5)
 _fv41 = io.open(os.path.join(_ROOT5, "src/field_v4_1.py"), encoding="utf-8").read()
 check("v5: field_v4_1.py に v5 の語が入り込んでいない", "v5" not in _fv41)
+
+
+
+# ===========================================================================
+# v5b: 占領の認知・売主は取引の当事者・台本のバグ修正
+#   設計の正は docs/world_design_v5_impl.md 12章（走行前に固定）
+# ===========================================================================
+
+import sys as _sys5b                                        # noqa: E402
+_sys5b.path.insert(0, os.path.join(_ROOT5, "tools"))
+from run_metrics import (_v5b_control_share, _v5b_rule_intent,  # noqa: E402
+                         _v5b_rule_links, occupation_metrics)
+
+# --- 台本（第25月以降0件のバグが直っているか） -----------------------------
+with io.open(os.path.join(_ROOT5, "configs/events_v5b_seed85.yaml"),
+             encoding="utf-8") as _f:
+    SCRIPT5B = yaml.safe_load(_f)
+_a5b = SCRIPT5B["acquisitions"]
+_m5b = [int(a["month"]) for a in _a5b]
+check("v5b: 台本の取得が第25月以降にも起きる（v5 のバグ修正）",
+      any(m >= 25 for m in _m5b))
+check("v5b: 台本は60か月の範囲に収まる", max(_m5b) <= 60 and min(_m5b) >= 1)
+# 総数は「レート規則で回して非公共区画が尽きるまで」の結果として決まる値であり、
+# 狙って決めた数ではない（v5 は総数28で打ち切っていたのがバグ）。
+check("v5b: 総数の上限で打ち切っていない（非公共46区画を使い切るまで）",
+      len(_a5b) == 46)
+check("v5b: 取得は毎年起きる（第25〜36月・第37月以降にも件数がある）",
+      len([m for m in _m5b if 25 <= m <= 36]) > 0
+      and len([m for m in _m5b if m >= 37]) > 0)
+check("v5b: 2年目の件数は v5 と同じ（レート規則を変えていない）",
+      len([m for m in _m5b if 13 <= m <= 24]) == 13)
+check("v5b: 第1〜12月の件数は v5 と同じ15件",
+      len([m for m in _m5b if m <= 12]) == 15)
+check("v5b: すべての取得に kind と note がある",
+      all(a.get("kind") in ("sale", "lease") and a.get("note") for a in _a5b))
+_KINDS5B = {"registry", "broker_known", "moving_out", "sign_change", "construction",
+            "survey", "strangers", "tenant_swap", "renovation_sweep"}
+check("v5b: 兆候の種類は v5 の範囲を出ていない（新しい兆候を足していない）",
+      {t["kind"] for a in _a5b for t in a["traces"]} <= _KINDS5B)
+check("v5b: 賃借には登記の兆候が付かない（登記が動かないため）",
+      not [t for a in _a5b if a["kind"] == "lease"
+           for t in a["traces"] if t["kind"] == "registry"])
+check("v5b: 売買には必ず登記の兆候が1本付く（v5 と同じ規則）",
+      all(len([t for t in a["traces"] if t["kind"] == "registry"]) == 1
+          for a in _a5b if a["kind"] == "sale"))
+check("v5b: 1取得あたりの兆候は3本以内（v5 と同じ規則）",
+      all(len(a["traces"]) <= 3 for a in _a5b))
+with io.open(os.path.join(_ROOT5, "configs/events_v5_seed85.yaml"),
+             encoding="utf-8") as _f:
+    _V5SCRIPT = yaml.safe_load(_f)
+check("v5b: 第1〜12月の取得（月・区画・名義）は v5 と完全に同一（run94 と比較できる）",
+      [(a["month"], a["parcel_id"], a["under_name"]) for a in _a5b
+       if a["month"] <= 12]
+      == [(a["month"], a["parcel_id"], a["under_name"])
+          for a in _V5SCRIPT["acquisitions"] if a["month"] <= 12])
+check("v5b: 街に気づかせるための一斉改修の兆候を足していない",
+      not [t for a in _a5b for t in a["traces"] if t["kind"] == "renovation_sweep"])
+
+# --- 売買と賃借の適用 -------------------------------------------------------
+L5B = mk5()
+SCRIPT_SL = {"meta": {"holders": ["A社"]}, "acquisitions": [
+    {"id": "ACQ01", "month": 1, "parcel_id": "P01", "under_name": "A社",
+     "kind": "sale", "note": "転居することになった", "traces": []},
+    {"id": "ACQ02", "month": 2, "parcel_id": "P02", "under_name": "A社",
+     "kind": "lease", "note": "自分では使わなくなった", "traces": []},
+]}
+apply_script_v5(L5B, 1, SCRIPT_SL, "AQ01")
+check("v5b: 売買は登記の名義を移す",
+      L5B.parcels["P01"].owner_id == "AQ01"
+      and L5B.parcels["P01"].registered_name == "A社")
+_before_owner = L5B.parcels["P02"].owner_id
+apply_script_v5(L5B, 2, SCRIPT_SL, "AQ01")
+check("v5b: 賃借は登記を動かさない（所有者は変わらない）",
+      L5B.parcels["P02"].owner_id == _before_owner
+      and L5B.parcels["P02"].registered_name == "住民B")
+check("v5b: 賃借は使い手だけが変わる", L5B.parcels["P02"].tenant_id == "AQ01")
+check("v5b: 賃借は登記の閲覧に現れない",
+      not [r for r in registry_rows_v5(L5B, 2) if "P02" in r])
+check("v5b: 賃借も台帳に記録は残る（観測から落とさない）",
+      any(r["kind"] == "lease" and r["parcel_id"] == "P02" for r in L5B.records))
+check("v5b: 当事者の取引が2件とも記録される",
+      len(L5B.v5_deals) == 2
+      and {d["agent_id"] for d in L5B.v5_deals} == {"HH01", "HH02"})
+
+# --- 当事者としての観測（他人事の文言をやめる） ------------------------------
+_seller5b = Agent("HH01", "household", "R01", "説明")
+_rows5b = own_history_rows_v5(_seller5b, L5B, 2)
+check("v5b: 売主は『自分が売った』と当事者として知る",
+      any("あなたは P01 を A社 へ売却した" in r for r in _rows5b))
+check("v5b: 売主は手放した事情も知っている",
+      any("転居することになった" in r for r in _rows5b))
+_lessor5b = Agent("HH02", "household", "R02", "説明")
+check("v5b: 貸主は『自分が貸した』と当事者として知る",
+      any("あなたは P02 を A社 へ賃貸した" in r
+          for r in own_history_rows_v5(_lessor5b, L5B, 2)))
+check("v5b: 取引していない主体には自分の取引の行が出ない",
+      not own_history_rows_v5(Agent("HH03", "household", "R03", "説明"), L5B, 2))
+check("v5b: 当事者の観測に『名義が変わった』という他人事の文言を使わない",
+      not [r for r in _rows5b if "の名義が" in r])
+check("v5b: 取引の月より前には自分の取引が見えない",
+      not own_history_rows_v5(_lessor5b, L5B, 1))
+check("v5b: 当事者の観測に金額の語が無い",
+      not [w for w in MONEY_WORDS for r in _rows5b if w in r])
+
+# --- 占領の認知（O1〜O4）の固定ケース ---------------------------------------
+check("v5b: 2つの名義を結びつけた文をルールが拾う",
+      _v5b_rule_links("A社とB社、同じところが買っているのでは", {"A社", "B社"}, set()))
+check("v5b: その月にまだ成立していない取得は判定に使わない（未来を参照しない）",
+      not _v5b_rule_links("P01もP02も名義が変わった", {"A社"}, {"P01"}))
+check("v5b: 2区画を結びつけた文をルールが拾う",
+      _v5b_rule_links("P01もP02も名義が変わった", {"A社"}, {"P01", "P02"}))
+check("v5b: 1件だけの話はルールが拾わない",
+      not _v5b_rule_links("P01の名義がA社に変わった", {"A社", "B社"}, {"P01"}))
+check("v5b: 取得されていない区画を並べても拾わない",
+      not _v5b_rule_links("P07もP08も草が伸びている", {"A社"}, {"P01"}))
+check("v5b: 街ぐるみの意図の語をルールが拾う",
+      _v5b_rule_intent("この辺一帯を買い占めているらしい")
+      and _v5b_rule_intent("次々と手が入っている"))
+check("v5b: 個別の売買の話は意図として拾わない",
+      not _v5b_rule_intent("P01を売ったそうです"))
+
+_tmp5b = _tempfile.mkdtemp(prefix="qa_v5b_")
+with io.open(os.path.join(_tmp5b, "occupation_labels.jsonl"), "w",
+             encoding="utf-8") as _f:
+    for _row in [
+        {"kind": "utterance", "step": 1, "from": "HH01", "scene": "S1",
+         "text": "P01の名義がA社に変わった", "links_multiple": False, "intent": False,
+         "classified": True},
+        {"kind": "thought", "step": 2, "from": "HH05", "scene": "",
+         "text": "A社とB社、同じところが動いているのでは", "links_multiple": True,
+         "intent": False, "classified": True},
+        {"kind": "utterance", "step": 1, "from": "HH07", "scene": "S4",
+         "text": "この辺一帯を買い占めているのではないか", "links_multiple": False,
+         "intent": True, "classified": True},
+        {"kind": "article", "step": 4, "from": "MD01", "scene": "S2",
+         "text": "A社とB社が相次いでP01とP02を取得している", "links_multiple": True,
+         "intent": True, "classified": True},
+    ]:
+        _f.write(_json.dumps(_row, ensure_ascii=False) + "\n")
+_hbs = {m: {"A社", "B社"} for m in (1, 2, 3, 4)}
+_abs5b = {m: {"P01", "P02"} for m in (1, 2, 3, 4)}
+_dba = {"HH01": [{"step": 1, "parcel_id": "P01"}]}
+_occ = occupation_metrics(_tmp5b, _hbs, _abs5b, _dba, 4, 26)
+check("v5b: O1 は2つ以上を結びつけた最初の1件を捉える",
+      _occ["O1_first"]["month"] == 2 and _occ["O1_first"]["agent_id"] == "HH05")
+check("v5b: O1 は内心も対象にする", _occ["O1_first"]["kind"] == "thought")
+check("v5b: O1 は1件だけの言及を数えない", _occ["O1_count"] == 2)
+check("v5b: O2 は街ぐるみの意図の初出を捉える",
+      _occ["O2_first"]["month"] == 1 and _occ["O2_first"]["agent_id"] == "HH07"
+      and _occ["O2_count"] == 2)
+# O3 は「口にした人」と「内心にとどめた人」を分ける（Codexレビュー 2026-08-28）。
+check("v5b: O3 は公に口にした主体の数を月次で積む",
+      _occ["O3_public_agents_by_month"] == {1: 1, 2: 1, 3: 1, 4: 2}
+      and _occ["O3_public_agents_final"] == 2)
+check("v5b: 内心だけで気づいた主体は「口にした人」に数えない",
+      _occ["O3_private_only_agents_final"] == 1)
+check("v5b: O3 は全体に対する割合を出す",
+      _occ["O3_public_share_final"] == round(2 / 26, 3))
+check("v5b: O4 は記事に出た月を拾う", _occ["O4_article_months"] == [4])
+check("v5b: O4 は町内会の月（第1月）の発言を拾う",
+      _occ["O4_assembly_months"] == [1] and _occ["O4_counter_months"] == [])
+check("v5b: 当事者かどうかを分けて記録する",
+      _occ["O1_first_non_party"]["agent_id"] == "HH05"
+      and _occ["O1_by_party"]["non_party"] == 2)
+check("v5b: 分類できなかった行は false でなく unknown として数える",
+      _occ["O_unknown"] == 0 and _occ["O_measurable"] is True)
+check("v5b: 判定に使った件数を残す（分類の欠損を隠さない）",
+      _occ["O_rows_classified"] == 4 and _occ["O_rows_total"] == 4)
+_shutil.rmtree(_tmp5b, ignore_errors=True)
+check("v5b: 分類ラベルが無いランでは O 判定を出さない（false と混同しない）",
+      occupation_metrics(_tempfile.mkdtemp(prefix="qa_v5b_empty_"), {}, {}, {},
+                         1, 26) == {"O_available": False})
+check("v5b: 所有と賃借を合わせた支配の割合を出す",
+      _v5b_control_share({"kpi": {"final_acquirer_share": 0.25}}, 10, 5) == 0.375)
+
+# --- v5 との共存（v5 の台本は kind を持たないが動く） -----------------------
+_L5compat = mk5()
+apply_script_v5(_L5compat, 1, {"acquisitions": [
+    {"id": "ACQ01", "month": 1, "parcel_id": "P01", "under_name": "A社",
+     "traces": []}]}, "AQ01")
+check("v5b: kind を持たない旧台本（v5）は売買として動く",
+      _L5compat.parcels["P01"].owner_id == "AQ01")
+check("v5b: v5 の台本ファイルは変更していない",
+      os.path.exists(os.path.join(_ROOT5, "configs/events_v5_seed85.yaml")))
+with io.open(os.path.join(_ROOT5, "configs/events_v5_seed85.yaml"),
+             encoding="utf-8") as _f:
+    _v5script = yaml.safe_load(_f)
+check("v5b: v5 の台本に kind を足していない（過去の成果物は不変）",
+      not any("kind" in a for a in _v5script["acquisitions"]))
 
 
 print()
