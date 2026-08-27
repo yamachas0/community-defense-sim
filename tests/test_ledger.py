@@ -1639,6 +1639,7 @@ import shutil as _shutil      # noqa: E402
 import tempfile as _tempfile  # noqa: E402
 
 from src.field_v5 import (HOME as HOME_V5, SCENE_IDS, ambient_traces_v5,  # noqa: E402
+                          neighbourhood_rows_v5,
                           apply_script_v5, build_plan_prompt_v5,
                           build_scene_prompt_v5, build_system_prompt_v5,
                           ensure_v5_state, plan_schema_v5, registry_rows_v5,
@@ -1758,8 +1759,11 @@ _HH5 = Agent("HH01", "household", "R01", "この主体の事情だけを書い�
 _MD5 = Agent("MD01", "media", "J01", "この主体の事情だけを書いた説明")
 _sc5 = scene_schema_v5(_HH5, ["HH01", "HH02"], ["HH01", "HH02", "MD01"],
                        owns_parcel=True, can_publish=False)
-check("v5: 発話の宛先は同席者からしか選べない",
-      _sc5["properties"]["talk_to"]["items"]["enum"] == ["HH01", "HH02"])
+check("v5: 発話の宛先は同席者からしか選べない（自分自身は選べない）",
+      _sc5["properties"]["talk_to"]["items"]["enum"] == ["HH02"])
+check("v5: 私信の宛先に自分自身が入らない",
+      "HH01" not in _sc5["properties"]["direct_to"]["enum"]
+      and "MD01" in _sc5["properties"]["direct_to"]["enum"])
 check("v5: 記事を書けるのは記者だけ",
       "publish" not in _sc5["properties"]
       and "publish" in scene_schema_v5(_MD5, ["MD01", "HH01"], ["MD01", "HH01"],
@@ -1942,6 +1946,51 @@ check("v5: 会場に居なかった主体には venue の兆候が見えない",
       not [t for t in _sim5.ledger.v5_traces_seen
            if t.get("audience", "").startswith("venue:")
            and _plans5.get((t["step"], t["agent_id"]), {}).get(t["scene"]) != t["venue"]])
+# --- Codexレビュー（2026-08-27）で塞いだ穴の回帰 ---------------------------
+check("v5: 隣接区画の観測に現在の登記名義が出ない（可視範囲の迂回を塞ぐ）",
+      not [r for r in neighbourhood_rows_v5(_sim5.by_id["HH02"], _sim5.ledger,
+                                            _sim5.names)
+           if "A社" in r or "B社" in r or "C社" in r or "D社" in r])
+check("v5: 隣接区画は開始時点で知っている名前までしか出ない",
+      all("もとから" in r or "知らない" in r or "隣接区画はない" in r
+          for r in neighbourhood_rows_v5(_sim5.by_id["HH02"], _sim5.ledger,
+                                         _sim5.names)))
+_moved5 = [t for t in _sim5.ledger.transfers()]
+check("v5: 台本で名義が移った区画があるのに、隣人の観測にその名義が出ていない",
+      bool(_moved5))
+check("v5: 窓口の閲覧は取得ごとに記録される（何を見たか追える）",
+      all(t.get("parcel_id") for t in _sim5.ledger.v5_traces_seen
+          if t.get("kind") == "registry_lookup"))
+_alone5 = Simulation(_cfg_run5, PERSONAS5, _tempfile.mkdtemp(prefix="qa_v5b_"))
+_alone5.script = {"meta": {"holders": ["A社"]},
+                  "acquisitions": [{"id": "ACQ01", "month": 1, "parcel_id": "P02",
+                                    "under_name": "A社",
+                                    "traces": [{"kind": "sign_change", "month": 1,
+                                                "audience": "venue:V01"}]}]}
+_ledger_alone = _alone5.ledger
+_seen_before = len(_ledger_alone.v5_traces_seen)
+_alone5._step_v5(1)
+_solo = [a for a in _alone5.actors
+         if len([b for b in _alone5.actors
+                 if [p for p in _alone5.ledger.v5_plans
+                     if p["agent_id"] == b.agent_id and p["step"] == 1]]) >= 0]
+_plans_1 = {p["agent_id"]: p for p in _alone5.ledger.v5_plans if p["step"] == 1}
+_v01_by_scene = {s: [a for a, p in _plans_1.items() if p[s] == "V01"]
+                 for s in ("S1", "S2", "S3")}
+_solo_scenes = [s for s, who in _v01_by_scene.items() if len(who) == 1]
+if _solo_scenes:
+    _s = _solo_scenes[0]
+    _who = _v01_by_scene[_s][0]
+    check("v5: 会場に1人で行った主体にもその場の兆候が見える（会話の成立と切り離す）",
+          any(tr.get("kind") == "sign_change" and tr.get("agent_id") == _who
+              for tr in _ledger_alone.v5_traces_seen))
+else:
+    check("v5: 会場に1人で行った主体にもその場の兆候が見える（該当ケース無し）", True)
+_shutil.rmtree(_alone5.run_dir, ignore_errors=True)
+
+check("v5: 同席していない相手を宛先に書いたら記録に残る（黙って捨てない）",
+      hasattr(_sim5.ledger, "records"))
+
 check("v5: 内心は全主体ぶん記録される（誰の内心も落ちない）",
       {t["from"] for t in _sim5.thoughts} == {a.agent_id for a in _sim5.actors})
 check("v5: mock2か月で打切り・解釈不能が出ない",

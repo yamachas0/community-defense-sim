@@ -122,6 +122,8 @@ class GeminiClient:
         self.usage = usage or UsageMeter()
         self._cache_handles: Dict[str, Any] = {}
         self._cache_lock = threading.Lock()
+        # API が返す finish_reason=MAX_TOKENS の件数（本当の打切りの唯一の証拠）
+        self.max_token_finishes = 0
         self.backend = None
         self._client = None
         self._genai = None
@@ -258,6 +260,14 @@ class GeminiClient:
             "output_tokens": getattr(um, "candidates_token_count", 0) or 0,
         }
         text = getattr(resp, "text", None) or ""
+        # max_tokens 打切りは JSON 修復器では検出できない場合がある（v5 のスキーマには
+        # action_type が無い）。API が返す finish_reason を直接数える。
+        try:
+            reason = str(getattr(resp.candidates[0], "finish_reason", "") or "")
+        except Exception:
+            reason = ""
+        if "MAX_TOKEN" in reason.upper():
+            self.max_token_finishes += 1
         return text.strip(), usage
 
     def _gen_old(self, system_prompt, user_prompt, schema, temperature, max_tokens):
@@ -281,6 +291,12 @@ class GeminiClient:
             "output_tokens": getattr(um, "candidates_token_count", 0) or 0,
         }
         text = getattr(resp, "text", None) or ""
+        try:
+            reason = str(getattr(resp.candidates[0], "finish_reason", "") or "")
+        except Exception:
+            reason = ""
+        if "MAX_TOKEN" in reason.upper():
+            self.max_token_finishes += 1
         return text.strip(), usage
 
     def count_tokens(self, text: str) -> int:
@@ -375,6 +391,7 @@ class MockClient:
         self.model = model
         self.usage = usage or UsageMeter()
         self.backend = "mock"
+        self.max_token_finishes = 0
         self._rng_lock = threading.Lock()
         self._seed = seed
         self.prompt_log: List[Dict[str, Any]] = []

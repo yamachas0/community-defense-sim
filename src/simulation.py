@@ -1549,11 +1549,10 @@ class Simulation:
                 if venue == HOME_V5:
                     continue
                 groups.setdefault(venue, []).append(a)
-            groups = {v: m for v, m in groups.items() if len(m) >= 2}
-            if not groups:
-                continue
-            # 会場でだけ見える兆候（venue:）
-            for venue_id, members in sorted(groups.items()):
+            # その場に居れば見えるもの（兆候・登記の閲覧）は、話し相手が居なくても見える。
+            # 会話が成立するかどうかとは別（Codexレビュー 2026-08-27）。
+            attendance = dict(groups)
+            for venue_id, members in sorted(attendance.items()):
                 for tr in venue_traces_v5(step, self.script, venue_id, old_names):
                     for a in members:
                         a.extra["traces"].append(tr)
@@ -1563,14 +1562,25 @@ class Simulation:
             registry = (registry_rows_v5(self.ledger, step)
                         if (sid == "S4" and kind4 == "counter") else None)
             if registry:
-                # 誰が窓口で登記を見たか自体も観測に残す（プロンプトに出すだけにしない）。
-                for venue_id, members in sorted(groups.items()):
+                # 誰がどの名義変更を窓口で見たかを、取得ごとに観測へ残す。
+                viewed = [r for r in self.ledger.records
+                          if r.get("kind") == "transfer" and r.get("step", 0) <= step]
+                for venue_id, members in sorted(attendance.items()):
                     for a in members:
-                        self.ledger.v5_traces_seen.append(
-                            {"step": step, "agent_id": a.agent_id, "scene": sid,
-                             "venue": venue_id, "kind": "registry_lookup",
-                             "acq_id": "", "parcel_id": "", "audience": "registry",
-                             "text": f"窓口で登記の記録を閲覧した（{len(registry)}行）"})
+                        a.extra["registry_seen"] = True
+                        for rec in viewed:
+                            self.ledger.v5_traces_seen.append(
+                                {"step": step, "agent_id": a.agent_id, "scene": sid,
+                                 "venue": venue_id, "kind": "registry_lookup",
+                                 "acq_id": rec.get("acq_id", ""),
+                                 "parcel_id": rec.get("parcel_id", ""),
+                                 "audience": "registry",
+                                 "text": (f"窓口で見た: 第{rec['step']}月 "
+                                          f"{rec['parcel_id']} の名義が "
+                                          f"{rec.get('under_name', '')} に変わっていた")})
+            groups = {v: m for v, m in attendance.items() if len(m) >= 2}
+            if not groups:
+                continue
 
             for rnd in range(1, self.scene_rounds + 1):
                 items = []
@@ -1606,8 +1616,15 @@ class Simulation:
                     if a.role == "media":
                         self._v5_publish(a, act, step, sid)
                     text = str(act.get("text", "") or "").strip()
-                    talk_to = [t for t in (act.get("talk_to") or [])
-                               if t in present and t != aid]
+                    raw_to = [str(t) for t in (act.get("talk_to") or [])]
+                    talk_to = [t for t in raw_to if t in present and t != aid]
+                    for t in raw_to:
+                        if t not in talk_to:
+                            self.invalid_count += 1
+                            self.ledger._rec(step, "talk_to_rejected", by=aid,
+                                             given=t, scene=sid, venue=venue_id,
+                                             reason=("self" if t == aid
+                                                     else "not_present"))
                     self.events.append({"step": step, "agent_id": aid, "role": a.role,
                                         "name": a.name, "action_type": "utterance",
                                         "scene": sid, "venue": venue_id, "round": rnd,
@@ -2100,6 +2117,7 @@ class Simulation:
             "acquirer_model": getattr(self.acquirer_client, "model", "?"),
             "invalid_actions": self.invalid_count,
             "truncated_responses": self.truncated_count,
+            "max_token_finishes": getattr(self.client, "max_token_finishes", 0),
             "usage": self.usage.as_dict(),
             "kpi": {
                 "final_acquirer_share": self.kpi_rows[-1]["acquirer_share"] if self.kpi_rows else 0,

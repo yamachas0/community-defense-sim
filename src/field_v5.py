@@ -97,6 +97,9 @@ def ensure_v5_state(ledger: Ledger) -> None:
         ledger.v5_articles = []        # 記者の記事
         ledger.v5_directs = []         # 私信
         ledger.v5_utt_seq = 0
+        # 開始時点で街の人が知っている名前（以後この辞書は更新しない）
+        ledger.v5_initial_names = {p.pid: p.registered_name
+                                   for p in ledger.parcels.values()}
 
 
 # ---------------------------------------------------------------------------
@@ -285,6 +288,14 @@ def own_history_rows_v5(agent: Agent, ledger: Ledger, step: int) -> List[str]:
 
 def neighbourhood_rows_v5(agent: Agent, ledger: Ledger,
                           names: Dict[str, str]) -> List[str]:
+    """隣の区画について、日ごろ目に入る範囲。
+
+    **現在の登記名義は出さない**（Codexレビュー 2026-08-27）。名義の変化を毎月ここに
+    出すと、台本が決めた可視範囲（兆候・窓口の閲覧・人の話）を迂回して全員に
+    名義変更が漏れる＝「気づかせる仕組み」になってしまう。
+    ここに出すのは開始時点から知っている名前までで、その後の変化は
+    兆候を見るか、誰かから聞くか、窓口で登記を見るまで分からない。
+    """
     mine = [p.pid for p in ledger.owned_by(agent.agent_id)]
     mine += [p.pid for p in ledger.parcels.values() if p.tenant_id == agent.agent_id]
     seen: List[str] = []
@@ -292,11 +303,13 @@ def neighbourhood_rows_v5(agent: Agent, ledger: Ledger,
         for nb in neighbors(ledger.parcels, pid):
             if nb not in seen:
                 seen.append(nb)
+    initial = getattr(ledger, "v5_initial_names", {})
     rows = []
     for pid in sorted(seen):
         parcel = ledger.parcels[pid]
+        known = initial.get(pid, "")
         rows.append(f"  {pid}[{USE_JA.get(parcel.use, parcel.use)}] "
-                    f"名義:{parcel.registered_name or names.get(parcel.owner_id, parcel.owner_id)}")
+                    + (f"もとから{known}のところ" if known else "（誰の土地かは知らない）"))
     return rows or ["  （隣接区画はない）"]
 
 
@@ -357,11 +370,14 @@ def plan_schema_v5(venue_ids: List[str], s4_venue: str,
 def scene_schema_v5(agent: Agent, present_ids: List[str], all_ids: List[str],
                     owns_parcel: bool = False,
                     can_publish: bool = False) -> Dict[str, Any]:
+    others = [p for p in present_ids if p != agent.agent_id]
+    elsewhere = [a for a in all_ids if a != agent.agent_id]
     props: Dict[str, Any] = {
         "thought": {"type": "string"},
         "text": {"type": "string"},
-        "talk_to": {"type": "array", "items": {"type": "string", "enum": list(present_ids)}},
-        "direct_to": {"type": "string", "enum": [DIRECT_NONE] + list(all_ids)},
+        "talk_to": {"type": "array",
+                    "items": {"type": "string", "enum": others or list(present_ids)}},
+        "direct_to": {"type": "string", "enum": [DIRECT_NONE] + elsewhere},
         "direct_text": {"type": "string"},
     }
     if can_publish:
@@ -431,8 +447,9 @@ JSONの最初に thought を書く。thought は誰にも伝わらないあな�
     if agent.role == "media":
         text += f"""
 --- 記者としてできること ---
-月の最後の場面のあとで、記事を出すことができる（publish）。記事は翌月、市内の全員が読む。
-書かない月は publish を空文字にする。記事は{MAX_PUBLISH_CHARS}字以内。
+その場面のあとで記事を出すことができる（publish）。記事は翌月、市内の全員が読む。
+出せるのは1か月に1本で、書かない場面は publish を空文字にする。
+記事は{MAX_PUBLISH_CHARS}字以内。
 """
     if agent.role == "municipality":
         text += """
