@@ -271,3 +271,52 @@ run28/29/30/33 は 0%。1本60か月の実費は **$0.5〜1.1**（`cost_estimate
 ### 進捗ログ
 
 Claude側の作業ログは `docs/progress_claude.log`（`HH:MM 内容` 形式）。
+
+---
+
+## 2026-08-27 第2便更新（この節が上記すべてに優先する。最終更新 2026-08-27 12:50 JST）
+
+担当：CEO=Fable / CTO=Opus 5。施主GO（8/27 12:04「提案の通りすすめて」）を受け、
+`docs/design_review_loop.md` の **案1 → 案6 →（案2＋案3）→ 案4** を実装した（案5は不実装）。
+
+### この便で入れた変更（`main` = 未push・5548095 から6コミット先行）
+
+| commit | 内容 |
+|---|---|
+| `663a352` | **案1 ID表記統一**。観測は `[O0001] P17 名義A社 1588万` / `[L0001] …` の1トークンだけを出す。`Ledger._normalize_id`（`src/world.py`）が角括弧と `OFFER-`/`LEASE-` 接頭辞を剥がしてから解決するので、`[O0001]` / `O0001` / `OFFER-O0001` のいずれで指されても同一の1件になる。`record_accept` / `record_reject` / `record_counter` / `record_withdraw` / `resolve_lease_offer` に適用。 |
+| `10957ab` | **案6 行為の帰結を本人へ返す**。`Simulation._record_own_results` が毎月末に各主体の行為と帳簿結果（結果種別・理由コード・関係ID）を `agent.extra["last_month_results"]` に入れ、翌月の観測に `[先月の自分の行為と、帳簿上の結果（機械記録）]` として出す。全主体（X社含む）が対象。 |
+| `f212ef2` | **案2 仲介が事実を運ぶ ＋ 案3 案件記録**。意向確認を台帳の状態遷移（`Q0001` 形式・`requested→asked→answered→reported`）にした。新動詞＝X社 `request_owner_inquiry`/`answer_broker_inquiry`、仲介 `inquire_owner_intent`/`report_owner_intent`、住民 `answer_broker_inquiry`。構造化欄 `parcel_id` / `inquiry_id` / `owner_intent`(enum) / `asking_price`（万円の数値 or `unknown`/`not_asked`/`declined_to_answer`）。X社の観測に `[自社の案件記録（機械記録・区画別・全件）]` を追加し、直近12件制限を廃止。`check_land_registry_v3` は登記を実際に読み直し、前回スナップショットと一致した時だけ「第N月の照会と同一」、差異があれば差異を返す。 |
+| `2cba76f` | **案4 計画欄6→2**。必須は `strategy` と `next_milestone` だけ。`goal_assessment`/`expected_goal_effect`/`alternatives`/`revision_reason` は任意（`normalize_acquirer_plan_v3` が無ければ空を返すのでテレメトリの形は不変）。 |
+| `2a75414` | mock の不整合修正（照会が無い月に `answer_broker_inquiry` を空targetで出さない）。 |
+| `b2de14e` | `tools/run_metrics.py` 追加。run36/38 の診断で使った指標を機械的に再現する集計器。 |
+
+### 設計上の決定（次の担当者が迷わないように）
+
+- **`inquire_owner_intent` の宛先は所有者IDではなく区画ID**。所有者は台帳が解決する（`record_offer` が区画から所有者を解決するのと同じ物理）。仲介は登記を引く動詞を持たないため、所有者IDで宛てさせると当てずっぽうになり、この経路が成立しなくなる。
+- **`owner_intent` は enum**（`willing_to_sell` / `willing_to_lease` / `not_willing` / `undecided` / `unknown` / `not_asked` / `declined_to_answer`）。未査定・未回答・回答拒否を正当な事実として運べるようにしてある。**どれを選ぶか、そもそも答えるかは主体が決める。**
+- **`asking_price` は文字列**。数値なら実額、`unknown`/`not_asked`/`declined_to_answer` なら不明という事実。数値でも unknown 系でもない値は `invalid_price_value` で不成立にする（欠損を金額に化けさせない）。
+- **案件記録・登記確認・先月の結果に書くのは事実と出典IDだけ**。「再照会不要」「確認が古い」「次は交渉すべき」「一定月数で自動的に要再調査」「優先度・成功確率」は書かない（不可リスト＝`docs/design_review_loop.md` 3章）。回帰テストで禁止語を固定してある。
+
+### 検証結果
+
+- `python tests/test_ledger.py` → **RESULT: 126 passed, 0 failed**（案1で9本・案6で6本・案2/3で26本・案4で4本を追加）。
+- 60か月mock（`--provider mock`）→ 完走。最新 `simulations/2026-08-27_1236_48_field_v3_a_city`（calls 1649・errors 0・truncated 0）。意向確認は request 6 / asked 34 / answer 53 / report 27 で依頼→照会→回答→報告が全段通っている。HTML内「AI」表記 0件。
+- **mock の `invalid_actions` は版をまたいで比較できない**（プロンプト長で mock の乱数が変わるため）。増分はすべて mock 側の当てずっぽう由来で、世界側は正当に弾いている（内訳は `docs/progress_claude.log` 12:37 の行）。
+- **実API試走 3か月**：`simulations/2026-08-27_1243_49_field_v3_a_city`。**実費 $0.0325**・calls 82・API errors 0・**truncated 0 / invalid_actions 0 / `no_such_offer` 0**（＝合格条件を満たす）。X社は `request_owner_inquiry` を11回使用、登記の重複照会 0、`make_offer` は3か月内では 0。
+
+### 次に行う作業
+
+1. Codexレビュー（実装＋ルールベース抵触）→ 指摘反映。※8/27 12:45 時点で Codex 側の使用量上限により失敗、13:17 以降に再試行。
+2. **実API本走：同一設定（`config_field_v3`・seed 85）× 3本を順次**。累計上限 **$4**（試走込み）。1本ごとに `summary.json` の usage で実費を積算し、超えそうなら止める。
+3. 3本を `tools/run_metrics.py` で集計し、**分布として** `RESULTS.md`（1本1節＋横断比較）と本節に追記する。
+4. `RESULTS.md` に「**run≤38 の成約数は欠陥A（ID表記の二重化）による下限値**」を明記する。
+5. レポートHTMLは既存の GitHub Pages（`yamachas0.github.io/quiet-acquisition-report` か `dev-review/qa-runs/`）へ公開しURLを報告。**ソースリポの push は禁止**。
+
+### 禁止・制約（変更なし）
+
+- ルールベース排除（売却確率・閾値・強制イベント・「〜なら〜しろ」の指示文・台本を足さない）。
+- 観測に無い事実をコードで補完しない。欠損は不成立として残す。
+- `mvp_v1` / `field_v2` の設定と成果物は変更しない。
+- v3のプロンプトとHTMLに「AI」表記を出さない。
+- 秘密情報・`.env` の内容を文書に転記しない。
+- `git push` は施主承認制。本便でも未push。
