@@ -229,6 +229,7 @@ cfg_v3 = {
 }
 resident_schema = action_schema_v3(resident_v3)
 buyer_schema = action_schema_v3(buyer_v3)
+buyer_operation_schema = buyer_schema["properties"]["operations"]
 check("住民には不動産以外の日常行動がある",
       all(v in resident_schema["properties"]["action_type"]["enum"]
           for v in ("routine", "work", "community_activity")))
@@ -237,7 +238,7 @@ check("発話は同席か直接連絡だけ",
       == ["ambient", "direct", "none"])
 check("場所が構造化出力の必須項目", "location" in resident_schema["required"])
 check("X社の名義はX社とA社からD社だけ",
-      buyer_schema["properties"]["under_name"]["enum"]
+      buyer_operation_schema["items"]["properties"]["under_name"]["enum"]
       == ["X社", "A社", "B社", "C社", "D社"])
 resident_system = build_system_prompt_v3(resident_v3, cfg_v3, 48)
 buyer_system = build_system_prompt_v3(buyer_v3, cfg_v3, 48)
@@ -248,11 +249,13 @@ check("v3の利用者向けプロンプトにAI表記がない",
       "AI" not in resident_system and "AI" not in buyer_system)
 check("X社は計画と世界内行動を同じスキーマで返す",
       all(key in buyer_schema["required"] for key in (
-          "action_type", "strategy", "next_milestone", "expected_goal_effect")))
+          "operations", "strategy", "next_milestone", "expected_goal_effect"))
+      and buyer_operation_schema["maxItems"] == 6)
 buyer_v3.extra["strategy_state"] = {"strategy": "面積効率を比較する"}
 buyer_v3.extra["execution_history"] = [{
     "step": 1, "action_type": "market_research", "target": "", "amount": 0,
     "outcome_kind": "market_research", "effective_area": 0,
+    "operations": "market_research:-=>market_research",
     "control_delta": 0, "cash": 60000,
 }]
 decision_prompt = build_acquirer_decision_prompt_v3(buyer_v3, "第2月の観測")

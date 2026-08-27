@@ -72,6 +72,8 @@ def build_roster(personas: Dict[str, Any], counts: Dict[str, int],
         a.extra["mandate"] = scenario["acquirer_mandate"].strip()
         a.extra["budget"] = int(scenario["acquirer_budget"])
         a.extra["aliases"] = list(p.get("aliases", [a.name]))
+        a.extra["monthly_operation_capacity"] = int(
+            scenario.get("acquirer_monthly_operation_capacity", 6))
 
     take("acquirer", "AQ", counts["acquirers"], acq_extra)
 

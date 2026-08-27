@@ -119,6 +119,45 @@ def verbs_for_v3(role: str) -> List[str]:
 
 
 def action_schema_v3(agent: Agent) -> Dict[str, Any]:
+    if agent.role == "acquirer":
+        allowed = list(dict.fromkeys(
+            [agent.name] + list(agent.extra.get("aliases", []))))
+        capacity = int(agent.extra.get("monthly_operation_capacity", 6))
+        operation_props: Dict[str, Any] = {
+            "action_type": {"type": "string", "enum": verbs_for_v3(agent.role)},
+            "target": {"type": "string"},
+            "amount": {"type": "integer"},
+            "under_name": {"type": "string", "enum": allowed},
+            "note": {"type": "string"},
+            "evidence": {"type": "array", "items": {"type": "string"}},
+        }
+        props: Dict[str, Any] = {
+            "operations": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": capacity,
+                "items": {
+                    "type": "object",
+                    "properties": operation_props,
+                    "required": list(operation_props),
+                },
+            },
+            "location": {"type": "string"},
+            "utterance": {"type": "string"},
+            "utterance_channel": {"type": "string", "enum": ["ambient", "direct", "none"]},
+            "utterance_to": {"type": "string"},
+            "memory": {"type": "string"},
+            "reasoning": {"type": "string"},
+            "evidence": {"type": "array", "items": {"type": "string"}},
+            "goal_assessment": {"type": "string"},
+            "strategy": {"type": "string"},
+            "next_milestone": {"type": "string"},
+            "expected_goal_effect": {"type": "string"},
+            "alternatives": {"type": "array", "items": {"type": "string"}},
+            "revision_reason": {"type": "string"},
+        }
+        return {"type": "object", "properties": props, "required": list(props)}
+
     props: Dict[str, Any] = {
         "action_type": {"type": "string", "enum": verbs_for_v3(agent.role)},
         "target": {"type": "string"},
@@ -131,17 +170,6 @@ def action_schema_v3(agent: Agent) -> Dict[str, Any]:
         "reasoning": {"type": "string"},
         "evidence": {"type": "array", "items": {"type": "string"}},
     }
-    if agent.role == "acquirer":
-        allowed = [agent.name] + list(agent.extra.get("aliases", []))
-        props["under_name"] = {"type": "string", "enum": list(dict.fromkeys(allowed))}
-        props.update({
-            "goal_assessment": {"type": "string"},
-            "strategy": {"type": "string"},
-            "next_milestone": {"type": "string"},
-            "expected_goal_effect": {"type": "string"},
-            "alternatives": {"type": "array", "items": {"type": "string"}},
-            "revision_reason": {"type": "string"},
-        })
     return {"type": "object", "properties": props, "required": list(props)}
 
 
@@ -177,20 +205,23 @@ def _acquirer_plan_text(plan: Dict[str, Any]) -> str:
 def build_acquirer_decision_prompt_v3(agent: Agent, world_prompt: str) -> str:
     plan = normalize_acquirer_plan_v3(agent.extra.get("strategy_state", {}))
     history = agent.extra.get("execution_history", [])
-    rows = [world_prompt, "", "--- 前月までの計画 ---", _acquirer_plan_text(plan),
+    capacity = int(agent.extra.get("monthly_operation_capacity", 6))
+    rows = [world_prompt, "", f"[会社の月次実行能力] 独立した実務を最大{capacity}件まで並行できる。",
+            "", "--- 前月までの計画 ---", _acquirer_plan_text(plan),
             "", "--- 直近の実行と目標への実績（機械記録） ---"]
     if history:
         for item in history[-8:]:
             rows.append(
                 f"第{item.get('step')}月 {item.get('action_type')} "
                 f"target={item.get('target') or '-'} amount={item.get('amount', 0)} "
+                f"operations={item.get('operations') or '-'} "
                 f"outcome={item.get('outcome_kind') or '-'} "
                 f"支配={item.get('effective_area', 0)}㎡ "
                 f"増減={item.get('control_delta', 0)}㎡ cash={item.get('cash', 0)}万"
             )
     else:
         rows.append("（実行履歴なし）")
-    rows += ["", "計画更新と今月実行する世界内行動を、一つの意思決定として同時に返す。"]
+    rows += ["", "計画更新と今月並行実行するoperationsを、一つの意思決定として同時に返す。"]
     return "\n".join(rows)
 
 
@@ -235,12 +266,26 @@ direct発言はutterance_toで指定した一主体だけに届く。全員共�
 {agent.extra['mandate']}
 手段、価格、順序、速度、仲介利用、直接接触、名義の選択は自ら決める。
 利用可能な契約・登記名義: {' / '.join([agent.name] + list(agent.extra.get('aliases', [])))}
-計画と今月の世界内行動を同じ意思決定で選ぶ。直近の実績と目標差分から前月計画を
+会社の月次実行能力は最大{int(agent.extra.get('monthly_operation_capacity', 6))}件の独立した実務である。
+計画と今月のoperationsを同じ意思決定で選ぶ。直近の実績と目標差分から前月計画を
 維持または改訂し、実質的に異なる代替案を比較する。外部の返答や将来の会合・成約を
 観測なしに仮定しない。情報収集、接触、提案、待機のいずれも選べるが、選んだ今月行動が
 任務到達までの経路にどう作用すると見込むかを明記する。相手の反応と成約結果は相手が決める。
 """
-    text += f"""
+        text += f"""
+--- JSON出力 ---
+operations, location, utterance, utterance_channel, utterance_to, memory, reasoning, evidence, goal_assessment, strategy,
+next_milestone, expected_goal_effect, alternatives, revision_reasonを必ず含める。
+operationsは1〜{int(agent.extra.get('monthly_operation_capacity', 6))}件。各要素には
+action_type, target, amount, under_name, note, evidenceを含める。
+金額単位は万円。各実務で不要なtargetは空文字、不要なamountは0、noteは140字以内。
+evidenceは今月の観測に表示されたIDだけを引用し、根拠がなければ[]。
+memoryは{MAX_MEMORY_CHARS}字以内、reasoningは80字以内。
+計画欄は各240字以内、alternativesは2〜3件。
+説明文を付けずJSONだけ返す。
+"""
+    else:
+        text += f"""
 --- JSON出力 ---
 action_type, target, amount, location, utterance, utterance_channel,
 utterance_to, memory, reasoning, evidence を必ず含める。
@@ -249,10 +294,6 @@ evidenceは今月の観測に表示されたIDだけを引用し、根拠がな�
 memoryは{MAX_MEMORY_CHARS}字以内、reasoningは80字以内、utteranceは{MAX_TEXT_CHARS}字以内。
 説明文を付けずJSONだけ返す。
 """
-    if agent.role == "acquirer":
-        text += ("under_name, goal_assessment, strategy, next_milestone, "
-                 "expected_goal_effect, alternatives, revision_reasonも必須。"
-                 "計画欄は各240字以内、alternativesは2〜3件。\n")
     return text
 
 
@@ -421,7 +462,10 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     rows.append("[公開連絡先]")
     rows.extend(f"  {x}" for x in directory)
     rows.append("")
-    rows.append("今月の主な活動、訪問場所、必要なら発言と契約行動をJSONで1つ返す。")
+    if agent.role == "acquirer":
+        rows.append("今月の計画と、並行実行する実務operationsをJSONで1つ返す。")
+    else:
+        rows.append("今月の主な活動、訪問場所、必要なら発言と契約行動をJSONで1つ返す。")
     return "\n".join(rows)
 
 

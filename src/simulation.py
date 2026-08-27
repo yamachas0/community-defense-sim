@@ -366,6 +366,12 @@ class Simulation:
                 self.events.append(event)
                 continue
 
+            if a.role == "acquirer":
+                event = self._process_acquirer_portfolio(
+                    step, a, act, result, venue_ids, messages, presences, ambient_rows)
+                self.events.append(event)
+                continue
+
             action = str(act.get("action_type", "")).strip()
             target = str(act.get("target", "")).strip()
             amount = _as_int(act.get("amount", 0))
@@ -466,6 +472,11 @@ class Simulation:
             )
             outcome = event.get("outcome", {})
             outcome_kind = outcome.get("kind", "") if isinstance(outcome, dict) else str(outcome)
+            operations = event.get("operations", [])
+            operation_summary = " ; ".join(
+                f"{op.get('action_type')}:{op.get('target') or '-'}=>"
+                f"{op.get('outcome', {}).get('kind', '-')}"
+                for op in operations)
             history = a.extra.setdefault("execution_history", [])
             previous_area = history[-1]["effective_area"] if history else 0
             history.append({
@@ -474,10 +485,164 @@ class Simulation:
                 "target": event.get("target", ""),
                 "amount": event.get("amount", 0),
                 "outcome_kind": outcome_kind,
+                "operations": operation_summary,
                 "effective_area": effective_area,
                 "control_delta": effective_area - previous_area,
                 "cash": self.ledger.cash.get(a.agent_id, 0),
             })
+
+    def _process_acquirer_portfolio(
+            self, step: int, a: Agent, act: Dict[str, Any], result: Dict[str, Any],
+            venue_ids: set, messages: List[Dict[str, Any]],
+            presences: Dict[str, str], ambient_rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+        plan = normalize_acquirer_plan_v3(act)
+        a.extra["strategy_state"] = plan
+        memory = str(act.get("memory", "")).strip()
+        reasoning = str(act.get("reasoning", "")).strip()
+        location = str(act.get("location", "")).strip()
+        utterance = str(act.get("utterance", "")).strip()
+        channel = str(act.get("utterance_channel", "none")).strip()
+        utterance_to = str(act.get("utterance_to", "")).strip()
+        raw_evidence = act.get("evidence", [])
+        evidence = ([str(x).strip() for x in raw_evidence if str(x).strip()][:12]
+                    if isinstance(raw_evidence, list) else [])
+        a.memory = memory
+
+        valid_location = location in venue_ids or location in ("HOME", "OFFICE")
+        place = f"{location}:{a.agent_id}" if location in ("HOME", "OFFICE") else location
+        capacity = int(a.extra.get("monthly_operation_capacity", 6))
+        raw_operations = act.get("operations", [])
+        if not isinstance(raw_operations, list):
+            raw_operations = []
+        operation_rows: List[Dict[str, Any]] = []
+        contacts = {
+            "consult_broker", "contact_broker", "client_followup",
+            "circulate_listing", "approach_owner", "interdepartmental_contact",
+            "interview", "cultivate_source", "request_comment", "request_report",
+        }
+
+        if not raw_operations:
+            self.invalid_count += 1
+            operation_rows.append({
+                "action_type": "",
+                "target": "",
+                "amount": 0,
+                "under_name": "",
+                "note": "",
+                "evidence": [],
+                "outcome": {"kind": "invalid_action", "reason": "missing_operations"},
+            })
+
+        for index, raw_operation in enumerate(raw_operations):
+            if not isinstance(raw_operation, dict):
+                row = {
+                    "action_type": "", "target": "", "amount": 0,
+                    "under_name": "", "note": "", "evidence": [],
+                    "outcome": {"kind": "invalid_action", "reason": "operation_not_object"},
+                }
+                self.invalid_count += 1
+                operation_rows.append(row)
+                continue
+            action = str(raw_operation.get("action_type", "")).strip()
+            target = str(raw_operation.get("target", "")).strip()
+            amount = _as_int(raw_operation.get("amount", 0))
+            under_name = str(raw_operation.get("under_name", "")).strip()
+            note = str(raw_operation.get("note", "")).strip()
+            raw_op_evidence = raw_operation.get("evidence", [])
+            op_evidence = (
+                [str(x).strip() for x in raw_op_evidence if str(x).strip()][:12]
+                if isinstance(raw_op_evidence, list) else [])
+
+            if index >= capacity:
+                outcome = {
+                    "kind": "invalid_action", "reason": "monthly_capacity_exceeded",
+                    "capacity": capacity,
+                }
+            elif action not in verbs_for_v3(a.role):
+                outcome = {"kind": "invalid_action", "reason": "unknown_verb",
+                           "given": action}
+            elif not valid_location:
+                outcome = {"kind": "invalid_action", "reason": "unknown_location",
+                           "given": location}
+            elif action in _AMOUNT_REQUIRED and not _has_amount(raw_operation):
+                outcome = {"kind": "invalid_action", "reason": "missing_amount",
+                           "given": action}
+            elif action in _TARGET_REQUIRED and not target:
+                outcome = {"kind": "invalid_action", "reason": "missing_target",
+                           "given": action}
+            else:
+                outcome = self._apply_v3(
+                    step, a, action, target, amount, under_name, note)
+            if _is_rejected(outcome):
+                self.invalid_count += 1
+            elif action in contacts and note:
+                destination = self._agent_id(target)
+                if destination:
+                    messages.append({
+                        "from": a.agent_id, "to": destination, "text": note,
+                        "step": step,
+                        "obs_id": f"MSG-M{step:02d}-{a.agent_id}-{destination}-O{index + 1}",
+                    })
+            operation_rows.append({
+                "action_type": action,
+                "target": target,
+                "amount": amount,
+                "under_name": under_name,
+                "note": note,
+                "evidence": op_evidence,
+                "outcome": outcome,
+            })
+
+        if act.get("_truncated"):
+            self.truncated_count += 1
+        if valid_location:
+            presences[a.agent_id] = place
+        if utterance and channel == "ambient" and valid_location:
+            row = {
+                "step": step, "from": a.agent_id, "role": a.role,
+                "name": a.name, "location": place, "text": utterance,
+            }
+            ambient_rows.append(row)
+            self.all_utterances.append(row)
+        elif utterance and channel == "direct":
+            destination = self._agent_id(utterance_to)
+            if destination:
+                messages.append({
+                    "from": a.agent_id, "to": destination, "text": utterance,
+                    "step": step,
+                    "obs_id": f"MSG-M{step:02d}-{a.agent_id}-{destination}",
+                })
+
+        rejected = sum(1 for op in operation_rows if _is_rejected(op["outcome"]))
+        return {
+            "step": step,
+            "agent_id": a.agent_id,
+            "role": a.role,
+            "name": a.name,
+            "latency_sec": round(result.get("latency", 0.0), 2),
+            "action_type": "operation_portfolio",
+            "target": "",
+            "amount": 0,
+            "location": location,
+            "utterance": utterance,
+            "utterance_channel": channel,
+            "utterance_to": utterance_to,
+            "memory": memory,
+            "reasoning": reasoning,
+            "evidence": evidence,
+            "under_name": "",
+            "truncated": bool(act.get("_truncated")),
+            "operations": operation_rows,
+            "outcome": {
+                "kind": "operation_portfolio",
+                "selected": len(raw_operations),
+                "completed": len(operation_rows) - rejected,
+                "rejected": rejected,
+                "capacity": capacity,
+            },
+            "plan": plan,
+        }
+
     def _agent_id(self, value: str) -> Optional[str]:
         if value in self.by_id:
             return value

@@ -10,7 +10,7 @@ llm:
   model: gemini-2.5-flash-lite
   acquirer_model: gemini-2.5-flash
   acquirer_temperature: 0.45
-  acquirer_max_tokens: 1400
+  acquirer_max_tokens: 2400
   acquirer_thinking_budget: 256
   temperature: 0.75
   max_tokens: 720
@@ -83,6 +83,7 @@ scenario:
     media: 500
     acquirer: 0
   acquirer_budget: 90000
+  acquirer_monthly_operation_capacity: 6
   acquirer_mandate: |
     この60か月の実行期間内のできる限り早い時点に、A市の非公共不動産の
     総面積の過半を、合法的な所有権または排他的な長期賃借・運営権によって

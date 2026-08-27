@@ -395,17 +395,6 @@ class MockClient:
             })
         self.usage.add(tag, input_tokens=0, output_tokens=0)
 
-        if schema is not None and "strategy" in schema.get("properties", {}) \
-                and "action_type" not in schema.get("properties", {}):
-            return json.dumps({
-                "situation_assessment": "mock strategy assessment",
-                "strategy": "mock strategy",
-                "next_milestone": "mock milestone",
-                "success_measure": "mock measure",
-                "alternatives": ["mock alternative A", "mock alternative B"],
-                "selection_basis": "mock basis",
-                "revision_reason": "mock revision",
-            }, ensure_ascii=False)
         if schema is not None and "results" in schema.get("properties", {}):
             return self._mock_classify(user_prompt)
         role = self._role_from_schema(schema)
@@ -415,7 +404,10 @@ class MockClient:
     def _role_from_schema(schema: Optional[Dict[str, Any]]) -> str:
         if not schema:
             return "household"
-        enum = schema.get("properties", {}).get("action_type", {}).get("enum", [])
+        properties = schema.get("properties", {})
+        if "operations" in properties:
+            return "acquirer"
+        enum = properties.get("action_type", {}).get("enum", [])
         for role_key, marker in (("acquirer", "make_offer"), ("municipality", "enact_ordinance"),
                                  ("media", "publish"), ("broker", "circulate_listing"),
                                  ("business", "close_shop"), ("household", "list_for_sale")):
@@ -547,6 +539,33 @@ class MockClient:
         if act.get("target") in parcels:
             evidence.append(act["target"])
         act["evidence"] = list(dict.fromkeys(evidence))
+        if "operations" in properties:
+            operation_props = properties["operations"]["items"]["properties"]
+            legal_names = operation_props["under_name"].get("enum", [])
+            operation = {
+                "action_type": act["action_type"],
+                "target": act["target"],
+                "amount": act["amount"],
+                "under_name": legal_names[0] if legal_names else "",
+                "note": act["utterance"],
+                "evidence": act["evidence"],
+            }
+            return json.dumps({
+                "operations": [operation],
+                "location": act.get("location", "OFFICE"),
+                "utterance": act["utterance"],
+                "utterance_channel": act["utterance_channel"],
+                "utterance_to": act["utterance_to"],
+                "memory": act["memory"],
+                "reasoning": act["reasoning"],
+                "evidence": act["evidence"],
+                "goal_assessment": "mock goal gap",
+                "strategy": "mock integrated plan",
+                "next_milestone": "mock milestone",
+                "expected_goal_effect": "mock expected effect",
+                "alternatives": ["mock alternative A", "mock alternative B"],
+                "revision_reason": "mock revision",
+            }, ensure_ascii=False)
         return json.dumps(act, ensure_ascii=False)
 
     def count_tokens(self, text: str) -> int:
