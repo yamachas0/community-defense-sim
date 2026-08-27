@@ -358,6 +358,44 @@ def _lease_offers(agent: Agent, ledger: Ledger) -> str:
     )
 
 
+OWN_RESULT_ROWS = 8
+
+
+def own_result_row(step: int, action_type: str, target: str,
+                   outcome: Any) -> Dict[str, Any]:
+    """自分が選んだ1件の行為が、帳簿でどうなったかの機械記録。
+
+    ここで作るのは事実（結果の種別・不成立の理由コード・関係する識別子）だけで、
+    評価も助言も次にすべきことも書かない。
+    """
+    kind = outcome.get("kind", "") if isinstance(outcome, dict) else str(outcome or "")
+    reason = outcome.get("reason", "") if isinstance(outcome, dict) else ""
+    refs: List[str] = []
+    if isinstance(outcome, dict):
+        for key in ("offer_id", "lease_offer_id", "inquiry_id", "parcel_id"):
+            value = outcome.get(key)
+            if value:
+                refs.append(f"{key}={value}")
+    return {"step": int(step), "action_type": str(action_type or ""),
+            "target": str(target or ""), "kind": str(kind),
+            "reason": str(reason or ""), "refs": refs}
+
+
+def own_results_text(rows: List[Dict[str, Any]]) -> str:
+    if not rows:
+        return "  （先月の記録なし）"
+    out = []
+    for r in rows[:OWN_RESULT_ROWS]:
+        line = (f"  第{r.get('step')}月 {r.get('action_type') or '-'} "
+                f"target={r.get('target') or '-'} 結果={r.get('kind') or '-'}")
+        if r.get("reason"):
+            line += f" 理由={r['reason']}"
+        if r.get("refs"):
+            line += " " + " ".join(r["refs"])
+        out.append(line)
+    return "\n".join(out)
+
+
 def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                          names: Dict[str, str], cfg: Dict[str, Any]) -> str:
     ensure_v3_state(ledger)
@@ -365,6 +403,8 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     if agent.memory:
         rows += ["[自分の前月までの記憶]", agent.memory[:MAX_MEMORY_CHARS]]
     rows += ["[自分に実際に届いた情報]", _observations(agent, names)]
+    rows += ["[先月の自分の行為と、帳簿上の結果（機械記録）]",
+             own_results_text(agent.extra.get("last_month_results", []))]
     if agent.agent_id in ledger.on_demand_financing:
         rows += [f"[資金条件] 必要資金は案件成立時に調達可能。"
                  f"調達累計{ledger.financing_raised.get(agent.agent_id, 0)}万円。"

@@ -20,6 +20,7 @@ from src.agents import Agent  # noqa: E402
 from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                           build_system_prompt_v3, build_user_prompt_v3, control_share,
                           ensure_v3_state, list_for_lease, make_lease_offer,
+                          own_result_row, own_results_text,
                           resolve_lease_offer, seed_acquirer_intelligence_v3)  # noqa: E402
 
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
@@ -340,6 +341,35 @@ check("観測の賃借申込みIDも角括弧1トークンだけ",
       f"[{lease_id}] P01" in owner_lease_view and "LEASE-" not in owner_lease_view)
 check("角括弧・旧表記どちらでも賃借申込みに解決する",
       resolve_lease_offer(L, 2, f"[LEASE-{lease_id}]", "HH01", True)["kind"] == "lease_control")
+
+print("== 案6: 自分の行為の帰結が本人へ返る ==")
+L = mk()
+rejected = L.record_accept(2, "O9999", "HH01")
+row = own_result_row(2, "accept_offer", "O9999", rejected)
+check("不成立の理由コードが機械記録として残る",
+      row["kind"] == "accept_rejected" and row["reason"] == "no_such_offer")
+check("関係する識別子も残る", "offer_id=O9999" in row["refs"])
+text = own_results_text([row])
+check("不成立の記録に評価語も当為も混ざらない",
+      "理由=no_such_offer" in text
+      and not any(w in text for w in ("すべき", "しろ", "望ましい", "有効", "非効率")))
+resident_r = Agent("HH01", "household", "R01", "所有者")
+resident_r.extra["last_month_results"] = [row]
+view_r = build_user_prompt_v3(resident_r, L, 3, 60, names_v3, cfg_id)
+check("翌月の観測に先月の自分の行為と結果が載る",
+      "[先月の自分の行為と、帳簿上の結果（機械記録）]" in view_r
+      and "accept_rejected" in view_r)
+view_empty = build_user_prompt_v3(Agent("HH02", "household", "R02", "所有者"),
+                                  L, 1, 60, names_v3, cfg_id)
+check("記録がない月は空である事実だけを返す", "（先月の記録なし）" in view_empty)
+buyer_r = Agent("AQ01", "acquirer", "X社", "外部会社",
+                extra={"mandate": "m", "aliases": ["A社"],
+                       "last_month_results": [own_result_row(
+                           2, "make_offer", "P01",
+                           {"kind": "offer_rejected", "reason": "already_owner"})]})
+view_b = build_user_prompt_v3(buyer_r, L, 3, 60, names_v3, cfg_id)
+check("X社にも同じ機械記録が返る",
+      "offer_rejected" in view_b and "理由=already_owner" in view_b)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")

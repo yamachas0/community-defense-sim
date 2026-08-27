@@ -25,7 +25,7 @@ from .agents import Agent, build_roster, index_by_id, name_map
 from .field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                        build_system_prompt_v3, build_user_prompt_v3, control_share,
                        effective_control_area_share, ensure_v3_state, list_for_lease,
-                       make_lease_offer, normalize_acquirer_plan_v3,
+                       make_lease_offer, normalize_acquirer_plan_v3, own_result_row,
                        resolve_lease_offer, seed_acquirer_intelligence_v3, settle_v3_control, verbs_for_v3)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
@@ -462,6 +462,7 @@ class Simulation:
         self.timeline = []
         self.ledger.settle_month(step, self.business_margins)
         settle_v3_control(self.ledger, step)
+        self._record_own_results(step)
 
         for a in self.agents:
             if a.role != "acquirer":
@@ -498,6 +499,29 @@ class Simulation:
                 "cash": self.ledger.cash.get(a.agent_id, 0),
                 "financing_raised": self.ledger.financing_raised.get(a.agent_id, 0),
             })
+
+    def _record_own_results(self, step: int) -> None:
+        """今月自分が選んだ行為が帳簿でどうなったかを、本人の翌月観測へ渡す。
+
+        成立も不成立も同じ形で返す。返すのは結果の種別と理由コードという事実だけで、
+        次にどうすべきかは書かない。
+        """
+        for a in self.agents:
+            event = next((e for e in reversed(self.events)
+                          if e.get("step") == step and e.get("agent_id") == a.agent_id),
+                         None)
+            if event is None:
+                a.extra["last_month_results"] = []
+                continue
+            operations = event.get("operations")
+            if operations:
+                rows = [own_result_row(step, op.get("action_type", ""),
+                                       op.get("target", ""), op.get("outcome", {}))
+                        for op in operations]
+            else:
+                rows = [own_result_row(step, event.get("action_type", ""),
+                                       event.get("target", ""), event.get("outcome", {}))]
+            a.extra["last_month_results"] = rows
 
     def _process_acquirer_portfolio(
             self, step: int, a: Agent, act: Dict[str, Any], result: Dict[str, Any],
