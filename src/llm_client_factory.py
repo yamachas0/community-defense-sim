@@ -215,9 +215,17 @@ class GeminiClient:
             except Exception as e:
                 msg = str(e).lower()
                 name = type(e).__name__
+                # 接続断・タイムアウトも一時的な通信の失敗であり、主体の判断とは
+                # 無関係なので同じく再試行する（2026-08-28 のスモークで
+                # "Server disconnected without sending a response" が1本出た）。
                 transient = ("429" in msg or "rate" in msg or "quota" in msg
                              or "resource_exhausted" in msg or "503" in msg
-                             or "unavailable" in msg or name == "ResourceExhausted")
+                             or "unavailable" in msg or "disconnect" in msg
+                             or "timeout" in msg or "timed out" in msg
+                             or "connection" in msg or "remoteprotocolerror" in msg
+                             or name in ("ResourceExhausted", "RemoteProtocolError",
+                                         "ReadTimeout", "ConnectError",
+                                         "ConnectionError"))
                 if transient and attempt < MAX_RATE_LIMIT_RETRIES - 1:
                     last_err = e
                     wait = _retry_backoff(attempt)
