@@ -1,0 +1,12 @@
+{"step": 1, "our_town": 5, "their_town": 7, "neutral": 8, "shift_rate": 0.5833, "shift_rate_cum": 0.5833}
+{"step": 2, "our_town": 9, "their_town": 4, "neutral": 7, "shift_rate": 0.3077, "shift_rate_cum": 0.44}
+{"step": 3, "our_town": 7, "their_town": 3, "neutral": 10, "shift_rate": 0.3, "shift_rate_cum": 0.4}
+{"step": 4, "our_town": 3, "their_town": 10, "neutral": 7, "shift_rate": 0.7692, "shift_rate_cum": 0.5}
+{"step": 5, "our_town": 4, "their_town": 9, "neutral": 7, "shift_rate": 0.6923, "shift_rate_cum": 0.541}
+{"step": 6, "our_town": 10, "their_town": 3, "neutral": 7, "shift_rate": 0.2308, "shift_rate_cum": 0.4865}
+{"step": 7, "our_town": 8, "their_town": 4, "neutral": 8, "shift_rate": 0.3333, "shift_rate_cum": 0.4651}
+{"step": 8, "our_town": 4, "their_town": 7, "neutral": 9, "shift_rate": 0.6364, "shift_rate_cum": 0.4845}
+{"step": 9, "our_town": 9, "their_town": 4, "neutral": 7, "shift_rate": 0.3077, "shift_rate_cum": 0.4636}
+{"step": 10, "our_town": 6, "their_town": 4, "neutral": 10, "shift_rate": 0.4, "shift_rate_cum": 0.4583}
+{"step": 11, "our_town": 9, "their_town": 7, "neutral": 4, "shift_rate": 0.4375, "shift_rate_cum": 0.4559}
+{"step": 12, "our_town": 7, "their_town": 7, "neutral": 6, "shift_rate": 0.5, "shift_rate_cum": 0.46}

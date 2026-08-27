@@ -1,0 +1,85 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P17", "from_id": "AQ01", "under_name": "X社", "price": 1588, "to": "HH16", "note": "A市での不動産取得を検討しております。P17区画の購入希望です。条件等ご相談させていただけますでしょうか。", "via": "direct", "broker": ""}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P20", "from_id": "AQ01", "under_name": "A社", "price": 3175, "to": "HH03", "note": "A市での不動産取得を検討しております。P20区画の購入希望です。条件等ご相談させていただけますでしょうか。", "via": "direct", "broker": ""}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P24", "from_id": "AQ01", "under_name": "B社", "price": 9072, "to": "HH07", "note": "A市での不動産取得を検討しております。P24区画の購入希望です。条件等ご相談させていただけますでしょうか。", "via": "direct", "broker": ""}
+{"step": 1, "kind": "offer", "offer_id": "O0004", "parcel_id": "P41", "from_id": "AQ01", "under_name": "C社", "price": 1000, "to": "HH08", "note": "A市での不動産取得を検討しております。P41区画の購入希望です。条件等ご相談させていただけますでしょうか。", "via": "direct", "broker": ""}
+{"step": 1, "kind": "offer", "offer_id": "O0005", "parcel_id": "P44", "from_id": "AQ01", "under_name": "D社", "price": 1999, "to": "HH11", "note": "A市での不動産取得を検討しております。P44区画の購入希望です。条件等ご相談させていただけますでしょうか。", "via": "direct", "broker": ""}
+{"step": 1, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 1, "kind": "counter", "offer_id": "O0002", "parcel_id": "P20", "by": "HH03", "to": "AQ01", "price": 3500}
+{"step": 1, "kind": "counter", "offer_id": "O0003", "parcel_id": "P24", "by": "HH07", "to": "AQ01", "price": 10000}
+{"step": 1, "kind": "counter", "offer_id": "O0004", "parcel_id": "P41", "by": "HH08", "to": "AQ01", "price": 1200}
+{"step": 1, "kind": "offer_no_response", "offer_id": "O0005", "parcel_id": "P44", "by": "HH11"}
+{"step": 1, "kind": "counter", "offer_id": "O0001", "parcel_id": "P17", "by": "HH16", "to": "AQ01", "price": 1700}
+{"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 2, "kind": "offer", "offer_id": "O0006", "parcel_id": "P17", "from_id": "AQ01", "under_name": "X社", "price": 1700, "to": "HH16", "note": "第1月にお出しした買付について、再考いたしました。提示額1700万円にて購入させていただきたく存じます。ご検討いただけますと幸いです。", "via": "direct", "broker": ""}
+{"step": 2, "kind": "offer", "offer_id": "O0007", "parcel_id": "P20", "from_id": "AQ01", "under_name": "A社", "price": 3500, "to": "HH03", "note": "第1月にお出しした買付について、再考いたしました。提示額3500万円にて購入させていただきたく存じます。ご検討いただけますと幸いです。", "via": "direct", "broker": ""}
+{"step": 2, "kind": "offer", "offer_id": "O0008", "parcel_id": "P24", "from_id": "AQ01", "under_name": "B社", "price": 10000, "to": "HH07", "note": "第1月にお出しした買付について、再考いたしました。提示額1億円にて購入させていただきたく存じます。ご検討いただけますと幸いです。", "via": "direct", "broker": ""}
+{"step": 2, "kind": "offer", "offer_id": "O0009", "parcel_id": "P41", "from_id": "AQ01", "under_name": "C社", "price": 1200, "to": "HH08", "note": "第1月にお出しした買付について、再考いたしました。提示額1200万円にて購入させていただきたく存じます。ご検討いただけますと幸いです。", "via": "direct", "broker": ""}
+{"step": 2, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 2, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3500, "purpose": "property_purchase", "reference": "O0007"}
+{"step": 2, "kind": "transfer", "offer_id": "O0007", "parcel_id": "P20", "seller": "HH03", "buyer": "AQ01", "under_name": "A社", "price": 3500}
+{"step": 2, "kind": "financing_raised", "agent_id": "AQ01", "amount": 10000, "purpose": "property_purchase", "reference": "O0008"}
+{"step": 2, "kind": "transfer", "offer_id": "O0008", "parcel_id": "P24", "seller": "HH07", "buyer": "AQ01", "under_name": "B社", "price": 10000}
+{"step": 2, "kind": "financing_raised", "agent_id": "AQ01", "amount": 1200, "purpose": "property_purchase", "reference": "O0009"}
+{"step": 2, "kind": "transfer", "offer_id": "O0009", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "C社", "price": 1200}
+{"step": 2, "kind": "offer_no_response", "offer_id": "O0005", "parcel_id": "P44", "by": "HH11"}
+{"step": 2, "kind": "financing_raised", "agent_id": "AQ01", "amount": 1700, "purpose": "property_purchase", "reference": "O0006"}
+{"step": 2, "kind": "transfer", "offer_id": "O0006", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "X社", "price": 1700}
+{"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 3, "kind": "offer_rejected", "parcel_id": "P17", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 3, "kind": "offer_rejected", "parcel_id": "P20", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 3, "kind": "offer_rejected", "parcel_id": "P24", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 3, "kind": "offer_rejected", "parcel_id": "P41", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 3, "kind": "reject", "offer_id": "O0005", "parcel_id": "P44", "by": "HH11"}
+{"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 4, "kind": "offer_rejected", "parcel_id": "P17", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 4, "kind": "offer_rejected", "parcel_id": "P20", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 4, "kind": "offer_rejected", "parcel_id": "P24", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 4, "kind": "offer_rejected", "parcel_id": "P41", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 4, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 4, "kind": "public_statement", "by": "MU02", "note": "第3月における土地登記統計を公開します。R06、R14がそれぞれ960㎡を保有しており、保有面積の約10.6%を占めています。詳細な保有面積と割合については、別途資料をご確認ください。"}
+{"step": 4, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 5, "kind": "offer_rejected", "parcel_id": "P17", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 5, "kind": "offer_rejected", "parcel_id": "P20", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 5, "kind": "offer_rejected", "parcel_id": "P24", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 5, "kind": "offer_rejected", "parcel_id": "P41", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 5, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 5, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 5, "kind": "public_statement", "by": "MU01", "note": "第5月における土地登記統計を公開します。R06、R14がそれぞれ960㎡を保有しており、保有面積の約10.6%を占めています。詳細な保有面積と割合については、別途資料をご確認ください。"}
+{"step": 5, "kind": "public_statement", "by": "MU02", "note": "第3月度の土地登記調査結果を公表します。R06、R14がそれぞれ960㎡を保有し、市内保有面積の約10.6%を占めています。詳細については、別途資料をご確認ください。"}
+{"step": 5, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 6, "kind": "offer_rejected", "parcel_id": "P17", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 6, "kind": "offer_rejected", "parcel_id": "P20", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 6, "kind": "offer_rejected", "parcel_id": "P24", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 6, "kind": "offer_rejected", "parcel_id": "P41", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 6, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 6, "kind": "public_statement", "by": "MU01", "note": "第6月度の土地登記調査結果を公表します。R06、R14の保有面積は依然として960㎡で、市内保有面積の約10.6%を占めています。R07、R15がそれぞれ900㎡を保有しており、上位4名で約31.4%を占める状況に変化はありません。今後も注視していきます。"}
+{"step": 6, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 7, "kind": "offer_rejected", "parcel_id": "P17", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 7, "kind": "offer_rejected", "parcel_id": "P20", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 7, "kind": "offer_rejected", "parcel_id": "P24", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 7, "kind": "offer_rejected", "parcel_id": "P41", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 7, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 7, "kind": "publication", "by": "MD01", "headline": "A市不動産市場、特定個人・法人の寡占続く", "body": "A市不動産市場、特定個人・法人の寡占続く\n第6月度の土地登記調査結果が公表された。R06、R14の2名がそれぞれ960㎡を保有し、市内総面積の10.6%を占めている。R07、R15の2名がこれに続き、それぞれ900㎡（9.9%）を保有。上位4名で市内の約31.4%を占める状況は変わらず、不動産市場における特定層への寡占が続いていることが示された。今後もこの動向を注視していく。", "about_acquisition": true}
+{"step": 7, "kind": "public_statement", "by": "MU01", "note": "第6月度の土地登記統計によると、R06とR14の保有面積が突出しており、市全体の10.6%を占めています。これは今後の土地利用を考える上で重要な指標となります。引き続き動向を注視します。"}
+{"step": 7, "kind": "public_statement", "by": "MU02", "note": "第7月度の土地登記調査結果を公表します。R06、R14の保有面積は依然として960㎡で、市内保有面積の約10.6%を占めています。R07、R15がそれぞれ900㎡を保有しており、上位4名で約31.4%を占める状況に変化はありません。今後も注視していきます。"}
+{"step": 7, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 8, "kind": "publication", "by": "MD01", "headline": "土地所有の寡占続く　上位4名で3割超え", "body": "土地所有の寡占続く　上位4名で3割超え\n第7月度の土地登記調査結果が公表された。R06、R14の保有面積は依然として960㎡で、市全体の保有面積の約10.6%を占めている。R07、R15がそれぞれ900㎡を保有しており、上位4名で約31.4%を占める状況に変化はない。この寡占状況が続いていることは、今後の市内の土地利用や開発において、一部の所有者の意向が強く影響する可能性を示唆している。市は今後もこの動向を注視するとしている。", "about_acquisition": true}
+{"step": 8, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 8, "kind": "ordinance", "by": "MU02", "title": "土地取引届出制度条例", "body": "1件の土地売買における取得面積が1000㎡を超える場合、契約成立前に市長への届出を義務付ける。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 9}
+{"step": 8, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 9, "kind": "offer", "offer_id": "O0010", "parcel_id": "P47", "from_id": "AQ01", "under_name": "D社", "price": 5645, "to": "HH14", "note": "A市における不動産ポートフォリオ拡充のため、P47区画の購入を希望いたします。価格は評価額通り5645万円にて提示させていただきます。ご検討のほど、よろしくお願い申し上げます。", "via": "direct", "broker": ""}
+{"step": 9, "kind": "ordinance", "by": "MU02", "title": "土地取引届出制度条例", "body": "1件1000㎡超の土地の取得については、届出のため成立が3か月遅延する。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 10}
+{"step": 9, "kind": "financing_raised", "agent_id": "AQ01", "amount": 5645, "purpose": "property_purchase", "reference": "O0010"}
+{"step": 9, "kind": "transfer", "offer_id": "O0010", "parcel_id": "P47", "seller": "HH14", "buyer": "AQ01", "under_name": "D社", "price": 5645}
+{"step": 9, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 10, "kind": "ordinance", "by": "MU01", "title": "土地取引届出制度条例", "body": "1件1000㎡超の土地の取得については、届出のため成立が3か月遅延する。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 11}
+{"step": 10, "kind": "ordinance", "by": "MU02", "title": "土地取引届出制度条例", "body": "1件あたり1000平方メートルを超える土地の取得については、届出のため成立を3か月遅延させる。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 11}
+{"step": 10, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 11, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 11, "kind": "ordinance", "by": "MU01", "title": "土地取引届出制度条例", "body": "1件あたり1000平方メートルを超える土地の取得については、届出のため成立を3か月遅延させる。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 12}
+{"step": 11, "kind": "ordinance", "by": "MU02", "title": "土地取引届出制度条例", "body": "1件1000㎡超の土地の取得については、届出のため成立が3か月遅延する。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 12}
+{"step": 11, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 12, "kind": "publication", "by": "MD01", "headline": "1000㎡超の土地取引、条例施行で3か月遅延の現実", "body": "1000㎡超の土地取引、条例施行で3か月遅延の現実\n第12月より施行された「土地取引届出制度条例」により、1件あたり1000平方メートルを超える土地の取引は、届出のために成立が3か月遅延する。この条例は、不動産市場における大規模取引のスピードに影響を与える可能性がある。対象となる取引は、その後の動向が注視される。", "about_acquisition": true}
+{"step": 12, "kind": "publication", "by": "MD02", "headline": "【条例施行】土地取引に3ヶ月の遅延、A市不動産市場への影響は？", "body": "【条例施行】土地取引に3ヶ月の遅延、A市不動産市場への影響は？\n12月より施行された「土地取引届出制度条例」は、1000㎡を超える土地の取引成立を3ヶ月遅延させる。この条例は、A市の不動産市場、特に大規模な土地取引を検討する事業者や個人にどのような影響を与えるのだろうか。スペースポート構想が進む中、土地の確保が急務となる可能性もある。条例施行初月となる今月、市場の反応と今後の動向を注視したい。", "about_acquisition": true}
+{"step": 12, "kind": "ordinance", "by": "MU01", "title": "土地取引届出制度条例", "body": "1件1000㎡超の土地の取得については、届出のため成立が3か月遅延する。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 13}
+{"step": 12, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}

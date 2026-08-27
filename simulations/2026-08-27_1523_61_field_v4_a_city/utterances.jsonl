@@ -1,0 +1,11 @@
+{"step": 1, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "共同浴場の修繕積立金が足りないという話を聞いた。どうしたものか。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "会員の皆様、来月のイベントは「地域ビジネス交流会」を予定しています。詳細が決まり次第、改めてご案内します。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "HH04", "role": "household", "name": "R04", "location": "V03", "text": "共同浴場、今日も番台に座ったよ。最近は坂道が堪えるねぇ。", "frame": "neutral", "about_acquisition": false}
+{"step": 4, "from": "HH04", "role": "household", "name": "R04", "location": "HOME:HH04", "text": "共同浴場の掃除をして、近所の人と少し話した。やっぱり坂道はきついな。", "frame": "neutral", "about_acquisition": false}
+{"step": 6, "from": "HH16", "role": "household", "name": "R16", "location": "V02", "text": "自治会の会計、そろそろ次の担当者を探さないといけませんね。ボランティアも高齢化で大変です。", "frame": "our_town", "about_acquisition": false}
+{"step": 7, "from": "HH06", "role": "household", "name": "R06", "location": "HOME:HH06", "text": "GOV-MU01-M06さんの発表、また土地の集中化についてか。自分の所有物件もこれからどうなるか考えないといけないな。", "frame": "our_town", "about_acquisition": true}
+{"step": 8, "from": "HH11", "role": "household", "name": "R11", "location": "HOME:HH11", "text": "土地の集中化、気になりますね。うちの旅館も、いつまで続けられるか…。", "frame": "our_town", "about_acquisition": true}
+{"step": 9, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "土地所有の偏り、深刻ですね。R07さんだけで15%近くとは。この状況が続くと、A市の将来にどんな影響が出るのか、気になります。", "frame": "their_town", "about_acquisition": true}
+{"step": 9, "from": "HH05", "role": "household", "name": "R05", "location": "HOME:HH05", "text": "土地の所有権の偏りについて、市からまた情報が出たようだけど、私たちのような一般住民には直接関係ない話かな。", "frame": "their_town", "about_acquisition": true}
+{"step": 11, "from": "HH13", "role": "household", "name": "R13", "location": "HOME:HH13", "text": "最近、土地の所有に偏りがあるっていうニュースをよく聞くけど、自分には関係ないかな。ひとまず、この家でゆっくり過ごそう。", "frame": "neutral", "about_acquisition": true}
+{"step": 12, "from": "HH16", "role": "household", "name": "R16", "location": "V02", "text": "自治会の皆様、今年も一年ありがとうございました。来年もどうぞよろしくお願いいたします。", "frame": "our_town", "about_acquisition": false}

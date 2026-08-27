@@ -1,0 +1,100 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P32", "from_id": "AQ01", "under_name": "B社", "price": 3400, "to": "HH15", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 1, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 1, "kind": "counter", "offer_id": "O0001", "parcel_id": "P32", "by": "HH15", "to": "AQ01", "price": 3316}
+{"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 2, "kind": "offer", "offer_id": "O0002", "parcel_id": "P12", "from_id": "AQ01", "under_name": "B社", "price": 3434, "to": "HH11", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 2, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 2, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 2, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 2, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 300, "delay_months": 2, "effective_step": 3}
+{"step": 2, "kind": "offer_no_response", "offer_id": "O0002", "parcel_id": "P12", "by": "HH11"}
+{"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 3, "kind": "offer", "offer_id": "O0003", "parcel_id": "P12", "from_id": "AQ01", "under_name": "D社", "price": 3046, "to": "HH11", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 3, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 3, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 3, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 3, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 3, "effective_step": 4}
+{"step": 3, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 3, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 3, "effective_step": 4}
+{"step": 3, "kind": "offer_no_response", "offer_id": "O0002", "parcel_id": "P12", "by": "HH11"}
+{"step": 3, "kind": "reject", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 4, "kind": "offer", "offer_id": "O0004", "parcel_id": "P13", "from_id": "AQ01", "under_name": "A社", "price": 2619, "to": "HH12", "note": "ご検討ください。", "via": "broker", "broker": "BR01"}
+{"step": 4, "kind": "withdraw", "offer_id": "O0002", "parcel_id": "P12", "by": "AQ01"}
+{"step": 4, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 4, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 4, "kind": "reject", "offer_id": "O0004", "parcel_id": "P13", "by": "HH12"}
+{"step": 4, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 5, "kind": "withdraw_rejected", "offer_id": "O0002", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 5, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 5, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 5, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 5, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 6, "kind": "offer", "offer_id": "O0005", "parcel_id": "P16", "from_id": "AQ01", "under_name": "B社", "price": 2578, "to": "HH15", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 6, "kind": "offer", "offer_id": "O0006", "parcel_id": "P14", "from_id": "AQ01", "under_name": "D社", "price": 3334, "to": "HH13", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 6, "kind": "offer", "offer_id": "O0007", "parcel_id": "P11", "from_id": "AQ01", "under_name": "A社", "price": 2911, "to": "HH10", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 6, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 6, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 6, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 6, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 6, "kind": "offer_no_response", "offer_id": "O0007", "parcel_id": "P11", "by": "HH10"}
+{"step": 6, "kind": "filing_required", "offer_id": "O0006", "parcel_id": "P14", "by": "HH13", "buyer": "AQ01", "price": 3334, "due_step": 9, "ordinance": "土地取得届出条例（mock）"}
+{"step": 6, "kind": "filing_required", "offer_id": "O0005", "parcel_id": "P16", "by": "HH15", "buyer": "AQ01", "price": 2578, "due_step": 9, "ordinance": "土地取得届出条例（mock）"}
+{"step": 6, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 7, "kind": "offer", "offer_id": "O0008", "parcel_id": "P16", "from_id": "AQ01", "under_name": "X社", "price": 3016, "to": "HH15", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 7, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 7, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 7, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 7, "kind": "counter", "offer_id": "O0007", "parcel_id": "P11", "by": "HH10", "to": "AQ01", "price": 4496}
+{"step": 7, "kind": "no_response_rejected", "offer_id": "O0005", "by": "HH15", "reason": "offer_not_open"}
+{"step": 7, "kind": "counter", "offer_id": "O0008", "parcel_id": "P16", "by": "HH15", "to": "AQ01", "price": 2867}
+{"step": 7, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 8, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 8, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 8, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 8, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 8, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 9, "kind": "offer", "offer_id": "O0009", "parcel_id": "P07", "from_id": "AQ01", "under_name": "X社", "price": 3490, "to": "HH06", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 9, "kind": "offer_rejected", "parcel_id": "P48", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 9, "kind": "offer", "offer_id": "O0010", "parcel_id": "P38", "from_id": "AQ01", "under_name": "B社", "price": 2707, "to": "HH05", "note": "ご検討ください。", "via": "broker", "broker": "BR02"}
+{"step": 9, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 9, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 9, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 9, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 9, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 2, "effective_step": 10}
+{"step": 9, "kind": "counter", "offer_id": "O0010", "parcel_id": "P38", "by": "HH05", "to": "AQ01", "price": 3002}
+{"step": 9, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3490, "purpose": "property_purchase", "reference": "O0009"}
+{"step": 9, "kind": "transfer", "offer_id": "O0009", "parcel_id": "P07", "seller": "HH06", "buyer": "AQ01", "under_name": "X社", "price": 3490}
+{"step": 9, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3334, "purpose": "property_purchase", "reference": "O0006"}
+{"step": 9, "kind": "transfer", "offer_id": "O0006", "parcel_id": "P14", "seller": "HH13", "buyer": "AQ01", "under_name": "D社", "price": 3334, "filed": true}
+{"step": 9, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2578, "purpose": "property_purchase", "reference": "O0005"}
+{"step": 9, "kind": "transfer", "offer_id": "O0005", "parcel_id": "P16", "seller": "HH15", "buyer": "AQ01", "under_name": "B社", "price": 2578, "filed": true}
+{"step": 9, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 10, "kind": "offer", "offer_id": "O0011", "parcel_id": "P18", "from_id": "AQ01", "under_name": "X社", "price": 2788, "to": "HH01", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 10, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 10, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 10, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 10, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 10, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 10, "kind": "reject", "offer_id": "O0011", "parcel_id": "P18", "by": "HH01"}
+{"step": 10, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 11, "kind": "offer_rejected", "parcel_id": "P48", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 11, "kind": "withdraw_rejected", "offer_id": "O0002", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 11, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 11, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 11, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 11, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 11, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 11, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 11, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 12, "kind": "offer", "offer_id": "O0012", "parcel_id": "P33", "from_id": "AQ01", "under_name": "C社", "price": 2464, "to": "HH16", "note": "ご検討ください。", "via": "broker", "broker": "BR01"}
+{"step": 12, "kind": "offer", "offer_id": "O0013", "parcel_id": "P28", "from_id": "AQ01", "under_name": "X社", "price": 3211, "to": "HH11", "note": "ご検討ください。", "via": "direct", "broker": ""}
+{"step": 12, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 12, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3211, "purpose": "property_purchase", "reference": "O0013"}
+{"step": 12, "kind": "transfer", "offer_id": "O0013", "parcel_id": "P28", "seller": "HH11", "buyer": "AQ01", "under_name": "X社", "price": 3211}
+{"step": 12, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2464, "purpose": "property_purchase", "reference": "O0012"}
+{"step": 12, "kind": "transfer", "offer_id": "O0012", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "C社", "price": 2464}
+{"step": 12, "kind": "financing_raised", "agent_id": "AQ01", "amount": 74, "purpose": "broker_fee", "reference": "O0012"}
+{"step": 12, "kind": "broker_fee", "offer_id": "O0012", "parcel_id": "P33", "broker": "BR01", "payer": "AQ01", "amount": 74, "rate": 0.03}
+{"step": 12, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}

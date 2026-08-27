@@ -1,0 +1,66 @@
+{"step": 1, "from": "BZ01", "role": "business", "name": "T01", "phase": "day", "text": "特になし", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "BZ02", "role": "business", "name": "T02", "phase": "day", "text": "毎日は変わらない。", "frame": "our_town", "about_acquisition": true}
+{"step": 1, "from": "BZ03", "role": "business", "name": "T03", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": true}
+{"step": 1, "from": "BZ04", "role": "business", "name": "T04", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH01", "role": "household", "name": "R01", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH02", "role": "household", "name": "R02", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": true}
+{"step": 1, "from": "HH03", "role": "household", "name": "R03", "phase": "day", "text": "特になし", "frame": "their_town", "about_acquisition": false}
+{"step": 1, "from": "HH04", "role": "household", "name": "R04", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 1, "from": "HH05", "role": "household", "name": "R05", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH06", "role": "household", "name": "R06", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH07", "role": "household", "name": "R07", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": false}
+{"step": 1, "from": "HH08", "role": "household", "name": "R08", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 1, "from": "HH09", "role": "household", "name": "R09", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": true}
+{"step": 1, "from": "HH10", "role": "household", "name": "R10", "phase": "day", "text": "毎日は変わらない。", "frame": "our_town", "about_acquisition": true}
+{"step": 1, "from": "HH11", "role": "household", "name": "R11", "phase": "day", "text": "毎日は変わらない。", "frame": "our_town", "about_acquisition": false}
+{"step": 1, "from": "HH12", "role": "household", "name": "R12", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": false}
+{"step": 1, "from": "HH13", "role": "household", "name": "R13", "phase": "day", "text": "特になし", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "HH14", "role": "household", "name": "R14", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": false}
+{"step": 1, "from": "HH15", "role": "household", "name": "R15", "phase": "day", "text": "毎日は変わらない。", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "HH16", "role": "household", "name": "R16", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": true}
+{"step": 1, "from": "HH06", "role": "household", "name": "R06", "phase": "response", "text": "mock: 今月の実感", "frame": "their_town", "about_acquisition": false}
+{"step": 2, "from": "BZ01", "role": "business", "name": "T01", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "BZ02", "role": "business", "name": "T02", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "BZ03", "role": "business", "name": "T03", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "BZ04", "role": "business", "name": "T04", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": false}
+{"step": 2, "from": "HH01", "role": "household", "name": "R01", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH02", "role": "household", "name": "R02", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH03", "role": "household", "name": "R03", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH04", "role": "household", "name": "R04", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH05", "role": "household", "name": "R05", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH06", "role": "household", "name": "R06", "phase": "day", "text": "毎日は変わらない。", "frame": "their_town", "about_acquisition": true}
+{"step": 2, "from": "HH07", "role": "household", "name": "R07", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH08", "role": "household", "name": "R08", "phase": "day", "text": "特になし", "frame": "their_town", "about_acquisition": false}
+{"step": 2, "from": "HH09", "role": "household", "name": "R09", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH10", "role": "household", "name": "R10", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": true}
+{"step": 2, "from": "HH11", "role": "household", "name": "R11", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "HH12", "role": "household", "name": "R12", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH13", "role": "household", "name": "R13", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": false}
+{"step": 2, "from": "HH14", "role": "household", "name": "R14", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH15", "role": "household", "name": "R15", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH16", "role": "household", "name": "R16", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": false}
+{"step": 2, "from": "HH02", "role": "household", "name": "R02", "phase": "response", "text": "mock: 今月の実感", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH05", "role": "household", "name": "R05", "phase": "response", "text": "mock: 今月の実感", "frame": "neutral", "about_acquisition": false}
+{"step": 2, "from": "HH14", "role": "household", "name": "R14", "phase": "response", "text": "mock: 今月の実感", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "BZ01", "role": "business", "name": "T01", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "BZ02", "role": "business", "name": "T02", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "BZ03", "role": "business", "name": "T03", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": false}
+{"step": 3, "from": "BZ04", "role": "business", "name": "T04", "phase": "day", "text": "毎日は変わらない。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH01", "role": "household", "name": "R01", "phase": "day", "text": "毎日は変わらない。", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "HH02", "role": "household", "name": "R02", "phase": "day", "text": "毎日は変わらない。", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "HH03", "role": "household", "name": "R03", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "HH04", "role": "household", "name": "R04", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "HH05", "role": "household", "name": "R05", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH06", "role": "household", "name": "R06", "phase": "day", "text": "特になし", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "HH07", "role": "household", "name": "R07", "phase": "day", "text": "特になし", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "HH08", "role": "household", "name": "R08", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "HH09", "role": "household", "name": "R09", "phase": "day", "text": "特になし", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "HH10", "role": "household", "name": "R10", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "HH11", "role": "household", "name": "R11", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH12", "role": "household", "name": "R12", "phase": "day", "text": "毎日は変わらない。", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "HH13", "role": "household", "name": "R13", "phase": "day", "text": "毎日は変わらない。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "HH14", "role": "household", "name": "R14", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "our_town", "about_acquisition": false}
+{"step": 3, "from": "HH15", "role": "household", "name": "R15", "phase": "day", "text": "近所の名義が変わったのが気になる。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH16", "role": "household", "name": "R16", "phase": "day", "text": "特になし", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "HH01", "role": "household", "name": "R01", "phase": "response", "text": "mock: 今月の実感", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH03", "role": "household", "name": "R03", "phase": "response", "text": "mock: 今月の実感", "frame": "their_town", "about_acquisition": false}

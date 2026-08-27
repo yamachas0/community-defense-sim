@@ -1,0 +1,6 @@
+{"step": 1, "from": "BZ01", "role": "business", "name": "T01", "location": "V05", "text": "皆さん、こんにちは。最近の街の様子はいかがですか？特に、宿泊客の入り具合や、建物の修繕など、何か気になることはありますか？", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "いらっしゃいませ！今日のオススメは煮魚定食ですよ。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "BZ03", "role": "business", "name": "T03", "location": "V03", "text": "こんにちは、いつもお世話になっております。食品・日用品店のT03です。皆様、お変わりありませんか？", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH03", "role": "household", "name": "R03", "location": "V01", "text": "やあ、元気だったかい？最近、うちの空地の草刈りが大変でね。何かいい話でもないかと思って寄ってみたよ。", "frame": "our_town", "about_acquisition": false}
+{"step": 1, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "こんにちは。いつもお世話になってます。今日はこの席で作業させてもらいますね。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH12", "role": "household", "name": "R12", "location": "V04", "text": "こんにちは。お久しぶりです。最近はいかがですか？", "frame": "neutral", "about_acquisition": false}

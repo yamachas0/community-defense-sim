@@ -1,0 +1,102 @@
+{
+  "run_name": "field_v4_1b_a_city",
+  "steps": 12,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "mock",
+  "provider": "mock",
+  "elapsed_sec": 0.2,
+  "acquirer_model": "mock",
+  "invalid_actions": 5,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 361,
+    "input_tokens": 0,
+    "cached_tokens": 0,
+    "output_tokens": 0,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:p1": {
+        "calls": 192,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:p1": {
+        "calls": 48,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:p1": {
+        "calls": 24,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:p1": {
+        "calls": 24,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:acquirer:p1": {
+        "calls": 12,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:p1": {
+        "calls": 24,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:p2": {
+        "calls": 23,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "classify": {
+        "calls": 14,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.1957,
+    "final_hhi": 0.0832,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.4605,
+    "cascade": {
+      "induced": 3,
+      "max_chain": 3
+    },
+    "final_effective_control_area_share": null,
+    "late_index": {
+      "step": 2,
+      "title": "土地取得届出条例（mock）",
+      "share_at_enactment": 0.0435,
+      "share_observable": 0.0217
+    },
+    "detection_lag": {
+      "step": 3,
+      "headline": "【mock】名義の集中について",
+      "share_at_first_report": 0.0435,
+      "share_observable": 0.0435
+    },
+    "final_acquirer_area_share": 0.1674,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

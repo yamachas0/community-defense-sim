@@ -1,0 +1,102 @@
+{
+  "run_name": "field_v4_a_city",
+  "steps": 12,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 100.8,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 8,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 380,
+    "input_tokens": 580573,
+    "cached_tokens": 119039,
+    "output_tokens": 116177,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:p1": {
+        "calls": 192,
+        "input": 274180,
+        "cached": 75826,
+        "output": 54766
+      },
+      "agent:business:p1": {
+        "calls": 48,
+        "input": 65262,
+        "cached": 16622,
+        "output": 14489
+      },
+      "agent:broker:p1": {
+        "calls": 24,
+        "input": 30161,
+        "cached": 0,
+        "output": 4975
+      },
+      "agent:municipality:p1": {
+        "calls": 24,
+        "input": 37113,
+        "cached": 6440,
+        "output": 6568
+      },
+      "agent:media:p1": {
+        "calls": 24,
+        "input": 34331,
+        "cached": 9250,
+        "output": 5694
+      },
+      "agent:acquirer:p1": {
+        "calls": 12,
+        "input": 53326,
+        "cached": 4375,
+        "output": 9143
+      },
+      "agent:household:p2": {
+        "calls": 44,
+        "input": 70932,
+        "cached": 6526,
+        "output": 12440
+      },
+      "classify": {
+        "calls": 12,
+        "input": 15268,
+        "cached": 0,
+        "output": 8102
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.0652,
+    "final_hhi": 0.0605,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.1132,
+    "cascade": {
+      "induced": 1,
+      "max_chain": 2
+    },
+    "final_effective_control_area_share": null,
+    "late_index": {
+      "step": 5,
+      "title": "一定面積以上の土地売買に関する届出制度",
+      "share_at_enactment": 0.0435,
+      "share_observable": 0.0217
+    },
+    "detection_lag": {
+      "step": 6,
+      "headline": "A市、土地取引に届出制導入へ - 透明性向上と適正な土地利用目指す",
+      "share_at_first_report": 0.0435,
+      "share_observable": 0.0435
+    },
+    "final_acquirer_area_share": 0.0374,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "run_name": "field_v4_1_a_city",
+  "steps": 12,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 104.0,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 36,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 417,
+    "input_tokens": 644496,
+    "cached_tokens": 207850,
+    "output_tokens": 117775,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:p1": {
+        "calls": 192,
+        "input": 273298,
+        "cached": 102378,
+        "output": 47897
+      },
+      "agent:business:p1": {
+        "calls": 48,
+        "input": 60769,
+        "cached": 21545,
+        "output": 10340
+      },
+      "agent:broker:p1": {
+        "calls": 24,
+        "input": 31329,
+        "cached": 13708,
+        "output": 7120
+      },
+      "agent:acquirer:p1": {
+        "calls": 12,
+        "input": 43219,
+        "cached": 9461,
+        "output": 6772
+      },
+      "agent:municipality:p1": {
+        "calls": 24,
+        "input": 41611,
+        "cached": 11306,
+        "output": 8164
+      },
+      "agent:media:p1": {
+        "calls": 24,
+        "input": 35796,
+        "cached": 13376,
+        "output": 7600
+      },
+      "agent:household:p2": {
+        "calls": 78,
+        "input": 122804,
+        "cached": 36076,
+        "output": 19131
+      },
+      "classify": {
+        "calls": 15,
+        "input": 35670,
+        "cached": 0,
+        "output": 10751
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.0217,
+    "final_hhi": 0.0624,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.042,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 1
+    },
+    "final_effective_control_area_share": null,
+    "late_index": null,
+    "detection_lag": {
+      "step": 3,
+      "headline": "【速報】A市、海外投資グループによる広大な土地保有が明らかに",
+      "share_at_first_report": 0.0,
+      "share_observable": 0.0
+    },
+    "final_acquirer_area_share": 0.0077,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "run": "2026-08-25_1228_17_field_v2_a_city",
+  "model": "gemini-2.5-flash-lite",
+  "price": {
+    "input": 0.1,
+    "output": 0.4,
+    "cache_read": 0.01,
+    "cache_storage_hour": 1.0
+  },
+  "calls": 1652,
+  "classify_calls": 32,
+  "input_tokens": 5193130,
+  "output_tokens": 650880,
+  "cost_input_usd": 0.51931,
+  "cost_output_usd": 0.26035,
+  "cost_total_usd": 0.7797,
+  "safety_factor": 2.0,
+  "cost_upper_usd": 1.5593,
+  "calibration": "ローカル推定のみ（countTokens 未使用）"
+}

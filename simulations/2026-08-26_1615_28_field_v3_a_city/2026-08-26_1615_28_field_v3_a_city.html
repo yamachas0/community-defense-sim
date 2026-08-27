@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>静かな占領 — 2026-08-26_1615_28_field_v3_a_city</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0A0A0A;--accent:#10B981;--accent-bg:#ECFDF5;--g50:#F9FAFB;--g100:#F3F4F6;
+ --g200:#E5E7EB;--g300:#D1D5DB;--g500:#6B7280;--g600:#4B5563;--g700:#374151;--g900:#111827;
+ --warn:#B45309;--warn-bg:#FFFBEB;--blue:#2563EB;--purple:#7C3AED;
+ --font:'Noto Sans JP','Hiragino Kaku Gothic ProN','Meiryo',system-ui,sans-serif;}
+*{box-sizing:border-box;}
+body{margin:0;background:#fff;color:var(--g900);font-family:var(--font);font-size:15px;line-height:1.75;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 80px;}
+header{background:var(--black);color:#fff;padding:28px 0 24px;margin-bottom:28px;}
+header .wrap{padding-bottom:0;}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--accent);font-weight:700;margin:0 0 8px;}
+h1{font-size:23px;margin:0 0 10px;font-weight:900;line-height:1.4;}
+.meta{font-size:12.5px;color:var(--g300);margin:0;}
+.meta b{color:#fff;font-weight:500;}
+h2{font-size:18px;font-weight:900;margin:44px 0 16px;padding:8px 0 8px 13px;
+ border-left:5px solid var(--accent);background:var(--g50);}
+h3{font-size:14.5px;font-weight:700;margin:20px 0 9px;padding-bottom:5px;border-bottom:2px solid var(--black);}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:0 0 18px;}
+.card{border:1px solid var(--g200);border-left:4px solid var(--accent);padding:11px 13px;}
+.card .k{font-size:11.5px;color:var(--g500);font-weight:700;letter-spacing:.04em;}
+.card .v{font-size:23px;font-weight:900;line-height:1.25;}
+.card .s{font-size:11.5px;color:var(--g600);}
+.panel{border:1px solid var(--g200);padding:14px;margin:0 0 18px;background:#fff;}
+.ctrl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:var(--accent);}
+button{font-family:var(--font);font-weight:700;font-size:13px;border:2px solid var(--black);
+ background:#fff;padding:5px 12px;cursor:pointer;}
+button:hover{background:var(--black);color:#fff;}
+button.on{background:var(--black);color:#fff;}
+select,input[type=text]{font-family:var(--font);font-size:13px;padding:5px 8px;border:1px solid var(--g300);background:#fff;}
+.stepnum{font-weight:900;font-size:16px;min-width:108px;}
+.mapwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;}
+canvas{border:1px solid var(--g200);max-width:100%;cursor:pointer;}
+.legend{font-size:12px;line-height:2;color:var(--g700);}
+.sw{display:inline-block;width:13px;height:13px;border:1px solid var(--g300);
+ vertical-align:-2px;margin-right:6px;}
+.small{font-size:12px;color:var(--g500);}
+.scroll{max-height:520px;overflow:auto;border:1px solid var(--g200);padding:10px;}
+.note{background:var(--warn-bg);border-left:4px solid var(--warn);padding:11px 13px;
+ margin:0 0 16px;font-size:13px;color:var(--g700);}
+.chartbox{border:1px solid var(--g200);padding:8px;margin:0 0 14px;}
+/* --- クロニクル --- */
+.mo{margin:0 0 4px;padding:5px 0 3px;border-top:2px solid var(--black);font-weight:900;font-size:13.5px;
+ position:sticky;top:0;background:#fff;z-index:2;}
+.beat{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--g100);}
+.tag{flex:0 0 auto;font-size:10.5px;font-weight:900;padding:1px 7px;border-radius:2px;
+ white-space:nowrap;height:19px;line-height:17px;border:1px solid;}
+.t-deal{background:var(--accent-bg);color:#047857;border-color:var(--accent);}
+.t-nego{background:#EFF6FF;color:#1D4ED8;border-color:#93C5FD;}
+.t-list{background:#F5F3FF;color:#6D28D9;border-color:#C4B5FD;}
+.t-rent{background:#FFF7ED;color:#C2410C;border-color:#FDBA74;}
+.t-media{background:var(--warn-bg);color:var(--warn);border-color:var(--warn);}
+.t-gov{background:#111827;color:#fff;border-color:#111827;}
+.t-exit{background:#FEF2F2;color:#B91C1C;border-color:#FCA5A5;}
+.t-talk{background:var(--g100);color:var(--g600);border-color:var(--g300);}
+.t-fail{background:#fff;color:#9CA3AF;border-color:var(--g300);}
+.t-idle{background:#fff;color:#D1D5DB;border-color:#F3F4F6;}
+.bd{flex:1;min-width:0;}
+.bd .hl{font-size:13.5px;line-height:1.6;}
+.bd .who{font-weight:700;}
+.bd .sub{font-size:12px;color:var(--g600);line-height:1.65;margin-top:2px;}
+.bd .say{font-size:12.5px;color:var(--g900);background:var(--g50);border-left:3px solid var(--g300);
+ padding:3px 9px;margin-top:4px;}
+.bd .say.pub{border-left-color:var(--accent);}
+.bd .say.pri{border-left-color:var(--blue);}
+.bd .mem{font-size:11.5px;color:var(--g500);margin-top:3px;font-style:italic;}
+.pill{display:inline-block;font-size:11px;font-weight:700;background:var(--g100);
+ border:1px solid var(--g200);border-radius:10px;padding:0 7px;margin-left:5px;cursor:pointer;}
+.pill:hover{background:var(--black);color:#fff;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.6;}
+th{background:var(--black);color:#fff;text-align:left;padding:7px 8px;font-weight:700;white-space:nowrap;}
+td{border-bottom:1px solid var(--g200);padding:6px 8px;vertical-align:top;}
+tr:nth-child(even) td{background:var(--g50);}
+.hit{background:#FEF9C3;}
+@media(max-width:640px){.stepnum{min-width:84px;}h1{font-size:19px;}}
+</style></head><body>
+<header><div class="wrap">
+<p class="eyebrow">QUIET ACQUISITION — SIMULATION RESULT</p>
+<h1>静かな占領 ── 不動産取得と地域認知の推移</h1>
+<p class="meta" id="hdrmeta"></p>
+</div></header>
+<div class="wrap">
+<div class="cards" id="cards"></div>
+<div class="note" id="verdict"></div>
+
+<h2>1. 所有マップの時系列</h2>
+<div class="panel">
+ <div class="ctrl">
+  <button id="play">▶ 再生</button>
+  <span class="stepnum" id="stepnum"></span>
+  <input type="range" id="slider" min="0" value="0">
+ </div>
+ <div class="mapwrap">
+  <canvas id="map" width="560" height="420"></canvas>
+  <div class="legend" id="legend"></div>
+ </div>
+ <div id="stepinfo" class="small" style="margin-top:10px;"></div>
+ <p class="small" style="margin-top:4px;"><b>区画をクリック</b>すると、その区画に起きたことが下の「3. 区画の履歴」に出る。</p>
+</div>
+
+<h2>2. KPI の推移</h2>
+<div class="chartbox"><svg id="ch1" viewBox="0 0 900 260" style="width:100%;height:auto;"></svg></div>
+<div class="chartbox"><svg id="ch2" viewBox="0 0 900 260" style="width:100%;height:auto;"></svg></div>
+
+<h2>3. 区画の履歴</h2>
+<div class="panel">
+ <div class="ctrl">
+  <label>区画 <select id="psel"></select></label>
+  <span class="small" id="pinfo"></span>
+ </div>
+ <div class="scroll" id="phist"></div>
+</div>
+
+<h2>4. 月次クロニクル ── 誰が何をして、何が起きたか</h2>
+<div class="panel">
+ <div class="ctrl" id="catbar"></div>
+ <div class="ctrl">
+  <label>エージェント <select id="asel"></select></label>
+  <label>区画 <select id="psel2"></select></label>
+  <label>月 <select id="msel"></select></label>
+  <input type="text" id="q" placeholder="発言・理由を検索" size="22">
+  <button id="reset">条件クリア</button>
+  <span class="small" id="cnt"></span>
+ </div>
+ <div class="scroll" id="chron" style="max-height:640px;"></div>
+</div>
+
+<h2>5. エージェント別スレッド ── 1体の36か月を一本で追う</h2>
+<div class="panel">
+ <div class="ctrl">
+  <label>エージェント <select id="tsel"></select></label>
+  <label><input type="checkbox" id="thideidle"> 静観の月を隠す</label>
+  <span class="small" id="tinfo"></span>
+ </div>
+ <div class="scroll" id="thread" style="max-height:640px;"></div>
+</div>
+
+<h2>6. 出来事</h2>
+<div class="panel" id="events"></div>
+</div>
+<script>
+const D = {"meta": {"run_name": "field_v3_a_city", "steps": 3, "agents": {"acquirer": 1, "broker": 2, "business": 4, "household": 16, "media": 2, "municipality": 2}, "parcels": 48, "model": "gemini-2.5-flash-lite", "provider": "google", "elapsed_sec": 25.3, "acquirer_model": "gemini-2.5-flash", "invalid_actions": 4, "truncated_responses": 3, "usage": {"calls": 81, "input_tokens": 106620, "cached_tokens": 2029, "output_tokens": 12285, "errors": 0, "by_tag": {"agent:household": {"calls": 48, "input": 65972, "cached": 1371, "output": 7801}, "agent:business": {"calls": 12, "input": 13281, "cached": 0, "output": 1842}, "agent:broker": {"calls": 6, "input": 6466, "cached": 658, "output": 951}, "agent:municipality": {"calls": 6, "input": 6640, "cached": 0, "output": 710}, "agent:media": {"calls": 6, "input": 6504, "cached": 0, "output": 912}, "agent:acquirer": {"calls": 3, "input": 7757, "cached": 0, "output": 69}}}, "kpi": {"final_acquirer_share": 0.0, "final_hhi": 0.0633, "final_acquirer_control_share": 0.0, "cognition_shift_final": null, "cascade": {"induced": 0, "max_chain": 0}, "final_effective_control_area_share": 0.0, "late_index": null, "detection_lag": null, "business_survival": 1.0, "resident_outflow": 0.0}}, "parcels": [{"pid": "P01", "x": 0, "y": 0, "block": "湾岸観光地区", "use": "public", "value": 2268}, {"pid": "P02", "x": 1, "y": 0, "block": "湾岸観光地区", "use": "shop", "value": 3645}, {"pid": "P03", "x": 2, "y": 0, "block": "湾岸観光地区", "use": "shop", "value": 4455}, {"pid": "P04", "x": 3, "y": 0, "block": "湾岸観光地区", "use": "shop", "value": 5670}, {"pid": "P05", "x": 4, "y": 0, "block": "中央駅前地区", "use": "residential", "value": 5184}, {"pid": "P06", "x": 5, "y": 0, "block": "中央駅前地区", "use": "shop", "value": 8640}, {"pid": "P07", "x": 6, "y": 0, "block": "中央駅前地区", "use": "shop", "value": 11520}, {"pid": "P08", "x": 7, "y": 0, "block": "中央駅前地区", "use": "residential", "value": 12960}, {"pid": "P09", "x": 0, "y": 1, "block": "湾岸観光地区", "use": "residential", "value": 2268}, {"pid": "P10", "x": 1, "y": 1, "block": "湾岸観光地区", "use": "shop", "value": 3645}, {"pid": "P11", "x": 2, "y": 1, "block": "湾岸観光地区", "use": "shop", "value": 4455}, {"pid": "P12", "x": 3, "y": 1, "block": "湾岸観光地区", "use": "residential", "value": 4536}, {"pid": "P13", "x": 4, "y": 1, "block": "中央駅前地区", "use": "residential", "value": 5184}, {"pid": "P14", "x": 5, "y": 1, "block": "中央駅前地区", "use": "shop", "value": 8640}, {"pid": "P15", "x": 6, "y": 1, "block": "中央駅前地区", "use": "shop", "value": 11520}, {"pid": "P16", "x": 7, "y": 1, "block": "中央駅前地区", "use": "residential", "value": 12960}, {"pid": "P17", "x": 0, "y": 2, "block": "湾岸観光地区", "use": "vacant", "value": 1588}, {"pid": "P18", "x": 1, "y": 2, "block": "湾岸観光地区", "use": "residential", "value": 2916}, {"pid": "P19", "x": 2, "y": 2, "block": "湾岸観光地区", "use": "residential", "value": 3564}, {"pid": "P20", "x": 3, "y": 2, "block": "湾岸観光地区", "use": "vacant", "value": 3175}, {"pid": "P21", "x": 4, "y": 2, "block": "中央駅前地区", "use": "residential", "value": 5184}, {"pid": "P22", "x": 5, "y": 2, "block": "中央駅前地区", "use": "residential", "value": 6912}, {"pid": "P23", "x": 6, "y": 2, "block": "中央駅前地区", "use": "residential", "value": 9216}, {"pid": "P24", "x": 7, "y": 2, "block": "中央駅前地区", "use": "vacant", "value": 9072}, {"pid": "P25", "x": 0, "y": 3, "block": "北部学術・生活地区", "use": "residential", "value": 1428}, {"pid": "P26", "x": 1, "y": 3, "block": "北部学術・生活地区", "use": "shop", "value": 2295}, {"pid": "P27", "x": 2, "y": 3, "block": "北部学術・生活地区", "use": "shop", "value": 2805}, {"pid": "P28", "x": 3, "y": 3, "block": "北部学術・生活地区", "use": "residential", "value": 2856}, {"pid": "P29", "x": 4, "y": 3, "block": "温泉丘陵地区", "use": "residential", "value": 4536}, {"pid": "P30", "x": 5, "y": 3, "block": "温泉丘陵地区", "use": "shop", "value": 7560}, {"pid": "P31", "x": 6, "y": 3, "block": "温泉丘陵地区", "use": "residential", "value": 8064}, {"pid": "P32", "x": 7, "y": 3, "block": "温泉丘陵地区", "use": "residential", "value": 11340}, {"pid": "P33", "x": 0, "y": 4, "block": "北部学術・生活地区", "use": "residential", "value": 1428}, {"pid": "P34", "x": 1, "y": 4, "block": "北部学術・生活地区", "use": "residential", "value": 1836}, {"pid": "P35", "x": 2, "y": 4, "block": "北部学術・生活地区", "use": "residential", "value": 2244}, {"pid": "P36", "x": 3, "y": 4, "block": "北部学術・生活地区", "use": "residential", "value": 2856}, {"pid": "P37", "x": 4, "y": 4, "block": "温泉丘陵地区", "use": "residential", "value": 4536}, {"pid": "P38", "x": 5, "y": 4, "block": "温泉丘陵地区", "use": "residential", "value": 6048}, {"pid": "P39", "x": 6, "y": 4, "block": "温泉丘陵地区", "use": "residential", "value": 8064}, {"pid": "P40", "x": 7, "y": 4, "block": "温泉丘陵地区", "use": "residential", "value": 11340}, {"pid": "P41", "x": 0, "y": 5, "block": "北部学術・生活地区", "use": "vacant", "value": 1000}, {"pid": "P42", "x": 1, "y": 5, "block": "北部学術・生活地区", "use": "residential", "value": 1836}, {"pid": "P43", "x": 2, "y": 5, "block": "北部学術・生活地区", "use": "residential", "value": 2244}, {"pid": "P44", "x": 3, "y": 5, "block": "北部学術・生活地区", "use": "vacant", "value": 1999}, {"pid": "P45", "x": 4, "y": 5, "block": "温泉丘陵地区", "use": "residential", "value": 4536}, {"pid": "P46", "x": 5, "y": 5, "block": "温泉丘陵地区", "use": "residential", "value": 6048}, {"pid": "P47", "x": 6, "y": 5, "block": "温泉丘陵地区", "use": "vacant", "value": 5645}, {"pid": "P48", "x": 7, "y": 5, "block": "温泉丘陵地区", "use": "public", "value": 11340}], "frames": [{"step": 0, "owner": {"P01": "MU01", "P02": "HH01", "P03": "HH02", "P04": "HH03", "P05": "HH04", "P06": "HH05", "P07": "HH06", "P08": "HH07", "P09": "HH08", "P10": "HH09", "P11": "HH10", "P12": "HH11", "P13": "HH12", "P14": "HH13", "P15": "HH14", "P16": "HH15", "P17": "HH16", "P18": "HH01", "P19": "HH02", "P20": "HH03", "P21": "HH04", "P22": "HH05", "P23": "HH06", "P24": "HH07", "P25": "HH08", "P26": "HH09", "P27": "HH10", "P28": "HH11", "P29": "HH12", "P30": "HH13", "P31": "HH14", "P32": "HH15", "P33": "HH16", "P34": "HH01", "P35": "HH02", "P36": "HH03", "P37": "HH04", "P38": "HH05", "P39": "HH06", "P40": "HH07", "P41": "HH08", "P42": "HH09", "P43": "HH10", "P44": "HH11", "P45": "HH12", "P46": "HH13", "P47": "HH14", "P48": "MU01"}, "registered": {"P01": "G01", "P02": "R01", "P03": "R02", "P04": "R03", "P05": "R04", "P06": "R05", "P07": "R06", "P08": "R07", "P09": "R08", "P10": "R09", "P11": "R10", "P12": "R11", "P13": "R12", "P14": "R13", "P15": "R14", "P16": "R15", "P17": "R16", "P18": "R01", "P19": "R02", "P20": "R03", "P21": "R04", "P22": "R05", "P23": "R06", "P24": "R07", "P25": "R08", "P26": "R09", "P27": "R10", "P28": "R11", "P29": "R12", "P30": "R13", "P31": "R14", "P32": "R15", "P33": "R16", "P34": "R01", "P35": "R02", "P36": "R03", "P37": "R04", "P38": "R05", "P39": "R06", "P40": "R07", "P41": "R08", "P42": "R09", "P43": "R10", "P44": "R11", "P45": "R12", "P46": "R13", "P47": "R14", "P48": "G01"}, "use": {"P01": "public", "P02": "shop", "P03": "shop", "P04": "shop", "P05": "residential", "P06": "shop", "P07": "shop", "P08": "residential", "P09": "residential", "P10": "shop", "P11": "shop", "P12": "residential", "P13": "residential", "P14": "shop", "P15": "shop", "P16": "residential", "P17": "vacant", "P18": "residential", "P19": "residential", "P20": "vacant", "P21": "residential", "P22": "residential", "P23": "residential", "P24": "vacant", "P25": "residential", "P26": "shop", "P27": "shop", "P28": "residential", "P29": "residential", "P30": "shop", "P31": "residential", "P32": "residential", "P33": "residential", "P34": "residential", "P35": "residential", "P36": "residential", "P37": "residential", "P38": "residential", "P39": "residential", "P40": "residential", "P41": "vacant", "P42": "residential", "P43": "residential", "P44": "vacant", "P45": "residential", "P46": "residential", "P47": "vacant", "P48": "public"}, "rent": {"P01": 0, "P02": 24, "P03": 24, "P04": 24, "P05": 0, "P06": 24, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}, "tenant": {"P01": "", "P02": "BZ01", "P03": "BZ02", "P04": "BZ03", "P05": "", "P06": "BZ04", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller_name": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "control_rent": {"P01": 0, "P02": 0, "P03": 0, "P04": 0, "P05": 0, "P06": 0, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}}, {"step": 1, "owner": {"P01": "MU01", "P02": "HH01", "P03": "HH02", "P04": "HH03", "P05": "HH04", "P06": "HH05", "P07": "HH06", "P08": "HH07", "P09": "HH08", "P10": "HH09", "P11": "HH10", "P12": "HH11", "P13": "HH12", "P14": "HH13", "P15": "HH14", "P16": "HH15", "P17": "HH16", "P18": "HH01", "P19": "HH02", "P20": "HH03", "P21": "HH04", "P22": "HH05", "P23": "HH06", "P24": "HH07", "P25": "HH08", "P26": "HH09", "P27": "HH10", "P28": "HH11", "P29": "HH12", "P30": "HH13", "P31": "HH14", "P32": "HH15", "P33": "HH16", "P34": "HH01", "P35": "HH02", "P36": "HH03", "P37": "HH04", "P38": "HH05", "P39": "HH06", "P40": "HH07", "P41": "HH08", "P42": "HH09", "P43": "HH10", "P44": "HH11", "P45": "HH12", "P46": "HH13", "P47": "HH14", "P48": "MU01"}, "registered": {"P01": "G01", "P02": "R01", "P03": "R02", "P04": "R03", "P05": "R04", "P06": "R05", "P07": "R06", "P08": "R07", "P09": "R08", "P10": "R09", "P11": "R10", "P12": "R11", "P13": "R12", "P14": "R13", "P15": "R14", "P16": "R15", "P17": "R16", "P18": "R01", "P19": "R02", "P20": "R03", "P21": "R04", "P22": "R05", "P23": "R06", "P24": "R07", "P25": "R08", "P26": "R09", "P27": "R10", "P28": "R11", "P29": "R12", "P30": "R13", "P31": "R14", "P32": "R15", "P33": "R16", "P34": "R01", "P35": "R02", "P36": "R03", "P37": "R04", "P38": "R05", "P39": "R06", "P40": "R07", "P41": "R08", "P42": "R09", "P43": "R10", "P44": "R11", "P45": "R12", "P46": "R13", "P47": "R14", "P48": "G01"}, "use": {"P01": "public", "P02": "shop", "P03": "shop", "P04": "shop", "P05": "residential", "P06": "shop", "P07": "shop", "P08": "residential", "P09": "residential", "P10": "shop", "P11": "shop", "P12": "residential", "P13": "residential", "P14": "shop", "P15": "shop", "P16": "residential", "P17": "vacant", "P18": "residential", "P19": "residential", "P20": "vacant", "P21": "residential", "P22": "residential", "P23": "residential", "P24": "vacant", "P25": "residential", "P26": "shop", "P27": "shop", "P28": "residential", "P29": "residential", "P30": "shop", "P31": "residential", "P32": "residential", "P33": "residential", "P34": "residential", "P35": "residential", "P36": "residential", "P37": "residential", "P38": "residential", "P39": "residential", "P40": "residential", "P41": "vacant", "P42": "residential", "P43": "residential", "P44": "vacant", "P45": "residential", "P46": "residential", "P47": "vacant", "P48": "public"}, "rent": {"P01": 0, "P02": 24, "P03": 24, "P04": 24, "P05": 0, "P06": 24, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}, "tenant": {"P01": "", "P02": "BZ01", "P03": "BZ02", "P04": "BZ03", "P05": "", "P06": "BZ04", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller_name": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "control_rent": {"P01": 0, "P02": 0, "P03": 0, "P04": 0, "P05": 0, "P06": 0, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}}, {"step": 2, "owner": {"P01": "MU01", "P02": "HH01", "P03": "HH02", "P04": "HH03", "P05": "HH04", "P06": "HH05", "P07": "HH06", "P08": "HH07", "P09": "HH08", "P10": "HH09", "P11": "HH10", "P12": "HH11", "P13": "HH12", "P14": "HH13", "P15": "HH14", "P16": "HH15", "P17": "HH16", "P18": "HH01", "P19": "HH02", "P20": "HH03", "P21": "HH04", "P22": "HH05", "P23": "HH06", "P24": "HH07", "P25": "HH08", "P26": "HH09", "P27": "HH10", "P28": "HH11", "P29": "HH12", "P30": "HH13", "P31": "HH14", "P32": "HH15", "P33": "HH16", "P34": "HH01", "P35": "HH02", "P36": "HH03", "P37": "HH04", "P38": "HH05", "P39": "HH06", "P40": "HH07", "P41": "HH08", "P42": "HH09", "P43": "HH10", "P44": "HH11", "P45": "HH12", "P46": "HH13", "P47": "HH14", "P48": "MU01"}, "registered": {"P01": "G01", "P02": "R01", "P03": "R02", "P04": "R03", "P05": "R04", "P06": "R05", "P07": "R06", "P08": "R07", "P09": "R08", "P10": "R09", "P11": "R10", "P12": "R11", "P13": "R12", "P14": "R13", "P15": "R14", "P16": "R15", "P17": "R16", "P18": "R01", "P19": "R02", "P20": "R03", "P21": "R04", "P22": "R05", "P23": "R06", "P24": "R07", "P25": "R08", "P26": "R09", "P27": "R10", "P28": "R11", "P29": "R12", "P30": "R13", "P31": "R14", "P32": "R15", "P33": "R16", "P34": "R01", "P35": "R02", "P36": "R03", "P37": "R04", "P38": "R05", "P39": "R06", "P40": "R07", "P41": "R08", "P42": "R09", "P43": "R10", "P44": "R11", "P45": "R12", "P46": "R13", "P47": "R14", "P48": "G01"}, "use": {"P01": "public", "P02": "shop", "P03": "shop", "P04": "shop", "P05": "residential", "P06": "shop", "P07": "shop", "P08": "residential", "P09": "residential", "P10": "shop", "P11": "shop", "P12": "residential", "P13": "residential", "P14": "shop", "P15": "shop", "P16": "residential", "P17": "vacant", "P18": "residential", "P19": "residential", "P20": "vacant", "P21": "residential", "P22": "residential", "P23": "residential", "P24": "vacant", "P25": "residential", "P26": "shop", "P27": "shop", "P28": "residential", "P29": "residential", "P30": "shop", "P31": "residential", "P32": "residential", "P33": "residential", "P34": "residential", "P35": "residential", "P36": "residential", "P37": "residential", "P38": "residential", "P39": "residential", "P40": "residential", "P41": "vacant", "P42": "residential", "P43": "residential", "P44": "vacant", "P45": "residential", "P46": "residential", "P47": "vacant", "P48": "public"}, "rent": {"P01": 0, "P02": 24, "P03": 24, "P04": 24, "P05": 0, "P06": 24, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}, "tenant": {"P01": "", "P02": "BZ01", "P03": "BZ02", "P04": "BZ03", "P05": "", "P06": "BZ04", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller_name": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "control_rent": {"P01": 0, "P02": 0, "P03": 0, "P04": 0, "P05": 0, "P06": 0, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}}, {"step": 3, "owner": {"P01": "MU01", "P02": "HH01", "P03": "HH02", "P04": "HH03", "P05": "HH04", "P06": "HH05", "P07": "HH06", "P08": "HH07", "P09": "HH08", "P10": "HH09", "P11": "HH10", "P12": "HH11", "P13": "HH12", "P14": "HH13", "P15": "HH14", "P16": "HH15", "P17": "HH16", "P18": "HH01", "P19": "HH02", "P20": "HH03", "P21": "HH04", "P22": "HH05", "P23": "HH06", "P24": "HH07", "P25": "HH08", "P26": "HH09", "P27": "HH10", "P28": "HH11", "P29": "HH12", "P30": "HH13", "P31": "HH14", "P32": "HH15", "P33": "HH16", "P34": "HH01", "P35": "HH02", "P36": "HH03", "P37": "HH04", "P38": "HH05", "P39": "HH06", "P40": "HH07", "P41": "HH08", "P42": "HH09", "P43": "HH10", "P44": "HH11", "P45": "HH12", "P46": "HH13", "P47": "HH14", "P48": "MU01"}, "registered": {"P01": "G01", "P02": "R01", "P03": "R02", "P04": "R03", "P05": "R04", "P06": "R05", "P07": "R06", "P08": "R07", "P09": "R08", "P10": "R09", "P11": "R10", "P12": "R11", "P13": "R12", "P14": "R13", "P15": "R14", "P16": "R15", "P17": "R16", "P18": "R01", "P19": "R02", "P20": "R03", "P21": "R04", "P22": "R05", "P23": "R06", "P24": "R07", "P25": "R08", "P26": "R09", "P27": "R10", "P28": "R11", "P29": "R12", "P30": "R13", "P31": "R14", "P32": "R15", "P33": "R16", "P34": "R01", "P35": "R02", "P36": "R03", "P37": "R04", "P38": "R05", "P39": "R06", "P40": "R07", "P41": "R08", "P42": "R09", "P43": "R10", "P44": "R11", "P45": "R12", "P46": "R13", "P47": "R14", "P48": "G01"}, "use": {"P01": "public", "P02": "shop", "P03": "shop", "P04": "shop", "P05": "residential", "P06": "shop", "P07": "shop", "P08": "residential", "P09": "residential", "P10": "shop", "P11": "shop", "P12": "residential", "P13": "residential", "P14": "shop", "P15": "shop", "P16": "residential", "P17": "vacant", "P18": "residential", "P19": "residential", "P20": "vacant", "P21": "residential", "P22": "residential", "P23": "residential", "P24": "vacant", "P25": "residential", "P26": "shop", "P27": "shop", "P28": "residential", "P29": "residential", "P30": "shop", "P31": "residential", "P32": "residential", "P33": "residential", "P34": "residential", "P35": "residential", "P36": "residential", "P37": "residential", "P38": "residential", "P39": "residential", "P40": "residential", "P41": "vacant", "P42": "residential", "P43": "residential", "P44": "vacant", "P45": "residential", "P46": "residential", "P47": "vacant", "P48": "public"}, "rent": {"P01": 0, "P02": 24, "P03": 24, "P04": 24, "P05": 0, "P06": 24, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}, "tenant": {"P01": "", "P02": "BZ01", "P03": "BZ02", "P04": "BZ03", "P05": "", "P06": "BZ04", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "controller_name": {"P01": "", "P02": "", "P03": "", "P04": "", "P05": "", "P06": "", "P07": "", "P08": "", "P09": "", "P10": "", "P11": "", "P12": "", "P13": "", "P14": "", "P15": "", "P16": "", "P17": "", "P18": "", "P19": "", "P20": "", "P21": "", "P22": "", "P23": "", "P24": "", "P25": "", "P26": "", "P27": "", "P28": "", "P29": "", "P30": "", "P31": "", "P32": "", "P33": "", "P34": "", "P35": "", "P36": "", "P37": "", "P38": "", "P39": "", "P40": "", "P41": "", "P42": "", "P43": "", "P44": "", "P45": "", "P46": "", "P47": "", "P48": ""}, "control_rent": {"P01": 0, "P02": 0, "P03": 0, "P04": 0, "P05": 0, "P06": 0, "P07": 0, "P08": 0, "P09": 0, "P10": 0, "P11": 0, "P12": 0, "P13": 0, "P14": 0, "P15": 0, "P16": 0, "P17": 0, "P18": 0, "P19": 0, "P20": 0, "P21": 0, "P22": 0, "P23": 0, "P24": 0, "P25": 0, "P26": 0, "P27": 0, "P28": 0, "P29": 0, "P30": 0, "P31": 0, "P32": 0, "P33": 0, "P34": 0, "P35": 0, "P36": 0, "P37": 0, "P38": 0, "P39": 0, "P40": 0, "P41": 0, "P42": 0, "P43": 0, "P44": 0, "P45": 0, "P46": 0, "P47": 0, "P48": 0}}], "kpi": [{"step": 1, "acquirer_share": 0.0, "hhi": 0.0633, "block_share": {"湾岸観光地区": 0.0, "中央駅前地区": 0.0, "北部学術・生活地区": 0.0, "温泉丘陵地区": 0.0}, "transfers_cum": 0, "cascade_induced": 0, "cascade_max_chain": 0, "business_survival": 1.0, "resident_outflow": 0.0, "shops_occupied": 4, "shops_total": 12, "mean_shop_rent": 8.0, "ordinance_enacted": false, "published_acquisition": false, "acquirer_control_share": 0.0}, {"step": 2, "acquirer_share": 0.0, "hhi": 0.0633, "block_share": {"湾岸観光地区": 0.0, "中央駅前地区": 0.0, "北部学術・生活地区": 0.0, "温泉丘陵地区": 0.0}, "transfers_cum": 0, "cascade_induced": 0, "cascade_max_chain": 0, "business_survival": 1.0, "resident_outflow": 0.0, "shops_occupied": 4, "shops_total": 12, "mean_shop_rent": 8.0, "ordinance_enacted": false, "published_acquisition": false, "acquirer_control_share": 0.0}, {"step": 3, "acquirer_share": 0.0, "hhi": 0.0633, "block_share": {"湾岸観光地区": 0.0, "中央駅前地区": 0.0, "北部学術・生活地区": 0.0, "温泉丘陵地区": 0.0}, "transfers_cum": 0, "cascade_induced": 0, "cascade_max_chain": 0, "business_survival": 1.0, "resident_outflow": 0.0, "shops_occupied": 4, "shops_total": 12, "mean_shop_rent": 8.0, "ordinance_enacted": false, "published_acquisition": false, "acquirer_control_share": 0.0}], "cognition": [{"step": 1, "our_town": 0, "their_town": 0, "neutral": 0, "shift_rate": null, "shift_rate_cum": null}, {"step": 2, "our_town": 0, "their_town": 0, "neutral": 0, "shift_rate": null, "shift_rate_cum": null}, {"step": 3, "our_town": 0, "their_town": 0, "neutral": 0, "shift_rate": null, "shift_rate_cum": null}], "utterances": [{"step": 1, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "今日も元気に営業します！"}, {"step": 1, "from": "BZ03", "role": "business", "name": "T03", "location": "HOME:BZ03", "text": "今日も一日頑張りましょう。"}, {"step": 1, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "今月も通常営業でまいります。会員の皆様、どうぞご利用ください。"}, {"step": 1, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "今日は天気が良いので、少し散歩でもしようかね。"}, {"step": 1, "from": "HH04", "role": "household", "name": "R04", "location": "HOME:HH04", "text": "今日も共同浴場の掃除は欠かせないな。もう年だし、体がつらいが、これも長年の習慣だからな。"}, {"step": 1, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "今日もいい天気ですね。このコーヒー、豆の種類が変わりましたか？"}, {"step": 1, "from": "HH09", "role": "household", "name": "R09", "location": "HOME:HH09", "text": "今日は天気がいいから、少し散歩でもしようか。"}, {"step": 2, "from": "BZ03", "role": "business", "name": "T03", "location": "HOME:BZ03", "text": "今日も元気に営業しています。お困りのことがあればいつでもお声がけください。"}, {"step": 2, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "会員の皆様、いつもご利用ありがとうございます。今月も通常営業いたします。ご不明な点はお気軽にお声がけください。"}, {"step": 2, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "今月も特に変わったことはないね。共同浴場の修繕費、そろそろまた集まる頃かしら。"}, {"step": 2, "from": "HH04", "role": "household", "name": "R04", "location": "V03", "text": "今日も元気に湯を沸かすかね。"}, {"step": 2, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "今日も湾岸の景色は綺麗だな。リモートワークをしながら、この街の魅力を発信し続けよう。"}, {"step": 2, "from": "HH14", "role": "household", "name": "R14", "location": "HOME:HH14", "text": "今日も一日頑張ろう。"}, {"step": 3, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "今日も元気に営業中です！"}, {"step": 3, "from": "BZ03", "role": "business", "name": "T03", "location": "HOME:BZ03", "text": "今日も元気に営業します！"}, {"step": 3, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "共同浴場の修繕、いくらくらいかかるのかしら。"}, {"step": 3, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "今日もいい天気ですね。この景色を見ながら仕事ができるのは本当に幸せです。"}, {"step": 3, "from": "HH12", "role": "household", "name": "R12", "location": "HOME:HH12", "text": "今月も特に予定はないね。ゆっくり過ごしましょう。"}], "events": [{"step": 1, "id": "AQ01", "name": "X社", "role": "acquirer", "action": "market_research", "target": "", "amount": 0, "ok": false, "outcome": "invalid_action", "why": "unknown_location", "utterance": "", "ch": "none", "to": "", "memory": "", "reasoning": "", "under_name": ""}, {"step": 1, "id": "BR01", "name": "B01", "role": "broker", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に公募案件や顧客からの連絡もなく、静かなスタート。地域の状況を把握しつつ、次の動きに備えよう。", "reasoning": "特に行動すべき情報がなく、様子見とする。", "under_name": ""}, {"step": 1, "id": "BR02", "name": "B02", "role": "broker", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "1200万円の資金がある。公開されている売出し・長期賃貸募集はない。HH01–HH16（住民）、BZ01–BZ04（事業者）、BR01–BR02（仲介）、AQ01（X社）、MU01–MU02（行政）、MD01–MD02（記者）が公開連絡先として存在する。今月は特に目立った動きはなかった。", "reasoning": "公開案件がないため、通常業務は行えない。様子を見る。", "under_name": ""}, {"step": 1, "id": "BZ01", "name": "T01", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "通常営業を開始します。", "ch": "direct", "to": "T01", "memory": "旅館の通常営業を開始する。手元資金は650万円。P02の賃料は月24万円。", "reasoning": "営業開始月なので、まずは通常営業を行う。", "under_name": ""}, {"step": 1, "id": "BZ02", "name": "T02", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "今日も元気に営業します！", "ch": "ambient", "to": "", "memory": "飲食店T02、駅前で通常営業。夫婦で地元客と観光客に対応。店舗は賃借。資金650万円。賃料24万/月。今月は通常営業から開始。", "reasoning": "通常営業を行い、日々の売上を確保する。まずは現状維持から。", "under_name": ""}, {"step": 1, "id": "BZ03", "name": "T03", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "今日も一日頑張りましょう。", "ch": "ambient", "to": "", "memory": "共同浴場前の食品・日用品店T03。高齢住民への配達も行う。店舗は賃借で後継者は未定。日々の営業と地域客への対応が中心。", "reasoning": "通常営業を行い、地域住民との関係を維持する。", "under_name": ""}, {"step": 1, "id": "BZ04", "name": "T04", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "今月も通常営業でまいります。会員の皆様、どうぞご利用ください。", "ch": "ambient", "to": "", "memory": "P06（コワーキング施設）の通常営業を行う。開業借入の返済は順調。会員は安定しており、新規会員獲得のためのイベント企画も検討中。", "reasoning": "開業借入の返済のため、まずは安定した通常営業を継続する。", "under_name": ""}, {"step": 1, "id": "HH01", "name": "R01", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日は天気が良いので、少し散歩でもしようかね。", "ch": "ambient", "to": "", "memory": "74歳の夫婦世帯。温泉丘陵地区の築古住宅と小さな貸店舗を所有。町内会と共同浴場に関わり、修繕費と県外の子どものことが気になっている。今月は特に不動産に関する動きはなく、日常を送る。", "reasoning": "特に不動産に関する用事や懸念事項がないため、日常の生活を送る。", "under_name": ""}, {"step": 1, "id": "HH02", "name": "R02", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今月も仕事と子育て、地域活動で忙しくなりそうです。不動産のことはまた来月考えよう。", "ch": "none", "to": "", "memory": "今月も仕事、子育て、地域活動を中心に生活を送る。不動産については特に何もせず、来月以降に改めて検討する予定。", "reasoning": "特に不動産に関するイベントや連絡がなく、現状維持が最適と判断。", "under_name": ""}, {"step": 1, "id": "HH03", "name": "R03", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今月も特に変わったことはなかったな。来月あたり、そろそろP20の草刈りでもしないといかんな。", "ch": "none", "to": "", "memory": "P04, P20, P36の物件を所有している。P20の草刈りが負担になっている。今月は特に何もせず、普段通りの日常を送った。", "reasoning": "特に不動産に関する動きはなく、普段通りの生活を送ったため、routineを選択した。", "under_name": ""}, {"step": 1, "id": "HH04", "name": "R04", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日も共同浴場の掃除は欠かせないな。もう年だし、体がつらいが、これも長年の習慣だからな。", "ch": "ambient", "to": "", "memory": "82歳単身世帯。温泉付きの古い家で暮らし、共同浴場の世話を続けている。坂道と家の段差がつらくなり、県外の家族から同居を勧められている。手元資金1000万円。所有物件はP05, P21, P37。", "reasoning": "共同浴場の世話は長年の習慣であり、体がつらいと感じつつも続けている。", "under_name": ""}, {"step": 1, "id": "HH05", "name": "R05", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に不動産に関する動きはなく、通常の生活を送る。今後のために、まずは手元の資金状況を確認し、保有物件の評価額を把握しておく。", "reasoning": "特に不動産に関するイベントや連絡がないため、日常業務をこなす。", "under_name": ""}, {"step": 1, "id": "HH06", "name": "R06", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "毎月不動産を考える必要はないので、今月は普段通りの生活を送る。母の介護と仕事で忙しい。", "reasoning": "不動産に関する具体的な動きはないため、日常のルーティンを選択する。", "under_name": ""}, {"step": 1, "id": "HH07", "name": "R07", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に不動産に関する動きはない。普段通りの生活を送る。", "reasoning": "特に不動産に関するイベントや必要性が無いため、通常通りの生活を選択する。", "under_name": ""}, {"step": 1, "id": "HH08", "name": "R08", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日もいい天気ですね。このコーヒー、豆の種類が変わりましたか？", "ch": "ambient", "to": "", "memory": "湾岸の喫茶店(V04)でリモートワーク。特に不動産に関する動きはなく、日常を過ごしている。資金は1000万円。所有物件はP09、P25、P41。", "reasoning": "特に不動産に関する用件はなく、普段通り喫茶店で仕事をする。", "under_name": ""}, {"step": 1, "id": "HH09", "name": "R09", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日は天気がいいから、少し散歩でもしようか。", "ch": "ambient", "to": "", "memory": "元市職員。駅前に住宅と空いた元店舗の区画を持つ。68歳。退職後は散歩、通院、家の管理が中心。手元資金1000万円。所有物件はP10(店舗/湾岸)、P26(店舗/北部)、P42(住宅/北部)。今月は特に不動産に関する行動はせず、普段通りの生活を送る。", "reasoning": "特に不動産に関する予定はなく、普段通りの日常を送る。", "under_name": ""}, {"step": 1, "id": "HH10", "name": "R10", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今月は特に大きな予定はないので、家でゆっくり過ごそう。", "ch": "none", "to": "", "memory": "R10（HH10）は39歳、夫婦と小学生2人の世帯。北部地区の住宅ローンが長く残っている。学校、仕事、家事、保護者仲間との付き合いを大切にしている。今月は特に大きな予定はないので、家でゆっくり過ごす。", "reasoning": "特に不動産に関する動きや、他者との交流の必要性を感じないため、日常のルーティンを選択。", "under_name": ""}, {"step": 1, "id": "HH11", "name": "R11", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "旅館の仕事と子どもの進学費用準備が中心の生活。相続した温泉丘陵地区の住宅と、北部学術・生活地区の住宅・空地を所有している。手元資金は1000万円。", "reasoning": "今月は特に不動産に関する予定はなく、日常のルーティンをこなす。", "under_name": ""}, {"step": 1, "id": "HH12", "name": "R12", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "土産店を引退し、元店舗を貸している66歳の夫婦世帯。湾岸の住民。借主、旧知の商店主、旅館関係者との付き合いが続いている。手元資金は1000万円。P13, P29, P45の住宅を所有。", "reasoning": "特に不動産に関する行動の必要がないため、通常の生活を送る。", "under_name": ""}, {"step": 1, "id": "HH13", "name": "R13", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "中古住宅購入後、初めての居住月。通勤と趣味に時間を使い、地域との関わりはまだ薄い。", "reasoning": "購入したばかりの自宅での生活に慣れることを優先する。", "under_name": ""}, {"step": 1, "id": "HH14", "name": "R14", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "駅前の実家で父と暮らす介護職。古い借入と家の修繕負担がある。近所の飲食店や共同浴場を日常的に使う。", "reasoning": "今月は特に不動産に関する動きはないため、日常のルーティンを選択する。", "under_name": ""}, {"step": 1, "id": "HH15", "name": "R15", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に不動産に関する行動はせず、日常を過ごす。", "reasoning": "転勤の可能性があり、すぐには行動を起こさない。", "under_name": ""}, {"step": 1, "id": "HH16", "name": "R16", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "70歳の夫婦世帯。北部地区に自宅とは別の古い空室住宅を持つ。大学の国際交流ボランティアと自治会会計を手伝っている。手元資金は1000万円。P17(空地/湾岸)とP33(住宅/北部)を所有。", "reasoning": "特に不動産に関する用件はないため、通常の日常を送る。", "under_name": ""}, {"step": 1, "id": "MD01", "name": "J01", "role": "media", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に大きな動きはなかった。引き続きA市の動向を注視していく。", "reasoning": "特に調査すべき情報がなく、通常業務に徹する。", "under_name": ""}, {"step": 1, "id": "MD02", "name": "J02", "role": "media", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "A市は湾岸にある人口約12万人の温泉観光都市。スペースポート構想があるが不確定。市内は人口減少、高齢化、相続、建物の改修負担、後継者不足が進む。住民、事業者、仲介、行政、記者などが日常業務を送る。私は地域記者J02として、店舗、移住、観光、催事を扱うウェブ媒体の取材を行う。", "reasoning": "今月は特に情報がないため、特別な活動は行わず様子を見る。", "under_name": ""}, {"step": 1, "id": "MU01", "name": "G01", "role": "municipality", "action": "routine_service", "target": "", "amount": 0, "ok": true, "outcome": "routine_service", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務として、月次の報告書作成と、他部署との情報共有を行う。特に空き家対策に関する部署間連携の必要性を感じる。", "reasoning": "月初の定例業務として執行する。", "under_name": ""}, {"step": 1, "id": "MU02", "name": "G02", "role": "municipality", "action": "routine_service", "target": "", "amount": 0, "ok": true, "outcome": "routine_service", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務を遂行する。", "reasoning": "今月は特に緊急の用件はなく、通常の行政事務を行う。", "under_name": ""}, {"step": 2, "id": "AQ01", "name": "X社", "role": "acquirer", "action": "check_land_registry", "target": "", "amount": 0, "ok": false, "outcome": "invalid_action", "why": "unknown_location", "utterance": "", "ch": "none", "to": "", "memory": "", "reasoning": "", "under_name": ""}, {"step": 2, "id": "BR01", "name": "B01", "role": "broker", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "静かなスタート。地域の状況を把握しつつ、次の動きに備える。", "reasoning": "特に公募案件や顧客からの連絡もなく、静かなので様子を見る。", "under_name": ""}, {"step": 2, "id": "BR02", "name": "B02", "role": "broker", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "1200万円の資金がある。公開されている売出し・長期賃貸募集はない。HH01–HH16（住民）、BZ01–BZ04（事業者）、BR01–BR02（仲介）、AQ01（X社）、MU01–MU02（行政）、MD01–MD02（記者）が公開連絡先として存在する。今月は特に目立った動きはなかった。", "reasoning": "公開されている物件や目立った動きがないため、様子を見る。", "under_name": ""}, {"step": 2, "id": "BZ01", "name": "T01", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "通常営業を続けます。", "ch": "none", "to": "", "memory": "旅館の通常営業を続けます。手元資金は680万円です。P02の賃料は月24万円です。", "reasoning": "通常営業を継続し、日々の運営を行います。", "under_name": ""}, {"step": 2, "id": "BZ02", "name": "T02", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "飲食店T02、駅前で通常営業。夫婦で地元客と観光客に対応。店舗は賃借。資金665万円。賃料24万/月。今月も通常営業を継続する。", "reasoning": "通常営業を継続し、収入を得る。資金繰りも安定している。", "under_name": ""}, {"step": 2, "id": "BZ03", "name": "T03", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "今日も元気に営業しています。お困りのことがあればいつでもお声がけください。", "ch": "ambient", "to": "", "memory": "共同浴場前の食品・日用品店T03。高齢住民への配達も行う。店舗は賃借で後継者は未定。日々の営業と地域客への対応が中心。店舗P04は賃料24万円/月。", "reasoning": "通常営業を行い、地域住民との関係維持に努める。", "under_name": ""}, {"step": 2, "id": "BZ04", "name": "T04", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "会員の皆様、いつもご利用ありがとうございます。今月も通常営業いたします。ご不明な点はお気軽にお声がけください。", "ch": "ambient", "to": "", "memory": "P06（コワーキング施設）の通常営業を行う。開業借入の返済は順調。会員は安定しており、新規会員獲得のためのイベント企画も検討中。今月も通常営業を継続し、会員への挨拶を行う。", "reasoning": "通常営業を継続し、会員への挨拶を行う。特に大きな問題はなく、現状維持で問題ない。", "under_name": ""}, {"step": 2, "id": "HH01", "name": "R01", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今月も特に変わったことはないね。共同浴場の修繕費、そろそろまた集まる頃かしら。", "ch": "ambient", "to": "", "memory": "74歳の夫婦世帯。温泉丘陵地区の築古住宅と小さな貸店舗を所有。町内会と共同浴場に関わり、修繕費と県外の子どものことが気になっている。今月は特に不動産に関する動きはなく、日常を送る。共同浴場の修繕費が気になる。", "reasoning": "特に不動産に関する用件はなく、日常を送る。共同浴場の修繕費が気になるので、それを口にする。", "under_name": ""}, {"step": 2, "id": "HH02", "name": "R02", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月も仕事、子育て、地域活動を中心に生活を送る。不動産については特に何もせず、来月以降に改めて検討する予定。手元資金は1024万円。所有物件はP03、P19、P35。", "reasoning": "特に不動産に関する動きがなく、日常を送るためroutineを選択。", "under_name": ""}, {"step": 2, "id": "HH03", "name": "R03", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "P04, P20, P36の物件を所有。P20の草刈りが負担。今月は特に何もせず、普段通りの日常を送った。手元資金は1024万円。", "reasoning": "今月は特に不動産に関する具体的な行動の必要性を感じず、普段通りの生活を送ることを選択した。", "under_name": ""}, {"step": 2, "id": "HH04", "name": "R04", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日も元気に湯を沸かすかね。", "ch": "ambient", "to": "", "memory": "82歳単身世帯。温泉付きの古い家で暮らし、共同浴場の世話を続けている。坂道と家の段差がつらくなり、県外の家族から同居を勧められている。手元資金1000万円。所有物件はP05, P21, P37。", "reasoning": "共同浴場の世話は日課であり、生活の一部であるため。", "under_name": ""}, {"step": 2, "id": "HH05", "name": "R05", "role": "household", "action": "household_finance", "target": "", "amount": 0, "ok": true, "outcome": "household_finance", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "先月からの継続で、保有物件の評価額を把握しておく。手元資金は1024万円。P06（店舗）は8640万円、P22（住宅）は6912万円、P38（住宅）は6048万円と評価。特に大きな動きはない。", "reasoning": "保有物件の評価額と手元資金を確認し、将来の計画に備える。", "under_name": ""}, {"step": 2, "id": "HH06", "name": "R06", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "母の様子を見ながら、仕事の準備をしよう。", "ch": "none", "to": "", "memory": "母の介護と仕事で忙しい日々。不動産については、今は特に何も考えていない。毎月不動産を考える必要はないので、今月も普段通りの生活を送る。", "reasoning": "毎月不動産を考える必要はないため、普段通りの生活を選択する。", "under_name": ""}, {"step": 2, "id": "HH07", "name": "R07", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に不動産に関する動きはない。普段通りの生活を送る。", "reasoning": "特に不動産に関する動きがなく、普段通りの生活を送る。", "under_name": ""}, {"step": 2, "id": "HH08", "name": "R08", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日も湾岸の景色は綺麗だな。リモートワークをしながら、この街の魅力を発信し続けよう。", "ch": "ambient", "to": "", "memory": "湾岸の喫茶店(V04)でリモートワーク。この街の魅力を発信し続けることを意識している。資金1000万円。所有物件はP09、P25、P41。", "reasoning": "特に不動産に関する動きがないため、日常業務と情報発信を続ける。", "under_name": ""}, {"step": 2, "id": "HH09", "name": "R09", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "元市職員。駅前に住宅と空いた元店舗の区画を持つ。68歳。退職後は散歩、通院、家の管理が中心。手元資金1000万円。所有物件はP10(店舗/湾岸)、P26(店舗/北部)、P42(住宅/北部)。今月は特に不動産に関する行動はせず、普段通りの生活を送る。", "reasoning": "特に不動産に関する行動の必要はなく、普段通りの生活を送る。", "under_name": ""}, {"step": 2, "id": "HH10", "name": "R10", "role": "household", "action": "household_finance", "target": "", "amount": 0, "ok": true, "outcome": "household_finance", "why": "", "utterance": "今月の家計を確認します。", "ch": "none", "to": "", "memory": "R10（HH10）は39歳、夫婦と小学生2人の世帯。北部地区の住宅ローンが長く残っている。学校、仕事、家事、保護者仲間との付き合いを大切にしている。今月は特に大きな予定はないので、家計を確認する。", "reasoning": "手元資金と所有物件の評価額を確認し、今後の家計について考える。", "under_name": ""}, {"step": 2, "id": "HH11", "name": "R11", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "旅館の仕事と子どもの進学費用準備が中心の生活。相続した温泉丘陵地区の住宅を所有している。手元資金は1000万円。P12, P28, P44を所有。", "reasoning": "今月は特に不動産に関する行動の必要性を感じないため、通常の生活を送る。", "under_name": ""}, {"step": 2, "id": "HH12", "name": "R12", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "土産店を引退し、元店舗を貸している66歳の夫婦世帯。湾岸の住民。借主、旧知の商店主、旅館関係者との付き合いが続いている。手元資金は1000万円。P13, P29, P45の住宅を所有。", "reasoning": "特に不動産に関する行動の必要はなく、通常の生活を送る。", "under_name": ""}, {"step": 2, "id": "HH13", "name": "R13", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "中古住宅購入後、初の居住月。通勤と趣味が中心で、地域との関わりはまだ薄い。手元資金1000万円。所有物件はP14（店舗/中央駅前地区）、P30（店舗/温泉丘陵地区）、P46（住宅/温泉丘陵地区）。", "reasoning": "今月は特に不動産に関する用件がなく、普段通りの生活を送る。", "under_name": ""}, {"step": 2, "id": "HH14", "name": "R14", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日も一日頑張ろう。", "ch": "ambient", "to": "HH01,HH02,HH03,HH04,HH05,HH06,HH07,HH08,HH09,HH10,HH11,HH12,HH13,HH15,HH16", "memory": "駅前の実家で父と暮らす介護職。古い借入と家の修繕負担がある。近所の飲食店や共同浴場を日常的に使う。今月も変わらず日常を送る。", "reasoning": "特別なイベントや連絡がないため、日常のルーティンをこなす。", "under_name": ""}, {"step": 2, "id": "HH15", "name": "R15", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に不動産に関する行動はせず、日常を過ごす。転勤の可能性は依然としてあるため、引き続きA市の不動産動向は注視する。", "reasoning": "転勤の可能性があり、A市に住宅を所有しているため、不動産動向は注視しつつも、今月は特に積極的な行動は取らない。", "under_name": ""}, {"step": 2, "id": "HH16", "name": "R16", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "70歳の夫婦世帯。北部地区に自宅とは別の古い空室住宅を持つ。大学の国際交流ボランティアと自治会会計を手伝っている。手元資金は1000万円。P17(空地/湾岸)とP33(住宅/北部)を所有。先月は特に不動産に関する行動はなかった。", "reasoning": "特に不動産に関する用件がないため、通常の日常を送る。", "under_name": ""}, {"step": 2, "id": "MD01", "name": "J01", "role": "media", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "前月までの記憶を引き継ぎ、今月も特に大きな動きはないため、通常業務に加えてA市の動向を注視していく。", "reasoning": "特段の取材対象や情報がなく、通常の活動を行う必要がないため。", "under_name": ""}, {"step": 2, "id": "MD02", "name": "J02", "role": "media", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "A市は湾岸にある人口約12万人の温泉観光都市。スペースポート構想があるが不確定。市内は人口減少、高齢化、相続、建物の改修負担、後継者不足が進む。住民、事業者、仲介、行政、記者などが日常業務を送る。私は地域記者J02として、店舗、移住、観光、催事を扱うウェブ媒体の取材を行う。", "reasoning": "今月は特に情報がないため、様子を見る。", "under_name": ""}, {"step": 2, "id": "MU01", "name": "G01", "role": "municipality", "action": "routine_service", "target": "", "amount": 0, "ok": true, "outcome": "routine_service", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務として、月次の報告書作成と、他部署との情報共有を行う。特に空き家対策に関する部署間連携の必要性を感じる。", "reasoning": "通常業務を遂行する。", "under_name": ""}, {"step": 2, "id": "MU02", "name": "G02", "role": "municipality", "action": "routine_service", "target": "", "amount": 0, "ok": true, "outcome": "routine_service", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務を遂行する。今月は特に大きな動きはなく、日々の事務作業に集中する。", "reasoning": "前月までの記憶に基づき、通常業務を継続する。", "under_name": ""}, {"step": 3, "id": "AQ01", "name": "X社", "role": "acquirer", "action": "check_land_registry", "target": "", "amount": 0, "ok": false, "outcome": "invalid_action", "why": "unknown_location", "utterance": "", "ch": "none", "to": "", "memory": "", "reasoning": "", "under_name": ""}, {"step": 3, "id": "BR01", "name": "B01", "role": "broker", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "静かなスタート。地域の状況を把握しつつ、次の動きに備える。公開案件がなくても、顧客との関係維持や情報収集は重要。", "reasoning": "現状、公開案件や具体的な依頼がないため、情報収集と顧客との関係維持に努める。", "under_name": ""}, {"step": 3, "id": "BR02", "name": "B02", "role": "broker", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "1200万円の資金がある。公開されている売出し・長期賃貸募集はない。HH01–HH16（住民）、BZ01–BZ04（事業者）、BR01–BR02（仲介）、AQ01（X社）、MU01–MU02（行政）、MD01–MD02（記者）が公開連絡先として存在する。今月は特に目立った動きはなかった。今月届いた情報はない。", "reasoning": "今月は新たな情報や機会がないため、現状維持とする。", "under_name": ""}, {"step": 3, "id": "BZ01", "name": "T01", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "通常営業を続けます。", "ch": "none", "to": "", "memory": "旅館の通常営業を続けます。手元資金は710万円です。P02の賃料は月24万円です。旅館組合の会議室を使い、同業者との連絡が多い。", "reasoning": "通常営業を継続し、資金状況を確認する。", "under_name": ""}, {"step": 3, "id": "BZ02", "name": "T02", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "今日も元気に営業中です！", "ch": "ambient", "to": "", "memory": "飲食店T02、駅前で通常営業。夫婦で地元客と観光客に対応。店舗は賃借。資金680万円。賃料24万/月。今月も通常営業を継続する。", "reasoning": "通常営業を継続し、店舗の維持と収益確保を図る。", "under_name": ""}, {"step": 3, "id": "BZ03", "name": "T03", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": true, "outcome": "operate", "why": "", "utterance": "今日も元気に営業します！", "ch": "ambient", "to": "", "memory": "共同浴場前の食品・日用品店T03。高齢住民への配達も行う。店舗は賃借で後継者は未定。日々の営業と地域客への対応が中心。店舗P04は賃料24万円/月。手元資金664万円。今月も通常営業を継続。", "reasoning": "通常営業を行い、地域住民との関係を維持する。", "under_name": ""}, {"step": 3, "id": "BZ04", "name": "T04", "role": "business", "action": "operate", "target": "", "amount": 0, "ok": false, "outcome": "invalid_action", "why": "unknown_location", "utterance": "皆様、いつもご利用ありがとうございます。今月もどうぞよろしくお願いいたします。", "ch": "ambient", "to": "", "memory": "P06（コワーキング施設）の通常営業。開業借入の返済は順調。会員は安定しており、新規会員獲得のためのイベント企画も検討中。今月も通常営業を継続し、会員への挨拶を行う。", "reasoning": "通常営業を継続し、会員への挨拶を行う。特に大きな変更点はなく、現状維持。", "under_name": ""}, {"step": 3, "id": "HH01", "name": "R01", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "共同浴場の修繕、いくらくらいかかるのかしら。", "ch": "ambient", "to": "", "memory": "74歳の夫婦世帯。温泉丘陵地区の築古住宅と小さな貸店舗を所有。町内会と共同浴場に関わり、修繕費と県外の子どものことが気になっている。今月は共同浴場の修繕費が気になる。", "reasoning": "共同浴場の修繕費が気になるので、町内会で話題に出してみる。", "under_name": ""}, {"step": 3, "id": "HH02", "name": "R02", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月も仕事、子育て、地域活動を中心に生活を送る。不動産については特に何もせず、来月以降に改めて検討する予定。手元資金は1048万円。所有物件はP03、P19、P35。", "reasoning": "特に不動産に関する動きはなく、通常の日常を送る。", "under_name": ""}, {"step": 3, "id": "HH03", "name": "R03", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "P04, P20, P36の物件を所有。P20の草刈りが負担。今月は特に何もせず、普段通りの日常を送った。手元資金は1048万円。来月はP20の草刈りを検討したい。", "reasoning": "今月は特に不動産に関する行動はなく、日常を送る。来月以降の行動のための準備。", "under_name": ""}, {"step": 3, "id": "HH04", "name": "R04", "role": "household", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "82歳単身世帯。温泉付きの古い家で暮らし、共同浴場の世話を続けている。坂道と家の段差がつらくなり、県外の家族から同居を勧められている。手元資金1000万円。所有物件はP05, P21, P37。今月は特に何もせず、日常生活を送った。", "reasoning": "特に大きな動きはなく、現状維持を選択した。", "under_name": ""}, {"step": 3, "id": "HH05", "name": "R05", "role": "household", "action": "household_finance", "target": "", "amount": 0, "ok": true, "outcome": "household_finance", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "保有物件の評価額を把握しておく。手元資金は1048万円。P06（店舗）は8640万円、P22（住宅）は6912万円、P38（住宅）は6048万円と評価。特に大きな動きはない。", "reasoning": "今月も特に不動産に関する動きはないため、家計の確認のみ行う。", "under_name": ""}, {"step": 3, "id": "HH06", "name": "R06", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "母の介護と仕事で忙しい日々。不動産については、今は特に何も考えていない。毎月不動産を考える必要はないので、今月も普段通りの生活を送る。", "reasoning": "毎月不動産を考える必要はないという設定に基づき、特別な行動は取らず日常を送る。", "under_name": ""}, {"step": 3, "id": "HH07", "name": "R07", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "今月は特に不動産に関する動きはない。普段通りの生活を送る。", "reasoning": "不動産に関する動きがないため、日常を送る。", "under_name": ""}, {"step": 3, "id": "HH08", "name": "R08", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今日もいい天気ですね。この景色を見ながら仕事ができるのは本当に幸せです。", "ch": "ambient", "to": "", "memory": "湾岸の喫茶店(V04)でリモートワーク。この街の魅力を発信し続けることを意識している。資金1000万円。所有物件はP09、P25、P41。", "reasoning": "特に不動産に関する動きがないため、日常業務を継続する。喫茶店での発言は、自身の活動と街への愛着を示す。", "under_name": ""}, {"step": 3, "id": "HH09", "name": "R09", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "元市職員。駅前に住宅と空いた元店舗の区画を持つ。68歳。退職後は散歩、通院、家の管理が中心。手元資金1000万円。所有物件はP10(店舗/湾岸)、P26(店舗/北部)、P42(住宅/北部)。今月は特に不動産に関する行動はせず、普段通りの生活を送る。", "reasoning": "今月は不動産に関する特別な行動の必要がないため、通常の日常を送る。", "under_name": ""}, {"step": 3, "id": "HH10", "name": "R10", "role": "household", "action": "household_finance", "target": "", "amount": 0, "ok": true, "outcome": "household_finance", "why": "", "utterance": "今月も家計の確認をします。", "ch": "none", "to": "", "memory": "39歳、夫婦と小学生2人の世帯。北部地区の住宅ローンが長く残っている。学校、仕事、家事、保護者仲間との付き合いを大切にしている。今月も家計を確認する。", "reasoning": "特に大きな予定はないため、家計の確認を行う。", "under_name": ""}, {"step": 3, "id": "HH11", "name": "R11", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今月も旅館の仕事と子どもの進学準備で忙しくなりそうだ。相続した家のことも少しは考えたいが、まずは目の前のことをしっかりやろう。", "ch": "none", "to": "", "memory": "旅館の仕事と子どもの進学費用準備が中心の生活。相続した温泉丘陵地区の住宅を所有している。手元資金は1000万円。P12, P28, P44を所有している。", "reasoning": "特に不動産に関する急な用件はないため、日常のルーティンを選択。家族の将来のために、子どもの進学費用準備を優先する。", "under_name": ""}, {"step": 3, "id": "HH12", "name": "R12", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "今月も特に予定はないね。ゆっくり過ごしましょう。", "ch": "ambient", "to": "", "memory": "土産店を引退し、元店舗を貸している66歳の夫婦世帯。湾岸の住民。借主、旧知の商店主、旅館関係者との付き合いが続いている。P13, P29, P45の住宅を所有。手元資金は1000万円。今月は特に不動産に関する動きはなく、自宅でゆっくり過ごす。", "reasoning": "特に不動産に関する情報がなく、次の行動を強制されないため、普段通りの生活を送る。", "under_name": ""}, {"step": 3, "id": "HH13", "name": "R13", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "中古住宅購入後、初の居住月。通勤と趣味が中心で、地域との関わりはまだ薄い。手元資金1000万円。所有物件はP14（店舗/中央駅前地区）、P30（店舗/温泉丘陵地区）、P46（住宅/温泉丘陵地区）。今月は特に不動産に関する動きはなく、日常を過ごす。", "reasoning": "特に不動産に関するイベントや情報がないため、日常のルーティンを選択。", "under_name": ""}, {"step": 3, "id": "HH14", "name": "R14", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "駅前の実家で父と暮らす介護職。古い借入と家の修繕負担がある。近所の飲食店や共同浴場を日常的に使う。今月も変わらず日常を送る。手元資金1000万円。所有物件はP15, P31, P47。", "reasoning": "特に不動産に関する動きはないので、日常を送る。", "under_name": ""}, {"step": 3, "id": "HH15", "name": "R15", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "転勤の可能性は依然としてあるため、引き続きA市の不動産動向は注視する。今月も特に不動産に関する行動はせず、日常を過ごした。", "reasoning": "転勤の可能性があり不動産動向は注視すべきだが、今月は特に動きがないため、日常を過ごす。", "under_name": ""}, {"step": 3, "id": "HH16", "name": "R16", "role": "household", "action": "routine", "target": "", "amount": 0, "ok": true, "outcome": "routine", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "70歳の夫婦世帯。北部地区に自宅とは別の古い空室住宅を持つ。大学の国際交流ボランティアと自治会会計を手伝っている。手元資金は1000万円。P17(空地/湾岸)とP33(住宅/北部)を所有。今月も特に不動産に関する行動はなかった。", "reasoning": "特に不動産に関する情報がなく、特別な行動も必要ないため、通常の生活を送る。", "under_name": ""}, {"step": 3, "id": "MD01", "name": "J01", "role": "media", "action": "routine_reporting", "target": "", "amount": 0, "ok": true, "outcome": "routine_reporting", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務を継続しつつ、A市の不動産市場や地域経済の動向を注視する。特に高齢化や後継者不足といった地域課題と不動産問題との関連を探る。", "reasoning": "地域記者として、日々の通常業務をこなしつつ、A市の全体像を把握するための情報収集を継続する。", "under_name": ""}, {"step": 3, "id": "MD02", "name": "J02", "role": "media", "action": "hold", "target": "", "amount": 0, "ok": true, "outcome": "hold", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "A市は温泉観光都市。スペースポート構想あり。人口減少、高齢化、後継者不足が進む。地域記者J02として店舗、移住、観光、催事を取材。今月は特別な記事や調査を行わない。", "reasoning": "今月は特に取材するべき事案がないため、保留とする。", "under_name": ""}, {"step": 3, "id": "MU01", "name": "G01", "role": "municipality", "action": "routine_service", "target": "", "amount": 0, "ok": true, "outcome": "routine_service", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務として、月次の報告書作成と、他部署との情報共有を行う。特に空き家対策に関する部署間連携の必要性を感じる。", "reasoning": "通常業務を遂行する。", "under_name": ""}, {"step": 3, "id": "MU02", "name": "G02", "role": "municipality", "action": "routine_service", "target": "", "amount": 0, "ok": true, "outcome": "routine_service", "why": "", "utterance": "", "ch": "none", "to": "", "memory": "通常業務を遂行する。今月は特に大きな動きはなく、日々の事務作業に集中する。", "reasoning": "通常業務を継続する。", "under_name": ""}], "ledger": [{"step": 1, "kind": "hold", "by": "BR01", "note": ""}, {"step": 1, "kind": "hold", "by": "BR02", "note": ""}, {"step": 1, "kind": "operate", "by": "BZ01", "note": "通常営業を開始します。"}, {"step": 1, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業します！"}, {"step": 1, "kind": "operate", "by": "BZ03", "note": "今日も一日頑張りましょう。"}, {"step": 1, "kind": "operate", "by": "BZ04", "note": "今月も通常営業でまいります。会員の皆様、どうぞご利用ください。"}, {"step": 1, "kind": "routine", "by": "HH01", "note": "今日は天気が良いので、少し散歩でもしようかね。"}, {"step": 1, "kind": "routine", "by": "HH02", "note": "今月も仕事と子育て、地域活動で忙しくなりそうです。不動産のことはまた来月考えよう。"}, {"step": 1, "kind": "routine", "by": "HH03", "note": "今月も特に変わったことはなかったな。来月あたり、そろそろP20の草刈りでもしないといかんな。"}, {"step": 1, "kind": "routine", "by": "HH04", "note": "今日も共同浴場の掃除は欠かせないな。もう年だし、体がつらいが、これも長年の習慣だからな。"}, {"step": 1, "kind": "routine", "by": "HH05", "note": ""}, {"step": 1, "kind": "routine", "by": "HH06", "note": ""}, {"step": 1, "kind": "routine", "by": "HH07", "note": ""}, {"step": 1, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。このコーヒー、豆の種類が変わりましたか？"}, {"step": 1, "kind": "routine", "by": "HH09", "note": "今日は天気がいいから、少し散歩でもしようか。"}, {"step": 1, "kind": "routine", "by": "HH10", "note": "今月は特に大きな予定はないので、家でゆっくり過ごそう。"}, {"step": 1, "kind": "routine", "by": "HH11", "note": ""}, {"step": 1, "kind": "routine", "by": "HH12", "note": ""}, {"step": 1, "kind": "routine", "by": "HH13", "note": ""}, {"step": 1, "kind": "routine", "by": "HH14", "note": ""}, {"step": 1, "kind": "routine", "by": "HH15", "note": ""}, {"step": 1, "kind": "routine", "by": "HH16", "note": ""}, {"step": 1, "kind": "hold", "by": "MD01", "note": ""}, {"step": 1, "kind": "hold", "by": "MD02", "note": ""}, {"step": 1, "kind": "routine_service", "by": "MU01", "note": ""}, {"step": 1, "kind": "routine_service", "by": "MU02", "note": ""}, {"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}, {"step": 2, "kind": "hold", "by": "BR01", "note": ""}, {"step": 2, "kind": "hold", "by": "BR02", "note": ""}, {"step": 2, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。"}, {"step": 2, "kind": "operate", "by": "BZ02", "note": ""}, {"step": 2, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業しています。お困りのことがあればいつでもお声がけください。"}, {"step": 2, "kind": "operate", "by": "BZ04", "note": "会員の皆様、いつもご利用ありがとうございます。今月も通常営業いたします。ご不明な点はお気軽にお声がけください。"}, {"step": 2, "kind": "routine", "by": "HH01", "note": "今月も特に変わったことはないね。共同浴場の修繕費、そろそろまた集まる頃かしら。"}, {"step": 2, "kind": "routine", "by": "HH02", "note": ""}, {"step": 2, "kind": "routine", "by": "HH03", "note": ""}, {"step": 2, "kind": "routine", "by": "HH04", "note": "今日も元気に湯を沸かすかね。"}, {"step": 2, "kind": "household_finance", "by": "HH05", "note": ""}, {"step": 2, "kind": "routine", "by": "HH06", "note": "母の様子を見ながら、仕事の準備をしよう。"}, {"step": 2, "kind": "routine", "by": "HH07", "note": ""}, {"step": 2, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は綺麗だな。リモートワークをしながら、この街の魅力を発信し続けよう。"}, {"step": 2, "kind": "routine", "by": "HH09", "note": ""}, {"step": 2, "kind": "household_finance", "by": "HH10", "note": "今月の家計を確認します。"}, {"step": 2, "kind": "routine", "by": "HH11", "note": ""}, {"step": 2, "kind": "routine", "by": "HH12", "note": ""}, {"step": 2, "kind": "routine", "by": "HH13", "note": ""}, {"step": 2, "kind": "routine", "by": "HH14", "note": "今日も一日頑張ろう。"}, {"step": 2, "kind": "routine", "by": "HH15", "note": ""}, {"step": 2, "kind": "routine", "by": "HH16", "note": ""}, {"step": 2, "kind": "hold", "by": "MD01", "note": ""}, {"step": 2, "kind": "hold", "by": "MD02", "note": ""}, {"step": 2, "kind": "routine_service", "by": "MU01", "note": ""}, {"step": 2, "kind": "routine_service", "by": "MU02", "note": ""}, {"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}, {"step": 3, "kind": "hold", "by": "BR01", "note": ""}, {"step": 3, "kind": "hold", "by": "BR02", "note": ""}, {"step": 3, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。"}, {"step": 3, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}, {"step": 3, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！"}, {"step": 3, "kind": "routine", "by": "HH01", "note": "共同浴場の修繕、いくらくらいかかるのかしら。"}, {"step": 3, "kind": "routine", "by": "HH02", "note": ""}, {"step": 3, "kind": "routine", "by": "HH03", "note": ""}, {"step": 3, "kind": "hold", "by": "HH04", "note": ""}, {"step": 3, "kind": "household_finance", "by": "HH05", "note": ""}, {"step": 3, "kind": "routine", "by": "HH06", "note": ""}, {"step": 3, "kind": "routine", "by": "HH07", "note": ""}, {"step": 3, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。この景色を見ながら仕事ができるのは本当に幸せです。"}, {"step": 3, "kind": "routine", "by": "HH09", "note": ""}, {"step": 3, "kind": "household_finance", "by": "HH10", "note": "今月も家計の確認をします。"}, {"step": 3, "kind": "routine", "by": "HH11", "note": "今月も旅館の仕事と子どもの進学準備で忙しくなりそうだ。相続した家のことも少しは考えたいが、まずは目の前のことをしっかりやろう。"}, {"step": 3, "kind": "routine", "by": "HH12", "note": "今月も特に予定はないね。ゆっくり過ごしましょう。"}, {"step": 3, "kind": "routine", "by": "HH13", "note": ""}, {"step": 3, "kind": "routine", "by": "HH14", "note": ""}, {"step": 3, "kind": "routine", "by": "HH15", "note": ""}, {"step": 3, "kind": "routine", "by": "HH16", "note": ""}, {"step": 3, "kind": "routine_reporting", "by": "MD01", "note": ""}, {"step": 3, "kind": "hold", "by": "MD02", "note": ""}, {"step": 3, "kind": "routine_service", "by": "MU01", "note": ""}, {"step": 3, "kind": "routine_service", "by": "MU02", "note": ""}, {"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}], "agents": [{"id": "HH01", "name": "R01", "role": "household"}, {"id": "HH02", "name": "R02", "role": "household"}, {"id": "HH03", "name": "R03", "role": "household"}, {"id": "HH04", "name": "R04", "role": "household"}, {"id": "HH05", "name": "R05", "role": "household"}, {"id": "HH06", "name": "R06", "role": "household"}, {"id": "HH07", "name": "R07", "role": "household"}, {"id": "HH08", "name": "R08", "role": "household"}, {"id": "HH09", "name": "R09", "role": "household"}, {"id": "HH10", "name": "R10", "role": "household"}, {"id": "HH11", "name": "R11", "role": "household"}, {"id": "HH12", "name": "R12", "role": "household"}, {"id": "HH13", "name": "R13", "role": "household"}, {"id": "HH14", "name": "R14", "role": "household"}, {"id": "HH15", "name": "R15", "role": "household"}, {"id": "HH16", "name": "R16", "role": "household"}, {"id": "BZ01", "name": "T01", "role": "business"}, {"id": "BZ02", "name": "T02", "role": "business"}, {"id": "BZ03", "name": "T03", "role": "business"}, {"id": "BZ04", "name": "T04", "role": "business"}, {"id": "BR01", "name": "B01", "role": "broker"}, {"id": "BR02", "name": "B02", "role": "broker"}, {"id": "AQ01", "name": "X社", "role": "acquirer"}, {"id": "MU01", "name": "G01", "role": "municipality"}, {"id": "MU02", "name": "G02", "role": "municipality"}, {"id": "MD01", "name": "J01", "role": "media"}, {"id": "MD02", "name": "J02", "role": "media"}], "acquirers": ["AQ01"], "municipality": "MU01", "ordinances": [], "publications": []};
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const nameOf={}, roleOf={};
+D.agents.forEach(a=>{nameOf[a.id]=a.name; roleOf[a.id]=a.role;});
+const ACQ=new Set(D.acquirers);
+const nSteps=D.meta.steps;
+const pct=v=>(v==null?"—":(v*100).toFixed(1)+"%");
+const ROLEJA={household:"住民世帯",business:"地元事業者",broker:"不動産仲介",
+ acquirer:"外部取得主体",municipality:"自治体",media:"地元メディア"};
+const PARCEL=Object.fromEntries(D.parcels.map(p=>[p.pid,p]));
+
+/* ---------- header + cards ---------- */
+const m=D.meta, k=m.kpi;
+$("#hdrmeta").innerHTML=`<b>${esc(m.run_name)}</b> ／ ${esc(m.provider)} · ${esc(m.model)} ／ `
+ +`${m.steps}か月 ／ 区画${m.parcels} ／ `
+ +Object.entries(m.agents).map(([r,v])=>`${esc(ROLEJA[r]||r)}${v}`).join("・")
+ +` ／ 所要${m.elapsed_sec}s ／ 無効行動${m.invalid_actions}`;
+const cards=[
+ ["① 所有集中度（取得主体シェア）",pct(k.final_acquirer_share),"HHI "+(k.final_hhi??0).toFixed(3)],
+ ...(k.final_acquirer_control_share==null?[]:
+   [["長期賃借・運営支配",pct(k.final_acquirer_control_share),"所有権とは別集計"]]),
+ ["② 認知転相率（累積）",pct(k.cognition_shift_final),"「あの主体の街」と語る発話の比率"],
+ ["③ 売却カスケード",(k.cascade&&k.cascade.induced!=null?k.cascade.induced:"—")+"件",
+  "最大連鎖 "+((k.cascade&&k.cascade.max_chain)||0)],
+ ["④ 手遅れ度（規制発動時シェア）",k.late_index?pct(k.late_index.share_at_enactment):"規制なし",
+  k.late_index?`第${k.late_index.step}月「${esc(k.late_index.title)}」`:"最後まで規制は発動しなかった"],
+ ["⑤ 検知ラグ（初報道時シェア）",k.detection_lag?pct(k.detection_lag.share_at_first_report):"報道なし",
+  k.detection_lag?`第${k.detection_lag.step}月`:"買収は報じられなかった"],
+ ["⑥ 生活KPI",pct(k.business_survival),"事業者残存率／住民転出率 "+pct(k.resident_outflow)],
+];
+$("#cards").innerHTML=cards.map(c=>`<div class="card"><div class="k">${c[0]}</div>
+ <div class="v">${c[1]}</div><div class="s">${c[2]}</div></div>`).join("");
+const lag=k.detection_lag?k.detection_lag.share_at_first_report:null;
+const late=k.late_index?k.late_index.share_at_enactment:null;
+$("#verdict").innerHTML="<b>読み方</b>：④手遅れ度と⑤検知ラグが高いほど「気づいた時にはもう遅い」が起きている。"
+ +(lag!=null?` このランでは最初に買収が報じられた時点で既に <b>${pct(lag)}</b> が取得済み。`:" このランでは買収は最後まで報じられなかった。")
+ +(late!=null?` 規制が動いた時点では <b>${pct(late)}</b>。`:" 規制は最後まで発動しなかった。");
+
+/* ---------- map ---------- */
+const cv=$("#map"), ctx=cv.getContext("2d");
+const cols=Math.max(...D.parcels.map(p=>p.x))+1, rows=Math.max(...D.parcels.map(p=>p.y))+1;
+const CW=Math.floor(cv.width/cols), CH=Math.floor(cv.height/rows);
+const COL={acq:"#10B981",pub:"#93C5FD",hh:"#E5E7EB",biz:"#FCD34D",other:"#C4B5FD"};
+let selPid=null;
+function ownerClass(id){ if(ACQ.has(id))return"acq"; if(id===D.municipality)return"pub";
+ const r=roleOf[id]; if(r==="household")return"hh"; if(r==="business")return"biz"; return"other"; }
+function draw(step){
+ const fr=D.frames[step]; ctx.clearRect(0,0,cv.width,cv.height);
+ D.parcels.forEach(p=>{
+  const own=fr.owner[p.pid], cls=ownerClass(own);
+  ctx.fillStyle=COL[cls]; ctx.fillRect(p.x*CW,p.y*CH,CW-2,CH-2);
+  ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.strokeRect(p.x*CW,p.y*CH,CW-2,CH-2);
+  if(p.pid===selPid){ ctx.strokeStyle="#0A0A0A"; ctx.lineWidth=3;
+   ctx.strokeRect(p.x*CW+2,p.y*CH+2,CW-6,CH-6); }
+  const use=fr.use[p.pid];
+  ctx.fillStyle=cls==="acq"?"#04351F":"#374151";
+  ctx.font="700 10px sans-serif"; ctx.fillText(p.pid,p.x*CW+4,p.y*CH+13);
+  ctx.font="700 15px sans-serif";
+  const gl=use==="shop"?"商":use==="vacant"?"空":use==="public"?"公":"住";
+  ctx.fillText(gl,p.x*CW+CW/2-8,p.y*CH+CH/2+11);
+  if(use==="shop"&&!fr.tenant[p.pid]){ ctx.strokeStyle="#B45309"; ctx.lineWidth=2;
+   ctx.beginPath(); ctx.moveTo(p.x*CW+4,p.y*CH+CH-8); ctx.lineTo(p.x*CW+CW-8,p.y*CH+CH-8); ctx.stroke(); }
+ });
+}
+cv.addEventListener("click",ev=>{
+ const r=cv.getBoundingClientRect();
+ const x=Math.floor((ev.clientX-r.left)*(cv.width/r.width)/CW);
+ const y=Math.floor((ev.clientY-r.top)*(cv.height/r.height)/CH);
+ const p=D.parcels.find(q=>q.x===x&&q.y===y);
+ if(p){ selPid=p.pid; $("#psel").value=p.pid; renderParcel(); draw(+slider.value);
+  $("#psel").scrollIntoView({behavior:"smooth",block:"center"}); }
+});
+$("#legend").innerHTML=
+ `<div><span class="sw" style="background:${COL.acq}"></span>外部取得主体が所有</div>
+  <div><span class="sw" style="background:#fff;border:3px solid ${COL.other}"></span>長期賃借・運営支配（所有とは別）</div>
+  <div><span class="sw" style="background:${COL.hh}"></span>住民世帯が所有</div>
+  <div><span class="sw" style="background:${COL.biz}"></span>地元事業者が所有</div>
+  <div><span class="sw" style="background:${COL.pub}"></span>公有地</div>
+  <div style="margin-top:8px;">住＝住宅／商＝商店／空＝空地／公＝公有地</div>
+  <div><span style="color:#B45309;font-weight:900;">──</span> 下線＝空き店舗</div>`;
+
+/* ---------- charts ---------- */
+function lineChart(svg,series,opts){
+ const W=900,H=260,L=54,R=168,T=18,B=34;
+ const xs=i=>L+(W-L-R)*(nSteps<=1?0:i/nSteps);
+ const ymax=opts.ymax!=null?opts.ymax:Math.max(0.0001,...series.flatMap(s=>s.data.filter(v=>v!=null)));
+ const ys=v=>H-B-(H-T-B)*(v/ymax);
+ let g=`<rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>`;
+ for(let t=0;t<=4;t++){const v=ymax*t/4,y=ys(v);
+  g+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#E5E7EB"/>`
+    +`<text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="#6B7280">${opts.fmt(v)}</text>`;}
+ for(let s=0;s<=nSteps;s+=Math.max(1,Math.round(nSteps/12)))
+  g+=`<text x="${xs(s)}" y="${H-12}" text-anchor="middle" font-size="11" fill="#6B7280">${s}</text>`;
+ (opts.marks||[]).forEach(mk=>{const x=xs(mk.step);
+  g+=`<line x1="${x}" y1="${T}" x2="${x}" y2="${H-B}" stroke="${mk.color}" stroke-dasharray="4 3"/>`
+    +`<text x="${x+4}" y="${T+12}" font-size="11" font-weight="700" fill="${mk.color}">${esc(mk.label)}</text>`;});
+ series.forEach((s,si)=>{
+  let d="",started=false;
+  s.data.forEach((v,i)=>{ if(v==null)return; const x=xs(i+1),y=ys(v);
+   d+=(started?"L":"M")+x+" "+y+" "; started=true;});
+  g+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`
+    +`<text x="${W-R+8}" y="${T+16+si*18}" font-size="12" font-weight="700" fill="${s.color}">${esc(s.label)}</text>`;});
+ g+=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#111827"/>`
+   +`<text x="${W-R}" y="${H-2}" text-anchor="end" font-size="11" fill="#6B7280">経過月</text>`;
+ svg.innerHTML=g;
+}
+const marks=[];
+if(k.detection_lag)marks.push({step:k.detection_lag.step,label:"初報道",color:"#B45309"});
+if(k.late_index)marks.push({step:k.late_index.step,label:"規制発動",color:"#0A0A0A"});
+lineChart($("#ch1"),[
+ {label:"① 取得主体シェア",color:"#10B981",data:D.kpi.map(r=>r.acquirer_share)},
+ ...(k.final_acquirer_control_share==null?[]:[{label:"長期賃借・運営支配",color:"#7C3AED",data:D.kpi.map(r=>r.acquirer_control_share)}]),
+ {label:"HHI 集中指数",color:"#111827",data:D.kpi.map(r=>r.hhi)},
+ {label:"② 認知転相率",color:"#B45309",data:D.cognition.map(r=>r.shift_rate_cum)},
+],{ymax:1,fmt:v=>(v*100).toFixed(0)+"%",marks});
+lineChart($("#ch2"),[
+ {label:"③ 誘発売却(累積)",color:"#059669",data:D.kpi.map(r=>r.cascade_induced)},
+ {label:"営業中の店舗数",color:"#2563EB",data:D.kpi.map(r=>r.shops_occupied)},
+ {label:"平均賃料(万/月)",color:"#B45309",data:D.kpi.map(r=>r.mean_shop_rent)},
+],{fmt:v=>v.toFixed(0),marks});
+
+/* ---------- クロニクル用: イベントの分類と要約 ---------- */
+const CATS=[["deal","成約"],["nego","買付・交渉"],["list","売出"],["rent","賃料"],
+ ["media","報道"],["gov","自治体"],["exit","退出・廃業"],["talk","発言"],
+ ["fail","不成立"],["idle","静観"]];
+function cat(e){
+ if(!e.ok) return "fail";
+ const o=e.outcome;
+ if(o==="transfer") return "deal";
+ if(o==="offer"||o==="counter"||o==="withdraw") return "nego";
+ if(o==="listing"||o==="unlist") return "list";
+ if(o==="rent_change"||o==="rent_negotiation"||o==="redevelop") return "rent";
+ if(o==="publication") return "media";
+ if(o==="ordinance"||o==="ordinance_study"||o==="request_report") return "gov";
+ if(o==="move_out"||o==="business_closed"||o==="relocate") return "exit";
+ if(e.action==="investigate"||e.action==="public_statement") return "gov";
+ if(e.utterance) return "talk";
+ return "idle";
+}
+const P=pid=>`<span class="pill" data-pid="${pid}">${pid}</span>`;
+function summary(e){
+ const t=e.target, a=e.amount;
+ switch(e.action){
+  case "make_offer": return `${P(t)} に <b>${a}万</b>で買付（名義「${esc(e.under_name||"—")}」）`;
+  case "accept_offer": {
+   const tr=(D.ledger||[]).find(r=>r.kind==="transfer"&&r.step===e.step&&r.offer_id===t);
+   return tr?`${P(tr.parcel_id)} を <b>${tr.price}万</b>で売却 → 名義「${esc(tr.under_name)}」`
+            :`買付 ${esc(t)} を承諾`;}
+  case "counter_offer": return `買付 ${esc(t)} に <b>${a}万</b>で逆提示`;
+  case "reject_offer": return `買付 ${esc(t)} を拒否`;
+  case "withdraw_offer": return `買付 ${esc(t)} を取り下げ`;
+  case "list_for_sale": return `${P(t)} を <b>${a}万</b>で売りに出す`;
+  case "unlist": return `${P(t)} の売り出しを取り下げ`;
+  case "set_rent": {
+   const rc=(D.ledger||[]).find(r=>r.kind==="rent_change"&&r.step===e.step&&r.parcel_id===t);
+   return rc?`${P(t)} の賃料を ${rc.old}万 → <b>${rc.new}万</b>に改定`
+            :`${P(t)} の賃料を <b>${a}万</b>に`;}
+  case "negotiate_rent": return `${esc(nameOf[t]||t)} に家賃を <b>${a}万</b>へと交渉`;
+  case "redevelop": return `${P(t)} を商業用途に建て替え（賃料 <b>${a}万</b>）`;
+  case "relocate": return `${P(t)} へ店を移す`;
+  case "close_shop": return `<b>店を畳んだ</b>`;
+  case "move_out": return `<b>この街から転出した</b>`;
+  case "circulate_listing": return `${esc(nameOf[t]||t)} に売り情報を流す`;
+  case "approach_owner": return `${esc(nameOf[t]||t)} に売却を打診`;
+  case "publish": return `<b>記事を出した</b>`;
+  case "investigate": return `登記簿を調べた`;
+  case "silent": return `今月は書かなかった`;
+  case "enact_ordinance": return `<b>条例を施行「${esc(t)}」</b>`;
+  case "study_ordinance": return `規制の検討を進める`;
+  case "request_report": return `${esc(nameOf[t]||t)} に説明を求めた`;
+  case "public_statement": return `声明を出した`;
+  case "monitor": case "hold": case "wait": case "continue": return `静観`;
+  default: return esc(e.action);
+ }
+}
+function beatHtml(e){
+ const c=cat(e), label=(CATS.find(x=>x[0]===c)||["","?"])[1];
+ let h=`<div class="beat" data-cat="${c}" data-id="${e.id}" data-step="${e.step}">`
+  +`<span class="tag t-${c}">${label}</span><div class="bd">`
+  +`<div class="hl"><span class="who">${esc(e.name)}</span>`
+  +`<span class="small">（${esc(ROLEJA[e.role]||e.role)}）</span> ${summary(e)}</div>`;
+ if(!e.ok) h+=`<div class="sub">→ 帳簿上は<b>不成立</b>（${esc(e.outcome)}${e.why?" / "+esc(e.why):""}）。コードは補正していない。</div>`;
+ if(e.reasoning) h+=`<div class="sub">理由：${esc(e.reasoning)}</div>`;
+ if(e.utterance) h+=`<div class="say ${e.ch==="public"?"pub":e.ch==="private"?"pri":""}">`
+  +`${e.ch==="private"?"（"+esc(nameOf[e.to]||e.to)+"へ）":""}「${esc(e.utterance)}」</div>`;
+ return h+`</div></div>`;
+}
+
+/* ---------- クロニクル ---------- */
+let active=new Set(CATS.filter(c=>c[0]!=="idle").map(c=>c[0]));
+$("#catbar").innerHTML='<span class="small">種別：</span>'
+ +CATS.map(c=>`<button class="catb ${active.has(c[0])?"on":""}" data-c="${c[0]}">${c[1]}</button>`).join("")
+ +'<button id="allcat">全部</button>';
+function fillSel(sel,opts,ph){ sel.innerHTML=`<option value="">${ph}</option>`
+ +opts.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join(""); }
+fillSel($("#asel"),D.agents.map(a=>[a.id,`${a.name}（${ROLEJA[a.role]||a.role}）`]),"すべて");
+fillSel($("#psel2"),D.parcels.map(p=>[p.pid,`${p.pid}（${p.block}）`]),"すべて");
+fillSel($("#msel"),Array.from({length:nSteps},(_,i)=>[i+1,`第${i+1}月`]),"全期間");
+fillSel($("#psel"),D.parcels.map(p=>[p.pid,`${p.pid}（${p.block}・${p.use}）`]),"（区画を選ぶ）");
+fillSel($("#tsel"),D.agents.map(a=>[a.id,`${a.name}（${ROLEJA[a.role]||a.role}）`]),"（選ぶ）");
+function chronicle(){
+ const aid=$("#asel").value, pid=$("#psel2").value, mo=$("#msel").value;
+ const q=$("#q").value.trim();
+ let rows=D.events.filter(e=>active.has(cat(e)));
+ if(aid) rows=rows.filter(e=>e.id===aid);
+ if(mo) rows=rows.filter(e=>e.step===+mo);
+ if(pid){
+  const offs=new Set((D.ledger||[]).filter(r=>r.parcel_id===pid&&r.offer_id).map(r=>r.offer_id));
+  rows=rows.filter(e=>e.target===pid||offs.has(e.target)
+   ||(e.utterance||"").includes(pid)||(e.reasoning||"").includes(pid));
+ }
+ if(q) rows=rows.filter(e=>(e.utterance+e.reasoning+e.name).includes(q));
+ $("#cnt").textContent=`${rows.length} 件`;
+ let h="",cur=-1;
+ rows.forEach(e=>{ if(e.step!==cur){cur=e.step; h+=`<div class="mo">第${cur}月</div>`;} h+=beatHtml(e); });
+ $("#chron").innerHTML=h||'<p class="small">条件に合う出来事がない。</p>';
+}
+$("#catbar").addEventListener("click",ev=>{
+ const b=ev.target.closest("button"); if(!b)return;
+ if(b.id==="allcat"){ active=new Set(CATS.map(c=>c[0]));
+  document.querySelectorAll(".catb").forEach(x=>x.classList.add("on")); chronicle(); return; }
+ const c=b.dataset.c; if(active.has(c)){active.delete(c);b.classList.remove("on");}
+ else{active.add(c);b.classList.add("on");} chronicle();
+});
+["#asel","#psel2","#msel"].forEach(s=>$(s).addEventListener("change",chronicle));
+$("#q").addEventListener("input",chronicle);
+$("#reset").addEventListener("click",()=>{
+ $("#asel").value="";$("#psel2").value="";$("#msel").value="";$("#q").value="";
+ active=new Set(CATS.filter(c=>c[0]!=="idle").map(c=>c[0]));
+ document.querySelectorAll(".catb").forEach(x=>x.classList.toggle("on",active.has(x.dataset.c)));
+ chronicle();
+});
+document.addEventListener("click",ev=>{
+ const p=ev.target.closest(".pill"); if(!p)return;
+ selPid=p.dataset.pid; $("#psel").value=selPid; renderParcel(); draw(+slider.value);
+ $("#psel").scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+/* ---------- 区画の履歴 ---------- */
+function renderParcel(){
+ const pid=$("#psel").value;
+ selPid=pid||null; draw(+slider.value);
+ if(!pid){ $("#phist").innerHTML='<p class="small">マップの区画をクリックするか、上で区画を選ぶ。</p>';
+  $("#pinfo").textContent=""; return; }
+ const p=PARCEL[pid];
+ const last=D.frames[D.frames.length-1];
+ $("#pinfo").innerHTML=`${p.block}／用途 ${esc(last.use[pid])}／初期評価額 ${p.value}万`
+  +`／最終の名義 <b>${esc(last.registered[pid])}</b>`
+  +(last.rent[pid]?`／賃料 ${last.rent[pid]}万`:"")
+  +(last.controller&&last.controller[pid]
+    ?`／長期賃借・運営名義 <b>${esc(last.controller_name[pid])}</b>`
+      +`（${last.control_rent[pid]}万/月）`:"");
+ const offs=new Set((D.ledger||[]).filter(r=>r.parcel_id===pid&&r.offer_id).map(r=>r.offer_id));
+ const recs=(D.ledger||[]).filter(r=>r.parcel_id===pid
+   ||(r.offer_id&&offs.has(r.offer_id)));
+ const rowFor=(r)=>{
+  const who=nameOf[r.by||r.from_id||r.seller||r.agent_id]||r.by||r.from_id||"";
+  switch(r.kind){
+   case "offer": return [`買付`,`${esc(r.under_name)} が <b>${r.price}万</b>で買付（${r.offer_id}）`];
+   case "counter": return [`逆提示`,`${esc(nameOf[r.by]||r.by)} が <b>${r.price}万</b>を希望（${r.offer_id}に対して）`];
+   case "transfer": return [`成約`,`${esc(nameOf[r.seller]||r.seller)} → 名義「${esc(r.under_name)}」 <b>${r.price}万</b>`];
+   case "listing": return [`売出`,`${esc(who)} が <b>${r.price}万</b>で売りに出す`];
+   case "unlist": return [`取下`,`${esc(who)} が売り出しを取り下げ`];
+   case "rent_change": return [`賃料`,`${esc(who)} が ${r.old}万 → <b>${r.new}万</b>に改定`];
+   case "redevelop": return [`再開発`,`${esc(who)} が商業用途へ（賃料 ${r.rent}万）`];
+   case "tenancy_end": return [`退去`,`${esc(nameOf[r.tenant]||r.tenant)} が退去（${esc(r.reason)}）`];
+   case "relocate": return [`入居`,`${esc(nameOf[r.agent_id]||r.agent_id)} が入居`];
+   default: return null;
+  }
+ };
+ let h='<table><thead><tr><th>月</th><th>種別</th><th>内容</th><th>そのときの言い分</th></tr></thead><tbody>';
+ let n=0;
+ recs.forEach(r=>{
+  const rw=rowFor(r); if(!rw)return; n++;
+  const actor=r.by||r.from_id||r.seller||r.agent_id||r.tenant;
+  const e=D.events.find(x=>x.step===r.step&&x.id===actor);
+  h+=`<tr><td>第${r.step}月</td><td><b>${rw[0]}</b></td><td>${rw[1]}</td>`
+   +`<td class="small">${e&&e.reasoning?esc(e.reasoning):""}`
+   +`${e&&e.utterance?"<br>「"+esc(e.utterance)+"」":""}</td></tr>`;
+ });
+ h+="</tbody></table>";
+ $("#phist").innerHTML=n?h:'<p class="small">この区画には、期間中なにも起きなかった。</p>';
+}
+$("#psel").addEventListener("change",renderParcel);
+
+/* ---------- エージェント別スレッド ---------- */
+function renderThread(){
+ const id=$("#tsel").value;
+ if(!id){ $("#thread").innerHTML='<p class="small">エージェントを選ぶと、その1体の36か月が一本で読める。</p>';
+  $("#tinfo").textContent=""; return; }
+ let rows=D.events.filter(e=>e.id===id);
+ if($("#thideidle").checked) rows=rows.filter(e=>cat(e)!=="idle");
+ const acts={}; rows.forEach(e=>{acts[e.action]=(acts[e.action]||0)+1;});
+ $("#tinfo").innerHTML=`${rows.length}か月ぶん ／ `
+  +Object.entries(acts).sort((a,b)=>b[1]-a[1]).map(([a,c])=>`${esc(a)}×${c}`).join("、");
+ let h="";
+ rows.forEach(e=>{
+  h+=`<div class="mo">第${e.step}月</div>`+beatHtml(e);
+  if(e.memory) h+=`<div class="beat" style="border-bottom:none;padding-top:0;">`
+   +`<span class="tag t-idle">記憶</span><div class="bd"><div class="mem">${esc(e.memory)}</div></div></div>`;
+ });
+ $("#thread").innerHTML=h||'<p class="small">該当なし。</p>';
+}
+$("#tsel").addEventListener("change",renderThread);
+$("#thideidle").addEventListener("change",renderThread);
+
+/* ---------- step 連動 ---------- */
+const slider=$("#slider"); slider.max=nSteps; slider.value=nSteps;
+function stepInfo(step){
+ const r=D.kpi[step-1];
+ if(!r) return "第0月（初期状態）";
+ return `第${step}月 — 取得主体シェア <b>${pct(r.acquirer_share)}</b> ／ HHI ${r.hhi.toFixed(3)}`
+  +` ／ 累計成約 ${r.transfers_cum} ／ 営業中の店 ${r.shops_occupied}/${r.shops_total}`
+  +` ／ 転出率 ${pct(r.resident_outflow)}`;
+}
+function update(){
+ const s=+slider.value;
+ $("#stepnum").textContent=s===0?"第0月":"第"+s+"月";
+ draw(s); $("#stepinfo").innerHTML=stepInfo(s);
+}
+slider.addEventListener("input",update);
+let timer=null;
+$("#play").addEventListener("click",()=>{
+ if(timer){clearInterval(timer);timer=null;$("#play").textContent="▶ 再生";return;}
+ if(+slider.value>=nSteps) slider.value=0;
+ $("#play").textContent="⏸ 停止";
+ timer=setInterval(()=>{ if(+slider.value>=nSteps){clearInterval(timer);timer=null;
+  $("#play").textContent="▶ 再生";return;} slider.value=+slider.value+1; update(); },420);
+});
+
+/* ---------- 出来事 ---------- */
+let ev="";
+ev+="<h3>報道</h3>";
+ev+=D.publications.length?D.publications.map(p=>
+ `<div class="beat"><span class="tag t-media">第${p.step}月</span><div class="bd">
+  <div class="hl">${esc(p.headline)}</div></div></div>`).join("")
+ :"<p class='small'>期間中、この街のことは記事にならなかった。</p>";
+ev+="<h3>規制</h3>";
+ev+=D.ordinances.length?D.ordinances.map(o=>
+ `<div class="beat"><span class="tag t-gov">第${o.step}月</span><div class="bd">
+  <div class="hl">${esc(o.title)}</div><div class="sub">${esc(o.body)}</div></div></div>`).join("")
+ :"<p class='small'>期間中、土地取引の規制は発動しなかった。</p>";
+$("#events").innerHTML=ev;
+
+update(); chronicle(); renderParcel(); renderThread();
+</script></body></html>

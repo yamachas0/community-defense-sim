@@ -1,0 +1,97 @@
+{
+  "run_name": "field_v4_1_a_city",
+  "steps": 12,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 98.4,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 0,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 398,
+    "input_tokens": 714056,
+    "cached_tokens": 112098,
+    "output_tokens": 116617,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:p1": {
+        "calls": 192,
+        "input": 331892,
+        "cached": 58409,
+        "output": 54176
+      },
+      "agent:business:p1": {
+        "calls": 48,
+        "input": 72843,
+        "cached": 14246,
+        "output": 11557
+      },
+      "agent:broker:p1": {
+        "calls": 24,
+        "input": 42468,
+        "cached": 6036,
+        "output": 6868
+      },
+      "agent:municipality:p1": {
+        "calls": 24,
+        "input": 39170,
+        "cached": 5999,
+        "output": 9071
+      },
+      "agent:acquirer:p1": {
+        "calls": 12,
+        "input": 41048,
+        "cached": 3500,
+        "output": 4447
+      },
+      "agent:media:p1": {
+        "calls": 24,
+        "input": 42192,
+        "cached": 6620,
+        "output": 6384
+      },
+      "agent:household:p2": {
+        "calls": 60,
+        "input": 107154,
+        "cached": 17288,
+        "output": 13590
+      },
+      "classify": {
+        "calls": 14,
+        "input": 37289,
+        "cached": 0,
+        "output": 10524
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.0,
+    "final_hhi": 0.0633,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.047,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 0
+    },
+    "final_effective_control_area_share": null,
+    "late_index": {
+      "step": 11,
+      "title": "土地取得届出制度",
+      "share_at_enactment": 0.0,
+      "share_observable": 0.0
+    },
+    "detection_lag": null,
+    "final_acquirer_area_share": 0.0,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

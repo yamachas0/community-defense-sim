@@ -1,0 +1,15 @@
+{"step": 1, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "いつものメニューでお願いします。"}
+{"step": 1, "from": "BZ03", "role": "business", "name": "T03", "location": "HOME:BZ03", "text": "今日も元気に営業するぞ！"}
+{"step": 1, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "本日もコワーキングスペースをご利用いただきありがとうございます。何かお困りのことはございますか？"}
+{"step": 1, "from": "HH02", "role": "household", "name": "R02", "location": "HOME:HH02", "text": "今月も仕事と育児、慌ただしく過ぎていきそうだわ。"}
+{"step": 1, "from": "HH03", "role": "household", "name": "R03", "location": "HOME:HH03", "text": "今月も無事に過ごせました。来月も平穏な日々が続くといいな。"}
+{"step": 1, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "今日もいい天気ですね。このブレンド、落ち着きます。"}
+{"step": 1, "from": "HH10", "role": "household", "name": "R10", "location": "HOME:HH10", "text": "今月も、日々の生活を大切に過ごしましょう。"}
+{"step": 1, "from": "HH15", "role": "household", "name": "R15", "location": "HOME:HH15", "text": "今月も特に変わったことはないな。仕事と家の往復で終わりそうだ。"}
+{"step": 2, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "今日も元気に営業中です！"}
+{"step": 2, "from": "BZ03", "role": "business", "name": "T03", "location": "OFFICE:BZ03", "text": "今日も元気に営業中です。皆様のお越しをお待ちしております。"}
+{"step": 2, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "そろそろ共同浴場の修繕費のことも考えないといけないね。子どもたちにも相談しようかしら。"}
+{"step": 2, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "今日もいい天気ですね。リモートワーク日和です。"}
+{"step": 3, "from": "BZ03", "role": "business", "name": "T03", "location": "HOME:BZ03", "text": "今日も元気に営業中です！お困りのことがあれば何でもお声がけください。"}
+{"step": 3, "from": "HH02", "role": "household", "name": "R02", "location": "HOME:HH02", "text": "今月も特に変わったことはないかな。仕事と子どもの学校、あとは近所付き合いで忙しくなりそう。"}
+{"step": 3, "from": "HH08", "role": "household", "name": "R08", "location": "V04", "text": "今日もいい天気ですね。リモートワーク頑張ります。"}

@@ -1429,12 +1429,12 @@ eff_rows = ordinance_effect_rows_v41b(LB, 4)
 check("v4.1b: 閾値が区画の最大を超えていれば「該当0件」が事実として返る",
       any("超える区画: 0件" in r for r in eff_rows))
 check("v4.1b: 条例の適用実績に施行後の移転件数と届出件数が出る",
-      any("施行後の名義移転: 0件" in r and "届出の対象になったもの: 0件" in r
+      any("施行後の名義移転: 0件" in r and "うち対象面積に該当したもの: 0件" in r
           for r in eff_rows))
 o_lb = record_offer_v41(LB, 4, AQ41, "P01", "A社")["offer_id"]
 respond_to_offer_v41(LB, 4, o_lb, "HH01", "sell")
 check("v4.1b: 閾値より小さい区画の移転は届出の対象にならない（実績にそう出る）",
-      any("施行後の名義移転: 1件 うち届出の対象になったもの: 0件" in r
+      any("施行後の名義移転: 1件 うち対象面積に該当したもの: 0件" in r
           for r in ordinance_effect_rows_v41b(LB, 5)))
 
 # --- スキーマ ---------------------------------------------------------------
@@ -1560,6 +1560,73 @@ for word in ("すべき", "しなさい", "推奨", "優先度", "望ましい",
     check(f"v4.1b: 実プロンプト（取得主体を除く）に当為・確率が出ない（{word}）",
           all(word not in text for key, text in _real_prompts_41b.items()
               if not key.endswith("acquirer")))
+
+
+# --- v4.1b: Codexレビュー（2026-08-27・gpt-5.6-sol）の指摘に対する回帰 ------------
+
+from src.field_v4_1b import (CONSULT_CAPACITY_PER_MONTH,  # noqa: E402
+                             _normalize_consult_id, ordinance_effect_rows_v41b)
+from src.viz import (MONEY_WORDS_HTML, _MONEYLESS_SUBS, _TEMPLATE,  # noqa: E402
+                     _apply_moneyless, _compact_events)
+
+LC = mk41()
+ensure_v41b_state(LC)
+qc = record_consult_v41b(LC, 1, HH41B, "BR01", "相談の本文。", BROKERS41B)["consult_id"]
+check("v4.1b: 相談は出した月のうちには答えられない（届くのは翌月）",
+      answer_consult_v41b(LC, 1, "BR01", qc, "答え")["reason"] == "not_yet_delivered")
+check("v4.1b: 同じ月に2件目の相談は出せない（有限資源を台帳側で数える）",
+      record_consult_v41b(LC, 1, HH41B, "BR02", "2件目。", BROKERS41B)["reason"]
+      == "monthly_consult_capacity_exceeded" and CONSULT_CAPACITY_PER_MONTH == 1)
+check("v4.1b: 翌月になれば相談はまた出せる",
+      record_consult_v41b(LC, 2, HH41B, "BR01", "翌月の相談。",
+                          BROKERS41B)["kind"] == "consult")
+check("v4.1b: 配送IDの表記（CONSULT-/ADVICE-）でも同じ相談へ解決する",
+      _normalize_consult_id(LC, "[CONSULT-Q0001]") == "Q0001"
+      and _normalize_consult_id(LC, "ADVICE-Q0001") == "Q0001"
+      and answer_consult_v41b(LC, 2, "BR01", "CONSULT-Q0001",
+                              "答え")["kind"] == "advice")
+check("v4.1b: 回答した月、相談者の観測にはまだ回答済みと出ない（本文は翌月に届く）",
+      "未回答" in own_consults_rows_v41b(LC, "HH01", NAMES41B, 2)[0]
+      and "回答済み" not in own_consults_rows_v41b(LC, "HH01", NAMES41B, 2)[0])
+check("v4.1b: 翌月になると相談者の観測に回答済みが出る",
+      "回答済み(第2月)" in own_consults_rows_v41b(LC, "HH01", NAMES41B, 3)[0])
+check("v4.1b: 答えた仲介自身の観測にはその月から回答済みが出る",
+      any("回答済み(第2月)" in r
+          for r in incoming_consults_rows_v41b(LC, "BR01", NAMES41B)))
+LE = mk41()
+ensure_v41b_state(LE)
+qe1 = record_consult_v41b(LE, 1, HH41B, "BR01", "1人目の相談。", BROKERS41B)["consult_id"]
+qe2 = record_consult_v41b(LE, 1, HH41B_2, "BR01", "2人目の相談。", BROKERS41B)["consult_id"]
+check("v4.1b: 同じ月の1件目の回答は成立する",
+      answer_consult_v41b(LE, 2, "BR01", qe1, "答え1", capacity=1)["kind"] == "advice")
+check("v4.1b: 月次上限を超える回答は成立しない（台帳側で数える）",
+      answer_consult_v41b(LE, 2, "BR01", qe2, "答え2", capacity=1)["reason"]
+      == "monthly_advice_capacity_exceeded")
+check("v4.1b: 翌月になれば上限は戻る",
+      answer_consult_v41b(LE, 3, "BR01", qe2, "答え2", capacity=1)["kind"] == "advice")
+
+LD = mk41()
+ensure_v41b_state(LD)
+enact_ordinance_v41(LD, 1, "MU01", "即時届出条例", "300㎡超は届出", 300, 0)
+od = record_offer_v41(LD, 2, AQ41, "P02", "A社")["offer_id"]   # P02 は 400㎡
+respond_to_offer_v41(LD, 2, od, "HH01", "sell")
+rows_d = ordinance_effect_rows_v41b(LD, 3)
+check("v4.1b: 遅延0か月の条例でも「対象面積に該当した取得」を数え落とさない",
+      any("施行後の名義移転: 1件 うち対象面積に該当したもの: 1件 "
+          "うち届出で待機したもの: 0件" in r for r in rows_d))
+
+_mless = _apply_moneyless(_TEMPLATE)
+check("v4.1b: 金額のない世界のレポートHTMLに金額の語が残らない",
+      not [w for w in MONEY_WORDS_HTML if w in _mless])
+check("v4.1b: 金額ありのテンプレートは差し替えても壊れていない（差し替えは全件当たる）",
+      len(_MONEYLESS_SUBS) >= 10 and len(_mless) < len(_TEMPLATE))
+check("v4.1b: 金額のある版のテンプレートは変えていない",
+      "初期評価額" in _TEMPLATE and "平均賃料" in _TEMPLATE)
+_ev = [{"step": 1, "agent_id": "AQ01", "role": "acquirer", "amount": 3000,
+        "action_type": "offers", "outcome": {"kind": "phase1"}}]
+check("v4.1b: 金額のない世界のレポートデータに amount を載せない",
+      "amount" not in _compact_events(_ev, moneyless=True)[0]
+      and _compact_events(_ev)[0]["amount"] == 3000)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")

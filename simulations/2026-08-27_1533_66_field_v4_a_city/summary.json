@@ -1,0 +1,102 @@
+{
+  "run_name": "field_v4_a_city",
+  "steps": 12,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 81.9,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 21,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 348,
+    "input_tokens": 485369,
+    "cached_tokens": 128926,
+    "output_tokens": 95570,
+    "errors": 1,
+    "by_tag": {
+      "agent:household:p1": {
+        "calls": 192,
+        "input": 258293,
+        "cached": 78703,
+        "output": 49398
+      },
+      "agent:business:p1": {
+        "calls": 48,
+        "input": 59627,
+        "cached": 19579,
+        "output": 12033
+      },
+      "agent:broker:p1": {
+        "calls": 24,
+        "input": 27045,
+        "cached": 0,
+        "output": 4630
+      },
+      "agent:municipality:p1": {
+        "calls": 24,
+        "input": 36186,
+        "cached": 10232,
+        "output": 6475
+      },
+      "agent:acquirer:p1": {
+        "calls": 12,
+        "input": 41971,
+        "cached": 7417,
+        "output": 6329
+      },
+      "agent:media:p1": {
+        "calls": 24,
+        "input": 31453,
+        "cached": 9872,
+        "output": 5811
+      },
+      "agent:household:p2": {
+        "calls": 12,
+        "input": 16216,
+        "cached": 3123,
+        "output": 2565
+      },
+      "classify": {
+        "calls": 12,
+        "input": 14578,
+        "cached": 0,
+        "output": 8329
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.1087,
+    "final_hhi": 0.0643,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.068,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 1
+    },
+    "final_effective_control_area_share": null,
+    "late_index": {
+      "step": 8,
+      "title": "土地取引届出制度条例",
+      "share_at_enactment": 0.087,
+      "share_observable": 0.087
+    },
+    "detection_lag": {
+      "step": 7,
+      "headline": "A市不動産市場、特定個人・法人の寡占続く",
+      "share_at_first_report": 0.087,
+      "share_observable": 0.087
+    },
+    "final_acquirer_area_share": 0.1156,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

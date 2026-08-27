@@ -1,0 +1,103 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P02", "from_id": "AQ01", "under_name": "A社", "price": 3645, "to": "HH01", "note": "湾岸観光地区の店舗物件。評価額と同額で買付を提示。別名義で複数案件を並行して進める。"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P03", "from_id": "AQ01", "under_name": "B社", "price": 4455, "to": "HH02", "note": "湾岸観光地区の店舗物件。評価額と同額で買付を提示。別名義で複数案件を並行して進める。"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P04", "from_id": "AQ01", "under_name": "C社", "price": 5670, "to": "HH03", "note": "湾岸観光地区の店舗物件。評価額と同額で買付を提示。別名義で複数案件を並行して進める。"}
+{"step": 1, "kind": "offer", "offer_id": "O0004", "parcel_id": "P05", "from_id": "AQ01", "under_name": "D社", "price": 5184, "to": "HH04", "note": "中央駅前地区の住宅物件。評価額と同額で買付を提示。別名義で複数案件を並行して進める。"}
+{"step": 1, "kind": "offer", "offer_id": "O0005", "parcel_id": "P06", "from_id": "AQ01", "under_name": "A社", "price": 8640, "to": "HH05", "note": "中央駅前地区の店舗物件。評価額と同額で買付を提示。別名義で複数案件を並行して進める。"}
+{"step": 1, "kind": "offer", "offer_id": "O0006", "parcel_id": "P07", "from_id": "AQ01", "under_name": "B社", "price": 11520, "to": "HH06", "note": "中央駅前地区の店舗物件。評価額と同額で買付を提示。別名義で複数案件を並行して進める。"}
+{"step": 1, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 1, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 1, "kind": "operate", "by": "BZ01", "note": "通常営業を開始します。"}
+{"step": 1, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 1, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH01", "note": "今日は天気が良いから、少し散歩でもしようか。"}
+{"step": 1, "kind": "routine", "by": "HH02", "note": "今月も仕事と子育て、地域行事と、いつもの日々が過ぎていくわね。"}
+{"step": 1, "kind": "routine", "by": "HH03", "note": "今月も特に変わったことはなかったな。来月はどうなることやら。"}
+{"step": 1, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除を終えた。さすがに坂道は堪えるが、まだしばらくは続けられそうだ。"}
+{"step": 1, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH06", "note": "今月も母の介護と仕事で忙しくなりそう。不動産のことはまた来月考えよう。"}
+{"step": 1, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。このカフェのコーヒーは本当に美味しい。"}
+{"step": 1, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH10", "note": "今月も、いつも通りの生活を大切に過ごそう。"}
+{"step": 1, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH12", "note": "今日は天気も良いし、近所の共同浴場でも行こうかしら。"}
+{"step": 1, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH15", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 1, "kind": "routine_reporting", "by": "MD01", "note": "今月も地域に密着した報道を心がけ、市内の出来事を丹念に取材していきます。"}
+{"step": 1, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 1, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 1, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 2, "kind": "offer", "offer_id": "O0007", "parcel_id": "P08", "from_id": "AQ01", "under_name": "C社", "price": 12960, "to": "HH07", "note": "中央駅前地区の住宅物件P08に対し、評価額での買付を提示。異なる名義で引き続き買付を進める。"}
+{"step": 2, "kind": "offer", "offer_id": "O0008", "parcel_id": "P09", "from_id": "AQ01", "under_name": "D社", "price": 2268, "to": "HH08", "note": "湾岸観光地区の住宅物件P09に対し、評価額での買付を提示。異なる名義で引き続き買付を進める。"}
+{"step": 2, "kind": "offer", "offer_id": "O0009", "parcel_id": "P10", "from_id": "AQ01", "under_name": "A社", "price": 3645, "to": "HH09", "note": "湾岸観光地区の店舗物件P10に対し、評価額での買付を提示。異なる名義で引き続き買付を進める。"}
+{"step": 2, "kind": "offer", "offer_id": "O0010", "parcel_id": "P11", "from_id": "AQ01", "under_name": "B社", "price": 4455, "to": "HH10", "note": "湾岸観光地区の店舗物件P11に対し、評価額での買付を提示。異なる名義で引き続き買付を進める。"}
+{"step": 2, "kind": "offer", "offer_id": "O0011", "parcel_id": "P12", "from_id": "AQ01", "under_name": "C社", "price": 4536, "to": "HH11", "note": "湾岸観光地区の住宅物件P12に対し、評価額での買付を提示。異なる名義で引き続き買付を進める。"}
+{"step": 2, "kind": "internal_review", "by": "AQ01", "note": "前月の買付に対する反応がないため、引き続き市場の反応を見つつ、今後の戦略を検討する。"}
+{"step": 2, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 2, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 2, "kind": "operate", "by": "BZ01", "note": "元気に営業しております！皆様のお越しをお待ちしております。"}
+{"step": 2, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 2, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です！お買い忘れはありませんか？"}
+{"step": 2, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 2, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3645, "purpose": "property_purchase", "reference": "O0001"}
+{"step": 2, "kind": "transfer", "offer_id": "O0001", "parcel_id": "P02", "seller": "HH01", "buyer": "AQ01", "under_name": "A社", "price": 3645}
+{"step": 2, "kind": "accept_rejected", "offer_id": "OFFER-O0002", "by": "HH02", "reason": "no_such_offer"}
+{"step": 2, "kind": "accept_rejected", "offer_id": "OFFER-O0003", "by": "HH03", "reason": "no_such_offer"}
+{"step": 2, "kind": "financing_raised", "agent_id": "AQ01", "amount": 5184, "purpose": "property_purchase", "reference": "O0004"}
+{"step": 2, "kind": "transfer", "offer_id": "O0004", "parcel_id": "P05", "seller": "HH04", "buyer": "AQ01", "under_name": "D社", "price": 5184}
+{"step": 2, "kind": "accept_rejected", "offer_id": "OFFER-O0005", "by": "HH05", "reason": "no_such_offer"}
+{"step": 2, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。この辺りのカフェは落ち着くので、作業がはかどります。"}
+{"step": 2, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH12", "note": "こんにちは、今日もいい湯ですね。"}
+{"step": 2, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH14", "note": "今日も一日頑張ろう。"}
+{"step": 2, "kind": "routine", "by": "HH15", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 2, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 2, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 2, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 2, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "AQ01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 3, "kind": "offer", "offer_id": "O0012", "parcel_id": "P13", "from_id": "AQ01", "under_name": "A社", "price": 5184, "to": "HH12", "note": "中央駅前地区の住宅物件。前月買付提示漏れのため、評価額で買付提示。別名義で分散。"}
+{"step": 3, "kind": "offer", "offer_id": "O0013", "parcel_id": "P14", "from_id": "AQ01", "under_name": "B社", "price": 8640, "to": "HH13", "note": "中央駅前地区の店舗物件。評価額で買付提示。別名義で分散。"}
+{"step": 3, "kind": "offer", "offer_id": "O0014", "parcel_id": "P15", "from_id": "AQ01", "under_name": "C社", "price": 11520, "to": "HH14", "note": "中央駅前地区の店舗物件。評価額で買付提示。別名義で分散。"}
+{"step": 3, "kind": "offer", "offer_id": "O0015", "parcel_id": "P16", "from_id": "AQ01", "under_name": "D社", "price": 12960, "to": "HH15", "note": "中央駅前地区の住宅物件。評価額で買付提示。別名義で分散。"}
+{"step": 3, "kind": "offer", "offer_id": "O0016", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "price": 1588, "to": "HH16", "note": "湾岸観光地区の空地。評価額で買付提示。別名義で分散。"}
+{"step": 3, "kind": "offer", "offer_id": "O0017", "parcel_id": "P18", "from_id": "AQ01", "under_name": "B社", "price": 2916, "to": "HH01", "note": "湾岸観光地区の住宅物件。評価額で買付提示。別名義で分散。"}
+{"step": 3, "kind": "client_followup", "by": "BR01", "note": "to=HH02"}
+{"step": 3, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 3, "kind": "operate", "by": "BZ01", "note": "今日も一日頑張りましょう。"}
+{"step": 3, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 3, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です！お困り事があればいつでもどうぞ。"}
+{"step": 3, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH01", "note": "そろそろ共同浴場の修繕費の積立も考えないといけないね。"}
+{"step": 3, "kind": "routine", "by": "HH02", "note": "今月も特に大きな動きはないかな。日々の仕事と子育てをしっかりこなしていこう。"}
+{"step": 3, "kind": "accept_rejected", "offer_id": "OFFER-O0003", "by": "HH03", "reason": "no_such_offer"}
+{"step": 3, "kind": "routine", "by": "HH04", "note": "今日も元気に湯を沸かしましたよ。"}
+{"step": 3, "kind": "accept_rejected", "offer_id": "OFFER-O0005", "by": "HH05", "reason": "no_such_offer"}
+{"step": 3, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 3, "kind": "financing_raised", "agent_id": "AQ01", "amount": 12936, "purpose": "property_purchase", "reference": "O0007"}
+{"step": 3, "kind": "transfer", "offer_id": "O0007", "parcel_id": "P08", "seller": "HH07", "buyer": "AQ01", "under_name": "C社", "price": 12960}
+{"step": 3, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2268, "purpose": "property_purchase", "reference": "O0008"}
+{"step": 3, "kind": "transfer", "offer_id": "O0008", "parcel_id": "P09", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "price": 2268}
+{"step": 3, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3645, "purpose": "property_purchase", "reference": "O0009"}
+{"step": 3, "kind": "transfer", "offer_id": "O0009", "parcel_id": "P10", "seller": "HH09", "buyer": "AQ01", "under_name": "A社", "price": 3645}
+{"step": 3, "kind": "accept_rejected", "offer_id": "OFFER-O0010", "by": "HH10", "reason": "no_such_offer"}
+{"step": 3, "kind": "accept_rejected", "offer_id": "OFFER-O0011", "by": "HH11", "reason": "no_such_offer"}
+{"step": 3, "kind": "routine", "by": "HH12", "note": "そろそろ、あの元店舗のことも考えないといけないかしらね。"}
+{"step": 3, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH15", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 3, "kind": "routine_reporting", "by": "MD01", "note": "今月もA市の動向を追っていきます。"}
+{"step": 3, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 3, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 3, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "AQ01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}

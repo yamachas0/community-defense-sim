@@ -1,0 +1,85 @@
+{
+  "run_name": "field_v3_a_city",
+  "steps": 60,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 570.8,
+  "acquirer_model": "gemini-2.5-flash",
+  "invalid_actions": 45,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 1632,
+    "input_tokens": 2414238,
+    "cached_tokens": 878424,
+    "output_tokens": 368697,
+    "errors": 0,
+    "by_tag": {
+      "agent:household": {
+        "calls": 960,
+        "input": 1365208,
+        "cached": 537158,
+        "output": 175970
+      },
+      "agent:business": {
+        "calls": 240,
+        "input": 277154,
+        "cached": 128447,
+        "output": 43961
+      },
+      "agent:broker": {
+        "calls": 120,
+        "input": 136837,
+        "cached": 60605,
+        "output": 23373
+      },
+      "agent:municipality": {
+        "calls": 120,
+        "input": 138261,
+        "cached": 63575,
+        "output": 20437
+      },
+      "agent:media": {
+        "calls": 120,
+        "input": 134028,
+        "cached": 60895,
+        "output": 20444
+      },
+      "agent:acquirer": {
+        "calls": 60,
+        "input": 354245,
+        "cached": 27744,
+        "output": 75333
+      },
+      "classify": {
+        "calls": 12,
+        "input": 8505,
+        "cached": 0,
+        "output": 9179
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.0,
+    "final_hhi": 0.0633,
+    "final_acquirer_control_share": 0.0,
+    "cognition_shift_final": 0.0,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 0
+    },
+    "final_effective_control_area_share": 0.0,
+    "late_index": null,
+    "detection_lag": null,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

@@ -1,0 +1,99 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P04", "from_id": "AQ01", "under_name": "A社", "price": 5670, "to": "HH03", "note": "湾岸観光地区の店舗物件。評価額5670万円で買付。早期取得を目指す。"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P07", "from_id": "AQ01", "under_name": "B社", "price": 11520, "to": "HH06", "note": "中央駅前地区の店舗物件。評価額11520万円で買付。早期取得を目指す。"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P15", "from_id": "AQ01", "under_name": "C社", "price": 11520, "to": "HH14", "note": "中央駅前地区の店舗物件。評価額11520万円で買付。早期取得を目指す。"}
+{"step": 1, "kind": "offer", "offer_id": "O0004", "parcel_id": "P30", "from_id": "AQ01", "under_name": "D社", "price": 7560, "to": "HH13", "note": "温泉丘陵地区の店舗物件。評価額7560万円で買付。早期取得を目指す。"}
+{"step": 1, "kind": "offer", "offer_id": "O0005", "parcel_id": "P06", "from_id": "AQ01", "under_name": "X社", "price": 8640, "to": "HH05", "note": "中央駅前地区の店舗物件。評価額8640万円で買付。早期取得を目指す。"}
+{"step": 1, "kind": "internal_review", "by": "AQ01", "note": "初期買付戦略の進捗と、今後の追加買付候補物件の選定を検討する。"}
+{"step": 1, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 1, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 1, "kind": "operate", "by": "BZ01", "note": "通常営業を行います。"}
+{"step": 1, "kind": "operate", "by": "BZ02", "note": "いつものメニューでお願いします。"}
+{"step": 1, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業するぞ！"}
+{"step": 1, "kind": "operate", "by": "BZ04", "note": "本日もコワーキングスペースをご利用いただきありがとうございます。何かお困りのことはございますか？"}
+{"step": 1, "kind": "routine", "by": "HH01", "note": "今日は天気が良いので、庭の手入れでもしようかしら。"}
+{"step": 1, "kind": "routine", "by": "HH02", "note": "今月も仕事と育児、慌ただしく過ぎていきそうだわ。"}
+{"step": 1, "kind": "routine", "by": "HH03", "note": "今月も無事に過ごせました。来月も平穏な日々が続くといいな。"}
+{"step": 1, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。このブレンド、落ち着きます。"}
+{"step": 1, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH10", "note": "今月も、日々の生活を大切に過ごしましょう。"}
+{"step": 1, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH12", "note": "今日は天気もいいし、庭の手入れでもしようかしら。"}
+{"step": 1, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH15", "note": "今月も特に変わったことはないな。仕事と家の往復で終わりそうだ。"}
+{"step": 1, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 1, "kind": "hold", "by": "MD01", "note": ""}
+{"step": 1, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 1, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 1, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 2, "kind": "internal_review", "by": "AQ01", "note": "前月提示した買付提案の進捗と、今後の戦略オプションを検討する。特に、未反応の案件に対する追加アクションの要否を評価。"}
+{"step": 2, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P02"}
+{"step": 2, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P03"}
+{"step": 2, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P10"}
+{"step": 2, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P11"}
+{"step": 2, "kind": "wait", "by": "AQ01", "note": "前月の買付に対する相手方からの反応を待つ。焦って追加の買付を出すよりも、市場の反応を観察する期間とする。"}
+{"step": 2, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 2, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 2, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。お客様に満足いただけるよう、サービスの向上に努めます。"}
+{"step": 2, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 2, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です。皆様のお越しをお待ちしております。"}
+{"step": 2, "kind": "business_finance", "by": "BZ04", "note": "開業借入の返済計画を検討します。"}
+{"step": 2, "kind": "routine", "by": "HH01", "note": "そろそろ共同浴場の修繕費のことも考えないといけないね。子どもたちにも相談しようかしら。"}
+{"step": 2, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 2, "kind": "transfer", "offer_id": "O0001", "parcel_id": "P04", "seller": "HH03", "buyer": "AQ01", "under_name": "A社", "price": 5670}
+{"step": 2, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 2, "kind": "accept_rejected", "offer_id": "OFFER-O0005", "by": "HH05", "reason": "no_such_offer"}
+{"step": 2, "kind": "transfer", "offer_id": "O0002", "parcel_id": "P07", "seller": "HH06", "buyer": "AQ01", "under_name": "B社", "price": 11520}
+{"step": 2, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。リモートワーク日和です。"}
+{"step": 2, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH10", "note": "今月も家族との時間を大切に過ごしたいな。"}
+{"step": 2, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 2, "kind": "accept_rejected", "offer_id": "OFFER-O0003", "by": "HH14", "reason": "no_such_offer"}
+{"step": 2, "kind": "routine", "by": "HH15", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 2, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 2, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 2, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 2, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "AQ01", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 3, "kind": "internal_review", "by": "AQ01", "note": "P06の買付について、R05からの承諾意向に基づき、契約締結に向けた社内手続きと準備を進める。"}
+{"step": 3, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P17"}
+{"step": 3, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P20"}
+{"step": 3, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P24"}
+{"step": 3, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P41"}
+{"step": 3, "kind": "check_land_registry", "by": "AQ01", "note": "parcel=P44"}
+{"step": 3, "kind": "routine_brokerage", "by": "BR01", "note": "P07の買付承諾のご連絡ありがとうございます。担当者様との日程調整を進めます。"}
+{"step": 3, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 3, "kind": "operate", "by": "BZ01", "note": "通常営業を継続し、お客様に満足いただけるよう努めます。"}
+{"step": 3, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 3, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です！お困りのことがあれば何でもお声がけください。"}
+{"step": 3, "kind": "business_finance", "by": "BZ04", "note": "開業借入の返済計画を、手元資金の状況を踏まえて再検討します。"}
+{"step": 3, "kind": "routine", "by": "HH01", "note": "今月も特に変わったことはなかったね。共同浴場の修繕費、どうしようか。"}
+{"step": 3, "kind": "routine", "by": "HH02", "note": "今月も特に変わったことはないかな。仕事と子どもの学校、あとは近所付き合いで忙しくなりそう。"}
+{"step": 3, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 3, "kind": "transfer", "offer_id": "O0005", "parcel_id": "P06", "seller": "HH05", "buyer": "AQ01", "under_name": "X社", "price": 8640}
+{"step": 3, "kind": "routine", "by": "HH06", "note": "今月も母の介護と仕事で忙しくなりそうだわ。駅前の物件の件、BR01さんからの連絡待ちだけど、どうなるかしら。"}
+{"step": 3, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。リモートワーク頑張ります。"}
+{"step": 3, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH12", "note": "庭の手入れでもして、のんびり過ごそうかの。"}
+{"step": 3, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 3, "kind": "accept_rejected", "offer_id": "OFFER-O0003", "by": "HH14", "reason": "no_such_offer"}
+{"step": 3, "kind": "routine", "by": "HH15", "note": "転勤の可能性はあるけれど、まだA市の家のことは様子を見よう。"}
+{"step": 3, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 3, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 3, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 3, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 3, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "AQ01", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "AQ01", "rent": 24}]}

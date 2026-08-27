@@ -1133,7 +1133,7 @@ class Simulation:
                             "from": a.agent_id, "to": broker_id,
                             "text": outcome.get("question", ""), "step": step,
                             "kind": "consult",
-                            "obs_id": f"CONSULT-{outcome.get('consult_id')}"})
+                            "obs_id": str(outcome.get("consult_id"))})
                     operations.append({"action_type": "consult", "target": broker_id,
                                        "outcome": outcome})
                 elif question:
@@ -1168,7 +1168,8 @@ class Simulation:
                         outcome = {"kind": "invalid_action", "reason": "missing_target"}
                     else:
                         outcome = answer_consult_v41b(self.ledger, step, a.agent_id,
-                                                      consult_id, reply)
+                                                      consult_id, reply,
+                                                      capacity=capacity)
                     if _is_rejected(outcome):
                         self.invalid_count += 1
                     elif outcome.get("kind") == "advice":
@@ -1176,7 +1177,7 @@ class Simulation:
                             "from": a.agent_id, "to": outcome.get("to"),
                             "text": outcome.get("reply", ""), "step": step,
                             "kind": "advice",
-                            "obs_id": f"ADVICE-{outcome.get('consult_id')}"})
+                            "obs_id": str(outcome.get("consult_id"))})
                     operations.append({"action_type": "advise", "target": consult_id,
                                        "outcome": outcome})
                 if not operations:

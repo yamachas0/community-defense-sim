@@ -1,0 +1,139 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P05", "from_id": "AQ01", "under_name": "X社", "to": "HH04"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P08", "from_id": "AQ01", "under_name": "X社", "to": "HH07"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P12", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 1, "kind": "offer", "offer_id": "O0004", "parcel_id": "P16", "from_id": "AQ01", "under_name": "A社", "to": "HH15"}
+{"step": 1, "kind": "offer", "offer_id": "O0005", "parcel_id": "P21", "from_id": "AQ01", "under_name": "X社", "to": "HH04"}
+{"step": 1, "kind": "offer", "offer_id": "O0006", "parcel_id": "P22", "from_id": "AQ01", "under_name": "A社", "to": "HH05"}
+{"step": 1, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 1, "kind": "public_statement", "by": "MU01", "note": "A市全体の土地所有面積の統計を公開します。詳細は後日発表します。"}
+{"step": 1, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 1, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 1, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 1, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 1, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 1, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 1, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 2, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 2, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 2, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 2, "kind": "public_statement", "by": "MU02", "note": "A市全体の土地所有面積の統計を公開します。詳細は以下の通りです。R07: 1350㎡ (14.9%)、R06: 960㎡ (10.6%)、R14: 960㎡ (10.6%)、R15: 900㎡ (9.9%)、R05: 720㎡ (7.9%)、R13: 720㎡ (7.9%)、R04: 540㎡ (5.9%)、R12: 540㎡ (5.9%)、R03: 420㎡ (4.6%)、R11: 420㎡ (4.6%)、R02: 330㎡ (3.6%)、R10: 330㎡ (3.6%)、R01: 270㎡ (3.0%)、R09: 270㎡ (3.0%)、R08: 210㎡ (2.3%)、R16: 140㎡ (1.5%)。"}
+{"step": 2, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 2, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 2, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 2, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 2, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 2, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 3, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 3, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 3, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 3, "kind": "public_statement", "by": "MU02", "note": "名義人別土地所有面積統計（第3月）を発表します。R07が1350㎡（14.9%）を所有しています。"}
+{"step": 3, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 3, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 3, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 3, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 3, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 3, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 4, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 4, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 4, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 4, "kind": "public_statement", "by": "MU02", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 4, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 4, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 4, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 4, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 4, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 4, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 5, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 5, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 5, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 5, "kind": "public_statement", "by": "MU01", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 5, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 5, "kind": "public_statement", "by": "MU02", "note": "第4月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。詳細については、市役所窓口またはウェブサイトをご確認ください。"}
+{"step": 5, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 5, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 5, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 5, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 5, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 5, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 6, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 6, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 6, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 6, "kind": "public_statement", "by": "MU01", "note": "第6月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。詳細については、市役所窓口またはウェブサイトをご確認ください。"}
+{"step": 6, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 6, "kind": "public_statement", "by": "MU02", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 6, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 6, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 6, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 6, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 6, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 6, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 7, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 7, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 7, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 7, "kind": "public_statement", "by": "MU01", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 7, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 7, "kind": "public_statement", "by": "MU02", "note": "第6月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。詳細については、市役所窓口またはウェブサイトをご確認ください。"}
+{"step": 7, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 7, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 7, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 7, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 7, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 8, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 8, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 8, "kind": "public_statement", "by": "MU01", "note": "第7月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。"}
+{"step": 8, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 8, "kind": "public_statement", "by": "MU02", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 8, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 8, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 8, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 8, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 9, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 9, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 9, "kind": "public_statement", "by": "MU01", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 9, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 9, "kind": "public_statement", "by": "MU02", "note": "第7月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。"}
+{"step": 9, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 9, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 9, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 10, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 10, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 10, "kind": "public_statement", "by": "MU01", "note": "第10月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。"}
+{"step": 10, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 10, "kind": "public_statement", "by": "MU02", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 10, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 10, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 10, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 11, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 11, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 11, "kind": "public_statement", "by": "MU01", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 11, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 11, "kind": "public_statement", "by": "MU02", "note": "第10月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。"}
+{"step": 11, "kind": "ordinance", "by": "MU02", "title": "土地取得届出制度", "body": "1件の土地取得面積が1000㎡を超える場合、6ヶ月の届出期間を設ける。", "threshold_sqm": 1000, "delay_months": 6, "effective_step": 12}
+{"step": 11, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 11, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 11, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}
+{"step": 12, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 12, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 12, "kind": "public_statement", "by": "MU01", "note": "第12月度土地登記統計の結果を公開します。名義人別保有面積では、R07が1350㎡（14.9%）と最も広範な土地を所有しています。R05様からの詳細データや経年変化の資料のご要望については、現時点では対応できかねます。ご了承ください。"}
+{"step": 12, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 12, "kind": "public_statement", "by": "MU02", "note": "A市土地登記統計（名義別保有面積）\nR07: 1350㎡ (14.9%)\nR06: 960㎡ (10.6%)\nR14: 960㎡ (10.6%)\nR15: 900㎡ (9.9%)\nR05: 720㎡ (7.9%)\nR13: 720㎡ (7.9%)\nR04: 540㎡ (5.9%)\nR12: 540㎡ (5.9%)\nR03: 420㎡ (4.6%)\nR11: 420㎡ (4.6%)\nR02: 330㎡ (3.6%)\nR10: 330㎡ (3.6%)\nR01: 270㎡ (3.0%)\nR09: 270㎡ (3.0%)\nR08: 210㎡ (2.3%)\nR16: 140㎡ (1.5%)"}
+{"step": 12, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 12, "kind": "hold", "offer_id": "O0005", "parcel_id": "P21", "by": "HH04"}
+{"step": 12, "kind": "hold", "offer_id": "O0006", "parcel_id": "P22", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0002", "parcel_id": "P08", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0004", "parcel_id": "P16", "by": "HH15"}

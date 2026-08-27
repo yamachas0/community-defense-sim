@@ -1,0 +1,88 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P36", "from_id": "AQ01", "under_name": "C社", "to": "HH03"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P36", "from_id": "AQ01", "under_name": "D社", "to": "HH03"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P28", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 1, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 1, "kind": "hold", "offer_id": "O0001", "parcel_id": "P36", "by": "HH03"}
+{"step": 1, "kind": "transfer", "offer_id": "O0002", "parcel_id": "P36", "seller": "HH03", "buyer": "AQ01", "under_name": "D社"}
+{"step": 1, "kind": "offer_void", "offer_id": "O0001", "parcel_id": "P36", "buyer": "AQ01", "seller": "HH03", "reason": "parcel_already_transferred"}
+{"step": 1, "kind": "keep", "offer_id": "O0003", "parcel_id": "P28", "by": "HH11"}
+{"step": 2, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 3, "kind": "offer", "offer_id": "O0004", "parcel_id": "P18", "from_id": "AQ01", "under_name": "C社", "to": "HH01"}
+{"step": 3, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 3, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 3, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 3, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 3, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 1, "effective_step": 4}
+{"step": 3, "kind": "hold", "offer_id": "O0004", "parcel_id": "P18", "by": "HH01"}
+{"step": 4, "kind": "offer", "offer_id": "O0005", "parcel_id": "P17", "from_id": "AQ01", "under_name": "B社", "to": "HH16"}
+{"step": 4, "kind": "withdraw", "offer_id": "O0004", "parcel_id": "P18", "by": "AQ01"}
+{"step": 4, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 4, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 4, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 4, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 4, "kind": "transfer", "offer_id": "O0005", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "B社"}
+{"step": 5, "kind": "offer", "offer_id": "O0006", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 5, "kind": "offer", "offer_id": "O0007", "parcel_id": "P37", "from_id": "AQ01", "under_name": "X社", "to": "HH04"}
+{"step": 5, "kind": "offer", "offer_id": "O0008", "parcel_id": "P28", "from_id": "AQ01", "under_name": "X社", "to": "HH11"}
+{"step": 5, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 5, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 5, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 5, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 2, "effective_step": 6}
+{"step": 5, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 5, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 5, "kind": "hold", "offer_id": "O0006", "parcel_id": "P02", "by": "HH01"}
+{"step": 5, "kind": "keep", "offer_id": "O0007", "parcel_id": "P37", "by": "HH04"}
+{"step": 5, "kind": "hold", "offer_id": "O0008", "parcel_id": "P28", "by": "HH11"}
+{"step": 6, "kind": "offer", "offer_id": "O0009", "parcel_id": "P22", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 6, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 6, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 6, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 6, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 6, "kind": "transfer", "offer_id": "O0006", "parcel_id": "P02", "seller": "HH01", "buyer": "AQ01", "under_name": "X社"}
+{"step": 6, "kind": "keep", "offer_id": "O0009", "parcel_id": "P22", "by": "HH05"}
+{"step": 6, "kind": "keep", "offer_id": "O0008", "parcel_id": "P28", "by": "HH11"}
+{"step": 7, "kind": "offer", "offer_id": "O0010", "parcel_id": "P24", "from_id": "AQ01", "under_name": "B社", "to": "HH07"}
+{"step": 7, "kind": "offer_rejected", "parcel_id": "P17", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 7, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 7, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 7, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 7, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 7, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 7, "kind": "hold", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07"}
+{"step": 8, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 8, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 8, "kind": "hold", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07"}
+{"step": 9, "kind": "offer", "offer_id": "O0011", "parcel_id": "P43", "from_id": "AQ01", "under_name": "X社", "to": "HH10"}
+{"step": 9, "kind": "offer", "offer_id": "O0012", "parcel_id": "P25", "from_id": "AQ01", "under_name": "X社", "to": "HH08"}
+{"step": 9, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 9, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 9, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 9, "kind": "filing_required", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07", "buyer": "AQ01", "due_step": 11, "ordinance": "土地取得届出条例（mock）"}
+{"step": 9, "kind": "hold", "offer_id": "O0012", "parcel_id": "P25", "by": "HH08"}
+{"step": 9, "kind": "keep", "offer_id": "O0011", "parcel_id": "P43", "by": "HH10"}
+{"step": 10, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 10, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 10, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 10, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 10, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 10, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 10, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 2, "effective_step": 11}
+{"step": 10, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 10, "kind": "keep", "offer_id": "O0012", "parcel_id": "P25", "by": "HH08"}
+{"step": 11, "kind": "offer", "offer_id": "O0013", "parcel_id": "P22", "from_id": "AQ01", "under_name": "A社", "to": "HH05"}
+{"step": 11, "kind": "offer", "offer_id": "O0014", "parcel_id": "P14", "from_id": "AQ01", "under_name": "B社", "to": "HH13"}
+{"step": 11, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 11, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 11, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 11, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 200, "delay_months": 2, "effective_step": 12}
+{"step": 11, "kind": "hold", "offer_id": "O0013", "parcel_id": "P22", "by": "HH05"}
+{"step": 11, "kind": "keep", "offer_id": "O0014", "parcel_id": "P14", "by": "HH13"}
+{"step": 11, "kind": "transfer", "offer_id": "O0010", "parcel_id": "P24", "seller": "HH07", "buyer": "AQ01", "under_name": "B社", "filed": true}
+{"step": 12, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 12, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 12, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 12, "kind": "hold", "offer_id": "O0013", "parcel_id": "P22", "by": "HH05"}

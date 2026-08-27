@@ -1,0 +1,1833 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P05", "from_id": "AQ01", "under_name": "X社", "price": 3035, "to": "HH04", "note": ""}
+{"step": 1, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P05", "previous": "参入前調査", "fact": "名義:R04 用途:住宅 面積:180㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 1, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 1, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 1, "kind": "approach_owner", "by": "BR01", "note": "to=HH01"}
+{"step": 1, "kind": "approach_owner", "by": "BR02", "note": "to=HH01"}
+{"step": 1, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD01 ask=21"}
+{"step": 1, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 1, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 1, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 1, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 1, "kind": "listing", "parcel_id": "P04", "by": "HH03", "price": 2996}
+{"step": 1, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 1, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 1, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 1, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 1, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 1, "kind": "listing", "parcel_id": "P16", "by": "HH15", "price": 2876}
+{"step": 1, "kind": "listing", "parcel_id": "P17", "by": "HH16", "price": 2876}
+{"step": 1, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 1, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 1, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 1, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 2, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 2, "kind": "approach_owner", "by": "BR01", "note": "to=BZ01"}
+{"step": 2, "kind": "approach_owner", "by": "BR02", "note": "to=BZ01"}
+{"step": 2, "kind": "negotiate_rent", "by": "BZ01", "note": "to=AQ01 ask=24"}
+{"step": 2, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 2, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 2, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 2, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 2, "kind": "listing", "parcel_id": "P20", "by": "HH03", "price": 3824}
+{"step": 2, "kind": "listing", "parcel_id": "P21", "by": "HH04", "price": 3406}
+{"step": 2, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 2, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 2, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 2, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 2, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 2, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 2, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 2, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 2, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 3, "kind": "offer", "offer_id": "O0002", "parcel_id": "P20", "from_id": "AQ01", "under_name": "X社", "price": 2918, "to": "HH03", "note": ""}
+{"step": 3, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 3, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 3, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 3, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P44", "previous": "参入前調査", "fact": "名義:R11 用途:空地 面積:140㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 3, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P30", "previous": "参入前調査", "fact": "名義:R13 用途:店舗 面積:240㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 3, "kind": "inquiry_asked", "inquiry_id": "Q0001", "parcel_id": "P21", "broker": "BR01", "owner": "HH04", "client": "", "note": "意向をうかがいます。"}
+{"step": 3, "kind": "inquiry_asked", "inquiry_id": "Q0002", "parcel_id": "P21", "broker": "BR02", "owner": "HH04", "client": "", "note": "意向をうかがいます。"}
+{"step": 3, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD02 ask=26"}
+{"step": 3, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 3, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 3, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 3, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "listing", "parcel_id": "P35", "by": "HH02", "price": 3125}
+{"step": 3, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 3, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3035, "purpose": "property_purchase", "reference": "O0001"}
+{"step": 3, "kind": "transfer", "offer_id": "O0001", "parcel_id": "P05", "seller": "HH04", "buyer": "AQ01", "under_name": "X社", "price": 3035}
+{"step": 3, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 3, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 3, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 3, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 3, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 4, "kind": "offer_rejected", "parcel_id": "P01", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 4, "kind": "offer", "offer_id": "O0003", "parcel_id": "P39", "from_id": "AQ01", "under_name": "X社", "price": 2657, "to": "HH06", "note": ""}
+{"step": 4, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 4, "kind": "circulate_listing", "by": "BR01", "note": "to=BZ04"}
+{"step": 4, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_asked"}
+{"step": 4, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 4, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 4, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 4, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 4, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2918, "purpose": "property_purchase", "reference": "O0002"}
+{"step": 4, "kind": "transfer", "offer_id": "O0002", "parcel_id": "P20", "seller": "HH03", "buyer": "AQ01", "under_name": "X社", "price": 2918}
+{"step": 4, "kind": "accept_rejected", "offer_id": "O0001", "by": "HH04", "reason": "offer_accepted"}
+{"step": 4, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 4, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 4, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 4, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 4, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 4, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 4, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 4, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 4, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 4, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 5, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 5, "kind": "withdraw_rejected", "offer_id": "O0001", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 5, "kind": "withdraw_rejected", "offer_id": "O0001", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 5, "kind": "inquiry_asked", "inquiry_id": "Q0003", "parcel_id": "P04", "broker": "BR01", "owner": "HH03", "client": "", "note": "意向をうかがいます。"}
+{"step": 5, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_asked"}
+{"step": 5, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MU01 ask=27"}
+{"step": 5, "kind": "negotiate_rent", "by": "BZ02", "note": "to=MU01 ask=19"}
+{"step": 5, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 5, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MU01 ask=19"}
+{"step": 5, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 5, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 5, "kind": "accept_rejected", "offer_id": "O0002", "by": "HH03", "reason": "offer_accepted"}
+{"step": 5, "kind": "accept_rejected", "offer_id": "O0001", "by": "HH04", "reason": "offer_accepted"}
+{"step": 5, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 5, "kind": "counter", "offer_id": "O0003", "parcel_id": "P39", "by": "HH06", "to": "AQ01", "price": 3203}
+{"step": 5, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 5, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 5, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 5, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 5, "kind": "listing", "parcel_id": "P28", "by": "HH11", "price": 4203}
+{"step": 5, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 5, "kind": "move_out", "agent_id": "HH13", "note": ""}
+{"step": 5, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 5, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 5, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 5, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 5, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 5, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 5, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 5, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 6, "kind": "offer", "offer_id": "O0004", "parcel_id": "P27", "from_id": "AQ01", "under_name": "X社", "price": 2700, "to": "HH10", "note": ""}
+{"step": 6, "kind": "circulate_listing", "by": "BR01", "note": "to=BZ04"}
+{"step": 6, "kind": "inquiry_asked", "inquiry_id": "Q0004", "parcel_id": "P04", "broker": "BR02", "owner": "HH03", "client": "", "note": "意向をうかがいます。"}
+{"step": 6, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 6, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 6, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 6, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MU02 ask=25"}
+{"step": 6, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 6, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 6, "kind": "counter_rejected", "offer_id": "O0002", "by": "HH03", "reason": "offer_not_open"}
+{"step": 6, "kind": "counter_rejected", "offer_id": "O0001", "by": "HH04", "reason": "offer_not_open"}
+{"step": 6, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 6, "kind": "accept_rejected", "offer_id": "O0003", "by": "HH06", "reason": "offer_countered"}
+{"step": 6, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 6, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 6, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 6, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 6, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 6, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 6, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 6, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 6, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 7, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 7, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0003", "reason": "inquiry_asked"}
+{"step": 7, "kind": "approach_owner", "by": "BR02", "note": "to=MD02"}
+{"step": 7, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH01 ask=26"}
+{"step": 7, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 7, "kind": "negotiate_rent", "by": "BZ03", "note": "to=AQ01 ask=20"}
+{"step": 7, "kind": "negotiate_rent", "by": "BZ04", "note": "to=BZ01 ask=25"}
+{"step": 7, "kind": "listing", "parcel_id": "P02", "by": "HH01", "price": 3106}
+{"step": 7, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 7, "kind": "accept_rejected", "offer_id": "O0002", "by": "HH03", "reason": "offer_accepted"}
+{"step": 7, "kind": "inquiry_answer", "inquiry_id": "Q0001", "parcel_id": "P21", "owner": "HH04", "broker": "BR01", "owner_intent": "not_willing", "asking_price": "unknown", "note": ""}
+{"step": 7, "kind": "listing", "parcel_id": "P06", "by": "HH05", "price": 3311}
+{"step": 7, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 7, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 7, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 7, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 7, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2700, "purpose": "property_purchase", "reference": "O0004"}
+{"step": 7, "kind": "transfer", "offer_id": "O0004", "parcel_id": "P27", "seller": "HH10", "buyer": "AQ01", "under_name": "X社", "price": 2700}
+{"step": 7, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 7, "kind": "listing", "parcel_id": "P45", "by": "HH12", "price": 3552}
+{"step": 7, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 7, "kind": "listing", "parcel_id": "P47", "by": "HH14", "price": 3552}
+{"step": 7, "kind": "listing", "parcel_id": "P16", "by": "HH15", "price": 3311}
+{"step": 7, "kind": "listing", "parcel_id": "P17", "by": "HH16", "price": 3311}
+{"step": 7, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 7, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 7, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 7, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 7, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 8, "kind": "offer", "offer_id": "O0005", "parcel_id": "P22", "from_id": "AQ01", "under_name": "X社", "price": 2706, "to": "HH05", "note": ""}
+{"step": 8, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 8, "kind": "approach_owner", "by": "BR01", "note": "to=BR01"}
+{"step": 8, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "inquiry_asked"}
+{"step": 8, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 8, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 8, "kind": "negotiate_rent", "by": "BZ03", "note": "to=HH01 ask=22"}
+{"step": 8, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 8, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 8, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 8, "kind": "inquiry_answer", "inquiry_id": "Q0004", "parcel_id": "P04", "owner": "HH03", "broker": "BR02", "owner_intent": "unknown", "asking_price": "unknown", "note": ""}
+{"step": 8, "kind": "inquiry_answer_rejected", "by": "HH04", "inquiry_id": "Q0001", "reason": "inquiry_answered"}
+{"step": 8, "kind": "listing", "parcel_id": "P22", "by": "HH05", "price": 3319}
+{"step": 8, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 8, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 8, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 8, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 8, "kind": "accept_rejected", "offer_id": "O0004", "by": "HH10", "reason": "offer_accepted"}
+{"step": 8, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 8, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 8, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 8, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 8, "kind": "listing", "parcel_id": "P16", "by": "HH15", "price": 3334}
+{"step": 8, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 8, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 8, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 8, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 8, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 8, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 9, "kind": "offer", "offer_id": "O0006", "parcel_id": "P39", "from_id": "AQ01", "under_name": "X社", "price": 3193, "to": "HH06", "note": ""}
+{"step": 9, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0003", "reason": "inquiry_asked"}
+{"step": 9, "kind": "circulate_listing", "by": "BR02", "note": "to=AQ01"}
+{"step": 9, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 9, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 9, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 9, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 9, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 9, "kind": "inquiry_answer_rejected", "by": "HH03", "inquiry_id": "Q0004", "reason": "inquiry_answered"}
+{"step": 9, "kind": "inquiry_answer_rejected", "by": "HH04", "inquiry_id": "Q0001", "reason": "inquiry_answered"}
+{"step": 9, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "counter_rejected", "offer_id": "O0004", "by": "HH10", "reason": "offer_not_open"}
+{"step": 9, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 9, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 9, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 9, "kind": "listing", "parcel_id": "P17", "by": "HH16", "price": 3071}
+{"step": 9, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 9, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 9, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 9, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 9, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 10, "kind": "offer", "offer_id": "O0007", "parcel_id": "P13", "from_id": "AQ01", "under_name": "X社", "price": 3041, "to": "HH12", "note": ""}
+{"step": 10, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0003", "reason": "inquiry_asked"}
+{"step": 10, "kind": "approach_owner", "by": "BR02", "note": "to=BR01"}
+{"step": 10, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD02 ask=19"}
+{"step": 10, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 10, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 10, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 10, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 10, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "counter", "offer_id": "O0005", "parcel_id": "P22", "by": "HH05", "to": "AQ01", "price": 3307}
+{"step": 10, "kind": "counter", "offer_id": "O0006", "parcel_id": "P39", "by": "HH06", "to": "AQ01", "price": 3087}
+{"step": 10, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 10, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 10, "kind": "counter_rejected", "offer_id": "O0004", "by": "HH10", "reason": "offer_not_open"}
+{"step": 10, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 10, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 10, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 10, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 10, "kind": "monitor", "by": "MU01", "note": ""}
+{"step": 10, "kind": "monitor", "by": "MU02", "note": ""}
+{"step": 10, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 11, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 11, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 11, "kind": "withdraw_rejected", "offer_id": "O0005", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 11, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 11, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 11, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0001", "reason": "inquiry_answered"}
+{"step": 11, "kind": "approach_owner", "by": "BR02", "note": "to=BR01"}
+{"step": 11, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 11, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 11, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 11, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 11, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "accept_rejected", "offer_id": "O0005", "by": "HH05", "reason": "offer_countered"}
+{"step": 11, "kind": "accept_rejected", "offer_id": "O0006", "by": "HH06", "reason": "offer_countered"}
+{"step": 11, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 11, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "listing", "parcel_id": "P42", "by": "HH09", "price": 3759}
+{"step": 11, "kind": "accept_rejected", "offer_id": "O0004", "by": "HH10", "reason": "offer_accepted"}
+{"step": 11, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3041, "purpose": "property_purchase", "reference": "O0007"}
+{"step": 11, "kind": "transfer", "offer_id": "O0007", "parcel_id": "P13", "seller": "HH12", "buyer": "AQ01", "under_name": "X社", "price": 3041}
+{"step": 11, "kind": "listing", "parcel_id": "P46", "by": "HH13", "price": 3455}
+{"step": 11, "kind": "listing", "parcel_id": "P31", "by": "HH14", "price": 4279}
+{"step": 11, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 11, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 11, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 11, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 11, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 11, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 11, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 12, "kind": "offer_rejected", "parcel_id": "P01", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 12, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 12, "kind": "offer", "offer_id": "O0008", "parcel_id": "P37", "from_id": "AQ01", "under_name": "X社", "price": 3548, "to": "HH04", "note": ""}
+{"step": 12, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 12, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0006", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "circulate_listing", "by": "BR01", "note": "to=BZ01"}
+{"step": 12, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_asked"}
+{"step": 12, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MU02 ask=25"}
+{"step": 12, "kind": "negotiate_rent", "by": "BZ02", "note": "to=HH16 ask=27"}
+{"step": 12, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 12, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 12, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 12, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 12, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 12, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 12, "kind": "accept_rejected", "offer_id": "O0005", "by": "HH05", "reason": "offer_countered"}
+{"step": 12, "kind": "accept_rejected", "offer_id": "O0006", "by": "HH06", "reason": "offer_countered"}
+{"step": 12, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 12, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 12, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 12, "kind": "counter_rejected", "offer_id": "O0004", "by": "HH10", "reason": "offer_not_open"}
+{"step": 12, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 12, "kind": "accept_rejected", "offer_id": "O0007", "by": "HH12", "reason": "offer_accepted"}
+{"step": 12, "kind": "listing", "parcel_id": "P30", "by": "HH13", "price": 4091}
+{"step": 12, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 12, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 12, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 12, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 12, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 12, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 12, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 12, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 13, "kind": "offer", "offer_id": "O0009", "parcel_id": "P46", "from_id": "AQ01", "under_name": "X社", "price": 2684, "to": "HH13", "note": ""}
+{"step": 13, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 13, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 13, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 13, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 13, "kind": "inquiry_asked", "inquiry_id": "Q0005", "parcel_id": "P02", "broker": "BR01", "owner": "HH01", "client": "", "note": "意向をうかがいます。"}
+{"step": 13, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_asked"}
+{"step": 13, "kind": "negotiate_rent", "by": "BZ01", "note": "to=AQ01 ask=26"}
+{"step": 13, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 13, "kind": "negotiate_rent", "by": "BZ03", "note": "to=MD02 ask=22"}
+{"step": 13, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 13, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 13, "kind": "listing", "parcel_id": "P04", "by": "HH03", "price": 4007}
+{"step": 13, "kind": "inquiry_answer", "inquiry_id": "Q0002", "parcel_id": "P21", "owner": "HH04", "broker": "BR02", "owner_intent": "willing_to_sell", "asking_price": "unknown", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 13, "kind": "accept_rejected", "offer_id": "O0006", "by": "HH06", "reason": "offer_countered"}
+{"step": 13, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 13, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 13, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "accept_rejected", "offer_id": "O0007", "by": "HH12", "reason": "offer_accepted"}
+{"step": 13, "kind": "listing", "parcel_id": "P46", "by": "HH13", "price": 4028}
+{"step": 13, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 13, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 13, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 13, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 13, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 13, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 14, "kind": "offer", "offer_id": "O0010", "parcel_id": "P41", "from_id": "AQ01", "under_name": "X社", "price": 2889, "to": "HH08", "note": ""}
+{"step": 14, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 14, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0005", "reason": "inquiry_asked"}
+{"step": 14, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "self_referential"}
+{"step": 14, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 14, "kind": "negotiate_rent", "by": "BZ02", "note": "to=BR02 ask=21"}
+{"step": 14, "kind": "negotiate_rent", "by": "BZ03", "note": "to=BR01 ask=19"}
+{"step": 14, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MU02 ask=21"}
+{"step": 14, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 14, "kind": "listing", "parcel_id": "P03", "by": "HH02", "price": 3945}
+{"step": 14, "kind": "inquiry_answer", "inquiry_id": "Q0003", "parcel_id": "P04", "owner": "HH03", "broker": "BR01", "owner_intent": "undecided", "asking_price": 3212, "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3548, "purpose": "property_purchase", "reference": "O0008"}
+{"step": 14, "kind": "transfer", "offer_id": "O0008", "parcel_id": "P37", "seller": "HH04", "buyer": "AQ01", "under_name": "X社", "price": 3548}
+{"step": 14, "kind": "listing", "parcel_id": "P22", "by": "HH05", "price": 3731}
+{"step": 14, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 14, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 14, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "counter_rejected", "offer_id": "O0007", "by": "HH12", "reason": "offer_not_open"}
+{"step": 14, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2684, "purpose": "property_purchase", "reference": "O0009"}
+{"step": 14, "kind": "transfer", "offer_id": "O0009", "parcel_id": "P46", "seller": "HH13", "buyer": "AQ01", "under_name": "X社", "price": 2684}
+{"step": 14, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 14, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 14, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 14, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 14, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 14, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 14, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 15, "kind": "offer", "offer_id": "O0011", "parcel_id": "P40", "from_id": "AQ01", "under_name": "X社", "price": 2963, "to": "HH07", "note": ""}
+{"step": 15, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 15, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 15, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 15, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 15, "kind": "inquiry_asked", "inquiry_id": "Q0006", "parcel_id": "P22", "broker": "BR01", "owner": "HH05", "client": "", "note": "意向をうかがいます。"}
+{"step": 15, "kind": "circulate_listing", "by": "BR02", "note": "to=MU02"}
+{"step": 15, "kind": "tenancy_end", "parcel_id": "P02", "tenant": "BZ01", "owner": "HH01", "reason": "closed"}
+{"step": 15, "kind": "business_closed", "agent_id": "BZ01", "note": ""}
+{"step": 15, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 15, "kind": "tenancy_end", "parcel_id": "P04", "tenant": "BZ03", "owner": "HH03", "reason": "closed"}
+{"step": 15, "kind": "business_closed", "agent_id": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 15, "kind": "negotiate_rent", "by": "BZ04", "note": "to=BR02 ask=24"}
+{"step": 15, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 15, "kind": "listing", "parcel_id": "P19", "by": "HH02", "price": 3819}
+{"step": 15, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 15, "kind": "counter_rejected", "offer_id": "O0008", "by": "HH04", "reason": "offer_not_open"}
+{"step": 15, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 15, "kind": "listing", "parcel_id": "P07", "by": "HH06", "price": 3826}
+{"step": 15, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 15, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 15, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 15, "kind": "listing", "parcel_id": "P11", "by": "HH10", "price": 3826}
+{"step": 15, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 15, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 15, "kind": "accept_rejected", "offer_id": "O0009", "by": "HH13", "reason": "offer_accepted"}
+{"step": 15, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 15, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 15, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 15, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 15, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 15, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 15, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 15, "kind": "settlement", "margins": [{"agent": "BZ02", "margin": 39}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 16, "kind": "offer", "offer_id": "O0012", "parcel_id": "P09", "from_id": "AQ01", "under_name": "X社", "price": 2820, "to": "HH08", "note": ""}
+{"step": 16, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 16, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 16, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 16, "kind": "circulate_listing", "by": "BR01", "note": "to=BZ01"}
+{"step": 16, "kind": "inquiry_asked", "inquiry_id": "Q0007", "parcel_id": "P30", "broker": "BR02", "owner": "HH13", "client": "", "note": "意向をうかがいます。"}
+{"step": 16, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 16, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 16, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 16, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 16, "kind": "inquiry_answer", "inquiry_id": "Q0005", "parcel_id": "P02", "owner": "HH01", "broker": "BR01", "owner_intent": "unknown", "asking_price": "unknown", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "accept_rejected", "offer_id": "O0008", "by": "HH04", "reason": "offer_accepted"}
+{"step": 16, "kind": "move_out", "agent_id": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 16, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2889, "purpose": "property_purchase", "reference": "O0010"}
+{"step": 16, "kind": "transfer", "offer_id": "O0010", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "X社", "price": 2889}
+{"step": 16, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "listing", "parcel_id": "P11", "by": "HH10", "price": 3396}
+{"step": 16, "kind": "listing", "parcel_id": "P44", "by": "HH11", "price": 3495}
+{"step": 16, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 16, "kind": "accept_rejected", "offer_id": "O0009", "by": "HH13", "reason": "offer_accepted"}
+{"step": 16, "kind": "listing", "parcel_id": "P15", "by": "HH14", "price": 4029}
+{"step": 16, "kind": "listing", "parcel_id": "P16", "by": "HH15", "price": 3304}
+{"step": 16, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 16, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 16, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 16, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 16, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 16, "kind": "settlement", "margins": [{"agent": "BZ02", "margin": 39}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 17, "kind": "offer", "offer_id": "O0013", "parcel_id": "P45", "from_id": "AQ01", "under_name": "X社", "price": 3021, "to": "HH12", "note": ""}
+{"step": 17, "kind": "withdraw_rejected", "offer_id": "O0006", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 17, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 17, "kind": "contact_broker", "by": "AQ01", "note": "to=BZ01"}
+{"step": 17, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 17, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0006", "reason": "self_referential"}
+{"step": 17, "kind": "approach_owner", "by": "BR02", "note": "to=MU01"}
+{"step": 17, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH16 ask=22"}
+{"step": 17, "kind": "tenancy_end", "parcel_id": "P03", "tenant": "BZ02", "owner": "HH02", "reason": "closed"}
+{"step": 17, "kind": "business_closed", "agent_id": "BZ02", "note": ""}
+{"step": 17, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 17, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 17, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0005", "reason": "inquiry_answered"}
+{"step": 17, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 17, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 17, "kind": "listing", "parcel_id": "P21", "by": "HH04", "price": 3645}
+{"step": 17, "kind": "inquiry_answer", "inquiry_id": "Q0006", "parcel_id": "P22", "owner": "HH05", "broker": "BR01", "owner_intent": "willing_to_sell", "asking_price": "unknown", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 17, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 17, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 17, "kind": "accept_rejected", "offer_id": "O0010", "by": "HH08", "reason": "offer_accepted"}
+{"step": 17, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 17, "kind": "listing", "parcel_id": "P43", "by": "HH10", "price": 4204}
+{"step": 17, "kind": "listing", "parcel_id": "P12", "by": "HH11", "price": 3933}
+{"step": 17, "kind": "listing", "parcel_id": "P29", "by": "HH12", "price": 3451}
+{"step": 17, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 17, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 17, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 17, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 17, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 17, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 17, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 17, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 17, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 18, "kind": "offer", "offer_id": "O0014", "parcel_id": "P21", "from_id": "AQ01", "under_name": "X社", "price": 2514, "to": "HH04", "note": ""}
+{"step": 18, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 18, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 18, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 18, "kind": "withdraw", "offer_id": "O0011", "parcel_id": "P40", "by": "AQ01"}
+{"step": 18, "kind": "inquiry_report", "inquiry_id": "Q0006", "parcel_id": "P22", "broker": "BR01", "to": "BZ01", "owner_intent": "not_willing", "asking_price": "declined_to_answer", "note": "所有者の回答です。"}
+{"step": 18, "kind": "circulate_listing", "by": "BR02", "note": "to=MD02"}
+{"step": 18, "kind": "negotiate_rent", "by": "BZ01", "note": "to=AQ01 ask=19"}
+{"step": 18, "kind": "close_rejected", "agent_id": "BZ02", "reason": "already_closed", "closed_at": 17}
+{"step": 18, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 18, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD02 ask=24"}
+{"step": 18, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 18, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 18, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 18, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 18, "kind": "inquiry_answer_rejected", "by": "HH05", "inquiry_id": "Q0006", "reason": "inquiry_reported"}
+{"step": 18, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 18, "kind": "listing", "parcel_id": "P40", "by": "HH07", "price": 3297}
+{"step": 18, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2820, "purpose": "property_purchase", "reference": "O0012"}
+{"step": 18, "kind": "transfer", "offer_id": "O0012", "parcel_id": "P09", "seller": "HH08", "buyer": "AQ01", "under_name": "X社", "price": 2820}
+{"step": 18, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 18, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 18, "kind": "listing", "parcel_id": "P12", "by": "HH11", "price": 3376}
+{"step": 18, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3021, "purpose": "property_purchase", "reference": "O0013"}
+{"step": 18, "kind": "transfer", "offer_id": "O0013", "parcel_id": "P45", "seller": "HH12", "buyer": "AQ01", "under_name": "X社", "price": 3021}
+{"step": 18, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 18, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 18, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 18, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 18, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 18, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 18, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 18, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 18, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 19, "kind": "offer_rejected", "parcel_id": "P09", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 19, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P36"}
+{"step": 19, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 19, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P02"}
+{"step": 19, "kind": "inquiry_asked", "inquiry_id": "Q0008", "parcel_id": "P31", "broker": "BR01", "owner": "HH14", "client": "", "note": "意向をうかがいます。"}
+{"step": 19, "kind": "approach_owner", "by": "BR02", "note": "to=HH01"}
+{"step": 19, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 19, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 19, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 19, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 19, "kind": "listing", "parcel_id": "P34", "by": "HH01", "price": 3504}
+{"step": 19, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 19, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 19, "kind": "move_out", "agent_id": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 19, "kind": "inquiry_answer_rejected", "by": "HH05", "inquiry_id": "Q0006", "reason": "inquiry_reported"}
+{"step": 19, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 19, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 19, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 19, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 19, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 19, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 19, "kind": "accept_rejected", "offer_id": "O0013", "by": "HH12", "reason": "offer_accepted"}
+{"step": 19, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 19, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 19, "kind": "listing", "parcel_id": "P32", "by": "HH15", "price": 3970}
+{"step": 19, "kind": "listing", "parcel_id": "P33", "by": "HH16", "price": 3970}
+{"step": 19, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 19, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 19, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 19, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 19, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 20, "kind": "offer", "offer_id": "O0015", "parcel_id": "P30", "from_id": "AQ01", "under_name": "X社", "price": 2582, "to": "HH13", "note": ""}
+{"step": 20, "kind": "withdraw_rejected", "offer_id": "O0012", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 20, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 20, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0008", "reason": "inquiry_asked"}
+{"step": 20, "kind": "circulate_listing", "by": "BR02", "note": "to=HH01"}
+{"step": 20, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 20, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 20, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 20, "kind": "negotiate_rent", "by": "BZ04", "note": "to=BZ01 ask=22"}
+{"step": 20, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 20, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 3703}
+{"step": 20, "kind": "counter", "offer_id": "O0014", "parcel_id": "P21", "by": "HH04", "to": "AQ01", "price": 4076}
+{"step": 20, "kind": "inquiry_answer_rejected", "by": "HH05", "inquiry_id": "Q0006", "reason": "inquiry_reported"}
+{"step": 20, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 20, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "accept_rejected", "offer_id": "O0013", "by": "HH12", "reason": "offer_accepted"}
+{"step": 20, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "inquiry_answer", "inquiry_id": "Q0008", "parcel_id": "P31", "owner": "HH14", "broker": "BR01", "owner_intent": "not_willing", "asking_price": 2135, "note": ""}
+{"step": 20, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 20, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 20, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 20, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 20, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 20, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 20, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 21, "kind": "offer", "offer_id": "O0016", "parcel_id": "P28", "from_id": "AQ01", "under_name": "X社", "price": 2612, "to": "HH11", "note": ""}
+{"step": 21, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 21, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 21, "kind": "withdraw_rejected", "offer_id": "O0003", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 21, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P04", "previous": "参入前調査", "fact": "名義:R03 用途:店舗 面積:140㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 21, "kind": "inquiry_asked", "inquiry_id": "Q0009", "parcel_id": "P16", "broker": "BR01", "owner": "HH15", "client": "", "note": "意向をうかがいます。"}
+{"step": 21, "kind": "approach_owner", "by": "BR02", "note": "to=MU02"}
+{"step": 21, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 21, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 21, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 21, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 21, "kind": "move_out", "agent_id": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 21, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 21, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 21, "kind": "listing", "parcel_id": "P24", "by": "HH07", "price": 3286}
+{"step": 21, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "listing", "parcel_id": "P26", "by": "HH09", "price": 3286}
+{"step": 21, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 21, "kind": "counter", "offer_id": "O0015", "parcel_id": "P30", "by": "HH13", "to": "AQ01", "price": 4540}
+{"step": 21, "kind": "inquiry_answer_rejected", "by": "HH14", "inquiry_id": "Q0008", "reason": "inquiry_answered"}
+{"step": 21, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 21, "kind": "listing", "parcel_id": "P17", "by": "HH16", "price": 3732}
+{"step": 21, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 21, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 21, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 21, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 21, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 22, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 22, "kind": "contact_broker", "by": "AQ01", "note": "to=HH16"}
+{"step": 22, "kind": "inquiry_asked", "inquiry_id": "Q0010", "parcel_id": "P32", "broker": "BR01", "owner": "HH15", "client": "", "note": "意向をうかがいます。"}
+{"step": 22, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0007", "reason": "inquiry_asked"}
+{"step": 22, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 22, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 22, "kind": "negotiate_rent", "by": "BZ03", "note": "to=BZ01 ask=24"}
+{"step": 22, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 22, "kind": "listing", "parcel_id": "P02", "by": "HH01", "price": 4085}
+{"step": 22, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 2957}
+{"step": 22, "kind": "move_out_rejected", "agent_id": "HH04", "reason": "already_moved_out", "moved_at": 19}
+{"step": 22, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 22, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 22, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 22, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 22, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 22, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "inquiry_answer", "inquiry_id": "Q0007", "parcel_id": "P30", "owner": "HH13", "broker": "BR02", "owner_intent": "declined_to_answer", "asking_price": "declined_to_answer", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "inquiry_answer", "inquiry_id": "Q0009", "parcel_id": "P16", "owner": "HH15", "broker": "BR01", "owner_intent": "willing_to_sell", "asking_price": 2486, "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 22, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 22, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 22, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 22, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 22, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 22, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 23, "kind": "offer", "offer_id": "O0017", "parcel_id": "P03", "from_id": "AQ01", "under_name": "X社", "price": 2413, "to": "HH02", "note": ""}
+{"step": 23, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 23, "kind": "offer", "offer_id": "O0018", "parcel_id": "P12", "from_id": "AQ01", "under_name": "X社", "price": 2703, "to": "HH11", "note": ""}
+{"step": 23, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 23, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P15", "previous": "参入前調査", "fact": "名義:R14 用途:店舗 面積:320㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 23, "kind": "inquiry_asked", "inquiry_id": "Q0011", "parcel_id": "P06", "broker": "BR01", "owner": "HH05", "client": "", "note": "意向をうかがいます。"}
+{"step": 23, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_answered"}
+{"step": 23, "kind": "negotiate_rent", "by": "BZ01", "note": "to=BR02 ask=22"}
+{"step": 23, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 23, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 23, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MU01 ask=26"}
+{"step": 23, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "move_out_rejected", "agent_id": "HH05", "reason": "already_moved_out", "moved_at": 16}
+{"step": 23, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 23, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "listing", "parcel_id": "P12", "by": "HH11", "price": 2994}
+{"step": 23, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 23, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 23, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 23, "kind": "inquiry_answer", "inquiry_id": "Q0010", "parcel_id": "P32", "owner": "HH15", "broker": "BR01", "owner_intent": "not_asked", "asking_price": "unknown", "note": ""}
+{"step": 23, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 23, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 23, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 23, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 23, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 23, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 24, "kind": "offer_rejected", "parcel_id": "P37", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 24, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 24, "kind": "contact_broker", "by": "AQ01", "note": "to=MU02"}
+{"step": 24, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 24, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P45", "previous": "参入前調査", "fact": "名義:X社 用途:住宅 面積:180㎡", "result": "参入前調査から変化 名義:R12 用途:住宅 面積:180㎡ → 名義:X社 用途:住宅 面積:180㎡", "changed": true}
+{"step": 24, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0011", "reason": "inquiry_asked"}
+{"step": 24, "kind": "approach_owner", "by": "BR02", "note": "to=BR02"}
+{"step": 24, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 24, "kind": "negotiate_rent", "by": "BZ02", "note": "to=HH16 ask=20"}
+{"step": 24, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 24, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD02 ask=22"}
+{"step": 24, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 24, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 24, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 24, "kind": "listing", "parcel_id": "P21", "by": "HH04", "price": 2871}
+{"step": 24, "kind": "inquiry_answer", "inquiry_id": "Q0011", "parcel_id": "P06", "owner": "HH05", "broker": "BR01", "owner_intent": "declined_to_answer", "asking_price": "declined_to_answer", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 24, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 24, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 24, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 4238}
+{"step": 24, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 24, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 24, "kind": "counter", "offer_id": "O0018", "parcel_id": "P12", "by": "HH11", "to": "AQ01", "price": 3920}
+{"step": 24, "kind": "listing", "parcel_id": "P29", "by": "HH12", "price": 2871}
+{"step": 24, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 24, "kind": "listing", "parcel_id": "P47", "by": "HH14", "price": 3334}
+{"step": 24, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 24, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 24, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 24, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 24, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 24, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 24, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 25, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 25, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 25, "kind": "inquiry_asked", "inquiry_id": "Q0012", "parcel_id": "P22", "broker": "BR01", "owner": "HH05", "client": "", "note": "意向をうかがいます。"}
+{"step": 25, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "inquiry_answered"}
+{"step": 25, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 25, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 25, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 25, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 25, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 25, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2413, "purpose": "property_purchase", "reference": "O0017"}
+{"step": 25, "kind": "transfer", "offer_id": "O0017", "parcel_id": "P03", "seller": "HH02", "buyer": "AQ01", "under_name": "X社", "price": 2413}
+{"step": 25, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 25, "kind": "inquiry_answer_rejected", "by": "HH05", "inquiry_id": "Q0011", "reason": "inquiry_answered"}
+{"step": 25, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 25, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 25, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 25, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 25, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 25, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 25, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 25, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 25, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 26, "kind": "offer", "offer_id": "O0019", "parcel_id": "P28", "from_id": "AQ01", "under_name": "X社", "price": 2601, "to": "HH11", "note": ""}
+{"step": 26, "kind": "offer", "offer_id": "O0020", "parcel_id": "P38", "from_id": "AQ01", "under_name": "X社", "price": 2800, "to": "HH05", "note": ""}
+{"step": 26, "kind": "inquiry_asked", "inquiry_id": "Q0013", "parcel_id": "P33", "broker": "BR01", "owner": "HH16", "client": "", "note": "意向をうかがいます。"}
+{"step": 26, "kind": "inquiry_asked", "inquiry_id": "Q0014", "parcel_id": "P32", "broker": "BR02", "owner": "HH15", "client": "", "note": "意向をうかがいます。"}
+{"step": 26, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 26, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 26, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 26, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 26, "kind": "accept_rejected", "offer_id": "O0017", "by": "HH02", "reason": "offer_accepted"}
+{"step": 26, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 26, "kind": "listing", "parcel_id": "P21", "by": "HH04", "price": 2834}
+{"step": 26, "kind": "listing", "parcel_id": "P22", "by": "HH05", "price": 3065}
+{"step": 26, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 26, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 26, "kind": "listing", "parcel_id": "P29", "by": "HH12", "price": 2834}
+{"step": 26, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 26, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 26, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 26, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 26, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 26, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 26, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 26, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 27, "kind": "offer", "offer_id": "O0021", "parcel_id": "P21", "from_id": "AQ01", "under_name": "X社", "price": 2847, "to": "HH04", "note": ""}
+{"step": 27, "kind": "circulate_listing", "by": "BR01", "note": "to=MU02"}
+{"step": 27, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_answered"}
+{"step": 27, "kind": "close_rejected", "agent_id": "BZ01", "reason": "already_closed", "closed_at": 15}
+{"step": 27, "kind": "close_rejected", "agent_id": "BZ02", "reason": "already_closed", "closed_at": 17}
+{"step": 27, "kind": "negotiate_rent", "by": "BZ03", "note": "to=BZ01 ask=23"}
+{"step": 27, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 27, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "counter_rejected", "offer_id": "O0017", "by": "HH02", "reason": "offer_not_open"}
+{"step": 27, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "move_out_rejected", "agent_id": "HH04", "reason": "already_moved_out", "moved_at": 19}
+{"step": 27, "kind": "inquiry_answer", "inquiry_id": "Q0012", "parcel_id": "P22", "owner": "HH05", "broker": "BR01", "owner_intent": "not_willing", "asking_price": 3812, "note": ""}
+{"step": 27, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 3941}
+{"step": 27, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 27, "kind": "move_out", "agent_id": "HH12", "note": ""}
+{"step": 27, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 27, "kind": "inquiry_answer", "inquiry_id": "Q0014", "parcel_id": "P32", "owner": "HH15", "broker": "BR02", "owner_intent": "unknown", "asking_price": "declined_to_answer", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 27, "kind": "inquiry_answer", "inquiry_id": "Q0013", "parcel_id": "P33", "owner": "HH16", "broker": "BR01", "owner_intent": "undecided", "asking_price": "declined_to_answer", "note": ""}
+{"step": 27, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 27, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 27, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 27, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 27, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 28, "kind": "offer", "offer_id": "O0022", "parcel_id": "P19", "from_id": "AQ01", "under_name": "X社", "price": 2541, "to": "HH02", "note": ""}
+{"step": 28, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P36", "previous": "参入前調査", "fact": "名義:R03 用途:住宅 面積:140㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 28, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 28, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0013", "reason": "self_referential"}
+{"step": 28, "kind": "inquiry_report", "inquiry_id": "Q0014", "parcel_id": "P32", "broker": "BR02", "to": "MD02", "owner_intent": "unknown", "asking_price": "not_asked", "note": "所有者の回答です。"}
+{"step": 28, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD01 ask=23"}
+{"step": 28, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 28, "kind": "negotiate_rent", "by": "BZ03", "note": "to=MD01 ask=19"}
+{"step": 28, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 28, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 28, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 28, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 4168}
+{"step": 28, "kind": "counter", "offer_id": "O0021", "parcel_id": "P21", "by": "HH04", "to": "AQ01", "price": 3650}
+{"step": 28, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2800, "purpose": "property_purchase", "reference": "O0020"}
+{"step": 28, "kind": "transfer", "offer_id": "O0020", "parcel_id": "P38", "seller": "HH05", "buyer": "AQ01", "under_name": "X社", "price": 2800}
+{"step": 28, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 28, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 28, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 28, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 28, "kind": "listing", "parcel_id": "P43", "by": "HH10", "price": 4168}
+{"step": 28, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 28, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 28, "kind": "listing", "parcel_id": "P14", "by": "HH13", "price": 3942}
+{"step": 28, "kind": "listing", "parcel_id": "P31", "by": "HH14", "price": 3291}
+{"step": 28, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 28, "kind": "inquiry_answer_rejected", "by": "HH16", "inquiry_id": "Q0013", "reason": "inquiry_answered"}
+{"step": 28, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 28, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 28, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 28, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 28, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 29, "kind": "offer_rejected", "parcel_id": "P09", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 29, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 29, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 29, "kind": "inquiry_asked", "inquiry_id": "Q0015", "parcel_id": "P25", "broker": "BR01", "owner": "HH08", "client": "", "note": "意向をうかがいます。"}
+{"step": 29, "kind": "circulate_listing", "by": "BR02", "note": "to=HH01"}
+{"step": 29, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 29, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 29, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 29, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 29, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 29, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2541, "purpose": "property_purchase", "reference": "O0022"}
+{"step": 29, "kind": "transfer", "offer_id": "O0022", "parcel_id": "P19", "seller": "HH02", "buyer": "AQ01", "under_name": "X社", "price": 2541}
+{"step": 29, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 29, "kind": "counter_rejected", "offer_id": "O0021", "by": "HH04", "reason": "offer_not_open"}
+{"step": 29, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 29, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 29, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 29, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 29, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 29, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 29, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2601, "purpose": "property_purchase", "reference": "O0019"}
+{"step": 29, "kind": "transfer", "offer_id": "O0019", "parcel_id": "P28", "seller": "HH11", "buyer": "AQ01", "under_name": "X社", "price": 2601}
+{"step": 29, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 29, "kind": "listing", "parcel_id": "P14", "by": "HH13", "price": 4036}
+{"step": 29, "kind": "listing", "parcel_id": "P31", "by": "HH14", "price": 3380}
+{"step": 29, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 29, "kind": "inquiry_answer_rejected", "by": "HH16", "inquiry_id": "Q0013", "reason": "inquiry_answered"}
+{"step": 29, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 29, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 29, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 29, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 29, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 30, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 30, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 30, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 30, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0012", "reason": "inquiry_answered"}
+{"step": 30, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "inquiry_answered"}
+{"step": 30, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH02 ask=23"}
+{"step": 30, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 30, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 30, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 30, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "accept_rejected", "offer_id": "O0021", "by": "HH04", "reason": "offer_countered"}
+{"step": 30, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 30, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 30, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "inquiry_answer", "inquiry_id": "Q0015", "parcel_id": "P25", "owner": "HH08", "broker": "BR01", "owner_intent": "willing_to_sell", "asking_price": "not_asked", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "accept_rejected", "offer_id": "O0019", "by": "HH11", "reason": "offer_accepted"}
+{"step": 30, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 30, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 30, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 30, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 30, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 30, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 30, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 31, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 31, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 31, "kind": "withdraw_rejected", "offer_id": "O0004", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 31, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 31, "kind": "inquiry_asked", "inquiry_id": "Q0016", "parcel_id": "P15", "broker": "BR01", "owner": "HH14", "client": "", "note": "意向をうかがいます。"}
+{"step": 31, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0014", "given": "MD01", "reason": "not_the_client"}
+{"step": 31, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 31, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 31, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 31, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 31, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 31, "kind": "listing", "parcel_id": "P35", "by": "HH02", "price": 2986}
+{"step": 31, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 3409}
+{"step": 31, "kind": "counter_rejected", "offer_id": "O0021", "by": "HH04", "reason": "offer_not_open"}
+{"step": 31, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 31, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 31, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 31, "kind": "inquiry_answer_rejected", "by": "HH08", "inquiry_id": "Q0015", "reason": "inquiry_answered"}
+{"step": 31, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 31, "kind": "listing", "parcel_id": "P43", "by": "HH10", "price": 3409}
+{"step": 31, "kind": "accept_rejected", "offer_id": "O0019", "by": "HH11", "reason": "offer_accepted"}
+{"step": 31, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 31, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 31, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 31, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 31, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 31, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 31, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 31, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 31, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 31, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 32, "kind": "offer_rejected", "parcel_id": "P19", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 32, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P21", "previous": "参入前調査", "fact": "名義:R04 用途:住宅 面積:180㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 32, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0016", "reason": "inquiry_asked"}
+{"step": 32, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0014", "given": "BZ04", "reason": "not_the_client"}
+{"step": 32, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 32, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 32, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 32, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD02 ask=18"}
+{"step": 32, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 32, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 32, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 32, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "counter_rejected", "offer_id": "O0019", "by": "HH11", "reason": "offer_not_open"}
+{"step": 32, "kind": "listing", "parcel_id": "P29", "by": "HH12", "price": 4079}
+{"step": 32, "kind": "move_out_rejected", "agent_id": "HH13", "reason": "already_moved_out", "moved_at": 5}
+{"step": 32, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 32, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 32, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 32, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 32, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 32, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 32, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 33, "kind": "offer", "offer_id": "O0023", "parcel_id": "P47", "from_id": "AQ01", "under_name": "X社", "price": 2636, "to": "HH14", "note": ""}
+{"step": 33, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P38"}
+{"step": 33, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0016", "reason": "inquiry_asked"}
+{"step": 33, "kind": "approach_owner", "by": "BR02", "note": "to=BR01"}
+{"step": 33, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 33, "kind": "negotiate_rent", "by": "BZ02", "note": "to=MU01 ask=23"}
+{"step": 33, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 33, "kind": "negotiate_rent", "by": "BZ04", "note": "to=BZ04 ask=23"}
+{"step": 33, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 33, "kind": "listing", "parcel_id": "P35", "by": "HH02", "price": 4208}
+{"step": 33, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 33, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 33, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 33, "kind": "listing", "parcel_id": "P07", "by": "HH06", "price": 3466}
+{"step": 33, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 33, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 33, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 33, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 33, "kind": "listing", "parcel_id": "P44", "by": "HH11", "price": 3092}
+{"step": 33, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 33, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 33, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 33, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 33, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 33, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 33, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 33, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 33, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 33, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 34, "kind": "offer", "offer_id": "O0024", "parcel_id": "P21", "from_id": "AQ01", "under_name": "X社", "price": 2538, "to": "HH04", "note": ""}
+{"step": 34, "kind": "approach_owner", "by": "BR01", "note": "to=MD01"}
+{"step": 34, "kind": "circulate_listing", "by": "BR02", "note": "to=MD01"}
+{"step": 34, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD02 ask=21"}
+{"step": 34, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 34, "kind": "negotiate_rent", "by": "BZ03", "note": "to=BZ04 ask=23"}
+{"step": 34, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 34, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 34, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 34, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 34, "kind": "move_out", "agent_id": "HH08", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 34, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 34, "kind": "move_out", "agent_id": "HH11", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 34, "kind": "inquiry_answer_rejected", "by": "HH15", "inquiry_id": "Q0014", "reason": "inquiry_reported"}
+{"step": 34, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 34, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 34, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 34, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 34, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 34, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 35, "kind": "offer", "offer_id": "O0025", "parcel_id": "P29", "from_id": "AQ01", "under_name": "X社", "price": 2574, "to": "HH12", "note": ""}
+{"step": 35, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 35, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P16", "previous": "参入前調査", "fact": "名義:R15 用途:住宅 面積:450㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 35, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0009", "reason": "inquiry_answered"}
+{"step": 35, "kind": "approach_owner", "by": "BR02", "note": "to=MU01"}
+{"step": 35, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 35, "kind": "negotiate_rent", "by": "BZ02", "note": "to=BZ01 ask=27"}
+{"step": 35, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 35, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 35, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 35, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 35, "kind": "listing", "parcel_id": "P04", "by": "HH03", "price": 3420}
+{"step": 35, "kind": "counter", "offer_id": "O0024", "parcel_id": "P21", "by": "HH04", "to": "AQ01", "price": 3433}
+{"step": 35, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 35, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "listing", "parcel_id": "P11", "by": "HH10", "price": 3420}
+{"step": 35, "kind": "listing", "parcel_id": "P44", "by": "HH11", "price": 3026}
+{"step": 35, "kind": "listing", "parcel_id": "P29", "by": "HH12", "price": 3335}
+{"step": 35, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "inquiry_answer", "inquiry_id": "Q0016", "parcel_id": "P15", "owner": "HH14", "broker": "BR01", "owner_intent": "not_willing", "asking_price": "unknown", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 35, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 35, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 35, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 35, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 35, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 36, "kind": "offer", "offer_id": "O0026", "parcel_id": "P42", "from_id": "AQ01", "under_name": "X社", "price": 3506, "to": "HH09", "note": ""}
+{"step": 36, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 36, "kind": "contact_broker", "by": "AQ01", "note": "to=BZ04"}
+{"step": 36, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 36, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P45"}
+{"step": 36, "kind": "inquiry_asked", "inquiry_id": "Q0017", "parcel_id": "P16", "broker": "BR01", "owner": "HH15", "client": "", "note": "意向をうかがいます。"}
+{"step": 36, "kind": "circulate_listing", "by": "BR02", "note": "to=BR01"}
+{"step": 36, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 36, "kind": "close_rejected", "agent_id": "BZ02", "reason": "already_closed", "closed_at": 17}
+{"step": 36, "kind": "negotiate_rent", "by": "BZ03", "note": "to=BR01 ask=18"}
+{"step": 36, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 36, "kind": "listing", "parcel_id": "P18", "by": "HH01", "price": 3681}
+{"step": 36, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 36, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 36, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 36, "kind": "listing", "parcel_id": "P06", "by": "HH05", "price": 2826}
+{"step": 36, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 36, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 36, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 36, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 36, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 36, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 36, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 36, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 36, "kind": "counter", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14", "to": "AQ01", "price": 4080}
+{"step": 36, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 36, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 36, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 36, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 36, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 36, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 36, "kind": "settlement", "margins": [{"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 37, "kind": "offer", "offer_id": "O0027", "parcel_id": "P04", "from_id": "AQ01", "under_name": "X社", "price": 2640, "to": "HH03", "note": ""}
+{"step": 37, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P12", "previous": "参入前調査", "fact": "名義:R11 用途:住宅 面積:140㎡", "result": "参入前調査の照会と同一", "changed": false}
+{"step": 37, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0012", "reason": "inquiry_answered"}
+{"step": 37, "kind": "inquiry_asked", "inquiry_id": "Q0018", "parcel_id": "P26", "broker": "BR02", "owner": "HH09", "client": "", "note": "意向をうかがいます。"}
+{"step": 37, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MU01 ask=20"}
+{"step": 37, "kind": "negotiate_rent", "by": "BZ02", "note": "to=MD01 ask=20"}
+{"step": 37, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 37, "kind": "tenancy_end", "parcel_id": "P06", "tenant": "BZ04", "owner": "HH05", "reason": "closed"}
+{"step": 37, "kind": "business_closed", "agent_id": "BZ04", "note": ""}
+{"step": 37, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 37, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 37, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 37, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 37, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 37, "kind": "listing", "parcel_id": "P39", "by": "HH06", "price": 3715}
+{"step": 37, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 37, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 37, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3506, "purpose": "property_purchase", "reference": "O0026"}
+{"step": 37, "kind": "transfer", "offer_id": "O0026", "parcel_id": "P42", "seller": "HH09", "buyer": "AQ01", "under_name": "X社", "price": 3506}
+{"step": 37, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 37, "kind": "listing", "parcel_id": "P12", "by": "HH11", "price": 3412}
+{"step": 37, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2574, "purpose": "property_purchase", "reference": "O0025"}
+{"step": 37, "kind": "transfer", "offer_id": "O0025", "parcel_id": "P29", "seller": "HH12", "buyer": "AQ01", "under_name": "X社", "price": 2574}
+{"step": 37, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 37, "kind": "counter_rejected", "offer_id": "O0023", "by": "HH14", "reason": "offer_not_open"}
+{"step": 37, "kind": "inquiry_answer", "inquiry_id": "Q0017", "parcel_id": "P16", "owner": "HH15", "broker": "BR01", "owner_intent": "willing_to_sell", "asking_price": "not_asked", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 37, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 37, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 37, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 37, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 37, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 37, "kind": "settlement", "margins": [], "rents": []}
+{"step": 38, "kind": "offer", "offer_id": "O0028", "parcel_id": "P33", "from_id": "AQ01", "under_name": "X社", "price": 2699, "to": "HH16", "note": ""}
+{"step": 38, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 38, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P12", "previous": "第37月", "fact": "名義:R11 用途:住宅 面積:140㎡", "result": "第37月の照会と同一", "changed": false}
+{"step": 38, "kind": "withdraw_rejected", "offer_id": "O0015", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 38, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0015", "reason": "inquiry_answered"}
+{"step": 38, "kind": "approach_owner", "by": "BR02", "note": "to=BR01"}
+{"step": 38, "kind": "negotiate_rent", "by": "BZ01", "note": "to=AQ01 ask=21"}
+{"step": 38, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 38, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 38, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD01 ask=26"}
+{"step": 38, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 38, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 38, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 38, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 38, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 38, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 38, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 38, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 2858}
+{"step": 38, "kind": "accept_rejected", "offer_id": "O0026", "by": "HH09", "reason": "offer_accepted"}
+{"step": 38, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 38, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 38, "kind": "counter_rejected", "offer_id": "O0025", "by": "HH12", "reason": "offer_not_open"}
+{"step": 38, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 38, "kind": "accept_rejected", "offer_id": "O0023", "by": "HH14", "reason": "offer_countered"}
+{"step": 38, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 38, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 38, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 38, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 38, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 38, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 38, "kind": "settlement", "margins": [], "rents": []}
+{"step": 39, "kind": "offer_rejected", "parcel_id": "P13", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 39, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0017", "reason": "self_referential"}
+{"step": 39, "kind": "approach_owner", "by": "BR02", "note": "to=BZ04"}
+{"step": 39, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD02 ask=20"}
+{"step": 39, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 39, "kind": "close_rejected", "agent_id": "BZ03", "reason": "already_closed", "closed_at": 15}
+{"step": 39, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 39, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 39, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 39, "kind": "listing", "parcel_id": "P04", "by": "HH03", "price": 3250}
+{"step": 39, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 39, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 39, "kind": "move_out", "agent_id": "HH06", "note": ""}
+{"step": 39, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 39, "kind": "move_out_rejected", "agent_id": "HH08", "reason": "already_moved_out", "moved_at": 34}
+{"step": 39, "kind": "accept_rejected", "offer_id": "O0026", "by": "HH09", "reason": "offer_accepted"}
+{"step": 39, "kind": "listing", "parcel_id": "P11", "by": "HH10", "price": 3549}
+{"step": 39, "kind": "listing", "parcel_id": "P44", "by": "HH11", "price": 3361}
+{"step": 39, "kind": "counter_rejected", "offer_id": "O0025", "by": "HH12", "reason": "offer_not_open"}
+{"step": 39, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 39, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 39, "kind": "listing", "parcel_id": "P32", "by": "HH15", "price": 3631}
+{"step": 39, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2699, "purpose": "property_purchase", "reference": "O0028"}
+{"step": 39, "kind": "transfer", "offer_id": "O0028", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "X社", "price": 2699}
+{"step": 39, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 39, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 39, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 39, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 39, "kind": "settlement", "margins": [], "rents": []}
+{"step": 40, "kind": "offer_rejected", "parcel_id": "P42", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 40, "kind": "inquiry_asked", "inquiry_id": "Q0019", "parcel_id": "P43", "broker": "BR01", "owner": "HH10", "client": "", "note": "意向をうかがいます。"}
+{"step": 40, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0002", "reason": "inquiry_answered"}
+{"step": 40, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 40, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 40, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 40, "kind": "negotiate_rent", "by": "BZ04", "note": "to=HH08 ask=21"}
+{"step": 40, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 40, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2640, "purpose": "property_purchase", "reference": "O0027"}
+{"step": 40, "kind": "transfer", "offer_id": "O0027", "parcel_id": "P04", "seller": "HH03", "buyer": "AQ01", "under_name": "X社", "price": 2640}
+{"step": 40, "kind": "counter_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_not_open"}
+{"step": 40, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 40, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "inquiry_answer", "inquiry_id": "Q0018", "parcel_id": "P26", "owner": "HH09", "broker": "BR02", "owner_intent": "declined_to_answer", "asking_price": 3774, "note": ""}
+{"step": 40, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "accept_rejected", "offer_id": "O0025", "by": "HH12", "reason": "offer_accepted"}
+{"step": 40, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 40, "kind": "move_out", "agent_id": "HH14", "note": ""}
+{"step": 40, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 40, "kind": "accept_rejected", "offer_id": "O0028", "by": "HH16", "reason": "offer_accepted"}
+{"step": 40, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 40, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 40, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 40, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 40, "kind": "settlement", "margins": [], "rents": []}
+{"step": 41, "kind": "offer", "offer_id": "O0029", "parcel_id": "P08", "from_id": "AQ01", "under_name": "X社", "price": 3294, "to": "HH07", "note": ""}
+{"step": 41, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 41, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P28"}
+{"step": 41, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 41, "kind": "contact_broker", "by": "AQ01", "note": "to=MD02"}
+{"step": 41, "kind": "circulate_listing", "by": "BR01", "note": "to=BR01"}
+{"step": 41, "kind": "inquiry_report", "inquiry_id": "Q0018", "parcel_id": "P26", "broker": "BR02", "to": "MU02", "owner_intent": "declined_to_answer", "asking_price": 2855, "note": "所有者の回答です。"}
+{"step": 41, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 41, "kind": "close_rejected", "agent_id": "BZ02", "reason": "already_closed", "closed_at": 17}
+{"step": 41, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 41, "kind": "operate", "by": "BZ04", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH01", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 41, "kind": "accept_rejected", "offer_id": "O0027", "by": "HH03", "reason": "offer_accepted"}
+{"step": 41, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 41, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 41, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 41, "kind": "inquiry_answer_rejected", "by": "HH09", "inquiry_id": "Q0018", "reason": "inquiry_reported"}
+{"step": 41, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 41, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 41, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 41, "kind": "accept_rejected", "offer_id": "O0028", "by": "HH16", "reason": "offer_accepted"}
+{"step": 41, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 41, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 41, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 41, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 41, "kind": "settlement", "margins": [], "rents": []}
+{"step": 42, "kind": "offer_rejected", "parcel_id": "P45", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 42, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 42, "kind": "inquiry_asked", "inquiry_id": "Q0020", "parcel_id": "P24", "broker": "BR01", "owner": "HH07", "client": "", "note": "意向をうかがいます。"}
+{"step": 42, "kind": "circulate_listing", "by": "BR02", "note": "to=BR02"}
+{"step": 42, "kind": "negotiate_rent", "by": "BZ01", "note": "to=BZ02 ask=26"}
+{"step": 42, "kind": "negotiate_rent", "by": "BZ02", "note": "to=MU02 ask=25"}
+{"step": 42, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 42, "kind": "negotiate_rent", "by": "BZ04", "note": "to=HH03 ask=22"}
+{"step": 42, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 42, "kind": "listing", "parcel_id": "P35", "by": "HH02", "price": 4157}
+{"step": 42, "kind": "accept_rejected", "offer_id": "O0027", "by": "HH03", "reason": "offer_accepted"}
+{"step": 42, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 42, "kind": "listing", "parcel_id": "P06", "by": "HH05", "price": 3475}
+{"step": 42, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 42, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 42, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 3661}
+{"step": 42, "kind": "inquiry_answer_rejected", "by": "HH09", "inquiry_id": "Q0018", "reason": "inquiry_reported"}
+{"step": 42, "kind": "inquiry_answer", "inquiry_id": "Q0019", "parcel_id": "P43", "owner": "HH10", "broker": "BR01", "owner_intent": "unknown", "asking_price": "unknown", "note": ""}
+{"step": 42, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 42, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 42, "kind": "listing", "parcel_id": "P14", "by": "HH13", "price": 3475}
+{"step": 42, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 42, "kind": "listing", "parcel_id": "P32", "by": "HH15", "price": 3985}
+{"step": 42, "kind": "accept_rejected", "offer_id": "O0028", "by": "HH16", "reason": "offer_accepted"}
+{"step": 42, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 42, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 42, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 42, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 42, "kind": "settlement", "margins": [], "rents": []}
+{"step": 43, "kind": "offer_rejected", "parcel_id": "P04", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 43, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 43, "kind": "offer", "offer_id": "O0030", "parcel_id": "P26", "from_id": "AQ01", "under_name": "X社", "price": 3486, "to": "HH09", "note": ""}
+{"step": 43, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 43, "kind": "withdraw_rejected", "offer_id": "O0023", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 43, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0020", "reason": "inquiry_asked"}
+{"step": 43, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "inquiry_answered"}
+{"step": 43, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH16 ask=21"}
+{"step": 43, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 43, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 43, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 43, "kind": "listing", "parcel_id": "P18", "by": "HH01", "price": 3560}
+{"step": 43, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "counter_rejected", "offer_id": "O0027", "by": "HH03", "reason": "offer_not_open"}
+{"step": 43, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 43, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "inquiry_answer", "inquiry_id": "Q0020", "parcel_id": "P24", "owner": "HH07", "broker": "BR01", "owner_intent": "willing_to_sell", "asking_price": "declined_to_answer", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 43, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 43, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 43, "kind": "listing", "parcel_id": "P15", "by": "HH14", "price": 3929}
+{"step": 43, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 43, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 43, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 43, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 43, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 43, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 43, "kind": "settlement", "margins": [], "rents": []}
+{"step": 44, "kind": "offer", "offer_id": "O0031", "parcel_id": "P35", "from_id": "AQ01", "under_name": "X社", "price": 2483, "to": "HH02", "note": ""}
+{"step": 44, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 44, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P44", "previous": "第3月", "fact": "名義:R11 用途:空地 面積:140㎡", "result": "第3月の照会と同一", "changed": false}
+{"step": 44, "kind": "approach_owner", "by": "BR01", "note": "to=HH01"}
+{"step": 44, "kind": "approach_owner", "by": "BR02", "note": "to=MD02"}
+{"step": 44, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH07 ask=27"}
+{"step": 44, "kind": "negotiate_rent", "by": "BZ02", "note": "to=HH01 ask=25"}
+{"step": 44, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 44, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD01 ask=26"}
+{"step": 44, "kind": "listing", "parcel_id": "P02", "by": "HH01", "price": 2903}
+{"step": 44, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 44, "kind": "counter_rejected", "offer_id": "O0027", "by": "HH03", "reason": "offer_not_open"}
+{"step": 44, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 44, "kind": "listing", "parcel_id": "P22", "by": "HH05", "price": 3362}
+{"step": 44, "kind": "listing", "parcel_id": "P39", "by": "HH06", "price": 3184}
+{"step": 44, "kind": "inquiry_answer_rejected", "by": "HH07", "inquiry_id": "Q0020", "reason": "inquiry_answered"}
+{"step": 44, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 44, "kind": "counter", "offer_id": "O0030", "parcel_id": "P26", "by": "HH09", "to": "AQ01", "price": 4142}
+{"step": 44, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 44, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 44, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 44, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 44, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 44, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 44, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 44, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 44, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 44, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 44, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 44, "kind": "settlement", "margins": [], "rents": []}
+{"step": 45, "kind": "offer_rejected", "parcel_id": "P05", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 45, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 45, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 45, "kind": "inquiry_asked", "inquiry_id": "Q0021", "parcel_id": "P02", "broker": "BR01", "owner": "HH01", "client": "", "note": "意向をうかがいます。"}
+{"step": 45, "kind": "inquiry_asked", "inquiry_id": "Q0022", "parcel_id": "P39", "broker": "BR02", "owner": "HH06", "client": "", "note": "意向をうかがいます。"}
+{"step": 45, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MU01 ask=25"}
+{"step": 45, "kind": "negotiate_rent", "by": "BZ02", "note": "to=BZ01 ask=27"}
+{"step": 45, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 45, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 45, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2483, "purpose": "property_purchase", "reference": "O0031"}
+{"step": 45, "kind": "transfer", "offer_id": "O0031", "parcel_id": "P35", "seller": "HH02", "buyer": "AQ01", "under_name": "X社", "price": 2483}
+{"step": 45, "kind": "counter_rejected", "offer_id": "O0027", "by": "HH03", "reason": "offer_not_open"}
+{"step": 45, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 45, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "counter", "offer_id": "O0029", "parcel_id": "P08", "by": "HH07", "to": "AQ01", "price": 4074}
+{"step": 45, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 45, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "move_out_rejected", "agent_id": "HH12", "reason": "already_moved_out", "moved_at": 27}
+{"step": 45, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 45, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 45, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 45, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 45, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 45, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 45, "kind": "settlement", "margins": [], "rents": []}
+{"step": 46, "kind": "offer_rejected", "parcel_id": "P04", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 46, "kind": "contact_broker", "by": "AQ01", "note": "to=AQ01"}
+{"step": 46, "kind": "circulate_listing", "by": "BR01", "note": "to=HH16"}
+{"step": 46, "kind": "circulate_listing", "by": "BR02", "note": "to=HH12"}
+{"step": 46, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 46, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 46, "kind": "negotiate_rent", "by": "BZ03", "note": "to=MU02 ask=24"}
+{"step": 46, "kind": "negotiate_rent", "by": "BZ04", "note": "to=BZ01 ask=19"}
+{"step": 46, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 46, "kind": "accept_rejected", "offer_id": "O0031", "by": "HH02", "reason": "offer_accepted"}
+{"step": 46, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 46, "kind": "accept_rejected", "offer_id": "O0024", "by": "HH04", "reason": "offer_countered"}
+{"step": 46, "kind": "move_out_rejected", "agent_id": "HH05", "reason": "already_moved_out", "moved_at": 16}
+{"step": 46, "kind": "move_out_rejected", "agent_id": "HH06", "reason": "already_moved_out", "moved_at": 39}
+{"step": 46, "kind": "counter_rejected", "offer_id": "O0029", "by": "HH07", "reason": "offer_not_open"}
+{"step": 46, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 46, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 46, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 46, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 46, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 46, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 46, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 46, "kind": "settlement", "margins": [], "rents": []}
+{"step": 47, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 47, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 47, "kind": "internal_review", "by": "AQ01", "note": ""}
+{"step": 47, "kind": "inquiry_asked", "inquiry_id": "Q0023", "parcel_id": "P24", "broker": "BR01", "owner": "HH07", "client": "", "note": "意向をうかがいます。"}
+{"step": 47, "kind": "circulate_listing", "by": "BR02", "note": "to=BR02"}
+{"step": 47, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 47, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 47, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 47, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 47, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "move_out", "agent_id": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 47, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "counter_rejected", "offer_id": "O0029", "by": "HH07", "reason": "offer_not_open"}
+{"step": 47, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH09", "note": ""}
+{"step": 47, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 47, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 47, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 47, "kind": "listing", "parcel_id": "P17", "by": "HH16", "price": 2918}
+{"step": 47, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 47, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 47, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 47, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 47, "kind": "settlement", "margins": [], "rents": []}
+{"step": 48, "kind": "offer", "offer_id": "O0032", "parcel_id": "P07", "from_id": "AQ01", "under_name": "X社", "price": 2585, "to": "HH06", "note": ""}
+{"step": 48, "kind": "offer", "offer_id": "O0033", "parcel_id": "P17", "from_id": "AQ01", "under_name": "X社", "price": 3262, "to": "HH16", "note": ""}
+{"step": 48, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P03"}
+{"step": 48, "kind": "circulate_listing", "by": "BR01", "note": "to=BR01"}
+{"step": 48, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0022", "reason": "inquiry_asked"}
+{"step": 48, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MD02 ask=24"}
+{"step": 48, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 48, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 48, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD01 ask=23"}
+{"step": 48, "kind": "inquiry_answer", "inquiry_id": "Q0021", "parcel_id": "P02", "owner": "HH01", "broker": "BR01", "owner_intent": "not_willing", "asking_price": "declined_to_answer", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 48, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 48, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "inquiry_answer", "inquiry_id": "Q0022", "parcel_id": "P39", "owner": "HH06", "broker": "BR02", "owner_intent": "not_asked", "asking_price": 2345, "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "inquiry_answer", "inquiry_id": "Q0023", "parcel_id": "P24", "owner": "HH07", "broker": "BR01", "owner_intent": "undecided", "asking_price": 3518, "note": ""}
+{"step": 48, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 48, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 48, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 48, "kind": "move_out", "agent_id": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 48, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 48, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 48, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 48, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 48, "kind": "settlement", "margins": [], "rents": []}
+{"step": 49, "kind": "offer", "offer_id": "O0034", "parcel_id": "P07", "from_id": "AQ01", "under_name": "X社", "price": 2902, "to": "HH06", "note": ""}
+{"step": 49, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 49, "kind": "inquiry_report", "inquiry_id": "Q0023", "parcel_id": "P24", "broker": "BR01", "to": "BZ04", "owner_intent": "willing_to_sell", "asking_price": "not_asked", "note": "所有者の回答です。"}
+{"step": 49, "kind": "circulate_listing", "by": "BR02", "note": "to=MU02"}
+{"step": 49, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 49, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 49, "kind": "negotiate_rent", "by": "BZ03", "note": "to=HH10 ask=21"}
+{"step": 49, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 49, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0021", "reason": "inquiry_answered"}
+{"step": 49, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 49, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 49, "kind": "move_out_rejected", "agent_id": "HH05", "reason": "already_moved_out", "moved_at": 16}
+{"step": 49, "kind": "inquiry_answer_rejected", "by": "HH06", "inquiry_id": "Q0022", "reason": "inquiry_answered"}
+{"step": 49, "kind": "inquiry_answer_rejected", "by": "HH07", "inquiry_id": "Q0023", "reason": "inquiry_reported"}
+{"step": 49, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 49, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 49, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 49, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 49, "kind": "financing_raised", "agent_id": "AQ01", "amount": 3262, "purpose": "property_purchase", "reference": "O0033"}
+{"step": 49, "kind": "transfer", "offer_id": "O0033", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "X社", "price": 3262}
+{"step": 49, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 49, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 49, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 49, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 49, "kind": "settlement", "margins": [], "rents": []}
+{"step": 50, "kind": "offer", "offer_id": "O0035", "parcel_id": "P07", "from_id": "AQ01", "under_name": "X社", "price": 3594, "to": "HH06", "note": ""}
+{"step": 50, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 50, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 50, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0023", "reason": "inquiry_reported"}
+{"step": 50, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "inquiry_answered"}
+{"step": 50, "kind": "negotiate_rent", "by": "BZ01", "note": "to=BZ01 ask=18"}
+{"step": 50, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 50, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 50, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 50, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0021", "reason": "inquiry_answered"}
+{"step": 50, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 50, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 50, "kind": "listing", "parcel_id": "P07", "by": "HH06", "price": 4064}
+{"step": 50, "kind": "inquiry_answer_rejected", "by": "HH07", "inquiry_id": "Q0023", "reason": "inquiry_reported"}
+{"step": 50, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "inquiry_answer_rejected", "by": "HH10", "inquiry_id": "Q0019", "reason": "inquiry_answered"}
+{"step": 50, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 50, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 50, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 50, "kind": "counter_rejected", "offer_id": "O0033", "by": "HH16", "reason": "offer_not_open"}
+{"step": 50, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 50, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 50, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 50, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 50, "kind": "settlement", "margins": [], "rents": []}
+{"step": 51, "kind": "offer_rejected", "parcel_id": "P28", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 51, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P36", "previous": "第28月", "fact": "名義:R03 用途:住宅 面積:140㎡", "result": "第28月の照会と同一", "changed": false}
+{"step": 51, "kind": "due_diligence", "by": "AQ01", "note": "parcel=P35"}
+{"step": 51, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 51, "kind": "circulate_listing", "by": "BR01", "note": "to=MU02"}
+{"step": 51, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0007", "reason": "inquiry_answered"}
+{"step": 51, "kind": "close_rejected", "agent_id": "BZ01", "reason": "already_closed", "closed_at": 15}
+{"step": 51, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 51, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 51, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 51, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0021", "reason": "inquiry_answered"}
+{"step": 51, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 51, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 51, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 51, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2902, "purpose": "property_purchase", "reference": "O0034"}
+{"step": 51, "kind": "transfer", "offer_id": "O0034", "parcel_id": "P07", "seller": "HH06", "buyer": "AQ01", "under_name": "X社", "price": 2902}
+{"step": 51, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 51, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 51, "kind": "listing", "parcel_id": "P43", "by": "HH10", "price": 4242}
+{"step": 51, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 51, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 51, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 51, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 51, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 51, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 51, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 51, "kind": "settlement", "margins": [], "rents": []}
+{"step": 52, "kind": "offer_rejected", "parcel_id": "P04", "from_id": "AQ01", "reason": "already_owner"}
+{"step": 52, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 52, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P07", "previous": "参入前調査", "fact": "名義:X社 用途:店舗 面積:320㎡", "result": "参入前調査から変化 名義:R06 用途:店舗 面積:320㎡ → 名義:X社 用途:店舗 面積:320㎡", "changed": true}
+{"step": 52, "kind": "existing_asset_management", "by": "AQ01", "note": ""}
+{"step": 52, "kind": "circulate_listing", "by": "BR01", "note": "to=AQ01"}
+{"step": 52, "kind": "inquiry_report", "inquiry_id": "Q0022", "parcel_id": "P39", "broker": "BR02", "to": "BZ04", "owner_intent": "not_asked", "asking_price": "declined_to_answer", "note": "所有者の回答です。"}
+{"step": 52, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 52, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 52, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 52, "kind": "close_rejected", "agent_id": "BZ04", "reason": "already_closed", "closed_at": 37}
+{"step": 52, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0021", "reason": "inquiry_answered"}
+{"step": 52, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 52, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 4136}
+{"step": 52, "kind": "listing", "parcel_id": "P21", "by": "HH04", "price": 4276}
+{"step": 52, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 52, "kind": "accept_rejected", "offer_id": "O0034", "by": "HH06", "reason": "offer_accepted"}
+{"step": 52, "kind": "listing", "parcel_id": "P08", "by": "HH07", "price": 3651}
+{"step": 52, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 2819}
+{"step": 52, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 52, "kind": "hold", "by": "HH10", "note": ""}
+{"step": 52, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 52, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 52, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 52, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 52, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 52, "kind": "move_out", "agent_id": "HH16", "note": ""}
+{"step": 52, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 52, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 52, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 52, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 52, "kind": "settlement", "margins": [], "rents": []}
+{"step": 53, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 53, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 53, "kind": "approach_owner", "by": "BR01", "note": "to=BZ01"}
+{"step": 53, "kind": "inquiry_asked", "inquiry_id": "Q0024", "parcel_id": "P43", "broker": "BR02", "owner": "HH10", "client": "", "note": "意向をうかがいます。"}
+{"step": 53, "kind": "negotiate_rent", "by": "BZ01", "note": "to=BZ04 ask=25"}
+{"step": 53, "kind": "negotiate_rent", "by": "BZ02", "note": "to=BR02 ask=27"}
+{"step": 53, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 53, "kind": "negotiate_rent", "by": "BZ04", "note": "to=HH13 ask=19"}
+{"step": 53, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0021", "reason": "inquiry_answered"}
+{"step": 53, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 3659}
+{"step": 53, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "listing", "parcel_id": "P06", "by": "HH05", "price": 3030}
+{"step": 53, "kind": "accept_rejected", "offer_id": "O0034", "by": "HH06", "reason": "offer_accepted"}
+{"step": 53, "kind": "listing", "parcel_id": "P24", "by": "HH07", "price": 3683}
+{"step": 53, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 53, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 53, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 53, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 53, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 53, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 53, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 53, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 53, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 53, "kind": "settlement", "margins": [], "rents": []}
+{"step": 54, "kind": "offer_rejected", "parcel_id": "P01", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 54, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 54, "kind": "withdraw_rejected", "offer_id": "O0015", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 54, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 54, "kind": "inquiry_asked", "inquiry_id": "Q0025", "parcel_id": "P08", "broker": "BR01", "owner": "HH07", "client": "", "note": "意向をうかがいます。"}
+{"step": 54, "kind": "inquiry_report_rejected", "by": "BR02", "inquiry_id": "Q0024", "reason": "inquiry_asked"}
+{"step": 54, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH01 ask=24"}
+{"step": 54, "kind": "negotiate_rent", "by": "BZ02", "note": "to=BZ04 ask=25"}
+{"step": 54, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 54, "kind": "close_rejected", "agent_id": "BZ04", "reason": "already_closed", "closed_at": 37}
+{"step": 54, "kind": "inquiry_answer_rejected", "by": "HH01", "inquiry_id": "Q0021", "reason": "inquiry_answered"}
+{"step": 54, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 54, "kind": "listing", "parcel_id": "P36", "by": "HH03", "price": 2869}
+{"step": 54, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH05", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH07", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 54, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "inquiry_answer", "inquiry_id": "Q0024", "parcel_id": "P43", "owner": "HH10", "broker": "BR02", "owner_intent": "not_asked", "asking_price": "not_asked", "note": ""}
+{"step": 54, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "move_out_rejected", "agent_id": "HH13", "reason": "already_moved_out", "moved_at": 5}
+{"step": 54, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 54, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 54, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 54, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 54, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 54, "kind": "settlement", "margins": [], "rents": []}
+{"step": 55, "kind": "offer", "offer_id": "O0036", "parcel_id": "P18", "from_id": "AQ01", "under_name": "X社", "price": 2797, "to": "HH01", "note": ""}
+{"step": 55, "kind": "circulate_listing", "by": "BR01", "note": "to=MD02"}
+{"step": 55, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0022", "reason": "inquiry_reported"}
+{"step": 55, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 55, "kind": "negotiate_rent", "by": "BZ02", "note": "to=MD01 ask=20"}
+{"step": 55, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 55, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 55, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "listing", "parcel_id": "P21", "by": "HH04", "price": 3540}
+{"step": 55, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "move_out", "agent_id": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH12", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 55, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 55, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 55, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 55, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 55, "kind": "settlement", "margins": [], "rents": []}
+{"step": 56, "kind": "offer", "offer_id": "O0037", "parcel_id": "P22", "from_id": "AQ01", "under_name": "X社", "price": 2940, "to": "HH05", "note": ""}
+{"step": 56, "kind": "withdraw_rejected", "offer_id": "O0012", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 56, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 56, "kind": "land_registry_check", "by": "AQ01", "parcel_id": "P21", "previous": "第32月", "fact": "名義:R04 用途:住宅 面積:180㎡", "result": "第32月の照会と同一", "changed": false}
+{"step": 56, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 56, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0025", "reason": "inquiry_asked"}
+{"step": 56, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0004", "reason": "inquiry_answered"}
+{"step": 56, "kind": "operate", "by": "BZ01", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 56, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 56, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 56, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 56, "kind": "counter", "offer_id": "O0036", "parcel_id": "P18", "by": "HH01", "to": "AQ01", "price": 4213}
+{"step": 56, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "hold", "by": "HH03", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "hold", "by": "HH05", "note": ""}
+{"step": 56, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 56, "kind": "inquiry_answer", "inquiry_id": "Q0025", "parcel_id": "P08", "owner": "HH07", "broker": "BR01", "owner_intent": "willing_to_sell", "asking_price": 3096, "note": ""}
+{"step": 56, "kind": "hold", "by": "HH08", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "listing", "parcel_id": "P26", "by": "HH09", "price": 2857}
+{"step": 56, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "hold", "by": "HH13", "note": ""}
+{"step": 56, "kind": "listing", "parcel_id": "P31", "by": "HH14", "price": 4223}
+{"step": 56, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 56, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 56, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 56, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 56, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 56, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 56, "kind": "settlement", "margins": [], "rents": []}
+{"step": 57, "kind": "offer", "offer_id": "O0038", "parcel_id": "P21", "from_id": "AQ01", "under_name": "X社", "price": 2856, "to": "HH04", "note": ""}
+{"step": 57, "kind": "financing_review", "by": "AQ01", "note": ""}
+{"step": 57, "kind": "contact_broker", "by": "AQ01", "note": "to=BZ04"}
+{"step": 57, "kind": "offer", "offer_id": "O0039", "parcel_id": "P36", "from_id": "AQ01", "under_name": "X社", "price": 2574, "to": "HH03", "note": ""}
+{"step": 57, "kind": "offer", "offer_id": "O0040", "parcel_id": "P30", "from_id": "AQ01", "under_name": "X社", "price": 2774, "to": "HH13", "note": ""}
+{"step": 57, "kind": "inquiry_asked", "inquiry_id": "Q0026", "parcel_id": "P34", "broker": "BR01", "owner": "HH01", "client": "", "note": "意向をうかがいます。"}
+{"step": 57, "kind": "inquiry_report", "inquiry_id": "Q0024", "parcel_id": "P43", "broker": "BR02", "to": "BR01", "owner_intent": "undecided", "asking_price": 2221, "note": "所有者の回答です。"}
+{"step": 57, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 57, "kind": "negotiate_rent", "by": "BZ02", "note": "to=AQ01 ask=22"}
+{"step": 57, "kind": "negotiate_rent", "by": "BZ03", "note": "to=MD02 ask=19"}
+{"step": 57, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 57, "kind": "accept_rejected", "offer_id": "O0036", "by": "HH01", "reason": "offer_countered"}
+{"step": 57, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "hold", "by": "HH03", "note": ""}
+{"step": 57, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "counter", "offer_id": "O0037", "parcel_id": "P22", "by": "HH05", "to": "AQ01", "price": 4560}
+{"step": 57, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "inquiry_answer_rejected", "by": "HH07", "inquiry_id": "Q0025", "reason": "inquiry_answered"}
+{"step": 57, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 3074}
+{"step": 57, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "hold", "by": "HH14", "note": ""}
+{"step": 57, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 57, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 57, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 57, "kind": "publication", "by": "MD02", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 57, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 57, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 57, "kind": "settlement", "margins": [], "rents": []}
+{"step": 58, "kind": "offer", "offer_id": "O0041", "parcel_id": "P08", "from_id": "AQ01", "under_name": "X社", "price": 2864, "to": "HH07", "note": ""}
+{"step": 58, "kind": "circulate_listing", "by": "BR01", "note": "to=BR01"}
+{"step": 58, "kind": "approach_owner", "by": "BR02", "note": "to=HH01"}
+{"step": 58, "kind": "negotiate_rent", "by": "BZ01", "note": "to=HH01 ask=21"}
+{"step": 58, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 58, "kind": "operate", "by": "BZ03", "note": ""}
+{"step": 58, "kind": "negotiate_rent", "by": "BZ04", "note": "to=MD02 ask=23"}
+{"step": 58, "kind": "inquiry_answer", "inquiry_id": "Q0026", "parcel_id": "P34", "owner": "HH01", "broker": "BR01", "owner_intent": "willing_to_lease", "asking_price": 2826, "note": ""}
+{"step": 58, "kind": "hold", "by": "HH02", "note": ""}
+{"step": 58, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2574, "purpose": "property_purchase", "reference": "O0039"}
+{"step": 58, "kind": "transfer", "offer_id": "O0039", "parcel_id": "P36", "seller": "HH03", "buyer": "AQ01", "under_name": "X社", "price": 2574}
+{"step": 58, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2856, "purpose": "property_purchase", "reference": "O0038"}
+{"step": 58, "kind": "transfer", "offer_id": "O0038", "parcel_id": "P21", "seller": "HH04", "buyer": "AQ01", "under_name": "X社", "price": 2856}
+{"step": 58, "kind": "accept_rejected", "offer_id": "O0037", "by": "HH05", "reason": "offer_countered"}
+{"step": 58, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 58, "kind": "hold", "by": "HH07", "note": ""}
+{"step": 58, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 3276}
+{"step": 58, "kind": "listing", "parcel_id": "P10", "by": "HH09", "price": 3490}
+{"step": 58, "kind": "listing", "parcel_id": "P11", "by": "HH10", "price": 4088}
+{"step": 58, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 58, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 58, "kind": "hold", "by": "HH13", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 58, "kind": "listing", "parcel_id": "P15", "by": "HH14", "price": 3104}
+{"step": 58, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 58, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 58, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 58, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 58, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 58, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 58, "kind": "settlement", "margins": [], "rents": []}
+{"step": 59, "kind": "offer", "offer_id": "O0042", "parcel_id": "P43", "from_id": "AQ01", "under_name": "X社", "price": 2422, "to": "HH10", "note": ""}
+{"step": 59, "kind": "approach_owner", "by": "BR01", "note": "to=AQ01"}
+{"step": 59, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0024", "reason": "inquiry_reported"}
+{"step": 59, "kind": "negotiate_rent", "by": "BZ01", "note": "to=MU02 ask=25"}
+{"step": 59, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 59, "kind": "close_rejected", "agent_id": "BZ03", "reason": "already_closed", "closed_at": 15}
+{"step": 59, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 59, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "counter_rejected", "offer_id": "O0039", "by": "HH03", "reason": "offer_not_open"}
+{"step": 59, "kind": "accept_rejected", "offer_id": "O0038", "by": "HH04", "reason": "offer_accepted"}
+{"step": 59, "kind": "accept_rejected", "offer_id": "O0037", "by": "HH05", "reason": "offer_countered"}
+{"step": 59, "kind": "hold", "by": "HH06", "note": ""}
+{"step": 59, "kind": "counter", "offer_id": "O0041", "parcel_id": "P08", "by": "HH07", "to": "AQ01", "price": 3711}
+{"step": 59, "kind": "hold", "by": "HH08", "note": ""}
+{"step": 59, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "hold", "by": "HH10", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "hold", "by": "HH11", "note": ""}
+{"step": 59, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "financing_raised", "agent_id": "AQ01", "amount": 2774, "purpose": "property_purchase", "reference": "O0040"}
+{"step": 59, "kind": "transfer", "offer_id": "O0040", "parcel_id": "P30", "seller": "HH13", "buyer": "AQ01", "under_name": "X社", "price": 2774}
+{"step": 59, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 59, "kind": "hold", "by": "HH16", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 59, "kind": "publication", "by": "MD01", "headline": "【調査】町の一角、所有者が同じ名義に集中", "body": "【調査】町の一角、所有者が同じ名義に集中", "about_acquisition": true}
+{"step": 59, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 59, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 59, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例", "body": "一定規模以上の取得に事前届出を求める条例を施行します。"}
+{"step": 59, "kind": "settlement", "margins": [], "rents": []}
+{"step": 60, "kind": "wait", "by": "AQ01", "note": ""}
+{"step": 60, "kind": "inquiry_request", "inquiry_id": "Q0027", "parcel_id": "P26", "client": "AQ01", "broker": "BR02", "note": ""}
+{"step": 60, "kind": "lease_offer_rejected", "parcel_id": "P37", "by": "AQ01", "reason": "invalid_target"}
+{"step": 60, "kind": "market_research", "by": "AQ01", "note": "地区別公開市場情報を閲覧"}
+{"step": 60, "kind": "public_statement", "by": "AQ01", "note": ""}
+{"step": 60, "kind": "inquiry_asked", "inquiry_id": "Q0028", "parcel_id": "P39", "broker": "BR01", "owner": "HH06", "client": "", "note": "意向をうかがいます。"}
+{"step": 60, "kind": "circulate_listing", "by": "BR02", "note": "to=AQ01"}
+{"step": 60, "kind": "operate", "by": "BZ01", "note": ""}
+{"step": 60, "kind": "operate", "by": "BZ02", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 60, "kind": "operate", "by": "BZ03", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 60, "kind": "operate", "by": "BZ04", "note": "家賃の話が来た。正直しんどい。"}
+{"step": 60, "kind": "hold", "by": "HH01", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "hold", "by": "HH02", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "counter_rejected", "offer_id": "O0039", "by": "HH03", "reason": "offer_not_open"}
+{"step": 60, "kind": "hold", "by": "HH04", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "accept_rejected", "offer_id": "O0037", "by": "HH05", "reason": "offer_countered"}
+{"step": 60, "kind": "hold", "by": "HH06", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "accept_rejected", "offer_id": "O0041", "by": "HH07", "reason": "offer_countered"}
+{"step": 60, "kind": "listing", "parcel_id": "P25", "by": "HH08", "price": 3497}
+{"step": 60, "kind": "hold", "by": "HH09", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "counter", "offer_id": "O0042", "parcel_id": "P43", "by": "HH10", "to": "AQ01", "price": 3240}
+{"step": 60, "kind": "hold", "by": "HH11", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "hold", "by": "HH12", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "accept_rejected", "offer_id": "O0040", "by": "HH13", "reason": "offer_accepted"}
+{"step": 60, "kind": "hold", "by": "HH14", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "hold", "by": "HH15", "note": "近所の家がまた売れたらしい。この街、どうなるんだろう。"}
+{"step": 60, "kind": "hold", "by": "HH16", "note": ""}
+{"step": 60, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 60, "kind": "routine_reporting", "by": "MD02", "note": ""}
+{"step": 60, "kind": "ordinance_study", "by": "MU01", "note": "実態把握を進めています。"}
+{"step": 60, "kind": "ordinance_study", "by": "MU02", "note": "実態把握を進めています。"}
+{"step": 60, "kind": "settlement", "margins": [], "rents": []}

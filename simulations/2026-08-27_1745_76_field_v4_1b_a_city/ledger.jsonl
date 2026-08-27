@@ -1,0 +1,269 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P36", "from_id": "AQ01", "under_name": "C社", "to": "HH03"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P36", "from_id": "AQ01", "under_name": "D社", "to": "HH03"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P28", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 1, "kind": "consult", "consult_id": "Q0001", "by": "HH04", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0002", "by": "HH06", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0003", "by": "HH08", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0004", "by": "HH09", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0005", "by": "HH12", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0006", "by": "HH13", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0007", "by": "HH14", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 1, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 1, "kind": "keep", "offer_id": "O0001", "parcel_id": "P36", "by": "HH03"}
+{"step": 1, "kind": "transfer", "offer_id": "O0002", "parcel_id": "P36", "seller": "HH03", "buyer": "AQ01", "under_name": "D社"}
+{"step": 1, "kind": "hold", "offer_id": "O0003", "parcel_id": "P28", "by": "HH11"}
+{"step": 2, "kind": "advice", "consult_id": "Q0004", "by": "BR01", "to": "HH09", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 2, "kind": "advice", "consult_id": "Q0001", "by": "BR02", "to": "HH04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 2, "kind": "advice", "consult_id": "Q0002", "by": "BR02", "to": "HH06", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 2, "kind": "advice", "consult_id": "Q0007", "by": "BR02", "to": "HH14", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0008", "by": "BZ02", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0009", "by": "BZ03", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0010", "by": "BZ04", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0011", "by": "HH01", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0012", "by": "HH02", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0013", "by": "HH03", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0014", "by": "HH04", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0015", "by": "HH08", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0016", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 2, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 2, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 2, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 300, "delay_months": 1, "effective_step": 3}
+{"step": 2, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 2, "kind": "transfer", "offer_id": "O0003", "parcel_id": "P28", "seller": "HH11", "buyer": "AQ01", "under_name": "A社"}
+{"step": 3, "kind": "advice", "consult_id": "Q0013", "by": "BR01", "to": "HH03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 3, "kind": "advice", "consult_id": "Q0015", "by": "BR01", "to": "HH08", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 3, "kind": "advice", "consult_id": "Q0005", "by": "BR02", "to": "HH12", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 3, "kind": "advice", "consult_id": "Q0008", "by": "BR02", "to": "BZ02", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 3, "kind": "advice", "consult_id": "Q0009", "by": "BR02", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0017", "by": "BZ01", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0018", "by": "BZ02", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0019", "by": "BZ03", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0020", "by": "BZ04", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0021", "by": "HH01", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0022", "by": "HH06", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0023", "by": "HH07", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0024", "by": "HH09", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0025", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0026", "by": "HH15", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 3, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 3, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 3, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 3, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 3, "kind": "ordinance", "by": "MU02", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 100, "delay_months": 1, "effective_step": 4}
+{"step": 4, "kind": "offer_rejected", "parcel_id": "P48", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 4, "kind": "offer", "offer_id": "O0004", "parcel_id": "P40", "from_id": "AQ01", "under_name": "B社", "to": "HH07"}
+{"step": 4, "kind": "offer", "offer_id": "O0005", "parcel_id": "P32", "from_id": "AQ01", "under_name": "D社", "to": "HH15"}
+{"step": 4, "kind": "advice", "consult_id": "Q0011", "by": "BR01", "to": "HH01", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 4, "kind": "advice", "consult_id": "Q0021", "by": "BR01", "to": "HH01", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 4, "kind": "advice", "consult_id": "Q0003", "by": "BR02", "to": "HH08", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 4, "kind": "advice", "consult_id": "Q0010", "by": "BR02", "to": "BZ04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 4, "kind": "advice", "consult_id": "Q0014", "by": "BR02", "to": "HH04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 4, "kind": "advice", "consult_id": "Q0016", "by": "BR02", "to": "HH11", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0027", "by": "BZ02", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0028", "by": "BZ03", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0029", "by": "HH04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0030", "by": "HH05", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0031", "by": "HH06", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0032", "by": "HH10", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0033", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0034", "by": "HH14", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0035", "by": "HH15", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 4, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 4, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 4, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 4, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 4, "kind": "hold", "offer_id": "O0004", "parcel_id": "P40", "by": "HH07"}
+{"step": 4, "kind": "hold", "offer_id": "O0005", "parcel_id": "P32", "by": "HH15"}
+{"step": 5, "kind": "offer", "offer_id": "O0006", "parcel_id": "P08", "from_id": "AQ01", "under_name": "D社", "to": "HH07"}
+{"step": 5, "kind": "offer", "offer_id": "O0007", "parcel_id": "P06", "from_id": "AQ01", "under_name": "B社", "to": "HH05"}
+{"step": 5, "kind": "offer", "offer_id": "O0008", "parcel_id": "P43", "from_id": "AQ01", "under_name": "A社", "to": "HH10"}
+{"step": 5, "kind": "withdraw_rejected", "offer_id": "O0002", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 5, "kind": "advice", "consult_id": "Q0034", "by": "BR01", "to": "HH14", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 5, "kind": "advice", "consult_id": "Q0012", "by": "BR02", "to": "HH02", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 5, "kind": "advice", "consult_id": "Q0018", "by": "BR02", "to": "BZ02", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 5, "kind": "advice", "consult_id": "Q0019", "by": "BR02", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 5, "kind": "advice", "consult_id": "Q0020", "by": "BR02", "to": "BZ04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0036", "by": "BZ03", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0037", "by": "BZ04", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0038", "by": "HH03", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0039", "by": "HH04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0040", "by": "HH05", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0041", "by": "HH08", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0042", "by": "HH10", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0043", "by": "HH11", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0044", "by": "HH15", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0045", "by": "HH16", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 5, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 5, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 5, "kind": "hold", "offer_id": "O0007", "parcel_id": "P06", "by": "HH05"}
+{"step": 5, "kind": "filing_required", "offer_id": "O0004", "parcel_id": "P40", "by": "HH07", "buyer": "AQ01", "due_step": 6, "ordinance": "土地取得届出条例（mock）"}
+{"step": 5, "kind": "hold", "offer_id": "O0006", "parcel_id": "P08", "by": "HH07"}
+{"step": 5, "kind": "hold", "offer_id": "O0008", "parcel_id": "P43", "by": "HH10"}
+{"step": 5, "kind": "hold", "offer_id": "O0005", "parcel_id": "P32", "by": "HH15"}
+{"step": 6, "kind": "offer", "offer_id": "O0009", "parcel_id": "P44", "from_id": "AQ01", "under_name": "D社", "to": "HH11"}
+{"step": 6, "kind": "advice", "consult_id": "Q0028", "by": "BR01", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0029", "by": "BR01", "to": "HH04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0038", "by": "BR01", "to": "HH03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0039", "by": "BR01", "to": "HH04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0040", "by": "BR01", "to": "HH05", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0041", "by": "BR01", "to": "HH08", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0006", "by": "BR02", "to": "HH13", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0017", "by": "BR02", "to": "BZ01", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0024", "by": "BR02", "to": "HH09", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0025", "by": "BR02", "to": "HH11", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0046", "by": "HH01", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0047", "by": "HH05", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0048", "by": "HH08", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0049", "by": "HH10", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0050", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0051", "by": "HH15", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0052", "by": "HH16", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 6, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 6, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 6, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 6, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 6, "kind": "keep", "offer_id": "O0007", "parcel_id": "P06", "by": "HH05"}
+{"step": 6, "kind": "response_rejected", "offer_id": "O0004", "by": "HH07", "reason": "offer_not_open"}
+{"step": 6, "kind": "hold", "offer_id": "O0006", "parcel_id": "P08", "by": "HH07"}
+{"step": 6, "kind": "hold", "offer_id": "O0008", "parcel_id": "P43", "by": "HH10"}
+{"step": 6, "kind": "filing_required", "offer_id": "O0009", "parcel_id": "P44", "by": "HH11", "buyer": "AQ01", "due_step": 7, "ordinance": "土地取得届出条例（mock）"}
+{"step": 6, "kind": "keep", "offer_id": "O0005", "parcel_id": "P32", "by": "HH15"}
+{"step": 6, "kind": "transfer", "offer_id": "O0004", "parcel_id": "P40", "seller": "HH07", "buyer": "AQ01", "under_name": "B社", "filed": true}
+{"step": 7, "kind": "advice", "consult_id": "Q0022", "by": "BR02", "to": "HH06", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 7, "kind": "advice", "consult_id": "Q0023", "by": "BR02", "to": "HH07", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 7, "kind": "advice", "consult_id": "Q0026", "by": "BR02", "to": "HH15", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 7, "kind": "advice", "consult_id": "Q0027", "by": "BR02", "to": "BZ02", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 7, "kind": "advice", "consult_id": "Q0030", "by": "BR02", "to": "HH05", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 7, "kind": "advice", "consult_id": "Q0031", "by": "BR02", "to": "HH06", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0053", "by": "BZ04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0054", "by": "HH03", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0055", "by": "HH04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0056", "by": "HH05", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0057", "by": "HH07", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0058", "by": "HH10", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0059", "by": "HH12", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0060", "by": "HH14", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0061", "by": "HH16", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 7, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 7, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 7, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 7, "kind": "response_rejected", "offer_id": "O0004", "by": "HH07", "reason": "offer_not_open"}
+{"step": 7, "kind": "keep", "offer_id": "O0006", "parcel_id": "P08", "by": "HH07"}
+{"step": 7, "kind": "filing_required", "offer_id": "O0008", "parcel_id": "P43", "by": "HH10", "buyer": "AQ01", "due_step": 8, "ordinance": "土地取得届出条例（mock）"}
+{"step": 7, "kind": "transfer", "offer_id": "O0009", "parcel_id": "P44", "seller": "HH11", "buyer": "AQ01", "under_name": "D社", "filed": true}
+{"step": 8, "kind": "offer", "offer_id": "O0010", "parcel_id": "P37", "from_id": "AQ01", "under_name": "C社", "to": "HH04"}
+{"step": 8, "kind": "offer", "offer_id": "O0011", "parcel_id": "P35", "from_id": "AQ01", "under_name": "B社", "to": "HH02"}
+{"step": 8, "kind": "offer", "offer_id": "O0012", "parcel_id": "P21", "from_id": "AQ01", "under_name": "D社", "to": "HH04"}
+{"step": 8, "kind": "advice", "consult_id": "Q0043", "by": "BR01", "to": "HH11", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0047", "by": "BR01", "to": "HH05", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0048", "by": "BR01", "to": "HH08", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0053", "by": "BR01", "to": "BZ04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0032", "by": "BR02", "to": "HH10", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0033", "by": "BR02", "to": "HH11", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0035", "by": "BR02", "to": "HH15", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0036", "by": "BR02", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "advice", "consult_id": "Q0037", "by": "BR02", "to": "BZ04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0062", "by": "BZ02", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0063", "by": "BZ03", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0064", "by": "BZ04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0065", "by": "HH06", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0066", "by": "HH08", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0067", "by": "HH15", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0068", "by": "HH16", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 8, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 8, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 8, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 8, "kind": "hold", "offer_id": "O0011", "parcel_id": "P35", "by": "HH02"}
+{"step": 8, "kind": "filing_required", "offer_id": "O0010", "parcel_id": "P37", "by": "HH04", "buyer": "AQ01", "due_step": 9, "ordinance": "土地取得届出条例（mock）"}
+{"step": 8, "kind": "hold", "offer_id": "O0012", "parcel_id": "P21", "by": "HH04"}
+{"step": 8, "kind": "transfer", "offer_id": "O0008", "parcel_id": "P43", "seller": "HH10", "buyer": "AQ01", "under_name": "A社", "filed": true}
+{"step": 9, "kind": "advice", "consult_id": "Q0042", "by": "BR01", "to": "HH10", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "advice", "consult_id": "Q0056", "by": "BR01", "to": "HH05", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "advice", "consult_id": "Q0057", "by": "BR01", "to": "HH07", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "advice", "consult_id": "Q0044", "by": "BR02", "to": "HH15", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "advice", "consult_id": "Q0045", "by": "BR02", "to": "HH16", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "advice", "consult_id": "Q0049", "by": "BR02", "to": "HH10", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "advice", "consult_id": "Q0050", "by": "BR02", "to": "HH11", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0069", "by": "BZ02", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0070", "by": "BZ03", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0071", "by": "HH01", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0072", "by": "HH05", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0073", "by": "HH07", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0074", "by": "HH08", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0075", "by": "HH10", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0076", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0077", "by": "HH13", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 9, "kind": "publication", "by": "MD01", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 9, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 9, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 9, "kind": "hold", "offer_id": "O0011", "parcel_id": "P35", "by": "HH02"}
+{"step": 9, "kind": "response_rejected", "offer_id": "O0010", "by": "HH04", "reason": "offer_not_open"}
+{"step": 9, "kind": "filing_required", "offer_id": "O0012", "parcel_id": "P21", "by": "HH04", "buyer": "AQ01", "due_step": 10, "ordinance": "土地取得届出条例（mock）"}
+{"step": 9, "kind": "transfer", "offer_id": "O0010", "parcel_id": "P37", "seller": "HH04", "buyer": "AQ01", "under_name": "C社", "filed": true}
+{"step": 10, "kind": "advice", "consult_id": "Q0046", "by": "BR01", "to": "HH01", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 10, "kind": "advice", "consult_id": "Q0058", "by": "BR01", "to": "HH10", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 10, "kind": "advice", "consult_id": "Q0059", "by": "BR01", "to": "HH12", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 10, "kind": "advice", "consult_id": "Q0062", "by": "BR01", "to": "BZ02", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 10, "kind": "advice", "consult_id": "Q0052", "by": "BR02", "to": "HH16", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 10, "kind": "advice", "consult_id": "Q0061", "by": "BR02", "to": "HH16", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0078", "by": "BZ02", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0079", "by": "BZ04", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0080", "by": "HH06", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0081", "by": "HH10", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0082", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0083", "by": "HH14", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0084", "by": "HH16", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 10, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 10, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 10, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 10, "kind": "ordinance", "by": "MU01", "title": "土地取得届出条例（mock）", "body": "一定規模以上の取得に事前届出を求める。", "threshold_sqm": 300, "delay_months": 2, "effective_step": 11}
+{"step": 10, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 10, "kind": "transfer", "offer_id": "O0011", "parcel_id": "P35", "seller": "HH02", "buyer": "AQ01", "under_name": "B社"}
+{"step": 10, "kind": "transfer", "offer_id": "O0012", "parcel_id": "P21", "seller": "HH04", "buyer": "AQ01", "under_name": "D社", "filed": true}
+{"step": 11, "kind": "offer", "offer_id": "O0013", "parcel_id": "P17", "from_id": "AQ01", "under_name": "D社", "to": "HH16"}
+{"step": 11, "kind": "advice", "consult_id": "Q0055", "by": "BR01", "to": "HH04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0064", "by": "BR01", "to": "BZ04", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0065", "by": "BR01", "to": "HH06", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0072", "by": "BR01", "to": "HH05", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0074", "by": "BR01", "to": "HH08", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0051", "by": "BR02", "to": "HH15", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0054", "by": "BR02", "to": "HH03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0063", "by": "BR02", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0066", "by": "BR02", "to": "HH08", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0085", "by": "BZ01", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0086", "by": "BZ03", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0087", "by": "HH04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0088", "by": "HH07", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0089", "by": "HH08", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0090", "by": "HH10", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0091", "by": "HH12", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 11, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 11, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 11, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 11, "kind": "public_statement", "by": "MU01", "note": "【mock】名義の集中について"}
+{"step": 11, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 11, "kind": "transfer", "offer_id": "O0013", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "D社"}
+{"step": 12, "kind": "offer", "offer_id": "O0014", "parcel_id": "P22", "from_id": "AQ01", "under_name": "X社", "to": "HH05"}
+{"step": 12, "kind": "advice", "consult_id": "Q0078", "by": "BR01", "to": "BZ02", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0081", "by": "BR01", "to": "HH10", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0085", "by": "BR01", "to": "BZ01", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0086", "by": "BR01", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0060", "by": "BR02", "to": "HH14", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0067", "by": "BR02", "to": "HH15", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0068", "by": "BR02", "to": "HH16", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0070", "by": "BR02", "to": "BZ03", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "advice", "consult_id": "Q0071", "by": "BR02", "to": "HH01", "reply": "近隣の名義変更の状況を伝える。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0092", "by": "BZ01", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0093", "by": "BZ03", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0094", "by": "BZ04", "to": "BR01", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0095", "by": "HH06", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0096", "by": "HH07", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0097", "by": "HH09", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0098", "by": "HH11", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0099", "by": "HH12", "to": "BR02", "question": "この辺りの土地の動きをどう見ているか教えてほしい。"}
+{"step": 12, "kind": "publication", "by": "MD02", "headline": "【mock】名義の集中について", "body": "【mock】名義の集中について", "about_acquisition": true}
+{"step": 12, "kind": "investigate", "by": "MU02", "note": "corporate_records"}
+{"step": 12, "kind": "public_statement", "by": "MU02", "note": "【mock】名義の集中について"}
+{"step": 12, "kind": "keep", "offer_id": "O0014", "parcel_id": "P22", "by": "HH05"}

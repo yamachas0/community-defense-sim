@@ -1,0 +1,1952 @@
+{"step": 1, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 1, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 1, "kind": "inquiry_request", "inquiry_id": "Q0001", "parcel_id": "P02", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の店舗P02について、売却または賃貸の意向を確認。名義R01。"}
+{"step": 1, "kind": "inquiry_request", "inquiry_id": "Q0002", "parcel_id": "P03", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の店舗P03について、売却または賃貸の意向を確認。名義R02。"}
+{"step": 1, "kind": "inquiry_request", "inquiry_id": "Q0003", "parcel_id": "P06", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の店舗P06について、売却または賃貸の意向を確認。名義R05。"}
+{"step": 1, "kind": "inquiry_request", "inquiry_id": "Q0004", "parcel_id": "P07", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の店舗P07について、売却または賃貸の意向を確認。名義R06。"}
+{"step": 1, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 1, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 1, "kind": "operate", "by": "BZ01", "note": "さて、今月も頑張りましょうか。"}
+{"step": 1, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 1, "kind": "operate", "by": "BZ03", "note": "今日も一日頑張りましょう！"}
+{"step": 1, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH01", "note": "今月も特に変わったことはないね。どうする？"}
+{"step": 1, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH03", "note": "まずは家の周りの草刈りでもしておこうか。"}
+{"step": 1, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除と薪割りが済んだ。今日も一日、穏やかに過ごせそうだ。"}
+{"step": 1, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。作業捗りそうです。"}
+{"step": 1, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH10", "note": "今月も、家族との時間を大切に、仕事と子育てを両立させていこう。"}
+{"step": 1, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH13", "note": "新しい家も落ち着いてきたし、そろそろ街のことも知りたいな。"}
+{"step": 1, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 1, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 1, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 1, "kind": "routine_reporting", "by": "MD01", "note": ""}
+{"step": 1, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 1, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 1, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 1, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 2, "kind": "wait", "by": "AQ01", "note": "前月依頼した意向確認の回答を待つ"}
+{"step": 2, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗と、次のアクション候補を内部で検討する"}
+{"step": 2, "kind": "inquiry_request", "inquiry_id": "Q0005", "parcel_id": "P04", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の店舗物件P04について、BR01を通じて所有者意向を確認する"}
+{"step": 2, "kind": "inquiry_request", "inquiry_id": "Q0006", "parcel_id": "P08", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の住宅物件P08について、BR02を通じて所有者意向を確認する"}
+{"step": 2, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 2, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 2, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。予約状況は良好です。"}
+{"step": 2, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 2, "kind": "operate", "by": "BZ03", "note": "今日も一日頑張りましょう。配達も承りますよ。"}
+{"step": 2, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 2, "kind": "home_maintenance", "by": "HH03", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は綺麗だな。リモートワークで集中できるのはありがたい。"}
+{"step": 2, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 2, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 2, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 2, "kind": "cover_city_hall", "by": "MD01", "note": "市役所周辺の動向について、何か新しい動きはありますか？"}
+{"step": 2, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 2, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 2, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 2, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 3, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 3, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 3, "kind": "inquiry_request", "inquiry_id": "Q0007", "parcel_id": "P09", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の住宅P09について、BR01を通じて所有者意向を確認する。"}
+{"step": 3, "kind": "inquiry_request", "inquiry_id": "Q0008", "parcel_id": "P13", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の住宅P13について、BR02を通じて所有者意向を確認する。"}
+{"step": 3, "kind": "internal_review", "by": "AQ01", "note": "これまでの情報収集と仲介業者とのやり取りを評価し、今後の戦略を検討する。"}
+{"step": 3, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 3, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 3, "kind": "operate", "by": "BZ01", "note": "今日も元気に営業しております！"}
+{"step": 3, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 3, "kind": "operate", "by": "BZ03", "note": "今日も一日、元気に営業します！"}
+{"step": 3, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH01", "note": "今月も特に何もせず、穏やかに過ごしましょう。"}
+{"step": 3, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 3, "kind": "home_maintenance", "by": "HH03", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は綺麗だな。リモートワークも捗る。"}
+{"step": 3, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 3, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 3, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 3, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 3, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 3, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 3, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 3, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 4, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 4, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 4, "kind": "inquiry_request", "inquiry_id": "Q0009", "parcel_id": "P10", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の店舗物件P10について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 4, "kind": "inquiry_request", "inquiry_id": "Q0010", "parcel_id": "P14", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の店舗物件P14について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 4, "kind": "inquiry_request", "inquiry_id": "Q0011", "parcel_id": "P11", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の店舗物件P11について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 4, "kind": "inquiry_request", "inquiry_id": "Q0012", "parcel_id": "P15", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の店舗物件P15について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 4, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 4, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 4, "kind": "operate", "by": "BZ01", "note": "今年も桜の季節がやってきましたね。皆様のお越しを心よりお待ちしております。"}
+{"step": 4, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 4, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業しています！"}
+{"step": 4, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH03", "note": "今月も特にやることはないな。"}
+{"step": 4, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。リモートワーク日和です。"}
+{"step": 4, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 4, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 4, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 4, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 4, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 4, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 4, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 4, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 5, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 5, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 5, "kind": "inquiry_request", "inquiry_id": "Q0013", "parcel_id": "P17", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の空地P17について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 5, "kind": "inquiry_request", "inquiry_id": "Q0014", "parcel_id": "P24", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の空地P24について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 5, "kind": "inquiry_request", "inquiry_id": "Q0015", "parcel_id": "P20", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の空地P20について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 5, "kind": "inquiry_request", "inquiry_id": "Q0016", "parcel_id": "P47", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の空地P47について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 5, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 5, "kind": "hold", "by": "BR02", "note": "X社様との情報交換に向けて、引き続き物件情報の収集と分析を進めます。"}
+{"step": 5, "kind": "operate", "by": "BZ01", "note": "おかげさまで、今月も多くのお客様にお越しいただき、大変感謝しております。今後とも、皆様に満足いただけるサービスを提供できるよう努めてまいります。"}
+{"step": 5, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 5, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です！お困りのことがあれば何でもお声かけください。"}
+{"step": 5, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 5, "kind": "home_maintenance", "by": "HH03", "note": "そろそろP36の草刈りをしないといけないな。維持費もばかにならない。"}
+{"step": 5, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 5, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 5, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 5, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 5, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 5, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 5, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 5, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 6, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 6, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 6, "kind": "inquiry_request", "inquiry_id": "Q0017", "parcel_id": "P18", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の住宅P18について所有者意向確認を依頼。"}
+{"step": 6, "kind": "inquiry_request", "inquiry_id": "Q0018", "parcel_id": "P21", "client": "AQ01", "broker": "BR02", "note": "中央駅前地区の住宅P21について所有者意向確認を依頼。"}
+{"step": 6, "kind": "inquiry_request", "inquiry_id": "Q0019", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34について所有者意向確認を依頼。"}
+{"step": 6, "kind": "inquiry_request", "inquiry_id": "Q0020", "parcel_id": "P37", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P37について所有者意向確認を依頼。"}
+{"step": 6, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 6, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 6, "kind": "operate", "by": "BZ01", "note": "通常通り営業いたします。皆様のお越しをお待ちしております。"}
+{"step": 6, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 6, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 6, "kind": "home_maintenance", "by": "HH03", "note": "そろそろP36の草刈りも大変になってきたな。"}
+{"step": 6, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 6, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 6, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 6, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 6, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 6, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 6, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 6, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 7, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 7, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 7, "kind": "inquiry_request", "inquiry_id": "Q0021", "parcel_id": "P05", "client": "AQ01", "broker": "BR01", "note": "中央駅前地区の住宅P05について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 7, "kind": "inquiry_request", "inquiry_id": "Q0022", "parcel_id": "P12", "client": "AQ01", "broker": "BR02", "note": "湾岸観光地区の住宅P12について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 7, "kind": "inquiry_request", "inquiry_id": "Q0023", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P28について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 7, "kind": "inquiry_request", "inquiry_id": "Q0024", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P29について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 7, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 7, "kind": "hold", "by": "BR02", "note": "X社様からの日程調整の打診、承知いたしました。追ってこちらから具体的な候補日時をご連絡いたします。"}
+{"step": 7, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 7, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色を眺めながら仕事。この街ののんびりした雰囲気が好きだな。"}
+{"step": 7, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH12", "note": "特に何もせず、いつものように過ごしました。"}
+{"step": 7, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 7, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 7, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 7, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 7, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 7, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 7, "kind": "routine_service", "by": "MU02", "note": ""}
+{"step": 7, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 8, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 8, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 8, "kind": "inquiry_request", "inquiry_id": "Q0025", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P35の所有者意向確認を依頼。"}
+{"step": 8, "kind": "inquiry_request", "inquiry_id": "Q0026", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P39の所有者意向確認を依頼。"}
+{"step": 8, "kind": "inquiry_request", "inquiry_id": "Q0027", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P42の所有者意向確認を依頼。"}
+{"step": 8, "kind": "inquiry_request", "inquiry_id": "Q0028", "parcel_id": "P45", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P45の所有者意向確認を依頼。"}
+{"step": 8, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 8, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 8, "kind": "operate", "by": "BZ01", "note": "今月も多くのお客様にお越しいただき、感謝しております。来月のご予約も順調に頂戴しており、安心いたしました。"}
+{"step": 8, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 8, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！"}
+{"step": 8, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH01", "note": "また夏が終わっていくね。"}
+{"step": 8, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除をして、近所の方と少しお話ししました。やはり坂道は堪えますね。"}
+{"step": 8, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH14", "note": "父の様子を見ながら、いつものように仕事と近所付き合いを続ける。"}
+{"step": 8, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 8, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 8, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 8, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 8, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 8, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 8, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 9, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 9, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 9, "kind": "inquiry_request", "inquiry_id": "Q0029", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P25について所有者意向確認を依頼。"}
+{"step": 9, "kind": "inquiry_request", "inquiry_id": "Q0030", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31について所有者意向確認を依頼。"}
+{"step": 9, "kind": "inquiry_request", "inquiry_id": "Q0031", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P33について所有者意向確認を依頼。"}
+{"step": 9, "kind": "inquiry_request", "inquiry_id": "Q0032", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38について所有者意向確認を依頼。"}
+{"step": 9, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 9, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 9, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 9, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 9, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 9, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 9, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 9, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 9, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 9, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 9, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 10, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 10, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 10, "kind": "inquiry_request", "inquiry_id": "Q0033", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P36について所有者意向確認を依頼。"}
+{"step": 10, "kind": "inquiry_request", "inquiry_id": "Q0034", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P40について所有者意向確認を依頼。"}
+{"step": 10, "kind": "inquiry_request", "inquiry_id": "Q0035", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P43について所有者意向確認を依頼。"}
+{"step": 10, "kind": "inquiry_request", "inquiry_id": "Q0036", "parcel_id": "P46", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P46について所有者意向確認を依頼。"}
+{"step": 10, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 10, "kind": "hold", "by": "BR02", "note": "X社からの連絡をお待ちしております。詳細なヒアリングの機会を設けるべく、準備を進めております。"}
+{"step": 10, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 10, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH04", "note": "今日も共同浴場のお世話をしてきました。少し坂道がこたえますね。"}
+{"step": 10, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 10, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 10, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 10, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 10, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 10, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 10, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 10, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 11, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 11, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 11, "kind": "inquiry_request", "inquiry_id": "Q0037", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P26について、所有者意向確認を依頼。"}
+{"step": 11, "kind": "inquiry_request", "inquiry_id": "Q0038", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗物件P30について、所有者意向確認を依頼。"}
+{"step": 11, "kind": "inquiry_request", "inquiry_id": "Q0039", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P27について、所有者意向確認を依頼。"}
+{"step": 11, "kind": "inquiry_request", "inquiry_id": "Q0040", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P32について、所有者意向確認を依頼。"}
+{"step": 11, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 11, "kind": "hold", "by": "BR02", "note": "X社からの連絡を待っており、引き続き対応準備を進めます。"}
+{"step": 11, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 11, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業しております！配達も承りますので、お気軽にお電話ください。"}
+{"step": 11, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH04", "note": "今日も共同浴場のお世話、大変だけどやりがいがあるね。"}
+{"step": 11, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 11, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 11, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 11, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 11, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 11, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 11, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 11, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 12, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 12, "kind": "inquiry_request", "inquiry_id": "Q0041", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P28について所有者意向確認を依頼。"}
+{"step": 12, "kind": "inquiry_request", "inquiry_id": "Q0042", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P29について所有者意向確認を依頼。"}
+{"step": 12, "kind": "inquiry_request", "inquiry_id": "Q0043", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34について所有者意向確認を依頼。"}
+{"step": 12, "kind": "inquiry_request", "inquiry_id": "Q0044", "parcel_id": "P37", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P37について所有者意向確認を依頼。"}
+{"step": 12, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後のアプローチ戦略について社内検討を行う。"}
+{"step": 12, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 12, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 12, "kind": "operate", "by": "BZ01", "note": "今年も残すところあとわずか。皆様のおかげで、忙しいながらも充実した一年となりました。来年もどうぞよろしくお願いいたします。"}
+{"step": 12, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 12, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除を終え、一息ついている。坂道はやはり堪えるな。家族の顔が浮かんだ。"}
+{"step": 12, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 12, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 12, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 12, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 12, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 12, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 12, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 12, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 13, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 13, "kind": "inquiry_request", "inquiry_id": "Q0045", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P35の所有者意向確認をBR01に依頼。"}
+{"step": 13, "kind": "inquiry_request", "inquiry_id": "Q0046", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P38の所有者意向確認をBR02に依頼。"}
+{"step": 13, "kind": "inquiry_request", "inquiry_id": "Q0047", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P42の所有者意向確認をBR01に依頼。"}
+{"step": 13, "kind": "inquiry_request", "inquiry_id": "Q0048", "parcel_id": "P45", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P45の所有者意向確認をBR02に依頼。"}
+{"step": 13, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認状況と今後の戦略について社内検討を行う。"}
+{"step": 13, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 13, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 13, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 13, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除と、近所の人との立ち話で一日が終わった。体はまだ少しきついな。"}
+{"step": 13, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 13, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 13, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 13, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 13, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 13, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 13, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 13, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 14, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 14, "kind": "inquiry_request", "inquiry_id": "Q0049", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P36の所有者意向確認を依頼。"}
+{"step": 14, "kind": "inquiry_request", "inquiry_id": "Q0050", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P39の所有者意向確認を依頼。"}
+{"step": 14, "kind": "inquiry_request", "inquiry_id": "Q0051", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P43の所有者意向確認を依頼。"}
+{"step": 14, "kind": "inquiry_request", "inquiry_id": "Q0052", "parcel_id": "P46", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P46の所有者意向確認を依頼。"}
+{"step": 14, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後のアプローチ戦略について社内検討。"}
+{"step": 14, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 14, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 14, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 14, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！"}
+{"step": 14, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 14, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 14, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 14, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 14, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 14, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 14, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 14, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 15, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 15, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 15, "kind": "inquiry_request", "inquiry_id": "Q0053", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P25の所有者意向確認をBR01に依頼。"}
+{"step": 15, "kind": "inquiry_request", "inquiry_id": "Q0054", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P31の所有者意向確認をBR02に依頼。"}
+{"step": 15, "kind": "inquiry_request", "inquiry_id": "Q0055", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P33の所有者意向確認をBR01に依頼。"}
+{"step": 15, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認案件の進捗と、今後の取得戦略について社内で検討。"}
+{"step": 15, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 15, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 15, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 15, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH04", "note": "今日も共同浴場のお世話をしました。坂道が少しきつくなってきましたが、皆さんとお話しできるのが楽しみなんです。"}
+{"step": 15, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワークも捗ります。"}
+{"step": 15, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 15, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 15, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 15, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 15, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 15, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 15, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 15, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 16, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 16, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 16, "kind": "inquiry_request", "inquiry_id": "Q0056", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P26の所有者意向確認を依頼。"}
+{"step": 16, "kind": "inquiry_request", "inquiry_id": "Q0057", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗物件P30の所有者意向確認を依頼。"}
+{"step": 16, "kind": "inquiry_request", "inquiry_id": "Q0058", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P27の所有者意向確認を依頼。"}
+{"step": 16, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認案件の進捗と、今後のアプローチ戦略について社内検討。"}
+{"step": 16, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 16, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 16, "kind": "operate", "by": "BZ01", "note": "年末年始のお客様をお迎えする準備は順調です。来月も多くのお客様をお迎えできる見込みですので、通常営業を継続します。"}
+{"step": 16, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 16, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！配達も承りますよ。"}
+{"step": 16, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 16, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 16, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 16, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 16, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 16, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 16, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 16, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 17, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 17, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 17, "kind": "inquiry_request", "inquiry_id": "Q0059", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P34の所有者意向確認をBR01に依頼。"}
+{"step": 17, "kind": "inquiry_request", "inquiry_id": "Q0060", "parcel_id": "P37", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P37の所有者意向確認をBR02に依頼。"}
+{"step": 17, "kind": "inquiry_request", "inquiry_id": "Q0061", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P35の所有者意向確認をBR01に依頼。"}
+{"step": 17, "kind": "internal_review", "by": "AQ01", "note": "これまでの意向確認依頼の進捗と、今後の取得戦略について社内検討。"}
+{"step": 17, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 17, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 17, "kind": "operate", "by": "BZ01", "note": "今日も一日頑張りましょう！"}
+{"step": 17, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 17, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です。お困りのことがあればお声かけください。"}
+{"step": 17, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH01", "note": "特に何も変わったことはないわね。今日も一日、のんびり過ごしましょう。"}
+{"step": 17, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワークも捗ります。"}
+{"step": 17, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 17, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 17, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 17, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 17, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 17, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 17, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 17, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 18, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 18, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 18, "kind": "inquiry_request", "inquiry_id": "Q0062", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41について所有者意向確認をBR01に依頼する。"}
+{"step": 18, "kind": "inquiry_request", "inquiry_id": "Q0063", "parcel_id": "P44", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の空地P44について所有者意向確認をBR02に依頼する。"}
+{"step": 18, "kind": "inquiry_request", "inquiry_id": "Q0064", "parcel_id": "P47", "client": "AQ01", "broker": "BR01", "note": "温泉丘陵地区の空地P47について所有者意向確認をBR01に依頼する。"}
+{"step": 18, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認案件の進捗状況と、今後の戦略について社内検討を行う。"}
+{"step": 18, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 18, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 18, "kind": "operate", "by": "BZ01", "note": "今年も多くの皆様にお越しいただき、感謝しております。来月もどうぞよろしくお願いいたします。"}
+{"step": 18, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 18, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除を終えた。今日も坂道はきつかったな。家族の顔が浮かんでくる。"}
+{"step": 18, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 18, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 18, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 18, "kind": "cover_city_hall", "by": "MD01", "note": "市役所周辺の行政動向について取材を進めます。"}
+{"step": 18, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 18, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 18, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 18, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 19, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 19, "kind": "inquiry_request", "inquiry_id": "Q0065", "parcel_id": "P17", "client": "AQ01", "broker": "BR01", "note": "湾岸観光地区の空地P17について所有者意向確認を依頼。"}
+{"step": 19, "kind": "inquiry_request", "inquiry_id": "Q0066", "parcel_id": "P20", "client": "AQ01", "broker": "BR02", "note": "湾岸観光地区の空地P20について所有者意向確認を依頼。"}
+{"step": 19, "kind": "inquiry_request", "inquiry_id": "Q0067", "parcel_id": "P24", "client": "AQ01", "broker": "BR01", "note": "中央駅前地区の空地P24について所有者意向確認を依頼。"}
+{"step": 19, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認案件の進捗状況と、今後のアプローチ戦略について社内検討を行う。"}
+{"step": 19, "kind": "wait", "by": "AQ01", "note": "BR02からの連絡を待つ。"}
+{"step": 19, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 19, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 19, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 19, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 19, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 19, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 19, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 19, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 19, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 19, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 19, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 20, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 20, "kind": "inquiry_request", "inquiry_id": "Q0068", "parcel_id": "P41", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の空地P41の所有者意向確認をBR02に依頼する。"}
+{"step": 20, "kind": "inquiry_request", "inquiry_id": "Q0069", "parcel_id": "P44", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P44の所有者意向確認をBR01に依頼する。"}
+{"step": 20, "kind": "inquiry_request", "inquiry_id": "Q0070", "parcel_id": "P47", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の空地P47の所有者意向確認をBR02に依頼する。"}
+{"step": 20, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗と、今後のアプローチ戦略について社内検討を行う。"}
+{"step": 20, "kind": "wait", "by": "AQ01", "note": "仲介からの返答を待つ。"}
+{"step": 20, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 20, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 20, "kind": "hold", "by": "BZ01", "note": ""}
+{"step": 20, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 20, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワークも捗ります。"}
+{"step": 20, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 20, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 20, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 20, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 20, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 20, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 20, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 20, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 21, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 21, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 21, "kind": "inquiry_request", "inquiry_id": "Q0071", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地物件P25の所有者意向確認をBR01に依頼。"}
+{"step": 21, "kind": "inquiry_request", "inquiry_id": "Q0072", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の空地物件P29の所有者意向確認をBR02に依頼。"}
+{"step": 21, "kind": "inquiry_request", "inquiry_id": "Q0073", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地物件P33の所有者意向確認をBR01に依頼。"}
+{"step": 21, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗と、今後の戦略について社内検討を行う。"}
+{"step": 21, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 21, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 21, "kind": "operate", "by": "BZ01", "note": "今年もどうぞよろしくお願いいたします。皆様のおかげで無事新年を迎えられました。"}
+{"step": 21, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業します！"}
+{"step": 21, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！"}
+{"step": 21, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 21, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 21, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 21, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 21, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 21, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 21, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 21, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 22, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 22, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 22, "kind": "inquiry_request", "inquiry_id": "Q0074", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41の所有者意向確認をBR01に依頼。"}
+{"step": 22, "kind": "inquiry_request", "inquiry_id": "Q0075", "parcel_id": "P44", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の空地P44の所有者意向確認をBR02に依頼。"}
+{"step": 22, "kind": "inquiry_request", "inquiry_id": "Q0076", "parcel_id": "P47", "client": "AQ01", "broker": "BR01", "note": "温泉丘陵地区の空地P47の所有者意向確認をBR01に依頼。"}
+{"step": 22, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認案件の進捗と今後の戦略について社内検討を行う。"}
+{"step": 22, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 22, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 22, "kind": "operate", "by": "BZ01", "note": "今年も変わらぬご愛顧、誠にありがとうございます。皆様のおかげで新年を迎えることができました。"}
+{"step": 22, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 22, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワークも捗ります。"}
+{"step": 22, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 22, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 22, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 22, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 22, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 22, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 22, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 22, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 23, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 23, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 23, "kind": "inquiry_request", "inquiry_id": "Q0077", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P26の所有者意向確認をBR01に依頼する。"}
+{"step": 23, "kind": "inquiry_request", "inquiry_id": "Q0078", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗P30の所有者意向確認をBR02に依頼する。"}
+{"step": 23, "kind": "inquiry_request", "inquiry_id": "Q0079", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42の所有者意向確認をBR01に依頼する。"}
+{"step": 23, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と今後の戦略を社内で検討する。"}
+{"step": 23, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 23, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 23, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 23, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 23, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 23, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 23, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 23, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 23, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 23, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 23, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 24, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 24, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 24, "kind": "inquiry_request", "inquiry_id": "Q0080", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P27の所有者意向確認をBR01に依頼。"}
+{"step": 24, "kind": "inquiry_request", "inquiry_id": "Q0081", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P31の所有者意向確認をBR02に依頼。"}
+{"step": 24, "kind": "inquiry_request", "inquiry_id": "Q0082", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P34の所有者意向確認をBR01に依頼。"}
+{"step": 24, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と新規依頼物件の選定について社内検討を継続。"}
+{"step": 24, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 24, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 24, "kind": "operate", "by": "BZ01", "note": "今年もどうぞよろしくお願いいたします。"}
+{"step": 24, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業しています！"}
+{"step": 24, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業していますよ。お米の配達、承ります。"}
+{"step": 24, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワークも捗ります。"}
+{"step": 24, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 24, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 24, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 24, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 24, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 24, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 24, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 24, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 25, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 25, "kind": "inquiry_request", "inquiry_id": "Q0083", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P28の所有者意向確認をBR01に依頼。"}
+{"step": 25, "kind": "inquiry_request", "inquiry_id": "Q0084", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P35の所有者意向確認をBR01に依頼。"}
+{"step": 25, "kind": "inquiry_request", "inquiry_id": "Q0085", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P32の所有者意向確認をBR02に依頼。"}
+{"step": 25, "kind": "inquiry_request", "inquiry_id": "Q0086", "parcel_id": "P36", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の住宅P36の所有者意向確認をBR02に依頼。"}
+{"step": 25, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認案件の進捗状況と、今後の戦略について社内検討を行う。"}
+{"step": 25, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 25, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 25, "kind": "operate", "by": "BZ01", "note": "今年もたくさんのお客様にご利用いただき、感謝しております。来月もどうぞよろしくお願いいたします。"}
+{"step": 25, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 25, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 25, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 25, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 25, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 25, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 25, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 25, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 25, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 26, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 26, "kind": "inquiry_request", "inquiry_id": "Q0087", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P25の所有者意向確認をBR01に依頼。"}
+{"step": 26, "kind": "inquiry_request", "inquiry_id": "Q0088", "parcel_id": "P29", "client": "AQ01", "broker": "BR01", "note": "温泉丘陵地区の住宅物件P29の所有者意向確認をBR01に依頼。"}
+{"step": 26, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 26, "kind": "inquiry_request", "inquiry_id": "Q0089", "parcel_id": "P33", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の住宅物件P33の所有者意向確認をBR02に依頼。"}
+{"step": 26, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と市場情報を社内で確認。"}
+{"step": 26, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 26, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 26, "kind": "operate", "by": "BZ01", "note": "今年も残すところあとわずか。皆様のおかげで無事に一年を締めくくれそうです。来年もどうぞよろしくお願いいたします。"}
+{"step": 26, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 26, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。リモートワーク日和です。"}
+{"step": 26, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 26, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 26, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 26, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 26, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 26, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 26, "kind": "tourism_industry_work", "by": "MU02", "note": ""}
+{"step": 26, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 27, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 27, "kind": "inquiry_request", "inquiry_id": "Q0090", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P26の所有者意向確認を依頼"}
+{"step": 27, "kind": "inquiry_request", "inquiry_id": "Q0091", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P27の所有者意向確認を依頼"}
+{"step": 27, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 27, "kind": "inquiry_request", "inquiry_id": "Q0092", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗物件P30の所有者意向確認を依頼"}
+{"step": 27, "kind": "internal_review", "by": "AQ01", "note": "社内での投資戦略と進捗状況の確認"}
+{"step": 27, "kind": "inquiry_asked", "inquiry_id": "Q0087", "parcel_id": "P25", "broker": "BR01", "owner": "HH08", "client": "AQ01", "note": "P25の所有者様、X社からの依頼で売却・賃貸の意向をお伺いしたくご連絡いたしました。"}
+{"step": 27, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 27, "kind": "operate", "by": "BZ01", "note": "今年もどうぞよろしくお願いいたします。"}
+{"step": 27, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 27, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH03", "note": "そろそろ、P36の維持管理について何か手を打たないといけないな。"}
+{"step": 27, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 27, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 27, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 27, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 27, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 27, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 27, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合から空き家活用に関する相談があった。近隣の空き家所有者と組合員のマッチング支援を検討する。"}
+{"step": 27, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 28, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 28, "kind": "inquiry_request", "inquiry_id": "Q0093", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P34について、所有者意向確認を依頼する。"}
+{"step": 28, "kind": "inquiry_request", "inquiry_id": "Q0094", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P35について、所有者意向確認を依頼する。"}
+{"step": 28, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 28, "kind": "inquiry_request", "inquiry_id": "Q0095", "parcel_id": "P37", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P37について、所有者意向確認を依頼する。"}
+{"step": 28, "kind": "internal_review", "by": "AQ01", "note": "これまでの意向確認依頼の状況と、今後のアプローチ戦略を社内で検討する。"}
+{"step": 28, "kind": "inquiry_asked", "inquiry_id": "Q0088", "parcel_id": "P29", "broker": "BR01", "owner": "HH12", "client": "AQ01", "note": "P29の所有者様へ、売却・賃貸のご意向について確認のお願いです。"}
+{"step": 28, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 28, "kind": "operate", "by": "BZ01", "note": "今年もどうぞよろしくお願いいたします。"}
+{"step": 28, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 28, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH03", "note": "今月も特に大きな動きはないな。P36の維持管理費は、やはり少し気になるが、すぐにどうこうするほどでもないだろう。"}
+{"step": 28, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 28, "kind": "inquiry_answer", "inquiry_id": "Q0087", "parcel_id": "P25", "owner": "HH08", "broker": "BR01", "owner_intent": "undecided", "asking_price": 1800, "note": "P25については、売却・賃貸ともに前向きに検討したいと考えております。希望額は1800万円です。"}
+{"step": 28, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 28, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 28, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 28, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 28, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 28, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 28, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用に関する支援策について、具体的なご要望や懸念事項をお聞かせください。今後の支援に反映させてまいります。"}
+{"step": 28, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 29, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 29, "kind": "inquiry_request", "inquiry_id": "Q0096", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41について、所有者意向確認を依頼。"}
+{"step": 29, "kind": "inquiry_request", "inquiry_id": "Q0097", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42について、所有者意向確認を依頼。"}
+{"step": 29, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 29, "kind": "inquiry_request", "inquiry_id": "Q0098", "parcel_id": "P44", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の空地P44について、所有者意向確認を依頼。"}
+{"step": 29, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の状況と、今後の戦略について社内検討を行う。"}
+{"step": 29, "kind": "inquiry_rejected", "by": "BR01", "inquiry_id": "Q0088", "reason": "inquiry_asked"}
+{"step": 29, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 29, "kind": "operate", "by": "BZ01", "note": "今年も皆様にご愛顧いただき、心より感謝申し上げます。来年もどうぞよろしくお願いいたします。"}
+{"step": 29, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 29, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH08", "note": "今日もいい天気ですね。リモートワーク日和です。"}
+{"step": 29, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 29, "kind": "inquiry_answer", "inquiry_id": "Q0088", "parcel_id": "P29", "owner": "HH12", "broker": "BR01", "owner_intent": "declined_to_answer", "asking_price": "not_asked", "note": "P29については、まだ売却・賃貸ともに考えておりません。"}
+{"step": 29, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 29, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 29, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 29, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 29, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 29, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 29, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策について、具体的な進め方をご相談させてください。"}
+{"step": 29, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 30, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 30, "kind": "inquiry_request", "inquiry_id": "Q0099", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P43の所有者意向確認を依頼"}
+{"step": 30, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 30, "kind": "inquiry_request", "inquiry_id": "Q0100", "parcel_id": "P36", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の住宅物件P36の所有者意向確認を依頼"}
+{"step": 30, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後の戦略を社内で検討"}
+{"step": 30, "kind": "inquiry_report", "inquiry_id": "Q0088", "parcel_id": "P29", "broker": "BR01", "to": "AQ01", "owner_intent": "declined_to_answer", "asking_price": "not_asked", "note": "P29の所有者意向確認の結果をご報告します。売却・賃貸ともに考えていないとのことでした。"}
+{"step": 30, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 30, "kind": "operate", "by": "BZ01", "note": "年末年始の感謝を込めて、地域住民の皆様へ粗品をお配りしております。お気軽にお立ち寄りください。"}
+{"step": 30, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 30, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH12", "note": "今日は天気が良いから、庭の手入れでもしようかしら。"}
+{"step": 30, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 30, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 30, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 30, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 30, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 30, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 30, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策について、具体的な進め方をご相談させてください。"}
+{"step": 30, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 31, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 31, "kind": "inquiry_request", "inquiry_id": "Q0101", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P25の所有者意向確認をBR01に依頼。"}
+{"step": 31, "kind": "inquiry_request", "inquiry_id": "Q0102", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41の所有者意向確認をBR01に依頼。"}
+{"step": 31, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 31, "kind": "inquiry_request", "inquiry_id": "Q0103", "parcel_id": "P28", "client": "AQ01", "broker": "BR02", "note": "北部学術・生活地区の住宅P28の所有者意向確認をBR02に依頼。"}
+{"step": 31, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と新規取得戦略の検討。"}
+{"step": 31, "kind": "inquiry_report", "inquiry_id": "Q0088", "parcel_id": "P29", "broker": "BR01", "to": "AQ01", "owner_intent": "declined_to_answer", "asking_price": "not_asked", "note": "P29の件、所有者からは売却・賃貸ともに考えていないとの回答でした。"}
+{"step": 31, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 31, "kind": "operate", "by": "BZ01", "note": "今年も一年、皆様のおかげで無事に営業を終えることができました。来年もどうぞよろしくお願いいたします。"}
+{"step": 31, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中！"}
+{"step": 31, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 31, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 31, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 31, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 31, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 31, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 31, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、先月からの空き家活用支援策について、具体的な進捗をご報告します。皆様のご意見を伺いながら、より実効性のある支援策をまとめたいと考えております。"}
+{"step": 31, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 32, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 32, "kind": "inquiry_request", "inquiry_id": "Q0104", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P33について所有者意向確認を依頼。"}
+{"step": 32, "kind": "inquiry_request", "inquiry_id": "Q0105", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42について所有者意向確認を依頼。"}
+{"step": 32, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 32, "kind": "inquiry_request", "inquiry_id": "Q0106", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31について所有者意向確認を依頼。"}
+{"step": 32, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗状況と今後の戦略について社内検討を行う。"}
+{"step": 32, "kind": "inquiry_report", "inquiry_id": "Q0088", "parcel_id": "P29", "broker": "BR01", "to": "AQ01", "owner_intent": "declined_to_answer", "asking_price": "not_asked", "note": "P29の件、所有者へ確認したところ、売却・賃貸ともに考えていないとの回答でした。"}
+{"step": 32, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 32, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。地域の皆様に感謝しております。"}
+{"step": 32, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中！"}
+{"step": 32, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH04", "note": "今日も共同浴場のお世話、大変だけど、みんなのために頑張らないとね。"}
+{"step": 32, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 32, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 32, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 32, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 32, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 32, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 32, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策の進捗報告と意見交換のため、お伺いしました。"}
+{"step": 32, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 33, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 33, "kind": "inquiry_request", "inquiry_id": "Q0107", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34の所有者意向確認を依頼。"}
+{"step": 33, "kind": "inquiry_request", "inquiry_id": "Q0108", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P35の所有者意向確認を依頼。"}
+{"step": 33, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 33, "kind": "inquiry_request", "inquiry_id": "Q0109", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38の所有者意向確認を依頼。"}
+{"step": 33, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の状況と、今後のアプローチ戦略について社内検討。"}
+{"step": 33, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 33, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 33, "kind": "operate", "by": "BZ01", "note": "皆様、今年もよろしくお願いいたします。変わらぬご愛顧に感謝申し上げます。"}
+{"step": 33, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 33, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 33, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 33, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 33, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 33, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 33, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 33, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策の進捗についてご報告します。具体的な支援内容について、皆様のご意見をお聞かせください。"}
+{"step": 33, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 34, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 34, "kind": "inquiry_request", "inquiry_id": "Q0110", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P26について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 34, "kind": "inquiry_request", "inquiry_id": "Q0111", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P27について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 34, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 34, "kind": "inquiry_request", "inquiry_id": "Q0112", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗P30について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 34, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後のアプローチ戦略について社内検討を行う。"}
+{"step": 34, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 34, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 34, "kind": "operate", "by": "BZ01", "note": "皆様、今年もどうぞよろしくお願いいたします。変わらぬご愛顧を賜りますよう、心よりお願い申し上げます。"}
+{"step": 34, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 34, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です！お困りのことがあれば、いつでもお声がけください。"}
+{"step": 34, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 34, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 34, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 34, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 34, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 34, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 34, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の件で進捗報告と意見交換をさせていただきたく、お時間を頂戴できますでしょうか。"}
+{"step": 34, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 35, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 35, "kind": "inquiry_request", "inquiry_id": "Q0113", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "P36（北部学術・生活地区、住宅）の所有者意向確認をBR01に依頼。"}
+{"step": 35, "kind": "inquiry_request", "inquiry_id": "Q0114", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "P43（北部学術・生活地区、住宅）の所有者意向確認をBR01に依頼。"}
+{"step": 35, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 35, "kind": "inquiry_request", "inquiry_id": "Q0115", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "P32（温泉丘陵地区、住宅）の所有者意向確認をBR02に依頼。"}
+{"step": 35, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と今後のアプローチ戦略を社内で検討。"}
+{"step": 35, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 35, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 35, "kind": "operate", "by": "BZ01", "note": "今年も皆様に支えられ、無事に年末年始を迎えられました。来年もどうぞよろしくお願いいたします。"}
+{"step": 35, "kind": "operate", "by": "BZ02", "note": "本日もご来店ありがとうございます。おかげさまで、この店も長く続けられております。"}
+{"step": 35, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワークも捗ります。"}
+{"step": 35, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 35, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 35, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 35, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 35, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 35, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 35, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、先月からの空き家活用支援策の検討状況をご報告いたします。具体案について、皆様のご意見をお聞かせください。"}
+{"step": 35, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 36, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 36, "kind": "inquiry_request", "inquiry_id": "Q0116", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P28の所有者意向確認を依頼。過去依頼の再送。"}
+{"step": 36, "kind": "inquiry_request", "inquiry_id": "Q0117", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41の所有者意向確認を依頼。過去依頼の再送。"}
+{"step": 36, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 36, "kind": "inquiry_request", "inquiry_id": "Q0118", "parcel_id": "P37", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P37の所有者意向確認を依頼。過去依頼の再送。"}
+{"step": 36, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と今後の戦略を再確認。"}
+{"step": 36, "kind": "inquiry_asked", "inquiry_id": "Q0119", "parcel_id": "P29", "broker": "BR01", "owner": "HH12", "client": "", "note": "北部学術・生活地区の新規物件について、所有者意向確認の依頼を受けました。つきましては、P29の所有者様へ売却・賃貸のご意向を確認させていただけますでしょうか。"}
+{"step": 36, "kind": "hold", "by": "BR02", "note": ""}
+{"step": 36, "kind": "operate", "by": "BZ01", "note": "今年も皆様に支えられ、無事に年末年始を迎えられそうです。来年もどうぞよろしくお願いいたします。"}
+{"step": 36, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 36, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 36, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 36, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 36, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 36, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 36, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 36, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策について、進捗報告と意見交換をさせていただきます。"}
+{"step": 36, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 37, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 37, "kind": "inquiry_request", "inquiry_id": "Q0120", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P33の所有者意向確認をBR01に依頼する。"}
+{"step": 37, "kind": "inquiry_request", "inquiry_id": "Q0121", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42の所有者意向確認をBR01に依頼する。"}
+{"step": 37, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 37, "kind": "inquiry_request", "inquiry_id": "Q0122", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31の所有者意向確認をBR02に依頼する。"}
+{"step": 37, "kind": "inquiry_request", "inquiry_id": "Q0123", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P39の所有者意向確認をBR02に依頼する。"}
+{"step": 37, "kind": "inquiry_asked", "inquiry_id": "Q0104", "parcel_id": "P33", "broker": "BR01", "owner": "HH16", "client": "AQ01", "note": "P33の所有者様にご意向確認の連絡をいたします。"}
+{"step": 37, "kind": "inquiry_asked", "inquiry_id": "Q0118", "parcel_id": "P37", "broker": "BR02", "owner": "HH04", "client": "AQ01", "note": "P37の所有者様へ、X社からの意向確認の件でご連絡いたしました。ご売却や賃貸のご意向についてお伺いできますでしょうか。"}
+{"step": 37, "kind": "operate", "by": "BZ01", "note": "皆様、今年もよろしくお願いいたします。変わらぬご愛顧を賜りますようお願い申し上げます。"}
+{"step": 37, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 37, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 37, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 37, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 37, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 37, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 37, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 37, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の進捗についてご報告と意見交換をさせてください。"}
+{"step": 37, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 38, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 38, "kind": "inquiry_request", "inquiry_id": "Q0124", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P25について所有者の売却・賃貸意向を確認依頼。"}
+{"step": 38, "kind": "inquiry_request", "inquiry_id": "Q0125", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34について所有者の売却・賃貸意向を確認依頼。"}
+{"step": 38, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 38, "kind": "inquiry_request", "inquiry_id": "Q0126", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38について所有者の売却・賃貸意向を確認依頼。"}
+{"step": 38, "kind": "inquiry_request", "inquiry_id": "Q0127", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P40について所有者の売却・賃貸意向を確認依頼。"}
+{"step": 38, "kind": "inquiry_asked", "inquiry_id": "Q0120", "parcel_id": "P33", "broker": "BR01", "owner": "HH16", "client": "AQ01", "note": "P33の件、X社からの依頼で再度確認させてください。"}
+{"step": 38, "kind": "inquiry_rejected", "by": "BR02", "inquiry_id": "Q0118", "reason": "inquiry_asked"}
+{"step": 38, "kind": "operate", "by": "BZ01", "note": "今年も通常営業で参ります。どうぞよろしくお願いいたします。"}
+{"step": 38, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中！"}
+{"step": 38, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 38, "kind": "inquiry_answer", "inquiry_id": "Q0118", "parcel_id": "P37", "owner": "HH04", "broker": "BR02", "owner_intent": "willing_to_lease", "asking_price": 15, "note": "P37の売却は考えておりませんが、賃貸でしたら検討します。月額15万円程度でいかがでしょうか。"}
+{"step": 38, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 38, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 38, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 38, "kind": "inquiry_answer", "inquiry_id": "Q0104", "parcel_id": "P33", "owner": "HH16", "broker": "BR01", "owner_intent": "undecided", "asking_price": "not_asked", "note": "P33はまだ売却の意思はありません。賃貸の予定もありません。"}
+{"step": 38, "kind": "cover_city_hall", "by": "MD01", "note": "市役所にて、地域経済の動向と今後の市政について担当者から話を聞いた。特に高齢化対策と観光振興策に注力するとのこと。"}
+{"step": 38, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 38, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 38, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策の進捗についてご報告します。また、皆様のご意見を伺いたく存じます。"}
+{"step": 38, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 39, "kind": "contact_broker", "by": "AQ01", "note": "to=BR01"}
+{"step": 39, "kind": "inquiry_request", "inquiry_id": "Q0128", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P43の所有者意向確認を依頼。"}
+{"step": 39, "kind": "inquiry_request", "inquiry_id": "Q0129", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P35の所有者意向確認を依頼。"}
+{"step": 39, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 39, "kind": "inquiry_request", "inquiry_id": "Q0130", "parcel_id": "P45", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P45の所有者意向確認を依頼。"}
+{"step": 39, "kind": "inquiry_request", "inquiry_id": "Q0131", "parcel_id": "P46", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P46の所有者意向確認を依頼。"}
+{"step": 39, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0120", "reason": "inquiry_asked"}
+{"step": 39, "kind": "inquiry_report", "inquiry_id": "Q0118", "parcel_id": "P37", "broker": "BR02", "to": "AQ01", "owner_intent": "willing_to_lease", "asking_price": 15, "note": "X社様、P37様の意向についてご報告いたします。賃貸は検討可能とのことですが、売却の意思はないとのことです。賃貸希望額は月額15万円です。"}
+{"step": 39, "kind": "operate", "by": "BZ01", "note": "今日も元気に営業しております。皆様のお越しをお待ちしております。"}
+{"step": 39, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 39, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 39, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 39, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 39, "kind": "inquiry_answer", "inquiry_id": "Q0120", "parcel_id": "P33", "owner": "HH16", "broker": "BR01", "owner_intent": "not_willing", "asking_price": "not_asked", "note": "P33については、まだ売却も賃貸も考えておりません。ご期待に沿えず申し訳ありません。"}
+{"step": 39, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 39, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 39, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 39, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策の件で、進捗報告と意見交換をさせていただけますでしょうか。"}
+{"step": 39, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 40, "kind": "inquiry_answer_rejected", "by": "AQ01", "inquiry_id": "BR02", "reason": "no_such_inquiry"}
+{"step": 40, "kind": "inquiry_request", "inquiry_id": "Q0132", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P26の所有者意向確認を依頼。"}
+{"step": 40, "kind": "inquiry_request", "inquiry_id": "Q0133", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P27の所有者意向確認を依頼。"}
+{"step": 40, "kind": "inquiry_request", "inquiry_id": "Q0134", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗P30の所有者意向確認を依頼。"}
+{"step": 40, "kind": "inquiry_request", "inquiry_id": "Q0135", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31の所有者意向確認を依頼。"}
+{"step": 40, "kind": "internal_review", "by": "AQ01", "note": "これまでの意向確認結果と新規依頼の進捗を社内で確認し、次のアクションを検討。"}
+{"step": 40, "kind": "client_followup", "by": "BR01", "note": "to=AQ01"}
+{"step": 40, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 40, "kind": "operate", "by": "BZ01", "note": "今日も一日頑張りましょう！"}
+{"step": 40, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中！"}
+{"step": 40, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 40, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 40, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 40, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 40, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 40, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 40, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の件でご相談です。具体化に向けた進捗と、皆様のご意見を伺いたく参りました。"}
+{"step": 40, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 41, "kind": "lease_offer_rejected", "parcel_id": "BR02", "by": "AQ01", "reason": "invalid_target"}
+{"step": 41, "kind": "inquiry_request", "inquiry_id": "Q0136", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "P33は売却・賃貸意思なしとの報告だが、再度意向確認を依頼し、状況変化の可能性を探る。"}
+{"step": 41, "kind": "inquiry_request", "inquiry_id": "Q0137", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP28について、再度所有者意向確認を依頼する。"}
+{"step": 41, "kind": "inquiry_request", "inquiry_id": "Q0138", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区のP32について、再度所有者意向確認を依頼する。"}
+{"step": 41, "kind": "inquiry_request", "inquiry_id": "Q0139", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP41（空地）について、所有者意向確認を依頼する。"}
+{"step": 41, "kind": "inquiry_request", "inquiry_id": "Q0140", "parcel_id": "P47", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区のP47（空地）について、所有者意向確認を依頼する。"}
+{"step": 41, "kind": "inquiry_report", "inquiry_id": "Q0120", "parcel_id": "P33", "broker": "BR01", "to": "AQ01", "owner_intent": "not_willing", "asking_price": "not_asked", "note": "P33の所有者R16様へ意向確認を実施しましたが、売却・賃貸ともに意思がないとの回答でした。"}
+{"step": 41, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 41, "kind": "operate", "by": "BZ01", "note": "引き続き、皆様のお越しをお待ちしております。"}
+{"step": 41, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 41, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 41, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 41, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 41, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 41, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 41, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 41, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の件でご相談させてください。具体的な進捗と今後の進め方について意見交換させていただければ幸いです。"}
+{"step": 41, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 42, "kind": "lease_offer", "lease_offer_id": "L0001", "parcel_id": "P37", "from_id": "AQ01", "to": "HH04", "rent": 150000, "under_name": "A社", "note": "P37の所有者R04が提示した月額15万円で賃貸契約を申し込む。実効支配面積増加のため。"}
+{"step": 42, "kind": "inquiry_request", "inquiry_id": "Q0141", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "P33の所有者R16へ再度、売却・賃貸の意向確認を依頼。状況変化の可能性を探る。"}
+{"step": 42, "kind": "inquiry_request", "inquiry_id": "Q0142", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34の所有者意向確認をBR01に依頼。"}
+{"step": 42, "kind": "inquiry_request", "inquiry_id": "Q0143", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38の所有者意向確認をBR02に依頼。"}
+{"step": 42, "kind": "inquiry_request", "inquiry_id": "Q0144", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42の所有者意向確認をBR01に依頼。"}
+{"step": 42, "kind": "inquiry_request", "inquiry_id": "Q0145", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P39の所有者意向確認をBR02に依頼。"}
+{"step": 42, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 42, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 42, "kind": "operate", "by": "BZ01", "note": "皆様、いつもお世話になっております。今年も変わらぬご愛顧を賜りますようお願い申し上げます。"}
+{"step": 42, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 42, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！"}
+{"step": 42, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 42, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 42, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 42, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 42, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 42, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 42, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策について、旅館組合の皆様と進捗を共有し、ご意見を伺いたく伺いました。"}
+{"step": 42, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 43, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 43, "kind": "inquiry_request", "inquiry_id": "Q0146", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP25について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 43, "kind": "inquiry_request", "inquiry_id": "Q0147", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区のP30について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 43, "kind": "inquiry_request", "inquiry_id": "Q0148", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP35について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 43, "kind": "inquiry_request", "inquiry_id": "Q0149", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区のP40について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 43, "kind": "inquiry_request", "inquiry_id": "Q0150", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP43について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 43, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0141", "reason": "inquiry_requested"}
+{"step": 43, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 43, "kind": "operate", "by": "BZ01", "note": "今年も無事に営業できております。皆様のご愛顧に感謝いたします。今後ともどうぞよろしくお願いいたします。"}
+{"step": 43, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 43, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 43, "kind": "lease_control", "lease_offer_id": "L0001", "parcel_id": "P37", "owner": "HH04", "controller": "AQ01", "under_name": "A社", "rent": 150000}
+{"step": 43, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 43, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 43, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 43, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 43, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 43, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 43, "kind": "tourism_industry_work", "by": "MU02", "note": "先月ご相談いただいた空き家活用支援策について、現在、具体的な制度設計を進めております。本日は、その進捗をご報告し、皆様のご意見を伺いたく参りました。"}
+{"step": 43, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 43, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 43, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 44, "kind": "lease_offer", "lease_offer_id": "L0002", "parcel_id": "P37", "from_id": "AQ01", "to": "HH04", "rent": 150000, "under_name": "A社", "note": "P37の賃貸条件が提示されたため、正式な賃貸申込みを行う。A社名義で進める。"}
+{"step": 44, "kind": "inquiry_request", "inquiry_id": "Q0151", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP26（店舗）について、BR01へ所有者意向確認を依頼する。"}
+{"step": 44, "kind": "inquiry_request", "inquiry_id": "Q0152", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区のP31（住宅）について、BR02へ所有者意向確認を依頼する。"}
+{"step": 44, "kind": "inquiry_request", "inquiry_id": "Q0153", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP34（住宅）について、BR01へ所有者意向確認を依頼する。"}
+{"step": 44, "kind": "inquiry_request", "inquiry_id": "Q0154", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区のP38（住宅）について、BR02へ所有者意向確認を依頼する。"}
+{"step": 44, "kind": "inquiry_request", "inquiry_id": "Q0155", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区のP42（住宅）について、BR01へ所有者意向確認を依頼する。"}
+{"step": 44, "kind": "inquiry_report_rejected", "by": "BR01", "inquiry_id": "Q0141", "reason": "inquiry_requested"}
+{"step": 44, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 44, "kind": "operate", "by": "BZ01", "note": "引き続き、皆様に快適な滞在をご提供できるよう努めてまいります。ご愛顧に心より感謝申し上げます。"}
+{"step": 44, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 44, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH04", "note": "共同浴場のお世話と、近所の方々との交流は欠かせない。身体はきついが、この生活を続けたい気持ちもある。ただ、家族からの同居の勧めも、やはり気になる。"}
+{"step": 44, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 44, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 44, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 44, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 44, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 44, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 44, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、先月からの空き家活用支援策の進捗についてご報告いたします。具体的な支援メニュー案を作成しましたので、本日ご説明し、皆様のご意見を伺いたいと考えております。"}
+{"step": 44, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 44, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 44, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 45, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 45, "kind": "inquiry_request", "inquiry_id": "Q0156", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P27について、BR01を通じて所有者の売却・賃貸意向を確認する。"}
+{"step": 45, "kind": "inquiry_request", "inquiry_id": "Q0157", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P29について、BR02を通じて所有者の売却・賃貸意向を確認する。"}
+{"step": 45, "kind": "inquiry_request", "inquiry_id": "Q0158", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41について、BR01を通じて所有者の売却・賃貸意向を確認する。"}
+{"step": 45, "kind": "inquiry_request", "inquiry_id": "Q0159", "parcel_id": "P45", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P45について、BR02を通じて所有者の売却・賃貸意向を確認する。"}
+{"step": 45, "kind": "inquiry_request", "inquiry_id": "Q0160", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "P33の所有者R16が売却・賃貸に意思がないとの報告があったが、状況変化の可能性を考慮し、再度意向確認を依頼する。"}
+{"step": 45, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 45, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 45, "kind": "operate", "by": "BZ01", "note": "皆様のおかげで、今年も無事に営業を続けることができました。今後ともどうぞよろしくお願いいたします。"}
+{"step": 45, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 45, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH04", "note": "今日も共同浴場のお世話、ご苦労様です。"}
+{"step": 45, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 45, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 45, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 45, "kind": "cover_city_hall", "by": "MD01", "note": "市役所の高齢化対策と観光振興策に関する動向を調査します。"}
+{"step": 45, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 45, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 45, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の具体案についてご説明します。本日は、遊休資産の活用による地域活性化を目指し、いくつかの支援メニューをご提案させていただきます。ご意見をお聞かせください。"}
+{"step": 45, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 45, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 45, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 46, "kind": "withdraw_rejected", "offer_id": "L0002", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 46, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 46, "kind": "inquiry_request", "inquiry_id": "Q0161", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "P33の所有者意向を再確認します。状況変化の可能性を考慮。"}
+{"step": 46, "kind": "inquiry_request", "inquiry_id": "Q0162", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P35の所有者意向を確認します。"}
+{"step": 46, "kind": "inquiry_request", "inquiry_id": "Q0163", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P39の所有者意向を確認します。"}
+{"step": 46, "kind": "inquiry_request", "inquiry_id": "Q0164", "parcel_id": "P44", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P44の所有者意向を確認します。"}
+{"step": 46, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 46, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 46, "kind": "operate", "by": "BZ01", "note": "皆様、いつもお世話になっております。今年もどうぞよろしくお願いいたします。"}
+{"step": 46, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 46, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH04", "note": "共同浴場の掃除は大変だけど、みんなの笑顔を見るとやりがいがあるよ。"}
+{"step": 46, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は綺麗だな。リモートワークも捗る。"}
+{"step": 46, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 46, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 46, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 46, "kind": "cover_city_hall", "by": "MD01", "note": "市役所の高齢化対策と観光振興策に関する動向を継続して取材する。"}
+{"step": 46, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 46, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 46, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の進捗についてご報告いたします。具体的な支援メニュー案を作成いたしましたので、ご説明させてください。"}
+{"step": 46, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 46, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 46, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 47, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 47, "kind": "inquiry_request", "inquiry_id": "Q0165", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P25について所有者意向確認を依頼。"}
+{"step": 47, "kind": "inquiry_request", "inquiry_id": "Q0166", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗P30について所有者意向確認を依頼。"}
+{"step": 47, "kind": "inquiry_request", "inquiry_id": "Q0167", "parcel_id": "P43", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P43について所有者意向確認を依頼。"}
+{"step": 47, "kind": "inquiry_request", "inquiry_id": "Q0168", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P40について所有者意向確認を依頼。"}
+{"step": 47, "kind": "inquiry_request", "inquiry_id": "Q0169", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P36について所有者意向確認を依頼。"}
+{"step": 47, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 47, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 47, "kind": "operate", "by": "BZ01", "note": "皆さま、いつもありがとうございます。感謝の気持ちを込めて、今月も心を込めておもてなしいたします。"}
+{"step": 47, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 47, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH04", "note": "今日も共同浴場のお世話をしました。少し坂道がこたえますが、皆さんの笑顔を見ると元気が出ます。"}
+{"step": 47, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 47, "kind": "inquiry_answer", "inquiry_id": "Q0119", "parcel_id": "P29", "owner": "HH12", "broker": "BR01", "owner_intent": "declined_to_answer", "asking_price": "not_asked", "note": "P29については、まだ売却も賃貸も考えておりません。"}
+{"step": 47, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 47, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 47, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 47, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 47, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 47, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 47, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策について、具体的なメニュー案を作成しました。皆様のご意見をお聞かせください。"}
+{"step": 47, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 47, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 47, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 48, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 48, "kind": "internal_review", "by": "AQ01", "note": "P37のL0001がaccepted、L0002がopen状態であることの契約状況を再確認し、今後の運用方針を検討する。"}
+{"step": 48, "kind": "inquiry_request", "inquiry_id": "Q0170", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P26について、所有者の売却・賃貸意向を確認する。"}
+{"step": 48, "kind": "inquiry_request", "inquiry_id": "Q0171", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31について、所有者の売却・賃貸意向を確認する。"}
+{"step": 48, "kind": "inquiry_request", "inquiry_id": "Q0172", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42について、所有者の売却・賃貸意向を確認する。"}
+{"step": 48, "kind": "inquiry_request", "inquiry_id": "Q0173", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38について、所有者の売却・賃貸意向を確認する。"}
+{"step": 48, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 48, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 48, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。皆様のご愛顧に感謝いたします。"}
+{"step": 48, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 48, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 48, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 48, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 48, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 48, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 48, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 48, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 48, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策の具体化について、本日は進捗報告と意見交換のためお集まりいただきありがとうございます。具体的な支援メニュー案を作成いたしましたので、ご説明させていただきます。"}
+{"step": 48, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 48, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 48, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 49, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 49, "kind": "inquiry_request", "inquiry_id": "Q0174", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P28の所有者意向確認をBR01に依頼する。"}
+{"step": 49, "kind": "inquiry_request", "inquiry_id": "Q0175", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P29の所有者意向確認をBR02に依頼する。"}
+{"step": 49, "kind": "inquiry_request", "inquiry_id": "Q0176", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34の所有者意向確認をBR01に依頼する。"}
+{"step": 49, "kind": "inquiry_request", "inquiry_id": "Q0177", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P32の所有者意向確認をBR02に依頼する。"}
+{"step": 49, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後の戦略について社内検討を行う。"}
+{"step": 49, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 49, "kind": "routine_brokerage", "by": "BR02", "note": "L0002の取り下げについて、X社様のご意向を確認しました。今後の進め方についてご相談させていただけますでしょうか。"}
+{"step": 49, "kind": "operate", "by": "BZ01", "note": "いつもご利用いただきありがとうございます。今後ともどうぞよろしくお願いいたします。"}
+{"step": 49, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 49, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH08", "note": "今日も湾岸の風が気持ちいい。リモートワーク日和だ。"}
+{"step": 49, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 49, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 49, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 49, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 49, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 49, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 49, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策について、具体的なメニュー案を作成しましたので、本日ご説明に伺います。ご意見を伺いながら、より実効性のある支援にしていきたいと考えております。"}
+{"step": 49, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 49, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 49, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 50, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 50, "kind": "inquiry_request", "inquiry_id": "Q0178", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P35の所有者意向を確認。"}
+{"step": 50, "kind": "inquiry_request", "inquiry_id": "Q0179", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P39の所有者意向を確認。"}
+{"step": 50, "kind": "inquiry_request", "inquiry_id": "Q0180", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P27の所有者意向を確認。"}
+{"step": 50, "kind": "inquiry_request", "inquiry_id": "Q0181", "parcel_id": "P45", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P45の所有者意向を確認。"}
+{"step": 50, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後の戦略を再確認する。"}
+{"step": 50, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 50, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 50, "kind": "operate", "by": "BZ01", "note": "皆様、いつもご利用ありがとうございます。今月も心を込めておもてなしいたします。"}
+{"step": 50, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 50, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 50, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色を眺めながら仕事。そろそろ新しいカフェメニューも試してみようかな。"}
+{"step": 50, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 50, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 50, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 50, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 50, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 50, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 50, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、先月ご提案した空き家活用支援策について、具体的なメニュー案を作成しました。本日はその説明と、皆様のご意見を伺えればと存じます。"}
+{"step": 50, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 50, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 50, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 51, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 51, "kind": "inquiry_request", "inquiry_id": "Q0182", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P25の所有者意向を確認。"}
+{"step": 51, "kind": "inquiry_request", "inquiry_id": "Q0183", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗P30の所有者意向を確認。"}
+{"step": 51, "kind": "inquiry_request", "inquiry_id": "Q0184", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P36の所有者意向を確認。"}
+{"step": 51, "kind": "inquiry_request", "inquiry_id": "Q0185", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P40の所有者意向を確認。"}
+{"step": 51, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗と、次のアプローチ対象物件を検討。"}
+{"step": 51, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 51, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 51, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。地域への感謝を忘れずに。"}
+{"step": 51, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 51, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 51, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 51, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 51, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 51, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 51, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 51, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、本日はお集まりいただきありがとうございます。空き家活用支援策の進捗についてご報告と意見交換をさせていただきます。具体的な支援メニュー案を作成いたしましたので、これからご説明いたします。"}
+{"step": 51, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 51, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 51, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 52, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 52, "kind": "inquiry_request", "inquiry_id": "Q0186", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P26について、売却・賃貸意向を確認依頼する。"}
+{"step": 52, "kind": "inquiry_request", "inquiry_id": "Q0187", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31について、売却・賃貸意向を確認依頼する。"}
+{"step": 52, "kind": "inquiry_request", "inquiry_id": "Q0188", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P34について、売却・賃貸意向を確認依頼する。"}
+{"step": 52, "kind": "inquiry_request", "inquiry_id": "Q0189", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38について、売却・賃貸意向を確認依頼する。"}
+{"step": 52, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗と、今後の取得戦略について社内検討を行う。"}
+{"step": 52, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 52, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 52, "kind": "operate", "by": "BZ01", "note": "皆様のおかげで、今月も無事に営業を続けることができました。今後ともどうぞよろしくお願いいたします。"}
+{"step": 52, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 52, "kind": "operate", "by": "BZ03", "note": "今日も一日頑張りましょう！"}
+{"step": 52, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 52, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 52, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 52, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 52, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 52, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 52, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 52, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、先月ご提案した空き家活用支援策について、具体的なメニュー案を作成いたしました。本日はその説明と、皆様のご意見を伺いたく参りました。"}
+{"step": 52, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 52, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 52, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 53, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 53, "kind": "inquiry_request", "inquiry_id": "Q0190", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P28の所有者意向を確認する。"}
+{"step": 53, "kind": "inquiry_request", "inquiry_id": "Q0191", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P29の所有者意向を確認する。"}
+{"step": 53, "kind": "inquiry_request", "inquiry_id": "Q0192", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41の所有者意向を確認する。"}
+{"step": 53, "kind": "inquiry_request", "inquiry_id": "Q0193", "parcel_id": "P47", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の空地P47の所有者意向を確認する。"}
+{"step": 53, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の進捗状況と、今後のアプローチ戦略を検討する。"}
+{"step": 53, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 53, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 53, "kind": "operate", "by": "BZ01", "note": "皆様のおかげで、今年も無事に営業を続けられております。今後ともどうぞよろしくお願いいたします。"}
+{"step": 53, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 53, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 53, "kind": "hold", "by": "HH04", "note": "来月、A社に連絡してみよう。"}
+{"step": 53, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 53, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 53, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 53, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 53, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 53, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 53, "kind": "tourism_industry_work", "by": "MU02", "note": "空き家活用支援策の進捗報告と、具体的な支援メニュー案についてご説明します。"}
+{"step": 53, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 53, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 53, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 54, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 54, "kind": "withdraw_rejected", "offer_id": "L0002", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 54, "kind": "inquiry_request", "inquiry_id": "Q0194", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P27について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 54, "kind": "inquiry_request", "inquiry_id": "Q0195", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P32について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 54, "kind": "inquiry_request", "inquiry_id": "Q0196", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P35について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 54, "kind": "inquiry_request", "inquiry_id": "Q0197", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P39について、所有者の売却・賃貸意向を確認依頼。"}
+{"step": 54, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 54, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 54, "kind": "operate", "by": "BZ01", "note": "皆様、いつもご利用いただきありがとうございます。今後ともA市の魅力向上に貢献できるよう努めてまいります。"}
+{"step": 54, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 54, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 54, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 54, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 54, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 54, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 54, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 54, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 54, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、空き家活用支援策について、具体的なメニュー案を作成しましたのでご説明いたします。"}
+{"step": 54, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 54, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 54, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 55, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 55, "kind": "inquiry_request", "inquiry_id": "Q0198", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P25の所有者意向確認をBR01に依頼。"}
+{"step": 55, "kind": "inquiry_request", "inquiry_id": "Q0199", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗P30の所有者意向確認をBR02に依頼。"}
+{"step": 55, "kind": "inquiry_request", "inquiry_id": "Q0200", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P36の所有者意向確認をBR01に依頼。"}
+{"step": 55, "kind": "inquiry_request", "inquiry_id": "Q0201", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P40の所有者意向確認をBR02に依頼。"}
+{"step": 55, "kind": "internal_review", "by": "AQ01", "note": "既存の意向確認依頼の状況と進捗を社内で確認し、次のアクションを検討する。"}
+{"step": 55, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 55, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 55, "kind": "operate", "by": "BZ01", "note": "皆様、いつもお世話になっております。旅館T01です。今月も通常営業を続けてまいります。ご愛顧のほど、よろしくお願い申し上げます。"}
+{"step": 55, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 55, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 55, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 55, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 55, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 55, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 55, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 55, "kind": "tourism_industry_work", "by": "MU02", "note": "旅館組合の皆様、本日はお忙しい中お集まりいただきありがとうございます。空き家活用支援策について、具体的なメニュー案を作成いたしましたので、ご説明させていただきます。"}
+{"step": 55, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 55, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 55, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 56, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 56, "kind": "inquiry_request", "inquiry_id": "Q0202", "parcel_id": "P26", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗P26について所有者意向確認を依頼。"}
+{"step": 56, "kind": "inquiry_request", "inquiry_id": "Q0203", "parcel_id": "P31", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P31について所有者意向確認を依頼。"}
+{"step": 56, "kind": "inquiry_request", "inquiry_id": "Q0204", "parcel_id": "P33", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P33について所有者意向確認を依頼。"}
+{"step": 56, "kind": "inquiry_request", "inquiry_id": "Q0205", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P38について所有者意向確認を依頼。"}
+{"step": 56, "kind": "internal_review", "by": "AQ01", "note": "既存案件と新規依頼の進捗状況をレビューし、次の戦略を検討。"}
+{"step": 56, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 56, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 56, "kind": "operate", "by": "BZ02", "note": ""}
+{"step": 56, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 56, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 56, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 56, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 56, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 56, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 56, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 56, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 56, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 56, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 57, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 57, "kind": "inquiry_request", "inquiry_id": "Q0206", "parcel_id": "P28", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P28の所有者意向確認を依頼。"}
+{"step": 57, "kind": "inquiry_request", "inquiry_id": "Q0207", "parcel_id": "P29", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P29の所有者意向確認を依頼。"}
+{"step": 57, "kind": "inquiry_request", "inquiry_id": "Q0208", "parcel_id": "P34", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P34の所有者意向確認を依頼。"}
+{"step": 57, "kind": "inquiry_request", "inquiry_id": "Q0209", "parcel_id": "P39", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P39の所有者意向確認を依頼。"}
+{"step": 57, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と今後の戦略について社内検討を行う。"}
+{"step": 57, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 57, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 57, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 57, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業します！"}
+{"step": 57, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH08", "note": "今日も湾岸の景色は最高ですね。リモートワーク捗ります。"}
+{"step": 57, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 57, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 57, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 57, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 57, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 57, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 57, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 57, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 57, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 58, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 58, "kind": "inquiry_request", "inquiry_id": "Q0210", "parcel_id": "P27", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の店舗物件P27について、所有者意向確認を依頼。"}
+{"step": 58, "kind": "inquiry_request", "inquiry_id": "Q0211", "parcel_id": "P32", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P32について、所有者意向確認を依頼。"}
+{"step": 58, "kind": "inquiry_request", "inquiry_id": "Q0212", "parcel_id": "P35", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P35について、所有者意向確認を依頼。"}
+{"step": 58, "kind": "inquiry_request", "inquiry_id": "Q0213", "parcel_id": "P40", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P40について、所有者意向確認を依頼。"}
+{"step": 58, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と、今後の取得戦略について社内検討。"}
+{"step": 58, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 58, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 58, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 58, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH04", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 58, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 58, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 58, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 58, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 58, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 58, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 58, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 58, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 59, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 59, "kind": "inquiry_request", "inquiry_id": "Q0214", "parcel_id": "P25", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P25について、BR01を通じて所有者意向確認を依頼。"}
+{"step": 59, "kind": "inquiry_request", "inquiry_id": "Q0215", "parcel_id": "P30", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の店舗物件P30について、BR02を通じて所有者意向確認を依頼。"}
+{"step": 59, "kind": "inquiry_request", "inquiry_id": "Q0216", "parcel_id": "P36", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅物件P36について、BR01を通じて所有者意向確認を依頼。"}
+{"step": 59, "kind": "inquiry_request", "inquiry_id": "Q0217", "parcel_id": "P38", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅物件P38について、BR02を通じて所有者意向確認を依頼。"}
+{"step": 59, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と、今後の取得戦略について社内検討を行う。"}
+{"step": 59, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 59, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 59, "kind": "operate", "by": "BZ01", "note": "通常営業を続けます。地域への感謝を込めて。"}
+{"step": 59, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中です！"}
+{"step": 59, "kind": "operate", "by": "BZ03", "note": "今日も元気に営業中です！"}
+{"step": 59, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 59, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 59, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 59, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 59, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 59, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 59, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 59, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 59, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 59, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}
+{"step": 60, "kind": "contact_broker", "by": "AQ01", "note": "to=BR02"}
+{"step": 60, "kind": "inquiry_request", "inquiry_id": "Q0218", "parcel_id": "P41", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の空地P41について、所有者意向を確認する。"}
+{"step": 60, "kind": "inquiry_request", "inquiry_id": "Q0219", "parcel_id": "P47", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の空地P47について、所有者意向を確認する。"}
+{"step": 60, "kind": "inquiry_request", "inquiry_id": "Q0220", "parcel_id": "P42", "client": "AQ01", "broker": "BR01", "note": "北部学術・生活地区の住宅P42について、所有者意向を確認する。"}
+{"step": 60, "kind": "inquiry_request", "inquiry_id": "Q0221", "parcel_id": "P45", "client": "AQ01", "broker": "BR02", "note": "温泉丘陵地区の住宅P45について、所有者意向を確認する。"}
+{"step": 60, "kind": "internal_review", "by": "AQ01", "note": "既存案件の進捗と新規案件の検討を行う。"}
+{"step": 60, "kind": "hold", "by": "BR01", "note": ""}
+{"step": 60, "kind": "client_followup", "by": "BR02", "note": "to=AQ01"}
+{"step": 60, "kind": "operate", "by": "BZ01", "note": "皆様、いつもご利用ありがとうございます。今月も変わらぬご愛顧を賜りますようお願い申し上げます。"}
+{"step": 60, "kind": "operate", "by": "BZ02", "note": "今日も元気に営業中！"}
+{"step": 60, "kind": "hold", "by": "BZ04", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH01", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH02", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH03", "note": ""}
+{"step": 60, "kind": "hold", "by": "HH04", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH05", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH06", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH07", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH08", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH09", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH10", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH11", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH12", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH13", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH14", "note": ""}
+{"step": 60, "kind": "hold", "by": "HH15", "note": ""}
+{"step": 60, "kind": "routine", "by": "HH16", "note": ""}
+{"step": 60, "kind": "cover_city_hall", "by": "MD01", "note": ""}
+{"step": 60, "kind": "hold", "by": "MD02", "note": ""}
+{"step": 60, "kind": "routine_service", "by": "MU01", "note": ""}
+{"step": 60, "kind": "settlement", "margins": [{"agent": "BZ01", "margin": 54}, {"agent": "BZ02", "margin": 39}, {"agent": "BZ03", "margin": 31}, {"agent": "BZ04", "margin": 36}], "rents": [{"parcel": "P02", "tenant": "BZ01", "owner": "HH01", "rent": 24}, {"parcel": "P03", "tenant": "BZ02", "owner": "HH02", "rent": 24}, {"parcel": "P04", "tenant": "BZ03", "owner": "HH03", "rent": 24}, {"parcel": "P06", "tenant": "BZ04", "owner": "HH05", "rent": 24}]}
+{"step": 60, "kind": "financing_raised", "agent_id": "AQ01", "amount": 150000, "purpose": "control_rent", "reference": "P37"}
+{"step": 60, "kind": "control_rent_settlement", "parcel_id": "P37", "controller": "AQ01", "owner": "HH04", "amount": 150000}

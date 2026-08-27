@@ -28,6 +28,7 @@ from .world import Ledger
 
 CONSULT_NONE = "none"
 DEFAULT_ADVICE_CAPACITY = 6
+CONSULT_CAPACITY_PER_MONTH = 1
 
 _P1_TAIL = "まず thought（内心）を書き、それを踏まえて今月の行動をJSONで1つ返す。"
 _P2_TAIL = "まず thought（内心）を書き、それを踏まえて responses を返す。"
@@ -45,7 +46,20 @@ def ensure_v41b_state(ledger: Ledger) -> None:
 
 
 def _normalize_consult_id(ledger: Ledger, value: Any) -> str:
-    return ledger._normalize_id(value, "Q")
+    """観測に出た相談IDを台帳の鍵へ揃える（表記ゆれの吸収であって解釈ではない）。
+
+    機械記録も配送の観測IDも `Q0001` に統一してあるが、過去に `O0001` /
+    `OFFER-O0001` の二重表記で行為が不成立になった事故があるので、
+    `CONSULT-Q0001` / `ADVICE-Q0001` と書かれても同じ1件へ解決する。
+    """
+    text = str(value or "").strip().strip("[]() ").upper()
+    for prefix in ("CONSULT-", "ADVICE-", "CONSULT_", "ADVICE_"):
+        if text.startswith(prefix):
+            stripped = text[len(prefix):].strip()
+            if stripped[:1] == "Q":
+                text = stripped
+            break
+    return ledger._normalize_id(text, "Q")
 
 
 # ---------------------------------------------------------------------------
@@ -71,6 +85,13 @@ def record_consult_v41b(ledger: Ledger, step: int, agent: Agent, broker_id: str,
     if not text:
         return ledger._rec(step, "consult_rejected", by=agent.agent_id, to=target,
                            reason="missing_question")
+    used = sum(1 for c in ledger.v41b_consults.values()
+               if c["from"] == agent.agent_id and c["step"] == step)
+    if used >= CONSULT_CAPACITY_PER_MONTH:
+        # 有限資源は世界の側で数える（入力の形に頼らない）。
+        return ledger._rec(step, "consult_rejected", by=agent.agent_id, to=target,
+                           reason="monthly_consult_capacity_exceeded",
+                           capacity=CONSULT_CAPACITY_PER_MONTH)
     ledger.v41b_consult_seq += 1
     consult_id = f"Q{ledger.v41b_consult_seq:04d}"
     ledger.v41b_consults[consult_id] = {
@@ -83,7 +104,7 @@ def record_consult_v41b(ledger: Ledger, step: int, agent: Agent, broker_id: str,
 
 
 def answer_consult_v41b(ledger: Ledger, step: int, broker_id: str, consult_id: str,
-                        reply: str) -> Dict[str, Any]:
+                        reply: str, capacity: Optional[int] = None) -> Dict[str, Any]:
     """相談に答える。答えるかどうか・何を答えるかは仲介が決める。"""
     ensure_v41b_state(ledger)
     cid = _normalize_consult_id(ledger, consult_id)
@@ -98,6 +119,17 @@ def answer_consult_v41b(ledger: Ledger, step: int, broker_id: str, consult_id: s
     if consult["status"] != "open":
         return ledger._rec(step, "advice_rejected", consult_id=cid, by=broker_id,
                            reason="already_answered")
+    if step <= int(consult["step"]):
+        # 相談が仲介へ届くのは翌月。出された月のうちには答えられない。
+        return ledger._rec(step, "advice_rejected", consult_id=cid, by=broker_id,
+                           reason="not_yet_delivered")
+    if capacity is not None:
+        used = sum(1 for c in ledger.v41b_consults.values()
+                   if c["to"] == broker_id and c["answered_step"] == step)
+        if used >= int(capacity):
+            return ledger._rec(step, "advice_rejected", consult_id=cid, by=broker_id,
+                               reason="monthly_advice_capacity_exceeded",
+                               capacity=int(capacity))
     if not text:
         return ledger._rec(step, "advice_rejected", consult_id=cid, by=broker_id,
                            reason="missing_reply")
@@ -112,8 +144,15 @@ def answer_consult_v41b(ledger: Ledger, step: int, broker_id: str, consult_id: s
 # 観測（機械記録・金額なし・評価語なし）
 # ---------------------------------------------------------------------------
 
-def _consult_status_ja(consult: Dict[str, Any]) -> str:
+def _consult_status_ja(consult: Dict[str, Any], step: Optional[int] = None) -> str:
+    """相談の状態。回答は本文が届く月まで、相談者にはまだ見えない。
+
+    step を渡すと「その主体が今月見てよい状態」を返す。答えた本人（仲介）は
+    自分が答えたことを当然知っているが、相談者に見えるのは配送と同じ翌月からである。
+    """
     if consult["status"] == "answered":
+        if step is not None and int(step) <= int(consult["answered_step"]):
+            return "未回答"
         return f"回答済み(第{consult['answered_step']}月)"
     return "未回答"
 
@@ -131,15 +170,15 @@ def incoming_consults_rows_v41b(ledger: Ledger, broker_id: str,
     return rows or ["  （相談は来ていない）"]
 
 
-def own_consults_rows_v41b(ledger: Ledger, owner_id: str,
-                           names: Dict[str, str]) -> List[str]:
+def own_consults_rows_v41b(ledger: Ledger, owner_id: str, names: Dict[str, str],
+                           step: Optional[int] = None) -> List[str]:
     ensure_v41b_state(ledger)
     rows = []
     for consult in sorted(ledger.v41b_consults.values(), key=lambda c: c["id"]):
         if consult["from"] != owner_id:
             continue
         rows.append(f"  [{consult['id']}] 相談先:{names.get(consult['to'], consult['to'])} "
-                    f"第{consult['step']}月 状態:{_consult_status_ja(consult)}")
+                    f"第{consult['step']}月 状態:{_consult_status_ja(consult, step)}")
     return rows or ["  （まだ相談していない）"]
 
 
@@ -186,15 +225,25 @@ def ordinance_effect_rows_v41b(ledger: Ledger, step: int) -> List[str]:
                  if r.get("kind") == "transfer" and int(r.get("step", 0)) >= effective]
     filings = [r for r in ledger.records
                if r.get("kind") == "filing_required" and int(r.get("step", 0)) >= effective]
+
+    def over_threshold(row: Dict[str, Any]) -> bool:
+        parcel = ledger.parcels.get(row.get("parcel_id", ""))
+        return bool(parcel is not None and parcel.area_sqm > threshold)
+
+    # 遅延0か月の条例では届出の待機列に入らないまま移転する。「対象面積に該当した取得」と
+    # 「届出で待機した取得」を別の事実として出す（該当0件も事実として返る）。
+    hit = [r for r in transfers if over_threshold(r)]
     last = step - 1
     return [
         f"  第{effective}月施行「{ordinance['title']}」 対象:1件{threshold}㎡超の取得",
         f"  現在の登記でこの対象面積を超える区画: {len(over)}件 / 非公共{total}件",
-        f"  施行後の名義移転: {len(transfers)}件 うち届出の対象になったもの: {len(filings)}件",
+        f"  施行後の名義移転: {len(transfers)}件 "
+        f"うち対象面積に該当したもの: {len(hit)}件 "
+        f"うち届出で待機したもの: {len(filings)}件",
         f"  先月（第{last}月）の名義移転: "
         f"{sum(1 for r in transfers if int(r.get('step', 0)) == last)}件 "
-        f"うち届出の対象になったもの: "
-        f"{sum(1 for r in filings if int(r.get('step', 0)) == last)}件",
+        f"うち対象面積に該当したもの: "
+        f"{sum(1 for r in hit if int(r.get('step', 0)) == last)}件",
     ]
 
 
@@ -274,7 +323,7 @@ def build_phase1_prompt_v41b(agent: Agent, ledger: Ledger, step: int, n_steps: i
     rows: List[str] = []
     if agent.role in ("household", "business"):
         rows += ["[自分がした相談（機械記録）]"]
-        rows += own_consults_rows_v41b(ledger, agent.agent_id, names)
+        rows += own_consults_rows_v41b(ledger, agent.agent_id, names, step)
     elif agent.role == "broker":
         rows += ["[自分に来ている相談（機械記録）]"]
         rows += incoming_consults_rows_v41b(ledger, agent.agent_id, names)
@@ -295,12 +344,13 @@ def build_phase2_prompt_v41b(agent: Agent, ledger: Ledger, step: int, n_steps: i
     ensure_v41b_state(ledger)
     text = build_phase2_prompt_v41(agent, ledger, step, n_steps, names, offers, inbox)
     rows = ["[自分がした相談（機械記録）]"]
-    rows += own_consults_rows_v41b(ledger, agent.agent_id, names)
+    rows += own_consults_rows_v41b(ledger, agent.agent_id, names, step)
     return _insert_before(text, _P2_TAIL, rows + [""])
 
 
 __all__ = [
-    "CONSULT_NONE", "DEFAULT_ADVICE_CAPACITY", "ensure_v41b_state",
+    "CONSULT_NONE", "DEFAULT_ADVICE_CAPACITY", "CONSULT_CAPACITY_PER_MONTH",
+    "ensure_v41b_state",
     "record_consult_v41b", "answer_consult_v41b", "incoming_consults_rows_v41b",
     "own_consults_rows_v41b", "parcel_area_rows_v41b", "ordinance_effect_rows_v41b",
     "phase1_schema_v41b", "phase2_schema_v41b", "build_system_prompt_v41b",

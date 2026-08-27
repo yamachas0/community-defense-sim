@@ -1,0 +1,413 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P05", "from_id": "AQ01", "under_name": "X社", "to": "HH04"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P12", "from_id": "AQ01", "under_name": "X社", "to": "HH11"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P17", "from_id": "AQ01", "under_name": "X社", "to": "HH16"}
+{"step": 1, "kind": "offer", "offer_id": "O0004", "parcel_id": "P28", "from_id": "AQ01", "under_name": "X社", "to": "HH11"}
+{"step": 1, "kind": "offer", "offer_id": "O0005", "parcel_id": "P37", "from_id": "AQ01", "under_name": "X社", "to": "HH04"}
+{"step": 1, "kind": "offer", "offer_id": "O0006", "parcel_id": "P44", "from_id": "AQ01", "under_name": "X社", "to": "HH11"}
+{"step": 1, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 1, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 1, "kind": "hold", "offer_id": "O0005", "parcel_id": "P37", "by": "HH04"}
+{"step": 1, "kind": "hold", "offer_id": "O0002", "parcel_id": "P12", "by": "HH11"}
+{"step": 1, "kind": "hold", "offer_id": "O0004", "parcel_id": "P28", "by": "HH11"}
+{"step": 1, "kind": "hold", "offer_id": "O0006", "parcel_id": "P44", "by": "HH11"}
+{"step": 1, "kind": "hold", "offer_id": "O0003", "parcel_id": "P17", "by": "HH16"}
+{"step": 2, "kind": "offer_rejected", "parcel_id": "P01", "from_id": "AQ01", "reason": "public_land_not_for_sale"}
+{"step": 2, "kind": "offer", "offer_id": "O0007", "parcel_id": "P09", "from_id": "AQ01", "under_name": "B社", "to": "HH08"}
+{"step": 2, "kind": "offer", "offer_id": "O0008", "parcel_id": "P17", "from_id": "AQ01", "under_name": "X社", "to": "HH16"}
+{"step": 2, "kind": "offer", "offer_id": "O0009", "parcel_id": "P20", "from_id": "AQ01", "under_name": "C社", "to": "HH03"}
+{"step": 2, "kind": "offer", "offer_id": "O0010", "parcel_id": "P24", "from_id": "AQ01", "under_name": "D社", "to": "HH07"}
+{"step": 2, "kind": "offer", "offer_id": "O0011", "parcel_id": "P41", "from_id": "AQ01", "under_name": "A社", "to": "HH08"}
+{"step": 2, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 2, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 2, "kind": "hold", "offer_id": "O0009", "parcel_id": "P20", "by": "HH03"}
+{"step": 2, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 2, "kind": "hold", "offer_id": "O0005", "parcel_id": "P37", "by": "HH04"}
+{"step": 2, "kind": "hold", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07"}
+{"step": 2, "kind": "hold", "offer_id": "O0007", "parcel_id": "P09", "by": "HH08"}
+{"step": 2, "kind": "hold", "offer_id": "O0011", "parcel_id": "P41", "by": "HH08"}
+{"step": 2, "kind": "hold", "offer_id": "O0002", "parcel_id": "P12", "by": "HH11"}
+{"step": 2, "kind": "hold", "offer_id": "O0004", "parcel_id": "P28", "by": "HH11"}
+{"step": 2, "kind": "hold", "offer_id": "O0006", "parcel_id": "P44", "by": "HH11"}
+{"step": 2, "kind": "hold", "offer_id": "O0003", "parcel_id": "P17", "by": "HH16"}
+{"step": 2, "kind": "hold", "offer_id": "O0008", "parcel_id": "P17", "by": "HH16"}
+{"step": 3, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 3, "kind": "publication", "by": "MD02", "headline": "【速報】A市、海外投資グループによる広大な土地保有が明らかに", "body": "【速報】A市、海外投資グループによる広大な土地保有が明らかに\nA市内の土地保有面積の約14.9%にあたる1350㎡を保有する名義「R07」について、公開法人記録を調査した結果、複数の海外法人との関連が浮上しました。R07は、香港法人S投資控股を頂点とする複雑な法人群（A社、B社、C社、D社、X社など）と関連していることが判明。特に、不動産投資・運営会社であるX社が中心的な役割を担っている模様です。これにより、A市の広大な土地が海外の投資グループによって集約されている可能性が示唆されました。今後のA市の不動産市場や開発計画への影響が注目されます。", "about_acquisition": true}
+{"step": 3, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 3, "kind": "hold", "offer_id": "O0009", "parcel_id": "P20", "by": "HH03"}
+{"step": 3, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 3, "kind": "hold", "offer_id": "O0005", "parcel_id": "P37", "by": "HH04"}
+{"step": 3, "kind": "hold", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07"}
+{"step": 3, "kind": "keep", "offer_id": "O0007", "parcel_id": "P09", "by": "HH08"}
+{"step": 3, "kind": "hold", "offer_id": "O0011", "parcel_id": "P41", "by": "HH08"}
+{"step": 3, "kind": "hold", "offer_id": "O0002", "parcel_id": "P12", "by": "HH11"}
+{"step": 3, "kind": "hold", "offer_id": "O0004", "parcel_id": "P28", "by": "HH11"}
+{"step": 3, "kind": "hold", "offer_id": "O0006", "parcel_id": "P44", "by": "HH11"}
+{"step": 3, "kind": "hold", "offer_id": "O0003", "parcel_id": "P17", "by": "HH16"}
+{"step": 3, "kind": "hold", "offer_id": "O0008", "parcel_id": "P17", "by": "HH16"}
+{"step": 4, "kind": "offer", "offer_id": "O0012", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 4, "kind": "offer", "offer_id": "O0013", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 4, "kind": "offer", "offer_id": "O0014", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 4, "kind": "offer", "offer_id": "O0015", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 4, "kind": "offer", "offer_id": "O0016", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 4, "kind": "offer", "offer_id": "O0017", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 4, "kind": "publication", "by": "MD02", "headline": "【特報】A市不動産、海外投資グループによる集約の可能性浮上", "body": "【特報】A市不動産、海外投資グループによる集約の可能性浮上\n\nA市内の広大な土地が、複数の海外法人を通じて集約されている可能性が、本紙の調査で明らかになった。特に、香港法人S投資控股およびその関連会社であるX社が、A社、B社、C社、D社といった国内法人を通じてA市内の不動産を間接的に保有・管理している構図が浮かび上がっている。\n\n登記統計によると、個人名義のR07氏が市内の土地の約14.9%を保有しており、その保有実態が注目されていた。今回の法人記録調査により、R07氏の保有する土地が、これらの海外投資グループの資産運用の一部である可能性が示唆された。\n\nこの海外投資グループによる土地集約の動きは、A市の不動産市場の動向や今後の都市開発計画に大きな影響を与える可能性がある。市民や地元事業者は、この動きを注視する必要があるだろう。本紙では、今後もこの件について詳細な調査を続ける方針である。", "about_acquisition": true}
+{"step": 4, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 4, "kind": "hold", "offer_id": "O0009", "parcel_id": "P20", "by": "HH03"}
+{"step": 4, "kind": "hold", "offer_id": "O0013", "parcel_id": "P20", "by": "HH03"}
+{"step": 4, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 4, "kind": "hold", "offer_id": "O0005", "parcel_id": "P37", "by": "HH04"}
+{"step": 4, "kind": "hold", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07"}
+{"step": 4, "kind": "hold", "offer_id": "O0014", "parcel_id": "P24", "by": "HH07"}
+{"step": 4, "kind": "response_rejected", "offer_id": "O0007", "by": "HH08", "reason": "offer_not_open"}
+{"step": 4, "kind": "hold", "offer_id": "O0011", "parcel_id": "P41", "by": "HH08"}
+{"step": 4, "kind": "hold", "offer_id": "O0015", "parcel_id": "P41", "by": "HH08"}
+{"step": 4, "kind": "hold", "offer_id": "O0002", "parcel_id": "P12", "by": "HH11"}
+{"step": 4, "kind": "hold", "offer_id": "O0004", "parcel_id": "P28", "by": "HH11"}
+{"step": 4, "kind": "hold", "offer_id": "O0006", "parcel_id": "P44", "by": "HH11"}
+{"step": 4, "kind": "hold", "offer_id": "O0016", "parcel_id": "P44", "by": "HH11"}
+{"step": 4, "kind": "hold", "offer_id": "O0017", "parcel_id": "P47", "by": "HH14"}
+{"step": 4, "kind": "hold", "offer_id": "O0003", "parcel_id": "P17", "by": "HH16"}
+{"step": 4, "kind": "hold", "offer_id": "O0008", "parcel_id": "P17", "by": "HH16"}
+{"step": 4, "kind": "hold", "offer_id": "O0012", "parcel_id": "P17", "by": "HH16"}
+{"step": 5, "kind": "offer", "offer_id": "O0018", "parcel_id": "P05", "from_id": "AQ01", "under_name": "A社", "to": "HH04"}
+{"step": 5, "kind": "offer", "offer_id": "O0019", "parcel_id": "P12", "from_id": "AQ01", "under_name": "B社", "to": "HH11"}
+{"step": 5, "kind": "offer", "offer_id": "O0020", "parcel_id": "P28", "from_id": "AQ01", "under_name": "C社", "to": "HH11"}
+{"step": 5, "kind": "offer", "offer_id": "O0021", "parcel_id": "P37", "from_id": "AQ01", "under_name": "D社", "to": "HH04"}
+{"step": 5, "kind": "offer", "offer_id": "O0022", "parcel_id": "P41", "from_id": "AQ01", "under_name": "A社", "to": "HH08"}
+{"step": 5, "kind": "offer", "offer_id": "O0023", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 5, "kind": "withdraw", "offer_id": "O0001", "parcel_id": "P05", "by": "AQ01"}
+{"step": 5, "kind": "withdraw", "offer_id": "O0002", "parcel_id": "P12", "by": "AQ01"}
+{"step": 5, "kind": "withdraw", "offer_id": "O0003", "parcel_id": "P17", "by": "AQ01"}
+{"step": 5, "kind": "withdraw", "offer_id": "O0004", "parcel_id": "P28", "by": "AQ01"}
+{"step": 5, "kind": "withdraw", "offer_id": "O0005", "parcel_id": "P37", "by": "AQ01"}
+{"step": 5, "kind": "publication", "by": "MD02", "headline": "【速報】A市不動産、海外投資グループが関与か？～X社と香港法人S投資控股の関連を調査～", "body": "【速報】A市不動産、海外投資グループが関与か？～X社と香港法人S投資控股の関連を調査～\n先月までの調査でA市内で最も広範な土地を保有するR07。今月、公開法人記録を調査したところ、同氏がA社、B社、C社、D社、そしてX社、さらには香港法人S投資控股といった複数の法人と関係があることが判明しました。特に、X社とS投資控股が土地集約の中心的な役割を担っている可能性が浮上しています。X社は海外の不動産投資・運営会社であり、A社の広大な土地が海外の投資グループによって集約されているシナリオが考えられます。この動向はA市の不動産市場や今後の開発に大きな影響を与える可能性があり、引き続き注視していきます。", "about_acquisition": true}
+{"step": 5, "kind": "investigate", "by": "MU01", "note": "corporate_records"}
+{"step": 5, "kind": "hold", "offer_id": "O0009", "parcel_id": "P20", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0013", "parcel_id": "P20", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 5, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 5, "kind": "hold", "offer_id": "O0010", "parcel_id": "P24", "by": "HH07"}
+{"step": 5, "kind": "hold", "offer_id": "O0014", "parcel_id": "P24", "by": "HH07"}
+{"step": 5, "kind": "keep", "offer_id": "O0022", "parcel_id": "P41", "by": "HH08"}
+{"step": 5, "kind": "hold", "offer_id": "O0011", "parcel_id": "P41", "by": "HH08"}
+{"step": 5, "kind": "hold", "offer_id": "O0015", "parcel_id": "P41", "by": "HH08"}
+{"step": 5, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 5, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 5, "kind": "hold", "offer_id": "O0006", "parcel_id": "P44", "by": "HH11"}
+{"step": 5, "kind": "hold", "offer_id": "O0016", "parcel_id": "P44", "by": "HH11"}
+{"step": 5, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 5, "kind": "hold", "offer_id": "O0017", "parcel_id": "P47", "by": "HH14"}
+{"step": 5, "kind": "hold", "offer_id": "O0008", "parcel_id": "P17", "by": "HH16"}
+{"step": 5, "kind": "hold", "offer_id": "O0012", "parcel_id": "P17", "by": "HH16"}
+{"step": 6, "kind": "offer", "offer_id": "O0024", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 6, "kind": "offer", "offer_id": "O0025", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 6, "kind": "offer", "offer_id": "O0026", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 6, "kind": "offer", "offer_id": "O0027", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 6, "kind": "offer", "offer_id": "O0028", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 6, "kind": "offer", "offer_id": "O0029", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 6, "kind": "withdraw", "offer_id": "O0006", "parcel_id": "P44", "by": "AQ01"}
+{"step": 6, "kind": "withdraw_rejected", "offer_id": "O0007", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 6, "kind": "withdraw", "offer_id": "O0008", "parcel_id": "P17", "by": "AQ01"}
+{"step": 6, "kind": "withdraw", "offer_id": "O0009", "parcel_id": "P20", "by": "AQ01"}
+{"step": 6, "kind": "withdraw", "offer_id": "O0010", "parcel_id": "P24", "by": "AQ01"}
+{"step": 6, "kind": "withdraw", "offer_id": "O0011", "parcel_id": "P41", "by": "AQ01"}
+{"step": 6, "kind": "publication", "by": "MD02", "headline": "【速報】A市不動産、海外投資グループが関与か？X社・S投資控股の動向に注目", "body": "【速報】A市不動産、海外投資グループが関与か？X社・S投資控股の動向に注目\n\n地域ウェブ媒体J02（内部ID:MD02）は、A市の土地保有状況と法人記録の調査を進める中で、複数の法人格が複雑に絡み合い、海外の投資グループがA市内の広大な土地に深く関与している可能性が浮上したことを報じます。特に、香港法人S投資控股およびその関連会社であるX社（外部会社AQ01）の動向が注目されます。\n\nこれまでの調査で、R07という名義人がA市内で最も広範な土地を保有していることが判明していましたが、今月の法人記録調査により、R07がA社、B社、C社、D社といった国内法人、さらにはS投資控股とも関連があることが明らかになりました。X社はS投資控股の連結子会社であり、C社とは資産運用契約を結んでいます。これらの情報から、A市内の不動産資産が、海外の投資グループによって集約・管理されている構図が浮かび上がってい", "about_acquisition": true}
+{"step": 6, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 6, "kind": "hold", "offer_id": "O0013", "parcel_id": "P20", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 6, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 6, "kind": "hold", "offer_id": "O0014", "parcel_id": "P24", "by": "HH07"}
+{"step": 6, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 6, "kind": "response_rejected", "offer_id": "O0022", "by": "HH08", "reason": "offer_not_open"}
+{"step": 6, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 6, "kind": "hold", "offer_id": "O0015", "parcel_id": "P41", "by": "HH08"}
+{"step": 6, "kind": "hold", "offer_id": "O0016", "parcel_id": "P44", "by": "HH11"}
+{"step": 6, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 6, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 6, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 6, "kind": "hold", "offer_id": "O0017", "parcel_id": "P47", "by": "HH14"}
+{"step": 6, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 6, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 6, "kind": "hold", "offer_id": "O0012", "parcel_id": "P17", "by": "HH16"}
+{"step": 6, "kind": "hold", "offer_id": "O0024", "parcel_id": "P17", "by": "HH16"}
+{"step": 7, "kind": "offer", "offer_id": "O0030", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 7, "kind": "offer", "offer_id": "O0031", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 7, "kind": "offer", "offer_id": "O0032", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 7, "kind": "offer", "offer_id": "O0033", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 7, "kind": "offer", "offer_id": "O0034", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 7, "kind": "offer", "offer_id": "O0035", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 7, "kind": "withdraw", "offer_id": "O0012", "parcel_id": "P17", "by": "AQ01"}
+{"step": 7, "kind": "withdraw", "offer_id": "O0013", "parcel_id": "P20", "by": "AQ01"}
+{"step": 7, "kind": "withdraw", "offer_id": "O0014", "parcel_id": "P24", "by": "AQ01"}
+{"step": 7, "kind": "withdraw", "offer_id": "O0015", "parcel_id": "P41", "by": "AQ01"}
+{"step": 7, "kind": "withdraw", "offer_id": "O0016", "parcel_id": "P44", "by": "AQ01"}
+{"step": 7, "kind": "withdraw", "offer_id": "O0017", "parcel_id": "P47", "by": "AQ01"}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "【速報】A市不動産、海外投資グループによる大規模集約の可能性浮上", "body": "【速報】A市不動産、海外投資グループによる大規模集約の可能性浮上\n\n本紙の調査により、A市内の広範な土地が、香港法人S投資控股を頂点とする海外投資グループによって集約されている可能性が浮上した。特に、海外の不動産投資・運営会社であるX社（AQ01）が、A社、B社、C社、D社といった国内法人群を通じて、A市の不動産に深く関与していることが明らかになった。X社はS投資控股の連結対象として開示されており、A市全体の不動産市場に大きな影響を与える存在となりうる。この動向は、今後のA市の開発計画や地域経済にどのような影響を与えるのか、引き続き注視していく。", "about_acquisition": true}
+{"step": 7, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 7, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0031", "parcel_id": "P20", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 7, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 7, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 7, "kind": "hold", "offer_id": "O0032", "parcel_id": "P24", "by": "HH07"}
+{"step": 7, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 7, "kind": "hold", "offer_id": "O0033", "parcel_id": "P41", "by": "HH08"}
+{"step": 7, "kind": "response_rejected", "offer_id": "O0016", "by": "HH11", "reason": "offer_not_open"}
+{"step": 7, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 7, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 7, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 7, "kind": "hold", "offer_id": "O0034", "parcel_id": "P44", "by": "HH11"}
+{"step": 7, "kind": "hold", "offer_id": "O0035", "parcel_id": "P47", "by": "HH14"}
+{"step": 7, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 7, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 7, "kind": "hold", "offer_id": "O0024", "parcel_id": "P17", "by": "HH16"}
+{"step": 7, "kind": "hold", "offer_id": "O0030", "parcel_id": "P17", "by": "HH16"}
+{"step": 8, "kind": "offer", "offer_id": "O0036", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 8, "kind": "offer", "offer_id": "O0037", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 8, "kind": "offer", "offer_id": "O0038", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 8, "kind": "offer", "offer_id": "O0039", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 8, "kind": "offer", "offer_id": "O0040", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 8, "kind": "offer", "offer_id": "O0041", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 8, "kind": "withdraw_rejected", "offer_id": "O0012", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 8, "kind": "withdraw_rejected", "offer_id": "O0013", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 8, "kind": "withdraw_rejected", "offer_id": "O0014", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 8, "kind": "withdraw_rejected", "offer_id": "O0015", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 8, "kind": "withdraw_rejected", "offer_id": "O0016", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 8, "kind": "withdraw_rejected", "offer_id": "O0017", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 8, "kind": "publication", "by": "MD02", "headline": "【速報】A市不動産、海外投資グループの影？ X社（AQ01）の関与が判明", "body": "【速報】A市不動産、海外投資グループの影？ X社（AQ01）の関与が判明\nA市の不動産登記を分析した結果、一部の広大な土地が、海外の投資会社X社（AQ01）および香港法人S投資控股と関連の深い法人によって集約されている可能性が浮上しました。これらの法人群は、A社、B社、C社、D社といった複数の国内法人を通じてA市の土地に関与している模様です。特にX社は、海外では不動産投資・運営を主軸とする企業であり、その動向はA市の不動産市場に大きな影響を与える可能性があります。今後のA市の開発や土地利用のあり方に、海外からの視点がどのように影響していくのか、注視が必要です。", "about_acquisition": true}
+{"step": 8, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 8, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0031", "parcel_id": "P20", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0037", "parcel_id": "P20", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 8, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 8, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 8, "kind": "hold", "offer_id": "O0032", "parcel_id": "P24", "by": "HH07"}
+{"step": 8, "kind": "hold", "offer_id": "O0038", "parcel_id": "P24", "by": "HH07"}
+{"step": 8, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 8, "kind": "hold", "offer_id": "O0033", "parcel_id": "P41", "by": "HH08"}
+{"step": 8, "kind": "hold", "offer_id": "O0039", "parcel_id": "P41", "by": "HH08"}
+{"step": 8, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0034", "parcel_id": "P44", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0040", "parcel_id": "P44", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0041", "parcel_id": "P47", "by": "HH14"}
+{"step": 8, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 8, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 8, "kind": "hold", "offer_id": "O0035", "parcel_id": "P47", "by": "HH14"}
+{"step": 8, "kind": "hold", "offer_id": "O0024", "parcel_id": "P17", "by": "HH16"}
+{"step": 8, "kind": "hold", "offer_id": "O0030", "parcel_id": "P17", "by": "HH16"}
+{"step": 8, "kind": "hold", "offer_id": "O0036", "parcel_id": "P17", "by": "HH16"}
+{"step": 9, "kind": "offer", "offer_id": "O0042", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 9, "kind": "offer", "offer_id": "O0043", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 9, "kind": "offer", "offer_id": "O0044", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 9, "kind": "offer", "offer_id": "O0045", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 9, "kind": "offer", "offer_id": "O0046", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 9, "kind": "offer", "offer_id": "O0047", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 9, "kind": "withdraw_rejected", "offer_id": "O0012", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 9, "kind": "withdraw_rejected", "offer_id": "O0013", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 9, "kind": "withdraw_rejected", "offer_id": "O0014", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 9, "kind": "withdraw_rejected", "offer_id": "O0015", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 9, "kind": "withdraw_rejected", "offer_id": "O0016", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 9, "kind": "withdraw_rejected", "offer_id": "O0017", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 9, "kind": "publication", "by": "MD02", "headline": "【速報】A市不動産市場に海外資本の影 X社と香港S投資控股の関連浮上", "body": "【速報】A市不動産市場に海外資本の影 X社と香港S投資控股の関連浮上\nA市を舞台にした不動産取引において、海外資本の関与が示唆されています。先月の法人記録調査により、大手不動産投資・運営会社であるX社（AQ01）および香港法人S投資控股が、市内主要な土地保有者であるR07氏の背後に存在する可能性が浮上しました。さらに、S投資控股はX社を連結対象として開示しており、A社、B社といった国内法人もS投資控股の関連会社であることが確認されています。これらの海外資本の動向は、今後のA市の不動産市場、特に地価や開発計画に大きな影響を与える可能性があります。詳細については、引き続き取材を進めてまいります。", "about_acquisition": true}
+{"step": 9, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 9, "kind": "hold", "offer_id": "O0043", "parcel_id": "P20", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0031", "parcel_id": "P20", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0037", "parcel_id": "P20", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 9, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 9, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0032", "parcel_id": "P24", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0038", "parcel_id": "P24", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0044", "parcel_id": "P24", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 9, "kind": "hold", "offer_id": "O0033", "parcel_id": "P41", "by": "HH08"}
+{"step": 9, "kind": "hold", "offer_id": "O0039", "parcel_id": "P41", "by": "HH08"}
+{"step": 9, "kind": "hold", "offer_id": "O0045", "parcel_id": "P41", "by": "HH08"}
+{"step": 9, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0034", "parcel_id": "P44", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0040", "parcel_id": "P44", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0046", "parcel_id": "P44", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 9, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 9, "kind": "hold", "offer_id": "O0035", "parcel_id": "P47", "by": "HH14"}
+{"step": 9, "kind": "hold", "offer_id": "O0041", "parcel_id": "P47", "by": "HH14"}
+{"step": 9, "kind": "hold", "offer_id": "O0047", "parcel_id": "P47", "by": "HH14"}
+{"step": 9, "kind": "hold", "offer_id": "O0024", "parcel_id": "P17", "by": "HH16"}
+{"step": 9, "kind": "hold", "offer_id": "O0030", "parcel_id": "P17", "by": "HH16"}
+{"step": 9, "kind": "hold", "offer_id": "O0036", "parcel_id": "P17", "by": "HH16"}
+{"step": 9, "kind": "hold", "offer_id": "O0042", "parcel_id": "P17", "by": "HH16"}
+{"step": 10, "kind": "offer", "offer_id": "O0048", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 10, "kind": "offer", "offer_id": "O0049", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 10, "kind": "offer", "offer_id": "O0050", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 10, "kind": "offer", "offer_id": "O0051", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 10, "kind": "offer", "offer_id": "O0052", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 10, "kind": "offer", "offer_id": "O0053", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 10, "kind": "withdraw_rejected", "offer_id": "O0012", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 10, "kind": "withdraw_rejected", "offer_id": "O0013", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 10, "kind": "withdraw_rejected", "offer_id": "O0014", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 10, "kind": "withdraw_rejected", "offer_id": "O0015", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 10, "kind": "withdraw_rejected", "offer_id": "O0016", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 10, "kind": "withdraw_rejected", "offer_id": "O0017", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 10, "kind": "publication", "by": "MD02", "headline": "X社、A市不動産市場への関与を深める", "body": "X社、A市不動産市場への関与を深める\n先月公開された法人記録から、A市で1350㎡の土地を保有するR07の背後に、海外の不動産投資・運営会社であるX社（AQ01）および香港法人S投資控股が存在することが明らかになった。S投資控股はX社を連結対象としており、A社の不動産市場において、外資系企業による大規模な投資・運営が行われている可能性が浮上した。この動きが今後のA市の不動産市場や地域経済にどのような影響を与えるか、引き続き注視していく。", "about_acquisition": true}
+{"step": 10, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 10, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0031", "parcel_id": "P20", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0037", "parcel_id": "P20", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0043", "parcel_id": "P20", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0049", "parcel_id": "P20", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 10, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 10, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0032", "parcel_id": "P24", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0038", "parcel_id": "P24", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0044", "parcel_id": "P24", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0050", "parcel_id": "P24", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 10, "kind": "hold", "offer_id": "O0033", "parcel_id": "P41", "by": "HH08"}
+{"step": 10, "kind": "hold", "offer_id": "O0039", "parcel_id": "P41", "by": "HH08"}
+{"step": 10, "kind": "hold", "offer_id": "O0045", "parcel_id": "P41", "by": "HH08"}
+{"step": 10, "kind": "hold", "offer_id": "O0051", "parcel_id": "P41", "by": "HH08"}
+{"step": 10, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0034", "parcel_id": "P44", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0040", "parcel_id": "P44", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0046", "parcel_id": "P44", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0052", "parcel_id": "P44", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0053", "parcel_id": "P47", "by": "HH14"}
+{"step": 10, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 10, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 10, "kind": "hold", "offer_id": "O0035", "parcel_id": "P47", "by": "HH14"}
+{"step": 10, "kind": "hold", "offer_id": "O0041", "parcel_id": "P47", "by": "HH14"}
+{"step": 10, "kind": "hold", "offer_id": "O0047", "parcel_id": "P47", "by": "HH14"}
+{"step": 10, "kind": "hold", "offer_id": "O0048", "parcel_id": "P17", "by": "HH16"}
+{"step": 10, "kind": "hold", "offer_id": "O0024", "parcel_id": "P17", "by": "HH16"}
+{"step": 10, "kind": "hold", "offer_id": "O0030", "parcel_id": "P17", "by": "HH16"}
+{"step": 10, "kind": "hold", "offer_id": "O0036", "parcel_id": "P17", "by": "HH16"}
+{"step": 10, "kind": "hold", "offer_id": "O0042", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "offer", "offer_id": "O0054", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 11, "kind": "offer", "offer_id": "O0055", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 11, "kind": "offer", "offer_id": "O0056", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 11, "kind": "offer", "offer_id": "O0057", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 11, "kind": "offer", "offer_id": "O0058", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 11, "kind": "offer", "offer_id": "O0059", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 11, "kind": "publication", "by": "MD02", "headline": "【速報】A市不動産市場に海外資本の影？ X社と香港法人S投資控股の関連を調査", "body": "【速報】A市不動産市場に海外資本の影？ X社と香港法人S投資控股の関連を調査\n先月、当媒体が独自に行った法人記録の調査により、A市内の不動産保有割合が高いR07（保有面積1350㎡、14.9%）の背後に、海外の不動産投資・運営会社であるX社（AQ01）および香港法人S投資控股が関与している可能性が浮上しました。X社はS投資控股の連結対象であり、A社（東京都）やB社（東京都）といった国内法人とも関連が見られます。これらの海外資本の動向は、A市の不動産市場、特に今後の開発や物件価値に大きな影響を与える可能性があります。詳細な調査を進め、続報をお伝えします。", "about_acquisition": false}
+{"step": 11, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 11, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0031", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0037", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0043", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0049", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0055", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 11, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 11, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0032", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0038", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0044", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0050", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0056", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "keep", "offer_id": "O0057", "parcel_id": "P41", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0033", "parcel_id": "P41", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0039", "parcel_id": "P41", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0045", "parcel_id": "P41", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0051", "parcel_id": "P41", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0034", "parcel_id": "P44", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0040", "parcel_id": "P44", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0046", "parcel_id": "P44", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0052", "parcel_id": "P44", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0058", "parcel_id": "P44", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0059", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0035", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0041", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0047", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0053", "parcel_id": "P47", "by": "HH14"}
+{"step": 11, "kind": "hold", "offer_id": "O0054", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "hold", "offer_id": "O0024", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "hold", "offer_id": "O0030", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "hold", "offer_id": "O0036", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "hold", "offer_id": "O0042", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "hold", "offer_id": "O0048", "parcel_id": "P17", "by": "HH16"}
+{"step": 12, "kind": "offer", "offer_id": "O0060", "parcel_id": "P17", "from_id": "AQ01", "under_name": "A社", "to": "HH16"}
+{"step": 12, "kind": "offer", "offer_id": "O0061", "parcel_id": "P20", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 12, "kind": "offer", "offer_id": "O0062", "parcel_id": "P24", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 12, "kind": "offer", "offer_id": "O0063", "parcel_id": "P41", "from_id": "AQ01", "under_name": "D社", "to": "HH08"}
+{"step": 12, "kind": "offer", "offer_id": "O0064", "parcel_id": "P44", "from_id": "AQ01", "under_name": "A社", "to": "HH11"}
+{"step": 12, "kind": "offer", "offer_id": "O0065", "parcel_id": "P47", "from_id": "AQ01", "under_name": "B社", "to": "HH14"}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0012", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0013", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0014", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0015", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0016", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "withdraw_rejected", "offer_id": "O0017", "by": "AQ01", "reason": "offer_not_open_or_not_yours"}
+{"step": 12, "kind": "publication", "by": "MD02", "headline": "A市不動産市場に海外資本の影、X社とS投資控股の関与が明らかに", "body": "A市不動産市場に海外資本の影、X社とS投資控股の関与が明らかに\n先月、公開法人記録の調査により、A市で一定の土地保有面積を持つR07の背後に、海外の不動産投資・運営会社であるX社（AQ01）および香港法人S投資控股が存在することが判明した。X社はS投資控股を連結対象として開示しており、S投資控股はA社（BZ01）の親会社でもある。この海外資本のA市不動産市場への関与は、今後の市場動向に影響を与える可能性がある。特に、R07の保有面積は市全体の約14.9%を占めており、その所有権の背景が明らかになったことは注目に値する。今後、これらの海外資本がA市の不動産市場にどのような影響を与えるか、引き続き注視していく。", "about_acquisition": true}
+{"step": 12, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 12, "kind": "public_statement", "by": "MU01", "note": "A市における土地所有状況と主要法人の動向について、これまでの調査結果を公表します。R07が依然として最大の土地所有者ですが、X社（AQ01）のような外部法人による投資の可能性も視野に入れ、今後の土地利用政策の検討を進めてまいります。特に、R03さんの土地活用については、引き続き注視していきます。"}
+{"step": 12, "kind": "hold", "offer_id": "O0061", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0055", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0025", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0031", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0037", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0043", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0049", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0018", "parcel_id": "P05", "by": "HH04"}
+{"step": 12, "kind": "hold", "offer_id": "O0021", "parcel_id": "P37", "by": "HH04"}
+{"step": 12, "kind": "hold", "offer_id": "O0026", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0032", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0038", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0044", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0050", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0056", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0062", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0027", "parcel_id": "P41", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0033", "parcel_id": "P41", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0039", "parcel_id": "P41", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0045", "parcel_id": "P41", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0051", "parcel_id": "P41", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0063", "parcel_id": "P41", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0019", "parcel_id": "P12", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0020", "parcel_id": "P28", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0028", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0034", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0040", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0046", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0052", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0058", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0064", "parcel_id": "P44", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0065", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0023", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0029", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0035", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0041", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0047", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0053", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "hold", "offer_id": "O0059", "parcel_id": "P47", "by": "HH14"}
+{"step": 12, "kind": "transfer", "offer_id": "O0024", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "A社"}
+{"step": 12, "kind": "offer_void", "offer_id": "O0030", "parcel_id": "P17", "buyer": "AQ01", "seller": "HH16", "reason": "parcel_already_transferred"}
+{"step": 12, "kind": "offer_void", "offer_id": "O0036", "parcel_id": "P17", "buyer": "AQ01", "seller": "HH16", "reason": "parcel_already_transferred"}
+{"step": 12, "kind": "offer_void", "offer_id": "O0042", "parcel_id": "P17", "buyer": "AQ01", "seller": "HH16", "reason": "parcel_already_transferred"}
+{"step": 12, "kind": "offer_void", "offer_id": "O0048", "parcel_id": "P17", "buyer": "AQ01", "seller": "HH16", "reason": "parcel_already_transferred"}
+{"step": 12, "kind": "offer_void", "offer_id": "O0054", "parcel_id": "P17", "buyer": "AQ01", "seller": "HH16", "reason": "parcel_already_transferred"}
+{"step": 12, "kind": "offer_void", "offer_id": "O0060", "parcel_id": "P17", "buyer": "AQ01", "seller": "HH16", "reason": "parcel_already_transferred"}
+{"step": 12, "kind": "response_rejected", "offer_id": "O0030", "by": "HH16", "reason": "offer_not_open"}
+{"step": 12, "kind": "response_rejected", "offer_id": "O0036", "by": "HH16", "reason": "offer_not_open"}
+{"step": 12, "kind": "response_rejected", "offer_id": "O0042", "by": "HH16", "reason": "offer_not_open"}
+{"step": 12, "kind": "response_rejected", "offer_id": "O0048", "by": "HH16", "reason": "offer_not_open"}
+{"step": 12, "kind": "response_rejected", "offer_id": "O0054", "by": "HH16", "reason": "offer_not_open"}
+{"step": 12, "kind": "response_rejected", "offer_id": "O0060", "by": "HH16", "reason": "offer_not_open"}

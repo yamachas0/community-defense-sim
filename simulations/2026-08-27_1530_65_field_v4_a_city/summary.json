@@ -1,0 +1,102 @@
+{
+  "run_name": "field_v4_a_city",
+  "steps": 12,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 94.9,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 14,
+  "truncated_responses": 0,
+  "usage": {
+    "calls": 369,
+    "input_tokens": 536891,
+    "cached_tokens": 159068,
+    "output_tokens": 104072,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:p1": {
+        "calls": 192,
+        "input": 266023,
+        "cached": 97608,
+        "output": 47459
+      },
+      "agent:business:p1": {
+        "calls": 48,
+        "input": 63766,
+        "cached": 25240,
+        "output": 15158
+      },
+      "agent:broker:p1": {
+        "calls": 24,
+        "input": 28218,
+        "cached": 0,
+        "output": 4948
+      },
+      "agent:municipality:p1": {
+        "calls": 24,
+        "input": 33661,
+        "cached": 7847,
+        "output": 6256
+      },
+      "agent:media:p1": {
+        "calls": 24,
+        "input": 32417,
+        "cached": 9820,
+        "output": 5134
+      },
+      "agent:acquirer:p1": {
+        "calls": 12,
+        "input": 49013,
+        "cached": 5809,
+        "output": 8278
+      },
+      "agent:household:p2": {
+        "calls": 33,
+        "input": 48561,
+        "cached": 12744,
+        "output": 8119
+      },
+      "classify": {
+        "calls": 12,
+        "input": 15232,
+        "cached": 0,
+        "output": 8720
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.1087,
+    "final_hhi": 0.0643,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.1026,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 1
+    },
+    "final_effective_control_area_share": null,
+    "late_index": {
+      "step": 3,
+      "title": "A市土地利用届出条例",
+      "share_at_enactment": 0.087,
+      "share_observable": 0.0435
+    },
+    "detection_lag": {
+      "step": 4,
+      "headline": "1000㎡超の土地売買に届出制、A市土地利用届出条例施行",
+      "share_at_first_report": 0.087,
+      "share_observable": 0.087
+    },
+    "final_acquirer_area_share": 0.0815,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

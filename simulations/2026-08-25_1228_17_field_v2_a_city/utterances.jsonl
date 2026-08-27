@@ -1,0 +1,743 @@
+{"step": 1, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 1, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 1, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 1, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 1, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 1, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 1, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 1, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 1, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 1, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 1, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 2, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 2, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 2, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 2, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 2, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 2, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 2, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 2, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 3, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 3, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 3, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 3, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 3, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 4, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 4, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 4, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 4, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 4, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 4, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 4, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 4, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 4, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 4, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 4, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 4, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 4, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 4, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 5, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 5, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 5, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 5, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 5, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 5, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 5, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 5, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 5, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 5, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 5, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 5, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 5, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 6, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 6, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 6, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 6, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 6, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 6, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 6, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 6, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 6, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 6, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 6, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 6, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 7, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 7, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 7, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 7, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 7, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 7, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 7, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 7, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 7, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 7, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 8, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 8, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 8, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 8, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 8, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 8, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 8, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 8, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 8, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 8, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 8, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 8, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 8, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 8, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 8, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 9, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 9, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 9, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 9, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 9, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 9, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 9, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 9, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 9, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 9, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 9, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 9, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 9, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 10, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 10, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 10, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 10, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 10, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 10, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 10, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 10, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 10, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 10, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 10, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 10, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 10, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 10, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 10, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 10, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 10, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 11, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 11, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 11, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 11, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 11, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 11, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 11, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 11, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 11, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 11, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 11, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 12, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 12, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 12, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 12, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 12, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 12, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 13, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 13, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 13, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 13, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 13, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 13, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 13, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 13, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 13, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 13, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 13, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 13, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 14, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 14, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 14, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 14, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 14, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 14, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 14, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 14, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 14, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 14, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 14, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 15, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 15, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 15, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 15, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 15, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 15, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 15, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 15, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 15, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 15, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 15, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 16, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 16, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 16, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 16, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 16, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 16, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 16, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 16, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 17, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 17, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 17, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 17, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 17, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 17, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 17, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 17, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 17, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 17, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 17, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 17, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 17, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 18, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 18, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 18, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 18, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 18, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 18, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 18, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 18, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 18, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 18, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 18, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 18, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 18, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 18, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 19, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 19, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 19, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 19, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 19, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 19, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 19, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 19, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 20, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 20, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 20, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 20, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 20, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 20, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 20, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 20, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 20, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 21, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 21, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 21, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 21, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 21, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 21, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 21, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 21, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 21, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 21, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 21, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 21, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 21, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 21, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 21, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 21, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 22, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 22, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 22, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 22, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 22, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 22, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 22, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 22, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 22, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 22, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 22, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 22, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 23, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 23, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 23, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 23, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 23, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 23, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 23, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 23, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 23, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 23, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 23, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 23, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 24, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 24, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 24, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 24, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 24, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 24, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 24, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 24, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 24, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 24, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 25, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 25, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 25, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 25, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 25, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 25, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 25, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 25, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 25, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 25, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 26, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 26, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 26, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 26, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 26, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 26, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 26, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 26, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 26, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 26, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 26, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 26, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 27, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 27, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 27, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 27, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 27, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 27, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 27, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 27, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 27, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 28, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 28, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 28, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 28, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 28, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 28, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 28, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 28, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 28, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 28, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 28, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 28, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 28, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 29, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 29, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 29, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 29, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 29, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 29, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 29, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 29, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 29, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 29, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 29, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 29, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 29, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 30, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 30, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 30, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 30, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 30, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 30, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 30, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 30, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 30, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 30, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 30, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 30, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 31, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 31, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 31, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 31, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 31, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 31, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 31, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 31, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 31, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 31, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 32, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 32, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 32, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 32, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 32, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 32, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 32, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 32, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 33, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 33, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 33, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 33, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 33, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 33, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 33, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 33, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 33, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 34, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 34, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 34, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 34, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 34, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 34, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 34, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 34, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 34, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 34, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 34, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 35, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 35, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 35, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 35, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 35, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 35, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 36, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 36, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 36, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 36, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 36, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 36, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 36, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 36, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 36, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 36, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 36, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 36, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 36, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 36, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 37, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 37, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 37, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 37, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 37, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 37, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 37, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 37, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 37, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 37, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 37, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 37, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 37, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 37, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 37, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 37, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 38, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 38, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 38, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 38, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 38, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 38, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 38, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 38, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 38, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 38, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 38, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 39, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 39, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 39, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 39, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 39, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 39, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 39, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 39, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 39, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 39, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 39, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 39, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 40, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 40, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 40, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 40, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 40, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 40, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 40, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 40, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 40, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 40, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 40, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 40, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 40, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 40, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 41, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 41, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 41, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 41, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 41, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 41, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 41, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 41, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 41, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 42, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 42, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 42, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 42, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 42, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 42, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 42, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 42, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 42, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 42, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 42, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 43, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 43, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 43, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 43, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 43, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 43, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 43, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 43, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 43, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 43, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 43, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 43, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 43, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 43, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 43, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 43, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 44, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 44, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 44, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 44, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 44, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 44, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 44, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 44, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 44, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 44, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 44, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 44, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 44, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 44, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 44, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 45, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 45, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 45, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 45, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 45, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 45, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 45, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 45, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 45, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 45, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 45, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 45, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 45, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 45, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 45, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 45, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 46, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 46, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 46, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 46, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 46, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 46, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 46, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 46, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 46, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 46, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 46, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 46, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 46, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 47, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 47, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 47, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 47, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 47, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 47, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 47, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 47, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 47, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 47, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 47, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 47, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 47, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 47, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 48, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 48, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 48, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 48, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 48, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 48, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 48, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 48, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 48, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 49, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 49, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 49, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 49, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 49, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 49, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 49, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 49, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 49, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 49, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 49, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 49, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 49, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 50, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 50, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 50, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 50, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 50, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 50, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 50, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 50, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 50, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 50, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 50, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 50, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 50, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 50, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 50, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 51, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 51, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 51, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 51, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 51, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 51, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 51, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 51, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 51, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 51, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 51, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 51, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 51, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 51, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 51, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 51, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 52, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 52, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 52, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 52, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 52, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 52, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 52, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 53, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 53, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": false}
+{"step": 53, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 53, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 53, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 53, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 53, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 53, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 53, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 53, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 53, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 53, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 53, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 53, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 53, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 53, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 53, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 53, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 54, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 54, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 54, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 54, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 54, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 54, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 54, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 54, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 54, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 54, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 54, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 55, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 55, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 55, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 55, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 55, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 55, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 55, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 55, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 55, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 55, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 55, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 55, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 56, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 56, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 56, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 56, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 56, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 56, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 56, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 56, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 56, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 56, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 56, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 57, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 57, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 57, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 57, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 57, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 57, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 57, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 57, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 57, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 57, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 58, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 58, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 58, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 58, "from": "HH07", "role": "household", "name": "後藤 修", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 58, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 58, "from": "HH11", "role": "household", "name": "秋吉 隆", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 58, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 58, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 58, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 58, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 59, "from": "BZ01", "role": "business", "name": "温泉旅館「海月荘」女将・堤", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": false}
+{"step": 59, "from": "BZ02", "role": "business", "name": "駅前食堂「とよ常」店主・浜田", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": true}
+{"step": 59, "from": "BZ03", "role": "business", "name": "共同浴場前「山の手商店」安東", "text": "家賃の話が来た。正直しんどい。", "frame": "our_town", "about_acquisition": false}
+{"step": 59, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "their_town", "about_acquisition": true}
+{"step": 59, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 59, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 59, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 59, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 59, "from": "HH12", "role": "household", "name": "野上 由美子", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 59, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 60, "from": "BZ04", "role": "business", "name": "コワーキング「湾ラボ」代表・永井", "text": "家賃の話が来た。正直しんどい。", "frame": "neutral", "about_acquisition": true}
+{"step": 60, "from": "HH01", "role": "household", "name": "湯浅 正一", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 60, "from": "HH02", "role": "household", "name": "安部 理恵", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 60, "from": "HH03", "role": "household", "name": "河野 達也", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}
+{"step": 60, "from": "HH04", "role": "household", "name": "工藤 千鶴", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 60, "from": "HH05", "role": "household", "name": "甲斐 俊介", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": true}
+{"step": 60, "from": "HH06", "role": "household", "name": "衛藤 佳奈", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 60, "from": "HH08", "role": "household", "name": "松本 沙耶", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 60, "from": "HH09", "role": "household", "name": "姫野 和夫", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 60, "from": "HH10", "role": "household", "name": "吉良 美穂", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "our_town", "about_acquisition": false}
+{"step": 60, "from": "HH13", "role": "household", "name": "首藤 航", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": false}
+{"step": 60, "from": "HH14", "role": "household", "name": "麻生 真弓", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": false}
+{"step": 60, "from": "HH15", "role": "household", "name": "佐藤 宏明", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "neutral", "about_acquisition": true}
+{"step": 60, "from": "HH16", "role": "household", "name": "小野 百合", "text": "近所の家がまた売れたらしい。この街、どうなるんだろう。", "frame": "their_town", "about_acquisition": true}

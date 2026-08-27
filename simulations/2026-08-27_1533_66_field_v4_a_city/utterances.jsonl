@@ -1,0 +1,16 @@
+{"step": 1, "from": "HH16", "role": "household", "name": "R16", "location": "V02", "text": "自治会の会計、そろそろ来年度の予算案を考えないといけない時期ですね。", "frame": "our_town", "about_acquisition": false}
+{"step": 2, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "来月も同じメニューで頑張ります。", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "来月は仕入れを少し抑えて、様子を見ようかな。", "frame": "neutral", "about_acquisition": false}
+{"step": 3, "from": "HH11", "role": "household", "name": "R11", "location": "OFFICE:HH11", "text": "P44区画の買付、まだ返事してないんだけど、どうしようかな。旅館の仕事も子どものことも考えると、すぐには売れないんだよな。", "frame": "our_town", "about_acquisition": true}
+{"step": 5, "from": "BZ01", "role": "business", "name": "T01", "location": "V05", "text": "皆さん、こんにちは。今月も旅館組合の会議に来ました。最近の観光客の動向や、仕入れの状況について情報交換できればと思っています。", "frame": "our_town", "about_acquisition": false}
+{"step": 5, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "会員の皆様、アンケートへのご協力ありがとうございます。皆様からいただいた貴重なご意見を元に、より良い施設づくりに努めてまいります。特に設備面でのご要望については、来月以降のイベント企画や改善に反映できるよう検討いたします。", "frame": "our_town", "about_acquisition": false}
+{"step": 6, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "来月の仕入れについて、魚介類の業者さんと価格交渉をしないといけないな。去年の今頃はもっと安定していた気がするんだけど。", "frame": "our_town", "about_acquisition": false}
+{"step": 6, "from": "HH04", "role": "household", "name": "R04", "location": "V03", "text": "共同浴場のお湯の出が悪くなってきた気がする。そろそろ屋根の修理も考えないとね。", "frame": "our_town", "about_acquisition": false}
+{"step": 6, "from": "HH12", "role": "household", "name": "R12", "location": "HOME:HH12", "text": "今年の夏は例年より暑くなりそうだね。店舗のエアコン、ちゃんと効くかしら。", "frame": "neutral", "about_acquisition": false}
+{"step": 7, "from": "BZ01", "role": "business", "name": "T01", "location": "V05", "text": "皆様、今月も旅館組合の会議にお集まりいただきありがとうございます。さて、来月の仕入れについてですが、特に魚介類の安定供給に向けて、業者との価格交渉をT02さんから提案されております。皆様のご意見をお聞かせいただけますでしょうか。", "frame": "our_town", "about_acquisition": false}
+{"step": 8, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "共同浴場の修繕費、そろそろ具体的に考えないといけない時期かしらね。", "frame": "our_town", "about_acquisition": false}
+{"step": 9, "from": "BZ02", "role": "business", "name": "T02", "location": "HOME:BZ02", "text": "今月施行される土地取引届出制度条例について、1000㎡超の取得には3か月の遅延が生じるという情報が気になっています。今後の不動産取引にどのような影響があるか、少し注視していきたいです。", "frame": "neutral", "about_acquisition": true}
+{"step": 9, "from": "HH04", "role": "household", "name": "R04", "location": "HOME:HH04", "text": "共同浴場の掃除は、もう私が一人でやるには少し大変になってきたな。誰か手伝ってくれる人がいるといいのだが。", "frame": "our_town", "about_acquisition": false}
+{"step": 10, "from": "HH05", "role": "household", "name": "R05", "location": "HOME:HH05", "text": "今年の不動産取引は、新しい条例の影響で成立まで時間がかかるかもしれない。特に大きな取引は注意が必要だな。", "frame": "neutral", "about_acquisition": true}
+{"step": 12, "from": "BZ02", "role": "business", "name": "T02", "location": "HOME:BZ02", "text": "新しい条例の施行で、大きな土地の取引が遅れるのは困るな。特にうちみたいに賃借の店は、移転や拡大の計画が立てにくくなる。", "frame": "our_town", "about_acquisition": true}
+{"step": 12, "from": "HH11", "role": "household", "name": "R11", "location": "HOME:HH11", "text": "また新しい条例が施行されたようだな。1000㎡超の土地取引は成立まで3ヶ月遅れるのか。旅館の経営も楽じゃないのに、さらに面倒なことになったな。", "frame": "their_town", "about_acquisition": true}

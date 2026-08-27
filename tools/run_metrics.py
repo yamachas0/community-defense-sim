@@ -121,6 +121,16 @@ def metrics_v41(run_dir: str) -> Dict[str, Any]:
                                   for w in ("名義", "買い", "取得", "外資", "X社",
                                             "まとめて", "手放"))})
 
+    # --- 既に世界にあった相談経路（direct 私信）の量 ---
+    #     v4.1b の「専用の相談プロトコル」と比べるための基準値。
+    roles = {e["agent_id"]: e.get("role", "") for e in events}
+    owner_to_broker = [d for d in deliveries if d.get("kind") == "direct"
+                       and roles.get(d.get("from", "")) in ("household", "business")
+                       and roles.get(d.get("to", "")) == "broker"]
+    broker_to_owner = [d for d in deliveries if d.get("kind") == "direct"
+                       and roles.get(d.get("from", "")) == "broker"
+                       and roles.get(d.get("to", "")) in ("household", "business")]
+
     # --- 名義の分散（面積シェアのハーフィンダール指数）---
     name_area = collections.Counter()
     for r in valid_transfers:
@@ -207,6 +217,9 @@ def metrics_v41(run_dir: str) -> Dict[str, Any]:
             transition_steps[len(transition_steps) // 2] if transition_steps else None),
         "first_rumor_step": rumor_steps[0] if rumor_steps else None,
         "under_name_area_hhi": name_hhi,
+        "owner_to_broker_direct": len(owner_to_broker),
+        "broker_to_owner_direct": len(broker_to_owner),
+        "owners_using_direct_to_broker": len({d.get("from") for d in owner_to_broker}),
     }
 
 
@@ -224,6 +237,16 @@ def metrics_v41b(run_dir: str) -> Dict[str, Any]:
         r.get("reason", "") for r in ledger if r.get("kind") == "consult_rejected")
     advice_rejects = collections.Counter(
         r.get("reason", "") for r in ledger if r.get("kind") == "advice_rejected")
+    # 台帳に載らない不成立（相手が空・非object・月次上限超過など）は events 側にある。
+    for e in events:
+        for op in e.get("operations", []) or []:
+            outcome = op.get("outcome", {}) or {}
+            if str(outcome.get("kind", "")) != "invalid_action":
+                continue
+            if op.get("action_type") == "consult":
+                consult_rejects[str(outcome.get("reason", ""))] += 1
+            elif op.get("action_type") == "advise":
+                advice_rejects[str(outcome.get("reason", ""))] += 1
     consult_step = {r.get("consult_id"): r.get("step") for r in consults}
     answered_ids = [r.get("consult_id") for r in advices]
     latency = [int(r.get("step", 0)) - int(consult_step.get(r.get("consult_id"), 0))
@@ -239,19 +262,25 @@ def metrics_v41b(run_dir: str) -> Dict[str, Any]:
         if who and (who not in advice_delivered or step < advice_delivered[who]):
             advice_delivered[who] = step
 
-    # 相談してから決めた所有者（回答が届いた翌月以降に sell / keep を選んだ人）
+    # 助言を読めるのは届いた翌月から。読了前後で owner-month の判断を分けて数える。
+    advice_read_step = {who: step + 1 for who, step in advice_delivered.items()}
     decided_after_advice: Dict[str, List[str]] = {}
+    before = collections.Counter()
+    after = collections.Counter()
     for e in sorted(events, key=lambda x: (x.get("step", 0), x.get("agent_id", ""))):
         if e.get("action_type") != "responses":
             continue
         who = e.get("agent_id", "")
-        first = advice_delivered.get(who)
-        if first is None or int(e.get("step", 0)) <= first:
-            continue
+        read = advice_read_step.get(who)
+        readable = read is not None and int(e.get("step", 0)) >= read
         for op in e.get("operations", []) or []:
-            if op.get("action_type") in ("sell", "keep"):
+            decision = op.get("action_type", "")
+            if decision not in ("sell", "keep", "hold"):
+                continue
+            (after if readable else before)[decision] += 1
+            if readable and decision in ("sell", "keep"):
                 decided_after_advice.setdefault(who, []).append(
-                    f"M{e.get('step')}:{op.get('action_type')}")
+                    f"M{e.get('step')}:{decision}")
 
     # 相談の語が所有者の内心に出た回数（v4.1 の 58/70/60 と直接比べるため）
     thoughts_all = _read_jsonl(os.path.join(run_dir, "thoughts_all.jsonl"))
@@ -283,8 +312,14 @@ def metrics_v41b(run_dir: str) -> Dict[str, Any]:
         "answer_latency_steps": sorted(latency),
         "advices_delivered": sum(1 for d in deliveries if d.get("kind") == "advice"),
         "owners_who_received_advice": len(advice_delivered),
-        "decisions_after_advice": decided_after_advice,
-        "owners_deciding_after_advice": len(decided_after_advice),
+        "terminal_decisions_after_first_advice_read": decided_after_advice,
+        "owners_deciding_after_advice_read": len(decided_after_advice),
+        "owner_month_decisions_before_advice_read": dict(before),
+        "owner_month_decisions_after_advice_read": dict(after),
+        "unanswered_consults_at_end": len(consults) - len(set(answered_ids)),
+        "advices_unread_at_end": sum(
+            1 for d in deliveries if d.get("kind") == "advice"
+            and int(d.get("step", 0)) >= int(base.get("steps") or 0)),
         "broker_mentions_in_owner_thoughts": consult_word,
         "max_parcel_area_sqm": max_area,
         "ordinance_thresholds_vs_max_parcel": [

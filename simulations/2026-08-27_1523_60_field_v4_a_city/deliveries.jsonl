@@ -1,0 +1,601 @@
+{"step": 1, "to": "MU01", "from": "AQ01", "obs_id": "MSG-M01-AQ01-MU01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "MU02", "from": "HH01", "obs_id": "MSG-M01-HH01-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH16", "from": "HH07", "obs_id": "MSG-M01-HH07-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "MD01", "from": "HH09", "obs_id": "MSG-M01-HH09-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "BZ04", "from": "HH13", "obs_id": "MSG-M01-HH13-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH06", "from": "BZ01", "obs_id": "TALK-V05-M01-BZ01", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH10", "from": "BZ01", "obs_id": "TALK-V05-M01-BZ01", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH04", "from": "BZ03", "obs_id": "TALK-V08-M01-BZ03", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH08", "from": "BZ03", "obs_id": "TALK-V08-M01-BZ03", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH12", "from": "BZ03", "obs_id": "TALK-V08-M01-BZ03", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH14", "from": "BZ03", "obs_id": "TALK-V08-M01-BZ03", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "BZ03", "from": "HH08", "obs_id": "TALK-V08-M01-HH08", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH04", "from": "HH08", "obs_id": "TALK-V08-M01-HH08", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH12", "from": "HH08", "obs_id": "TALK-V08-M01-HH08", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH14", "from": "HH08", "obs_id": "TALK-V08-M01-HH08", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "BZ03", "from": "HH14", "obs_id": "TALK-V08-M01-HH14", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH04", "from": "HH14", "obs_id": "TALK-V08-M01-HH14", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH08", "from": "HH14", "obs_id": "TALK-V08-M01-HH14", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH12", "from": "HH14", "obs_id": "TALK-V08-M01-HH14", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH02", "from": "HH15", "obs_id": "TALK-V01-M01-HH15", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH03", "from": "HH15", "obs_id": "TALK-V01-M01-HH15", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 1, "to": "HH13", "from": "HH15", "obs_id": "TALK-V01-M01-HH15", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR01", "from": "BZ01", "obs_id": "MSG-M02-BZ01-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR01", "from": "BZ03", "obs_id": "MSG-M02-BZ03-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MU02", "from": "HH01", "obs_id": "MSG-M02-HH01-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR01", "from": "HH04", "obs_id": "MSG-M02-HH04-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BZ04", "from": "HH06", "obs_id": "MSG-M02-HH06-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "AQ01", "from": "HH08", "obs_id": "MSG-M02-HH08-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH16", "from": "HH09", "obs_id": "MSG-M02-HH09-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MD01", "from": "HH11", "obs_id": "MSG-M02-HH11-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR01", "from": "HH12", "obs_id": "MSG-M02-HH12-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MD01", "from": "HH14", "obs_id": "MSG-M02-HH14-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BZ01", "from": "HH15", "obs_id": "MSG-M02-HH15-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH01", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH02", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH03", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH04", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH05", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH06", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH07", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH08", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH09", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH10", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH11", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH12", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH13", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH14", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH15", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "HH16", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BZ01", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BZ02", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BZ03", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BZ04", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BR01", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BR02", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "AQ01", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "MU02", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "MD01", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "MD02", "from": "MU01", "obs_id": "GOV-MU01-M02", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 2, "to": "BR01", "from": "MU01", "obs_id": "MSG-M02-MU01-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH01", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH02", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH03", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH04", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH05", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH06", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH07", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH08", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH09", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH10", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH11", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH12", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH13", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH14", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH15", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "HH16", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "BZ01", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "BZ02", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "BZ03", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "BZ04", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "BR01", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "BR02", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "AQ01", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "MU01", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "MD01", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "MD02", "from": "MU02", "obs_id": "ORD-MU02-M02", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件300㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第3月）"}
+{"step": 2, "to": "MU02", "from": "MU02", "obs_id": "MSG-M02-MU02-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR02", "from": "BR01", "obs_id": "TALK-V08-M02-BR01", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BZ03", "from": "BR01", "obs_id": "TALK-V08-M02-BR01", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH09", "from": "BR01", "obs_id": "TALK-V08-M02-BR01", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH16", "from": "BR01", "obs_id": "TALK-V08-M02-BR01", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR01", "from": "BR02", "obs_id": "TALK-V08-M02-BR02", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BZ03", "from": "BR02", "obs_id": "TALK-V08-M02-BR02", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH09", "from": "BR02", "obs_id": "TALK-V08-M02-BR02", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH16", "from": "BR02", "obs_id": "TALK-V08-M02-BR02", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH03", "from": "HH02", "obs_id": "TALK-V04-M02-HH02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH07", "from": "HH02", "obs_id": "TALK-V04-M02-HH02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MD01", "from": "HH02", "obs_id": "TALK-V04-M02-HH02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH02", "from": "HH03", "obs_id": "TALK-V04-M02-HH03", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH07", "from": "HH03", "obs_id": "TALK-V04-M02-HH03", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MD01", "from": "HH03", "obs_id": "TALK-V04-M02-HH03", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BZ04", "from": "HH13", "obs_id": "TALK-V07-M02-HH13", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH14", "from": "HH13", "obs_id": "TALK-V07-M02-HH13", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MU01", "from": "HH13", "obs_id": "TALK-V07-M02-HH13", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR01", "from": "HH16", "obs_id": "TALK-V08-M02-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BR02", "from": "HH16", "obs_id": "TALK-V08-M02-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "BZ03", "from": "HH16", "obs_id": "TALK-V08-M02-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH09", "from": "HH16", "obs_id": "TALK-V08-M02-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH02", "from": "MD01", "obs_id": "TALK-V04-M02-MD01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH03", "from": "MD01", "obs_id": "TALK-V04-M02-MD01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH07", "from": "MD01", "obs_id": "TALK-V04-M02-MD01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH08", "from": "MD02", "obs_id": "TALK-V05-M02-MD02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "HH15", "from": "MD02", "obs_id": "TALK-V05-M02-MD02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 2, "to": "MU02", "from": "MD02", "obs_id": "TALK-V05-M02-MD02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "MU02", "from": "BR01", "obs_id": "MSG-M03-BR01-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "BR02", "from": "HH01", "obs_id": "MSG-M03-HH01-BR02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "MU01", "from": "HH05", "obs_id": "MSG-M03-HH05-MU01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "BR02", "from": "HH06", "obs_id": "MSG-M03-HH06-BR02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "MU01", "from": "HH10", "obs_id": "MSG-M03-HH10-MU01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "BR02", "from": "HH13", "obs_id": "MSG-M03-HH13-BR02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH01", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH02", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH03", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH04", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH05", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH06", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH07", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH08", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH09", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH10", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH11", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH12", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH13", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH14", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH15", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH16", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "BZ01", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "BZ02", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "BZ03", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "BZ04", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "BR01", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "BR02", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "AQ01", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "MU02", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "MD01", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "MD02", "from": "MU01", "obs_id": "GOV-MU01-M03", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 3, "to": "HH01", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH02", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH03", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH04", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH05", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH06", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH07", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH08", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH09", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH10", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH11", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH12", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH13", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH14", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH15", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH16", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ01", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ02", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ03", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ04", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BR01", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BR02", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "AQ01", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "MU02", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "MD01", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "MD02", "from": "MU01", "obs_id": "ORD-MU01-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH01", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH02", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH03", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH04", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH05", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH06", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH07", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH08", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH09", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH10", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH11", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH12", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH13", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH14", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH15", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "HH16", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ01", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ02", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ03", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ04", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BR01", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BR02", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "AQ01", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "MU01", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "MD01", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "MD02", "from": "MU02", "obs_id": "ORD-MU02-M03", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:3か月 / 施行:第4月）"}
+{"step": 3, "to": "BZ04", "from": "MU02", "obs_id": "MSG-M03-MU02-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH01", "from": "HH02", "obs_id": "TALK-V01-M03-HH02", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH03", "from": "HH02", "obs_id": "TALK-V01-M03-HH02", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH01", "from": "HH03", "obs_id": "TALK-V01-M03-HH03", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH02", "from": "HH03", "obs_id": "TALK-V01-M03-HH03", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "AQ01", "from": "HH11", "obs_id": "TALK-V03-M03-HH11", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH16", "from": "HH11", "obs_id": "TALK-V03-M03-HH11", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "AQ01", "from": "HH16", "obs_id": "TALK-V03-M03-HH16", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH11", "from": "HH16", "obs_id": "TALK-V03-M03-HH16", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH06", "from": "MD01", "obs_id": "TALK-V07-M03-MD01", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH10", "from": "MD01", "obs_id": "TALK-V07-M03-MD01", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "BZ01", "from": "MD02", "obs_id": "TALK-V04-M03-MD02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "BZ02", "from": "MD02", "obs_id": "TALK-V04-M03-MD02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "BZ03", "from": "MD02", "obs_id": "TALK-V04-M03-MD02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH04", "from": "MD02", "obs_id": "TALK-V04-M03-MD02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "HH12", "from": "MD02", "obs_id": "TALK-V04-M03-MD02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 3, "to": "MU02", "from": "MD02", "obs_id": "TALK-V04-M03-MD02", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "BZ04", "from": "HH06", "obs_id": "MSG-M04-HH06-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH16", "from": "HH07", "obs_id": "MSG-M04-HH07-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "MD02", "from": "HH09", "obs_id": "MSG-M04-HH09-MD02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "MU02", "from": "HH11", "obs_id": "MSG-M04-HH11-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH01", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH02", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH03", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH04", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH05", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH06", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH07", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH08", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH09", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH10", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH11", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH12", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH13", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH14", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH15", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "HH16", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BZ01", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BZ02", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BZ03", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BZ04", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BR01", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BR02", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "AQ01", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "MU02", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "MD01", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "MD02", "from": "MU01", "obs_id": "GOV-MU01-M04", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 4, "to": "BR02", "from": "HH02", "obs_id": "TALK-V01-M04-HH02", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH03", "from": "HH02", "obs_id": "TALK-V01-M04-HH02", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH07", "from": "HH02", "obs_id": "TALK-V01-M04-HH02", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "BR02", "from": "HH03", "obs_id": "TALK-V01-M04-HH03", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH02", "from": "HH03", "obs_id": "TALK-V01-M04-HH03", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH07", "from": "HH03", "obs_id": "TALK-V01-M04-HH03", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "BZ03", "from": "HH10", "obs_id": "TALK-V07-M04-HH10", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH05", "from": "HH10", "obs_id": "TALK-V07-M04-HH10", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "BR01", "from": "HH13", "obs_id": "TALK-V05-M04-HH13", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH09", "from": "HH13", "obs_id": "TALK-V05-M04-HH13", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH15", "from": "HH13", "obs_id": "TALK-V05-M04-HH13", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "MD01", "from": "HH14", "obs_id": "TALK-V06-M04-HH14", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 4, "to": "HH14", "from": "MD01", "obs_id": "TALK-V06-M04-MD01", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "BR02", "from": "BZ02", "obs_id": "MSG-M05-BZ02-BR02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "HH16", "from": "BZ03", "obs_id": "MSG-M05-BZ03-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "MD02", "from": "HH04", "obs_id": "MSG-M05-HH04-MD02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "BR02", "from": "HH06", "obs_id": "MSG-M05-HH06-BR02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "HH02", "from": "HH07", "obs_id": "MSG-M05-HH07-HH02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "MD01", "from": "HH13", "obs_id": "MSG-M05-HH13-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "BZ04", "from": "HH15", "obs_id": "MSG-M05-HH15-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "HH01", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH02", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH03", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH04", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH05", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH06", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH07", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH08", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH09", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH10", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH11", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH12", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH13", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH14", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH15", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "HH16", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "BZ01", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "BZ02", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "BZ03", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "BZ04", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "BR01", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "BR02", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "AQ01", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "MU02", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "MD01", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "MD02", "from": "MU01", "obs_id": "GOV-MU01-M05", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 5, "to": "AQ01", "from": "MU02", "obs_id": "MSG-M05-MU02-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "BZ01", "from": "HH14", "obs_id": "TALK-V04-M05-HH14", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "BZ02", "from": "HH14", "obs_id": "TALK-V04-M05-HH14", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "HH11", "from": "HH14", "obs_id": "TALK-V04-M05-HH14", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "AQ01", "from": "HH16", "obs_id": "TALK-V08-M05-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "BZ04", "from": "HH16", "obs_id": "TALK-V08-M05-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "HH05", "from": "HH16", "obs_id": "TALK-V08-M05-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 5, "to": "HH08", "from": "HH16", "obs_id": "TALK-V08-M05-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "HH06", "from": "BR02", "obs_id": "MSG-M06-BR02-HH06", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "HH16", "from": "BZ01", "obs_id": "MSG-M06-BZ01-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "MU01", "from": "BZ03", "obs_id": "MSG-M06-BZ03-MU01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "MD01", "from": "HH01", "obs_id": "MSG-M06-HH01-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "BZ04", "from": "HH02", "obs_id": "MSG-M06-HH02-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "AQ01", "from": "HH04", "obs_id": "MSG-M06-HH04-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "AQ01", "from": "HH11", "obs_id": "MSG-M06-HH11-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "AQ01", "from": "HH12", "obs_id": "MSG-M06-HH12-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "MU02", "from": "HH13", "obs_id": "MSG-M06-HH13-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "BZ04", "from": "HH14", "obs_id": "MSG-M06-HH14-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "AQ01", "from": "HH16", "obs_id": "MSG-M06-HH16-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "HH01", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "HH02", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "HH05", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "HH07", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "HH09", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "HH15", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "BZ01", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "BZ02", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "BR01", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "BR02", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "MU01", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "MU02", "from": "MD01", "obs_id": "NEWS-MD01-M06", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 6, "to": "MU01", "from": "MU02", "obs_id": "MSG-M06-MU02-MU01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "HH01", "from": "HH09", "obs_id": "TALK-V06-M06-HH09", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "HH02", "from": "HH09", "obs_id": "TALK-V06-M06-HH09", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 6, "to": "MU01", "from": "HH09", "obs_id": "TALK-V06-M06-HH09", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "MD01", "from": "BR01", "obs_id": "MSG-M07-BR01-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "BZ01", "from": "HH05", "obs_id": "MSG-M07-HH05-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "BR01", "from": "HH16", "obs_id": "MSG-M07-HH16-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH01", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "HH02", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "HH05", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "HH07", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "HH09", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "HH15", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "BZ01", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "BZ02", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "BR01", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "BR02", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "MU01", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "MU02", "from": "MD01", "obs_id": "NEWS-MD01-M07", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 7, "to": "BZ02", "from": "HH01", "obs_id": "TALK-V05-M07-HH01", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH02", "from": "HH01", "obs_id": "TALK-V05-M07-HH01", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH08", "from": "HH01", "obs_id": "TALK-V05-M07-HH01", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "BZ02", "from": "HH02", "obs_id": "TALK-V05-M07-HH02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH01", "from": "HH02", "obs_id": "TALK-V05-M07-HH02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH08", "from": "HH02", "obs_id": "TALK-V05-M07-HH02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH11", "from": "HH06", "obs_id": "TALK-V03-M07-HH06", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "BZ02", "from": "HH08", "obs_id": "TALK-V05-M07-HH08", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH01", "from": "HH08", "obs_id": "TALK-V05-M07-HH08", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH02", "from": "HH08", "obs_id": "TALK-V05-M07-HH08", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "BR01", "from": "HH09", "obs_id": "TALK-V01-M07-HH09", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "BR02", "from": "HH09", "obs_id": "TALK-V01-M07-HH09", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH15", "from": "HH09", "obs_id": "TALK-V01-M07-HH09", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 7, "to": "HH06", "from": "HH11", "obs_id": "TALK-V03-M07-HH11", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "AQ01", "from": "BR01", "obs_id": "MSG-M08-BR01-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH01", "from": "BR02", "obs_id": "MSG-M08-BR02-HH01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH01", "from": "BZ02", "obs_id": "MSG-M08-BZ02-HH01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "MD02", "from": "BZ03", "obs_id": "MSG-M08-BZ03-MD02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "BZ01", "from": "BZ04", "obs_id": "MSG-M08-BZ04-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH16", "from": "HH03", "obs_id": "MSG-M08-HH03-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH01", "from": "HH05", "obs_id": "MSG-M08-HH05-HH01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH01", "from": "HH08", "obs_id": "MSG-M08-HH08-HH01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "BR01", "from": "HH09", "obs_id": "MSG-M08-HH09-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "BR01", "from": "HH11", "obs_id": "MSG-M08-HH11-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "MU02", "from": "MD01", "obs_id": "MSG-M08-MD01-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH08", "from": "MD02", "obs_id": "NEWS-MD02-M08", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH14", "from": "MD02", "obs_id": "NEWS-MD02-M08", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BZ02", "from": "MD02", "obs_id": "NEWS-MD02-M08", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BZ04", "from": "MD02", "obs_id": "NEWS-MD02-M08", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BR02", "from": "MD02", "obs_id": "NEWS-MD02-M08", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "MU02", "from": "MD02", "obs_id": "NEWS-MD02-M08", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH01", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH02", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH03", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH04", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH05", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH06", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH07", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH08", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH09", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH10", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH11", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH12", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH13", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH14", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH15", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH16", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BZ01", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BZ02", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BZ03", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BZ04", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BR01", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "BR02", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "AQ01", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "MU01", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "MD01", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "MD02", "from": "MU02", "obs_id": "GOV-MU02-M08", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 8, "to": "HH02", "from": "HH01", "obs_id": "TALK-V02-M08-HH01", "kind": "ambient", "location": "V02", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH03", "from": "HH01", "obs_id": "TALK-V02-M08-HH01", "kind": "ambient", "location": "V02", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH06", "from": "HH01", "obs_id": "TALK-V02-M08-HH01", "kind": "ambient", "location": "V02", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "MD02", "from": "HH01", "obs_id": "TALK-V02-M08-HH01", "kind": "ambient", "location": "V02", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "BR01", "from": "HH07", "obs_id": "TALK-V04-M08-HH07", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH04", "from": "HH07", "obs_id": "TALK-V04-M08-HH07", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH12", "from": "HH07", "obs_id": "TALK-V04-M08-HH07", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 8, "to": "HH13", "from": "HH07", "obs_id": "TALK-V04-M08-HH07", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "BR01", "from": "BZ02", "obs_id": "MSG-M09-BZ02-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "BZ01", "from": "BZ03", "obs_id": "MSG-M09-BZ03-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "BR01", "from": "BZ04", "obs_id": "MSG-M09-BZ04-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "MU02", "from": "HH04", "obs_id": "MSG-M09-HH04-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "MD01", "from": "HH05", "obs_id": "MSG-M09-HH05-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "MU02", "from": "HH12", "obs_id": "MSG-M09-HH12-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "HH08", "from": "MD02", "obs_id": "NEWS-MD02-M09", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH14", "from": "MD02", "obs_id": "NEWS-MD02-M09", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BZ02", "from": "MD02", "obs_id": "NEWS-MD02-M09", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BZ04", "from": "MD02", "obs_id": "NEWS-MD02-M09", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BR02", "from": "MD02", "obs_id": "NEWS-MD02-M09", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "MU02", "from": "MD02", "obs_id": "NEWS-MD02-M09", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH01", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH02", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH03", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH04", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH05", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH06", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH07", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH08", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH09", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH10", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH11", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH12", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH13", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH14", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH15", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH16", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BZ01", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BZ02", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BZ03", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BZ04", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BR01", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "BR02", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "AQ01", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "MU02", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "MD01", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "MD02", "from": "MU01", "obs_id": "GOV-MU01-M09", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 9, "to": "HH01", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH02", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH03", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH04", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH05", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH06", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH07", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH08", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH09", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH10", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH11", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH12", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH13", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH14", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH15", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH16", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "BZ01", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "BZ02", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "BZ03", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "BZ04", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "BR01", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "BR02", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "AQ01", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "MU02", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "MD01", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "MD02", "from": "MU01", "obs_id": "ORD-MU01-M09", "kind": "ordinance", "location": "", "text": "【条例施行の告示】土地取得届出条例（mock）：一定規模以上の取得に事前届出を求める。（対象:1件200㎡超の取得 / 届出による成立の遅延:2か月 / 施行:第10月）"}
+{"step": 9, "to": "HH13", "from": "HH15", "obs_id": "TALK-V01-M09-HH15", "kind": "ambient", "location": "V01", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "BZ02", "from": "MD02", "obs_id": "TALK-V05-M09-MD02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "BZ04", "from": "MD02", "obs_id": "TALK-V05-M09-MD02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "HH10", "from": "MD02", "obs_id": "TALK-V05-M09-MD02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "HH04", "from": "MU01", "obs_id": "TALK-V04-M09-MU01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "HH05", "from": "MU01", "obs_id": "TALK-V04-M09-MU01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "HH12", "from": "MU01", "obs_id": "TALK-V04-M09-MU01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 9, "to": "HH14", "from": "MU01", "obs_id": "TALK-V04-M09-MU01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BR01", "from": "HH07", "obs_id": "MSG-M10-HH07-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "AQ01", "from": "HH09", "obs_id": "MSG-M10-HH09-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "MD01", "from": "HH11", "obs_id": "MSG-M10-HH11-MD01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ01", "from": "HH14", "obs_id": "MSG-M10-HH14-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BR01", "from": "HH15", "obs_id": "MSG-M10-HH15-BR01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH08", "from": "MD02", "obs_id": "NEWS-MD02-M10", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 10, "to": "HH14", "from": "MD02", "obs_id": "NEWS-MD02-M10", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 10, "to": "BZ02", "from": "MD02", "obs_id": "NEWS-MD02-M10", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 10, "to": "BZ04", "from": "MD02", "obs_id": "NEWS-MD02-M10", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 10, "to": "BR02", "from": "MD02", "obs_id": "NEWS-MD02-M10", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 10, "to": "MU02", "from": "MD02", "obs_id": "NEWS-MD02-M10", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 10, "to": "MD02", "from": "MD02", "obs_id": "MSG-M10-MD02-MD02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ04", "from": "MU01", "obs_id": "MSG-M10-MU01-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ02", "from": "BR02", "obs_id": "TALK-V05-M10-BR02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH12", "from": "BR02", "obs_id": "TALK-V05-M10-BR02", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ01", "from": "BZ04", "obs_id": "TALK-V07-M10-BZ04", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH08", "from": "BZ04", "obs_id": "TALK-V07-M10-BZ04", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "MU01", "from": "BZ04", "obs_id": "TALK-V07-M10-BZ04", "kind": "ambient", "location": "V07", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ03", "from": "HH01", "obs_id": "TALK-V03-M10-HH01", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH06", "from": "HH01", "obs_id": "TALK-V03-M10-HH01", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH13", "from": "HH01", "obs_id": "TALK-V03-M10-HH01", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ03", "from": "HH06", "obs_id": "TALK-V03-M10-HH06", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH01", "from": "HH06", "obs_id": "TALK-V03-M10-HH06", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH13", "from": "HH06", "obs_id": "TALK-V03-M10-HH06", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BR02", "from": "HH12", "obs_id": "TALK-V05-M10-HH12", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ02", "from": "HH12", "obs_id": "TALK-V05-M10-HH12", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "BZ03", "from": "HH13", "obs_id": "TALK-V03-M10-HH13", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH01", "from": "HH13", "obs_id": "TALK-V03-M10-HH13", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH06", "from": "HH13", "obs_id": "TALK-V03-M10-HH13", "kind": "ambient", "location": "V03", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH05", "from": "HH16", "obs_id": "TALK-V08-M10-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH07", "from": "HH16", "obs_id": "TALK-V08-M10-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "MD02", "from": "HH16", "obs_id": "TALK-V08-M10-HH16", "kind": "ambient", "location": "V08", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH11", "from": "MD01", "obs_id": "TALK-V04-M10-MD01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 10, "to": "HH15", "from": "MD01", "obs_id": "TALK-V04-M10-MD01", "kind": "ambient", "location": "V04", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH16", "from": "AQ01", "obs_id": "MSG-M11-AQ01-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "BZ04", "from": "BZ01", "obs_id": "MSG-M11-BZ01-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "MD02", "from": "BZ03", "obs_id": "MSG-M11-BZ03-MD02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH16", "from": "BZ04", "obs_id": "MSG-M11-BZ04-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "MU02", "from": "HH04", "obs_id": "MSG-M11-HH04-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH16", "from": "HH11", "obs_id": "MSG-M11-HH11-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH16", "from": "HH13", "obs_id": "MSG-M11-HH13-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH16", "from": "HH16", "obs_id": "MSG-M11-HH16-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH01", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH02", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH05", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH07", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH09", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH15", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ01", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ02", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BR01", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BR02", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "MU01", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "MU02", "from": "MD01", "obs_id": "NEWS-MD01-M11", "kind": "article", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH11", "from": "MD01", "obs_id": "MSG-M11-MD01-HH11", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 11, "to": "HH01", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH02", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH03", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH04", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH05", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH06", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH07", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH08", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH09", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH10", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH11", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH12", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH13", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH14", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH15", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "HH16", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ01", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ02", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ03", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ04", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BR01", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BR02", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "AQ01", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "MU01", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "MD01", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "MD02", "from": "MU02", "obs_id": "GOV-MU02-M11", "kind": "public_statement", "location": "", "text": "【mock】名義の集中について"}
+{"step": 11, "to": "BZ01", "from": "MU02", "obs_id": "MSG-M11-MU02-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MU02", "from": "BR02", "obs_id": "MSG-M12-BR02-MU02", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ04", "from": "HH01", "obs_id": "MSG-M12-HH01-BZ04", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MU01", "from": "HH02", "obs_id": "MSG-M12-HH02-MU01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH16", "from": "HH06", "obs_id": "MSG-M12-HH06-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "AQ01", "from": "HH07", "obs_id": "MSG-M12-HH07-AQ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH16", "from": "HH09", "obs_id": "MSG-M12-HH09-HH16", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH01", "from": "MD01", "obs_id": "MSG-M12-MD01-HH01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ01", "from": "MD02", "obs_id": "MSG-M12-MD02-BZ01", "kind": "direct", "location": "", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ01", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ02", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ04", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH05", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH07", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH11", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MU02", "from": "BZ03", "obs_id": "TALK-V05-M12-BZ03", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ01", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ02", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ03", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH05", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH07", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH11", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MU02", "from": "BZ04", "obs_id": "TALK-V05-M12-BZ04", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BR01", "from": "HH03", "obs_id": "TALK-V06-M12-HH03", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH08", "from": "HH03", "obs_id": "TALK-V06-M12-HH03", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH13", "from": "HH03", "obs_id": "TALK-V06-M12-HH03", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MD02", "from": "HH03", "obs_id": "TALK-V06-M12-HH03", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ01", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ02", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ03", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BZ04", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH07", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH11", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MU02", "from": "HH05", "obs_id": "TALK-V05-M12-HH05", "kind": "ambient", "location": "V05", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BR01", "from": "HH08", "obs_id": "TALK-V06-M12-HH08", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH03", "from": "HH08", "obs_id": "TALK-V06-M12-HH08", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH13", "from": "HH08", "obs_id": "TALK-V06-M12-HH08", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MD02", "from": "HH08", "obs_id": "TALK-V06-M12-HH08", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "BR01", "from": "HH13", "obs_id": "TALK-V06-M12-HH13", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH03", "from": "HH13", "obs_id": "TALK-V06-M12-HH13", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "HH08", "from": "HH13", "obs_id": "TALK-V06-M12-HH13", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}
+{"step": 12, "to": "MD02", "from": "HH13", "obs_id": "TALK-V06-M12-HH13", "kind": "ambient", "location": "V06", "text": "最近この辺りの土地の話をよく聞く。"}

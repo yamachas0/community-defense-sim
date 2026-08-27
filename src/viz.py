@@ -49,7 +49,8 @@ def _rebuild_world(cfg: Dict[str, Any], personas: Dict[str, Any]):
     return agents, parcels, municipality_id
 
 
-def _compact_events(events: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _compact_events(events: List[Dict[str, Any]],
+                    moneyless: bool = False) -> List[Dict[str, Any]]:
     def kind(e: Dict[str, Any]) -> str:
         o = e.get("outcome")
         return str(o.get("kind", "")) if isinstance(o, dict) else str(o or "")
@@ -64,7 +65,8 @@ def _compact_events(events: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         out.append({
             "step": e["step"], "id": e["agent_id"], "name": e.get("name", ""),
             "role": e["role"], "action": e.get("action_type", ""),
-            "target": e.get("target", ""), "amount": e.get("amount", 0),
+            "target": e.get("target", ""),
+            **({} if moneyless else {"amount": e.get("amount", 0)}),
             "ok": not k.endswith(("_rejected", "invalid_action", "parse_fail")),
             "outcome": k, "why": reason(e),
             "utterance": e.get("utterance", ""), "ch": e.get("utterance_channel", "none"),
@@ -89,16 +91,21 @@ def build_payload_from_dir(run_dir: str) -> Dict[str, Any]:
     with open(os.path.join(run_dir, "owner_frames.json"), encoding="utf-8") as f:
         frames = json.load(f)
 
+    moneyless = cfg.get("scenario_version") in MONEYLESS_VERSIONS
     return {
         "meta": meta,
+        "moneyless": moneyless,
         "parcels": sorted(({"pid": p.pid, "x": p.x, "y": p.y, "block": p.block,
-                            "use": p.use, "value": p.assessed_value} for p in parcels),
+                            "use": p.use,
+                            **({} if moneyless else {"value": p.assessed_value})}
+                           for p in parcels),
                           key=lambda q: (q["y"], q["x"])),
         "frames": frames,
         "kpi": _read_jsonl(os.path.join(run_dir, "kpi.jsonl")),
         "cognition": _read_jsonl(os.path.join(run_dir, "cognition.jsonl")),
         "utterances": _read_jsonl(os.path.join(run_dir, "utterances.jsonl")),
-        "events": _compact_events(_read_jsonl(os.path.join(run_dir, "events.jsonl"))),
+        "events": _compact_events(_read_jsonl(os.path.join(run_dir, "events.jsonl")),
+                                  moneyless=moneyless),
         "ledger": ledger,
         "agents": [{"id": a.agent_id, "name": a.name, "role": a.role} for a in agents],
         "acquirers": [a.agent_id for a in agents if a.role == "acquirer"],
@@ -111,12 +118,79 @@ def build_payload_from_dir(run_dir: str) -> Dict[str, Any]:
     }
 
 
+MONEYLESS_VERSIONS = ("field_v4_1b",)
+
+# 金額を持たない世界のレポートから、金額を前提にしたUIと文言を外すための差し替え。
+# 共通テンプレートは v1〜v4（金額のある世界）のために書かれている。v4.1b では
+# 該当のイベントが一つも起きないが、欄と文言そのものが成果物に残ってしまう
+# （区画の履歴では price を持たない行に「undefined万」とすら出る）。
+_MONEYLESS_SUBS = [
+    (''' {label:"平均賃料(万/月)",color:"#B45309",data:D.kpi.map(r=>r.mean_shop_rent)},''', ""),
+    ('''["nego","買付・交渉"],''', '''["nego","申し入れ"],'''),
+    ('''["rent","賃料"],''', ""),
+    (''' const t=e.target, a=e.amount;''', ''' const t=e.target;'''),
+    (''':`買付 ${esc(t)} を承諾`;}''', ''':`申し入れ ${esc(t)} に応じた`;}'''),
+    ('''  case "make_offer": return `${P(t)} に <b>${a}万</b>で買付（名義「${esc(e.under_name||"—")}」）`;''',
+     '''  case "make_offer": return `${P(t)} に取得を申し入れ（名義「${esc(e.under_name||"—")}」）`;'''),
+    ('''   return tr?`${P(tr.parcel_id)} を <b>${tr.price}万</b>で売却 → 名義「${esc(tr.under_name)}」`''',
+     '''   return tr?`${P(tr.parcel_id)} の名義を「${esc(tr.under_name)}」へ移した`'''),
+    ('''  case "counter_offer": return `買付 ${esc(t)} に <b>${a}万</b>で逆提示`;''', ""),
+    ('''  case "reject_offer": return `買付 ${esc(t)} を拒否`;''',
+     '''  case "reject_offer": return `申し入れ ${esc(t)} に応じなかった`;'''),
+    ('''  case "withdraw_offer": return `買付 ${esc(t)} を取り下げ`;''',
+     '''  case "withdraw_offer": return `申し入れ ${esc(t)} を取り下げ`;'''),
+    ('''  case "list_for_sale": return `${P(t)} を <b>${a}万</b>で売りに出す`;''', ""),
+    ('''  case "set_rent": {
+   const rc=(D.ledger||[]).find(r=>r.kind==="rent_change"&&r.step===e.step&&r.parcel_id===t);
+   return rc?`${P(t)} の賃料を ${rc.old}万 → <b>${rc.new}万</b>に改定`
+            :`${P(t)} の賃料を <b>${a}万</b>に`;}
+  case "negotiate_rent": return `${esc(nameOf[t]||t)} に家賃を <b>${a}万</b>へと交渉`;
+  case "redevelop": return `${P(t)} を商業用途に建て替え（賃料 <b>${a}万</b>）`;''', ""),
+    (''' $("#pinfo").innerHTML=`${p.block}／用途 ${esc(last.use[pid])}／初期評価額 ${p.value}万`
+  +`／最終の名義 <b>${esc(last.registered[pid])}</b>`
+  +(last.rent[pid]?`／賃料 ${last.rent[pid]}万`:"")
+  +(last.controller&&last.controller[pid]
+    ?`／長期賃借・運営名義 <b>${esc(last.controller_name[pid])}</b>`
+      +`（${last.control_rent[pid]}万/月）`:"");''',
+     ''' $("#pinfo").innerHTML=`${p.block}／用途 ${esc(last.use[pid])}`
+  +`／最終の名義 <b>${esc(last.registered[pid])}</b>`;'''),
+    ('''   case "offer": return [`買付`,`${esc(r.under_name)} が <b>${r.price}万</b>で買付（${r.offer_id}）`];
+   case "counter": return [`逆提示`,`${esc(nameOf[r.by]||r.by)} が <b>${r.price}万</b>を希望（${r.offer_id}に対して）`];
+   case "transfer": return [`成約`,`${esc(nameOf[r.seller]||r.seller)} → 名義「${esc(r.under_name)}」 <b>${r.price}万</b>`];
+   case "listing": return [`売出`,`${esc(who)} が <b>${r.price}万</b>で売りに出す`];''',
+     '''   case "offer": return [`申入`,`${esc(r.under_name)} 名義での取得の申し入れ（${r.offer_id}）`];
+   case "consult": return [`相談`,`${esc(nameOf[r.by]||r.by)} が ${esc(nameOf[r.to]||r.to)} に相談（${r.consult_id}）`];
+   case "advice": return [`回答`,`${esc(nameOf[r.by]||r.by)} が ${esc(nameOf[r.to]||r.to)} の相談に答えた（${r.consult_id}）`];
+   case "keep": return [`応じない`,`${esc(nameOf[r.by]||r.by)} が申し入れに応じなかった（${r.offer_id}）`];
+   case "hold": return [`保留`,`${esc(nameOf[r.by]||r.by)} は今月決めなかった（${r.offer_id}）`];
+   case "transfer": return [`移転`,`${esc(nameOf[r.seller]||r.seller)} → 名義「${esc(r.under_name)}」`];'''),
+    ('''   case "rent_change": return [`賃料`,`${esc(who)} が ${r.old}万 → <b>${r.new}万</b>に改定`];
+   case "redevelop": return [`再開発`,`${esc(who)} が商業用途へ（賃料 ${r.rent}万）`];''', ""),
+]
+
+MONEY_WORDS_HTML = ("万", "賃料", "評価額", "価格", "手数料", "逆提示", "家賃",
+                    "買付", "amount", "e.amount")
+
+
+def _apply_moneyless(html: str) -> str:
+    """金額ありの共通テンプレートから金額のUIと文言を落とす（v4.1b用）。"""
+    for old, new in _MONEYLESS_SUBS:
+        if old not in html:
+            raise AssertionError(f"moneyless substitution missed: {old[:60]}")
+        html = html.replace(old, new, 1)
+    leftovers = [w for w in MONEY_WORDS_HTML if w in html]
+    if leftovers:
+        raise AssertionError(f"money words left in the moneyless report: {leftovers}")
+    return html
+
+
 def render_report_from_dir(run_dir: str, out_path: Optional[str] = None,
                            folder: Optional[str] = None) -> str:
     folder = folder or os.path.basename(os.path.normpath(run_dir))
     out_path = out_path or os.path.join(run_dir, f"{folder}.html")
     data = build_payload_from_dir(run_dir)
-    html = _TEMPLATE.replace("__TITLE__", folder).replace(
+    template = (_apply_moneyless(_TEMPLATE) if data.get("moneyless") else _TEMPLATE)
+    html = template.replace("__TITLE__", folder).replace(
         "__DATA__", json.dumps(data, ensure_ascii=False))
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)
