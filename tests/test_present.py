@@ -91,8 +91,13 @@ def main() -> int:
                 check("present: 語られた区画の数が JSON と一致",
                       str(s["noticed"]) in stats_text and str(s["silent"]) in stats_text)
                 check("present: 実費が JSON と一致", f"${s['cost_usd']}" in stats_text)
-                check("present: 突き合わせの行に metrics 一致が出る",
-                      "metrics_v5 と一致" in page.inner_text("#checkline"))
+                check("present: 突き合わせが真であることを画面に出す",
+                      "一致（区画IDと初出月まで照合）" in page.inner_text("#checkline"))
+                check("present: JSON の突き合わせフラグが真",
+                      d94["checks"]["loose_basis_matches_metrics"]
+                      and d94["checks"]["deals_matches_metrics"])
+                check("present: 右地図の基準が画面に書いてある",
+                      "LLM分類を通った発話" in page.inner_text("#checkline"))
 
                 # 月送り：第0月は右地図が0
                 check("present: 第0月は左右とも塗られていない",
@@ -133,6 +138,8 @@ def main() -> int:
                 check("present: 沈黙の区画をクリックすると詳細が開く",
                       page.is_visible("#dlgBody")
                       and d94["silent"][0] in page.inner_text("#dlgTitle"))
+                check("present: 詳細に追跡できた月数が出る",
+                      "追跡できた月数" in page.inner_text("#dlgBody"))
                 page.screenshot(path=os.path.join(SHOTS, "04_silent_detail_1280.png"))
                 page.click("#dlgClose")
 
@@ -146,6 +153,16 @@ def main() -> int:
                           page.is_visible(f"#p{key}"))
                     page.screenshot(path=os.path.join(SHOTS, f"{name}_1280.png"),
                                     full_page=True)
+                check("present: 沈黙の区画がキーボードで開ける",
+                      page.eval_on_selector(f"#mapR .cell[data-pid='{d94['silent'][0]}']",
+                                            "el => el.tabIndex") == 0)
+                v=d94.get("invented_link")
+                check("present: 街が作った結びつきの数値が JSON から出る",
+                      bool(v) and str(v["utterances"]) in page.inner_text("#invented")
+                      and v["quote"]["text"][:24] in page.inner_text("#invented"),
+                      "invented_link 無し" if not v else "")
+                check("present: 引用に出典（utt_id と月）が付く",
+                      bool(v) and v["quote"]["utt_id"] in page.inner_text("#invented"))
                 check("present: 窓口パネルに実際の発話が載る",
                       len(page.inner_text("#replay")) > 200)
                 check("present: 引き算パネルの数値が history JSON から出る",
@@ -180,6 +197,29 @@ def main() -> int:
                 check("present: 390 で横スクロールが出ない", mw[0] <= mw[1], str(mw))
                 check("present: 390 でも console エラーが出ない", not merr, str(merr[:2]))
                 m.screenshot(path=os.path.join(SHOTS, "11_start_390.png"),
+                             full_page=True)
+                m.fill("#slider", str(d94["stats"]["steps"]))
+                m.dispatch_event("#slider", "input")
+                m.wait_for_timeout(300)
+                mw2 = m.evaluate("[document.documentElement.scrollWidth,"
+                                 "document.documentElement.clientWidth]")
+                check("present: 390 の最終月でも横スクロールが出ない", mw2[0] <= mw2[1],
+                      str(mw2))
+                check("present: 390 でも差のバーが値を持つ",
+                      m.eval_on_selector("#gapfill", "el => el.style.width") not in ("", "0%"))
+                m.click(f"#mapR .cell[data-pid='{d94['silent'][0]}']")
+                m.wait_for_timeout(300)
+                check("present: 390 で沈黙の詳細が開く", m.is_visible("#dlgBody"))
+                m.screenshot(path=os.path.join(SHOTS, "12_silent_390.png"))
+                m.click("#dlgClose")
+                for key in ("E", "F", "G", "H"):
+                    m.click(f"[role=tab][data-p='{key}']")
+                    m.wait_for_timeout(150)
+                mw3 = m.evaluate("[document.documentElement.scrollWidth,"
+                                 "document.documentElement.clientWidth]")
+                check("present: 390 でパネルを開いても横スクロールが出ない",
+                      mw3[0] <= mw3[1], str(mw3))
+                m.screenshot(path=os.path.join(SHOTS, "13_panels_390.png"),
                              full_page=True)
                 m.close()
             finally:

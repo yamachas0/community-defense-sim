@@ -16,7 +16,9 @@ from __future__ import annotations
 
 import argparse
 import collections
+import datetime as _dt
 import json
+import re
 import os
 import sys
 
@@ -122,20 +124,34 @@ def build(run_dir: str) -> dict:
                 "text": str(a.get("text", ""))} for a in articles])
     said.sort(key=lambda r: (r["step"], r["ch"], r["from"] or ""))
 
+    # 事後LLM分類が掛かっているのは**発話だけ**（記事・私信には分類ラベルが無い）。
+    # 仕様（impl §6.1）は「LLMが true とした行だけを数える」なので、
+    # 右地図は**LLM分類を通った発話だけ**で塗り、記事・私信だけで名指しされた区画は
+    # 別に数えて画面に出す（Codexレビュー 2026-08-28）。
     awareness = {}
+    rule_only_parcels = {}
     for row in said:
         step = row["step"]
         hit = _v5_mentions(row["text"], holders_by_step.get(step, set()))
         if not hit["hit"]:
             continue
-        if llm_ran and row["ch"] == "utterance":
-            if (step, row["from"], row["text"]) not in about:
-                continue
+        if llm_ran and row["ch"] == "utterance"                 and (step, row["from"], row["text"]) not in about:
+            continue          # LLM が「取得の話ではない」とした発話は数えない
+        # 事後分類が掛かるのは発話だけ。記事・私信にはラベルが無いので、
+        # 右地図には載せず「ルール抽出だけで名指しされた区画」として別に数える。
+        confirmed = (row["ch"] == "utterance") or (not llm_ran)
         for pid in hit["parcels"]:
             if pid not in acquired_by_step.get(step, set()):
                 continue          # その月までに成立していない取得は数えない
             if row["from"] == party_of.get(pid):
                 continue          # 当事者本人は「街が語った」に数えない
+            if not confirmed:
+                r = rule_only_parcels.setdefault(pid, {"first_month": step,
+                                                       "channels": []})
+                r["first_month"] = min(r["first_month"], step)
+                if row["ch"] not in r["channels"]:
+                    r["channels"].append(row["ch"])
+                continue
             a = awareness.setdefault(pid, {"first_month": step, "speakers_by_month": {},
                                            "speakers": []})
             a["first_month"] = min(a["first_month"], step)
@@ -154,9 +170,12 @@ def build(run_dir: str) -> dict:
         del a["speakers_by_month"]
 
     silent = sorted(pid for pid in acquired_month if pid not in awareness)
+    rule_only_only = sorted(pid for pid in rule_only_parcels if pid not in awareness)
 
     # --- v5b: O1（連結）が出た月を区画ごとに --------------------------------
-    o1_month = {}
+    # 地図の紫は「公に口にされた連結」だけにする（内心だけの連結で塗ると
+    #「街が語った」と読めてしまう）。内心を含む初出は別キーで持つ。
+    o1_month, o1_month_any = {}, {}
     if occ:
         for r in sorted(occ, key=lambda z: int(z.get("step", 0))):
             if not r.get("links_multiple"):
@@ -167,8 +186,11 @@ def build(run_dir: str) -> dict:
             named = [p for p in hit["parcels"] if p in acquired_by_step.get(step, set())]
             if not (len(named) >= 2 or (len(hit["holders"]) >= 2 and named)):
                 continue          # ルール∧LLM の連結だけ
+            public = r.get("kind") in ("utterance", "article")
             for pid in named:
-                o1_month.setdefault(pid, step)
+                o1_month_any.setdefault(pid, step)
+                if public:
+                    o1_month.setdefault(pid, step)
 
     # --- 兆候（誰にいつ見えたか）・沈黙の区画の突き合わせ用 -----------------
     trace_rows = [{"month": int(t.get("step", 0)), "agent_id": t.get("agent_id"),
@@ -225,38 +247,87 @@ def build(run_dir: str) -> dict:
                 {"parcel_id": e["parcel_id"], "month": e["month"],
                  "holder": e["holder"], "kind": e["kind"], "note": e["note"]})
 
-    # --- 窓口シーンの再現（Eパネル） ---------------------------------------
-    counter_month = next((m for m in range(1, n_steps + 1)
-                          if _v5_s4_kind(m) == "counter"
-                          and any(u["scene"] == "S4" and int(u["step"]) == m
-                                  for u in utts)), None)
+    # --- 一括照会の場面（Eパネル） -----------------------------------------
+    # 「窓口の月（S4）」に限らない。run94 の記者の5区画照会は S1 の市役所の待合で
+    # 起きていた（Codexレビュー 2026-08-28 で判明）。**1つの発話の中に、その月までに
+    # 成立した取得区画が最も多く並んだ発話**を探し、その場面を再生する。
     best = None
-    for m in range(1, n_steps + 1):
-        if _v5_s4_kind(m) != "counter":
-            continue
-        rows = [u for u in utts if int(u["step"]) == m and u.get("scene") == "S4"]
-        named = sum(len([p for p in V5_PARCEL_RE.findall(u["text"])
-                         if p in acquired_by_step.get(m, set())]) for u in rows)
-        if rows and (best is None or named > best[1]):
-            best = (m, named)
-    scene_month = best[0] if best else counter_month
-    scene_replay = {"month": scene_month, "venue": "V06", "rows": [], "article": None}
-    if scene_month:
-        rows = sorted([u for u in utts
-                       if int(u["step"]) == scene_month and u.get("scene") == "S4"],
+    for u in utts:
+        m = int(u["step"])
+        named = {p for p in V5_PARCEL_RE.findall(u["text"])
+                 if p in acquired_by_step.get(m, set())}
+        if best is None or len(named) > best[0]:
+            best = (len(named), u)
+    scene_replay = {"month": None, "rows": [], "article": None}
+    if best and best[0] >= 2:
+        trigger = best[1]
+        m = int(trigger["step"])
+        scene = trigger.get("scene")
+        venue = trigger.get("venue")
+        venue_label = {v["id"]: v["label"]
+                       for v in (cfg.get("social", {}).get("venues") or [])}.get(venue, venue)
+        rows = sorted([u for u in utts if int(u["step"]) == m
+                       and u.get("scene") == scene and u.get("venue") == venue],
                       key=lambda u: (u.get("round", 0), u.get("utt_id", "")))
-        scene_replay["attendees"] = sorted({u.get("from") for u in rows})
-        scene_replay["registry_rows"] = len([t for t in traces
-                                             if t.get("kind") == "registry_lookup"
-                                             and int(t.get("step", 0)) == scene_month])
-        scene_replay["rows"] = [{"round": u.get("round"), "from": u.get("from"),
-                                 "name": u.get("name"), "utt_id": u.get("utt_id"),
-                                 "text": u["text"]} for u in rows[:10]]
-        nxt = [a for a in articles if int(a["step"]) == scene_month]
+        here = [p["agent_id"] for p in plans
+                if int(p.get("step", 0)) == m and p.get(scene) == venue]
+        scene_replay = {
+            "month": m, "scene": scene, "venue": venue, "venue_label": venue_label,
+            "widest_query": best[0],
+            "trigger_utt_id": trigger.get("utt_id", ""),
+            "attendees": sorted(here),
+            "speakers": sorted({u.get("from") for u in rows}),
+            # 窓口の月に登記を見に行った主体が閲覧できた「名義変更の記録」の件数
+            "registry_records": len({t.get("acq_id") or t.get("parcel_id")
+                                     for t in traces
+                                     if t.get("kind") == "registry_lookup"
+                                     and int(t.get("step", 0)) <= m}),
+            "counter_month": _v5_s4_kind(m) == "counter",
+            # 一括照会の発話は必ず含める（先頭10件で切れて落ちないように）
+            "rows": [{"round": u.get("round"), "from": u.get("from"),
+                      "name": u.get("name"), "utt_id": u.get("utt_id"),
+                      "text": u["text"],
+                      "trigger": u.get("utt_id") == trigger.get("utt_id")}
+                     for u in (rows[:10]
+                               if any(u.get("utt_id") == trigger.get("utt_id")
+                                      for u in rows[:10])
+                               else [trigger] + [u for u in rows[:9]
+                                                 if u.get("utt_id")
+                                                 != trigger.get("utt_id")])],
+            "article": None,
+        }
+        nxt = [a for a in articles if int(a["step"]) == m]
         if nxt:
             scene_replay["article"] = {"month": int(nxt[0]["step"]),
                                        "from": nxt[0].get("from"),
                                        "text": nxt[0]["text"]}
+
+    # --- 台本に無い対象と登記が結びつけられた話題（Fパネル） ---------------
+    venue_labels = [v["label"] for v in (cfg.get("social", {}).get("venues") or [])]
+    parcel_pids = {p["pid"] for p in parcels}
+    invented = None
+    for label in venue_labels:
+        pat = re.compile(re.escape(label) + r"[^。]{0,12}登記|登記[^。]{0,12}"
+                         + re.escape(label))
+        u_hits = [u for u in utts if pat.search(u["text"])]
+        t_hits = [t for t in thoughts if pat.search(str(t.get("text", "")))]
+        if not u_hits:
+            continue
+        if invented is None or len(u_hits) > invented["utterances"]:
+            first = min(u_hits, key=lambda u: (int(u["step"]), u.get("utt_id", "")))
+            invented = {
+                "term": label,
+                "is_parcel": label in parcel_pids,      # 会場名は区画IDではない
+                "utterances": len(u_hits), "thoughts": len(t_hits),
+                "first_month": int(first["step"]), "last_month": max(int(u["step"])
+                                                                    for u in u_hits),
+                "speakers": len({u.get("from") for u in u_hits}),
+                "quote": {"utt_id": first.get("utt_id", ""), "month": int(first["step"]),
+                          "from": first.get("from"), "text": first["text"]},
+            }
+    public_transfers = len([e for e in events
+                            if e["parcel_id"] in {p["pid"] for p in parcels
+                                                  if p["use"] == "public"}])
 
     # --- 画面に出す数値はすべてここから ------------------------------------
     usage = summary.get("usage", {})
@@ -301,35 +372,52 @@ def build(run_dir: str) -> dict:
         "misdelivered": (metrics.get("D3_wiring") or {}).get("utterances_misdelivered", 0),
         "api_errors": (metrics.get("D3_wiring") or {}).get("api_errors", 0),
         "traces_by_kind": metrics.get("traces_by_kind"),
+        "rule_only_parcels": len(rule_only_only),
+        "public_transfers": public_transfers,
+        "cost_note": "トークン数×公開単価からの推計（請求実績ではない）",
     }
 
     # 公開済み metrics との突き合わせ（画面の数字が集計と食い違わないことの担保）
     # metrics_v5 の first_mention は「登記が動いた取得（sale）」だけを追う。
     # 地図は賃借も含めた28件を塗るので、**売買だけの部分集合**で突き合わせる。
+    # metrics_v5 の first_mention は「登記が動いた取得（sale）」だけを追い、
+    # 記事・私信もルール抽出だけで数える。右地図は**発話のLLM確定分だけ**なので、
+    # 両者は一致しない。ここでは metrics と同じ基準でも組み直し、
+    # **区画IDと初出月まで**突き合わせる（件数だけの照合にしない）。
     sale_pids = {e["parcel_id"] for e in events if e["kind"] == "sale"}
-    noticed_sale = len([p for p in awareness if p in sale_pids])
-    silent_sale = len([p for p in silent if p in sale_pids])
+    metrics_first = {v["parcel_id"]: v["month"]
+                     for v in (metrics.get("first_mention") or {}).values()}
+    loose = {}
+    for pid, a in awareness.items():
+        loose[pid] = a["first_month"]
+    for pid, r in rule_only_parcels.items():
+        loose[pid] = min(loose.get(pid, 10 ** 6), r["first_month"])
+    loose_sale = {p: m for p, m in loose.items() if p in sale_pids}
     checks = {
-        "noticed_sale_matches_metrics":
-            noticed_sale == metrics.get("noticed_acquisitions"),
-        "silent_sale_matches_metrics":
-            silent_sale == len(metrics.get("unnoticed_acquisitions") or []),
+        "loose_basis_matches_metrics": loose_sale == metrics_first,
         "deals_matches_metrics": (len(events) == (metrics.get("deals")
                                                   or metrics.get("acquisitions"))),
-        "noticed_all_deals": len(awareness),
-        "silent_all_deals": len(silent),
-        "noticed_sale_only": noticed_sale,
-        "silent_sale_only": silent_sale,
+        "map_basis": "LLM分類を通った発話のみ（当事者以外・その月までに成立）",
+        "metrics_basis": "記事・私信はルール抽出のみ・売買19件のみ",
+        "noticed_map": len(awareness),
+        "silent_map": len(silent),
+        "noticed_metrics_basis_sale": len(loose_sale),
+        "rule_only_parcels": len(rule_only_only),
     }
 
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
+                 "schema": 2,
+                 "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},
         "events": events,
         "awareness": awareness,
         "o1_month": o1_month,
+        "o1_month_any": o1_month_any,
+        "rule_only_parcels": rule_only_parcels,
+        "invented_link": invented,
         "silent": silent,
         "silent_detail": silent_detail,
         "agent_timeline": agent_timeline,
@@ -359,6 +447,10 @@ def main() -> int:
                   [(r["transfers"], r["ownership_share"]) for r in p["runs"]])
         return 0
     data = build(args.run)
+    hard = [k for k in ("loose_basis_matches_metrics", "deals_matches_metrics")
+            if not data["checks"].get(k)]
+    if hard:
+        raise SystemExit("集計との突き合わせに失敗: " + ", ".join(hard))
     out = os.path.join(args.out_dir, f"present_data_{args.label}.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
