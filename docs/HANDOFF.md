@@ -373,3 +373,53 @@ Claude側の作業ログは `docs/progress_claude.log`（`HH:MM 内容` 形式�
 
 ルールベース排除／観測に無い事実をコードで補完しない／`mvp_v1`・`field_v2` の設定と成果物は不変／
 v3のプロンプトとHTMLに「AI」表記なし／`.env` の内容を文書に書かない／`git push` は施主承認制。
+
+
+---
+
+## 2026-08-27 第3便・v4-mini（この節が上記すべてに優先する。最終更新 2026-08-27 16:00 JST）
+
+担当：CEO=Fable / CTO=Opus 5。施主GO（8/27 14:51「一旦これでやってみて」・14:54「X社も flash-lite でよい」）。
+
+### 実装（`main` は未push・`9f88604` から4コミット先行）
+
+| commit | 内容 |
+|---|---|
+| `b51915d` | v4-mini 本体。`src/field_v4.py`（同期3フェーズの世界API・観測・スキーマ・プロンプト）、`configs/config_field_v4.yaml`（12か月・seed 85・**全主体 gemini-2.5-flash-lite**・personasはv3流用）、`src/simulation.py` に `_step_v4`、Mockのv4対応、`tests/test_ledger.py` にv4回帰、`tools/run_metrics.py` に `metrics_v4`。 |
+| `8b51f57` | Codex実装レビュー反映（重大2・高3・中3）：届出競合の終端化と自己売買の拒否、`no_response` の存在・open・所有者検証と未応答の買付ごとの記帳、応答フェーズへ当月の観測と記憶を引き継ぎ、feelingを月1件に統合、届出完了移転と賃料清算の順序統一、仲介の観測を仕様どおりに（全区画登記を外す・取次ぎ時点の相手を保持）、結果の8件打切り廃止、`direct`+`broker_id` の矛盾を不成立に、`metrics_v4` の照合式修正。 |
+| `35b30a6` | `broker_id` の「取次ぎ先なし」を `"none"` に（**Geminiは `enum` に空文字を入れると 400 を返す**）。スキーマの空選択肢を検査する回帰テストを追加。 |
+| `9ab1c8f` 相当 | `RESULTS.md` にv4節、`tools/price_analysis_v4.py`（価格分析）。 |
+
+**v1〜v3のコード・設定・成果物は変更していない。** v4は別ファイル・別config・`scenario_version: field_v4` 分岐。
+
+### v4の設計（要点）
+
+- 月＝同期3フェーズ。①提示（X社が `offers[]{parcel_id, price, under_name, via, broker_id, note}`・`withdraw[]`・`memo`／住民・事業者は `location`+`talk`+`feeling`／仲介は `location`+`talk` だけ／行政・記者は `investigate`・`publish`・（行政のみ）`ordinance`）→②応答（買付が届いている所有者だけ・`responses[]{offer_id, decision(accept|reject|counter|no_response), counter_price}`+`feeling`）→③清算・配送。
+- 手続き動詞は語彙に無い。登記は最初から公開。資金は成立時に自動調達。仲介は機構（自動リレー＋手数料3%自動記帳）で、仲介のLLMは話すだけ。
+- 条例は行政が `threshold_sqm` / `delay_months` を決めて制定し、**翌月から施行**、後発が上書き、1件の取得面積だけで判定。
+- **判定基準は実走前に固定**（`docs/world_design_v4_impl.md`）。集計は `tools/run_metrics.py`（配線の指標と世界の指標を分けて出す）。
+
+### 検証と実走（実API合計 $0.692）
+
+- `python tests/test_ledger.py` → **206 passed, 0 failed**。`--provider mock` 12か月 完走。
+- run61（$0.068）＝**配線失敗**。X社のスキーマがGeminiに400で拒否され12か月ぶん全滅 → `"none"` 修正。
+- 1か月スモーク run63（$0.006）でX社が第1月に買付6件・エラー0を確認。
+- **12か月×3本**（run64 $0.0938 / run65 $0.0810 / run66 $0.0752）＝成約 3/5/5件・所有率 6.5/10.9/10.9%。
+  事前固定の判定は **3/3本で「取得が進む」「住民が気づく」の両方が成立**。
+- **60か月×1本**（run67 $0.3682）＝成約14件・所有率30.4%・面積24.3%。
+  **初報道 第36月・条例 第40月（どちらも所有率10.9%時点）＝検知ラグと手遅れ度が初めて数値化された。**
+- レポート公開：https://yamachas0.github.io/quiet-acquisition-report/ （v4の4本＋前便を `v3_phase2.html` に退避）。全URL 200確認。**ソースリポは未push。**
+
+### 要施主判断（v4-miniで見つかった穴・未実装の対策）
+
+1. **金額の桁**：12か月runAでX社が万円と円を取り違えた買付（評価額のちょうど1万倍・最大7,500億円）を出し、
+   所有者が受諾して成立した。資金が無制限に調達される設計なので予算で弾かれない。
+   対策案＝①調達上限を保有資産の評価額に紐づける ②観測の金額に単位を併記 ③調達に金利。**未実装。**
+2. **仲介経由の買付が0件**（4本すべて `direct`）。手数料の経路は一度も動いていない。
+3. **自社が既に所有する区画への再買付**が多い（60か月で49件）。世界は正しく弾いている。
+4. v4-miniには長期賃借・住民側の売り出し・転出・廃業が無い＝「実効統治」ではなく「所有権取得」の試験である。
+
+### 次に行う作業
+
+施主GO（8/27 15:47）により **v4.1（金額の廃止＋thought統合）** に着手する。仕様＝`docs/world_design_v4_1_no_money.md`。
+v4は保存し、v4.1は別ファイル（`src/field_v4_1.py` / `configs/config_field_v4_1.yaml`）で実装する。
