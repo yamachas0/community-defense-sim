@@ -58,14 +58,37 @@ def metrics_v4(run_dir: str) -> Dict[str, Any]:
         op.get("outcome", {}).get("kind", "") for op in response_ops)
 
     parse_fail = sum(1 for e in events if e.get("action_type") == "PARSE_FAIL")
+
+    acquirer_ids = {e["agent_id"] for e in events if e.get("role") == "acquirer"}
+    valid_transfers = [r for r in transfers if r.get("buyer") in acquirer_ids
+                       and r.get("buyer") != r.get("seller")]
+    filed_ids = {r.get("offer_id") for r in ledger if r.get("kind") == "filing_required"}
+    filed_completed = [r for r in transfers if r.get("offer_id") in filed_ids]
+    accept_decisions = sum(1 for op in response_ops if op.get("action_type") == "accept")
+    accept_immediate = sum(1 for op in response_ops
+                           if op.get("outcome", {}).get("kind") == "transfer")
+    accept_filing = sum(1 for op in response_ops
+                        if op.get("outcome", {}).get("kind") == "filing_required")
+    accept_failed = sum(1 for op in response_ops
+                        if op.get("outcome", {}).get("kind") == "accept_rejected")
+    # 仲介経由の有効成立1件につき手数料が1件で、金額が契約料率と一致するか
+    fee_by_offer = collections.Counter(r.get("offer_id") for r in fees)
+    fee_duplicates = sum(1 for n in fee_by_offer.values() if n > 1)
+    fee_expected = 0
+    for record in valid_transfers + filed_completed:
+        channel_fee = [r for r in fees if r.get("offer_id") == record.get("offer_id")]
+        if channel_fee:
+            fee_expected += int(round(record.get("price", 0) * channel_fee[0].get("rate", 0)))
+    # 「その月に買付が届いていた所有者」＝応答フェーズに呼ばれた所有者
+    called = {(e["step"], e["agent_id"]) for e in events
+              if e.get("action_type") == "responses"}
     offer_steps = sorted({r["step"] for r in offer_records})
     transfer_steps = sorted({r["step"] for r in transfers})
 
     about = [f for f in feelings if f.get("about_acquisition")]
     about_people = sorted({f["from"] for f in about})
-    offered_owner_steps = {(r["step"], r.get("to", "")) for r in offer_records}
     about_without_own_offer = [f for f in about
-                               if (f["step"], f["from"]) not in offered_owner_steps]
+                               if (f["step"], f["from"]) not in called]
     frames = collections.Counter(f.get("frame", "") for f in feelings)
 
     ordinances = [{"step": r["step"], "by": r.get("by"), "title": r.get("title"),
@@ -98,9 +121,20 @@ def metrics_v4(run_dir: str) -> Dict[str, Any]:
         "responders_called": sum(1 for e in events if e.get("action_type") == "responses"),
         "responses": dict(decisions),
         "response_outcomes": dict(decision_results),
-        "accepts_to_transfer": kinds.get("transfer", 0),
-        "filing_required": kinds.get("filing_required", 0),
-        "accept_rejected": kinds.get("accept_rejected", 0),
+        "accept_decisions": accept_decisions,
+        "accept_immediate_transfer": accept_immediate,
+        "accept_filing_required": accept_filing,
+        "accept_rejected_outcome": accept_failed,
+        "accept_reconciles": accept_decisions == (accept_immediate + accept_filing
+                                                  + accept_failed),
+        "filed_transfer_completed": len(filed_completed),
+        "filing_void": kinds.get("filing_void", 0),
+        "offer_void": kinds.get("offer_void", 0),
+        "no_response_rejected": kinds.get("no_response_rejected", 0),
+        "transfers_total": kinds.get("transfer", 0),
+        "transfers_valid_acquirer": len(valid_transfers),
+        "fee_duplicates": fee_duplicates,
+        "fee_total_matches_rate": fee_expected == sum(r.get("amount", 0) for r in fees),
         "broker_fee_count": len(fees),
         "broker_fee_total": sum(r.get("amount", 0) for r in fees),
         "deliveries_by_kind": dict(collections.Counter(d.get("kind", "")
@@ -108,9 +142,10 @@ def metrics_v4(run_dir: str) -> Dict[str, Any]:
         # --- 世界で起きたこと（設計の指標） ---
         "months_with_offers": len(offer_steps),
         "first_offer_step": offer_steps[0] if offer_steps else None,
-        "months_with_transfers": len(transfer_steps),
-        "first_transfer_step": transfer_steps[0] if transfer_steps else None,
-        "transfers": len(transfers),
+        "months_with_transfers": len({r["step"] for r in valid_transfers}),
+        "first_transfer_step": (min(r["step"] for r in valid_transfers)
+                                if valid_transfers else None),
+        "transfers": len(valid_transfers),
         "no_offer_months": no_offer_months,
         "acquirer_active_months": len(acquirer_steps),
         "ownership_share": summary.get("kpi", {}).get("final_acquirer_share"),
@@ -132,7 +167,8 @@ def metrics_v4(run_dir: str) -> Dict[str, Any]:
             and r.get("about_acquisition")),
         "investigations": kinds.get("investigate", 0),
         # --- 判定（docs/world_design_v4_impl.md の事前定義） ---
-        "verdict_acquisition_progresses": bool(len(transfer_steps) >= 2
+        "verdict_acquisition_progresses": bool(
+            len({r["step"] for r in valid_transfers}) >= 2
                                                and (summary.get("kpi", {})
                                                     .get("final_acquirer_area_share") or 0) > 0),
         "verdict_residents_notice": bool(len(about_people) >= 2

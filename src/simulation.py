@@ -32,7 +32,8 @@ from .field_v3 import (action_schema_v3, answer_owner_inquiry,
                        report_owner_intent, request_owner_inquiry,
                        resolve_lease_offer, seed_acquirer_intelligence_v3,
                        settle_v3_control, verbs_for_v3)
-from .field_v4 import (build_phase1_prompt_v4, build_phase2_prompt_v4,
+from .field_v4 import (own_results_text_v4,  # noqa: F401
+                       build_phase1_prompt_v4, build_phase2_prompt_v4,
                        build_system_prompt_v4, enact_ordinance_v4,
                        ensure_v4_state, execute_pending_transfers_v4,
                        owners_with_offers, phase1_schema_v4, phase2_schema_v4,
@@ -586,12 +587,16 @@ class Simulation:
                  for a in self.agents]
         results = self._call_batch(items, "p1")
         # 観測は作成済み。ここから届く情報は翌月にだけ見える。
+        # 同じ月の応答フェーズでも「すでに自分へ届いていた情報」は見えている必要があるので、
+        # 消す前に写しを取る。
+        inbox_snapshot = {a.agent_id: list(a.inbox) for a in self.agents}
         for a in self.agents:
             a.inbox = []
 
         messages: List[Dict[str, Any]] = []
         presences: Dict[str, str] = {}
         ambient_rows: List[Dict[str, Any]] = []
+        month_feelings: Dict[str, Dict[str, Any]] = {}
 
         for a in sorted(self.agents, key=lambda x: x.agent_id):
             result = results.get(a.agent_id, {})
@@ -761,8 +766,9 @@ class Simulation:
                                      "text": utterance, "step": step, "kind": "direct",
                                      "obs_id": f"MSG-M{step:02d}-{a.agent_id}-{destination}"})
             if feeling and a.role in ("household", "business"):
-                self.feelings.append({"step": step, "from": a.agent_id, "role": a.role,
-                                      "name": a.name, "phase": "day", "text": feeling})
+                month_feelings[a.agent_id] = {
+                    "step": step, "from": a.agent_id, "role": a.role,
+                    "name": a.name, "phase": "day", "text": feeling}
             if act.get("_truncated"):
                 self.truncated_count += 1
 
@@ -784,7 +790,8 @@ class Simulation:
                       if oid in self.by_id]
         items2 = [(a, self.system_prompts[a.agent_id],
                    build_phase2_prompt_v4(a, self.ledger, step, self.n_steps, names,
-                                          offers_by_owner[a.agent_id]),
+                                          offers_by_owner[a.agent_id],
+                                          inbox_snapshot.get(a.agent_id, [])),
                    phase2_schema_v4())
                   for a in responders]
         results2 = self._call_batch(items2, "p2")
@@ -832,14 +839,23 @@ class Simulation:
             if memory:
                 a.memory = memory
             if feeling:
-                self.feelings.append({"step": step, "from": a.agent_id, "role": a.role,
-                                      "name": a.name, "phase": "response", "text": feeling})
+                # 同じ月の実感は1件に統合する（応答フェーズの実感がその月の最後の実感）。
+                month_feelings[a.agent_id] = {
+                    "step": step, "from": a.agent_id, "role": a.role,
+                    "name": a.name, "phase": "response", "text": feeling}
             if act.get("_truncated"):
                 self.truncated_count += 1
-            if not operations:
-                operations.append({"action_type": "no_response", "target": "", "amount": 0,
-                                   "outcome": {"kind": "offer_no_response",
-                                               "reason": "no_response_returned"}})
+            answered = {str(op.get("target", "")).strip().upper().strip("[]")
+                        for op in operations}
+            for offer in offers_by_owner[a.agent_id]:
+                if offer.offer_id in answered or offer.status != "open":
+                    continue
+                # 触れられなかった買付は、買付ごとに「今月は答えなかった」と記録する。
+                outcome = respond_to_offer_v4(self.ledger, step, offer.offer_id,
+                                              a.agent_id, "no_response", 0)
+                operations.append({"action_type": "no_response",
+                                   "target": offer.offer_id, "amount": 0,
+                                   "outcome": outcome})
             event.update({"action_type": "responses", "target": "", "amount": 0,
                           "location": "", "utterance": "", "utterance_channel": "none",
                           "utterance_to": "", "memory": memory, "feeling": feeling,
@@ -859,11 +875,15 @@ class Simulation:
                                      "obs_id": f"TALK-{row['location']}-M{step:02d}-{row['from']}"})
         self._deliver_v4(messages, step)
         self.timeline = []
+        # 届出を終えた成立も、即時の成立と同じく賃料清算の前に記帳する（帰属を揃える）。
+        filed_outcomes = execute_pending_transfers_v4(self.ledger, step)
         self.ledger.settle_month(step, self.business_margins)
-        execute_pending_transfers_v4(self.ledger, step)
-        self._record_own_results_v4(step)
+        for row in sorted(month_feelings.values(), key=lambda r: r["from"]):
+            self.feelings.append(row)
+        self._record_own_results_v4(step, filed_outcomes)
 
-    def _record_own_results_v4(self, step: int) -> None:
+    def _record_own_results_v4(self, step: int,
+                               filed_outcomes: Optional[List[Dict[str, Any]]] = None) -> None:
         """今月の自分の行為が帳簿でどうなったかを、本人の翌月観測へ渡す（事実だけ）。"""
         for a in self.agents:
             rows: List[Dict[str, Any]] = []
@@ -879,6 +899,14 @@ class Simulation:
                     rows.append(own_result_row(step, event.get("action_type", ""),
                                                event.get("target", ""),
                                                event.get("outcome", {})))
+            for outcome in (filed_outcomes or []):
+                # 届出を終えた成立は行為の記録ではなく帳簿の記録なので、
+                # 当事者（買主・売主）にだけ結果として返す。
+                if a.agent_id not in (outcome.get("buyer"), outcome.get("seller"),
+                                      outcome.get("by")):
+                    continue
+                rows.append(own_result_row(step, "filed_acquisition",
+                                           outcome.get("parcel_id", ""), outcome))
             a.extra["last_month_results"] = rows
 
     def _record_own_results(self, step: int) -> None:

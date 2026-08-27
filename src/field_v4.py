@@ -13,13 +13,30 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional, Tuple
 
 from .agents import Agent
-from .field_v3 import own_result_row, own_results_text  # 事実だけを返す結果表示（v3と共通）
+from .field_v3 import own_result_row  # 事実だけを返す結果行（v3と共通）
 from .world import Ledger, Parcel, neighbors
 
 MAX_MEMORY_CHARS = 240
 MAX_TEXT_CHARS = 140
 MAX_MEMO_CHARS = 200
 MAX_FEELING_CHARS = 120
+OWN_RESULT_ROWS_V4 = 40   # 自分の行為の結果は切り捨てない（買付8件＋取り下げでも全部返す）
+
+
+def own_results_text_v4(rows: List[Dict[str, Any]]) -> str:
+    """自分が選んだ行為の帳簿上の結果。事実と理由コードだけを、件数を切らずに出す。"""
+    if not rows:
+        return "  （先月の記録なし）"
+    out = []
+    for r in rows[:OWN_RESULT_ROWS_V4]:
+        line = (f"  第{r.get('step')}月 {r.get('action_type') or '-'} "
+                f"target={r.get('target') or '-'} 結果={r.get('kind') or '-'}")
+        if r.get("reason"):
+            line += f" 理由={r['reason']}"
+        if r.get("refs"):
+            line += " " + " ".join(r["refs"])
+        out.append(line)
+    return "\n".join(out)
 
 USE_JA = {"residential": "住宅", "shop": "店舗", "lodging": "宿泊",
           "office": "事務所", "vacant": "空地", "public": "公共施設"}
@@ -72,6 +89,11 @@ def record_offer_v4(ledger: Ledger, step: int, agent: Agent, parcel_id: str,
         return ledger._rec(step, "offer_rejected", parcel_id=parcel_id,
                            from_id=agent.agent_id, reason="unknown_channel",
                            given=via)
+    if via == "direct" and broker_id:
+        # 直接の買付に取次ぎ先が入っている指定は矛盾しているので、黙って捨てずに不成立にする。
+        return ledger._rec(step, "offer_rejected", parcel_id=parcel_id,
+                           from_id=agent.agent_id,
+                           reason="broker_not_allowed_for_direct", given=broker_id)
     if via == "broker" and broker_id not in broker_ids:
         # 誰が取り次ぐのかが欠けている買付は成立しない（世界が仲介を割り当てない）。
         return ledger._rec(step, "offer_rejected", parcel_id=parcel_id,
@@ -88,7 +110,8 @@ def record_offer_v4(ledger: Ledger, step: int, agent: Agent, parcel_id: str,
     offer_id = outcome.get("offer_id")
     if offer_id:
         ledger.v4_offer_channel[offer_id] = {
-            "via": via, "broker": broker_id if via == "broker" else ""}
+            "via": via, "broker": broker_id if via == "broker" else "",
+            "to": outcome.get("to", "")}
         outcome["via"] = via
         outcome["broker"] = broker_id if via == "broker" else ""
     return outcome
@@ -199,9 +222,18 @@ def respond_to_offer_v4(ledger: Ledger, step: int, offer_id: str, owner_id: str,
     ensure_v4_state(ledger)
     normalized = ledger._normalize_id(offer_id, "O")
     if decision == "no_response":
-        # 答えないことも選択である。買付は取り下げられるまで開いたままになる。
+        # 答えないことも選択である。ただし答えられるのは、実在して開いていて、
+        # 自分の区画に届いている買付だけ（存在しない事実は台帳に載せない）。
+        offer = ledger.offers.get(normalized)
+        if offer is None or offer.status != "open":
+            return ledger._rec(step, "no_response_rejected", offer_id=normalized,
+                               by=owner_id, reason="offer_not_open")
+        parcel = ledger.parcels.get(offer.parcel_id)
+        if parcel is None or parcel.owner_id != owner_id:
+            return ledger._rec(step, "no_response_rejected", offer_id=normalized,
+                               by=owner_id, reason="not_owner")
         return ledger._rec(step, "offer_no_response", offer_id=normalized,
-                           by=owner_id)
+                           parcel_id=offer.parcel_id, by=owner_id)
     if decision == "reject":
         return ledger.record_reject(step, normalized, owner_id)
     if decision == "counter":
@@ -222,11 +254,17 @@ def respond_to_offer_v4(ledger: Ledger, step: int, offer_id: str, owner_id: str,
     parcel = ledger.parcels.get(offer.parcel_id)
     if parcel is None or parcel.owner_id != owner_id:
         return ledger.record_accept(step, normalized, owner_id)
+    if offer.from_id == owner_id:
+        # 自分が出した買付を自分で受けることはできない（自己売買）。
+        offer.status = "void"
+        return ledger._rec(step, "accept_rejected", offer_id=normalized, by=owner_id,
+                           reason="self_offer")
     delay = filing_delay_for(ledger, parcel, step)
     if delay <= 0:
         outcome = ledger.record_accept(step, normalized, owner_id)
         if outcome.get("kind") == "transfer":
             settle_broker_fee_v4(ledger, step, offer)
+            close_competing_offers_v4(ledger, step, offer.parcel_id, offer.offer_id)
         return outcome
     offer.status = "filed"
     ledger.v4_pending.append({"offer_id": offer.offer_id, "owner": owner_id,
@@ -236,6 +274,22 @@ def respond_to_offer_v4(ledger: Ledger, step: int, offer_id: str, owner_id: str,
                        buyer=offer.from_id, price=offer.price,
                        due_step=step + delay,
                        ordinance=active_ordinance(ledger, step)["title"])
+
+
+def close_competing_offers_v4(ledger: Ledger, step: int, parcel_id: str,
+                              keep_offer_id: str) -> None:
+    """成立した区画に残る他の買付（届出待ちを含む）を、成立不能として終端させる。"""
+    ensure_v4_state(ledger)
+    for offer in ledger.offers.values():
+        if offer.parcel_id != parcel_id or offer.offer_id == keep_offer_id:
+            continue
+        if offer.status in ("open", "filed"):
+            offer.status = "void"
+            ledger._rec(step, "offer_void", offer_id=offer.offer_id,
+                        parcel_id=parcel_id, reason="parcel_already_transferred")
+    ledger.v4_pending = [row for row in ledger.v4_pending
+                         if row["offer_id"] == keep_offer_id
+                         or ledger.offers[row["offer_id"]].parcel_id != parcel_id]
 
 
 def settle_broker_fee_v4(ledger: Ledger, step: int, offer) -> Optional[Dict[str, Any]]:
@@ -273,10 +327,21 @@ def execute_pending_transfers_v4(ledger: Ledger, step: int) -> List[Dict[str, An
         offer = ledger.offers.get(row["offer_id"])
         if offer is None:
             continue
+        parcel = ledger.parcels.get(offer.parcel_id)
+        if (parcel is None or parcel.owner_id != row["owner"]
+                or offer.from_id == parcel.owner_id or offer.status != "filed"):
+            # 届出の間に区画の所有者が変わっていた。受諾した相手はもう所有者ではない。
+            offer.status = "void"
+            done.append(ledger._rec(step, "filing_void", offer_id=offer.offer_id,
+                                    parcel_id=offer.parcel_id, by=row["owner"],
+                                    reason="owner_changed"))
+            continue
         offer.status = "open"
         outcome = ledger.record_accept(step, offer.offer_id, row["owner"])
         if outcome.get("kind") == "transfer":
+            outcome["filed"] = True
             settle_broker_fee_v4(ledger, step, offer)
+            close_competing_offers_v4(ledger, step, offer.parcel_id, offer.offer_id)
         done.append(outcome)
     ledger.v4_pending = remaining
     return done
@@ -409,9 +474,11 @@ def broker_relay_rows(agent: Agent, ledger: Ledger, names: Dict[str, str]) -> Li
         if channel.get("broker") != agent.agent_id:
             continue
         parcel = ledger.parcels[offer.parcel_id]
+        # 表示する所有者は「取り次いだ時点の相手」。成立後の名義に書き換えない。
+        relayed_to = channel.get("to", "") or parcel.owner_id
         rows.append(f"  [{offer.offer_id}] {offer.parcel_id} {parcel.area_sqm}㎡ "
                     f"買主名義:{offer.under_name} {offer.price}万 第{offer.step}月 "
-                    f"所有者:{names.get(parcel.owner_id, parcel.owner_id)} "
+                    f"取次ぎ先:{names.get(relayed_to, relayed_to)} "
                     f"状態:{offer.status}")
     fee = ledger.v4_broker_fees.get(agent.agent_id, 0)
     rows.append(f"  仲介手数料の受領累計 {fee}万円")
@@ -631,7 +698,7 @@ def build_phase1_prompt_v4(agent: Agent, ledger: Ledger, step: int, n_steps: int
         rows += ["[自分の前月までの記憶]", agent.memory[:MAX_MEMORY_CHARS]]
     rows += ["[自分に実際に届いた情報]"] + observations_rows(agent, names)
     rows += ["[先月の自分の行為と、帳簿上の結果（機械記録）]",
-             own_results_text(agent.extra.get("last_month_results", []))]
+             own_results_text_v4(agent.extra.get("last_month_results", []))]
     rows += ["[施行中の条例]", ordinance_text(ledger, step)]
 
     if agent.agent_id in ledger.on_demand_financing:
@@ -660,7 +727,6 @@ def build_phase1_prompt_v4(agent: Agent, ledger: Ledger, step: int, n_steps: int
         rows += ["[近隣の土地登記（公開情報）]"] + neighbourhood_rows(agent, ledger, names, step)
     elif agent.role == "broker":
         rows += ["[自分が取り次いだ買付（機械記録）]"] + broker_relay_rows(agent, ledger, names)
-        rows += ["[公開されている土地登記（全区画）]"] + registry_rows(ledger, names)
     else:  # municipality / media
         if agent.extra.get("registry_stats_seen"):
             rows += ["[自分で調べた登記統計（名義別の保有面積）]"]
@@ -684,10 +750,19 @@ def build_phase1_prompt_v4(agent: Agent, ledger: Ledger, step: int, n_steps: int
 
 
 def build_phase2_prompt_v4(agent: Agent, ledger: Ledger, step: int, n_steps: int,
-                           names: Dict[str, str], offers: List[Any]) -> str:
+                           names: Dict[str, str], offers: List[Any],
+                           inbox: Optional[List[Dict[str, Any]]] = None) -> str:
     rows = [f"=== 第{step}月（応答） / 全{n_steps}月 ===",
-            "自分の土地に買付が届いた。受けるか、断るか、価格を返すかを決める。",
-            "[届いている買付]"]
+            "自分の土地に買付が届いた。受けるか、断るか、価格を返すかを決める。"]
+    if agent.memory:
+        rows += ["[自分の記憶]", agent.memory[:MAX_MEMORY_CHARS]]
+    # 今月すでに自分へ届いている情報は、同じ月の判断でも見えている。
+    snapshot = Agent(agent.agent_id, agent.role, agent.name, "")
+    snapshot.inbox = list(inbox if inbox is not None else agent.inbox)
+    rows += ["[今月自分に届いた情報]"] + observations_rows(snapshot, names)
+    rows += ["[先月の自分の行為と、帳簿上の結果（機械記録）]",
+             own_results_text_v4(agent.extra.get("last_month_results", []))]
+    rows += ["[届いている買付]"]
     rows += incoming_offers_rows(agent, ledger, names, offers)
     rows += ["[自分の所有物件]"] + own_parcels_rows(agent, ledger, names)
     rows += ["[近隣の土地登記（公開情報）]"] + neighbourhood_rows(agent, ledger, names, step)
@@ -697,6 +772,7 @@ def build_phase2_prompt_v4(agent: Agent, ledger: Ledger, step: int, n_steps: int
         "responses に、届いている買付ごとの決定を入れる。",
         "decision は accept（受ける）/ reject（断る）/ counter（価格を返す）/ "
         "no_response（今月は答えない）。",
+        "responses に入れなかった買付は、今月は答えなかったものとして記録される。",
         "counter のときだけ counter_price に希望額（万円の整数）を入れ、"
         "それ以外は0にする。答えない買付は responses に入れない。",
         f"feeling には今月の自分の実感を{MAX_FEELING_CHARS}字以内で書く。",
@@ -714,5 +790,6 @@ __all__ = [
     "own_parcels_rows", "neighbourhood_rows", "broker_relay_rows",
     "observations_rows", "phase1_schema_v4", "phase2_schema_v4",
     "build_system_prompt_v4", "build_phase1_prompt_v4", "build_phase2_prompt_v4",
-    "own_result_row", "own_results_text", "DECISION_VALUES", "INVESTIGATE_VALUES",
+    "own_result_row", "own_results_text_v4", "close_competing_offers_v4",
+    "DECISION_VALUES", "INVESTIGATE_VALUES",
 ]

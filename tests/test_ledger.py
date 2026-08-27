@@ -36,7 +36,9 @@ from src.field_v4 import (active_ordinance, build_phase1_prompt_v4,
                           incoming_offers_rows, neighbourhood_rows,
                           own_offers_rows, owners_with_offers, phase1_schema_v4,
                           phase2_schema_v4, record_offer_v4, registry_rows,
-                          registry_stats_rows, respond_to_offer_v4)  # noqa: E402
+                          registry_stats_rows, respond_to_offer_v4,
+                          close_competing_offers_v4, own_results_text_v4,
+                          broker_relay_rows)  # noqa: E402
 
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
 from src.schemas import action_schema  # noqa: E402
@@ -819,6 +821,89 @@ check("所有者には金額・名義・経路・評価額との比が事実と�
       and "1.50倍" in view_p2)
 check("応答フェーズにも評価語・当為は書かない",
       "すべき" not in view_p2 and "推奨" not in view_p2)
+
+print("== v4: Codex実装レビューで直した欠陥の固定 ==")
+
+L20 = mk4()
+check("存在しない買付には『答えない』も記帳できない",
+      respond_to_offer_v4(L20, 1, "O9999", "HH01", "no_response", 0)["reason"]
+      == "offer_not_open")
+o20 = record_offer_v4(L20, 1, AQ4, "P03", 2500, "A社", "direct", "", ["BR01"])["offer_id"]
+check("他人に届いた買付には『答えない』も記帳できない",
+      respond_to_offer_v4(L20, 1, o20, "HH01", "no_response", 0)["reason"] == "not_owner")
+
+L21 = mk4()
+a21 = record_offer_v4(L21, 1, AQ4, "P01", 3000, "A社", "direct", "", ["BR01"])["offer_id"]
+b21 = record_offer_v4(L21, 1, AQ4, "P01", 3300, "B社", "direct", "", ["BR01"])["offer_id"]
+respond_to_offer_v4(L21, 1, a21, "HH01", "accept", 0)
+check("成立した区画に残る他の買付は、その場で成立不能として終端する",
+      L21.offers[b21].status == "void")
+check("買い手が所有者になった区画で、自分の買付を自分で受けることはできない",
+      respond_to_offer_v4(L21, 2, b21, "AQ01", "accept", 0)["kind"] == "accept_rejected"
+      and sum(1 for r in L21.records if r["kind"] == "transfer") == 1)
+check("成立不能になった買付は応答対象に残らない",
+      "AQ01" not in owners_with_offers(L21, 2))
+
+L22 = mk4()
+enact_ordinance_v4(L22, 1, "MU01", "届出条例", "300㎡超は届出", 300, 2)
+x22 = record_offer_v4(L22, 2, AQ4, "P02", 5000, "A社", "direct", "", ["BR01"])["offer_id"]
+y22 = record_offer_v4(L22, 2, AQ4, "P02", 5200, "B社", "direct", "", ["BR01"])["offer_id"]
+respond_to_offer_v4(L22, 2, x22, "HH01", "accept", 0)
+respond_to_offer_v4(L22, 2, y22, "HH01", "accept", 0)
+done22 = execute_pending_transfers_v4(L22, 4)
+kinds22 = [r["kind"] for r in done22]
+check("同じ区画の届出待ちが2件あっても、成立するのは1件だけ",
+      kinds22.count("transfer") == 1
+      and sum(1 for r in L22.records if r["kind"] == "transfer") == 1)
+check("成立できなかった届出待ちは成立不能として終端する",
+      L22.offers[y22].status == "void" and L22.v4_pending == [])
+check("届出を終えた成立は、届出を経た成立として印が残る",
+      any(r.get("filed") for r in done22 if r["kind"] == "transfer"))
+
+L23 = mk4()
+o23 = record_offer_v4(L23, 1, AQ4, "P01", 3000, "A社", "direct", "", ["BR01"])["offer_id"]
+L23.v4_ordinance = {"step": 0, "effective_step": 1, "by": "MU01", "title": "t",
+                    "body": "b", "threshold_sqm": 50, "delay_months": 2}
+o23b = record_offer_v4(L23, 1, AQ4, "P03", 2500, "A社", "direct", "", ["BR01"])["offer_id"]
+respond_to_offer_v4(L23, 1, o23b, "HH02", "accept", 0)
+L23.parcels["P03"].owner_id = "HH01"      # 届出の間に所有者が変わった状況を作る
+void23 = execute_pending_transfers_v4(L23, 3)
+check("届出の間に所有者が変わった案件は成立させない",
+      void23 and void23[0]["kind"] == "filing_void"
+      and L23.parcels["P03"].owner_id == "HH01")
+
+L24 = mk4()
+mixed = record_offer_v4(L24, 1, AQ4, "P01", 3000, "A社", "direct", "BR01", ["BR01"])
+check("直接の買付に取次ぎ先を入れた指定は、黙って捨てずに不成立にする",
+      mixed["kind"] == "offer_rejected"
+      and mixed["reason"] == "broker_not_allowed_for_direct")
+
+L25 = mk4()
+o25 = record_offer_v4(L25, 1, AQ4, "P01", 3000, "A社", "broker", "BR01", ["BR01"])["offer_id"]
+respond_to_offer_v4(L25, 1, o25, "HH01", "accept", 0)
+BR25 = Agent("BR01", "broker", "B01", "仲介")
+relay25 = broker_relay_rows(BR25, L25, NAMES4)
+check("仲介の記録は、取り次いだ時点の相手のまま残る（成立後の名義に書き換えない）",
+      any("取次ぎ先:R01" in row for row in relay25))
+view_br = build_phase1_prompt_v4(BR25, L25, 2, 12, NAMES4, CFG4)
+check("仲介は全区画の登記を配られない（自分が扱った案件と手数料だけ）",
+      "[公開されている土地登記（全区画）]" not in view_br
+      and "[自分が取り次いだ買付（機械記録）]" in view_br)
+
+many = [own_result_row(1, "make_offer", f"P{i:02d}", {"kind": "offer"}) for i in range(1, 13)]
+check("自分の行為の結果は8件で切り捨てない",
+      own_results_text_v4(many).count("make_offer") == 12)
+
+L26 = mk4()
+o26 = record_offer_v4(L26, 1, AQ4, "P01", 3600, "A社", "direct", "", ["BR01"])["offer_id"]
+HH26 = Agent("HH01", "household", "R01", "住民")
+HH26.memory = "先月は仲介から連絡があった"
+inbox26 = [{"from": "BR01", "text": "湾岸で名義が変わっているようです", "step": 1,
+            "obs_id": "TALK-V01-M01-BR01", "location": "V01"}]
+view26 = build_phase2_prompt_v4(HH26, L26, 1, 12, NAMES4,
+                                owners_with_offers(L26, 1)["HH01"], inbox26)
+check("応答フェーズでも、その月にすでに届いていた情報と記憶が見えている",
+      "湾岸で名義が変わっている" in view26 and "先月は仲介から連絡があった" in view26)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
