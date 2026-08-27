@@ -28,6 +28,8 @@ V3_VERBS: Dict[str, Dict[str, str]] = {
         "accept_offer": "届いた売買買付を受ける (target=Oから始まる買付ID)",
         "counter_offer": "売買買付へ価格を返す (target=買付ID, amount=希望価格)",
         "reject_offer": "売買買付を断る (target=買付ID)",
+        "answer_broker_inquiry": ("仲介から届いた意向確認に答える "
+                                  "(target=Qから始まる照会ID, owner_intent=回答, asking_price=希望額か不明)"),
         "accept_lease_offer": "届いた長期賃貸申込みを受ける (target=Lから始まる申込ID)",
         "reject_lease_offer": "長期賃貸申込みを断る (target=申込ID)",
         "unlist": "売出しを取り下げる (target=区画ID)",
@@ -57,6 +59,11 @@ V3_VERBS: Dict[str, Dict[str, str]] = {
         "community_activity": "地域や業界の活動へ参加する",
         "circulate_listing": "物件情報を特定の相手へ伝える (target=相手ID)",
         "approach_owner": "所有者へ相談・意向確認を行う (target=所有者ID)",
+        "inquire_owner_intent": ("指定した区画の所有者へ売却・賃貸の意向を確認する "
+                                 "(target=区画ID, inquiry_id=依頼済みなら照会ID)"),
+        "report_owner_intent": ("所有者から得た回答を依頼主へ報告する "
+                                "(target=依頼主ID, inquiry_id=照会ID, owner_intent=回答, "
+                                "asking_price=希望額か不明)"),
         "hold": "特別な行動を取らない",
     },
     "acquirer": {
@@ -65,6 +72,10 @@ V3_VERBS: Dict[str, Dict[str, str]] = {
         "existing_asset_management": "既存保有・賃借物件を管理する",
         "financing_review": "資金調達、法務、税務を確認する",
         "contact_broker": "仲介へ相談・連絡する (target=仲介ID)",
+        "request_owner_inquiry": ("仲介へ特定区画の所有者意向の確認を依頼する "
+                                  "(target=仲介ID, parcel_id=区画ID)"),
+        "answer_broker_inquiry": ("仲介から届いた意向確認に答える "
+                                  "(target=Qから始まる照会ID, owner_intent=回答, asking_price=希望額か不明)"),
         "check_land_registry": "指定した1区画の土地登記を調べる (target=区画ID)",
         "due_diligence": "観測済みの物件を精査する (target=区画ID)",
         "make_offer": "公開売出しの有無を問わず区画へ直接買付を出す (target=区画ID, amount=価格)",
@@ -114,6 +125,41 @@ ROLE_TEXT = {
 }
 
 
+# 意向確認で運べる回答の語彙。どれを選ぶか（そもそも答えるか）は所有者が決める。
+# 未査定・未回答・回答拒否も事実として運べるようにし、値を埋めるために推測させない。
+OWNER_INTENT_VALUES = [
+    "willing_to_sell", "willing_to_lease", "not_willing", "undecided",
+    "unknown", "not_asked", "declined_to_answer",
+]
+PRICE_UNKNOWN_VALUES = ("unknown", "not_asked", "declined_to_answer")
+INQUIRY_ROWS = 12
+
+
+def normalize_price_value(value: Any) -> Any:
+    """希望額の欄を、実額（int）か『不明である』という事実（文字列）へ揃える。
+
+    値が無いことは「0円」ではない。埋められなかった欄を金額に化けさせないため、
+    数値でないものは unknown 系の事実か、成立しない入力として扱う。
+    """
+    text = str(value if value is not None else "").strip().lower()
+    if text in PRICE_UNKNOWN_VALUES:
+        return text
+    if text in ("", "-", "none", "null"):
+        return "unknown"
+    cleaned = text.replace(",", "").replace("万円", "").replace("万", "").strip()
+    try:
+        number = int(float(cleaned))
+    except (TypeError, ValueError):
+        return None
+    if number < 0:
+        return None
+    return number
+
+
+def price_text(value: Any) -> str:
+    return f"{value}万" if isinstance(value, int) else str(value)
+
+
 def verbs_for_v3(role: str) -> List[str]:
     return list(V3_VERBS[role])
 
@@ -128,6 +174,10 @@ def action_schema_v3(agent: Agent) -> Dict[str, Any]:
             "target": {"type": "string"},
             "amount": {"type": "integer"},
             "under_name": {"type": "string", "enum": allowed},
+            "parcel_id": {"type": "string"},
+            "inquiry_id": {"type": "string"},
+            "owner_intent": {"type": "string", "enum": OWNER_INTENT_VALUES},
+            "asking_price": {"type": "string"},
             "note": {"type": "string"},
             "evidence": {"type": "array", "items": {"type": "string"}},
         }
@@ -170,6 +220,14 @@ def action_schema_v3(agent: Agent) -> Dict[str, Any]:
         "reasoning": {"type": "string"},
         "evidence": {"type": "array", "items": {"type": "string"}},
     }
+    if agent.role == "broker":
+        props["parcel_id"] = {"type": "string"}
+        props["inquiry_id"] = {"type": "string"}
+        props["owner_intent"] = {"type": "string", "enum": OWNER_INTENT_VALUES}
+        props["asking_price"] = {"type": "string"}
+    elif agent.role == "household":
+        props["owner_intent"] = {"type": "string", "enum": OWNER_INTENT_VALUES}
+        props["asking_price"] = {"type": "string"}
     return {"type": "object", "properties": props, "required": list(props)}
 
 
@@ -278,7 +336,12 @@ direct発言はutterance_toで指定した一主体だけに届く。全員共�
 operations, location, utterance, utterance_channel, utterance_to, memory, reasoning, evidence, goal_assessment, strategy,
 next_milestone, expected_goal_effect, alternatives, revision_reasonを必ず含める。
 operationsは1〜{int(agent.extra.get('monthly_operation_capacity', 6))}件。各要素には
-action_type, target, amount, under_name, note, evidenceを含める。
+action_type, target, amount, under_name, parcel_id, inquiry_id, owner_intent,
+asking_price, note, evidenceを含める。
+parcel_idは区画を伴う実務で使い、伴わなければ空文字。inquiry_idは既存の照会を指すときだけ使う。
+owner_intentとasking_priceは意向確認に答える実務でだけ意味を持ち、該当しなければ
+owner_intent="not_asked"、asking_price="not_asked"を入れる。
+asking_priceは万円の数値か unknown / not_asked / declined_to_answer を文字列で入れる。
 金額単位は万円。各実務で不要なtargetは空文字、不要なamountは0、noteは140字以内。
 evidenceは今月の観測に表示されたIDだけを引用し、根拠がなければ[]。
 観測の角括弧内に表示されるIDは、そのままtargetにもevidenceにも使える同一の識別子である。
@@ -287,10 +350,18 @@ memoryは{MAX_MEMORY_CHARS}字以内、reasoningは80字以内。
 説明文を付けずJSONだけ返す。
 """
     else:
+        extra_fields = {
+            "broker": ("parcel_id, inquiry_id, owner_intent, asking_price も含める。"
+                       "parcel_idは区画を伴う行動、inquiry_idは既存の照会を指すときに使う。"),
+            "household": ("owner_intent, asking_price も含める。"
+                          "意向確認に答えるとき以外は owner_intent=\"not_asked\"、"
+                          "asking_price=\"not_asked\" を入れる。"),
+        }.get(agent.role, "")
         text += f"""
 --- JSON出力 ---
 action_type, target, amount, location, utterance, utterance_channel,
 utterance_to, memory, reasoning, evidence を必ず含める。
+{extra_fields}
 金額単位は万円。不要なtargetは空文字、不要なamountは0、発言しない場合はutteranceを空文字にする。
 evidenceは今月の観測に表示されたIDだけを引用し、根拠がなければ[]。
 観測の角括弧内に表示されるIDは、そのままtargetにもevidenceにも使える同一の識別子である。
@@ -396,6 +467,137 @@ def own_results_text(rows: List[Dict[str, Any]]) -> str:
     return "\n".join(out)
 
 
+# ---------------------------------------------------------------------------
+# 意向確認・案件記録の観測（台帳が持っている事実を、そのまま隠さず出す）
+#
+# ここに書いてよいのは帳簿上の事実と出典IDだけである。
+# 「再照会は不要」「確認が古い」「次はこうすべき」といった評価・当為・自動判定は書かない。
+# ---------------------------------------------------------------------------
+
+INQUIRY_RESPONSE_KINDS = {
+    "counter", "reject", "transfer", "lease_control", "lease_reject",
+    "inquiry_answer", "inquiry_report",
+}
+
+
+def _inquiry_state_text(row: Dict[str, Any], names: Dict[str, str]) -> str:
+    parts = [f"[{row['id']}]", row["parcel_id"], f"状態:{row['status']}"]
+    if row.get("requested_step"):
+        client = names.get(row["client"], row["client"]) or "-"
+        parts.append(f"依頼:{client}(第{row['requested_step']}月)")
+    if row.get("asked_step"):
+        owner = names.get(row["owner"], row["owner"]) or "-"
+        parts.append(f"照会:{owner}(第{row['asked_step']}月)")
+    if row.get("answered_step"):
+        parts.append(f"回答:第{row['answered_step']}月 {row['owner_intent']} "
+                     f"希望額:{price_text(row['asking_price'])}")
+    if row.get("reported_step"):
+        to = names.get(row["reported_to"], row["reported_to"]) or "-"
+        parts.append(f"報告:{to}(第{row['reported_step']}月) {row['reported_intent']} "
+                     f"希望額:{price_text(row['reported_price'])}")
+    return "  " + " ".join(parts)
+
+
+def owner_inquiries_text(agent: Agent, ledger: Ledger,
+                         names: Dict[str, str]) -> str:
+    ensure_v3_state(ledger)
+    rows = [r for r in ledger.v3_inquiries.values()
+            if r["owner"] == agent.agent_id and r["status"] == "asked"]
+    if not rows:
+        return "  （届いていない）"
+    return "\n".join(
+        f"  [{r['id']}] {r['parcel_id']} 仲介:{names.get(r['broker'], r['broker'])} "
+        f"照会:第{r['asked_step']}月"
+        + (f"「{r['note']}」" if r.get("note") else "")
+        for r in rows[-INQUIRY_ROWS:])
+
+
+def broker_inquiries_text(agent: Agent, ledger: Ledger,
+                          names: Dict[str, str]) -> str:
+    ensure_v3_state(ledger)
+    rows = [r for r in ledger.v3_inquiries.values()
+            if r["broker"] == agent.agent_id]
+    if not rows:
+        return "  （なし）"
+    return "\n".join(_inquiry_state_text(r, names) for r in rows[-INQUIRY_ROWS:])
+
+
+def client_inquiries_text(agent: Agent, ledger: Ledger,
+                          names: Dict[str, str]) -> str:
+    ensure_v3_state(ledger)
+    rows = [r for r in ledger.v3_inquiries.values()
+            if r["client"] == agent.agent_id or r["reported_to"] == agent.agent_id]
+    if not rows:
+        return "  （なし）"
+    return "\n".join(_inquiry_state_text(r, names) for r in rows[-INQUIRY_ROWS:])
+
+
+def acquirer_pipeline_text(agent: Agent, ledger: Ledger,
+                           names: Dict[str, str]) -> str:
+    """自社が関与した区画の、帳簿上の経過を1区画1行で出す（件数の切り捨てなし）。"""
+    ensure_v3_state(ledger)
+    aid = agent.agent_id
+    rows: Dict[str, Dict[str, Any]] = {}
+
+    def slot(pid: str) -> Dict[str, Any]:
+        return rows.setdefault(pid, {"offers": [], "leases": [], "inquiries": [],
+                                     "response": None})
+
+    for offer in ledger.offers.values():
+        if offer.from_id == aid:
+            slot(offer.parcel_id)["offers"].append(offer)
+    for lease in ledger.v3_lease_offers.values():
+        if lease["from"] == aid:
+            slot(lease["parcel_id"])["leases"].append(lease)
+    for inquiry in ledger.v3_inquiries.values():
+        if inquiry["client"] == aid or inquiry["reported_to"] == aid:
+            slot(inquiry["parcel_id"])["inquiries"].append(inquiry)
+    last_action = agent.extra.get("parcel_last_action", {})
+    for pid in last_action:
+        if pid in ledger.parcels:
+            slot(pid)
+    for record in ledger.records:
+        pid = record.get("parcel_id")
+        if pid not in rows or record.get("kind") not in INQUIRY_RESPONSE_KINDS:
+            continue
+        if aid in (record.get("by"), record.get("from_id"), record.get("broker")):
+            continue
+        current = rows[pid]["response"]
+        if current is None or record.get("step", 0) >= current["step"]:
+            rows[pid]["response"] = {"step": record.get("step", 0),
+                                     "kind": record.get("kind", "")}
+    if not rows:
+        return "  （自社が関与した区画はまだない）"
+
+    checked = agent.extra.get("land_registry_checked", {})
+    results = agent.extra.get("land_registry_result", {})
+    out = []
+    for pid in sorted(rows):
+        data = rows[pid]
+        parts = [f"  {pid}"]
+        action = last_action.get(pid)
+        if action:
+            parts.append(f"自社最終行動:{action.get('action', '-')}"
+                         f"(第{action.get('step')}月/{action.get('outcome', '-')})")
+        else:
+            parts.append("自社最終行動:-")
+        response = data["response"]
+        parts.append(f"相手最終返答:{response['kind']}(第{response['step']}月)"
+                     if response else "相手最終返答:-")
+        prices = [f"買付{o.price}万" for o in data["offers"][-1:]]
+        prices += [f"賃借{o['rent']}万/月" for o in data["leases"][-1:]]
+        parts.append("提示額:" + ("/".join(prices) if prices else "-"))
+        states = [f"{o.offer_id}={o.status}" for o in data["offers"]]
+        states += [f"{o['id']}={o['status']}" for o in data["leases"]]
+        states += [f"{q['id']}={q['status']}" for q in data["inquiries"]]
+        parts.append("状態:" + ("/".join(states) if states else "-"))
+        label = checked.get(pid, "なし")
+        result = results.get(pid, "")
+        parts.append(f"登記確認:{label}" + (f"({result})" if result else ""))
+        out.append(" ".join(parts))
+    return "\n".join(out)
+
+
 def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                          names: Dict[str, str], cfg: Dict[str, Any]) -> str:
     ensure_v3_state(ledger)
@@ -420,6 +622,8 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
             rows.append("  （所有物件なし）")
         rows += ["[自分に届いた売買買付]", _sale_offers(agent, ledger)]
         rows += ["[自分に届いた長期賃貸申込み]", _lease_offers(agent, ledger)]
+        rows += ["[自分に届いた仲介からの意向確認]",
+                 owner_inquiries_text(agent, ledger, names)]
     elif agent.role == "business":
         occupied = [p for p in ledger.parcels.values() if p.tenant_id == agent.agent_id]
         rows.append("[自分の店舗・施設]")
@@ -433,6 +637,8 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         rows.extend("  " + _parcel_text(p, names, True) for p in public)
         if not public:
             rows.append("  （公開案件なし）")
+        rows += ["[自分が扱っている意向確認（機械記録）]",
+                 broker_inquiries_text(agent, ledger, names)]
     elif agent.role == "acquirer":
         # 区画ID・地区・用途は誰でも見られる公開地図。所有名義や評価額は含めない。
         # これにより取得主体は売出しがなくても調査対象を自分で選べる。
@@ -466,8 +672,8 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         rows.extend("  " + _parcel_text(p, names) for p in controlled)
         if not controlled:
             rows.append("  （なし）")
-        own_sales = [o for o in ledger.offers.values() if o.from_id == agent.agent_id][-12:]
-        rows.append("[自社が出した直近の売買買付]")
+        own_sales = [o for o in ledger.offers.values() if o.from_id == agent.agent_id]
+        rows.append("[自社が出した売買買付（全件）]")
         rows.extend(
             f"  [{o.offer_id}] {o.parcel_id} 名義{o.under_name} {o.price}万 "
             f"状態:{o.status}" + (f" 逆提示{o.counter_price}万" if o.counter_price else "")
@@ -476,8 +682,8 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         if not own_sales:
             rows.append("  （なし）")
         own_leases = [o for o in ledger.v3_lease_offers.values()
-                      if o["from"] == agent.agent_id][-12:]
-        rows.append("[自社が出した直近の長期賃借・運営申込み]")
+                      if o["from"] == agent.agent_id]
+        rows.append("[自社が出した長期賃借・運営申込み（全件）]")
         rows.extend(f"  [{o['id']}] {o['parcel_id']} 名義{o['under_name']} "
                     f"{o['rent']}万/月 状態:{o['status']}" for o in own_leases)
         if not own_leases:
@@ -488,10 +694,18 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         rows.extend("  " + _parcel_text(p, names, True) for p in public)
         if not public:
             rows.append("  （公開案件なし）")
+        rows += ["[自分に届いた仲介からの意向確認]",
+                 owner_inquiries_text(agent, ledger, names)]
+        rows += ["[仲介への意向確認の依頼と、その進行（機械記録）]",
+                 client_inquiries_text(agent, ledger, names)]
+        rows += ["[自社の案件記録（機械記録・区画別・全件）]",
+                 acquirer_pipeline_text(agent, ledger, names)]
         registry_targets = set(agent.extra.get("land_registry_targets", []))
         if registry_targets:
+            checked = agent.extra.get("land_registry_checked", {})
             rows.append("[自分で調べた土地登記]")
             rows.extend("  " + _parcel_text(p, names, True)
+                        + f" 確認:{checked.get(p.pid, '-')}"
                         for p in sorted(ledger.parcels.values(), key=lambda x: x.pid)
                         if p.pid in registry_targets)
     elif agent.role in ("media", "municipality"):
@@ -533,12 +747,20 @@ def seed_acquirer_intelligence_v3(
     else:
         targets = []
     agent.extra["land_registry_targets"] = targets
+    checked = agent.extra.setdefault("land_registry_checked", {})
+    snapshots = agent.extra.setdefault("land_registry_snapshot", {})
+    for pid in targets:
+        checked[pid] = "参入前調査"
+        snapshots[pid] = registry_fact(ledger.parcels[pid])
 
 
 def ensure_v3_state(ledger: Ledger) -> None:
     if not hasattr(ledger, "v3_lease_offers"):
         ledger.v3_lease_offers = {}
         ledger.v3_lease_seq = 0
+    if not hasattr(ledger, "v3_inquiries"):
+        ledger.v3_inquiries = {}
+        ledger.v3_inquiry_seq = 0
 
 
 def make_lease_offer(ledger: Ledger, step: int, parcel_id: str, by: Agent,
@@ -599,6 +821,202 @@ def list_for_lease(ledger: Ledger, step: int, parcel_id: str, by: str,
                            by=by, reason="invalid_target_or_amount")
     p.lease_listed_rent = int(rent)
     return ledger._rec(step, "lease_listing", parcel_id=parcel_id, by=by, rent=int(rent))
+
+
+# ---------------------------------------------------------------------------
+# 意向確認（依頼 → 照会 → 回答 → 報告）
+#
+# 世界が用意するのは「区画・意向・希望額を事実として運べる」という物理だけである。
+# 誰に照会するか、答えるか、何と答えるか、報告するかは、すべて各主体が決める。
+# ---------------------------------------------------------------------------
+
+
+def _new_inquiry_id(ledger: Ledger) -> str:
+    ledger.v3_inquiry_seq += 1
+    return f"Q{ledger.v3_inquiry_seq:04d}"
+
+
+def request_owner_inquiry(ledger: Ledger, step: int, by: str, broker_id: str,
+                          parcel_id: str, note: str) -> Dict[str, Any]:
+    """依頼主が仲介へ、特定区画の所有者意向の確認を依頼する。"""
+    ensure_v3_state(ledger)
+    parcel = ledger.parcels.get(parcel_id)
+    if parcel is None or parcel.use == "public":
+        return ledger._rec(step, "inquiry_rejected", by=by, parcel_id=parcel_id,
+                           reason="invalid_parcel")
+    if broker_id == by:
+        return ledger._rec(step, "inquiry_rejected", by=by, parcel_id=parcel_id,
+                           reason="self_referential")
+    inquiry_id = _new_inquiry_id(ledger)
+    ledger.v3_inquiries[inquiry_id] = {
+        "id": inquiry_id, "parcel_id": parcel_id, "client": by, "broker": broker_id,
+        "owner": "", "status": "requested", "requested_step": step,
+        "asked_step": None, "answered_step": None, "reported_step": None,
+        "owner_intent": "not_asked", "asking_price": "not_asked",
+        "reported_intent": "", "reported_price": "", "reported_to": "",
+        "note": note[:MAX_TEXT_CHARS],
+    }
+    return ledger._rec(step, "inquiry_request", inquiry_id=inquiry_id,
+                       parcel_id=parcel_id, client=by, broker=broker_id,
+                       note=note[:MAX_TEXT_CHARS])
+
+
+def inquire_owner_intent(ledger: Ledger, step: int, broker_id: str,
+                         parcel_id: str, inquiry_id: str, note: str) -> Dict[str, Any]:
+    """仲介が、指定区画の現所有者へ意向を確認する。
+
+    宛先は買付と同じく区画で指定する。誰が所有者かは台帳が解決する
+    （`record_offer` が区画から所有者を解決するのと同じ物理）。
+    """
+    ensure_v3_state(ledger)
+    inquiry_id = ledger._normalize_id(inquiry_id)
+    row = ledger.v3_inquiries.get(inquiry_id) if inquiry_id else None
+    if inquiry_id and row is None:
+        return ledger._rec(step, "inquiry_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="no_such_inquiry")
+    if row is not None and row["broker"] != broker_id:
+        return ledger._rec(step, "inquiry_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="not_your_inquiry")
+    target_parcel = parcel_id or (row["parcel_id"] if row else "")
+    parcel = ledger.parcels.get(target_parcel)
+    if parcel is None or parcel.use == "public":
+        return ledger._rec(step, "inquiry_rejected", by=broker_id,
+                           parcel_id=target_parcel, reason="invalid_parcel")
+    owner_id = parcel.owner_id
+    if owner_id == broker_id:
+        return ledger._rec(step, "inquiry_rejected", by=broker_id,
+                           parcel_id=target_parcel, reason="self_referential")
+    if row is None:
+        inquiry_id = _new_inquiry_id(ledger)
+        row = {
+            "id": inquiry_id, "parcel_id": target_parcel, "client": "",
+            "broker": broker_id, "owner": owner_id, "status": "asked",
+            "requested_step": None, "asked_step": step, "answered_step": None,
+            "reported_step": None, "owner_intent": "unknown",
+            "asking_price": "unknown", "reported_intent": "", "reported_price": "",
+            "reported_to": "", "note": note[:MAX_TEXT_CHARS],
+        }
+        ledger.v3_inquiries[inquiry_id] = row
+    else:
+        row.update(owner=owner_id, status="asked", asked_step=step,
+                   parcel_id=target_parcel, owner_intent="unknown",
+                   asking_price="unknown", note=note[:MAX_TEXT_CHARS])
+    return ledger._rec(step, "inquiry_asked", inquiry_id=row["id"],
+                       parcel_id=target_parcel, broker=broker_id, owner=owner_id,
+                       client=row["client"], note=note[:MAX_TEXT_CHARS])
+
+
+def answer_owner_inquiry(ledger: Ledger, step: int, inquiry_id: str, by: str,
+                         owner_intent: str, asking_price: Any,
+                         note: str) -> Dict[str, Any]:
+    """照会を受けた所有者が、自分の意向と希望額を答える。"""
+    ensure_v3_state(ledger)
+    inquiry_id = ledger._normalize_id(inquiry_id)
+    row = ledger.v3_inquiries.get(inquiry_id)
+    if row is None:
+        return ledger._rec(step, "inquiry_answer_rejected", by=by,
+                           inquiry_id=inquiry_id, reason="no_such_inquiry")
+    if row["owner"] != by:
+        return ledger._rec(step, "inquiry_answer_rejected", by=by,
+                           inquiry_id=inquiry_id, reason="not_asked_party")
+    if row["status"] not in ("asked", "answered", "reported"):
+        return ledger._rec(step, "inquiry_answer_rejected", by=by,
+                           inquiry_id=inquiry_id,
+                           reason="inquiry_" + str(row["status"]))
+    if owner_intent not in OWNER_INTENT_VALUES:
+        return ledger._rec(step, "inquiry_answer_rejected", by=by,
+                           inquiry_id=inquiry_id, reason="invalid_owner_intent",
+                           given=owner_intent)
+    price = normalize_price_value(asking_price)
+    if price is None:
+        return ledger._rec(step, "inquiry_answer_rejected", by=by,
+                           inquiry_id=inquiry_id, reason="invalid_price_value",
+                           given=str(asking_price))
+    row.update(status="answered", owner_intent=owner_intent, asking_price=price,
+               answered_step=step, note=note[:MAX_TEXT_CHARS])
+    return ledger._rec(step, "inquiry_answer", inquiry_id=inquiry_id,
+                       parcel_id=row["parcel_id"], owner=by, broker=row["broker"],
+                       owner_intent=owner_intent, asking_price=price,
+                       note=note[:MAX_TEXT_CHARS])
+
+
+def report_owner_intent(ledger: Ledger, step: int, broker_id: str, client_id: str,
+                        inquiry_id: str, owner_intent: str, asking_price: Any,
+                        note: str) -> Dict[str, Any]:
+    """仲介が依頼主へ、区画・意向・希望額を事実として報告する。"""
+    ensure_v3_state(ledger)
+    inquiry_id = ledger._normalize_id(inquiry_id)
+    row = ledger.v3_inquiries.get(inquiry_id)
+    if row is None:
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="no_such_inquiry")
+    if row["broker"] != broker_id:
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="not_your_inquiry")
+    if client_id == broker_id:
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="self_referential")
+    if owner_intent not in OWNER_INTENT_VALUES:
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="invalid_owner_intent",
+                           given=owner_intent)
+    price = normalize_price_value(asking_price)
+    if price is None:
+        return ledger._rec(step, "inquiry_report_rejected", by=broker_id,
+                           inquiry_id=inquiry_id, reason="invalid_price_value",
+                           given=str(asking_price))
+    if not row["client"]:
+        row["client"] = client_id
+    row.update(status="reported", reported_step=step, reported_intent=owner_intent,
+               reported_price=price, reported_to=client_id,
+               note=note[:MAX_TEXT_CHARS])
+    return ledger._rec(step, "inquiry_report", inquiry_id=inquiry_id,
+                       parcel_id=row["parcel_id"], broker=broker_id, to=client_id,
+                       owner_intent=owner_intent, asking_price=price,
+                       note=note[:MAX_TEXT_CHARS])
+
+
+# ---------------------------------------------------------------------------
+# 土地登記の照会（実際に読み直し、前回との異同を返す）
+# ---------------------------------------------------------------------------
+
+
+def registry_fact(parcel: Parcel) -> str:
+    """その区画の登記事実（照会で得られる内容）。"""
+    return (f"名義:{parcel.registered_name} 用途:{parcel.use} "
+            f"面積:{parcel.area_sqm}㎡")
+
+
+def check_land_registry_v3(ledger: Ledger, step: int, agent: Agent,
+                           parcel_id: str) -> Dict[str, Any]:
+    """指定区画の登記を実際に読み直し、前回照会時との異同を事実として返す。"""
+    parcel = ledger.parcels.get(parcel_id)
+    if parcel is None:
+        return {"kind": "invalid_action", "reason": "no_such_parcel",
+                "target": parcel_id}
+    targets = agent.extra.setdefault("land_registry_targets", [])
+    if parcel_id not in targets:
+        targets.append(parcel_id)
+    checked = agent.extra.setdefault("land_registry_checked", {})
+    snapshots = agent.extra.setdefault("land_registry_snapshot", {})
+    results = agent.extra.setdefault("land_registry_result", {})
+    fact = registry_fact(parcel)
+    previous_label = checked.get(parcel_id, "")
+    previous_fact = snapshots.get(parcel_id)
+    if previous_fact is None:
+        result = "初回照会"
+    elif previous_fact == fact:
+        result = previous_label + "の照会と同一"
+    else:
+        result = previous_label + "から変化 " + previous_fact + " → " + fact
+    checked[parcel_id] = f"第{step}月"
+    snapshots[parcel_id] = fact
+    results[parcel_id] = result
+    return ledger._rec(step, "land_registry_check", by=agent.agent_id,
+                       parcel_id=parcel_id, previous=previous_label or "なし",
+                       fact=fact, result=result,
+                       changed=bool(previous_fact is not None
+                                    and previous_fact != fact))
 
 
 def settle_v3_control(ledger: Ledger, step: int) -> None:

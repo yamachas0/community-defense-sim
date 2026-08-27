@@ -20,7 +20,10 @@ from src.agents import Agent  # noqa: E402
 from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                           build_system_prompt_v3, build_user_prompt_v3, control_share,
                           ensure_v3_state, list_for_lease, make_lease_offer,
-                          own_result_row, own_results_text,
+                          acquirer_pipeline_text, answer_owner_inquiry,
+                          check_land_registry_v3, inquire_owner_intent,
+                          own_result_row, own_results_text, report_owner_intent,
+                          request_owner_inquiry,
                           resolve_lease_offer, seed_acquirer_intelligence_v3)  # noqa: E402
 
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
@@ -370,6 +373,118 @@ buyer_r = Agent("AQ01", "acquirer", "X社", "外部会社",
 view_b = build_user_prompt_v3(buyer_r, L, 3, 60, names_v3, cfg_id)
 check("X社にも同じ機械記録が返る",
       "offer_rejected" in view_b and "理由=already_owner" in view_b)
+
+print("== 案2: 仲介が区画・意向・希望額を事実として運ぶ ==")
+L = mk()
+L.enable_on_demand_financing(["AQ01"])
+buyer_q = Agent("AQ01", "acquirer", "X社", "外部会社",
+                extra={"mandate": "m", "aliases": ["A社"]})
+broker_q = Agent("BR01", "broker", "B01", "地域の仲介")
+owner_q = Agent("HH01", "household", "R01", "所有者")
+names_q = {"HH01": "R01", "HH02": "R02", "BZ01": "T01", "BR01": "B01",
+           "AQ01": "X社", "MU01": "G01"}
+req = request_owner_inquiry(L, 1, "AQ01", "BR01", "P01", "P01の意向を確認したい")
+qid = req.get("inquiry_id", "")
+check("依頼が台帳に記録される", req["kind"] == "inquiry_request" and qid.startswith("Q"))
+check("公共区画への依頼は不成立",
+      request_owner_inquiry(L, 1, "AQ01", "BR01", "P04", "")["kind"] == "inquiry_rejected")
+asked = inquire_owner_intent(L, 2, "BR01", "P01", qid, "いかがでしょう")
+check("仲介の照会で依頼が進む",
+      asked["kind"] == "inquiry_asked" and L.v3_inquiries[qid]["status"] == "asked")
+check("宛先は区画で指定し、現所有者は台帳が解決する",
+      asked["owner"] == "HH01")
+check("存在しない区画への照会は不成立",
+      inquire_owner_intent(L, 2, "BR01", "P99", "", "")["reason"] == "invalid_parcel")
+check("他社の照会は進められない",
+      inquire_owner_intent(L, 2, "BR02", "P01", qid, "")["reason"]
+      == "not_your_inquiry")
+owner_q.extra["inbox"] = []
+owner_view_q = build_user_prompt_v3(owner_q, L, 3, 60, names_q, cfg_id)
+check("照会は所有者の観測へ台帳の記録として届く",
+      f"[{qid}] P01" in owner_view_q and "仲介:B01" in owner_view_q)
+check("照会を受けていない主体は答えられない",
+      answer_owner_inquiry(L, 3, qid, "HH02", "willing_to_sell", "3000", "")["reason"]
+      == "not_asked_party")
+check("数値でない希望額は事実として成立しない",
+      answer_owner_inquiry(L, 3, qid, "HH01", "willing_to_sell", "応相談", "")["reason"]
+      == "invalid_price_value")
+ans = answer_owner_inquiry(L, 3, qid, "HH01", "willing_to_sell", "3200", "条件次第")
+check("所有者の回答が区画・意向・希望額として台帳に載る",
+      ans["kind"] == "inquiry_answer" and ans["asking_price"] == 3200
+      and ans["owner_intent"] == "willing_to_sell")
+rep = report_owner_intent(L, 4, "BR01", "AQ01", qid, "willing_to_sell", "3200", "報告")
+check("仲介の報告が依頼主宛に台帳へ載る",
+      rep["kind"] == "inquiry_report" and rep["to"] == "AQ01")
+client_view = build_user_prompt_v3(buyer_q, L, 5, 60, names_q, cfg_id)
+check("報告は依頼主の観測へ機械記録として届く",
+      f"[{qid}]" in client_view and "willing_to_sell" in client_view
+      and "希望額:3200万" in client_view)
+broker_view = build_user_prompt_v3(broker_q, L, 5, 60, names_q, cfg_id)
+check("仲介は自分が扱う照会の進行状況を観測できる",
+      f"[{qid}]" in broker_view and "状態:reported" in broker_view)
+L2 = mk()
+q2 = inquire_owner_intent(L2, 1, "BR01", "P01", "", "")["inquiry_id"]
+for value in ("unknown", "not_asked", "declined_to_answer"):
+    check(f"未回答・拒否も事実として運べる（{value}）",
+          answer_owner_inquiry(L2, 2, q2, "HH01", value, value, "")["kind"]
+          == "inquiry_answer")
+check("依頼のない自発的な照会も成立する", L2.v3_inquiries[q2]["client"] == "")
+check("存在しない照会IDへの回答は不成立",
+      answer_owner_inquiry(L2, 2, "Q9999", "HH01", "unknown", "unknown", "")["reason"]
+      == "no_such_inquiry")
+check("他社の照会は報告できない",
+      report_owner_intent(L2, 3, "BR02", "AQ01", q2, "unknown", "unknown", "")["reason"]
+      == "not_your_inquiry")
+broker_schema = action_schema_v3(broker_q)
+check("仲介の出力に区画・照会・意向・希望額の欄がある",
+      all(k in broker_schema["required"]
+          for k in ("parcel_id", "inquiry_id", "owner_intent", "asking_price")))
+check("意向の語彙に unknown / not_asked / 回答拒否が含まれる",
+      all(v in broker_schema["properties"]["owner_intent"]["enum"]
+          for v in ("unknown", "not_asked", "declined_to_answer")))
+
+print("== 案3: 案件パイプラインと登記の再照会 ==")
+L3 = mk()
+L3.enable_on_demand_financing(["AQ01"])
+buyer_p = Agent("AQ01", "acquirer", "X社", "外部会社",
+                extra={"mandate": "m", "aliases": ["A社"]})
+seed_acquirer_intelligence_v3(
+    buyer_p, L3, {"acquirer_initial_intelligence": {
+        "market_research": True, "land_registry_scope": "non_public"}})
+check("参入前に取得した登記は確認月が『参入前調査』として残る",
+      buyer_p.extra["land_registry_checked"]["P01"] == "参入前調査")
+first = check_land_registry_v3(L3, 5, buyer_p, "P01")
+check("再照会は no-op ではなく、前回との異同を返す",
+      first["kind"] == "land_registry_check"
+      and first["result"] == "参入前調査の照会と同一" and first["changed"] is False)
+offer_p = L3.record_offer(6, "P01", "AQ01", 3000, under_name="A社")
+L3.record_accept(7, offer_p["offer_id"], "HH01")
+second = check_land_registry_v3(L3, 8, buyer_p, "P01")
+check("名義が動いていれば差異が返る",
+      second["changed"] is True and "から変化" in second["result"])
+check("存在しない区画の照会は不成立",
+      check_land_registry_v3(L3, 8, buyer_p, "P99")["reason"] == "no_such_parcel")
+buyer_p.extra["parcel_last_action"] = {
+    "P01": {"step": 6, "action": "make_offer", "outcome": "offer", "amount": 3000}}
+pipeline = acquirer_pipeline_text(buyer_p, L3, names_q)
+check("案件記録に自社の行動・相手の返答・提示額・状態・登記確認月が並ぶ",
+      all(k in pipeline for k in ("自社最終行動:make_offer", "相手最終返答:transfer",
+                                  "提示額:買付3000万", "状態:", "登記確認:第8月")))
+check("案件記録に評価語・当為・自動判定が混ざらない",
+      not any(w in pipeline for w in (
+          "再照会", "不要", "古い", "すべき", "望ましい", "優先", "確率",
+          "要再調査", "推奨")))
+many = mk()
+many.enable_on_demand_financing(["AQ01"])
+big_buyer = Agent("AQ01", "acquirer", "X社", "外部会社",
+                  extra={"mandate": "m", "aliases": ["A社"]})
+for i in range(14):
+    many.record_offer(i + 1, "P01" if i % 2 else "P03", "AQ01", 2000 + i,
+                      under_name="X社")
+big_view = build_user_prompt_v3(big_buyer, many, 20, 60, names_q, cfg_id)
+check("自社の買付は件数を切り捨てずに全件出る",
+      all(f"[O{n:04d}]" in big_view for n in range(1, 15))
+      and "[自社が出した売買買付（全件）]" in big_view)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")

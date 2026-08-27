@@ -355,6 +355,7 @@ _PARCEL_RE = re.compile(r"\bP\d{2}\b")
 _OFFER_RE = re.compile(r"\bO\d{4}\b")
 _AGENT_RE = re.compile(r"\b(?:HH|BZ|BR|AQ|MU|MD)\d{2}\b")
 _VENUE_RE = re.compile(r"\bV\d{2}\b")
+_INQUIRY_RE = re.compile(r"\bQ\d{4}\b")
 _STEP_RE = re.compile(r"第\s*(\d+)\s*月")
 _OBSERVATION_ID_RE = re.compile(
     r"\[((?:SALE|UTT|MSG|NEWS|OFFER|LEASE|TALK)-[^\]]+|[OLQ]\d{4})\]")
@@ -428,6 +429,7 @@ class MockClient:
                      schema: Optional[Dict[str, Any]] = None) -> str:
         parcels = sorted(set(_PARCEL_RE.findall(user_prompt)))
         offers = sorted(set(_OFFER_RE.findall(user_prompt)))
+        inquiries = sorted(set(_INQUIRY_RE.findall(user_prompt)))
         agents = sorted(set(_AGENT_RE.findall(user_prompt)))
         observed_ids = list(dict.fromkeys(_OBSERVATION_ID_RE.findall(user_prompt)))
         m = _STEP_RE.search(user_prompt)
@@ -446,7 +448,10 @@ class MockClient:
             else:
                 act.update(action_type="wait")
         elif role == "household":
-            if offers and rng.random() < 0.45:
+            if inquiries and rng.random() < 0.5:
+                act.update(action_type="answer_broker_inquiry",
+                           target=rng.choice(inquiries))
+            elif offers and rng.random() < 0.45:
                 act.update(action_type="accept_offer", target=rng.choice(offers))
             elif offers and rng.random() < 0.5:
                 act.update(action_type="counter_offer", target=rng.choice(offers),
@@ -472,7 +477,17 @@ class MockClient:
             if rng.random() < 0.5:
                 act.update(utterance="家賃の話が来た。正直しんどい。", utterance_channel="public")
         elif role == "broker":
-            if agents:
+            if parcels and rng.random() < 0.4:
+                act.update(action_type="inquire_owner_intent",
+                           target=rng.choice(parcels),
+                           utterance="意向をうかがいます。", utterance_channel="private",
+                           utterance_to=rng.choice(agents) if agents else "")
+            elif agents and inquiries and rng.random() < 0.4:
+                act.update(action_type="report_owner_intent",
+                           target=rng.choice(agents),
+                           utterance="所有者の回答です。", utterance_channel="private",
+                           utterance_to=rng.choice(agents))
+            elif agents:
                 act.update(action_type=rng.choice(["circulate_listing", "approach_owner"]),
                            target=rng.choice(agents),
                            utterance="いい話がありますよ。", utterance_channel="private",
@@ -523,6 +538,22 @@ class MockClient:
         if "under_name" in properties:
             legal_names = properties["under_name"].get("enum", [])
             act["under_name"] = rng.choice(legal_names) if legal_names else ""
+        if "parcel_id" in properties:
+            act["parcel_id"] = (rng.choice(parcels)
+                                if parcels and rng.random() < 0.7 else "")
+        if "inquiry_id" in properties:
+            if act["action_type"] == "report_owner_intent" and inquiries:
+                act["inquiry_id"] = inquiries[-1]
+            else:
+                act["inquiry_id"] = (rng.choice(inquiries)
+                                     if inquiries and rng.random() < 0.5 else "")
+        if "owner_intent" in properties:
+            intents = properties["owner_intent"].get("enum", ["unknown"])
+            act["owner_intent"] = rng.choice(intents)
+        if "asking_price" in properties:
+            act["asking_price"] = rng.choice(
+                [str(int(2000 + 2000 * rng.random())), "unknown",
+                 "not_asked", "declined_to_answer"])
         if "goal_assessment" in properties:
             act.update({
                 "goal_assessment": "mock goal gap",
@@ -543,16 +574,49 @@ class MockClient:
         if "operations" in properties:
             operation_props = properties["operations"]["items"]["properties"]
             legal_names = operation_props["under_name"].get("enum", [])
-            operation = {
-                "action_type": act["action_type"],
-                "target": act["target"],
-                "amount": act["amount"],
-                "under_name": legal_names[0] if legal_names else "",
-                "note": act["utterance"],
-                "evidence": act["evidence"],
-            }
+            allowed_ops = operation_props["action_type"].get("enum", [])
+            capacity = int(properties["operations"].get("maxItems", 6))
+            operations = []
+            # 1件だけ返すと複数実務の配線が一度も通らないので、Mockでは件数も種類も揺らす。
+            for index in range(rng.randint(1, capacity)):
+                verb = (act["action_type"] if index == 0
+                        else rng.choice(allowed_ops or [act["action_type"]]))
+                target = ""
+                amount = 0
+                if verb in ("make_offer", "make_lease_offer"):
+                    target = rng.choice(parcels) if parcels else ""
+                    amount = int(2400 * (1.0 + 0.5 * rng.random()))
+                elif verb in ("check_land_registry", "due_diligence"):
+                    target = rng.choice(parcels) if parcels else ""
+                elif verb in ("contact_broker", "request_owner_inquiry"):
+                    target = rng.choice(agents) if agents else ""
+                elif verb == "answer_broker_inquiry":
+                    target = rng.choice(inquiries) if inquiries else ""
+                elif verb == "withdraw_offer":
+                    target = rng.choice(offers) if offers else ""
+                elif index == 0:
+                    target = act["target"]
+                    amount = act["amount"]
+                operations.append({
+                    "action_type": verb,
+                    "target": target,
+                    "amount": amount,
+                    "under_name": legal_names[0] if legal_names else "",
+                    "parcel_id": (rng.choice(parcels)
+                                  if parcels and verb == "request_owner_inquiry"
+                                  else ""),
+                    "inquiry_id": (rng.choice(inquiries)
+                                   if inquiries and rng.random() < 0.3 else ""),
+                    "owner_intent": rng.choice(
+                        operation_props["owner_intent"].get("enum", ["not_asked"])),
+                    "asking_price": rng.choice(
+                        [str(int(1500 + 2000 * rng.random())), "unknown",
+                         "not_asked"]),
+                    "note": act["utterance"],
+                    "evidence": act["evidence"],
+                })
             return json.dumps({
-                "operations": [operation],
+                "operations": operations,
                 "location": act.get("location", "OFFICE"),
                 "utterance": act["utterance"],
                 "utterance_channel": act["utterance_channel"],

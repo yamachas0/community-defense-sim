@@ -22,11 +22,16 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional, Tuple
 
 from .agents import Agent, build_roster, index_by_id, name_map
-from .field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
-                       build_system_prompt_v3, build_user_prompt_v3, control_share,
-                       effective_control_area_share, ensure_v3_state, list_for_lease,
+from .field_v3 import (action_schema_v3, answer_owner_inquiry,
+                       build_acquirer_decision_prompt_v3,
+                       build_system_prompt_v3, build_user_prompt_v3,
+                       check_land_registry_v3, control_share,
+                       effective_control_area_share, ensure_v3_state,
+                       inquire_owner_intent, list_for_lease,
                        make_lease_offer, normalize_acquirer_plan_v3, own_result_row,
-                       resolve_lease_offer, seed_acquirer_intelligence_v3, settle_v3_control, verbs_for_v3)
+                       report_owner_intent, request_owner_inquiry,
+                       resolve_lease_offer, seed_acquirer_intelligence_v3,
+                       settle_v3_control, verbs_for_v3)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -94,8 +99,19 @@ _TARGET_REQUIRED = {
     "interview", "cultivate_source", "request_comment",
     "relocate", "negotiate_rent", "circulate_listing", "approach_owner",
     "make_offer", "withdraw_offer", "redevelop", "request_report",
-    "check_land_registry",
+    "check_land_registry", "request_owner_inquiry", "inquire_owner_intent",
+    "answer_broker_inquiry", "report_owner_intent",
 }
+
+
+def _structured_fields(source: Dict[str, Any]) -> Dict[str, Any]:
+    """区画・照会ID・意向・希望額という、行為が運ぶ構造化された事実を取り出す。"""
+    return {
+        "parcel_id": str(source.get("parcel_id", "") or "").strip(),
+        "inquiry_id": str(source.get("inquiry_id", "") or "").strip(),
+        "owner_intent": str(source.get("owner_intent", "") or "").strip(),
+        "asking_price": source.get("asking_price", ""),
+    }
 
 
 def _has_amount(act: Dict[str, Any]) -> bool:
@@ -392,6 +408,7 @@ class Simulation:
             evidence = ([str(x).strip() for x in raw_evidence if str(x).strip()][:12]
                         if isinstance(raw_evidence, list) else [])
             under_name = str(act.get("under_name", "")).strip()
+            fields = _structured_fields(act)
             plan = (normalize_acquirer_plan_v3(act) if a.role == "acquirer" else {})
             if a.role == "acquirer":
                 a.extra["strategy_state"] = plan
@@ -413,7 +430,7 @@ class Simulation:
                            "given": action}
             else:
                 outcome = self._apply_v3(step, a, action, target, amount,
-                                         under_name, utterance)
+                                         under_name, utterance, fields)
             if _is_rejected(outcome):
                 self.invalid_count += 1
             if act.get("_truncated"):
@@ -425,7 +442,7 @@ class Simulation:
                 "utterance_channel": channel, "utterance_to": utterance_to,
                 "memory": memory, "reasoning": reasoning, "evidence": evidence,
                 "under_name": under_name, "truncated": bool(act.get("_truncated")),
-                "outcome": outcome, "plan": plan,
+                "outcome": outcome, "plan": plan, "structured": fields,
             })
             self.events.append(event)
 
@@ -580,6 +597,7 @@ class Simulation:
             amount = _as_int(raw_operation.get("amount", 0))
             under_name = str(raw_operation.get("under_name", "")).strip()
             note = str(raw_operation.get("note", "")).strip()
+            op_fields = _structured_fields(raw_operation)
             raw_op_evidence = raw_operation.get("evidence", [])
             op_evidence = (
                 [str(x).strip() for x in raw_op_evidence if str(x).strip()][:12]
@@ -604,7 +622,19 @@ class Simulation:
                            "given": action}
             else:
                 outcome = self._apply_v3(
-                    step, a, action, target, amount, under_name, note)
+                    step, a, action, target, amount, under_name, note, op_fields)
+            outcome_kind = (outcome.get("kind", "") if isinstance(outcome, dict)
+                            else str(outcome))
+            engaged_parcel = next(
+                (pid for pid in (target, op_fields.get("parcel_id", ""),
+                                 outcome.get("parcel_id", "")
+                                 if isinstance(outcome, dict) else "")
+                 if pid in self.ledger.parcels), "")
+            if engaged_parcel:
+                a.extra.setdefault("parcel_last_action", {})[engaged_parcel] = {
+                    "step": step, "action": action, "outcome": outcome_kind,
+                    "amount": amount,
+                }
             if _is_rejected(outcome):
                 self.invalid_count += 1
             elif action in contacts and note:
@@ -620,6 +650,7 @@ class Simulation:
                 "target": target,
                 "amount": amount,
                 "under_name": under_name,
+                "structured": op_fields,
                 "note": note,
                 "evidence": op_evidence,
                 "outcome": outcome,
@@ -681,8 +712,35 @@ class Simulation:
         return next((a.agent_id for a in self.agents if a.name == value), None)
 
     def _apply_v3(self, step: int, a: Agent, action: str, target: str, amount: int,
-                  under_name: str, utterance: str) -> Dict[str, Any]:
+                  under_name: str, utterance: str,
+                  fields: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         ledger = self.ledger
+        fields = fields or {}
+        parcel_id = str(fields.get("parcel_id", "") or "").strip()
+        inquiry_id = str(fields.get("inquiry_id", "") or "").strip()
+        owner_intent = str(fields.get("owner_intent", "") or "").strip()
+        asking_price = fields.get("asking_price", "")
+        if action == "request_owner_inquiry":
+            destination = self._agent_id(target)
+            if not destination:
+                return {"kind": "invalid_action", "reason": "no_such_agent",
+                        "target": target}
+            return request_owner_inquiry(ledger, step, a.agent_id, destination,
+                                         parcel_id, utterance)
+        if action == "inquire_owner_intent":
+            return inquire_owner_intent(ledger, step, a.agent_id,
+                                        target or parcel_id, inquiry_id, utterance)
+        if action == "answer_broker_inquiry":
+            return answer_owner_inquiry(ledger, step, target, a.agent_id,
+                                        owner_intent, asking_price, utterance)
+        if action == "report_owner_intent":
+            destination = self._agent_id(target)
+            if not destination:
+                return {"kind": "invalid_action", "reason": "no_such_agent",
+                        "target": target}
+            return report_owner_intent(ledger, step, a.agent_id, destination,
+                                       inquiry_id, owner_intent, asking_price,
+                                       utterance)
         if action == "list_for_lease":
             return list_for_lease(ledger, step, target, a.agent_id, amount)
         if action == "make_lease_offer":
@@ -698,13 +756,7 @@ class Simulation:
             return ledger.record_offer(step, target, a.agent_id, amount,
                                        under_name=under_name, note=utterance[:120])
         if action == "check_land_registry":
-            if target not in ledger.parcels:
-                return {"kind": "invalid_action", "reason": "no_such_parcel",
-                        "target": target}
-            targets = a.extra.setdefault("land_registry_targets", [])
-            if target not in targets:
-                targets.append(target)
-            return ledger.record_note(step, a.agent_id, action, f"parcel={target}")
+            return check_land_registry_v3(ledger, step, a, target)
         if action == "check_corporate_registry":
             a.extra["corporate_registry_seen"] = True
             return ledger.record_note(step, a.agent_id, action, "公開法人記録を閲覧")
