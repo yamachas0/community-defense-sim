@@ -32,6 +32,11 @@ from .field_v3 import (action_schema_v3, answer_owner_inquiry,
                        report_owner_intent, request_owner_inquiry,
                        resolve_lease_offer, seed_acquirer_intelligence_v3,
                        settle_v3_control, verbs_for_v3)
+from .field_v4 import (build_phase1_prompt_v4, build_phase2_prompt_v4,
+                       build_system_prompt_v4, enact_ordinance_v4,
+                       ensure_v4_state, execute_pending_transfers_v4,
+                       owners_with_offers, phase1_schema_v4, phase2_schema_v4,
+                       record_offer_v4, respond_to_offer_v4)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -144,6 +149,7 @@ class Simulation:
     def __init__(self, cfg: Dict[str, Any], personas: Dict[str, Any], run_dir: str):
         self.cfg = cfg
         self.field_v3 = cfg.get("scenario_version") == "field_v3"
+        self.field_v4 = cfg.get("scenario_version") == "field_v4"
         self.personas = personas
         self.run_dir = run_dir
         self.n_steps = int(cfg["steps"])
@@ -189,11 +195,20 @@ class Simulation:
             if a.role == "acquirer" and a.extra.get("financing") == "on_demand"
         ])
         ensure_v3_state(self.ledger)
+        if self.field_v4:
+            ensure_v4_state(self.ledger)
+            self.ledger.v4_fee_rate = float(cfg["scenario"].get("broker_fee_rate", 0.0))
+            for agent in (a for a in self.agents if a.role == "acquirer"):
+                agent.extra["monthly_offer_capacity"] = int(
+                    cfg["scenario"].get("acquirer_monthly_offer_capacity", 8))
         if self.field_v3:
             for agent in (a for a in self.agents if a.role == "acquirer"):
                 seed_acquirer_intelligence_v3(agent, self.ledger, cfg["scenario"])
 
-        if self.field_v3:
+        if self.field_v4:
+            self.system_prompts = {a.agent_id: build_system_prompt_v4(a, cfg, len(parcels))
+                                   for a in self.agents}
+        elif self.field_v3:
             self.system_prompts = {a.agent_id: build_system_prompt_v3(a, cfg, len(parcels))
                                    for a in self.agents}
         else:
@@ -210,6 +225,9 @@ class Simulation:
         self.truncated_count = 0
         self.business_margins = {a.agent_id: int(a.extra.get("monthly_margin", 0))
                                  for a in self.agents if a.role == "business"}
+        self.broker_ids = [a.agent_id for a in self.agents if a.role == "broker"]
+        self.feelings: List[Dict[str, Any]] = []      # 住民・事業者の月次の実感（認知の観測値）
+        self.deliveries: List[Dict[str, Any]] = []    # 誰に何が実際に届いたか（経路の追跡用）
 
     # -- main loop ---------------------------------------------------------
 
@@ -232,6 +250,9 @@ class Simulation:
         return self._finalize(elapsed)
 
     def _step(self, step: int) -> None:
+        if self.field_v4:
+            self._step_v4(step)
+            return
         if self.field_v3:
             self._step_v3(step)
             return
@@ -516,6 +537,349 @@ class Simulation:
                 "cash": self.ledger.cash.get(a.agent_id, 0),
                 "financing_raised": self.ledger.financing_raised.get(a.agent_id, 0),
             })
+
+    # -- v4: 同期3フェーズ（提示 → 応答 → 清算） ---------------------------
+
+    def _call_batch(self, items, tag: str):
+        """(agent, system_prompt, user_prompt, schema) をまとめて呼ぶ。"""
+        workers = int(self.cfg["llm"].get("parallel_workers", 8))
+        results: Dict[str, Dict[str, Any]] = {}
+
+        def call(item):
+            agent, system_prompt, user_prompt, schema = item
+            started = time.time()
+            raw = self.client.generate(system_prompt, user_prompt, schema=schema,
+                                       tag=f"agent:{agent.role}:{tag}")
+            return agent.agent_id, {"raw": raw, "user_prompt": user_prompt,
+                                    "latency": time.time() - started}
+
+        if not items:
+            return results
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            for aid, result in ex.map(call, items):
+                results[aid] = result
+        return results
+
+    def _deliver_v4(self, messages: List[Dict[str, Any]], step: int) -> None:
+        for message in messages:
+            destination = message["to"]
+            agent = self.by_id.get(destination)
+            if agent is None:
+                continue
+            agent.inbox.append({k: v for k, v in message.items() if k != "to"})
+            self.deliveries.append({
+                "step": step, "to": destination, "from": message.get("from", ""),
+                "obs_id": message.get("obs_id", ""), "kind": message.get("kind", "talk"),
+                "location": message.get("location", ""),
+                "text": str(message.get("text", ""))[:200],
+            })
+
+    def _step_v4(self, step: int) -> None:
+        ensure_v4_state(self.ledger)
+        venue_ids = {v["id"] for v in self.cfg.get("social", {}).get("venues", [])}
+        names = self.names
+
+        # --- フェーズ1: 提示 -------------------------------------------------
+        items = [(a, self.system_prompts[a.agent_id],
+                  build_phase1_prompt_v4(a, self.ledger, step, self.n_steps, names, self.cfg),
+                  phase1_schema_v4(a, self.cfg, self.broker_ids))
+                 for a in self.agents]
+        results = self._call_batch(items, "p1")
+        # 観測は作成済み。ここから届く情報は翌月にだけ見える。
+        for a in self.agents:
+            a.inbox = []
+
+        messages: List[Dict[str, Any]] = []
+        presences: Dict[str, str] = {}
+        ambient_rows: List[Dict[str, Any]] = []
+
+        for a in sorted(self.agents, key=lambda x: x.agent_id):
+            result = results.get(a.agent_id, {})
+            act = _parse_action(result.get("raw", ""))
+            event: Dict[str, Any] = {
+                "step": step, "phase": 1, "agent_id": a.agent_id, "role": a.role,
+                "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2),
+            }
+            if act is None:
+                self.invalid_count += 1
+                event.update({"action_type": "PARSE_FAIL",
+                              "outcome": {"kind": "parse_fail",
+                                          "reason": "unparseable_response"},
+                              "raw": (result.get("raw") or "")[:400]})
+                self.events.append(event)
+                continue
+
+            location = str(act.get("location", "")).strip()
+            utterance = str(act.get("utterance", "")).strip()
+            channel = str(act.get("utterance_channel", "none")).strip()
+            utterance_to = str(act.get("utterance_to", "")).strip()
+            memory = str(act.get("memory", "")).strip()
+            feeling = str(act.get("feeling", "")).strip()
+            a.memory = memory
+            valid_location = location in venue_ids or location in ("HOME", "OFFICE")
+            place = f"{location}:{a.agent_id}" if location in ("HOME", "OFFICE") else location
+            operations: List[Dict[str, Any]] = []
+
+            if a.role == "acquirer":
+                capacity = int(a.extra.get("monthly_offer_capacity", 8))
+                raw_offers = act.get("offers", [])
+                raw_offers = raw_offers if isinstance(raw_offers, list) else []
+                for index, row in enumerate(raw_offers):
+                    if not isinstance(row, dict):
+                        outcome = {"kind": "invalid_action", "reason": "offer_not_object"}
+                        operations.append({"action_type": "make_offer", "target": "",
+                                           "amount": 0, "outcome": outcome})
+                        self.invalid_count += 1
+                        continue
+                    parcel_id = str(row.get("parcel_id", "")).strip()
+                    price = row.get("price", 0)
+                    under_name = str(row.get("under_name", "")).strip()
+                    via = str(row.get("via", "")).strip()
+                    broker_id = str(row.get("broker_id", "")).strip()
+                    note = str(row.get("note", "")).strip()
+                    if index >= capacity:
+                        outcome = {"kind": "invalid_action",
+                                   "reason": "monthly_offer_capacity_exceeded",
+                                   "capacity": capacity}
+                    elif not parcel_id:
+                        outcome = {"kind": "invalid_action", "reason": "missing_target"}
+                    elif not _has_amount({"amount": price}):
+                        outcome = {"kind": "invalid_action", "reason": "missing_amount"}
+                    else:
+                        outcome = record_offer_v4(self.ledger, step, a, parcel_id, price,
+                                                  under_name, via, broker_id,
+                                                  self.broker_ids, note)
+                    if _is_rejected(outcome):
+                        self.invalid_count += 1
+                    operations.append({"action_type": "make_offer", "target": parcel_id,
+                                       "amount": _as_int(price), "under_name": under_name,
+                                       "via": via, "broker_id": broker_id, "note": note,
+                                       "outcome": outcome})
+                raw_withdraw = act.get("withdraw", [])
+                raw_withdraw = raw_withdraw if isinstance(raw_withdraw, list) else []
+                for value in raw_withdraw:
+                    offer_id = str(value).strip()
+                    if not offer_id:
+                        continue
+                    outcome = self.ledger.record_withdraw(step, offer_id, a.agent_id)
+                    if _is_rejected(outcome):
+                        self.invalid_count += 1
+                    operations.append({"action_type": "withdraw_offer", "target": offer_id,
+                                       "amount": 0, "outcome": outcome})
+                if not operations:
+                    # 買付を出さない月も、選ばれた事実として記録する。
+                    operations.append({"action_type": "no_offer", "target": "", "amount": 0,
+                                       "outcome": {"kind": "no_offer"}})
+                event["memo"] = str(act.get("memo", "")).strip()[:200]
+
+            elif a.role in ("municipality", "media"):
+                investigate = str(act.get("investigate", "none")).strip()
+                if investigate == "land_registry":
+                    a.extra["registry_stats_seen"] = True
+                    outcome = self.ledger.record_note(step, a.agent_id, "investigate",
+                                                      "land_registry")
+                    operations.append({"action_type": "investigate",
+                                       "target": "land_registry", "amount": 0,
+                                       "outcome": outcome})
+                elif investigate == "corporate_records":
+                    a.extra["corporate_records_seen"] = True
+                    outcome = self.ledger.record_note(step, a.agent_id, "investigate",
+                                                      "corporate_records")
+                    operations.append({"action_type": "investigate",
+                                       "target": "corporate_records", "amount": 0,
+                                       "outcome": outcome})
+                publish = str(act.get("publish", "")).strip()
+                if publish:
+                    if a.role == "media":
+                        headline = (publish.splitlines()[0] if publish else "（無題）")[:80]
+                        outcome = self.ledger.record_publication(
+                            step, a.agent_id, headline, publish[:400],
+                            self._is_about_acquisition(publish))
+                        article_id = f"NEWS-{a.agent_id}-M{step:02d}"
+                        for recipient in self.agents:
+                            subscriptions = recipient.extra.get("subscriptions", [])
+                            if a.name in subscriptions or a.agent_id in subscriptions:
+                                messages.append({"from": a.agent_id, "to": recipient.agent_id,
+                                                 "text": publish[:400], "step": step,
+                                                 "kind": "article", "obs_id": article_id})
+                    else:
+                        outcome = self.ledger.record_note(step, a.agent_id,
+                                                          "public_statement", publish[:400])
+                        notice_id = f"GOV-{a.agent_id}-M{step:02d}"
+                        for recipient in self.agents:
+                            if recipient.agent_id == a.agent_id:
+                                continue
+                            messages.append({"from": a.agent_id, "to": recipient.agent_id,
+                                             "text": publish[:400], "step": step,
+                                             "kind": "public_statement", "obs_id": notice_id})
+                    operations.append({"action_type": "publish", "target": "", "amount": 0,
+                                       "outcome": outcome})
+                if a.role == "municipality":
+                    title = str(act.get("ordinance_title", "")).strip()
+                    body = str(act.get("ordinance_text", "")).strip()
+                    if title and body:
+                        outcome = enact_ordinance_v4(
+                            self.ledger, step, a.agent_id, title, body,
+                            act.get("ordinance_threshold_sqm", 0),
+                            act.get("ordinance_delay_months", 0))
+                        if _is_rejected(outcome):
+                            self.invalid_count += 1
+                        else:
+                            notice_id = f"ORD-{a.agent_id}-M{step:02d}"
+                            text = (f"【条例施行の告示】{title}：{body[:200]}"
+                                    f"（対象:1件{outcome.get('threshold_sqm')}㎡超の取得 / "
+                                    f"届出による成立の遅延:{outcome.get('delay_months')}か月 / "
+                                    f"施行:第{outcome.get('effective_step')}月）")
+                            for recipient in self.agents:
+                                if recipient.agent_id == a.agent_id:
+                                    continue
+                                messages.append({"from": a.agent_id,
+                                                 "to": recipient.agent_id, "text": text,
+                                                 "step": step, "kind": "ordinance",
+                                                 "obs_id": notice_id})
+                        operations.append({"action_type": "enact_ordinance",
+                                           "target": title, "amount": 0,
+                                           "outcome": outcome})
+                if not operations:
+                    operations.append({"action_type": "routine", "target": "", "amount": 0,
+                                       "outcome": {"kind": "no_ledger_change"}})
+            else:
+                operations.append({"action_type": "day", "target": "", "amount": 0,
+                                   "outcome": {"kind": "day", "location": location}})
+
+            if valid_location:
+                presences[a.agent_id] = place
+            if utterance and channel == "ambient" and valid_location:
+                row = {"step": step, "from": a.agent_id, "role": a.role, "name": a.name,
+                       "location": place, "text": utterance}
+                ambient_rows.append(row)
+                self.all_utterances.append(row)
+            elif utterance and channel == "direct":
+                destination = self._agent_id(utterance_to)
+                if destination:
+                    messages.append({"from": a.agent_id, "to": destination,
+                                     "text": utterance, "step": step, "kind": "direct",
+                                     "obs_id": f"MSG-M{step:02d}-{a.agent_id}-{destination}"})
+            if feeling and a.role in ("household", "business"):
+                self.feelings.append({"step": step, "from": a.agent_id, "role": a.role,
+                                      "name": a.name, "phase": "day", "text": feeling})
+            if act.get("_truncated"):
+                self.truncated_count += 1
+
+            event.update({
+                "action_type": ("offers" if a.role == "acquirer" else "day"),
+                "target": "", "amount": 0, "location": location, "utterance": utterance,
+                "utterance_channel": channel, "utterance_to": utterance_to,
+                "memory": memory, "feeling": feeling, "reasoning": "",
+                "evidence": [], "under_name": "",
+                "truncated": bool(act.get("_truncated")),
+                "operations": operations,
+                "outcome": {"kind": "phase1", "operations": len(operations)},
+            })
+            self.events.append(event)
+
+        # --- フェーズ2: 応答（買付が届いている所有者だけ） ---------------------
+        offers_by_owner = owners_with_offers(self.ledger, step)
+        responders = [self.by_id[oid] for oid in sorted(offers_by_owner)
+                      if oid in self.by_id]
+        items2 = [(a, self.system_prompts[a.agent_id],
+                   build_phase2_prompt_v4(a, self.ledger, step, self.n_steps, names,
+                                          offers_by_owner[a.agent_id]),
+                   phase2_schema_v4())
+                  for a in responders]
+        results2 = self._call_batch(items2, "p2")
+
+        for a in sorted(responders, key=lambda x: x.agent_id):
+            result = results2.get(a.agent_id, {})
+            act = _parse_action(result.get("raw", ""))
+            event = {"step": step, "phase": 2, "agent_id": a.agent_id, "role": a.role,
+                     "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2)}
+            if act is None:
+                self.invalid_count += 1
+                event.update({"action_type": "PARSE_FAIL",
+                              "outcome": {"kind": "parse_fail",
+                                          "reason": "unparseable_response"},
+                              "raw": (result.get("raw") or "")[:400]})
+                self.events.append(event)
+                continue
+            raw_responses = act.get("responses", [])
+            raw_responses = raw_responses if isinstance(raw_responses, list) else []
+            operations = []
+            for row in raw_responses:
+                if not isinstance(row, dict):
+                    self.invalid_count += 1
+                    operations.append({"action_type": "response", "target": "", "amount": 0,
+                                       "outcome": {"kind": "invalid_action",
+                                                   "reason": "response_not_object"}})
+                    continue
+                offer_id = str(row.get("offer_id", "")).strip()
+                decision = str(row.get("decision", "")).strip()
+                counter_price = row.get("counter_price", 0)
+                if not offer_id:
+                    outcome = {"kind": "invalid_action", "reason": "missing_target"}
+                elif decision == "counter" and not _has_amount({"amount": counter_price}):
+                    outcome = {"kind": "invalid_action", "reason": "missing_amount"}
+                else:
+                    outcome = respond_to_offer_v4(self.ledger, step, offer_id,
+                                                  a.agent_id, decision, counter_price)
+                if _is_rejected(outcome):
+                    self.invalid_count += 1
+                operations.append({"action_type": decision or "response",
+                                   "target": offer_id,
+                                   "amount": _as_int(counter_price), "outcome": outcome})
+            feeling = str(act.get("feeling", "")).strip()
+            memory = str(act.get("memory", "")).strip()
+            if memory:
+                a.memory = memory
+            if feeling:
+                self.feelings.append({"step": step, "from": a.agent_id, "role": a.role,
+                                      "name": a.name, "phase": "response", "text": feeling})
+            if act.get("_truncated"):
+                self.truncated_count += 1
+            if not operations:
+                operations.append({"action_type": "no_response", "target": "", "amount": 0,
+                                   "outcome": {"kind": "offer_no_response",
+                                               "reason": "no_response_returned"}})
+            event.update({"action_type": "responses", "target": "", "amount": 0,
+                          "location": "", "utterance": "", "utterance_channel": "none",
+                          "utterance_to": "", "memory": memory, "feeling": feeling,
+                          "reasoning": "", "evidence": [], "under_name": "",
+                          "truncated": bool(act.get("_truncated")),
+                          "operations": operations,
+                          "outcome": {"kind": "phase2", "responses": len(operations)}})
+            self.events.append(event)
+
+        # --- フェーズ3: 清算・配送 -------------------------------------------
+        for row in ambient_rows:
+            for destination, place in presences.items():
+                if destination != row["from"] and place == row["location"]:
+                    messages.append({"from": row["from"], "to": destination,
+                                     "text": row["text"], "step": step,
+                                     "location": row["location"], "kind": "ambient",
+                                     "obs_id": f"TALK-{row['location']}-M{step:02d}-{row['from']}"})
+        self._deliver_v4(messages, step)
+        self.timeline = []
+        self.ledger.settle_month(step, self.business_margins)
+        execute_pending_transfers_v4(self.ledger, step)
+        self._record_own_results_v4(step)
+
+    def _record_own_results_v4(self, step: int) -> None:
+        """今月の自分の行為が帳簿でどうなったかを、本人の翌月観測へ渡す（事実だけ）。"""
+        for a in self.agents:
+            rows: List[Dict[str, Any]] = []
+            for event in self.events:
+                if event.get("step") != step or event.get("agent_id") != a.agent_id:
+                    continue
+                operations = event.get("operations")
+                if operations:
+                    rows.extend(own_result_row(step, op.get("action_type", ""),
+                                               op.get("target", ""), op.get("outcome", {}))
+                                for op in operations)
+                else:
+                    rows.append(own_result_row(step, event.get("action_type", ""),
+                                               event.get("target", ""),
+                                               event.get("outcome", {})))
+            a.extra["last_month_results"] = rows
 
     def _record_own_results(self, step: int) -> None:
         """今月自分が選んだ行為が帳簿でどうなったかを、本人の翌月観測へ渡す。
@@ -943,7 +1307,12 @@ class Simulation:
             pub_steps = classify_publications(
                 self.client, self.ledger.publications,
                 batch=int(kcfg.get("classify_batch", 25)))
-        cog = cognition_series(classified, self.n_steps)
+        classified_feelings: List[Dict[str, Any]] = []
+        if self.field_v4 and kcfg.get("classify_utterances", True) and self.feelings:
+            classified_feelings = classify_utterances(
+                self.client, self.feelings, batch=int(kcfg.get("classify_batch", 25)))
+        # v4 の認知は「毎月の実感（feeling）」の事後分類から測る。
+        cog = cognition_series(classified_feelings or classified, self.n_steps)
 
         summary = {
             "run_name": self.cfg.get("run_name"),
@@ -971,6 +1340,12 @@ class Simulation:
                     self.ledger, self.acquirer_ids) if self.field_v3 else None,
                 "late_index": late_index(self.ledger, self.acquirer_ids, share_by_step),
                 "detection_lag": detection_lag(self.ledger, share_by_step, pub_steps),
+                "final_acquirer_area_share": (
+                    round(sum(p.area_sqm for p in self.ledger.parcels.values()
+                              if p.use != "public" and p.owner_id in self.acquirer_ids)
+                          / max(1, sum(p.area_sqm for p in self.ledger.parcels.values()
+                                       if p.use != "public")), 4)
+                    if self.field_v4 else None),
                 "business_survival": self.kpi_rows[-1]["business_survival"] if self.kpi_rows else None,
                 "resident_outflow": self.kpi_rows[-1]["resident_outflow"] if self.kpi_rows else None,
             },
@@ -981,6 +1356,10 @@ class Simulation:
         _write_jsonl(os.path.join(d, "kpi.jsonl"), self.kpi_rows)
         _write_jsonl(os.path.join(d, "cognition.jsonl"), cog)
         _write_jsonl(os.path.join(d, "utterances.jsonl"), classified or self.all_utterances)
+        if self.field_v4:
+            _write_jsonl(os.path.join(d, "feelings.jsonl"),
+                         classified_feelings or self.feelings)
+            _write_jsonl(os.path.join(d, "deliveries.jsonl"), self.deliveries)
         self.ledger.dump_records(os.path.join(d, "ledger.jsonl"))
         with open(os.path.join(d, "owner_frames.json"), "w", encoding="utf-8") as f:
             json.dump(self.owner_frames, f, ensure_ascii=False)

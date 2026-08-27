@@ -399,8 +399,91 @@ class MockClient:
 
         if schema is not None and "results" in schema.get("properties", {}):
             return self._mock_classify(user_prompt)
+        properties = (schema or {}).get("properties", {})
+        if schema is not None and "action_type" not in properties:
+            return self._mock_v4(system_prompt, user_prompt, schema)
         role = self._role_from_schema(schema)
         return self._mock_action(role, system_prompt, user_prompt, schema)
+
+    def _mock_v4(self, system_prompt: str, user_prompt: str,
+                 schema: Dict[str, Any]) -> str:
+        """v4（同期3フェーズ）の配線確認用スタブ。世界の行動規則ではない。"""
+        properties = schema.get("properties", {})
+        parcels = sorted(set(_PARCEL_RE.findall(user_prompt)))
+        offers = sorted(set(_OFFER_RE.findall(user_prompt)))
+        agents = sorted(set(_AGENT_RE.findall(user_prompt)))
+        venues = sorted(set(_VENUE_RE.findall(system_prompt)))
+        m = _STEP_RE.search(user_prompt)
+        step = int(m.group(1)) if m else 1
+        rng = self._rng(f"v4:{step}:{system_prompt[:48]}:{len(user_prompt)}")
+
+        def talk(fields):
+            fields["location"] = rng.choice(venues + ["HOME", "OFFICE"])
+            if rng.random() < 0.5:
+                fields["utterance"] = "最近この辺りの土地の話をよく聞く。"
+                fields["utterance_channel"] = rng.choice(["ambient", "direct"])
+                fields["utterance_to"] = rng.choice(agents) if agents else ""
+            else:
+                fields["utterance"] = ""
+                fields["utterance_channel"] = "none"
+                fields["utterance_to"] = ""
+            fields["memory"] = f"step{step} (mock)"
+            return fields
+
+        if "responses" in properties:
+            responses = []
+            for offer_id in offers:
+                decision = rng.choice(["accept", "reject", "counter", "no_response"])
+                responses.append({
+                    "offer_id": offer_id,
+                    "decision": decision,
+                    "counter_price": int(2800 + 2000 * rng.random()) if decision == "counter" else 0,
+                })
+            return json.dumps({"responses": responses,
+                               "feeling": "mock: 今月の実感",
+                               "memory": f"step{step} 応答 (mock)"}, ensure_ascii=False)
+
+        if "offers" in properties:
+            item_props = properties["offers"]["items"]["properties"]
+            legal_names = item_props["under_name"].get("enum", [""])
+            broker_ids = [b for b in item_props["broker_id"].get("enum", []) if b]
+            capacity = int(properties["offers"].get("maxItems", 8))
+            rows = []
+            for _ in range(rng.randint(0, min(3, capacity))):
+                via = rng.choice(["direct", "broker"])
+                rows.append({
+                    "parcel_id": rng.choice(parcels) if parcels else "",
+                    "price": int(2400 * (1.0 + 0.5 * rng.random())),
+                    "under_name": rng.choice(legal_names),
+                    "via": via,
+                    "broker_id": (rng.choice(broker_ids) if via == "broker" and broker_ids
+                                  else ""),
+                    "note": "ご検討ください。",
+                })
+            withdraw = [rng.choice(offers)] if offers and rng.random() < 0.15 else []
+            fields = talk({"offers": rows, "withdraw": withdraw,
+                           "memo": f"step{step} mock memo"})
+            return json.dumps(fields, ensure_ascii=False)
+
+        if "investigate" in properties:
+            fields = {"investigate": rng.choice(["none", "none", "land_registry",
+                                                 "corporate_records"]),
+                      "publish": ("【mock】名義の集中について" if rng.random() < 0.3 else "")}
+            if "ordinance_title" in properties:
+                enact = rng.random() < 0.15
+                fields.update({
+                    "ordinance_title": "土地取得届出条例（mock）" if enact else "",
+                    "ordinance_text": "一定規模以上の取得に事前届出を求める。" if enact else "",
+                    "ordinance_threshold_sqm": int(rng.choice([100, 200, 300])) if enact else 0,
+                    "ordinance_delay_months": int(rng.choice([1, 2, 3])) if enact else 0,
+                })
+            return json.dumps(talk(fields), ensure_ascii=False)
+
+        fields = talk({})
+        if "feeling" in properties:
+            fields["feeling"] = rng.choice(["特になし", "近所の名義が変わったのが気になる。",
+                                            "毎日は変わらない。"])
+        return json.dumps(fields, ensure_ascii=False)
 
     @staticmethod
     def _role_from_schema(schema: Optional[Dict[str, Any]]) -> str:

@@ -29,6 +29,15 @@ from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
                           request_owner_inquiry,
                           resolve_lease_offer, seed_acquirer_intelligence_v3)  # noqa: E402
 
+from src.field_v4 import (active_ordinance, build_phase1_prompt_v4,
+                          build_phase2_prompt_v4, build_system_prompt_v4,
+                          channel_text, enact_ordinance_v4, ensure_v4_state,
+                          execute_pending_transfers_v4, filing_delay_for,
+                          incoming_offers_rows, neighbourhood_rows,
+                          own_offers_rows, owners_with_offers, phase1_schema_v4,
+                          phase2_schema_v4, record_offer_v4, registry_rows,
+                          registry_stats_rows, respond_to_offer_v4)  # noqa: E402
+
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
 from src.schemas import action_schema  # noqa: E402
 from src.world import Ledger, Parcel  # noqa: E402
@@ -606,6 +615,210 @@ q8 = request_owner_inquiry(L8, 1, "AQ01", "BR01", "P01",
 view8 = build_user_prompt_v3(broker8, L8, 2, 60, names_q, cfg_id)
 check("依頼主が書いた文面が仲介の観測に届く",
       "売却または賃貸の意向を確認してほしい" in view8 and f"[{q8}] P01" in view8)
+
+# ---------------------------------------------------------------------------
+# v4（同期3フェーズ・手続き動詞なし）
+# ---------------------------------------------------------------------------
+
+print("== v4: 買付の記帳と経路 ==")
+
+
+def mk4(fee_rate: float = 0.03) -> Ledger:
+    parcels = [
+        Parcel("P01", 0, 0, "北町", "residential", "HH01", 2400, area_sqm=100,
+               registered_name="住民A"),
+        Parcel("P02", 1, 0, "北町", "residential", "HH01", 6000, area_sqm=400,
+               registered_name="住民A"),
+        Parcel("P03", 2, 0, "北町", "residential", "HH02", 2400, area_sqm=120,
+               registered_name="住民B"),
+        Parcel("P04", 3, 0, "北町", "public", "MU01", 2400, area_sqm=200,
+               registered_name="市"),
+    ]
+    ledger = Ledger(parcels, {"HH01": 900, "HH02": 900, "BR01": 100, "AQ01": 0,
+                              "MU01": 0})
+    ensure_v4_state(ledger)
+    ledger.v4_fee_rate = fee_rate
+    ledger.enable_on_demand_financing(["AQ01"])
+    return ledger
+
+
+AQ4 = Agent("AQ01", "acquirer", "X社", "取得会社")
+AQ4.extra["aliases"] = ["A社", "B社"]
+AQ4.extra["mandate"] = "この会社だけが知る目的"
+AQ4.extra["monthly_offer_capacity"] = 8
+HH4 = Agent("HH01", "household", "R01", "住民")
+MU4 = Agent("MU01", "municipality", "G01", "行政")
+NAMES4 = {"HH01": "R01", "HH02": "R02", "BR01": "B01", "AQ01": "X社", "MU01": "G01"}
+CFG4 = {
+    "world": {"town_name": "A市", "background": "背景", "block_names": ["北町"],
+              "corporate_records": ["A社: 記録"]},
+    "social": {"venues": [{"id": "V01", "label": "飲食店"}],
+               "public_directory": ["AQ01: X社"]},
+    "scenario": {},
+}
+
+L4 = mk4()
+bad_name = record_offer_v4(L4, 1, AQ4, "P01", 3000, "Z社", "direct", "", ["BR01"])
+check("使えない名義の買付は成立しない",
+      bad_name["kind"] == "offer_rejected" and bad_name["reason"] == "unknown_legal_name")
+missing_broker = record_offer_v4(L4, 1, AQ4, "P01", 3000, "A社", "broker", "", ["BR01"])
+check("仲介経由なのに仲介が指定されていない買付は成立しない（世界が割り当てない）",
+      missing_broker["kind"] == "offer_rejected"
+      and missing_broker["reason"] == "unknown_broker")
+bad_price = record_offer_v4(L4, 1, AQ4, "P01", "たかい", "A社", "direct", "", ["BR01"])
+check("金額でない価格は成立しない（0に補完しない）",
+      bad_price["kind"] == "offer_rejected" and bad_price["reason"] == "invalid_amount")
+public_offer = record_offer_v4(L4, 1, AQ4, "P04", 3000, "A社", "direct", "", ["BR01"])
+check("公有地への買付は成立しない", public_offer["kind"] == "offer_rejected")
+
+ok_offer = record_offer_v4(L4, 1, AQ4, "P01", 3000, "A社", "broker", "BR01", ["BR01"],
+                           "ご検討ください")
+oid4 = ok_offer["offer_id"]
+check("仲介経由の買付が記帳され、経路が残る",
+      ok_offer["kind"] == "offer" and ok_offer["via"] == "broker"
+      and channel_text(L4, oid4, NAMES4) == "仲介B01経由")
+check("買付は出した月のうちに所有者の応答対象になる",
+      owners_with_offers(L4, 1).get("HH01", [])[0].offer_id == oid4)
+
+print("== v4: 応答と清算 ==")
+no_res = respond_to_offer_v4(L4, 1, oid4, "HH01", "no_response", 0)
+check("答えないことも選択として記録され、買付は開いたままになる",
+      no_res["kind"] == "offer_no_response" and L4.offers[oid4].status == "open")
+counter4 = respond_to_offer_v4(L4, 1, oid4, "HH01", "counter", 4000)
+check("逆提示は台帳の状態遷移として記帳される",
+      counter4["kind"] == "counter" and L4.offers[oid4].counter_price == 4000)
+check("逆提示は買付を出した側の観測に出る",
+      any("逆提示4000万" in row for row in own_offers_rows(AQ4, L4, NAMES4)))
+
+L5 = mk4()
+o5 = record_offer_v4(L5, 1, AQ4, "P01", 3000, "A社", "broker", "BR01", ["BR01"])["offer_id"]
+before_broker = L5.cash["BR01"]
+accepted = respond_to_offer_v4(L5, 1, o5, "HH01", "accept", 0)
+check("受諾で所有権が移り、名義は買い手が選んだものになる",
+      accepted["kind"] == "transfer" and L5.parcels["P01"].owner_id == "AQ01"
+      and L5.parcels["P01"].registered_name == "A社")
+check("仲介経由の成立で手数料が自動記帳される（契約条件の3%）",
+      L5.cash["BR01"] - before_broker == 90
+      and L5.v4_broker_fees.get("BR01") == 90)
+check("必要資金は成立時に調達される", L5.financing_raised.get("AQ01", 0) >= 3000)
+
+L6 = mk4()
+o6 = record_offer_v4(L6, 1, AQ4, "P03", 2500, "A社", "direct", "", ["BR01"])["offer_id"]
+before6 = L6.cash["BR01"]
+respond_to_offer_v4(L6, 1, o6, "HH02", "accept", 0)
+check("直接の買付では仲介手数料が発生しない", L6.cash["BR01"] == before6)
+
+L7 = mk4()
+a7 = record_offer_v4(L7, 1, AQ4, "P01", 3000, "A社", "direct", "", ["BR01"])["offer_id"]
+b7 = record_offer_v4(L7, 1, AQ4, "P01", 3200, "B社", "direct", "", ["BR01"])["offer_id"]
+respond_to_offer_v4(L7, 1, a7, "HH01", "accept", 0)
+second = respond_to_offer_v4(L7, 1, b7, "HH01", "accept", 0)
+check("同じ区画は二重に成立しない（先に成立した1件だけが移転する）",
+      second["kind"] == "accept_rejected" and L7.parcels["P01"].owner_id == "AQ01")
+
+print("== v4: 条例（制定されれば機構として効く） ==")
+L8 = mk4()
+bad_ord = enact_ordinance_v4(L8, 1, "MU01", "", "本文", 100, 2)
+check("条文が空の条例は成立しない",
+      bad_ord["kind"] == "ordinance_rejected" and bad_ord["reason"] == "missing_text")
+bad_param = enact_ordinance_v4(L8, 1, "MU01", "届出条例", "本文", 100, -1)
+check("成立しない数値の条例は記帳されない",
+      bad_param["kind"] == "ordinance_rejected"
+      and bad_param["reason"] == "invalid_parameters")
+ord8 = enact_ordinance_v4(L8, 2, "MU01", "届出条例", "300㎡超は届出", 300, 2)
+check("条例は制定した月には施行されない（全主体は同月を並行して判断している）",
+      ord8["effective_step"] == 3 and active_ordinance(L8, 2) is None
+      and filing_delay_for(L8, L8.parcels["P02"], 2) == 0)
+check("施行後は対象面積を超える取得にだけ届出の遅延がかかる",
+      filing_delay_for(L8, L8.parcels["P02"], 3) == 2
+      and filing_delay_for(L8, L8.parcels["P01"], 3) == 0)
+enact_ordinance_v4(L8, 3, "MU01", "改正届出条例", "50㎡超は届出", 50, 1)
+check("後から制定された条例が有効になる（上書き）",
+      active_ordinance(L8, 4)["threshold_sqm"] == 50
+      and filing_delay_for(L8, L8.parcels["P01"], 4) == 1)
+
+L9 = mk4()
+enact_ordinance_v4(L9, 1, "MU01", "届出条例", "300㎡超は届出", 300, 2)
+o9 = record_offer_v4(L9, 2, AQ4, "P02", 5000, "A社", "broker", "BR01", ["BR01"])["offer_id"]
+filed = respond_to_offer_v4(L9, 2, o9, "HH01", "accept", 0)
+check("届出が要る取得は、受諾しても即日には成立しない",
+      filed["kind"] == "filing_required" and filed["due_step"] == 4
+      and L9.parcels["P02"].owner_id == "HH01")
+check("届出期間中は成立しない", execute_pending_transfers_v4(L9, 3) == []
+      and L9.parcels["P02"].owner_id == "HH01")
+done9 = execute_pending_transfers_v4(L9, 4)
+check("届出期間を終えた月に成立し、手数料もその時点で発生する",
+      done9 and done9[0]["kind"] == "transfer"
+      and L9.parcels["P02"].owner_id == "AQ01"
+      and L9.v4_broker_fees.get("BR01") == 150)
+
+L10 = mk4()
+enact_ordinance_v4(L10, 1, "MU01", "届出条例", "300㎡超は届出（遅延なし）", 300, 0)
+o10 = record_offer_v4(L10, 2, AQ4, "P02", 5000, "A社", "direct", "", ["BR01"])["offer_id"]
+check("遅延0か月の届出制度では、その月のうちに成立する",
+      respond_to_offer_v4(L10, 2, o10, "HH01", "accept", 0)["kind"] == "transfer")
+
+print("== v4: 観測とスキーマ ==")
+schema_aq = phase1_schema_v4(AQ4, CFG4, ["BR01", "BR02"])
+offers_schema = schema_aq["properties"]["offers"]
+check("買付を出さない月が許される（最低件数を課さない）",
+      "minItems" not in offers_schema and offers_schema["maxItems"] == 8)
+check("経路の仲介は選択肢から選ぶ（自由入力で取りこぼさない）",
+      offers_schema["items"]["properties"]["broker_id"]["enum"] == ["", "BR01", "BR02"])
+check("名義は使える登記名義からしか選べない",
+      offers_schema["items"]["properties"]["under_name"]["enum"] == ["X社", "A社", "B社"])
+check("応答には『今月は答えない』が含まれる",
+      "no_response" in phase2_schema_v4()["properties"]["responses"]["items"]
+      ["properties"]["decision"]["enum"])
+check("仲介は話すだけで、取引を止める行為を持たない",
+      set(phase1_schema_v4(Agent("BR01", "broker", "B01", "仲介"), CFG4, ["BR01"])
+          ["properties"]) == {"location", "utterance", "utterance_channel",
+                              "utterance_to", "memory"})
+check("条例を制定できるのは行政だけ（記者のスキーマには無い）",
+      "ordinance_title" not in phase1_schema_v4(
+          Agent("MD01", "media", "J01", "記者"), CFG4, ["BR01"])["properties"]
+      and "ordinance_title" in phase1_schema_v4(MU4, CFG4, ["BR01"])["properties"])
+
+system_v4 = build_system_prompt_v4(AQ4, CFG4, 48)
+banned_verbs = ("check_land_registry", "market_research", "internal_review",
+                "financing_review", "contact_broker", "client_followup",
+                "request_owner_inquiry", "due_diligence")
+check("v4に手続き動詞は存在しない",
+      not any(v in system_v4 for v in banned_verbs))
+check("v4のプロンプトに「AI」表記はない", "AI" not in system_v4)
+check("買付を出すことを指示していない",
+      "必ず買付" not in system_v4 and "買付を出せ" not in system_v4)
+
+L11 = mk4()
+view_aq = build_phase1_prompt_v4(AQ4, L11, 1, 12, NAMES4, CFG4)
+check("登記は最初から公開情報として観測に出る（調べる行為は要らない）",
+      "[公開されている土地登記（全区画）]" in view_aq and "P01" in view_aq
+      and "名義:住民A" in view_aq)
+check("計画欄・代替案・根拠IDの必須はない",
+      "alternatives" not in view_aq and "goal_assessment" not in view_aq
+      and "evidence" not in view_aq)
+for banned in ("すべき", "推奨", "優先度", "不要", "望ましい"):
+    check(f"観測に評価語・当為が混ざらない（{banned}）", banned not in view_aq)
+
+record_offer_v4(L11, 1, AQ4, "P01", 3000, "A社", "broker", "BR01", ["BR01"])
+respond_to_offer_v4(L11, 1, "O0001", "HH01", "accept", 0)
+view_hh = build_phase1_prompt_v4(HH4, L11, 2, 12, NAMES4, CFG4)
+check("住民には近隣の名義と、その変更が観測に出る",
+      "[近隣の土地登記（公開情報）]" in view_hh and "P02" in view_hh)
+check("登記統計は名義別の面積として集計できる",
+      any("A社" in row for row in registry_stats_rows(L11, NAMES4)))
+check("全区画の登記は誰が見ても同じ事実である",
+      len(registry_rows(L11, NAMES4)) == len(L11.parcels))
+
+L12 = mk4()
+o12 = record_offer_v4(L12, 1, AQ4, "P01", 3600, "A社", "direct", "", ["BR01"])["offer_id"]
+view_p2 = build_phase2_prompt_v4(HH4, L12, 1, 12, NAMES4,
+                                 owners_with_offers(L12, 1)["HH01"])
+check("所有者には金額・名義・経路・評価額との比が事実として出る",
+      f"[{o12}]" in view_p2 and "名義:A社" in view_p2 and "直接" in view_p2
+      and "1.50倍" in view_p2)
+check("応答フェーズにも評価語・当為は書かない",
+      "すべき" not in view_p2 and "推奨" not in view_p2)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
