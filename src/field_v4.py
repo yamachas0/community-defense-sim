@@ -89,6 +89,7 @@ def record_offer_v4(ledger: Ledger, step: int, agent: Agent, parcel_id: str,
         return ledger._rec(step, "offer_rejected", parcel_id=parcel_id,
                            from_id=agent.agent_id, reason="unknown_channel",
                            given=via)
+    broker_id = "" if broker_id.strip().lower() in ("", "none") else broker_id.strip()
     if via == "direct" and broker_id:
         # 直接の買付に取次ぎ先が入っている指定は矛盾しているので、黙って捨てずに不成立にする。
         return ledger._rec(step, "offer_rejected", parcel_id=parcel_id,
@@ -520,7 +521,8 @@ def phase1_schema_v4(agent: Agent, cfg: Dict[str, Any],
             "price": {"type": "integer"},
             "under_name": {"type": "string", "enum": names},
             "via": {"type": "string", "enum": ["direct", "broker"]},
-            "broker_id": {"type": "string", "enum": [""] + list(broker_ids)},
+            # 「取次ぎ先なし」は空文字ではなく none と書く（enumに空文字を入れられない）。
+            "broker_id": {"type": "string", "enum": ["none"] + list(broker_ids)},
             "note": {"type": "string"},
         }
         props = {
@@ -628,7 +630,7 @@ direct発言はutterance_toで指定した一主体だけに届く。全員共�
 offers, withdraw, memo, location, utterance, utterance_channel, utterance_to, memory
 を必ず含める。買付を出さない月は offers を空配列にする。
 offersの各要素は parcel_id, price（万円の整数）, under_name, via, broker_id, note。
-viaが direct のとき broker_id は空文字。noteは所有者に届く文面（{MAX_TEXT_CHARS}字以内）。
+viaが direct のとき broker_id は "none"。noteは所有者に届く文面（{MAX_TEXT_CHARS}字以内）。
 withdrawは取り下げる買付ID（[O0001]の形）の配列。無ければ空配列。
 memoは自分用の覚書（{MAX_MEMO_CHARS}字以内）。memoryは{MAX_MEMORY_CHARS}字以内。
 説明文を付けずJSONだけ返す。

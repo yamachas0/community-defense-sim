@@ -446,7 +446,8 @@ class MockClient:
         if "offers" in properties:
             item_props = properties["offers"]["items"]["properties"]
             legal_names = item_props["under_name"].get("enum", [""])
-            broker_ids = [b for b in item_props["broker_id"].get("enum", []) if b]
+            broker_ids = [b for b in item_props["broker_id"].get("enum", [])
+                          if b and b != "none"]
             capacity = int(properties["offers"].get("maxItems", 8))
             rows = []
             for _ in range(rng.randint(0, min(3, capacity))):
@@ -457,7 +458,7 @@ class MockClient:
                     "under_name": rng.choice(legal_names),
                     "via": via,
                     "broker_id": (rng.choice(broker_ids) if via == "broker" and broker_ids
-                                  else ""),
+                                  else "none"),
                     "note": "ご検討ください。",
                 })
             withdraw = [rng.choice(offers)] if offers and rng.random() < 0.15 else []

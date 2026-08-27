@@ -766,7 +766,29 @@ offers_schema = schema_aq["properties"]["offers"]
 check("買付を出さない月が許される（最低件数を課さない）",
       "minItems" not in offers_schema and offers_schema["maxItems"] == 8)
 check("経路の仲介は選択肢から選ぶ（自由入力で取りこぼさない）",
-      offers_schema["items"]["properties"]["broker_id"]["enum"] == ["", "BR01", "BR02"])
+      offers_schema["items"]["properties"]["broker_id"]["enum"] == ["none", "BR01", "BR02"])
+def _enum_values(node):
+    found = []
+    if isinstance(node, dict):
+        if "enum" in node:
+            found.extend(node["enum"])
+        for value in node.values():
+            found.extend(_enum_values(value))
+    elif isinstance(node, list):
+        for value in node:
+            found.extend(_enum_values(value))
+    return found
+
+
+check("スキーマの選択肢に空文字を入れない（実APIが400で拒否する）",
+      all(str(v).strip() != "" for role_agent in
+          (AQ4, HH4, MU4, Agent("MD01", "media", "J01", "記者"),
+           Agent("BR01", "broker", "B01", "仲介"))
+          for v in _enum_values(phase1_schema_v4(role_agent, CFG4, ["BR01", "BR02"])))
+      and all(str(v).strip() != "" for v in _enum_values(phase2_schema_v4())))
+check("『取次ぎ先なし』は none と書く（direct の指定と矛盾しない）",
+      record_offer_v4(mk4(), 1, AQ4, "P01", 3000, "A社", "direct", "none",
+                      ["BR01"])["kind"] == "offer")
 check("名義は使える登記名義からしか選べない",
       offers_schema["items"]["properties"]["under_name"]["enum"] == ["X社", "A社", "B社"])
 check("応答には『今月は答えない』が含まれる",
