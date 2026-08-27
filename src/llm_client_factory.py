@@ -400,10 +400,67 @@ class MockClient:
         if schema is not None and "results" in schema.get("properties", {}):
             return self._mock_classify(user_prompt)
         properties = (schema or {}).get("properties", {})
+        if schema is not None and "thought" in properties:
+            return self._mock_v41(system_prompt, user_prompt, schema)
         if schema is not None and "action_type" not in properties:
             return self._mock_v4(system_prompt, user_prompt, schema)
         role = self._role_from_schema(schema)
         return self._mock_action(role, system_prompt, user_prompt, schema)
+
+    def _mock_v41(self, system_prompt: str, user_prompt: str,
+                  schema: Dict[str, Any]) -> str:
+        """v4.1（金額なし・thought先頭）の配線確認用スタブ。世界の行動規則ではない。"""
+        properties = schema.get("properties", {})
+        parcels = sorted(set(_PARCEL_RE.findall(user_prompt)))
+        offers = sorted(set(_OFFER_RE.findall(user_prompt)))
+        agents = sorted(set(_AGENT_RE.findall(user_prompt)))
+        venues = sorted(set(_VENUE_RE.findall(system_prompt)))
+        m = _STEP_RE.search(user_prompt)
+        step = int(m.group(1)) if m else 1
+        rng = self._rng(f"v41:{step}:{system_prompt[:48]}:{len(user_prompt)}")
+        fields: Dict[str, Any] = {"thought": f"step{step} mock: 内心の記録"}
+
+        if "responses" in properties:
+            fields["responses"] = [
+                {"offer_id": oid,
+                 "decision": rng.choice(["sell", "keep", "hold", "hold"])}
+                for oid in offers]
+            return json.dumps(fields, ensure_ascii=False)
+
+        if "offers" in properties:
+            item_props = properties["offers"]["items"]["properties"]
+            legal_names = item_props["under_name"].get("enum", [""])
+            capacity = int(properties["offers"].get("maxItems", 6))
+            fields["offers"] = [
+                {"parcel_id": rng.choice(parcels) if parcels else "",
+                 "under_name": rng.choice(legal_names),
+                 "note": "ご検討ください。"}
+                for _ in range(rng.randint(0, min(3, capacity)))]
+            fields["withdraw"] = ([rng.choice(offers)]
+                                  if offers and rng.random() < 0.15 else [])
+        elif "investigate" in properties:
+            fields["investigate"] = rng.choice(["none", "none", "land_registry",
+                                                "corporate_records"])
+            fields["publish"] = ("【mock】名義の集中について" if rng.random() < 0.3 else "")
+            if "ordinance_title" in properties:
+                enact = rng.random() < 0.15
+                fields.update({
+                    "ordinance_title": "土地取得届出条例（mock）" if enact else "",
+                    "ordinance_text": "一定規模以上の取得に事前届出を求める。" if enact else "",
+                    "ordinance_threshold_sqm": int(rng.choice([100, 200, 300])) if enact else 0,
+                    "ordinance_delay_months": int(rng.choice([1, 2, 3])) if enact else 0,
+                })
+
+        fields["location"] = rng.choice(venues + ["HOME", "OFFICE"])
+        if rng.random() < 0.5:
+            fields["utterance"] = "最近この辺りの名義がよく変わる。"
+            fields["utterance_channel"] = rng.choice(["ambient", "direct"])
+            fields["utterance_to"] = rng.choice(agents) if agents else ""
+        else:
+            fields["utterance"] = ""
+            fields["utterance_channel"] = "none"
+            fields["utterance_to"] = ""
+        return json.dumps(fields, ensure_ascii=False)
 
     def _mock_v4(self, system_prompt: str, user_prompt: str,
                  schema: Dict[str, Any]) -> str:
