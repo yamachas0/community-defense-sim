@@ -356,7 +356,8 @@ _OFFER_RE = re.compile(r"\bO\d{4}\b")
 _AGENT_RE = re.compile(r"\b(?:HH|BZ|BR|AQ|MU|MD)\d{2}\b")
 _VENUE_RE = re.compile(r"\bV\d{2}\b")
 _STEP_RE = re.compile(r"第\s*(\d+)\s*月")
-_OBSERVATION_ID_RE = re.compile(r"\[((?:SALE|UTT|MSG|NEWS|OFFER|LEASE|TALK)-[^\]]+)\]")
+_OBSERVATION_ID_RE = re.compile(
+    r"\[((?:SALE|UTT|MSG|NEWS|OFFER|LEASE|TALK)-[^\]]+|[OLQ]\d{4})\]")
 
 
 class MockClient:

@@ -281,6 +281,7 @@ operationsは1〜{int(agent.extra.get('monthly_operation_capacity', 6))}件。�
 action_type, target, amount, under_name, note, evidenceを含める。
 金額単位は万円。各実務で不要なtargetは空文字、不要なamountは0、noteは140字以内。
 evidenceは今月の観測に表示されたIDだけを引用し、根拠がなければ[]。
+観測の角括弧内に表示されるIDは、そのままtargetにもevidenceにも使える同一の識別子である。
 memoryは{MAX_MEMORY_CHARS}字以内、reasoningは80字以内。
 計画欄は各240字以内、alternativesは2〜3件。
 説明文を付けずJSONだけ返す。
@@ -292,6 +293,7 @@ action_type, target, amount, location, utterance, utterance_channel,
 utterance_to, memory, reasoning, evidence を必ず含める。
 金額単位は万円。不要なtargetは空文字、不要なamountは0、発言しない場合はutteranceを空文字にする。
 evidenceは今月の観測に表示されたIDだけを引用し、根拠がなければ[]。
+観測の角括弧内に表示されるIDは、そのままtargetにもevidenceにも使える同一の識別子である。
 memoryは{MAX_MEMORY_CHARS}字以内、reasoningは80字以内、utteranceは{MAX_TEXT_CHARS}字以内。
 説明文を付けずJSONだけ返す。
 """
@@ -337,7 +339,7 @@ def _sale_offers(agent: Agent, ledger: Ledger) -> str:
     if not offers:
         return "  （届いていない）"
     return "\n".join(
-        f"  [OFFER-{o.offer_id}] {o.offer_id}: {o.parcel_id} 名義{o.under_name} {o.price}万"
+        f"  [{o.offer_id}] {o.parcel_id} 名義{o.under_name} {o.price}万"
         for o in offers
     )
 
@@ -351,7 +353,7 @@ def _lease_offers(agent: Agent, ledger: Ledger) -> str:
     if not rows:
         return "  （届いていない）"
     return "\n".join(
-        f"  [LEASE-{o['id']}] {o['id']}: {o['parcel_id']} 名義{o['under_name']} {o['rent']}万/月"
+        f"  [{o['id']}] {o['parcel_id']} 名義{o['under_name']} {o['rent']}万/月"
         for o in rows
     )
 
@@ -427,7 +429,7 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         own_sales = [o for o in ledger.offers.values() if o.from_id == agent.agent_id][-12:]
         rows.append("[自社が出した直近の売買買付]")
         rows.extend(
-            f"  {o.offer_id}: {o.parcel_id} 名義{o.under_name} {o.price}万 "
+            f"  [{o.offer_id}] {o.parcel_id} 名義{o.under_name} {o.price}万 "
             f"状態:{o.status}" + (f" 逆提示{o.counter_price}万" if o.counter_price else "")
             for o in own_sales
         )
@@ -436,7 +438,7 @@ def build_user_prompt_v3(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         own_leases = [o for o in ledger.v3_lease_offers.values()
                       if o["from"] == agent.agent_id][-12:]
         rows.append("[自社が出した直近の長期賃借・運営申込み]")
-        rows.extend(f"  {o['id']}: {o['parcel_id']} 名義{o['under_name']} "
+        rows.extend(f"  [{o['id']}] {o['parcel_id']} 名義{o['under_name']} "
                     f"{o['rent']}万/月 状態:{o['status']}" for o in own_leases)
         if not own_leases:
             rows.append("  （なし）")
@@ -527,6 +529,7 @@ def make_lease_offer(ledger: Ledger, step: int, parcel_id: str, by: Agent,
 def resolve_lease_offer(ledger: Ledger, step: int, offer_id: str, by: str,
                         accept: bool) -> Dict[str, Any]:
     ensure_v3_state(ledger)
+    offer_id = ledger._normalize_id(offer_id)
     offer = ledger.v3_lease_offers.get(offer_id)
     if not offer or offer["status"] != "open" or offer["to"] != by:
         return ledger._rec(step, "lease_response_rejected", lease_offer_id=offer_id,

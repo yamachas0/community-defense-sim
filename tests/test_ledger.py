@@ -18,8 +18,8 @@ from src.simulation import (_AMOUNT_REQUIRED, _has_amount, _is_rejected,  # noqa
                             _parse_action, _repair_truncated_json)
 from src.agents import Agent  # noqa: E402
 from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
-                          build_system_prompt_v3, control_share, ensure_v3_state,
-                          list_for_lease, make_lease_offer,
+                          build_system_prompt_v3, build_user_prompt_v3, control_share,
+                          ensure_v3_state, list_for_lease, make_lease_offer,
                           resolve_lease_offer, seed_acquirer_intelligence_v3)  # noqa: E402
 
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
@@ -292,6 +292,55 @@ check("所有者を変えずに運営・賃借主体を別記録",
       L.parcels["P01"].owner_id == "HH01"
       and getattr(L.parcels["P01"], "controller_id", None) == "AQ01")
 check("所有率と別の支配率を集計", abs(control_share(L, ["AQ01"]) - 0.25) < 1e-9)
+print("== 案1: 買付・賃借IDの表記統一 ==")
+names_v3 = {"HH01": "R01", "HH02": "R02", "BZ01": "T01", "AQ01": "X社", "MU01": "G01"}
+cfg_id = {"world": {"town_name": "A市", "background": "日常が続く。",
+                    "block_names": ["北町"]},
+          "social": {"venues": [{"id": "V01", "label": "飲食店"}],
+                     "public_directory": ["HH01: R01"]}}
+L = mk()
+L.enable_on_demand_financing(["AQ01"])
+oid_a = L.record_offer(1, "P01", "AQ01", 2500, under_name="X社")["offer_id"]
+owner_v3 = Agent("HH01", "household", "R01", "所有者")
+owner_view = build_user_prompt_v3(owner_v3, L, 2, 60, names_v3, cfg_id)
+check("観測の買付IDは角括弧1トークンだけ",
+      f"[{oid_a}] P01" in owner_view and "OFFER-" not in owner_view,
+      owner_view)
+check("角括弧付きの買付IDで受諾できる",
+      L.record_accept(2, f"[{oid_a}]", "HH01")["kind"] == "transfer")
+L = mk()
+L.enable_on_demand_financing(["AQ01"])
+oid_b = L.record_offer(1, "P01", "AQ01", 2500, under_name="X社")["offer_id"]
+check("旧表記 OFFER- 付きでも同一の買付に解決する",
+      L.record_accept(2, f"OFFER-{oid_b}", "HH01")["kind"] == "transfer")
+L = mk()
+L.enable_on_demand_financing(["AQ01"])
+oid_c = L.record_offer(1, "P01", "AQ01", 2500, under_name="X社")["offer_id"]
+check("素のIDでも受諾できる",
+      L.record_accept(2, oid_c, "HH01")["kind"] == "transfer")
+L = mk()
+L.enable_on_demand_financing(["AQ01"])
+oid_d = L.record_offer(1, "P01", "AQ01", 2500, under_name="X社")["offer_id"]
+check("存在しない買付IDは今までどおり不成立",
+      L.record_accept(2, "[O9999]", "HH01")["kind"] == "accept_rejected")
+check("角括弧付きの買付IDで拒否・逆提示・取下げも解決する",
+      L.record_counter(2, f"[{oid_d}]", "HH01", 3000)["kind"] == "counter")
+L = mk()
+L.enable_on_demand_financing(["AQ01"])
+oid_e = L.record_offer(1, "P01", "AQ01", 2500, under_name="X社")["offer_id"]
+check("角括弧付きで取下げできる",
+      L.record_withdraw(2, f"[{oid_e}]", "AQ01")["kind"] == "withdraw")
+L = mk()
+buyer_id_test = Agent("AQ01", "acquirer", "X社", "外部会社",
+                      extra={"mandate": "m", "aliases": ["A社"]})
+ensure_v3_state(L)
+lease_id = make_lease_offer(L, 1, "P01", buyer_id_test, 24, "A社", "希望")["lease_offer_id"]
+owner_lease_view = build_user_prompt_v3(owner_v3, L, 2, 60, names_v3, cfg_id)
+check("観測の賃借申込みIDも角括弧1トークンだけ",
+      f"[{lease_id}] P01" in owner_lease_view and "LEASE-" not in owner_lease_view)
+check("角括弧・旧表記どちらでも賃借申込みに解決する",
+      resolve_lease_offer(L, 2, f"[LEASE-{lease_id}]", "HH01", True)["kind"] == "lease_control")
+
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
 sys.exit(1 if FAIL else 0)
