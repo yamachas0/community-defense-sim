@@ -118,6 +118,18 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
                      "text": str(a.get("text", "")), "heard_by": []})
     said.sort(key=lambda r: _v5_order(r["step"], r.get("scene") or "", r.get("round")))
 
+    cross = collections.Counter()
+    for row in said:
+        if row["kind"] != "utterance":
+            continue
+        r_hit = _v5_mentions(row["text"], holders)["hit"]
+        l_hit = (int(row["step"]), row["from"], row["text"]) in about
+        cross[("rule+" if r_hit else "rule-") + "/" + ("llm+" if l_hit else "llm-")] += 1
+    llm_only = [row for row in said
+                if row["kind"] == "utterance"
+                and not _v5_mentions(row["text"], holders)["hit"]
+                and (int(row["step"]), row["from"], row["text"]) in about]
+
     mention_rows, edges, form = [], 0, collections.Counter()
     knowers_by_month = collections.defaultdict(set)
     holder_only_rows = []
@@ -174,6 +186,14 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
                 "available_antecedents": [t.get("kind") for t in ante][:4],
                 "heard_from": [m["from"] for m in heard][:4],
             }
+
+    optimistic = set(first_mention)
+    for row in holder_only_rows:
+        for a in acqs:
+            if (int(a["step"]) <= row["step"]
+                    and a.get("under_name") in row["_hit"]["holders"]
+                    and row["from"] != a.get("seller")):
+                optimistic.add(acq_id_of[a["parcel_id"]])
 
     all_ids = [acq_id_of[a["parcel_id"]] for a in acqs]
     noticed = set(first_mention)
@@ -260,7 +280,12 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
     scenes_with_talk = {(u["step"], u["scene"]) for u in utts}
     parse_fail = len([e for e in events if e.get("action_type") == "PARSE_FAIL"])
     max_tok = summary.get("max_token_finishes", 0)
+    n_classified = len([r for r in classified if "about_acquisition" in r])
     d3 = {
+        "api_errors": summary.get("usage", {}).get("errors", 0),
+        "transfers_recorded": len(acqs),
+        "classified_rows": n_classified,
+        "classifier_unknown": unknown_cls,
         "parse_fail": parse_fail,
         "max_token_finishes": max_tok,
         "groups_missing_turns": len(missing_turns),
@@ -269,8 +294,20 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "scenes_with_conversation": len(scenes_with_talk),
         "rounds_max": max(rounds_seen.values()) if rounds_seen else 0,
         "ok": (parse_fail == 0 and max_tok == 0 and not missing_turns
-               and not bad_delivery and bool(conv_groups)),
+               and not bad_delivery and bool(conv_groups)
+               and summary.get("usage", {}).get("errors", 0) == 0
+               and (not llm_ran or (n_classified == len(utts) and unknown_cls == 0))),
     }
+
+    with open(os.path.join(run_dir, "edges_v5.jsonl"), "w", encoding="utf-8") as f:
+        for row in mention_rows:
+            for dst in (row["heard_by"] or []):
+                f.write(json.dumps({"step": row["step"], "from": row["from"],
+                                    "to": dst, "channel": row["kind"],
+                                    "scene": row.get("scene"), "venue": row.get("venue"),
+                                    "parcels": row["_hit"]["parcels"],
+                                    "holders": row["_hit"]["holders"]},
+                                   ensure_ascii=False) + "\n")
 
     talk_events = [e for e in events if e.get("action_type") == "utterance"]
     usage = summary.get("usage", {})
@@ -308,19 +345,24 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "mention_rows": len(mention_rows),
         "mention_by_channel": dict(collections.Counter(r["kind"] for r in mention_rows)),
         "propagation_edges": edges,
-        "knowers_by_month": {m: sorted(v) for m, v in sorted(knowers_by_month.items())},
+        "speakers_by_month": {m: sorted(v) for m, v in sorted(knowers_by_month.items())},
+        "rule_llm_cross": dict(cross),
+        "llm_only_utterances": len(llm_only),
         "first_mention": first_mention,
         "noticed_acquisitions": len(noticed),
         "unnoticed_acquisitions": unnoticed,
         "unnoticed_ratio_all": (round(len(unnoticed) / len(all_ids), 3)
                                 if all_ids else None),
+        "unnoticed_ratio_optimistic": (
+            round(len([a for a in all_ids if a not in optimistic]) / len(all_ids), 3)
+            if all_ids else None),
         "cohort_followup_months": V5_FOLLOWUP_MONTHS,
         "cohort_size": len(cohort),
         "cohort_unnoticed_ratio": (round(len(cohort_unnoticed) / len(cohort), 3)
                                    if cohort else None),
         "detection_lag_months": sorted(lags),
         "mean_detection_lag_months": (round(sum(lags) / len(lags), 2) if lags else None),
-        "rumor_form": dict(form),
+        "reference_accuracy": dict(form),
         "holder_only_mentions": len(holder_only_rows),
         # 明るみ（3段階）
         "article_months": article_months,

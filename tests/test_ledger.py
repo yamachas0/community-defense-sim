@@ -1634,6 +1634,7 @@ check("v4.1b: 金額のない世界のレポートデータに amount を載せ�
 #   v1〜v4.1b の経路は不変であることも合わせて固定する。
 # ===========================================================================
 
+import collections            # noqa: E402
 import json as _json          # noqa: E402
 import shutil as _shutil      # noqa: E402
 import tempfile as _tempfile  # noqa: E402
@@ -1748,13 +1749,20 @@ check("v5: S4は町内会→窓口→仲介の店先→取材の順で月替わ�
       == ["assembly", "counter", "broker_front", "press", "assembly"])
 
 # --- スキーマ -------------------------------------------------------------
-_plan_sc = plan_schema_v5(["V01", "V02"], "V06", owns_parcel=True)
+_plan_sc = plan_schema_v5(["V01", "V02"], "V06")
 check("v5: 計画の出力は thought が先頭",
       list(_plan_sc["properties"])[0] == "thought")
 check("v5: S4の行き先はその月の会場か自宅だけ",
       _plan_sc["properties"]["plan_s4"]["enum"] == ["V06", HOME_V5])
-check("v5: 区画を持たない主体には姿勢の欄が無い",
-      "stance" not in plan_schema_v5(["V01"], "V06", owns_parcel=False)["properties"])
+# 姿勢を毎コール尋ねると売却の話題を主体に想起させ続ける（Codexレビュー 2026-08-27）。
+# 計画コールでは尋ねず、その月の最後のターンで1回だけ尋ねる。
+check("v5: 計画コールでは姿勢を尋ねない（売却話題のプライミングを作らない）",
+      "stance" not in _plan_sc["properties"]
+      and "stance" not in plan_schema_v5(["V01"], "V06")["properties"])
+check("v5: 計画コールのプロンプトに姿勢の教示が無い",
+      "stance" not in build_plan_prompt_v5(
+          Agent("HH01", "household", "R01", "説明"), L5, 1, 12,
+          {"HH01": "R01"}, [], "町内会", "V02"))
 _HH5 = Agent("HH01", "household", "R01", "この主体の事情だけを書いた説明")
 _MD5 = Agent("MD01", "media", "J01", "この主体の事情だけを書いた説明")
 _sc5 = scene_schema_v5(_HH5, ["HH01", "HH02"], ["HH01", "HH02", "MD01"],
@@ -1828,7 +1836,7 @@ _prompts5 = []
 _prompts5_world = []
 for _a in _actors5:
     _sys = build_system_prompt_v5(_a, CFG5, len(_parcels5))
-    _plan = build_plan_prompt_v5(_a, _L5real, 1, 12, _names5, [], "町内会", "V02", True)
+    _plan = build_plan_prompt_v5(_a, _L5real, 1, 12, _names5, [], "町内会", "V02")
     _scene = build_scene_prompt_v5(_a, _L5real, 1, 12, _names5, "S1", "朝の商店街",
                                    "V01 駅前の飲食店", [_a.agent_id, "HH02"], [], [],
                                    1, 2, registry_rows_v5(_L5real, 1), True,
@@ -1991,6 +1999,20 @@ _shutil.rmtree(_alone5.run_dir, ignore_errors=True)
 check("v5: 同席していない相手を宛先に書いたら記録に残る（黙って捨てない）",
       hasattr(_sim5.ledger, "records"))
 
+_stance_prompts = [p for p in _sim5.client.prompt_log if "stance" in p["user"]]
+_stance_by = collections.Counter()
+for _p in _stance_prompts:
+    _stance_by[_p["tag"]] += 1
+check("v5: 姿勢を尋ねるのは会話のターンだけ（計画コールでは尋ねない）",
+      not [p for p in _stance_prompts if p["tag"].endswith(":plan")])
+check("v5: 姿勢は1主体につき月1回までしか記録されない",
+      all(v == 1 for v in collections.Counter(
+          (r["step"], r["agent_id"]) for r in _sim5.ledger.v5_stances).values()))
+check("v5: 記事は1主体につき月1本までしか記録されない",
+      all(v == 1 for v in collections.Counter(
+          (r["step"], r["from"]) for r in _sim5.ledger.v5_articles).values()))
+check("v5: 記事の棄却（quota超過）が起きていない＝最後のターンで1回だけ書かせている",
+      not [r for r in _sim5.ledger.records if r.get("kind") == "article_rejected"])
 check("v5: 内心は全主体ぶん記録される（誰の内心も落ちない）",
       {t["from"] for t in _sim5.thoughts} == {a.agent_id for a in _sim5.actors})
 check("v5: mock2か月で打切り・解釈不能が出ない",

@@ -352,8 +352,13 @@ def inbox_rows_v5(agent: Agent, names: Dict[str, str]) -> List[str]:
 # 出力スキーマ
 # ---------------------------------------------------------------------------
 
-def plan_schema_v5(venue_ids: List[str], s4_venue: str,
-                   owns_parcel: bool = False) -> Dict[str, Any]:
+def plan_schema_v5(venue_ids: List[str], s4_venue: str) -> Dict[str, Any]:
+    """月の初めの計画。thought と S1〜S4 の行き先だけを返す。
+
+    姿勢（stance）はここでは尋ねない。毎コール「手放すことを考えているか」を
+    尋ねると売却の話題を主体に想起させ続ける＝世界側のプライミングになるため
+    （Codexレビュー 2026-08-27）。姿勢は月末＝その主体の最後のターンで1回だけ尋ねる。
+    """
     day = {"type": "string", "enum": list(venue_ids) + [HOME]}
     props = {
         "thought": {"type": "string"},
@@ -362,14 +367,19 @@ def plan_schema_v5(venue_ids: List[str], s4_venue: str,
         "plan_s3": dict(day),
         "plan_s4": {"type": "string", "enum": [s4_venue, HOME]},
     }
-    if owns_parcel:
-        props["stance"] = {"type": "string", "enum": STANCE_VALUES}
     return {"type": "object", "properties": props, "required": list(props)}
 
 
 def scene_schema_v5(agent: Agent, present_ids: List[str], all_ids: List[str],
                     owns_parcel: bool = False,
                     can_publish: bool = False) -> Dict[str, Any]:
+    """シーン1ターンの出力。
+
+    `owns_parcel` / `can_publish` は **その月のその主体の最後のターンでだけ True** に
+    する（Codexレビュー2巡目）。毎ターン「手放すことを考えているか」を尋ねると
+    売却の話題を主体に想起させ続ける＝世界側のプライミングになるため。
+    記事も同じ理由で、月内のやりとりを全部聞いたあとの1回に限る。
+    """
     others = [p for p in present_ids if p != agent.agent_id]
     elsewhere = [a for a in all_ids if a != agent.agent_id]
     props: Dict[str, Any] = {
@@ -461,8 +471,7 @@ JSONの最初に thought を書く。thought は誰にも伝わらないあな�
 
 def build_plan_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                          names: Dict[str, str], traces: List[Dict[str, Any]],
-                         s4_label: str, s4_venue: str,
-                         owns_parcel: bool = False) -> str:
+                         s4_label: str, s4_venue: str) -> str:
     rows = [f"=== 第{step}月 / 全{n_steps}月 ==="]
     thought = agent.extra.get("thought", "")
     rows += ["[前の場面からの自分の内心（そのまま持ち越したもの）]",
@@ -476,10 +485,6 @@ def build_plan_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     rows += ["[隣接する区画の名義（日ごろ目に入る範囲）]"] + neighbourhood_rows_v5(agent, ledger, names)
     rows += ["", f"今月のS4は「{s4_label}」（会場 {s4_venue}）。行くかどうかは自分で決める。",
              "まず thought（内心）を書き、それを踏まえて S1〜S4 をどこで過ごすかをJSONで返す。"]
-    if owns_parcel:
-        rows += ["あわせて stance に、今のあなたが自分の土地を手放すことを考えているか"
-                 "（sell）、そうでないか（keep）を書く。これは記録に残るだけで"
-                 "誰にも伝わらず、何も起こさない。"]
     rows += ["説明文を付けずＪＳＯＮだけ返す。"]
     return "\n".join(rows)
 

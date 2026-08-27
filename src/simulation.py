@@ -292,6 +292,7 @@ class Simulation:
         self.feelings: List[Dict[str, Any]] = []      # 住民・事業者の月次の実感（認知の観測値）
         self.thoughts: List[Dict[str, Any]] = []      # v4.1: 月次の内心（認知の観測値）
         self.deliveries: List[Dict[str, Any]] = []    # 誰に何が実際に届いたか（経路の追跡用）
+        self.parse_fail_raw: List[Dict[str, Any]] = []  # 解釈できなかった応答の全文
 
     # -- main loop ---------------------------------------------------------
 
@@ -1475,6 +1476,9 @@ class Simulation:
                                 "outcome": {"kind": "parse_fail",
                                             "reason": "unparseable_response"},
                                 "raw": (raw or "")[:400]})
+            # 400字で切ると打切りの原因が追えないので、全文を別ログに残す。
+            self.parse_fail_raw.append({"step": step, "agent_id": agent.agent_id,
+                                        "tag": tag, "raw": raw or ""})
             return None
         if act.get("_truncated"):
             self.truncated_count += 1
@@ -1512,11 +1516,10 @@ class Simulation:
         # --- 2) 計画コール（月1回・全主体） ---------------------------------
         items = []
         for a in self.actors:
-            owns = self._v5_owns(a)
             prompt = build_plan_prompt_v5(a, self.ledger, step, self.n_steps, self.names,
-                                          a.extra["traces"], label4, venue4, owns)
+                                          a.extra["traces"], label4, venue4)
             items.append((a, self.system_prompts[a.agent_id], prompt,
-                          plan_schema_v5(self.venue_ids, venue4, owns)))
+                          plan_schema_v5(self.venue_ids, venue4)))
         results = self._call_batch(items, "plan")
         for a in self.actors:
             a.inbox = []      # 観測を作り終えた直後に空にする（以降は翌月ぶん）
@@ -1527,7 +1530,6 @@ class Simulation:
             plan = {sid: HOME_V5 for sid in SCENE_IDS}
             if act is not None:
                 self._v5_thought(a, act, step, "plan", "")
-                self._v5_stance(a, act, step, "plan")
                 for sid in SCENE_IDS:
                     value = str(act.get(f"plan_{sid.lower()}", "") or "").strip()
                     allowed = [venue4] if sid == "S4" else self.venue_ids
@@ -1539,6 +1541,22 @@ class Simulation:
                                          scene=sid, given=value)
             plans[a.agent_id] = plan
             self.ledger.v5_plans.append({"step": step, "agent_id": a.agent_id, **plan})
+
+        # 月内の出席をここで確定させる（計画は決まっている）。
+        # 「その主体の今月最後のターン」が分かると、姿勢と記事をそこ1回に絞れる。
+        attend: Dict[str, List[str]] = {}
+        for sid in SCENE_IDS:
+            venues: Dict[str, List[str]] = {}
+            for a in self.actors:
+                venue = plans[a.agent_id][sid]
+                if venue != HOME_V5:
+                    venues.setdefault(venue, []).append(a.agent_id)
+            for venue, members in venues.items():
+                if len(members) < 2:
+                    continue
+                for aid in members:
+                    attend.setdefault(aid, []).append(sid)
+        last_scene = {aid: scenes[-1] for aid, scenes in attend.items() if scenes}
 
         # --- 3) シーン（同席者だけの会話・各2ラウンド） ----------------------
         for sid in SCENE_IDS:
@@ -1588,8 +1606,10 @@ class Simulation:
                 for venue_id, members in sorted(groups.items()):
                     present = sorted(m.agent_id for m in members)
                     for a in members:
-                        owns = self._v5_owns(a)
-                        can_publish = a.role == "media"
+                        final_turn = (last_scene.get(a.agent_id) == sid
+                                      and rnd == self.scene_rounds)
+                        owns = self._v5_owns(a) and final_turn
+                        can_publish = a.role == "media" and final_turn
                         prompt = build_scene_prompt_v5(
                             a, self.ledger, step, self.n_steps, self.names, sid,
                             scene_label, self.venue_labels.get(venue_id, venue_id),
@@ -2165,6 +2185,7 @@ class Simulation:
             _write_jsonl(os.path.join(d, "stances_v5.jsonl"), self.ledger.v5_stances)
             _write_jsonl(os.path.join(d, "articles_v5.jsonl"), self.ledger.v5_articles)
             _write_jsonl(os.path.join(d, "directs_v5.jsonl"), self.ledger.v5_directs)
+            _write_jsonl(os.path.join(d, "parse_fail_raw.jsonl"), self.parse_fail_raw)
             _write_jsonl(os.path.join(d, "deliveries.jsonl"), self.deliveries)
         if self.field_v4:
             _write_jsonl(os.path.join(d, "feelings.jsonl"),
