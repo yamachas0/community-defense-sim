@@ -1561,6 +1561,15 @@ class Simulation:
                              "venue": venue_id, **tr})
             registry = (registry_rows_v5(self.ledger, step)
                         if (sid == "S4" and kind4 == "counter") else None)
+            if registry:
+                # 誰が窓口で登記を見たか自体も観測に残す（プロンプトに出すだけにしない）。
+                for venue_id, members in sorted(groups.items()):
+                    for a in members:
+                        self.ledger.v5_traces_seen.append(
+                            {"step": step, "agent_id": a.agent_id, "scene": sid,
+                             "venue": venue_id, "kind": "registry_lookup",
+                             "acq_id": "", "parcel_id": "", "audience": "registry",
+                             "text": f"窓口で登記の記録を閲覧した（{len(registry)}行）"})
 
             for rnd in range(1, self.scene_rounds + 1):
                 items = []
