@@ -554,15 +554,17 @@ class MockClient:
             act["asking_price"] = rng.choice(
                 [str(int(2000 + 2000 * rng.random())), "unknown",
                  "not_asked", "declined_to_answer"])
-        if "goal_assessment" in properties:
-            act.update({
-                "goal_assessment": "mock goal gap",
-                "strategy": "mock integrated plan",
-                "next_milestone": "mock milestone",
-                "expected_goal_effect": "mock expected effect",
-                "alternatives": ["mock alternative A", "mock alternative B"],
-                "revision_reason": "mock revision",
-            })
+        if "strategy" in properties:
+            act.update({"strategy": "mock integrated plan",
+                        "next_milestone": "mock milestone"})
+            # 任意欄は「無ければ空」の経路も通す必要があるので、Mockでは出したり出さなかったりする。
+            if rng.random() < 0.5:
+                act.update({
+                    "goal_assessment": "mock goal gap",
+                    "expected_goal_effect": "mock expected effect",
+                    "alternatives": ["mock alternative A", "mock alternative B"],
+                    "revision_reason": "mock revision",
+                })
         act["memory"] = f"step{step}: {act['action_type']} を選んだ (mock)"
         act["reasoning"] = "mock client — 実際の判断はしていない"
         evidence = []
@@ -624,12 +626,13 @@ class MockClient:
                 "memory": act["memory"],
                 "reasoning": act["reasoning"],
                 "evidence": act["evidence"],
-                "goal_assessment": "mock goal gap",
-                "strategy": "mock integrated plan",
-                "next_milestone": "mock milestone",
-                "expected_goal_effect": "mock expected effect",
-                "alternatives": ["mock alternative A", "mock alternative B"],
-                "revision_reason": "mock revision",
+                "strategy": act.get("strategy", "mock integrated plan"),
+                "next_milestone": act.get("next_milestone", "mock milestone"),
+                **({"goal_assessment": act["goal_assessment"],
+                    "expected_goal_effect": act["expected_goal_effect"],
+                    "alternatives": act["alternatives"],
+                    "revision_reason": act["revision_reason"]}
+                   if "revision_reason" in act else {}),
             }, ensure_ascii=False)
         return json.dumps(act, ensure_ascii=False)
 

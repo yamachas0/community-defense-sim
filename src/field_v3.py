@@ -164,6 +164,10 @@ def verbs_for_v3(role: str) -> List[str]:
     return list(V3_VERBS[role])
 
 
+OPTIONAL_PLAN_KEYS = ("goal_assessment", "expected_goal_effect",
+                      "alternatives", "revision_reason")
+
+
 def action_schema_v3(agent: Agent) -> Dict[str, Any]:
     if agent.role == "acquirer":
         allowed = list(dict.fromkeys(
@@ -206,7 +210,10 @@ def action_schema_v3(agent: Agent) -> Dict[str, Any]:
             "alternatives": {"type": "array", "items": {"type": "string"}},
             "revision_reason": {"type": "string"},
         }
-        return {"type": "object", "properties": props, "required": list(props)}
+        # 計画欄のうち必須は strategy と next_milestone だけにする。残りは書いても
+        # 書かなくてもよい（欄を埋めさせるために書式で強制しない）。
+        required = [key for key in props if key not in OPTIONAL_PLAN_KEYS]
+        return {"type": "object", "properties": props, "required": required}
 
     props: Dict[str, Any] = {
         "action_type": {"type": "string", "enum": verbs_for_v3(agent.role)},
@@ -326,15 +333,16 @@ direct発言はutterance_toで指定した一主体だけに届く。全員共�
 手段、価格、順序、速度、仲介利用、直接接触、名義の選択は自ら決める。
 利用可能な契約・登記名義: {' / '.join([agent.name] + list(agent.extra.get('aliases', [])))}
 会社の月次実行能力は最大{int(agent.extra.get('monthly_operation_capacity', 6))}件の独立した実務である。
-計画と今月のoperationsを同じ意思決定で選ぶ。直近の実績と目標差分から前月計画を
-維持または改訂し、実質的に異なる代替案を比較する。外部の返答や将来の会合・成約を
-観測なしに仮定しない。情報収集、接触、提案、待機のいずれも選べるが、選んだ今月行動が
-任務到達までの経路にどう作用すると見込むかを明記する。相手の反応と成約結果は相手が決める。
+計画と今月のoperationsを同じ意思決定で選ぶ。前月計画は維持しても改訂してもよい。
+外部の返答や将来の会合・成約を観測なしに仮定しない。情報収集、接触、提案、待機の
+いずれも選べる。相手の反応と成約結果は相手が決める。
 """
         text += f"""
 --- JSON出力 ---
-operations, location, utterance, utterance_channel, utterance_to, memory, reasoning, evidence, goal_assessment, strategy,
-next_milestone, expected_goal_effect, alternatives, revision_reasonを必ず含める。
+operations, location, utterance, utterance_channel, utterance_to, memory, reasoning,
+evidence, strategy, next_milestoneを必ず含める。
+goal_assessment, expected_goal_effect, alternatives, revision_reasonは任意で、
+書くことがなければ省いてよい。
 operationsは1〜{int(agent.extra.get('monthly_operation_capacity', 6))}件。各要素には
 action_type, target, amount, under_name, parcel_id, inquiry_id, owner_intent,
 asking_price, note, evidenceを含める。
@@ -346,7 +354,7 @@ asking_priceは万円の数値か unknown / not_asked / declined_to_answer を�
 evidenceは今月の観測に表示されたIDだけを引用し、根拠がなければ[]。
 観測の角括弧内に表示されるIDは、そのままtargetにもevidenceにも使える同一の識別子である。
 memoryは{MAX_MEMORY_CHARS}字以内、reasoningは80字以内。
-計画欄は各240字以内、alternativesは2〜3件。
+計画欄は各240字以内。
 説明文を付けずJSONだけ返す。
 """
     else:

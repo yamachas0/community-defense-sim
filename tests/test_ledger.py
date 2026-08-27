@@ -18,6 +18,7 @@ from src.simulation import (_AMOUNT_REQUIRED, _has_amount, _is_rejected,  # noqa
                             _parse_action, _repair_truncated_json)
 from src.agents import Agent  # noqa: E402
 from src.field_v3 import (action_schema_v3, build_acquirer_decision_prompt_v3,
+                          normalize_acquirer_plan_v3,
                           build_system_prompt_v3, build_user_prompt_v3, control_share,
                           ensure_v3_state, list_for_lease, make_lease_offer,
                           acquirer_pipeline_text, answer_owner_inquiry,
@@ -259,7 +260,7 @@ check("v3の利用者向けプロンプトにAI表記がない",
       "AI" not in resident_system and "AI" not in buyer_system)
 check("X社は計画と世界内行動を同じスキーマで返す",
       all(key in buyer_schema["required"] for key in (
-          "operations", "strategy", "next_milestone", "expected_goal_effect"))
+          "operations", "strategy", "next_milestone"))
       and buyer_operation_schema["maxItems"] == 6)
 buyer_v3.extra["strategy_state"] = {"strategy": "面積効率を比較する"}
 buyer_v3.extra["execution_history"] = [{
@@ -485,6 +486,26 @@ big_view = build_user_prompt_v3(big_buyer, many, 20, 60, names_q, cfg_id)
 check("自社の買付は件数を切り捨てずに全件出る",
       all(f"[O{n:04d}]" in big_view for n in range(1, 15))
       and "[自社が出した売買買付（全件）]" in big_view)
+
+print("== 案4: 計画欄は strategy と next_milestone だけ必須 ==")
+plan_schema = action_schema_v3(buyer_v3)
+check("必須の計画欄は2つだけ",
+      all(k in plan_schema["required"] for k in ("strategy", "next_milestone"))
+      and not any(k in plan_schema["required"] for k in (
+          "goal_assessment", "expected_goal_effect", "alternatives",
+          "revision_reason")))
+check("任意の計画欄はスキーマに残る（書いてもよい）",
+      all(k in plan_schema["properties"] for k in (
+          "goal_assessment", "expected_goal_effect", "alternatives",
+          "revision_reason")))
+sparse_plan = normalize_acquirer_plan_v3(
+    {"strategy": "面積の大きい区画から当たる", "next_milestone": "第9月までに3件"})
+check("任意欄が無くてもテレメトリの形は保たれる（無ければ空）",
+      sparse_plan["strategy"] == "面積の大きい区画から当たる"
+      and sparse_plan["goal_assessment"] == ""
+      and sparse_plan["alternatives"] == [])
+check("計画欄の埋め方を書式で強制しない",
+      "alternativesは2〜3件" not in build_system_prompt_v3(buyer_v3, cfg_v3, 48))
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
