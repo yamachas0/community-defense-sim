@@ -173,3 +173,101 @@ python tools/estimate_cost.py --run simulations/<v2 mock run directory>
 Windowsの標準パッチ障害時だけ非破壊の `git apply` を代替利用する。
 
 
+
+---
+
+## 2026-08-27 更新（この節が上記すべてに優先する。最終更新 2026-08-27 12:15 JST）
+
+担当交代の記録：8/25 11:32〜8/27 10:54 は OpenAI Codex デスクトップが作業。
+8/27 11:17 の施主指示により Claude 側（CEO=Fable / CTO=Opus 5）へ引き継いだ。
+本節は Codex の 4 コミットと run31/34/36/37/38 の**実測値**で正本化したもの。推測は「推定」と明記した。
+
+### 実装状況（`main` = `648f2d8`・未push・5コミット先行）
+
+作業ツリーには `AGENTS.md` / `CLAUDE.md` / `docs/layout-library.png` / `simulations/*`（run16〜38）が未追跡で残る。
+
+8/26〜27 に Codex が入れた 4 コミット：
+
+1. **`46d000f` 戦略テレメトリ** — X社の出力に計画欄（`goal_assessment` / `strategy` / `next_milestone` /
+   `expected_goal_effect` / `alternatives` / `revision_reason`）を追加し、`events.jsonl` の `plan` に保存。
+   `src/field_v3.py` に `normalize_acquirer_plan_v3` / `_acquirer_plan_text`、`src/simulation.py` に `execution_history`。
+2. **`d7c8f75` 計画と実行の統合** — 「計画コール」と「実行コール」の二段レビュー方式を廃止し、
+   計画と今月の行動を1回の構造化意思決定として返させる。二段方式は戦略JSONの半数が解析不能で失敗したため。
+3. **`8c968b6` X社の月次オペレーション枠** — X社だけ `operations[]` 配列で **1〜6件/月**を並行実行可能に
+   （`configs/config_field_v3.yaml: acquirer_monthly_operation_capacity: 6`）。他主体は従来どおり月1行動。
+   `action_schema_v3` が acquirer のときだけ `operations` 配列スキーマを返す。
+   枠超過は `invalid_action / monthly_capacity_exceeded`。
+4. **`648f2d8` X社の予算上限撤廃** — `acquirer_financing: on_demand`。成約時に必要額を調達する主体として
+   台帳（`Ledger.enable_on_demand_financing` / `financing_raised`）に明示し、調達累計を観測と結果に残す。
+   `[手元資金]` の代わりに `[資金条件] 必要資金は案件成立時に調達可能。調達累計N万円。固定予算上限はない。` を表示。
+
+X社の脳は `acquirer_model: gemini-2.5-flash`（`acquirer_thinking_budget: 256` / `acquirer_max_tokens: 2400`）、
+他26主体は `gemini-2.5-flash-lite`（`max_tokens: 720`）。`src/simulation.py` に acquirer 専用クライアントの
+別立て経路があり、`acquirer_model` を config で差し替えられる（**現時点で実走はしていない**）。
+
+### ランの実測結果（60か月・実API・すべて seed 85）
+
+| run | ディレクトリ | 時点 | 所有率 | 実効支配率 | 成約 | calls | in/out tok |
+|---|---|---|---|---|---|---|---|
+| 26 | `2026-08-26_1359_26_field_v3_a_city` | `46d000f` 前後 | 0% | 0% | 0 | 1,694 | 242万/34.9万 |
+| 31 | `2026-08-26_2306_31_field_v3_a_city` | `d7c8f75`（統合意思決定） | 0% | 0% | 0 | 1,634 | 233万/33.2万 |
+| 34 | `2026-08-27_0949_34_field_v3_a_city` | `d7c8f75` | 0% | 0% | 0 | 1,632 | 241万/36.9万 |
+| **36** | `2026-08-27_1007_36_field_v3_a_city` | `8c968b6`（オペ枠・予算9億円あり） | **39.1%** | **35.4%** | **18** | 1,632 | 245万/37.2万 |
+| 38 | `2026-08-27_1036_38_field_v3_a_city` | `648f2d8`（予算撤廃） | 0% | 0% | 0 | 1,632 | 245万/37.6万 |
+
+3か月試走：run35（`8c968b6`）所有6.5%、run37（`648f2d8`）所有10.9%・成約5件、
+run28/29/30/33 は 0%。1本60か月の実費は **$0.5〜1.1**（`cost_estimate.json` 準拠）。
+
+**run36 が第20月で止まった理由は特定済み**：成約18件の価格合計 90,043万円が `acquirer_budget: 90000` に到達し、
+以後の承諾が `accept_rejected / buyer_insufficient_funds` で13件弾かれた。予算撤廃（`648f2d8`）の判断自体は正しい。
+
+**run38 が 0% の理由**：X社342 operations のうち `check_land_registry` 160回（実区画14・重複146回＝全操作の42.7%）、
+`contact_broker` 59回、`internal_review` 59回、`financing_review` 56回で、**97%以上が準備行動**。
+買付は第47月と第60月に P17 へ2件のみ、所有者は応じなかった。
+
+### 2026-08-27 の診断（施主指示「モデルを疑う前に設計を見ろ」）
+
+全文は **`docs/design_review_loop.md`**。要点だけ：
+
+- **全11ラン（60か月5本＋3か月6本）で、第1月に `make_offer` を出した3本はすべて成約があり、
+  出さなかった8本はすべて成約0。分離は完全。** run37 と run38 は steps 以外 config 完全一致で結末が分かれた
+  ＝二峰性は構造ではなくサンプリング。
+- **【欠陥A・最重要】買付IDの表記が2系統ある。** 観測は `[OFFER-O0001] O0001: ...` と表示するが
+  `Ledger.record_accept`（`src/world.py:207`）は `O0001` しか解さない。
+  run36で住民の `accept_offer` 110回中 **77回（70%）が `no_such_offer` で消滅**していた。
+  **run≤38 の成約数は、この欠陥による下限値である。**
+- **【欠陥B】** run38のdirect通信308通の69%が「来週伺います／日程調整」等、世界に動詞が存在しない会合の約束。
+  履行は原理的に0。金額を含む通信は0通。X社⇔仲介は118通往復して契約0件。
+  仲介の行為はすべてノート1行の記録で、売り意向・査定額が事実として台帳を流れない。
+- **【欠陥C】** X社は開始時に全46区画の登記を取得済み（`land_registry_scope: non_public`）で毎月全件表示されているのに、
+  世界は「既知だ」という事実を返さない。自社の買付は「直近12件」しか観測に出ない（run36は56件出したので44件が不可視）。
+- **【欠陥D】** 計画欄6必須。run38では `revision_reason` の83%、`expected_goal_effect` の78%が前月と完全一致。
+  `alternatives` は全月ちょうど3件。
+- **【欠陥E】** 通信は翌月配送で1往復2か月。60か月で最大30往復。run38はそれを社交辞令に使い切った。
+- X社は60か月×2run で `make_lease_offer`（実効支配のもう半分の経路）を **1件も使っていない**。
+
+提案5案（案1 ID統一 / 案2 仲介が事実を運ぶ / 案3 パイプライン機械記録＋登記の確認月 / 案4 計画欄削減 /
+案5 同月内往復＝見送り推奨）と、各案の「ルールベース抵触」自己点検は `docs/design_review_loop.md` の第3章。
+
+### 次に行う作業（施主判断待ち）
+
+1. **施主が案1〜5から採用案を選ぶ。** 選定後に第2便として実装（CTO発注）。
+2. 案1（IDの表記統一）は他と独立で効き、非互換の代償が最も小さいため最優先で推奨。
+3. **モデル差し替え（`acquirer_model: gemini-2.5-pro` 等）のA/Bは保留**（施主指示 8/27 11:23）。
+   経路は実装済みで config 1行で切替可能だが、上記欠陥がある状態での比較は「壊れた世界での比較」になる。
+4. `RESULTS.md` に「run≤38 の成約数は欠陥Aによる下限値」を追記する。
+5. 同一設定の複数本による分布測定は、欠陥修正後に費用GOを取ってから。
+
+### 禁止・制約（変更なし）
+
+- ルールベース排除（売却確率・閾値・強制イベント・「〜なら〜しろ」の指示文・台本を足さない）。
+- 観測に無い事実をコードで補完しない。欠損は不成立として残す。
+- `mvp_v1` / `field_v2` の設定と成果物は変更しない。
+- v3のプロンプトとHTMLに「AI」表記を出さない。
+- 秘密情報・`.env` の内容を文書に転記しない（鍵は `GOOGLE_API_KEY` のみ）。
+- **実APIの課金ランは施主の費用GO待ち。** 本便では1本も走らせていない。
+- `git push` は施主承認制。本便では実施していない。
+
+### 進捗ログ
+
+Claude側の作業ログは `docs/progress_claude.log`（`HH:MM 内容` 形式）。
