@@ -210,6 +210,93 @@ def metrics_v41(run_dir: str) -> Dict[str, Any]:
     }
 
 
+def metrics_v41b(run_dir: str) -> Dict[str, Any]:
+    """v4.1b（相談経路を戻した版）の集計。v4.1 の全指標に相談・回答・条例実績を足す。"""
+    base = metrics_v41(run_dir)
+    base["scenario"] = "field_v4_1b"
+    events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
+    ledger = _read_jsonl(os.path.join(run_dir, "ledger.jsonl"))
+    deliveries = _read_jsonl(os.path.join(run_dir, "deliveries.jsonl"))
+
+    consults = [r for r in ledger if r.get("kind") == "consult"]
+    advices = [r for r in ledger if r.get("kind") == "advice"]
+    consult_rejects = collections.Counter(
+        r.get("reason", "") for r in ledger if r.get("kind") == "consult_rejected")
+    advice_rejects = collections.Counter(
+        r.get("reason", "") for r in ledger if r.get("kind") == "advice_rejected")
+    consult_step = {r.get("consult_id"): r.get("step") for r in consults}
+    answered_ids = [r.get("consult_id") for r in advices]
+    latency = [int(r.get("step", 0)) - int(consult_step.get(r.get("consult_id"), 0))
+               for r in advices if r.get("consult_id") in consult_step]
+
+    # 回答が実際に届いた所有者と、その月
+    advice_delivered: Dict[str, int] = {}
+    for d in deliveries:
+        if d.get("kind") != "advice":
+            continue
+        who = d.get("to", "")
+        step = int(d.get("step", 0))
+        if who and (who not in advice_delivered or step < advice_delivered[who]):
+            advice_delivered[who] = step
+
+    # 相談してから決めた所有者（回答が届いた翌月以降に sell / keep を選んだ人）
+    decided_after_advice: Dict[str, List[str]] = {}
+    for e in sorted(events, key=lambda x: (x.get("step", 0), x.get("agent_id", ""))):
+        if e.get("action_type") != "responses":
+            continue
+        who = e.get("agent_id", "")
+        first = advice_delivered.get(who)
+        if first is None or int(e.get("step", 0)) <= first:
+            continue
+        for op in e.get("operations", []) or []:
+            if op.get("action_type") in ("sell", "keep"):
+                decided_after_advice.setdefault(who, []).append(
+                    f"M{e.get('step')}:{op.get('action_type')}")
+
+    # 相談の語が所有者の内心に出た回数（v4.1 の 58/70/60 と直接比べるため）
+    thoughts_all = _read_jsonl(os.path.join(run_dir, "thoughts_all.jsonl"))
+    consult_word = sum(1 for t in thoughts_all
+                       if t.get("role") in ("household", "business")
+                       and "仲介" in str(t.get("text", "")))
+
+    # 条例が空振りしたか（閾値 > 区画の最大面積）
+    areas: List[int] = []
+    cfg_path = os.path.join(run_dir, "config.yaml")
+    if os.path.exists(cfg_path):
+        import yaml
+        with open(cfg_path, encoding="utf-8") as f:
+            run_cfg = yaml.safe_load(f) or {}
+        areas = [int(x) for x in
+                 (run_cfg.get("world", {}) or {}).get("area_pattern_sqm", []) or []]
+    max_area = max(areas) if areas else None
+    ordinances = base.get("ordinances", [])
+    base.update({
+        "consults_recorded": len(consults),
+        "consult_rejection_reasons": dict(consult_rejects),
+        "owners_who_consulted": len({r.get("by") for r in consults}),
+        "consult_steps": sorted({int(r.get("step", 0)) for r in consults}),
+        "advices_recorded": len(advices),
+        "advice_rejection_reasons": dict(advice_rejects),
+        "consults_answered": len(set(answered_ids)),
+        "consult_answer_rate": (round(len(set(answered_ids)) / len(consults), 3)
+                                if consults else None),
+        "answer_latency_steps": sorted(latency),
+        "advices_delivered": sum(1 for d in deliveries if d.get("kind") == "advice"),
+        "owners_who_received_advice": len(advice_delivered),
+        "decisions_after_advice": decided_after_advice,
+        "owners_deciding_after_advice": len(decided_after_advice),
+        "broker_mentions_in_owner_thoughts": consult_word,
+        "max_parcel_area_sqm": max_area,
+        "ordinance_thresholds_vs_max_parcel": [
+            {"step": o.get("step"), "threshold_sqm": o.get("threshold_sqm"),
+             "exceeds_every_parcel": (None if max_area is None
+                                      else bool((o.get("threshold_sqm") or 0) >= max_area))}
+            for o in ordinances],
+        "filings_triggered": sum(1 for r in ledger
+                                 if r.get("kind") == "filing_required"),
+    })
+    return base
+
 def metrics_v4(run_dir: str) -> Dict[str, Any]:
     """v4（同期3フェーズ）の集計。配線の指標と、世界で起きたことの指標を分けて出す。"""
     events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
@@ -456,7 +543,9 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        if version == "field_v4_1":
+        if version == "field_v4_1b":
+            rows.append(metrics_v41b(run))
+        elif version == "field_v4_1":
             rows.append(metrics_v41(run))
         elif version == "field_v4":
             rows.append(metrics_v4(run))

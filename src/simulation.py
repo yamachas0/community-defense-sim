@@ -45,6 +45,11 @@ from .field_v4_1 import (build_phase1_prompt_v41, build_phase2_prompt_v41,
                          own_result_row_v41, owners_with_offers_v41,
                          phase1_schema_v41, phase2_schema_v41, record_offer_v41,
                          respond_to_offer_v41, withdraw_offer_v41)
+from .field_v4_1b import (CONSULT_NONE, DEFAULT_ADVICE_CAPACITY,
+                          answer_consult_v41b,
+                          build_phase1_prompt_v41b, build_phase2_prompt_v41b,
+                          build_system_prompt_v41b, ensure_v41b_state,
+                          phase1_schema_v41b, record_consult_v41b)
 from .kpi import (classify_publications, classify_utterances, cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -158,7 +163,9 @@ class Simulation:
         self.cfg = cfg
         self.field_v3 = cfg.get("scenario_version") == "field_v3"
         self.field_v4 = cfg.get("scenario_version") == "field_v4"
-        self.field_v41 = cfg.get("scenario_version") == "field_v4_1"
+        self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
+        # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
+        self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
         self.run_dir = run_dir
         self.n_steps = int(cfg["steps"])
@@ -209,6 +216,12 @@ class Simulation:
             for agent in (a for a in self.agents if a.role == "acquirer"):
                 agent.extra["monthly_offer_capacity"] = int(
                     cfg["scenario"].get("acquirer_monthly_offer_capacity", 6))
+        if self.field_v41b:
+            ensure_v41b_state(self.ledger)
+            for agent in (a for a in self.agents if a.role == "broker"):
+                agent.extra["monthly_advice_capacity"] = int(
+                    cfg["scenario"].get("broker_monthly_advice_capacity",
+                                        DEFAULT_ADVICE_CAPACITY))
         if self.field_v4:
             ensure_v4_state(self.ledger)
             self.ledger.v4_fee_rate = float(cfg["scenario"].get("broker_fee_rate", 0.0))
@@ -219,7 +232,13 @@ class Simulation:
             for agent in (a for a in self.agents if a.role == "acquirer"):
                 seed_acquirer_intelligence_v3(agent, self.ledger, cfg["scenario"])
 
-        if self.field_v41:
+        self.broker_ids = [a.agent_id for a in self.agents if a.role == "broker"]
+        if self.field_v41b:
+            self.system_prompts = {
+                a.agent_id: build_system_prompt_v41b(a, cfg, len(parcels),
+                                                     self.broker_ids)
+                for a in self.agents}
+        elif self.field_v41:
             self.system_prompts = {a.agent_id: build_system_prompt_v41(a, cfg, len(parcels))
                                    for a in self.agents}
         elif self.field_v4:
@@ -936,11 +955,19 @@ class Simulation:
         venue_ids = {v["id"] for v in self.cfg.get("social", {}).get("venues", [])}
         names = self.names
 
-        items = [(a, self.system_prompts[a.agent_id],
-                  build_phase1_prompt_v41(a, self.ledger, step, self.n_steps, names,
-                                          self.cfg),
-                  phase1_schema_v41(a))
-                 for a in self.agents]
+        if self.field_v41b:
+            ensure_v41b_state(self.ledger)
+            items = [(a, self.system_prompts[a.agent_id],
+                      build_phase1_prompt_v41b(a, self.ledger, step, self.n_steps,
+                                               names, self.cfg),
+                      phase1_schema_v41b(a, self.broker_ids))
+                     for a in self.agents]
+        else:
+            items = [(a, self.system_prompts[a.agent_id],
+                      build_phase1_prompt_v41(a, self.ledger, step, self.n_steps, names,
+                                              self.cfg),
+                      phase1_schema_v41(a))
+                     for a in self.agents]
         results = self._call_batch(items, "p1")
         inbox_snapshot = {a.agent_id: list(a.inbox) for a in self.agents}
         for a in self.agents:
@@ -1092,6 +1119,69 @@ class Simulation:
                 if not operations:
                     operations.append({"action_type": "routine", "target": "",
                                        "outcome": {"kind": "no_ledger_change"}})
+            elif self.field_v41b and a.role in ("household", "business"):
+                # 相談（月1件）。相談するかどうか・何を相談するかは本人が決める。
+                broker_id = str(act.get("consult_broker_id", "")).strip()
+                question = str(act.get("consult_question", "")).strip()
+                if broker_id and broker_id != CONSULT_NONE:
+                    outcome = record_consult_v41b(self.ledger, step, a, broker_id,
+                                                  question, self.broker_ids)
+                    if _is_rejected(outcome):
+                        self.invalid_count += 1
+                    elif outcome.get("kind") == "consult":
+                        messages.append({
+                            "from": a.agent_id, "to": broker_id,
+                            "text": outcome.get("question", ""), "step": step,
+                            "kind": "consult",
+                            "obs_id": f"CONSULT-{outcome.get('consult_id')}"})
+                    operations.append({"action_type": "consult", "target": broker_id,
+                                       "outcome": outcome})
+                elif question:
+                    # 相手の指定が無い相談は届け先が決まらない＝不成立（補完しない）。
+                    self.invalid_count += 1
+                    operations.append({"action_type": "consult", "target": "",
+                                       "outcome": {"kind": "invalid_action",
+                                                   "reason": "missing_broker_id"}})
+                if not operations:
+                    operations.append({"action_type": "day", "target": "",
+                                       "outcome": {"kind": "day", "location": location}})
+            elif self.field_v41b and a.role == "broker":
+                # 自分宛の相談への回答。答えるかどうか・何を答えるかは本人が決める。
+                capacity = int(a.extra.get("monthly_advice_capacity",
+                                           DEFAULT_ADVICE_CAPACITY))
+                raw_advices = act.get("advices", [])
+                raw_advices = raw_advices if isinstance(raw_advices, list) else []
+                for index, row in enumerate(raw_advices):
+                    if not isinstance(row, dict):
+                        self.invalid_count += 1
+                        operations.append({"action_type": "advise", "target": "",
+                                           "outcome": {"kind": "invalid_action",
+                                                       "reason": "advice_not_object"}})
+                        continue
+                    consult_id = str(row.get("consult_id", "")).strip()
+                    reply = str(row.get("reply", "")).strip()
+                    if index >= capacity:
+                        outcome = {"kind": "invalid_action",
+                                   "reason": "monthly_advice_capacity_exceeded",
+                                   "capacity": capacity}
+                    elif not consult_id:
+                        outcome = {"kind": "invalid_action", "reason": "missing_target"}
+                    else:
+                        outcome = answer_consult_v41b(self.ledger, step, a.agent_id,
+                                                      consult_id, reply)
+                    if _is_rejected(outcome):
+                        self.invalid_count += 1
+                    elif outcome.get("kind") == "advice":
+                        messages.append({
+                            "from": a.agent_id, "to": outcome.get("to"),
+                            "text": outcome.get("reply", ""), "step": step,
+                            "kind": "advice",
+                            "obs_id": f"ADVICE-{outcome.get('consult_id')}"})
+                    operations.append({"action_type": "advise", "target": consult_id,
+                                       "outcome": outcome})
+                if not operations:
+                    operations.append({"action_type": "day", "target": "",
+                                       "outcome": {"kind": "day", "location": location}})
             else:
                 operations.append({"action_type": "day", "target": "",
                                    "outcome": {"kind": "day", "location": location}})
@@ -1141,10 +1231,12 @@ class Simulation:
         offers_by_owner = owners_with_offers_v41(self.ledger)
         responders = [self.by_id[oid] for oid in sorted(offers_by_owner)
                       if oid in self.by_id]
+        phase2_builder = (build_phase2_prompt_v41b if self.field_v41b
+                          else build_phase2_prompt_v41)
         items2 = [(a, self.system_prompts[a.agent_id],
-                   build_phase2_prompt_v41(a, self.ledger, step, self.n_steps, names,
-                                           offers_by_owner[a.agent_id],
-                                           inbox_snapshot.get(a.agent_id, [])),
+                   phase2_builder(a, self.ledger, step, self.n_steps, names,
+                                  offers_by_owner[a.agent_id],
+                                  inbox_snapshot.get(a.agent_id, [])),
                    phase2_schema_v41())
                   for a in responders]
         results2 = self._call_batch(items2, "p2")

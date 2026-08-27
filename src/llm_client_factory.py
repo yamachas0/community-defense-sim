@@ -450,6 +450,27 @@ class MockClient:
                     "ordinance_delay_months": int(rng.choice([1, 2, 3])) if enact else 0,
                 })
 
+        # v4.1b（相談経路）の配線確認用。世界の行動規則ではない。
+        if "consult_broker_id" in properties:
+            choices = properties["consult_broker_id"].get("enum", ["none"])
+            brokers = [c for c in choices if c != "none"]
+            if brokers and rng.random() < 0.4:
+                fields["consult_broker_id"] = rng.choice(brokers)
+                fields["consult_question"] = "この辺りの土地の動きをどう見ているか教えてほしい。"
+            else:
+                fields["consult_broker_id"] = "none"
+                fields["consult_question"] = ""
+        if "advices" in properties:
+            # 未回答の相談だけを拾う（配線確認のため。世界の行動規則ではない）。
+            consults = sorted({cid for line in user_prompt.splitlines()
+                               if "未回答" in line
+                               for cid in _INQUIRY_RE.findall(line)})
+            capacity = int(properties["advices"].get("maxItems", 6))
+            picked = consults[:capacity]
+            fields["advices"] = [{"consult_id": cid,
+                                  "reply": "近隣の名義変更の状況を伝える。"}
+                                 for cid in picked if rng.random() < 0.7]
+
         fields["location"] = rng.choice(venues + ["HOME", "OFFICE"])
         if rng.random() < 0.5:
             fields["utterance"] = "最近この辺りの名義がよく変わる。"

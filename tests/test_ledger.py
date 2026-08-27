@@ -1321,6 +1321,246 @@ for word in ("すべき", "しなさい", "推奨", "優先度", "望ましい",
           all(word not in text for key, text in _real_prompts.items()
               if not key.endswith("acquirer")))
 
+
+# ---------------------------------------------------------------------------
+# v4.1b: 相談経路の復活（金額は無いまま）＋行政の区画面積観測
+#   設計の正 = docs/world_design_v4_1b_broker_consult.md
+#   v4.1 の挙動が1文字も変わっていないことも、ここで固定する。
+# ---------------------------------------------------------------------------
+
+from src.field_v4_1b import (CONSULT_NONE, answer_consult_v41b,  # noqa: E402
+                             build_phase1_prompt_v41b,
+                             build_phase2_prompt_v41b,
+                             build_system_prompt_v41b, ensure_v41b_state,
+                             incoming_consults_rows_v41b,
+                             ordinance_effect_rows_v41b,
+                             own_consults_rows_v41b, parcel_area_rows_v41b,
+                             phase1_schema_v41b, record_consult_v41b)
+
+BR41B = Agent("BR01", "broker", "B01", "この主体の事情だけを書いた説明")
+BR41B.extra["monthly_advice_capacity"] = 6
+BR41B_2 = Agent("BR02", "broker", "B02", "この主体の事情だけを書いた説明")
+BR41B_2.extra["monthly_advice_capacity"] = 6
+HH41B = Agent("HH01", "household", "R01", "この主体の事情だけを書いた説明")
+HH41B_2 = Agent("HH02", "household", "R02", "この主体の事情だけを書いた説明")
+BROKERS41B = ["BR01", "BR02"]
+NAMES41B = dict(NAMES41)
+NAMES41B["BR02"] = "B02"
+
+LB = mk41()
+ensure_v41b_state(LB)
+q1 = record_consult_v41b(LB, 1, HH41B, "BR01", "この辺りの動きをどう見ているか。",
+                         BROKERS41B)
+check("v4.1b: 所有者の相談が Q0001 として台帳に載る",
+      q1["kind"] == "consult" and q1["consult_id"] == "Q0001"
+      and LB.v41b_consults["Q0001"]["status"] == "open"
+      and LB.v41b_consults["Q0001"]["to"] == "BR01")
+check("v4.1b: 相談は自分自身には出せない",
+      record_consult_v41b(LB, 1, HH41B, "HH01", "本文", BROKERS41B)["reason"]
+      == "self_consult")
+check("v4.1b: 仲介でない相手への相談は成立しない",
+      record_consult_v41b(LB, 1, HH41B, "HH02", "本文", BROKERS41B)["reason"]
+      == "unknown_broker")
+check("v4.1b: 本文の無い相談は成立しない（空欄を補完しない）",
+      record_consult_v41b(LB, 1, HH41B, "BR01", "   ", BROKERS41B)["reason"]
+      == "missing_question")
+check("v4.1b: 住民・事業者以外は相談できない",
+      record_consult_v41b(LB, 1, BR41B, "BR02", "本文", BROKERS41B)["reason"]
+      == "role_cannot_consult")
+
+check("v4.1b: 自分宛でない相談には答えられない",
+      answer_consult_v41b(LB, 2, "BR02", "Q0001", "答え")["reason"]
+      == "not_your_consultation")
+check("v4.1b: 他の仲介が答えようとしても相談の状態は変わらない",
+      LB.v41b_consults["Q0001"]["status"] == "open")
+check("v4.1b: 存在しない相談には答えられない",
+      answer_consult_v41b(LB, 2, "BR01", "Q9999", "答え")["reason"]
+      == "no_such_consultation")
+check("v4.1b: 本文の無い回答は成立しない",
+      answer_consult_v41b(LB, 2, "BR01", "Q0001", "  ")["reason"] == "missing_reply")
+a1 = answer_consult_v41b(LB, 2, "BR01", "[Q0001]", "近隣の名義変更の状況を伝える。")
+check("v4.1b: 角括弧付きの相談IDでも同じ1件に解決する",
+      a1["kind"] == "advice" and a1["consult_id"] == "Q0001"
+      and a1["to"] == "HH01")
+check("v4.1b: 回答した相談は回答済みになり、回答月が残る",
+      LB.v41b_consults["Q0001"]["status"] == "answered"
+      and LB.v41b_consults["Q0001"]["answered_step"] == 2)
+check("v4.1b: 同じ相談に二度は答えられない（状態は巻き戻らない）",
+      answer_consult_v41b(LB, 3, "BR01", "Q0001", "追加の答え")["reason"]
+      == "already_answered"
+      and LB.v41b_consults["Q0001"]["answered_step"] == 2)
+
+record_consult_v41b(LB, 3, HH41B_2, "BR02", "自分の土地について聞きたい。", BROKERS41B)
+rows_br1 = incoming_consults_rows_v41b(LB, "BR01", NAMES41B)
+check("v4.1b: 仲介の観測には自分宛の相談だけが機械記録で出る",
+      any("[Q0001]" in r and "回答済み(第2月)" in r and "R01" in r for r in rows_br1)
+      and not any("[Q0002]" in r for r in rows_br1))
+check("v4.1b: 相談本文は仲介の機械記録にも出る（世界が持つ事実を配送し損ねない）",
+      any("この辺りの動きをどう見ているか。" in r for r in rows_br1))
+check("v4.1b: 相談が来ていない仲介には「来ていない」と出る",
+      incoming_consults_rows_v41b(LB, "BR09", NAMES41B) == ["  （相談は来ていない）"])
+rows_hh1 = own_consults_rows_v41b(LB, "HH01", NAMES41B)
+check("v4.1b: 所有者の観測には自分がした相談と状態が出る",
+      len(rows_hh1) == 1 and "[Q0001]" in rows_hh1[0]
+      and "相談先:B01" in rows_hh1[0] and "回答済み(第2月)" in rows_hh1[0])
+check("v4.1b: 未回答の相談は未回答と出る",
+      "未回答" in own_consults_rows_v41b(LB, "HH02", NAMES41B)[0])
+check("v4.1b: 相談していない所有者には「まだ相談していない」と出る",
+      own_consults_rows_v41b(LB, "HH09", NAMES41B) == ["  （まだ相談していない）"])
+check("v4.1b: 相談も回答も台帳に金額の欄を持たない",
+      not any(k in row for row in LB.records for k in ("price", "amount", "fee", "rent")))
+
+# --- 行政の観測（区画面積の分布・条例の適用実績）-----------------------------
+area_rows = parcel_area_rows_v41b(LB, NAMES41B)
+check("v4.1b: 区画面積の分布に件数・最小・中央値・最大が出る",
+      any("非公共区画 3件" in r and "最小100㎡" in r and "中央値120㎡" in r and "最大400㎡" in r
+          for r in area_rows))
+check("v4.1b: 面積の分布はヒストグラムで出る",
+      any("100〜199㎡ 2件" in r and "400〜499㎡ 1件" in r for r in area_rows))
+check("v4.1b: 調べていない行政の面積分布に名義は出ない",
+      not any("名義別" in r for r in area_rows))
+check("v4.1b: 登記統計を調べた行政には名義別の1件あたり面積も出る",
+      any("名義別の1件あたり面積" in r
+          for r in parcel_area_rows_v41b(LB, NAMES41B, with_names=True)))
+check("v4.1b: 条例が無い月は適用実績も無いと出る",
+      ordinance_effect_rows_v41b(LB, 3) == ["  （施行中の届出制度はない）"])
+enact_ordinance_v41(LB, 3, "MU01", "届出条例", "1000㎡超は届出", 1000, 2)
+eff_rows = ordinance_effect_rows_v41b(LB, 4)
+check("v4.1b: 閾値が区画の最大を超えていれば「該当0件」が事実として返る",
+      any("超える区画: 0件" in r for r in eff_rows))
+check("v4.1b: 条例の適用実績に施行後の移転件数と届出件数が出る",
+      any("施行後の名義移転: 0件" in r and "届出の対象になったもの: 0件" in r
+          for r in eff_rows))
+o_lb = record_offer_v41(LB, 4, AQ41, "P01", "A社")["offer_id"]
+respond_to_offer_v41(LB, 4, o_lb, "HH01", "sell")
+check("v4.1b: 閾値より小さい区画の移転は届出の対象にならない（実績にそう出る）",
+      any("施行後の名義移転: 1件 うち届出の対象になったもの: 0件" in r
+          for r in ordinance_effect_rows_v41b(LB, 5)))
+
+# --- スキーマ ---------------------------------------------------------------
+sch_hh = phase1_schema_v41b(HH41B, BROKERS41B)
+check("v4.1b: 所有者のスキーマに相談先と相談内容が入る",
+      sch_hh["properties"]["consult_broker_id"]["enum"] == ["BR01", "BR02", CONSULT_NONE]
+      and "consult_question" in sch_hh["properties"]
+      and "consult_broker_id" in sch_hh["required"]
+      and "consult_question" in sch_hh["required"])
+check("v4.1b: enumに空の選択肢を入れない（Geminiが400を返す）",
+      all(v for v in sch_hh["properties"]["consult_broker_id"]["enum"]))
+sch_br = phase1_schema_v41b(BR41B, BROKERS41B)
+check("v4.1b: 仲介のスキーマは月次上限つきの回答配列を持つ",
+      sch_br["properties"]["advices"]["maxItems"] == 6
+      and sorted(sch_br["properties"]["advices"]["items"]["required"])
+      == ["consult_id", "reply"])
+check("v4.1b: 仲介には相談の欄を持たせない（答える側であって相談者ではない）",
+      "consult_broker_id" not in sch_br["properties"])
+check("v4.1b: 取得主体のスキーマは v4.1 と同一（打診の文面は戻していない）",
+      phase1_schema_v41b(AQ41, BROKERS41B) == phase1_schema_v41(AQ41))
+check("v4.1b: 行政のスキーマは v4.1 と同一",
+      phase1_schema_v41b(MU41, BROKERS41B) == phase1_schema_v41(MU41))
+check("v4.1: 所有者のスキーマは v4.1b の追加で変わっていない",
+      "consult_broker_id" not in phase1_schema_v41(HH41B)["properties"])
+
+# --- プロンプト -------------------------------------------------------------
+sys_hh_41 = build_system_prompt_v41(HH41B, CFG41, 48)
+sys_hh_41b = build_system_prompt_v41b(HH41B, CFG41, 48, BROKERS41B)
+check("v4.1b: 所有者のシステムプロンプトは v4.1 の本文をそのまま含む",
+      sys_hh_41b.startswith(sys_hh_41))
+check("v4.1b: 所有者に相談できることとJSONの形だけを足す",
+      "不動産仲介に相談する。" in sys_hh_41b
+      and "1か月に相談できるのは1件。" in sys_hh_41b
+      and "consult_broker_id, consult_question" in sys_hh_41b)
+sys_br_41b = build_system_prompt_v41b(BR41B, CFG41, 48, BROKERS41B)
+check("v4.1b: 仲介には自分宛の相談に答えられることを足す",
+      "自分に来ている相談に答える。" in sys_br_41b
+      and "advices の各要素は consult_id" in sys_br_41b)
+check("v4.1b: 仲介に取引経路は戻していないと本文に書いてある",
+      "土地の売買を取り次ぐ経路はこの世界に無い。" in sys_br_41b)
+check("v4.1b: 取得主体のシステムプロンプトは v4.1 と1文字も変わらない",
+      build_system_prompt_v41b(AQ41, CFG41, 48, BROKERS41B)
+      == build_system_prompt_v41(AQ41, CFG41, 48))
+for word in MONEY_WORDS:
+    check(f"v4.1b: 追加した世界の説明に金額の語が出ない（{word}）",
+          word not in sys_hh_41b and word not in sys_br_41b)
+for word in ("すべき", "しなさい", "推奨", "望ましい", "確率", "閾値", "優先度"):
+    check(f"v4.1b: 追加した世界の説明に当為・確率が出ない（{word}）",
+          word not in sys_hh_41b and word not in sys_br_41b)
+
+p1_br = build_phase1_prompt_v41b(BR41B, LB, 5, 12, NAMES41B, CFG41)
+check("v4.1b: 仲介の月次観測に相談の機械記録が入る",
+      "[自分に来ている相談（機械記録）]" in p1_br and "[Q0001]" in p1_br)
+check("v4.1b: 追加した観測は最後の指示文より前に入る",
+      p1_br.rstrip().endswith("まず thought（内心）を書き、それを踏まえて今月の行動をJSONで1つ返す。")
+      and p1_br.index("[自分に来ている相談（機械記録）]")
+      < p1_br.rindex("まず thought（内心）"))
+p1_hh = build_phase1_prompt_v41b(HH41B_2, LB, 5, 12, NAMES41B, CFG41)
+check("v4.1b: 所有者の月次観測に自分の相談の状態が入る",
+      "[自分がした相談（機械記録）]" in p1_hh and "[Q0002]" in p1_hh)
+check("v4.1b: 所有者の観測に他人の相談は出ない", "[Q0001]" not in p1_hh)
+p1_mu = build_phase1_prompt_v41b(MU41, LB, 5, 12, NAMES41B, CFG41)
+check("v4.1b: 行政の月次観測に区画面積の分布と条例の適用実績が入る",
+      "[A市の区画1件あたりの面積の分布（機械記録）]" in p1_mu
+      and "[施行中の条例の適用実績（機械記録）]" in p1_mu)
+check("v4.1b: 調べていない行政の観測に名義別の面積は出ない",
+      "名義別の1件あたり面積" not in p1_mu)
+MU41B_SEEN = Agent("MU01", "municipality", "G01", "この主体の事情だけを書いた説明")
+MU41B_SEEN.extra["registry_stats_seen"] = True
+check("v4.1b: 登記統計を調べた行政の観測には名義別の面積も出る",
+      "名義別の1件あたり面積" in build_phase1_prompt_v41b(
+          MU41B_SEEN, LB, 5, 12, NAMES41B, CFG41))
+p1_aq = build_phase1_prompt_v41b(AQ41, LB, 5, 12, NAMES41B, CFG41)
+check("v4.1b: 取得主体の観測は v4.1 と同一（相談の中身は見えない）",
+      p1_aq == build_phase1_prompt_v41(AQ41, LB, 5, 12, NAMES41B, CFG41)
+      and "[Q0001]" not in p1_aq)
+p1_md = build_phase1_prompt_v41b(MD41, LB, 5, 12, NAMES41B, CFG41)
+check("v4.1b: 記者の観測は v4.1 と同一（面積分布は行政だけに足す）",
+      p1_md == build_phase1_prompt_v41(MD41, LB, 5, 12, NAMES41B, CFG41))
+
+o_lb2 = record_offer_v41(LB, 5, AQ41, "P03", "A社")["offer_id"]
+offers_lb = owners_with_offers_v41(LB)["HH02"]
+p2_hh = build_phase2_prompt_v41b(HH41B_2, LB, 5, 12, NAMES41B, offers_lb, [])
+check("v4.1b: 応答フェーズでも自分の相談の状態が見える",
+      "[自分がした相談（機械記録）]" in p2_hh and "[Q0002]" in p2_hh)
+check("v4.1b: 応答フェーズの指示文は最後のまま",
+      p2_hh.rstrip().endswith("説明文を付けずJSONだけ返す。")
+      and p2_hh.index("[自分がした相談（機械記録）]") < p2_hh.rindex("まず thought（内心）"))
+
+# --- 実config・実ペルソナでの検査 ------------------------------------------
+CFG_41B = yaml.safe_load(io.open(os.path.join(_ROOT, "configs",
+                                              "config_field_v4_1b.yaml"),
+                                 encoding="utf-8").read())
+check("v4.1b: 実configは v4.1 と同じ seed・モデル・月数・ペルソナを使う",
+      (CFG_41B["seed"], CFG_41B["steps"], CFG_41B["llm"]["model"],
+       CFG_41B["personas_file"], CFG_41B["scenario"]["acquirer_monthly_offer_capacity"])
+      == (CFG_REAL["seed"], CFG_REAL["steps"], CFG_REAL["llm"]["model"],
+          CFG_REAL["personas_file"],
+          CFG_REAL["scenario"]["acquirer_monthly_offer_capacity"]))
+check("v4.1b: 実configの scenario_version は field_v4_1b",
+      CFG_41B["scenario_version"] == "field_v4_1b")
+_real_prompts_41b = {}
+for _role, _key in _roles41.items():
+    for _idx, _p in enumerate(PERSONAS_REAL[_key]):
+        _a = Agent(f"{_key[:2].upper()}{_idx + 1:02d}", _role, _p["name"],
+                   _p["persona"].strip())
+        _a.extra["aliases"] = _p.get("aliases", [])
+        _a.extra["mandate"] = CFG_41B["scenario"]["acquirer_mandate"]
+        _a.extra["monthly_offer_capacity"] = \
+            CFG_41B["scenario"]["acquirer_monthly_offer_capacity"]
+        _a.extra["monthly_advice_capacity"] = \
+            CFG_41B["scenario"]["broker_monthly_advice_capacity"]
+        _real_prompts_41b[_a.agent_id + _role] = build_system_prompt_v41b(
+            _a, CFG_41B, 48, ["BR01", "BR02"])
+check("v4.1b: 実configで全27主体のシステムプロンプトが組める",
+      len(_real_prompts_41b) == 27)
+for word in MONEY_WORDS:
+    if word == "円":
+        continue
+    check(f"v4.1b: 実プロンプト全27本に金額の語が出ない（{word}）",
+          all(word not in text for text in _real_prompts_41b.values()))
+for word in ("すべき", "しなさい", "推奨", "優先度", "望ましい", "確率", "閾値"):
+    check(f"v4.1b: 実プロンプト（取得主体を除く）に当為・確率が出ない（{word}）",
+          all(word not in text for key, text in _real_prompts_41b.items()
+              if not key.endswith("acquirer")))
+
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
 sys.exit(1 if FAIL else 0)
