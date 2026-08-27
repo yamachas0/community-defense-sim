@@ -50,7 +50,8 @@ from .field_v4_1b import (CONSULT_NONE, DEFAULT_ADVICE_CAPACITY,
                           build_phase1_prompt_v41b, build_phase2_prompt_v41b,
                           build_system_prompt_v41b, ensure_v41b_state,
                           phase1_schema_v41b, record_consult_v41b)
-from .field_v5 import (HOME as HOME_V5, SCENE_IDS, SCENE_LABELS,
+from .field_v5 import (DIRECT_NONE as DIRECT_NONE_V5, HOME as HOME_V5,
+                       SCENE_IDS, SCENE_LABELS,
                        ambient_traces_v5, apply_script_v5, build_plan_prompt_v5,
                        build_scene_prompt_v5, build_system_prompt_v5,
                        ensure_v5_state, load_script_v5, plan_schema_v5,
@@ -1419,7 +1420,7 @@ class Simulation:
                    scene: str) -> None:
         to = str(act.get("direct_to", "") or "").strip()
         text = str(act.get("direct_text", "") or "").strip()
-        if not to and not text:
+        if to in ("", DIRECT_NONE_V5):
             return
         if to not in self.by_id or to == agent.agent_id or to in self.acquirer_ids:
             self.ledger._rec(step, "direct_rejected", from_id=agent.agent_id,

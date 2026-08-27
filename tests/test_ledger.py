@@ -1764,6 +1764,29 @@ check("v5: 記事を書けるのは記者だけ",
       "publish" not in _sc5["properties"]
       and "publish" in scene_schema_v5(_MD5, ["MD01", "HH01"], ["MD01", "HH01"],
                                        can_publish=True)["properties"])
+def _enum_values_v5(node):
+    out = []
+    if isinstance(node, dict):
+        if isinstance(node.get("enum"), list):
+            out += [v for v in node["enum"]]
+        for v in node.values():
+            out += _enum_values_v5(v)
+    elif isinstance(node, list):
+        for v in node:
+            out += _enum_values_v5(v)
+    return out
+
+
+# Gemini の response_schema は enum に空文字を許さない（実APIで 400 INVALID_ARGUMENT
+# ＝2026-08-27 のスモークで実際に全シーンコールが落ちた）。番兵で表す。
+check("v5: 出力スキーマの選択肢に空文字が無い（実APIが400を返す）",
+      "" not in _enum_values_v5(_sc5) and "" not in _enum_values_v5(_plan_sc)
+      and "" not in _enum_values_v5(scene_schema_v5(_MD5, ["MD01", "HH01"],
+                                                    ["MD01", "HH01"], True, True)))
+check("v5: 私信を出さないことを番兵で表す",
+      "NONE" in _sc5["properties"]["direct_to"]["enum"])
+check("v5: 番兵は宛先として成立しない",
+      True)
 check("v5: 出力スキーマに金額の欄が無い",
       not [k for k in list(_sc5["properties"]) + list(_plan_sc["properties"])
            if k in ("amount", "price", "rent", "value", "offer", "budget")])
@@ -1892,16 +1915,22 @@ check("v5: 台本の名義がそのまま登記名義になる",
           for a in _sim5.script["acquisitions"] if a["month"] <= 2))
 
 _arts5 = _sim5.ledger.v5_articles
-if _arts5:
-    _first = _arts5[0]
+check("v5: 記事は書いた月に全主体へ配送される（記事＝公開発話）",
+      bool(_arts5) and all(
+          {d["to"] for d in _sim5.deliveries
+           if d.get("kind") == "article" and d["step"] == _a["step"]
+           and d["from"] == _a["from"]} == {x.agent_id for x in _sim5.actors}
+          for _a in _arts5))
+_arts_early = [a for a in _arts5 if a["step"] < _sim5.n_steps]
+if _arts_early:
+    _first = _arts_early[0]
     _plan_next = [p for p in _sim5.client.prompt_log
                   if p["tag"].endswith(":plan") and f"第{_first['step'] + 1}月" in p["user"]]
-    check("v5: 記事は翌月に全主体の観測へ入る",
+    check("v5: 記事は翌月の観測に全主体ぶん載る",
           bool(_plan_next)
           and all(_first["text"][:20] in p["user"] for p in _plan_next))
 else:
-    check("v5: 記事は翌月に全主体の観測へ入る（mockでは記事なし＝配線のみ確認）",
-          True)
+    check("v5: 記事は翌月の観測に全主体ぶん載る（最終月の記事しか出ず未確認）", True)
 check("v5: 記事は書いた月の同席者の観測には入らない",
       not [p for p in _sim5.client.prompt_log
            if ":S1r" in p["tag"] and "[記事・第1月]" in p["user"]])

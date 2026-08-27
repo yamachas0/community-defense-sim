@@ -74,6 +74,9 @@ TRACE_TEXTS = {
 }
 
 STANCE_VALUES = ["sell", "keep"]
+# Gemini の response_schema は enum に空文字を許さない（実APIで 400 INVALID_ARGUMENT）。
+# 「誰にも出さない」を表す番兵を置く。
+DIRECT_NONE = "NONE"
 
 
 def s4_for_step(step: int) -> Tuple[str, str, str]:
@@ -358,7 +361,7 @@ def scene_schema_v5(agent: Agent, present_ids: List[str], all_ids: List[str],
         "thought": {"type": "string"},
         "text": {"type": "string"},
         "talk_to": {"type": "array", "items": {"type": "string", "enum": list(present_ids)}},
-        "direct_to": {"type": "string", "enum": [""] + list(all_ids)},
+        "direct_to": {"type": "string", "enum": [DIRECT_NONE] + list(all_ids)},
         "direct_text": {"type": "string"},
     }
     if can_publish:
@@ -412,7 +415,7 @@ def build_system_prompt_v5(agent: Agent, cfg: Dict[str, Any], n_parcels: int) ->
 その場で話したいことがなければ text を空文字にしてよい（黙っていることも普通のことである）。
 talk_to は、その発言をとくに向けた相手の内部ID（居合わせた者のみ・複数可・空でよい）。
 別の場所にいる相手へ個人的に連絡したい月は direct_to に相手の内部ID、direct_text に
-その中身を書く（1か月に{quota}通まで・翌月に相手へ届く）。使わない月は direct_to を空文字にする。
+その中身を書く（1か月に{quota}通まで・翌月に相手へ届く）。使わない月は direct_to を {DIRECT_NONE} にする。
 
 --- 土地の登記 ---
 土地登記は公開情報である。ただし記録を見に行かなければ内容は分からない。
@@ -493,9 +496,9 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
              "まず thought（内心）を書き、それを踏まえてこの場で話すことを書く。",
              "話すことがなければ text は空文字でよい。"]
     if directs_left <= 0:
-        rows += ["今月の個人的な連絡はもう出せない（direct_to は空文字にする）。"]
+        rows += ["今月の個人的な連絡はもう出せない（direct_to は NONE にする）。"]
     else:
-        rows += [f"個人的な連絡は今月あと{directs_left}通まで出せる（不要なら direct_to は空文字）。"]
+        rows += [f"個人的な連絡は今月あと{directs_left}通まで出せる（不要なら direct_to は NONE）。"]
     if can_publish and articles_left <= 0:
         rows += ["今月の記事はもう出した（publish は空文字にする）。"]
     elif can_publish:
@@ -511,7 +514,7 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
 
 __all__ = [
     "SCENE_IDS", "SCENE_LABELS", "S4_ROTATION", "HOME", "TRACE_TEXTS",
-    "STANCE_VALUES", "MAX_THOUGHT_CHARS", "MAX_TEXT_CHARS", "MAX_PUBLISH_CHARS",
+    "STANCE_VALUES", "DIRECT_NONE", "MAX_THOUGHT_CHARS", "MAX_TEXT_CHARS", "MAX_PUBLISH_CHARS",
     "DEFAULT_SCENE_ROUNDS", "DEFAULT_DIRECT_QUOTA",
     "s4_for_step", "ensure_v5_state", "load_script_v5", "validate_script_v5",
     "acquisitions_at", "apply_script_v5", "ambient_traces_v5", "venue_traces_v5",

@@ -437,12 +437,12 @@ class MockClient:
             out["talk_to"] = ([rng.choice(present)]
                               if (present and speak and rng.random() < 0.5) else [])
             targets = list(properties.get("direct_to", {}).get("enum", []))
-            targets = [t for t in targets if t]
+            targets = [t for t in targets if t and t != "NONE"]
             if targets and rng.random() < 0.12:
                 out["direct_to"] = rng.choice(targets)
                 out["direct_text"] = "少し話したいことがあります。"
             else:
-                out["direct_to"] = ""
+                out["direct_to"] = "NONE"
                 out["direct_text"] = ""
         if "publish" in properties:
             out["publish"] = ("この街で名義の移った土地がある、という話を聞いた。"
