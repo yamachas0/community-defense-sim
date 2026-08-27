@@ -28,6 +28,124 @@ def _read_jsonl(path: str) -> List[Dict[str, Any]]:
         return [json.loads(line) for line in f if line.strip()]
 
 
+def metrics_v41(run_dir: str) -> Dict[str, Any]:
+    """v4.1（金額のない世界）の集計。判定基準は docs/world_design_v4_impl.md と同じ定義。"""
+    events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
+    ledger = _read_jsonl(os.path.join(run_dir, "ledger.jsonl"))
+    thoughts = _read_jsonl(os.path.join(run_dir, "thoughts.jsonl"))
+    deliveries = _read_jsonl(os.path.join(run_dir, "deliveries.jsonl"))
+    with open(os.path.join(run_dir, "summary.json"), encoding="utf-8") as f:
+        summary = json.load(f)
+
+    kinds = collections.Counter(r.get("kind", "") for r in ledger)
+    offer_records = [r for r in ledger if r.get("kind") == "offer"]
+    transfers = [r for r in ledger if r.get("kind") == "transfer"]
+    acquirer_ids = {e["agent_id"] for e in events if e.get("role") == "acquirer"}
+    valid_transfers = [r for r in transfers if r.get("buyer") in acquirer_ids
+                       and r.get("buyer") != r.get("seller")]
+
+    offer_ops = [op for e in events if e.get("role") == "acquirer"
+                 for op in e.get("operations", []) or []
+                 if op.get("action_type") == "make_offer"]
+    offer_fail = collections.Counter(
+        op.get("outcome", {}).get("reason", "")
+        for op in offer_ops
+        if str(op.get("outcome", {}).get("kind", "")).endswith(
+            ("_rejected", "invalid_action")))
+
+    response_ops = [op for e in events if e.get("action_type") == "responses"
+                    for op in e.get("operations", []) or []]
+    decisions = collections.Counter(op.get("action_type", "") for op in response_ops)
+    sell_decisions = decisions.get("sell", 0)
+    sell_transfer = sum(1 for op in response_ops
+                        if op.get("outcome", {}).get("kind") == "transfer")
+    sell_filing = sum(1 for op in response_ops
+                      if op.get("outcome", {}).get("kind") == "filing_required")
+    sell_failed = sum(1 for op in response_ops
+                      if op.get("outcome", {}).get("kind") == "response_rejected"
+                      and op.get("action_type") == "sell")
+    filed_ids = {r.get("offer_id") for r in ledger if r.get("kind") == "filing_required"}
+    filed_completed = [r for r in transfers if r.get("offer_id") in filed_ids]
+
+    parse_fail = sum(1 for e in events if e.get("action_type") == "PARSE_FAIL")
+    offer_steps = sorted({r["step"] for r in offer_records})
+    called = {(e["step"], e["agent_id"]) for e in events
+              if e.get("action_type") == "responses"}
+    about = [t for t in thoughts if t.get("about_acquisition")]
+    about_people = sorted({t["from"] for t in about})
+    about_without_own_offer = [t for t in about
+                               if (t["step"], t["from"]) not in called]
+    money_rows = [r for r in ledger
+                  if any(k in r for k in ("price", "amount", "rent", "fee"))]
+
+    return {
+        "run_dir": os.path.basename(run_dir.rstrip("/\\")),
+        "scenario": "field_v4_1",
+        "steps": summary.get("steps"),
+        "model": summary.get("model"),
+        # --- 配線 ---
+        "calls": summary.get("usage", {}).get("calls"),
+        "api_errors": summary.get("usage", {}).get("errors"),
+        "input_tokens": summary.get("usage", {}).get("input_tokens"),
+        "output_tokens": summary.get("usage", {}).get("output_tokens"),
+        "parse_fail": parse_fail,
+        "truncated": summary.get("truncated_responses"),
+        "invalid_actions": summary.get("invalid_actions"),
+        "offers_returned_by_acquirer": len(offer_ops),
+        "offers_recorded": len(offer_records),
+        "offer_rejection_reasons": dict(offer_fail),
+        "responders_called": sum(1 for e in events if e.get("action_type") == "responses"),
+        "responses": dict(decisions),
+        "sell_decisions": sell_decisions,
+        "sell_immediate_transfer": sell_transfer,
+        "sell_filing_required": sell_filing,
+        "sell_rejected": sell_failed,
+        "sell_reconciles": sell_decisions == (sell_transfer + sell_filing + sell_failed),
+        "filed_transfer_completed": len(filed_completed),
+        "filing_void": kinds.get("filing_void", 0),
+        "offer_void": kinds.get("offer_void", 0),
+        "response_rejected": kinds.get("response_rejected", 0),
+        "ledger_rows_with_money_fields": len(money_rows),
+        "deliveries_by_kind": dict(collections.Counter(d.get("kind", "")
+                                                       for d in deliveries)),
+        # --- 世界で起きたこと ---
+        "months_with_offers": len(offer_steps),
+        "first_offer_step": offer_steps[0] if offer_steps else None,
+        "months_with_transfers": len({r["step"] for r in valid_transfers}),
+        "first_transfer_step": (min(r["step"] for r in valid_transfers)
+                                if valid_transfers else None),
+        "transfers": len(valid_transfers),
+        "withdrawn": kinds.get("withdraw", 0),
+        "kept": kinds.get("keep", 0),
+        "held": kinds.get("hold", 0),
+        "ownership_share": summary.get("kpi", {}).get("final_acquirer_share"),
+        "area_share": summary.get("kpi", {}).get("final_acquirer_area_share"),
+        "under_names_used": dict(collections.Counter(r.get("under_name", "")
+                                                     for r in valid_transfers)),
+        "thoughts": len(thoughts),
+        "thought_frames": dict(collections.Counter(t.get("frame", "") for t in thoughts)),
+        "thoughts_about_acquisition": len(about),
+        "residents_aware": len(about_people),
+        "aware_without_own_offer": len(about_without_own_offer),
+        "first_aware_step": min((t["step"] for t in about), default=None),
+        "ordinances": [{"step": r["step"], "by": r.get("by"), "title": r.get("title"),
+                        "threshold_sqm": r.get("threshold_sqm"),
+                        "delay_months": r.get("delay_months")}
+                       for r in ledger if r.get("kind") == "ordinance"],
+        "publications": kinds.get("publication", 0),
+        "publications_about_acquisition": sum(
+            1 for r in ledger if r.get("kind") == "publication"
+            and r.get("about_acquisition")),
+        "investigations": kinds.get("investigate", 0),
+        # --- 判定（事前固定） ---
+        "verdict_acquisition_progresses": bool(
+            len({r["step"] for r in valid_transfers}) >= 2
+            and (summary.get("kpi", {}).get("final_acquirer_area_share") or 0) > 0),
+        "verdict_residents_notice": bool(len(about_people) >= 2
+                                         and len(about_without_own_offer) >= 1),
+    }
+
+
 def metrics_v4(run_dir: str) -> Dict[str, Any]:
     """v4（同期3フェーズ）の集計。配線の指標と、世界で起きたことの指標を分けて出す。"""
     events = _read_jsonl(os.path.join(run_dir, "events.jsonl"))
@@ -274,7 +392,12 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        rows.append(metrics_v4(run) if version == "field_v4" else metrics(run))
+        if version == "field_v4_1":
+            rows.append(metrics_v41(run))
+        elif version == "field_v4":
+            rows.append(metrics_v4(run))
+        else:
+            rows.append(metrics(run))
     if args.json:
         print(json.dumps(rows, ensure_ascii=False, indent=2))
         return 0

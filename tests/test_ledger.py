@@ -40,6 +40,16 @@ from src.field_v4 import (active_ordinance, build_phase1_prompt_v4,
                           close_competing_offers_v4, own_results_text_v4,
                           broker_relay_rows)  # noqa: E402
 
+from src.field_v4_1 import (active_ordinance_v41, build_phase1_prompt_v41,
+                            build_phase2_prompt_v41, build_system_prompt_v41,
+                            enact_ordinance_v41, ensure_v41_state,
+                            execute_pending_v41, filing_delay_v41,
+                            own_results_text_v41, own_result_row_v41,
+                            owners_with_offers_v41, phase1_schema_v41,
+                            phase2_schema_v41, record_offer_v41,
+                            registry_rows_v41, registry_stats_rows_v41,
+                            respond_to_offer_v41, withdraw_offer_v41)  # noqa: E402
+
 from src.prompts import build_system_prompt, build_user_prompt  # noqa: E402
 from src.schemas import action_schema  # noqa: E402
 from src.world import Ledger, Parcel  # noqa: E402
@@ -926,6 +936,224 @@ view26 = build_phase2_prompt_v4(HH26, L26, 1, 12, NAMES4,
                                 owners_with_offers(L26, 1)["HH01"], inbox26)
 check("応答フェーズでも、その月にすでに届いていた情報と記憶が見えている",
       "湾岸で名義が変わっている" in view26 and "先月は仲介から連絡があった" in view26)
+
+# ---------------------------------------------------------------------------
+# v4.1（金額を持たない世界・思考レイヤー）
+# ---------------------------------------------------------------------------
+
+print("== v4.1: 打診と応答（金額なし） ==")
+
+
+def mk41() -> Ledger:
+    parcels = [
+        Parcel("P01", 0, 0, "北町", "residential", "HH01", 2400, area_sqm=100,
+               registered_name="住民A"),
+        Parcel("P02", 1, 0, "北町", "residential", "HH01", 6000, area_sqm=400,
+               registered_name="住民A"),
+        Parcel("P03", 2, 0, "北町", "residential", "HH02", 2400, area_sqm=120,
+               registered_name="住民B"),
+        Parcel("P04", 3, 0, "北町", "public", "MU01", 2400, area_sqm=200,
+               registered_name="市"),
+    ]
+    ledger = Ledger(parcels, {})
+    ensure_v41_state(ledger)
+    return ledger
+
+
+AQ41 = Agent("AQ01", "acquirer", "X社", "取得会社")
+AQ41.extra["aliases"] = ["A社", "B社"]
+AQ41.extra["mandate"] = "この会社だけが知る目的"
+AQ41.extra["monthly_offer_capacity"] = 6
+HH41 = Agent("HH01", "household", "R01", "この主体の事情だけを書いた説明")
+MU41 = Agent("MU01", "municipality", "G01", "この主体の事情だけを書いた説明")
+MD41 = Agent("MD01", "media", "J01", "この主体の事情だけを書いた説明")
+BR41 = Agent("BR01", "broker", "B01", "この主体の事情だけを書いた説明")
+NAMES41 = {"HH01": "R01", "HH02": "R02", "BR01": "B01", "AQ01": "X社", "MU01": "G01"}
+CFG41 = {
+    "world": {"town_name": "A市", "background": "背景", "block_names": ["北町"],
+              "corporate_records": ["A社: 記録"]},
+    "social": {"venues": [{"id": "V01", "label": "飲食店"}],
+               "public_directory": ["AQ01: X社"]},
+    "scenario": {},
+}
+
+L41 = mk41()
+bad41 = record_offer_v41(L41, 1, AQ41, "P01", "Z社")
+check("v4.1: 使えない名義の打診は成立しない",
+      bad41["kind"] == "offer_rejected" and bad41["reason"] == "unknown_legal_name")
+check("v4.1: 公有地への打診は成立しない",
+      record_offer_v41(L41, 1, AQ41, "P04", "A社")["reason"] == "public_land_not_for_sale")
+check("v4.1: 存在しない区画への打診は成立しない",
+      record_offer_v41(L41, 1, AQ41, "P99", "A社")["reason"] == "no_such_parcel")
+o41 = record_offer_v41(L41, 1, AQ41, "P01", "A社", "ご検討ください")
+check("v4.1: 打診が金額なしで記帳される",
+      o41["kind"] == "offer" and "price" not in o41 and "amount" not in o41)
+check("v4.1: 打診はその月のうちに所有者の応答対象になる",
+      owners_with_offers_v41(L41)["HH01"][0]["id"] == o41["offer_id"])
+check("v4.1: 打診は所有者に届いた相手として記録される",
+      L41.v41_offers[o41["offer_id"]]["to"] == "HH01")
+
+hold41 = respond_to_offer_v41(L41, 1, o41["offer_id"], "HH01", "hold")
+check("v4.1: 決めないことも選択で、打診は開いたまま残る",
+      hold41["kind"] == "hold" and L41.v41_offers[o41["offer_id"]]["status"] == "open")
+check("v4.1: 他人に届いた打診には応答できない",
+      respond_to_offer_v41(L41, 1, o41["offer_id"], "HH02", "sell")["reason"] == "not_owner")
+check("v4.1: 存在しない打診には応答できない",
+      respond_to_offer_v41(L41, 1, "O9999", "HH01", "sell")["reason"] == "offer_not_open")
+check("v4.1: 世界にない決定は成立しない",
+      respond_to_offer_v41(L41, 1, o41["offer_id"], "HH01", "counter")["reason"]
+      == "unknown_decision")
+
+keep41 = respond_to_offer_v41(L41, 2, o41["offer_id"], "HH01", "keep")
+check("v4.1: 応じないと決めた打診は終端する",
+      keep41["kind"] == "keep" and L41.v41_offers[o41["offer_id"]]["status"] == "kept"
+      and "HH01" not in owners_with_offers_v41(L41))
+
+L42 = mk41()
+a42 = record_offer_v41(L42, 1, AQ41, "P01", "A社")["offer_id"]
+b42 = record_offer_v41(L42, 1, AQ41, "P01", "B社")["offer_id"]
+sold = respond_to_offer_v41(L42, 1, a42, "HH01", "sell")
+check("v4.1: sell で登記の名義だけが移る（金銭の記帳はない）",
+      sold["kind"] == "transfer" and L42.parcels["P01"].owner_id == "AQ01"
+      and L42.parcels["P01"].registered_name == "A社"
+      and "price" not in sold and L42.cash.get("AQ01", 0) == 0)
+check("v4.1: 成立した区画に残る他の打診はその場で終端する",
+      L42.v41_offers[b42]["status"] == "void")
+check("v4.1: 買い手が所有者になった区画で自己売買はできない",
+      respond_to_offer_v41(L42, 2, b42, "AQ01", "sell")["kind"] == "response_rejected")
+check("v4.1: 既に自社が持つ区画への打診は成立しない",
+      record_offer_v41(L42, 2, AQ41, "P01", "A社")["reason"] == "already_owner")
+
+L43 = mk41()
+w43 = record_offer_v41(L43, 1, AQ41, "P03", "A社")["offer_id"]
+check("v4.1: 自分が出した打診は取り下げられる",
+      withdraw_offer_v41(L43, 2, w43, "AQ01")["kind"] == "withdraw"
+      and L43.v41_offers[w43]["status"] == "withdrawn")
+check("v4.1: 他人の打診は取り下げられない",
+      withdraw_offer_v41(L43, 2, w43, "HH01")["kind"] == "withdraw_rejected")
+
+print("== v4.1: 条例（届出の遅延） ==")
+L44 = mk41()
+check("v4.1: 条文が空の条例は成立しない",
+      enact_ordinance_v41(L44, 1, "MU01", "", "本文", 100, 2)["reason"] == "missing_text")
+check("v4.1: 成立しない数値の条例は記帳されない",
+      enact_ordinance_v41(L44, 1, "MU01", "条例", "本文", 100, -1)["reason"]
+      == "invalid_parameters")
+ord44 = enact_ordinance_v41(L44, 2, "MU01", "届出条例", "300㎡超は届出", 300, 2)
+check("v4.1: 条例は制定した翌月から施行される",
+      ord44["effective_step"] == 3 and active_ordinance_v41(L44, 2) is None
+      and filing_delay_v41(L44, L44.parcels["P02"], 3) == 2
+      and filing_delay_v41(L44, L44.parcels["P01"], 3) == 0)
+o44 = record_offer_v41(L44, 3, AQ41, "P02", "A社")["offer_id"]
+filed44 = respond_to_offer_v41(L44, 3, o44, "HH01", "sell")
+check("v4.1: 届出が要る取得は受諾しても即日には成立しない",
+      filed44["kind"] == "filing_required" and filed44["due_step"] == 5
+      and L44.parcels["P02"].owner_id == "HH01")
+check("v4.1: 届出期間中は成立しない", execute_pending_v41(L44, 4) == []
+      and L44.parcels["P02"].owner_id == "HH01")
+done44 = execute_pending_v41(L44, 5)
+check("v4.1: 届出期間を終えた月に成立し、届出を経た印が残る",
+      done44 and done44[0]["kind"] == "transfer" and done44[0].get("filed") is True
+      and L44.parcels["P02"].owner_id == "AQ01")
+
+L45 = mk41()
+enact_ordinance_v41(L45, 1, "MU01", "届出条例", "300㎡超は届出", 300, 2)
+o45 = record_offer_v41(L45, 2, AQ41, "P02", "A社")["offer_id"]
+respond_to_offer_v41(L45, 2, o45, "HH01", "sell")
+L45.parcels["P02"].owner_id = "HH02"     # 届出の間に所有者が変わった状況
+void45 = execute_pending_v41(L45, 4)
+check("v4.1: 届出の間に所有者が変わった案件は成立させない",
+      void45 and void45[0]["kind"] == "filing_void"
+      and L45.parcels["P02"].owner_id == "HH02")
+
+print("== v4.1: スキーマと観測（金額が世界に無いこと） ==")
+schema41 = phase1_schema_v41(AQ41)
+check("v4.1: thought がJSONの先頭にある",
+      list(schema41["properties"])[0] == "thought"
+      and list(phase2_schema_v41()["properties"])[0] == "thought")
+check("v4.1: 打診の欄に金額はない",
+      set(schema41["properties"]["offers"]["items"]["properties"])
+      == {"parcel_id", "under_name", "note"})
+check("v4.1: 打診は月6件までで、出さない月も許される",
+      schema41["properties"]["offers"]["maxItems"] == 6
+      and "minItems" not in schema41["properties"]["offers"])
+check("v4.1: 応答は sell / keep / hold の3つで、逆提示は存在しない",
+      phase2_schema_v41()["properties"]["responses"]["items"]["properties"]
+      ["decision"]["enum"] == ["sell", "keep", "hold"])
+check("v4.1: memory / memo / feeling / reasoning の欄は無い（thoughtに統合）",
+      not ({"memory", "memo", "feeling", "reasoning"} & set(schema41["properties"]))
+      and not ({"memory", "memo", "feeling", "reasoning"}
+               & set(phase2_schema_v41()["properties"])))
+check("v4.1: 仲介は話すだけで、取引の行為を持たない",
+      set(phase1_schema_v41(BR41)["properties"])
+      == {"thought", "location", "utterance", "utterance_channel", "utterance_to"})
+check("v4.1: 条例を制定できるのは行政だけ",
+      "ordinance_title" in phase1_schema_v41(MU41)["properties"]
+      and "ordinance_title" not in phase1_schema_v41(MD41)["properties"])
+
+
+def _enum_values_41(node):
+    found = []
+    if isinstance(node, dict):
+        if "enum" in node:
+            found.extend(node["enum"])
+        for value in node.values():
+            found.extend(_enum_values_41(value))
+    elif isinstance(node, list):
+        for value in node:
+            found.extend(_enum_values_41(value))
+    return found
+
+
+check("v4.1: スキーマの選択肢に空文字を入れない（実APIが400で拒否する）",
+      all(str(v).strip() != "" for agent41 in (AQ41, HH41, MU41, MD41, BR41)
+          for v in _enum_values_41(phase1_schema_v41(agent41)))
+      and all(str(v).strip() != "" for v in _enum_values_41(phase2_schema_v41())))
+
+MONEY_WORDS = ("価格", "金額", "万円", "評価額", "決済", "資金", "手数料", "逆提示",
+               "賃料", "予算", "円）", "price", "amount")
+sys41 = build_system_prompt_v41(AQ41, CFG41, 48)
+for word in MONEY_WORDS:
+    check(f"v4.1: 世界の説明に金額の語が出ない（{word}）", word not in sys41)
+check("v4.1: v4.1のプロンプトに「AI」表記はない", "AI" not in sys41)
+check("v4.1: 内心は順序だけ指示し、中身を指示しない",
+      "まず thought を書き" in sys41 and "何を書くかはあなたが決める" in sys41)
+
+L46 = mk41()
+record_offer_v41(L46, 1, AQ41, "P01", "A社", "ご検討ください")
+view41 = build_phase1_prompt_v41(AQ41, L46, 1, 12, NAMES41, CFG41)
+for word in ("価格", "評価額", "万円", "手数料", "資金"):
+    check(f"v4.1: 取得主体の観測に金額の語が出ない（{word}）", word not in view41)
+for word in ("すべき", "推奨", "優先度", "不要", "望ましい"):
+    check(f"v4.1: 観測に評価語・当為が混ざらない（{word}）", word not in view41)
+check("v4.1: 登記は最初から公開情報として全区画が観測に出る",
+      "[公開されている土地登記（全区画）]" in view41
+      and len(registry_rows_v41(L46, NAMES41)) == len(L46.parcels))
+check("v4.1: 登記の行に評価額を出さない",
+      all("評価額" not in row for row in registry_rows_v41(L46, NAMES41)))
+
+HH41.extra["thought"] = "先月からの内心がそのまま残っている"
+view_hh41 = build_phase1_prompt_v41(HH41, L46, 2, 12, NAMES41, CFG41)
+check("v4.1: 前月の内心はそのまま翌月の観測に出る",
+      "先月からの内心がそのまま残っている" in view_hh41)
+check("v4.1: 住民には近隣の名義が観測に出る",
+      "[近隣の土地登記（公開情報）]" in view_hh41 and "P02" in view_hh41)
+view_p2_41 = build_phase2_prompt_v41(HH41, L46, 1, 12, NAMES41,
+                                     owners_with_offers_v41(L46)["HH01"],
+                                     [{"from": "BR01", "text": "名義が変わったらしい",
+                                       "step": 1, "obs_id": "TALK-V01-M01-BR01"}])
+check("v4.1: 応答フェーズにも内心と、その月に届いた情報が渡る",
+      "先月からの内心がそのまま残っている" in view_p2_41
+      and "名義が変わったらしい" in view_p2_41)
+for word in ("価格", "評価額", "万円"):
+    check(f"v4.1: 応答フェーズにも金額の語が出ない（{word}）", word not in view_p2_41)
+check("v4.1: 登記統計は名義別の面積として出る（金額を含まない）",
+      any("住民A" in row for row in registry_stats_rows_v41(L46, NAMES41))
+      and all("万" not in row for row in registry_stats_rows_v41(L46, NAMES41)))
+many41 = [own_result_row_v41(1, "make_offer", f"P{i:02d}", {"kind": "offer"})
+          for i in range(1, 13)]
+check("v4.1: 自分の行為の結果は切り捨てない",
+      own_results_text_v41(many41).count("make_offer") == 12)
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")
