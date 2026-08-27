@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import io
 import os
 import sys
 
@@ -44,6 +45,7 @@ from src.field_v4_1 import (active_ordinance_v41, build_phase1_prompt_v41,
                             build_phase2_prompt_v41, build_system_prompt_v41,
                             enact_ordinance_v41, ensure_v41_state,
                             execute_pending_v41, filing_delay_v41,
+                            incoming_offers_rows_v41, observations_rows_v41,
                             own_results_text_v41, own_result_row_v41,
                             owners_with_offers_v41, phase1_schema_v41,
                             phase2_schema_v41, record_offer_v41,
@@ -985,7 +987,7 @@ check("v4.1: 公有地への打診は成立しない",
       record_offer_v41(L41, 1, AQ41, "P04", "A社")["reason"] == "public_land_not_for_sale")
 check("v4.1: 存在しない区画への打診は成立しない",
       record_offer_v41(L41, 1, AQ41, "P99", "A社")["reason"] == "no_such_parcel")
-o41 = record_offer_v41(L41, 1, AQ41, "P01", "A社", "ご検討ください")
+o41 = record_offer_v41(L41, 1, AQ41, "P01", "A社")
 check("v4.1: 打診が金額なしで記帳される",
       o41["kind"] == "offer" and "price" not in o41 and "amount" not in o41)
 check("v4.1: 打診はその月のうちに所有者の応答対象になる",
@@ -1073,7 +1075,7 @@ check("v4.1: thought がJSONの先頭にある",
       and list(phase2_schema_v41()["properties"])[0] == "thought")
 check("v4.1: 打診の欄に金額はない",
       set(schema41["properties"]["offers"]["items"]["properties"])
-      == {"parcel_id", "under_name", "note"})
+      == {"parcel_id", "under_name"})
 check("v4.1: 打診は月6件までで、出さない月も許される",
       schema41["properties"]["offers"]["maxItems"] == 6
       and "minItems" not in schema41["properties"]["offers"])
@@ -1120,7 +1122,7 @@ check("v4.1: 内心は順序だけ指示し、中身を指示しない",
       "まず thought を書き" in sys41 and "何を書くかはあなたが決める" in sys41)
 
 L46 = mk41()
-record_offer_v41(L46, 1, AQ41, "P01", "A社", "ご検討ください")
+record_offer_v41(L46, 1, AQ41, "P01", "A社")
 view41 = build_phase1_prompt_v41(AQ41, L46, 1, 12, NAMES41, CFG41)
 for word in ("価格", "評価額", "万円", "手数料", "資金"):
     check(f"v4.1: 取得主体の観測に金額の語が出ない（{word}）", word not in view41)
@@ -1154,6 +1156,170 @@ many41 = [own_result_row_v41(1, "make_offer", f"P{i:02d}", {"kind": "offer"})
           for i in range(1, 13)]
 check("v4.1: 自分の行為の結果は切り捨てない",
       own_results_text_v41(many41).count("make_offer") == 12)
+
+
+# ---------------------------------------------------------------------------
+# v4.1: Codexレビュー（2026-08-27）指摘の修正を固定する
+# ---------------------------------------------------------------------------
+
+print("== v4.1: Codexレビュー指摘の修正 ==")
+
+# --- 打診に文面（note）は無い＝第二の私信経路を作らない -------------------
+L50 = mk41()
+o50 = record_offer_v41(L50, 1, AQ41, "P01", "A社")
+check("v4.1: 打診の記帳に文面(note)を持たない",
+      "note" not in o50 and "note" not in L50.v41_offers[o50["offer_id"]])
+check("v4.1: 届いている申し入れの表示に文面欄が無い",
+      all("「" not in row
+          for row in incoming_offers_rows_v41(L50, NAMES41,
+                                              owners_with_offers_v41(L50)["HH01"])))
+sys50 = build_system_prompt_v41(AQ41, CFG41, 4)
+check("v4.1: 取得主体のプロンプトが note を指示しない",
+      "note" not in sys50 and "文面を付けることはできない" in sys50)
+
+# --- ID表記ゆれ（[O0001] / O0001 / OFFER-O0001）は同一の打診を指す -------
+for label, given in (("角括弧", "[O0001]"), ("素のID", "O0001"),
+                     ("旧接頭辞", "OFFER-O0001")):
+    L51 = mk41()
+    id51 = record_offer_v41(L51, 1, AQ41, "P01", "A社")["offer_id"]
+    assert id51 == "O0001"
+    out51 = respond_to_offer_v41(L51, 1, given, "HH01", "hold")
+    check(f"v4.1: {label}の表記でも同じ打診に応答できる", out51["kind"] == "hold")
+    check(f"v4.1: {label}で応答しても正規化すると同一IDになる",
+          L51._normalize_id(given, "O") == id51)
+
+# --- 届出中に競合が成立しても、消した案件が翌月に復活しない ---------------
+L52 = mk41()
+a52 = record_offer_v41(L52, 1, AQ41, "P02", "A社")["offer_id"]
+b52 = record_offer_v41(L52, 1, AQ41, "P02", "B社")["offer_id"]
+enact_ordinance_v41(L52, 1, "MU01", "届出制度", "本文", 100, 1)
+enact_ordinance_v41(L52, 1, "MU01", "届出制度", "本文", 100, 2)   # 期限違いにする
+L52.v41_ordinance["delay_months"] = 1
+respond_to_offer_v41(L52, 2, a52, "HH01", "sell")     # 第3月成立
+L52.v41_ordinance["delay_months"] = 2
+respond_to_offer_v41(L52, 2, b52, "HH01", "sell")     # 第4月成立の予定
+check("v4.1: 期限の違う届出が2件とも待機している",
+      len(L52.v41_pending) == 2
+      and {r["offer_id"] for r in L52.v41_pending} == {a52, b52})
+done52 = execute_pending_v41(L52, 3)
+check("v4.1: 先に期限が来た届出だけが成立する",
+      len([r for r in done52 if r["kind"] == "transfer"]) == 1
+      and L52.parcels["P02"].owner_id == "AQ01")
+check("v4.1: 競合で消えた届出は待機列に復活しない", L52.v41_pending == [])
+check("v4.1: 競合で消えた届出は翌月に二重終端されない",
+      execute_pending_v41(L52, 4) == [])
+voids52 = [r for r in L52.records if r["kind"] == "offer_void"]
+check("v4.1: 競合で消えた打診には当事者（買主・売主）が残る",
+      voids52 and voids52[0].get("buyer") == "AQ01"
+      and voids52[0].get("seller") == "HH01")
+
+# --- 届出中に所有者が変わった案件の不成立は、買主にも結果が届く -----------
+L53 = mk41()
+o53 = record_offer_v41(L53, 1, AQ41, "P02", "A社")["offer_id"]
+enact_ordinance_v41(L53, 1, "MU01", "届出制度", "本文", 100, 2)
+respond_to_offer_v41(L53, 2, o53, "HH01", "sell")
+L53.parcels["P02"].owner_id = "HH02"          # 世界の外で名義が動いた場合
+void53 = execute_pending_v41(L53, 4)
+check("v4.1: 所有者が変わった届出は不成立になる",
+      len(void53) == 1 and void53[0]["kind"] == "filing_void")
+check("v4.1: 届出の不成立は買主にも結果として返せる",
+      void53[0].get("buyer") == "AQ01" and void53[0].get("seller") == "HH01")
+
+# --- 条例：欠損は補完しない・上限を世界が足さない・同月競合を記録する -----
+L54 = mk41()
+check("v4.1: 条例の数値が欠けていたら不成立にする（0に補完しない）",
+      enact_ordinance_v41(L54, 1, "MU01", "題", "本文", None, None)["kind"]
+      == "ordinance_rejected")
+check("v4.1: 条例の数値が数値でなければ不成立にする",
+      enact_ordinance_v41(L54, 1, "MU01", "題", "本文", "たくさん", 1)["kind"]
+      == "ordinance_rejected")
+check("v4.1: 遅延月数に世界側の上限を置かない",
+      enact_ordinance_v41(L54, 1, "MU01", "題", "本文", 100, 120)["kind"] == "ordinance")
+enact_ordinance_v41(L54, 2, "MU01", "題A", "本文", 100, 1)
+enact_ordinance_v41(L54, 2, "MU02", "題B", "本文", 200, 3)
+conflicts54 = [r for r in L54.records if r["kind"] == "ordinance_same_step_conflict"]
+check("v4.1: 同月に2主体が制定した事実は隠さず記録に残す",
+      len(conflicts54) == 1 and conflicts54[0]["by"] == "MU02"
+      and conflicts54[0]["other"] == "MU01")
+
+# --- 内心と、届いた文は切り捨てない ---------------------------------------
+L55 = mk41()
+long_thought = "あ" * 900
+HH55 = Agent("HH01", "household", "R01", "この主体の事情だけを書いた説明")
+HH55.extra["thought"] = long_thought
+view55 = build_phase1_prompt_v41(HH55, L55, 2, 12, NAMES41, CFG41)
+check("v4.1: 前月の内心は要約も切り捨てもせずそのまま渡す",
+      long_thought in view55)
+long_article = "外" * 380
+rows55 = observations_rows_v41(HH55, NAMES41,
+                               [{"from": "MD01", "text": long_article, "step": 2,
+                                 "obs_id": "NEWS-MD01-M02"}])
+check("v4.1: 届いた記事・発言は観測で切り捨てない",
+      long_article in rows55[0])
+view_p2_55 = build_phase2_prompt_v41(HH55, L55, 2, 12, NAMES41, [],
+                                     [{"from": "MD01", "text": long_article, "step": 2,
+                                       "obs_id": "NEWS-MD01-M02"}])
+check("v4.1: 応答フェーズでも内心と届いた文を切り捨てない",
+      long_thought in view_p2_55 and long_article in view_p2_55)
+
+# --- 先月の自分の結果は件数で切らない -------------------------------------
+many55 = [own_result_row_v41(1, "hold", f"O{i:04d}", {"kind": "hold"})
+          for i in range(1, 61)]
+check("v4.1: 先月の結果は60件でも全件返す",
+      len(own_results_text_v41(many55).splitlines()) == 60)
+
+# --- 開始時点の属性であることを断定形にしない ------------------------------
+check("v4.1: 売却後も「所有している」と断定しない",
+      "開始時点で自分の土地・建物を所有していた"
+      in build_system_prompt_v41(HH55, CFG41, 4))
+
+# --- 実configと実ペルソナで組んだ本番プロンプトを検査する ------------------
+import yaml  # noqa: E402
+
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CFG_REAL = yaml.safe_load(io.open(os.path.join(_ROOT, "configs",
+                                               "config_field_v4_1.yaml"),
+                                  encoding="utf-8"))
+PERSONAS_REAL = yaml.safe_load(io.open(os.path.join(_ROOT,
+                                                    CFG_REAL["personas_file"]),
+                                       encoding="utf-8"))
+MONEY_WORDS = ("価格", "評価額", "万円", "円", "手数料", "資金", "ローン", "借入",
+               "固定資産税", "修繕費", "老後資金", "進学費用", "原材料費", "賃借",
+               "家賃", "賃料", "金融機関", "査定", "予算", "決済", "代金")
+# コメント行（何を置き換えたかの説明）ではなく、実際に読み込まれる本文を検査する。
+_persona_text = chr(10).join(
+    str(row.get("persona", ""))
+    for rows in PERSONAS_REAL.values() for row in rows)
+for word in MONEY_WORDS:
+    if word == "円":
+        continue
+    check(f"v4.1: 実ペルソナに金額の語が無い（{word}）", word not in _persona_text)
+
+_roles41 = {"household": "household", "business": "business", "broker": "broker",
+            "acquirer": "acquirer", "municipality": "municipality", "media": "media"}
+_real_prompts = {}
+for _role, _key in _roles41.items():
+    for _idx, _p in enumerate(PERSONAS_REAL[_key]):
+        _a = Agent(f"{_key[:2].upper()}{_idx + 1:02d}", _role, _p["name"],
+                   _p["persona"].strip())
+        _a.extra["aliases"] = _p.get("aliases", [])
+        _a.extra["mandate"] = CFG_REAL["scenario"]["acquirer_mandate"]
+        _a.extra["monthly_offer_capacity"] = \
+            CFG_REAL["scenario"]["acquirer_monthly_offer_capacity"]
+        _real_prompts[_a.agent_id + _role] = build_system_prompt_v41(
+            _a, CFG_REAL, 48)
+check("v4.1: 実configで全27主体のシステムプロンプトが組める",
+      len(_real_prompts) == 27)
+for word in MONEY_WORDS:
+    if word == "円":
+        continue  # 「範囲」等の部分一致を避け、金額表記は「万円」で見る
+    check(f"v4.1: 実プロンプト全27本に金額の語が出ない（{word}）",
+          all(word not in text for text in _real_prompts.values()))
+# 当為・優先度の検査。X社の非公開目的（施主確定の研究前提）だけは対象外にする。
+for word in ("すべき", "しなさい", "推奨", "優先度", "望ましい", "確率", "閾値"):
+    check(f"v4.1: 実プロンプト（取得主体を除く）に当為・確率が出ない（{word}）",
+          all(word not in text for key, text in _real_prompts.items()
+              if not key.endswith("acquirer")))
 
 print()
 print(f"RESULT: {PASS} passed, {FAIL} failed")

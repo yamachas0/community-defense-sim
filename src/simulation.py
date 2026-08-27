@@ -38,6 +38,7 @@ from .field_v4 import (own_results_text_v4,  # noqa: F401
                        ensure_v4_state, execute_pending_transfers_v4,
                        owners_with_offers, phase1_schema_v4, phase2_schema_v4,
                        record_offer_v4, respond_to_offer_v4)
+from .field_v4_1 import MAX_TEXT_CHARS as MAX_TEXT_CHARS_V41
 from .field_v4_1 import (build_phase1_prompt_v41, build_phase2_prompt_v41,
                          build_system_prompt_v41, enact_ordinance_v41,
                          ensure_v41_state, execute_pending_v41,
@@ -990,13 +991,11 @@ class Simulation:
                     if not isinstance(row, dict):
                         self.invalid_count += 1
                         operations.append({"action_type": "make_offer", "target": "",
-                                           "amount": 0,
                                            "outcome": {"kind": "invalid_action",
                                                        "reason": "offer_not_object"}})
                         continue
                     parcel_id = str(row.get("parcel_id", "")).strip()
                     under_name = str(row.get("under_name", "")).strip()
-                    note = str(row.get("note", "")).strip()
                     if index >= capacity:
                         outcome = {"kind": "invalid_action",
                                    "reason": "monthly_offer_capacity_exceeded",
@@ -1005,12 +1004,11 @@ class Simulation:
                         outcome = {"kind": "invalid_action", "reason": "missing_target"}
                     else:
                         outcome = record_offer_v41(self.ledger, step, a, parcel_id,
-                                                   under_name, note)
+                                                   under_name)
                     if _is_rejected(outcome):
                         self.invalid_count += 1
                     operations.append({"action_type": "make_offer", "target": parcel_id,
-                                       "amount": 0, "under_name": under_name,
-                                       "note": note, "outcome": outcome})
+                                       "under_name": under_name, "outcome": outcome})
                 raw_withdraw = act.get("withdraw", [])
                 raw_withdraw = raw_withdraw if isinstance(raw_withdraw, list) else []
                 for value in raw_withdraw:
@@ -1021,11 +1019,10 @@ class Simulation:
                     if _is_rejected(outcome):
                         self.invalid_count += 1
                     operations.append({"action_type": "withdraw_offer",
-                                       "target": offer_id, "amount": 0,
-                                       "outcome": outcome})
+                                       "target": offer_id, "outcome": outcome})
                 if not operations:
                     operations.append({"action_type": "no_offer", "target": "",
-                                       "amount": 0, "outcome": {"kind": "no_offer"}})
+                                       "outcome": {"kind": "no_offer"}})
 
             elif a.role in ("municipality", "media"):
                 investigate = str(act.get("investigate", "none")).strip()
@@ -1035,8 +1032,7 @@ class Simulation:
                     outcome = self.ledger.record_note(step, a.agent_id, "investigate",
                                                       investigate)
                     operations.append({"action_type": "investigate",
-                                       "target": investigate, "amount": 0,
-                                       "outcome": outcome})
+                                       "target": investigate, "outcome": outcome})
                 publish = str(act.get("publish", "")).strip()
                 if publish:
                     if a.role == "media":
@@ -1065,15 +1061,17 @@ class Simulation:
                                                  "kind": "public_statement",
                                                  "obs_id": notice_id})
                     operations.append({"action_type": "publish", "target": "",
-                                       "amount": 0, "outcome": outcome})
+                                       "outcome": outcome})
                 if a.role == "municipality":
                     title = str(act.get("ordinance_title", "")).strip()
                     body = str(act.get("ordinance_text", "")).strip()
-                    if title and body:
+                    threshold_given = act.get("ordinance_threshold_sqm", None)
+                    delay_given = act.get("ordinance_delay_months", None)
+                    if title or body:
+                        # どれか1つでも書かれていたら必ず検証へ渡す（欠損は不成立にする）。
                         outcome = enact_ordinance_v41(
                             self.ledger, step, a.agent_id, title, body,
-                            act.get("ordinance_threshold_sqm", 0),
-                            act.get("ordinance_delay_months", 0))
+                            threshold_given, delay_given)
                         if _is_rejected(outcome):
                             self.invalid_count += 1
                         else:
@@ -1090,38 +1088,49 @@ class Simulation:
                                                      "kind": "ordinance",
                                                      "obs_id": notice_id})
                         operations.append({"action_type": "enact_ordinance",
-                                           "target": title, "amount": 0,
-                                           "outcome": outcome})
+                                           "target": title, "outcome": outcome})
                 if not operations:
                     operations.append({"action_type": "routine", "target": "",
-                                       "amount": 0,
                                        "outcome": {"kind": "no_ledger_change"}})
             else:
-                operations.append({"action_type": "day", "target": "", "amount": 0,
+                operations.append({"action_type": "day", "target": "",
                                    "outcome": {"kind": "day", "location": location}})
 
             if valid_location:
                 presences[a.agent_id] = place
+            elif location:
+                operations.append({"action_type": "visit", "target": location,
+                                   "outcome": {"kind": "presence_rejected",
+                                               "reason": "unknown_location"}})
             if utterance and channel == "ambient" and valid_location:
                 row = {"step": step, "from": a.agent_id, "role": a.role, "name": a.name,
-                       "location": place, "text": utterance}
+                       "location": place, "text": utterance[:MAX_TEXT_CHARS_V41]}
                 ambient_rows.append(row)
                 self.all_utterances.append(row)
+            elif utterance and channel == "ambient" and not valid_location:
+                operations.append({"action_type": "talk", "target": location,
+                                   "outcome": {"kind": "delivery_rejected",
+                                               "reason": "unknown_location"}})
             elif utterance and channel == "direct":
                 destination = self._agent_id(utterance_to)
                 if destination:
                     messages.append({"from": a.agent_id, "to": destination,
-                                     "text": utterance, "step": step, "kind": "direct",
+                                     "text": utterance[:MAX_TEXT_CHARS_V41], "step": step,
+                                     "kind": "direct",
                                      "obs_id": f"MSG-M{step:02d}-{a.agent_id}-{destination}"})
+                else:
+                    operations.append({"action_type": "talk", "target": utterance_to,
+                                       "outcome": {"kind": "delivery_rejected",
+                                                   "reason": "unknown_recipient"}})
             if act.get("_truncated"):
                 self.truncated_count += 1
 
             event.update({
                 "action_type": ("offers" if a.role == "acquirer" else "day"),
-                "target": "", "amount": 0, "location": location,
+                "target": "", "location": location,
                 "utterance": utterance, "utterance_channel": channel,
                 "utterance_to": utterance_to, "thought": thought,
-                "memory": thought, "reasoning": "", "evidence": [], "under_name": "",
+                "evidence": [], "under_name": "",
                 "truncated": bool(act.get("_truncated")),
                 "operations": operations,
                 "outcome": {"kind": "phase1", "operations": len(operations)},
@@ -1147,9 +1156,16 @@ class Simulation:
                      "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2)}
             if act is None:
                 self.invalid_count += 1
+                # 本人の判断を捏造しない。open のまま残った打診を事実として記録する。
+                pending_ids = [o["id"] for o in offers_by_owner[a.agent_id]
+                               if o["status"] == "open"]
+                for offer_id in pending_ids:
+                    self.ledger._rec(step, "response_not_recorded", offer_id=offer_id,
+                                     by=a.agent_id, reason="unparseable_response")
                 event.update({"action_type": "PARSE_FAIL",
                               "outcome": {"kind": "parse_fail",
-                                          "reason": "unparseable_response"},
+                                          "reason": "unparseable_response",
+                                          "offers_left_open": pending_ids},
                               "raw": (result.get("raw") or "")[:400]})
                 self.events.append(event)
                 continue
@@ -1167,7 +1183,6 @@ class Simulation:
                 if not isinstance(row, dict):
                     self.invalid_count += 1
                     operations.append({"action_type": "response", "target": "",
-                                       "amount": 0,
                                        "outcome": {"kind": "invalid_action",
                                                    "reason": "response_not_object"}})
                     continue
@@ -1181,23 +1196,25 @@ class Simulation:
                 if _is_rejected(outcome):
                     self.invalid_count += 1
                 operations.append({"action_type": decision or "response",
-                                   "target": offer_id, "amount": 0,
-                                   "outcome": outcome})
-            answered = {str(op.get("target", "")).strip().upper().strip("[]")
-                        for op in operations}
+                                   "target": offer_id, "outcome": outcome})
+            answered = set()
+            for op in operations:
+                raw_target = str(op.get("target", "")).strip()
+                if raw_target:
+                    answered.add(self.ledger._normalize_id(raw_target, "O"))
             for offer in offers_by_owner[a.agent_id]:
                 if offer["id"] in answered or offer["status"] != "open":
                     continue
                 outcome = respond_to_offer_v41(self.ledger, step, offer["id"],
                                                a.agent_id, "hold")
                 operations.append({"action_type": "hold", "target": offer["id"],
-                                   "amount": 0, "outcome": outcome})
+                                   "implicit": True, "outcome": outcome})
             if act.get("_truncated"):
                 self.truncated_count += 1
-            event.update({"action_type": "responses", "target": "", "amount": 0,
+            event.update({"action_type": "responses", "target": "",
                           "location": "", "utterance": "", "utterance_channel": "none",
-                          "utterance_to": "", "thought": thought, "memory": thought,
-                          "reasoning": "", "evidence": [], "under_name": "",
+                          "utterance_to": "", "thought": thought,
+                          "evidence": [], "under_name": "",
                           "truncated": bool(act.get("_truncated")),
                           "operations": operations,
                           "outcome": {"kind": "phase2", "responses": len(operations)}})

@@ -22,14 +22,13 @@ from .agents import Agent
 from .world import Ledger, Parcel, neighbors
 
 MAX_THOUGHT_CHARS = 400
-MAX_TEXT_CHARS = 140
-OWN_RESULT_ROWS = 40
+MAX_TEXT_CHARS = 400
 
 USE_JA = {"residential": "住宅", "shop": "店舗", "lodging": "宿泊",
           "office": "事務所", "vacant": "空地", "public": "公共施設"}
 
 ROLE_TEXT_V41 = {
-    "household": "A市で日常生活を送る住民世帯。自分の土地・建物を所有している。",
+    "household": "A市で日常生活を送る住民世帯。開始時点で自分の土地・建物を所有していた。",
     "business": "A市で事業を営む地元事業者。営業、仕入れ、人員、設備、顧客対応が日常業務である。",
     "broker": "A市の不動産仲介。地域の人づきあいの中にいる。",
     "acquirer": "街の外から不動産を取得・運用する会社。非公開目的はこの主体だけが知る。",
@@ -64,7 +63,7 @@ def _normalize_offer_id(ledger: Ledger, value: Any) -> str:
 # ---------------------------------------------------------------------------
 
 def record_offer_v41(ledger: Ledger, step: int, agent: Agent, parcel_id: str,
-                     under_name: str, note: str = "") -> Dict[str, Any]:
+                     under_name: str) -> Dict[str, Any]:
     """区画の取得を、指定した名義で申し入れる。金額は世界に存在しない。"""
     ensure_v41_state(ledger)
     allowed = [agent.name] + list(agent.extra.get("aliases", []))
@@ -87,11 +86,11 @@ def record_offer_v41(ledger: Ledger, step: int, agent: Agent, parcel_id: str,
     ledger.v41_offers[offer_id] = {
         "id": offer_id, "step": step, "parcel_id": parcel_id,
         "from": agent.agent_id, "to": parcel.owner_id, "under_name": under_name,
-        "status": "open", "note": note[:MAX_TEXT_CHARS],
+        "status": "open",
     }
     return ledger._rec(step, "offer", offer_id=offer_id, parcel_id=parcel_id,
                        from_id=agent.agent_id, under_name=under_name,
-                       to=parcel.owner_id, note=note[:MAX_TEXT_CHARS])
+                       to=parcel.owner_id)
 
 
 def withdraw_offer_v41(ledger: Ledger, step: int, offer_id: str,
@@ -139,9 +138,16 @@ def enact_ordinance_v41(ledger: Ledger, step: int, by: str, title: str, body: st
         return ledger._rec(step, "ordinance_rejected", by=by,
                            reason="invalid_parameters",
                            given=f"{threshold_sqm}/{delay_months}")
-    if threshold < 0 or delay < 0 or delay > 60:
+    if threshold < 0 or delay < 0:
         return ledger._rec(step, "ordinance_rejected", by=by,
                            reason="invalid_parameters", given=f"{threshold}/{delay}")
+    previous = ledger.v41_ordinance
+    if previous and previous["step"] == step and previous["by"] != by:
+        # 同期フェーズ内に「後発」は無い。隠れた主体優先度にしないため、
+        # 同月に2件制定された事実そのものを記録に残す。
+        ledger._rec(step, "ordinance_same_step_conflict", by=by,
+                    other=previous["by"], superseded=previous["title"],
+                    effective=str(title).strip()[:80])
     ledger.v41_ordinance = {"step": step, "effective_step": step + 1, "by": by,
                             "title": str(title).strip()[:80],
                             "body": str(body).strip()[:400],
@@ -192,7 +198,8 @@ def _close_competing_v41(ledger: Ledger, step: int, parcel_id: str,
         if offer["status"] in ("open", "filed"):
             offer["status"] = "void"
             ledger._rec(step, "offer_void", offer_id=offer["id"],
-                        parcel_id=parcel_id, reason="parcel_already_transferred")
+                        parcel_id=parcel_id, buyer=offer["from"], seller=offer["to"],
+                        reason="parcel_already_transferred")
     ledger.v41_pending = [row for row in ledger.v41_pending
                           if row["offer_id"] == keep_offer_id
                           or ledger.v41_offers[row["offer_id"]]["parcel_id"] != parcel_id]
@@ -256,25 +263,30 @@ def execute_pending_v41(ledger: Ledger, step: int) -> List[Dict[str, Any]]:
     ensure_v41_state(ledger)
     done: List[Dict[str, Any]] = []
     remaining = []
-    for row in ledger.v41_pending:
+    # 反復中に _close_competing_v41 が v41_pending を作り替えるため、
+    # 開始時点のスナップショットを回し、残す行も status を再検証する。
+    for row in list(ledger.v41_pending):
+        offer = ledger.v41_offers.get(row["offer_id"])
+        if offer is None or offer["status"] != "filed":
+            continue
         if row["due_step"] > step:
             remaining.append(row)
             continue
-        offer = ledger.v41_offers.get(row["offer_id"])
-        if offer is None:
-            continue
         parcel = ledger.parcels.get(offer["parcel_id"])
         if (parcel is None or parcel.owner_id != row["owner"]
-                or offer["status"] != "filed" or offer["from"] == parcel.owner_id):
+                or offer["from"] == parcel.owner_id):
             offer["status"] = "void"
             done.append(ledger._rec(step, "filing_void", offer_id=offer["id"],
                                     parcel_id=offer["parcel_id"], by=row["owner"],
+                                    buyer=offer["from"], seller=row["owner"],
                                     reason="owner_changed"))
             continue
         record = _transfer_v41(ledger, step, offer)
         record["filed"] = True
         done.append(record)
-    ledger.v41_pending = remaining
+    ledger.v41_pending = [row for row in remaining
+                          if ledger.v41_offers.get(row["offer_id"], {}).get("status")
+                          == "filed"]
     return done
 
 
@@ -304,7 +316,7 @@ def own_results_text_v41(rows: List[Dict[str, Any]]) -> str:
     if not rows:
         return "  （先月の記録なし）"
     out = []
-    for r in rows[:OWN_RESULT_ROWS]:
+    for r in rows:
         line = (f"  第{r.get('step')}月 {r.get('action_type') or '-'} "
                 f"target={r.get('target') or '-'} 結果={r.get('kind') or '-'}")
         if r.get("reason"):
@@ -372,8 +384,6 @@ def incoming_offers_rows_v41(ledger: Ledger, names: Dict[str, str],
         line = (f"  [{offer['id']}] {parcel.pid}"
                 f"[{USE_JA.get(parcel.use, parcel.use)}/{parcel.block}] "
                 f"{parcel.area_sqm}㎡ 名義:{offer['under_name']} 第{offer['step']}月から")
-        if offer.get("note"):
-            line += f"「{offer['note']}」"
         rows.append(line)
     return rows or ["  （届いていない）"]
 
@@ -423,7 +433,7 @@ def observations_rows_v41(agent: Agent, names: Dict[str, str],
         oid = item.get("obs_id") or f"MSG-M{item.get('step', 0):02d}-{item.get('from', '')}"
         src = names.get(item.get("from", ""), item.get("from", ""))
         venue = f" @{item['location']}" if item.get("location") else ""
-        rows.append(f"  [{oid}] {src}{venue}:「{str(item.get('text', ''))[:MAX_TEXT_CHARS]}」")
+        rows.append(f"  [{oid}] {src}{venue}:「{str(item.get('text', ''))}」")
     return rows
 
 
@@ -447,7 +457,6 @@ def phase1_schema_v41(agent: Agent) -> Dict[str, Any]:
         offer_props = {
             "parcel_id": {"type": "string"},
             "under_name": {"type": "string", "enum": names},
-            "note": {"type": "string"},
         }
         props["offers"] = {"type": "array", "maxItems": capacity,
                            "items": {"type": "object", "properties": offer_props,
@@ -530,7 +539,9 @@ JSONの最初に thought を書く。thought は誰にも伝わらないあな�
 利用できる登記名義: {' / '.join([agent.name] + list(agent.extra.get('aliases', [])))}
 
 --- 今月できること ---
-区画の取得を所有者へ申し入れる（打診）。1か月に申し入れられるのは
+区画の取得を所有者へ申し入れる（打診）。申し入れに添えられるのは区画と登記名義だけで、
+文面を付けることはできない。所有者へ言葉を伝えたい月は direct の発言を使う。
+1か月に申し入れられるのは
 最大{int(agent.extra.get('monthly_offer_capacity', 6))}件で、これがこの会社の月次の実務量である。
 自分が出した未応答の打診を取り下げる。誰かに話す。
 打診は出した月のうちに所有者へ届き、所有者はその月に応じる・応じない・決めない、のいずれかを返す。
@@ -538,7 +549,7 @@ JSONの最初に thought を書く。thought は誰にも伝わらないあな�
 --- JSON出力 ---
 thought, offers, withdraw, location, utterance, utterance_channel, utterance_to
 を必ず含める。打診しない月は offers を空配列にする。
-offersの各要素は parcel_id, under_name, note（所有者に届く文面・{MAX_TEXT_CHARS}字以内）。
+offersの各要素は parcel_id と under_name。
 withdrawは取り下げる打診ID（[O0001]の形）の配列。無ければ空配列。
 説明文を付けずJSONだけ返す。
 """
@@ -602,7 +613,7 @@ def build_phase1_prompt_v41(agent: Agent, ledger: Ledger, step: int, n_steps: in
     rows = [f"=== 第{step}月 / 全{n_steps}月 ==="]
     thought = agent.extra.get("thought", "")
     rows += ["[前月の自分の内心（そのまま持ち越したもの）]",
-             ("  " + thought[:MAX_THOUGHT_CHARS]) if thought else "  （まだ無い）"]
+             ("  " + thought) if thought else "  （まだ無い）"]
     rows += ["[自分に実際に届いた情報]"] + observations_rows_v41(agent, names)
     rows += ["[先月の自分の行為と、帳簿上の結果（機械記録）]",
              own_results_text_v41(agent.extra.get("last_month_results", []))]
@@ -644,7 +655,7 @@ def build_phase2_prompt_v41(agent: Agent, ledger: Ledger, step: int, n_steps: in
     rows = [f"=== 第{step}月（応答） / 全{n_steps}月 ===",
             "自分の土地に取得の申し入れが届いた。応じるかどうかを決める。"]
     thought = agent.extra.get("thought", "")
-    rows += ["[今の自分の内心]", ("  " + thought[:MAX_THOUGHT_CHARS]) if thought else "  （まだ無い）"]
+    rows += ["[今の自分の内心]", ("  " + thought) if thought else "  （まだ無い）"]
     rows += ["[今月自分に届いた情報]"] + observations_rows_v41(agent, names, inbox)
     rows += ["[先月の自分の行為と、帳簿上の結果（機械記録）]",
              own_results_text_v41(agent.extra.get("last_month_results", []))]

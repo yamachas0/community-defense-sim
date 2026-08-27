@@ -78,6 +78,56 @@ def metrics_v41(run_dir: str) -> Dict[str, Any]:
     money_rows = [r for r in ledger
                   if any(k in r for k in ("price", "amount", "rent", "fee"))]
 
+    # --- 初回反応と owner-month 反応を分ける（長期holdが分母を膨らませないように）---
+    first_response: Dict[str, str] = {}
+    for e in sorted(events, key=lambda x: (x.get("step", 0), x.get("agent_id", ""))):
+        if e.get("action_type") != "responses":
+            continue
+        for op in e.get("operations", []) or []:
+            oid = str(op.get("target", "")).strip().upper().strip("[]")
+            if oid and oid not in first_response:
+                first_response[oid] = op.get("action_type", "")
+    first_decisions = collections.Counter(first_response.values())
+    implicit_holds = sum(1 for e in events if e.get("action_type") == "responses"
+                         for op in e.get("operations", []) or []
+                         if op.get("implicit"))
+
+    # --- 届出（条例）による実現遅延を offer 単位で照合する ---
+    filing_rows = [r for r in ledger if r.get("kind") == "filing_required"]
+    transfer_by_offer = {r.get("offer_id"): r for r in transfers}
+    filing_delays = []
+    for row in filing_rows:
+        done = transfer_by_offer.get(row.get("offer_id"))
+        filing_delays.append({
+            "offer_id": row.get("offer_id"), "parcel_id": row.get("parcel_id"),
+            "sell_step": row.get("step"), "due_step": row.get("due_step"),
+            "transfer_step": done.get("step") if done else None,
+            "realized_delay": ((done.get("step") - row.get("step")) if done else None),
+        })
+    pending_at_end = [r["offer_id"] for r in filing_delays
+                      if r["transfer_step"] is None]
+
+    # --- 認知の転相を主体ごとに見る（総件数ではなく個人内の初回転換）---
+    first_transition = {}
+    for t in sorted(thoughts, key=lambda x: (x.get("step", 0), x.get("from", ""))):
+        if t.get("about_acquisition") and t.get("from") not in first_transition:
+            first_transition[t["from"]] = t.get("step")
+    transition_steps = sorted(first_transition.values())
+
+    # --- 噂（取得を扱う発話）の初出月 ---
+    rumor_steps = sorted({d.get("step") for d in deliveries
+                          if d.get("kind") in ("ambient", "direct")
+                          and any(w in str(d.get("text", ""))
+                                  for w in ("名義", "買い", "取得", "外資", "X社",
+                                            "まとめて", "手放"))})
+
+    # --- 名義の分散（面積シェアのハーフィンダール指数）---
+    name_area = collections.Counter()
+    for r in valid_transfers:
+        name_area[r.get("under_name", "")] += 1
+    total_named = sum(name_area.values()) or 1
+    name_hhi = round(sum((v / total_named) ** 2 for v in name_area.values()), 4)
+
     return {
         "run_dir": os.path.basename(run_dir.rstrip("/\\")),
         "scenario": "field_v4_1",
@@ -143,6 +193,20 @@ def metrics_v41(run_dir: str) -> Dict[str, Any]:
             and (summary.get("kpi", {}).get("final_acquirer_area_share") or 0) > 0),
         "verdict_residents_notice": bool(len(about_people) >= 2
                                          and len(about_without_own_offer) >= 1),
+        # --- 追加集計（Codexレビュー 2026-08-27 の指摘反映）---
+        "offers_first_month": sum(1 for r in offer_records if r.get("step") == 1),
+        "first_response_by_offer": dict(first_decisions),
+        "owner_month_responses": dict(decisions),
+        "implicit_holds": implicit_holds,
+        "response_not_recorded": kinds.get("response_not_recorded", 0),
+        "ordinance_same_step_conflict": kinds.get("ordinance_same_step_conflict", 0),
+        "filing_delays": filing_delays,
+        "filings_pending_at_end": pending_at_end,
+        "first_transition_step_by_agent": first_transition,
+        "median_first_transition_step": (
+            transition_steps[len(transition_steps) // 2] if transition_steps else None),
+        "first_rumor_step": rumor_steps[0] if rumor_steps else None,
+        "under_name_area_hhi": name_hhi,
     }
 
 

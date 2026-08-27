@@ -5,7 +5,7 @@ run_name: field_v4_1_a_city
 scenario_version: field_v4_1
 seed: 85
 steps: 12
-personas_file: configs/personas/field_v3.yaml
+personas_file: configs/personas/field_v4_1.yaml
 
 llm:
   provider: google
@@ -35,18 +35,12 @@ world:
     開始時点では決まっていない。
   grid: {cols: 8, rows: 6}
   block_names: [湾岸観光地区, 中央駅前地区, 北部学術・生活地区, 温泉丘陵地区]
-  base_assessed_value: 2600
-  base_unit_price: 24
   area_pattern_sqm: [70, 90, 110, 140, 180, 240, 320, 450]
-  block_premium:
-    湾岸観光地区: 1.35
-    中央駅前地区: 1.20
-    北部学術・生活地区: 0.85
-    温泉丘陵地区: 1.05
-  initial_shop_rent: 0
   shop_coords:
     [[1,0],[2,0],[3,0],[5,0],[6,0],[1,1],[2,1],[5,1],[6,1],[1,3],[2,3],[5,3]]
   vacant_coords: [[0,2],[3,2],[7,2],[0,5],[3,5],[6,5]]
+  # 賃料はこの世界に存在しない。0固定（共通の初期化が本キーを要求するため残す）。
+  initial_shop_rent: 0
   public_coords: [[0,0],[7,5]]
   corporate_records:
     - "A社: 香港法人S投資控股が全持分を保有。国内連絡先は東京都。"

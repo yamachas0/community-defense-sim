@@ -433,8 +433,7 @@ class MockClient:
             capacity = int(properties["offers"].get("maxItems", 6))
             fields["offers"] = [
                 {"parcel_id": rng.choice(parcels) if parcels else "",
-                 "under_name": rng.choice(legal_names),
-                 "note": "ご検討ください。"}
+                 "under_name": rng.choice(legal_names)}
                 for _ in range(rng.randint(0, min(3, capacity)))]
             fields["withdraw"] = ([rng.choice(offers)]
                                   if offers and rng.random() < 0.15 else [])
