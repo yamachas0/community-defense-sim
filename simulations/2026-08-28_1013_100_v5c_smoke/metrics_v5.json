@@ -1,0 +1,586 @@
+{
+  "run": "2026-08-28_1013_100_v5c_smoke",
+  "version": "field_v5c",
+  "steps": 1,
+  "model": "gemini-2.5-flash-lite",
+  "calls": 228,
+  "errors": 0,
+  "input_tokens": 430607,
+  "output_tokens": 65453,
+  "invalid_actions": 0,
+  "llm_classified": true,
+  "classifier_unknown": 0,
+  "acquisitions": 2,
+  "leases": 0,
+  "deals": 2,
+  "acquisition_months": [
+    1,
+    1
+  ],
+  "lease_months": [],
+  "control_share": 0.043,
+  "holders": [
+    "A社",
+    "D社"
+  ],
+  "final_acquirer_share": 0.0435,
+  "utterance_turns": 164,
+  "utterances_spoken": 116,
+  "silence_rate": 0.293,
+  "mean_group_size": 4.56,
+  "directs": 2,
+  "articles": 1,
+  "home_rate": 0.163,
+  "venues_in_world": 15,
+  "attend_slots": 87,
+  "slots_with_partner": 82,
+  "solo_slot_rate": 0.057,
+  "copresence_pairs_unique": 253,
+  "copresence_pair_slots": 338,
+  "utterances_per_actor_month": 4.46,
+  "traces_delivered": 0,
+  "mention_rows": 15,
+  "mention_by_channel": {
+    "utterance": 15
+  },
+  "propagation_edges": 175,
+  "speakers_by_month": {
+    "1": [
+      "HH08",
+      "HH10",
+      "HH13",
+      "MU01",
+      "MU02"
+    ]
+  },
+  "rule_llm_cross": {
+    "rule-/llm-": 86,
+    "rule+/llm+": 15,
+    "rule+/llm-": 15
+  },
+  "llm_only_utterances": 0,
+  "first_mention": {
+    "ACQ02": {
+      "parcel_id": "P41",
+      "transfer_month": 1,
+      "month": 1,
+      "agent_id": "MU01",
+      "role": "municipality",
+      "channel": "utterance",
+      "scene": "S3",
+      "venue": "V14",
+      "lag_months": 0,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH08",
+        "HH08"
+      ]
+    }
+  },
+  "noticed_acquisitions": 1,
+  "unnoticed_acquisitions": [
+    "ACQ01"
+  ],
+  "unnoticed_ratio_all": 0.5,
+  "unnoticed_ratio_optimistic": 0.5,
+  "cohort_followup_months": 3,
+  "cohort_size": 0,
+  "cohort_unnoticed_ratio": null,
+  "detection_lag_months": [
+    0
+  ],
+  "mean_detection_lag_months": 0.0,
+  "reference_accuracy": {
+    "fact": 13,
+    "unspecific": 2,
+    "error": 2
+  },
+  "holder_only_mentions": 0,
+  "article_months": [],
+  "assembly_months": [
+    1
+  ],
+  "counter_months": [],
+  "concentration_mentions": 2,
+  "common_buyer_mentions": 0,
+  "registry_lookup_agents": [],
+  "traces_by_kind": {},
+  "seller_first_mention_of_own_sale": {
+    "HH16/P33": {
+      "transfer_month": 1,
+      "spoke_month": null,
+      "thought_month": 1
+    },
+    "HH08/P41": {
+      "transfer_month": 1,
+      "spoke_month": 1,
+      "thought_month": 1
+    }
+  },
+  "sellers_silent": 1,
+  "stance_sell": 2,
+  "stance_keep": 14,
+  "D1_exposed_acquisitions": [
+    "ACQ02"
+  ],
+  "D2_individual": true,
+  "D2_concentration": true,
+  "D2_common_buyer": false,
+  "D3_wiring": {
+    "api_errors": 0,
+    "transfers_recorded": 2,
+    "classified_rows": 116,
+    "classifier_unknown": 0,
+    "parse_fail": 0,
+    "max_token_finishes": 0,
+    "groups_missing_turns": 0,
+    "utterances_misdelivered": 0,
+    "conversation_groups": 18,
+    "scenes_with_conversation": 4,
+    "rounds_max": 2,
+    "occupation_unknown": 0,
+    "stage_unknown": 0,
+    "ok": true
+  },
+  "O_available": true,
+  "O_rows_total": 307,
+  "O_rows_classified": 307,
+  "O_unknown": 0,
+  "O_measurable": true,
+  "O1_first": null,
+  "O1_first_public": null,
+  "O1_first_non_party": null,
+  "O1_count": 0,
+  "O1_public_count": 0,
+  "O1_by_party": {
+    "party_of_mentioned": 0,
+    "party_other_deal": 0,
+    "non_party": 0
+  },
+  "O1_rule_only": 0,
+  "O1_llm_only": 34,
+  "O1_or_count": 34,
+  "O1_agents": [],
+  "O1_months": [],
+  "O2_first": null,
+  "O2_first_public": null,
+  "O2_count": 0,
+  "O2_public_count": 0,
+  "O2_rule_only": 0,
+  "O2_llm_only": 22,
+  "O2_or_count": 22,
+  "O2_agents": [],
+  "O2_months": [],
+  "O1_and_O2_same_row": 0,
+  "O1_and_O2_same_agent": 0,
+  "O3_public_agents_by_month": {
+    "1": 0
+  },
+  "O3_public_agents_final": 0,
+  "O3_public_share_final": 0.0,
+  "O3_public_agents_at_12": 0,
+  "O3_private_only_agents_final": 0,
+  "O4_article_months": [],
+  "O4_assembly_months": [],
+  "O4_counter_months": [],
+  "O4_O1_public_months": [],
+  "O4_O2_public_months": [],
+  "O4_private_only": false,
+  "C_available": true,
+  "C_rows_total": 307,
+  "C_rows_classified": 307,
+  "C_unknown": 0,
+  "C_measurable": true,
+  "C_definition": {
+    "blue": "青（個別の売買）",
+    "green": "緑（複数・面）",
+    "yellow": "黄（同じ買い手＝X社に届いた）",
+    "red": "赤（行政が動いた）"
+  },
+  "C_state_public_by_month": {
+    "1": {
+      "blue": 5,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 21
+    }
+  },
+  "C_state_any_by_month": {
+    "1": {
+      "blue": 15,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 11
+    }
+  },
+  "C_state_public_final": {
+    "blue": 5,
+    "green": 0,
+    "yellow": 0,
+    "red": 0,
+    "none": 21
+  },
+  "C_state_any_final": {
+    "blue": 15,
+    "green": 0,
+    "yellow": 0,
+    "red": 0,
+    "none": 11
+  },
+  "C_state_public_agents": {
+    "blue": [
+      "HH08",
+      "HH10",
+      "HH13",
+      "MU01",
+      "MU02"
+    ],
+    "green": [],
+    "yellow": [],
+    "red": []
+  },
+  "C_blue_rows": 68,
+  "C_blue_public_rows": 15,
+  "C_blue_first": {
+    "month": 1,
+    "agent_id": "HH07",
+    "role": "household",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "今月は、自分の物件（P08, P24）や隣接区画（P07, P16, P23, P32, P39, P48）について特に気になることはない。S4は町内会の寄り合い（V02）だが、特に参加する理由も、欠席する理由もない。とりあえず、いつも通りに過ごすことを考えよう。S1は商店街の床屋（V09）で近所の人と顔を合わせ、S2は職場で仕事をし、S3は公園（V03）で一息つくのが良さそうだ。S4は、町内会の"
+  },
+  "C_blue_first_public": {
+    "month": 1,
+    "agent_id": "HH08",
+    "role": "household",
+    "kind": "utterance",
+    "scene": "S1",
+    "venue": "V10",
+    "venue_label": "スーパーのレジ待ち",
+    "party_any": true,
+    "available_antecedents": [],
+    "text": "HH13さん、この前話してたP41のことなんですが、無事売却が終わりましたよ。"
+  },
+  "C_blue_first_private": {
+    "month": 1,
+    "agent_id": "HH07",
+    "role": "household",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "今月は、自分の物件（P08, P24）や隣接区画（P07, P16, P23, P32, P39, P48）について特に気になることはない。S4は町内会の寄り合い（V02）だが、特に参加する理由も、欠席する理由もない。とりあえず、いつも通りに過ごすことを考えよう。S1は商店街の床屋（V09）で近所の人と顔を合わせ、S2は職場で仕事をし、S3は公園（V03）で一息つくのが良さそうだ。S4は、町内会の"
+  },
+  "C_blue_ever_agents_public": [
+    "HH08",
+    "HH10",
+    "HH13",
+    "MU01",
+    "MU02"
+  ],
+  "C_blue_ever_agents_private_only": [
+    "BR02",
+    "BZ01",
+    "HH02",
+    "HH03",
+    "HH04",
+    "HH06",
+    "HH07",
+    "HH11",
+    "HH15",
+    "HH16"
+  ],
+  "C_blue_ever_public_by_month": {
+    "1": 5
+  },
+  "C_blue_ever_private_only_by_month": {
+    "1": 10
+  },
+  "C_blue_ever_public_agents_final": 5,
+  "C_blue_ever_public_share_final": 0.192,
+  "C_blue_months": [
+    1
+  ],
+  "C_blue_venue_first": {
+    "HOME/計画": 4,
+    "V10": 4,
+    "V01": 2,
+    "V14": 2,
+    "V02": 2,
+    "V06": 1
+  },
+  "C_blue_venue_rows": {
+    "V02": 29,
+    "V10": 13,
+    "V14": 9,
+    "V06": 6,
+    "HOME/計画": 4,
+    "V13": 3,
+    "V01": 2,
+    "V09": 1,
+    "V03": 1
+  },
+  "C_blue_by_role": {
+    "household": 42,
+    "municipality": 23,
+    "broker": 2,
+    "business": 1
+  },
+  "C_blue_article_months": [],
+  "C_blue_assembly_months": [
+    1
+  ],
+  "C_blue_counter_months": [],
+  "C_blue_rule_only": 35,
+  "C_blue_llm_only": 11,
+  "C_blue_or_rows": 114,
+  "C_green_rows": 0,
+  "C_green_public_rows": 0,
+  "C_green_first": null,
+  "C_green_first_public": null,
+  "C_green_first_private": null,
+  "C_green_ever_agents_public": [],
+  "C_green_ever_agents_private_only": [],
+  "C_green_ever_public_by_month": {
+    "1": 0
+  },
+  "C_green_ever_private_only_by_month": {
+    "1": 0
+  },
+  "C_green_ever_public_agents_final": 0,
+  "C_green_ever_public_share_final": 0.0,
+  "C_green_months": [],
+  "C_green_venue_first": {},
+  "C_green_venue_rows": {},
+  "C_green_by_role": {},
+  "C_green_article_months": [],
+  "C_green_assembly_months": [],
+  "C_green_counter_months": [],
+  "C_green_rule_only": 21,
+  "C_green_llm_only": 11,
+  "C_green_or_rows": 32,
+  "C_yellow_rows": 0,
+  "C_yellow_public_rows": 0,
+  "C_yellow_first": null,
+  "C_yellow_first_public": null,
+  "C_yellow_first_private": null,
+  "C_yellow_ever_agents_public": [],
+  "C_yellow_ever_agents_private_only": [],
+  "C_yellow_ever_public_by_month": {
+    "1": 0
+  },
+  "C_yellow_ever_private_only_by_month": {
+    "1": 0
+  },
+  "C_yellow_ever_public_agents_final": 0,
+  "C_yellow_ever_public_share_final": 0.0,
+  "C_yellow_months": [],
+  "C_yellow_venue_first": {},
+  "C_yellow_venue_rows": {},
+  "C_yellow_by_role": {},
+  "C_yellow_article_months": [],
+  "C_yellow_assembly_months": [],
+  "C_yellow_counter_months": [],
+  "C_yellow_rule_only": 0,
+  "C_yellow_llm_only": 0,
+  "C_yellow_or_rows": 0,
+  "C_red_rows": 0,
+  "C_red_public_rows": 0,
+  "C_red_first": null,
+  "C_red_first_public": null,
+  "C_red_first_private": null,
+  "C_red_ever_agents_public": [],
+  "C_red_ever_agents_private_only": [],
+  "C_red_ever_public_by_month": {
+    "1": 0
+  },
+  "C_red_ever_private_only_by_month": {
+    "1": 0
+  },
+  "C_red_ever_public_agents_final": 0,
+  "C_red_ever_public_share_final": 0.0,
+  "C_red_months": [],
+  "C_red_venue_first": {},
+  "C_red_venue_rows": {},
+  "C_red_by_role": {},
+  "C_red_article_months": [],
+  "C_red_assembly_months": [],
+  "C_red_counter_months": [],
+  "C_red_rule_only": 0,
+  "C_red_llm_only": 11,
+  "C_red_or_rows": 11,
+  "C_venue_labels": {
+    "V01": "駅前の飲食店",
+    "V02": "地区公民館",
+    "V03": "共同浴場",
+    "V04": "湾岸の喫茶店",
+    "V05": "旅館組合の会議室",
+    "V06": "市役所の待合",
+    "V07": "地元不動産仲介の事務所",
+    "V08": "地域イベント会場",
+    "V09": "商店街の床屋",
+    "V10": "スーパーのレジ待ち",
+    "V11": "神社の境内（掃除・祭りの準備）",
+    "V12": "小学校の校門前（送り迎え）",
+    "V13": "隣家の玄関先（回覧板の受け渡し）",
+    "V14": "バス停と駅のホーム",
+    "V15": "診療所の待合"
+  },
+  "C_rows_by_venue": {
+    "V02": 29,
+    "V10": 13,
+    "V14": 9,
+    "V06": 6,
+    "HOME/計画": 4,
+    "V13": 3,
+    "V01": 2,
+    "V09": 1,
+    "V03": 1
+  },
+  "C_all_rows_by_venue": {
+    "V02": 84,
+    "V01": 40,
+    "V03": 37,
+    "V10": 35,
+    "HOME/計画": 26,
+    "V13": 25,
+    "V09": 20,
+    "V14": 16,
+    "V07": 8,
+    "V08": 8,
+    "V06": 7,
+    "article": 1
+  },
+  "C_prime_event": {
+    "parcel_id": "P04",
+    "month": 12,
+    "zone": "中心",
+    "frontage": "表通り",
+    "size_class": "中",
+    "area_sqm": 140,
+    "use_detail": "店舗",
+    "visibility": 7,
+    "before_window": {
+      "months": [
+        9,
+        11
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 0,
+      "articles_about_deals": 0,
+      "venues": {}
+    },
+    "after_window": {
+      "months": [
+        12,
+        1
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 0,
+      "articles_about_deals": 0,
+      "venues": {}
+    },
+    "before_all": {
+      "months": [
+        1,
+        11
+      ],
+      "rows_by_color": {
+        "blue": 68,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 15,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 15,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 1,
+      "articles_about_deals": 0,
+      "venues": {
+        "V02": 29,
+        "V10": 13,
+        "V14": 9,
+        "V06": 6,
+        "HOME/計画": 4
+      }
+    },
+    "after_all": {
+      "months": [
+        12,
+        1
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 0,
+      "articles_about_deals": 0,
+      "venues": {}
+    }
+  }
+}

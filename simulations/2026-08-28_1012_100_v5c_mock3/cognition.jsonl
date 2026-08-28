@@ -1,0 +1,3 @@
+{"step": 1, "our_town": 44, "their_town": 44, "neutral": 46, "shift_rate": 0.5, "shift_rate_cum": 0.5}
+{"step": 2, "our_town": 38, "their_town": 49, "neutral": 39, "shift_rate": 0.5632, "shift_rate_cum": 0.5314}
+{"step": 3, "our_town": 54, "their_town": 42, "neutral": 38, "shift_rate": 0.4375, "shift_rate_cum": 0.4982}

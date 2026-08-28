@@ -1,0 +1,4 @@
+{"step": 1, "kind": "transfer", "acq_id": "ACQ01", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "R16"}
+{"step": 1, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "R08"}
+{"step": 1, "kind": "direct_rejected", "from_id": "BR01", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 1, "kind": "publication", "by": "MD02", "headline": "T04さんが企画する、コワーキングスペース利用促進と地域交流を目的としたワークシ", "body": "T04さんが企画する、コワーキングスペース利用促進と地域交流を目的としたワークショップについて、MD01さんとMD02さんは協力の意思を示しました。イベントは地域活性化の糸口となる可能性があり、注目されます。また、町内会では雨漏りや空き家、草刈り、土地の相続・維持管理など、A市が抱える課題が改めて浮き彫りになりました。住民たちの間では、これらの問題に対する関心の高さがうかがえます。", "about_acquisition": false}

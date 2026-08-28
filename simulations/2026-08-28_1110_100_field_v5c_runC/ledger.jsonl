@@ -1,0 +1,100 @@
+{"step": 1, "kind": "transfer", "acq_id": "ACQ01", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "R16"}
+{"step": 1, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "R08"}
+{"step": 1, "kind": "publication", "by": "MD01", "headline": "T04氏、コワーキング施設開設おめでとうございます。記者として、街の活性化に繋が", "body": "T04氏、コワーキング施設開設おめでとうございます。記者として、街の活性化に繋がる取り組みに注目しています。特に、高齢化や空き家問題といった街の課題に対し、T04氏の施設がどのように貢献できるのか、また、P02のような空き家問題との連携について、お話を伺いました。街の変化を追っていきたいと思います。", "about_acquisition": false}
+{"step": 1, "kind": "publication", "by": "MD02", "headline": "A市に新たな風！T04氏、コワーキング施設を開設。\n地域ウェブ媒体のJ02です。", "body": "A市に新たな風！T04氏、コワーキング施設を開設。\n地域ウェブ媒体のJ02です。この度、T04氏がコワーキング施設を開設したとのことで、その取り組みについてお話を伺いました。T04氏は「街の活性化に貢献したい」と語り、多様な人々が集まる場を作ることで、新たな交流やビジネスの創出に繋がることを期待しています。特に、高齢化や後継者不足といった課題を抱えるA市において、若者や移住者の受け入れ、あるいは既存事業者の新たな挑戦を支援する拠点となる可能性を秘めています。今後のT04氏の活動に注目です。", "about_acquisition": false}
+{"step": 2, "kind": "lease", "acq_id": "ACQ03", "parcel_id": "P34", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 2, "kind": "direct_rejected", "from_id": "BZ01", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH12", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ04", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "R16"}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ05", "parcel_id": "P25", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "R08"}
+{"step": 3, "kind": "direct_rejected", "from_id": "BZ01", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 3, "kind": "publication", "by": "MD01", "headline": "市役所待合にて、MU01氏のcoworking space構想について、MU02", "body": "市役所待合にて、MU01氏のcoworking space構想について、MU02氏（観光・産業・企業担当）から空き家活用との連携について話があった。記者J01は、後継者不足や空き家問題への具体的な繋がりに注目。築古物件の改修支援や地域住民との連携について、さらなる詳細を求めた。構想が地域活性化にどう貢献するのか、今後の進展が注目される。", "about_acquisition": false}
+{"step": 4, "kind": "lease", "acq_id": "ACQ06", "parcel_id": "P09", "lessor": "HH08", "lessee": "AQ01", "under_name": "C社", "old_name": "R08"}
+{"step": 4, "kind": "lease", "acq_id": "ACQ07", "parcel_id": "P18", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 4, "kind": "direct_rejected", "from_id": "BR02", "to": "HH10", "reason": "quota_exhausted"}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ08", "parcel_id": "P42", "seller": "HH09", "buyer": "AQ01", "under_name": "D社", "old_name": "R09"}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ09", "parcel_id": "P43", "seller": "HH10", "buyer": "AQ01", "under_name": "B社", "old_name": "R10"}
+{"step": 5, "kind": "publication", "by": "MD01", "headline": "町内会での寄り合いで、P02の登記がA社に変更された件について情報交換が行われた", "body": "町内会での寄り合いで、P02の登記がA社に変更された件について情報交換が行われた。登記変更とR07氏との関連性は不明なままである。また、MU02氏が提案するコワーキングスペース構想についても話題に上がり、B01氏などが関心を示していることが伺えた。G01氏（市役所）は、この構想の説明にあたり、市の把握状況を整理したい意向を示した。空き家活用や地域活性化に繋がる新たな動きとして、今後の進展が注目される。", "about_acquisition": false}
+{"step": 6, "kind": "transfer", "acq_id": "ACQ10", "parcel_id": "P44", "seller": "HH11", "buyer": "AQ01", "under_name": "A社", "old_name": "R11"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH12", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 6, "kind": "publication", "by": "MD01", "headline": "市役所の窓口では、共同浴場の維持費、P42の測量、P02の登記変更、cowork", "body": "市役所の窓口では、共同浴場の維持費、P42の測量、P02の登記変更、coworking spaceの構想、空き家活用、相続問題、P17・P44のA社での活用など、様々な市民からの質問が寄せられた。R01さん、R02さん、R04さん、R05さん、R08さん、R11さん、R12さん、R13さん、R16さんからは、これらの件について具体的な情報提供や市の見解を求める声が上がった。T01さんはG01さんとP02の登記について相談しており、R03さんはB01さんと資料準備について確認する予定である。これらの市民の関心事を記事にまとめ、情報共有を図りたい。", "about_acquisition": false}
+{"step": 7, "kind": "lease", "acq_id": "ACQ11", "parcel_id": "P45", "lessor": "HH12", "lessee": "AQ01", "under_name": "B社", "old_name": "R12"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "BZ02", "to": "BZ03", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 8, "kind": "lease", "acq_id": "ACQ12", "parcel_id": "P37", "lessor": "HH04", "lessee": "AQ01", "under_name": "A社", "old_name": "R04"}
+{"step": 8, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "MU02", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 8, "kind": "publication", "by": "MD01", "headline": "P02の登記に関する市民の関心の高まりについて、市役所は現在、関係部署と連携し状", "body": "P02の登記に関する市民の関心の高まりについて、市役所は現在、関係部署と連携し状況把握に努めている。詳細な情報公開の機会を設ける予定。担当者不在のため、市役所としても詳しい状況は掴めていないが、市民からの問い合わせも複数寄せられており、速やかな情報共有が求められている。関係者への聞き取りも進め、事実確認を進める方針である。", "about_acquisition": false}
+{"step": 8, "kind": "direct_rejected", "from_id": "MU02", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 9, "kind": "transfer", "acq_id": "ACQ13", "parcel_id": "P35", "seller": "HH02", "buyer": "AQ01", "under_name": "D社", "old_name": "R02"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU02", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 9, "kind": "publication", "by": "MD01", "headline": "P02の登記に関する件で、市役所担当者との話が進展。S4の町内会ではT01氏から", "body": "P02の登記に関する件で、市役所担当者との話が進展。S4の町内会ではT01氏からの情報提供に期待。R03氏の測量案件は登記情報と照合可能か。R02氏の連絡先は本人確認後、T02氏へ連絡予定。R12氏が懸念する事業者活用についても注視していく。地域住民からの関心も高く、今後の情報開示が求められる。", "about_acquisition": false}
+{"step": 10, "kind": "transfer", "acq_id": "ACQ14", "parcel_id": "P10", "seller": "HH09", "buyer": "AQ01", "under_name": "B社", "old_name": "R09"}
+{"step": 10, "kind": "transfer", "acq_id": "ACQ15", "parcel_id": "P46", "seller": "HH13", "buyer": "AQ01", "under_name": "D社", "old_name": "R13"}
+{"step": 10, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 10, "kind": "direct_rejected", "from_id": "HH04", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 10, "kind": "direct_rejected", "from_id": "BR01", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 10, "kind": "direct_rejected", "from_id": "BR01", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 10, "kind": "publication", "by": "MD01", "headline": "市役所窓口にて、地域住民や事業関係者から様々な登記や不動産に関する相談が寄せられ", "body": "市役所窓口にて、地域住民や事業関係者から様々な登記や不動産に関する相談が寄せられている。特に、B01氏の所有する土地の登記情報と、共同浴場の維持費に関する件で、複数の関係者が関心を示している。記者J01は、これらの情報が錯綜している現状を踏まえ、関係者間の情報共有と事実確認を進めるべく取材を進めている。B01氏との面会調整についても、市役所窓口での進捗を確認しており、今後の記事化に向けて注視していく。", "about_acquisition": false}
+{"step": 11, "kind": "transfer", "acq_id": "ACQ16", "parcel_id": "P26", "seller": "HH09", "buyer": "AQ01", "under_name": "C社", "old_name": "R09"}
+{"step": 11, "kind": "transfer", "acq_id": "ACQ17", "parcel_id": "P38", "seller": "HH05", "buyer": "AQ01", "under_name": "C社", "old_name": "R05"}
+{"step": 11, "kind": "direct_rejected", "from_id": "BR01", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 12, "kind": "transfer", "acq_id": "ACQ18", "parcel_id": "P04", "seller": "HH03", "buyer": "AQ01", "under_name": "D社", "old_name": "R03"}
+{"step": 12, "kind": "transfer", "acq_id": "ACQ19", "parcel_id": "P05", "seller": "HH04", "buyer": "AQ01", "under_name": "A社", "old_name": "R04"}
+{"step": 13, "kind": "transfer", "acq_id": "ACQ20", "parcel_id": "P13", "seller": "HH12", "buyer": "AQ01", "under_name": "D社", "old_name": "R12"}
+{"step": 13, "kind": "publication", "by": "MD01", "headline": "【P45区画、登記変更】地区公民館での町内会にて、R07氏よりP45区画の登記が", "body": "【P45区画、登記変更】地区公民館での町内会にて、R07氏よりP45区画の登記がR04氏からR13氏に変更された旨が報告された。共同浴場の維持費や街の将来、不動産の価値など、住民の関心事が多岐にわたる中での登記変更であり、今後の動向が注目される。\n【街の将来、住民の不安】R06氏からは、相続や建物の維持、駅前土地の将来への不安が表明された。R15氏も自宅の老朽化と不動産価値の低下を懸念しており、後継者不足や相続問題が不動産に与える影響への関心を示した。街の高齢化と人口減少が進む中、住民の将来への不安は高まっているようだ。", "about_acquisition": false}
+{"step": 14, "kind": "lease", "acq_id": "ACQ21", "parcel_id": "P11", "lessor": "HH10", "lessee": "AQ01", "under_name": "A社", "old_name": "R10"}
+{"step": 14, "kind": "direct_rejected", "from_id": "HH10", "to": "HH04", "reason": "quota_exhausted"}
+{"step": 14, "kind": "publication", "by": "MD01", "headline": "第13月、P45区画の登記名義がR07からR13に変更される見込みであると報じた", "body": "第13月、P45区画の登記名義がR07からR13に変更される見込みであると報じたが、正式な手続きは未了であった。今月、市役所窓口にてMU02（G02）氏に登記簿の確認を依頼した結果、R07からR13への変更は正式に手続きされていることが確認された。共同浴場の維持費に関する市からの回答は、現時点では得られていない。この件については、引き続き取材を進める。", "about_acquisition": false}
+{"step": 15, "kind": "transfer", "acq_id": "ACQ22", "parcel_id": "P19", "seller": "HH02", "buyer": "AQ01", "under_name": "B社", "old_name": "R02"}
+{"step": 15, "kind": "direct_rejected", "from_id": "MU01", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "MU01", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 16, "kind": "lease", "acq_id": "ACQ23", "parcel_id": "P36", "lessor": "HH03", "lessee": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 16, "kind": "direct_rejected", "from_id": "HH01", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 16, "kind": "direct_rejected", "from_id": "HH01", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 16, "kind": "direct_rejected", "from_id": "HH01", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 16, "kind": "direct_rejected", "from_id": "HH11", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 16, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 16, "kind": "publication", "by": "MD01", "headline": "T03氏より、P45区画の登記に関する情報錯綜について、来月仲介業者から直接話を", "body": "T03氏より、P45区画の登記に関する情報錯綜について、来月仲介業者から直接話を聞く予定であるとの報告があった。当紙記者もR15氏の依頼を受け、来月市役所にてP45およびP42区画の登記簿謄本を確認する予定であり、情報共有を通じて正確な状況把握に努める。共同浴場維持費に関する協力姿勢も確認された。", "about_acquisition": false}
+{"step": 17, "kind": "direct_rejected", "from_id": "MU01", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 18, "kind": "lease", "acq_id": "ACQ24", "parcel_id": "P12", "lessor": "HH11", "lessee": "AQ01", "under_name": "C社", "old_name": "R11"}
+{"step": 19, "kind": "transfer", "acq_id": "ACQ25", "parcel_id": "P14", "seller": "HH13", "buyer": "AQ01", "under_name": "D社", "old_name": "R13"}
+{"step": 19, "kind": "transfer", "acq_id": "ACQ26", "parcel_id": "P22", "seller": "HH05", "buyer": "AQ01", "under_name": "B社", "old_name": "R05"}
+{"step": 19, "kind": "direct_rejected", "from_id": "HH05", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 19, "kind": "direct_rejected", "from_id": "HH05", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 20, "kind": "lease", "acq_id": "ACQ27", "parcel_id": "P27", "lessor": "HH10", "lessee": "AQ01", "under_name": "C社", "old_name": "R10"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH16", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH16", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH09", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH16", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH09", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH16", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH09", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH09", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 21, "kind": "transfer", "acq_id": "ACQ28", "parcel_id": "P03", "seller": "HH02", "buyer": "AQ01", "under_name": "D社", "old_name": "R02"}
+{"step": 21, "kind": "transfer", "acq_id": "ACQ29", "parcel_id": "P06", "seller": "HH05", "buyer": "AQ01", "under_name": "C社", "old_name": "R05"}
+{"step": 21, "kind": "direct_rejected", "from_id": "BZ02", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 21, "kind": "direct_rejected", "from_id": "HH11", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 21, "kind": "direct_rejected", "from_id": "HH11", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "MD01", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "MD01", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "MD01", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "MD01", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "BR02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "HH05", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 22, "kind": "direct_rejected", "from_id": "MD01", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 23, "kind": "transfer", "acq_id": "ACQ30", "parcel_id": "P30", "seller": "HH13", "buyer": "AQ01", "under_name": "C社", "old_name": "R13"}
+{"step": 24, "kind": "transfer", "acq_id": "ACQ31", "parcel_id": "P47", "seller": "HH14", "buyer": "AQ01", "under_name": "A社", "old_name": "R14"}
+{"step": 24, "kind": "direct_rejected", "from_id": "HH05", "to": "HH06", "reason": "quota_exhausted"}
+{"step": 24, "kind": "direct_rejected", "from_id": "HH05", "to": "HH06", "reason": "quota_exhausted"}
+{"step": 24, "kind": "direct_rejected", "from_id": "HH11", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 24, "kind": "direct_rejected", "from_id": "MU02", "to": "MD01", "reason": "quota_exhausted"}

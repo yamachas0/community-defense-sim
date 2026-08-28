@@ -1,0 +1,644 @@
+{
+  "run": "2026-08-28_1012_100_v5c_mock3",
+  "version": "field_v5c",
+  "steps": 3,
+  "model": "mock",
+  "calls": 611,
+  "errors": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "invalid_actions": 0,
+  "llm_classified": true,
+  "classifier_unknown": 0,
+  "acquisitions": 4,
+  "leases": 1,
+  "deals": 5,
+  "acquisition_months": [
+    1,
+    1,
+    3,
+    3
+  ],
+  "lease_months": [
+    2
+  ],
+  "control_share": 0.109,
+  "holders": [
+    "A社",
+    "B社",
+    "D社"
+  ],
+  "final_acquirer_share": 0.087,
+  "utterance_turns": 432,
+  "utterances_spoken": 342,
+  "silence_rate": 0.208,
+  "mean_group_size": 4.32,
+  "directs": 50,
+  "articles": 1,
+  "home_rate": 0.221,
+  "venues_in_world": 15,
+  "attend_slots": 243,
+  "slots_with_partner": 216,
+  "solo_slot_rate": 0.111,
+  "copresence_pairs_unique": 299,
+  "copresence_pair_slots": 777,
+  "utterances_per_actor_month": 4.38,
+  "traces_delivered": 12,
+  "mention_rows": 274,
+  "mention_by_channel": {
+    "utterance": 273,
+    "article": 1
+  },
+  "propagation_edges": 1973,
+  "speakers_by_month": {
+    "1": [
+      "BZ01",
+      "BZ02",
+      "BZ03",
+      "BZ04",
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH10",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD02",
+      "MU01"
+    ],
+    "2": [
+      "BR01",
+      "BZ01",
+      "BZ02",
+      "BZ03",
+      "BZ04",
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH10",
+      "HH11",
+      "HH12",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "3": [
+      "BZ01",
+      "BZ02",
+      "BZ04",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH10",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MU01"
+    ]
+  },
+  "rule_llm_cross": {
+    "rule-/llm+": 62,
+    "rule+/llm+": 273,
+    "rule+/llm-": 7
+  },
+  "llm_only_utterances": 62,
+  "first_mention": {
+    "ACQ01": {
+      "parcel_id": "P33",
+      "transfer_month": 1,
+      "month": 2,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V06",
+      "lag_months": 1,
+      "available_antecedents": [
+        "registry_lookup"
+      ],
+      "heard_from": []
+    }
+  },
+  "noticed_acquisitions": 1,
+  "unnoticed_acquisitions": [
+    "ACQ02",
+    "ACQ04",
+    "ACQ05"
+  ],
+  "unnoticed_ratio_all": 0.75,
+  "unnoticed_ratio_optimistic": 0.75,
+  "cohort_followup_months": 3,
+  "cohort_size": 0,
+  "cohort_unnoticed_ratio": null,
+  "detection_lag_months": [
+    1
+  ],
+  "mean_detection_lag_months": 1.0,
+  "reference_accuracy": {
+    "error": 259,
+    "unspecific": 1,
+    "fact": 14
+  },
+  "holder_only_mentions": 0,
+  "article_months": [
+    1
+  ],
+  "assembly_months": [
+    1
+  ],
+  "counter_months": [
+    2
+  ],
+  "concentration_mentions": 0,
+  "common_buyer_mentions": 0,
+  "registry_lookup_agents": [
+    "BR01",
+    "BZ01",
+    "BZ02",
+    "BZ03",
+    "BZ04",
+    "HH05",
+    "HH06",
+    "HH07",
+    "HH08",
+    "HH10",
+    "HH11",
+    "HH12",
+    "HH14",
+    "HH16",
+    "MD01",
+    "MD02",
+    "MU02"
+  ],
+  "traces_by_kind": {
+    "tenant_swap": 10,
+    "registry_lookup": 34,
+    "construction": 1,
+    "strangers": 1
+  },
+  "seller_first_mention_of_own_sale": {
+    "HH16/P33": {
+      "transfer_month": 1,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH08/P41": {
+      "transfer_month": 1,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH16/P17": {
+      "transfer_month": 3,
+      "spoke_month": 3,
+      "thought_month": 3
+    },
+    "HH08/P25": {
+      "transfer_month": 3,
+      "spoke_month": null,
+      "thought_month": null
+    }
+  },
+  "sellers_silent": 3,
+  "stance_sell": 5,
+  "stance_keep": 45,
+  "D1_exposed_acquisitions": [
+    "ACQ01"
+  ],
+  "D2_individual": true,
+  "D2_concentration": false,
+  "D2_common_buyer": false,
+  "D3_wiring": {
+    "api_errors": 0,
+    "transfers_recorded": 4,
+    "classified_rows": 342,
+    "classifier_unknown": 0,
+    "parse_fail": 0,
+    "max_token_finishes": 0,
+    "groups_missing_turns": 0,
+    "utterances_misdelivered": 0,
+    "conversation_groups": 50,
+    "scenes_with_conversation": 12,
+    "rounds_max": 2,
+    "occupation_unknown": 0,
+    "stage_unknown": 0,
+    "ok": true
+  },
+  "O_available": true,
+  "O_rows_total": 853,
+  "O_rows_classified": 853,
+  "O_unknown": 0,
+  "O_measurable": true,
+  "O1_first": null,
+  "O1_first_public": null,
+  "O1_first_non_party": null,
+  "O1_count": 0,
+  "O1_public_count": 0,
+  "O1_by_party": {
+    "party_of_mentioned": 0,
+    "party_other_deal": 0,
+    "non_party": 0
+  },
+  "O1_rule_only": 0,
+  "O1_llm_only": 0,
+  "O1_or_count": 0,
+  "O1_agents": [],
+  "O1_months": [],
+  "O2_first": null,
+  "O2_first_public": null,
+  "O2_count": 0,
+  "O2_public_count": 0,
+  "O2_rule_only": 0,
+  "O2_llm_only": 0,
+  "O2_or_count": 0,
+  "O2_agents": [],
+  "O2_months": [],
+  "O1_and_O2_same_row": 0,
+  "O1_and_O2_same_agent": 0,
+  "O3_public_agents_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "O3_public_agents_final": 0,
+  "O3_public_share_final": 0.0,
+  "O3_public_agents_at_12": 0,
+  "O3_private_only_agents_final": 0,
+  "O4_article_months": [],
+  "O4_assembly_months": [],
+  "O4_counter_months": [],
+  "O4_O1_public_months": [],
+  "O4_O2_public_months": [],
+  "O4_private_only": false,
+  "C_available": true,
+  "C_rows_total": 853,
+  "C_rows_classified": 853,
+  "C_unknown": 0,
+  "C_measurable": true,
+  "C_definition": {
+    "blue": "青（個別の売買）",
+    "green": "緑（複数・面）",
+    "yellow": "黄（同じ買い手＝X社に届いた）",
+    "red": "赤（行政が動いた）"
+  },
+  "C_state_public_by_month": {
+    "1": {
+      "blue": 0,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 26
+    },
+    "2": {
+      "blue": 0,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 26
+    },
+    "3": {
+      "blue": 0,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 26
+    }
+  },
+  "C_state_any_by_month": {
+    "1": {
+      "blue": 0,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 26
+    },
+    "2": {
+      "blue": 0,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 26
+    },
+    "3": {
+      "blue": 0,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 26
+    }
+  },
+  "C_state_public_final": {
+    "blue": 0,
+    "green": 0,
+    "yellow": 0,
+    "red": 0,
+    "none": 26
+  },
+  "C_state_any_final": {
+    "blue": 0,
+    "green": 0,
+    "yellow": 0,
+    "red": 0,
+    "none": 26
+  },
+  "C_state_public_agents": {
+    "blue": [],
+    "green": [],
+    "yellow": [],
+    "red": []
+  },
+  "C_blue_rows": 0,
+  "C_blue_public_rows": 0,
+  "C_blue_first": null,
+  "C_blue_first_public": null,
+  "C_blue_first_private": null,
+  "C_blue_ever_agents_public": [],
+  "C_blue_ever_agents_private_only": [],
+  "C_blue_ever_public_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_blue_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_blue_ever_public_agents_final": 0,
+  "C_blue_ever_public_share_final": 0.0,
+  "C_blue_months": [],
+  "C_blue_venue_first": {},
+  "C_blue_venue_rows": {},
+  "C_blue_by_role": {},
+  "C_blue_article_months": [],
+  "C_blue_assembly_months": [],
+  "C_blue_counter_months": [],
+  "C_blue_rule_only": 702,
+  "C_blue_llm_only": 0,
+  "C_blue_or_rows": 702,
+  "C_green_rows": 0,
+  "C_green_public_rows": 0,
+  "C_green_first": null,
+  "C_green_first_public": null,
+  "C_green_first_private": null,
+  "C_green_ever_agents_public": [],
+  "C_green_ever_agents_private_only": [],
+  "C_green_ever_public_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_green_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_green_ever_public_agents_final": 0,
+  "C_green_ever_public_share_final": 0.0,
+  "C_green_months": [],
+  "C_green_venue_first": {},
+  "C_green_venue_rows": {},
+  "C_green_by_role": {},
+  "C_green_article_months": [],
+  "C_green_assembly_months": [],
+  "C_green_counter_months": [],
+  "C_green_rule_only": 62,
+  "C_green_llm_only": 0,
+  "C_green_or_rows": 62,
+  "C_yellow_rows": 0,
+  "C_yellow_public_rows": 0,
+  "C_yellow_first": null,
+  "C_yellow_first_public": null,
+  "C_yellow_first_private": null,
+  "C_yellow_ever_agents_public": [],
+  "C_yellow_ever_agents_private_only": [],
+  "C_yellow_ever_public_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_yellow_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_yellow_ever_public_agents_final": 0,
+  "C_yellow_ever_public_share_final": 0.0,
+  "C_yellow_months": [],
+  "C_yellow_venue_first": {},
+  "C_yellow_venue_rows": {},
+  "C_yellow_by_role": {},
+  "C_yellow_article_months": [],
+  "C_yellow_assembly_months": [],
+  "C_yellow_counter_months": [],
+  "C_yellow_rule_only": 0,
+  "C_yellow_llm_only": 0,
+  "C_yellow_or_rows": 0,
+  "C_red_rows": 0,
+  "C_red_public_rows": 0,
+  "C_red_first": null,
+  "C_red_first_public": null,
+  "C_red_first_private": null,
+  "C_red_ever_agents_public": [],
+  "C_red_ever_agents_private_only": [],
+  "C_red_ever_public_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_red_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "C_red_ever_public_agents_final": 0,
+  "C_red_ever_public_share_final": 0.0,
+  "C_red_months": [],
+  "C_red_venue_first": {},
+  "C_red_venue_rows": {},
+  "C_red_by_role": {},
+  "C_red_article_months": [],
+  "C_red_assembly_months": [],
+  "C_red_counter_months": [],
+  "C_red_rule_only": 0,
+  "C_red_llm_only": 0,
+  "C_red_or_rows": 0,
+  "C_venue_labels": {
+    "V01": "駅前の飲食店",
+    "V02": "地区公民館",
+    "V03": "共同浴場",
+    "V04": "湾岸の喫茶店",
+    "V05": "旅館組合の会議室",
+    "V06": "市役所の待合",
+    "V07": "地元不動産仲介の事務所",
+    "V08": "地域イベント会場",
+    "V09": "商店街の床屋",
+    "V10": "スーパーのレジ待ち",
+    "V11": "神社の境内（掃除・祭りの準備）",
+    "V12": "小学校の校門前（送り迎え）",
+    "V13": "隣家の玄関先（回覧板の受け渡し）",
+    "V14": "バス停と駅のホーム",
+    "V15": "診療所の待合"
+  },
+  "C_rows_by_venue": {},
+  "C_all_rows_by_venue": {
+    "V14": 140,
+    "V13": 131,
+    "V02": 102,
+    "V07": 81,
+    "HOME/計画": 78,
+    "V10": 76,
+    "V06": 70,
+    "V01": 67,
+    "V03": 32,
+    "V09": 24,
+    "V11": 22,
+    "V08": 15,
+    "V15": 14,
+    "article": 1
+  },
+  "C_prime_event": {
+    "parcel_id": "P04",
+    "month": 12,
+    "zone": "中心",
+    "frontage": "表通り",
+    "size_class": "中",
+    "area_sqm": 140,
+    "use_detail": "店舗",
+    "visibility": 7,
+    "before_window": {
+      "months": [
+        9,
+        11
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 0,
+      "articles_about_deals": 0,
+      "venues": {}
+    },
+    "after_window": {
+      "months": [
+        12,
+        3
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 0,
+      "articles_about_deals": 0,
+      "venues": {}
+    },
+    "before_all": {
+      "months": [
+        1,
+        11
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 1,
+      "articles_about_deals": 0,
+      "venues": {}
+    },
+    "after_all": {
+      "months": [
+        12,
+        3
+      ],
+      "rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 0,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 0,
+      "articles_about_deals": 0,
+      "venues": {}
+    }
+  }
+}
