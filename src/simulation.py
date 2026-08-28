@@ -66,6 +66,23 @@ from .kpi import (classify_occupation, classify_publications, classify_utterance
                   cognition_series,
                   detection_lag, late_index, step_metrics)
 from .stage_v5e import defense_level_of, rule_red_v5e
+
+
+def _v5e_blue_rule():
+    """青のルール1次抽出は `tools/run_metrics.py` の `_v5c_rule_blue` が正。
+
+    走行中の停止判定と事後集計で判定が二本に割れないよう、**同じ関数を** 使う
+    （docs/world_design_v5e.md §1-2・§3）。tools はパッケージではないので
+    パスを足して読み込む（tests も同じやり方をしている）。
+    """
+    import sys as _sys
+    tools = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                         "tools")
+    if tools not in _sys.path:
+        _sys.path.insert(0, tools)
+    from run_metrics import _use_parcel_names, _v5c_rule_blue
+    _use_parcel_names("field_v5e")      # 土地の言い方を呼び名に合わせる
+    return _v5c_rule_blue
 from .llm_client_factory import UsageMeter, create_llm_client
 from .prompts import build_system_prompt, build_user_prompt
 from .schemas import action_schema, verbs_for
@@ -204,6 +221,8 @@ class Simulation:
         self.defense_stop: Optional[Dict[str, Any]] = None
         self.v5e_applied = 0
         self.v5e_suspended = 0
+        self.v5e_suspended_ids: List[str] = []
+        self._v5e_acq_month: Dict[str, int] = {}
         # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
         self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
@@ -312,6 +331,9 @@ class Simulation:
             if not os.path.isabs(events_file):
                 events_file = os.path.join(root, events_file)
             self.script = load_script_v5(events_file)
+            # 兆候をどの取得が生んだかを引くための対応表（v5e の停止で使う）。
+            self._v5e_acq_month = {str(a["id"]): int(a["month"])
+                                   for a in self.script.get("acquisitions", [])}
             # X社は v5 では主体ではない（一度も LLM を呼ばれない・誰の同席者にも出ない）
             self.actors = [a for a in self.agents if a.role != "acquirer"]
             self.actor_ids = [a.agent_id for a in self.actors]
@@ -1623,6 +1645,7 @@ class Simulation:
                 and step >= int(self.defense_stop["stop_from_month"])):
             for acq in acquisitions_at(self.script, step):
                 self.v5e_suspended += 1
+                self.v5e_suspended_ids.append(str(acq["id"]))
                 self.ledger._rec(step, "script_suspended", acq_id=acq["id"],
                                  parcel_id=acq["parcel_id"],
                                  reason="defense_detected")
@@ -1651,7 +1674,8 @@ class Simulation:
                                     self.pnames or None,
                                     TRACE_TEXTS_V5D if self.field_v5d else None)
         for a in self.actors:
-            a.extra["traces"] = list(ambient.get(a.agent_id, []))
+            a.extra["traces"] = [tr for tr in ambient.get(a.agent_id, [])
+                                 if self._v5e_trace_alive(tr)]
             a.extra["heard"] = []
             a.extra["directs_used"] = 0
             a.extra["articles_used"] = 0
@@ -1730,9 +1754,10 @@ class Simulation:
             # 会話が成立するかどうかとは別（Codexレビュー 2026-08-27）。
             attendance = dict(groups)
             for venue_id, members in sorted(attendance.items()):
-                for tr in venue_traces_v5(step, self.script, venue_id, old_names,
-                                          self.pnames or None,
-                                          TRACE_TEXTS_V5D if self.field_v5d else None):
+                for tr in [t for t in venue_traces_v5(
+                        step, self.script, venue_id, old_names, self.pnames or None,
+                        TRACE_TEXTS_V5D if self.field_v5d else None)
+                        if self._v5e_trace_alive(t)]:
                     for a in members:
                         a.extra["traces"].append(tr)
                         self.ledger.v5_traces_seen.append(
@@ -1857,6 +1882,39 @@ class Simulation:
         if self.field_v5e:
             self._v5e_month_end(step)
 
+    def _v5e_trace_alive(self, tr: Dict[str, Any]) -> bool:
+        """起きなかった取得の兆候を配らない（v5e で買い手が止まったあと）。
+
+        兆候は「その取得が現実に生む痕跡」なので、取得そのものが成立しない以上、
+        痕跡も存在しない。これを残すと、**起きていない売買の証拠**を住民が
+        見せられることになる（世界が住民に嘘をつく）。CTO 判断 2026-08-29。
+
+        止まる前の月に既に配られた準備の痕跡（測量など）はそのままで良い＝
+        その時点では買い手は現実に動いていた。落とすのは停止月以降だけである。
+        """
+        if not (self.field_v5e and self.defense_stop):
+            return True
+        month = self._v5e_acq_month.get(tr.get("acq_id"))
+        if month is None:
+            return True
+        return int(month) < int(self.defense_stop["stop_from_month"])
+
+    def _v5e_holders_acquired(self, step: int):
+        """その月までに成立した名義と区画（判定に未来の取得を混ぜない）。
+
+        `tools/run_metrics.py` の `holders_by_step` / `acquired_by_step` と
+        **同じ作り方**（台帳の transfer / lease の記録から採る）。
+        """
+        hs, ps = set(), set()
+        for r in self.ledger.records:
+            if r.get("kind") not in ("transfer", "lease"):
+                continue
+            if int(r.get("step", 0) or 0) > step:
+                continue
+            hs.add(str(r.get("under_name", "")))
+            ps.add(r.get("parcel_id"))
+        return hs, ps
+
     def _v5e_month_end(self, step: int) -> None:
         """その月の発話・内心・記事を観測側と同じ分類器で読む（v5e だけ）。
 
@@ -1881,15 +1939,19 @@ class Simulation:
                                     job_key=f"m{step:02d}_stage")
         self.stage_labels_v5e.extend(labels)
 
+        blue_rule = _v5e_blue_rule()
+        hs, ps = self._v5e_holders_acquired(step)
         triggers = []
         for r in labels:
             text = str(r.get("text", ""))
             classified = bool(r.get("classified"))
-            if not (classified and rule_red_v5e(text) and bool(r.get("defense"))):
+            blue = bool(blue_rule(text, hs, ps))
+            if not (classified and rule_red_v5e(text, blue)
+                    and bool(r.get("defense"))):
                 continue
             lv = defense_level_of({"classified": True, "rule_red": True,
                                    "rule_yellow": False, "rule_green": False,
-                                   "rule_blue": False, "llm_defense": True,
+                                   "rule_blue": blue, "llm_defense": True,
                                    "llm_defense_level": r.get("defense_level"),
                                    "text": text}) or {}
             triggers.append({"step": step, "from": r.get("from", ""),
@@ -2428,17 +2490,23 @@ class Simulation:
         if self.field_v5e:
             # v5e: 自衛の観測と、それに対する買い手の反応（台本の停止）の記録。
             # 「出なかった」も同じ重みで残す（docs/world_design_v5e.md §3）。
+            blue_rule = _v5e_blue_rule()
+
+            def _red_level(r):
+                text = str(r.get("text", ""))
+                step_ = int(r.get("step", 0) or 0)
+                hs_, ps_ = self._v5e_holders_acquired(step_)
+                blue = bool(blue_rule(text, hs_, ps_))
+                if not (bool(r.get("classified")) and bool(r.get("defense"))
+                        and rule_red_v5e(text, blue)):
+                    return None
+                return defense_level_of(
+                    {"classified": True, "rule_red": True, "rule_yellow": False,
+                     "rule_green": False, "rule_blue": blue, "llm_defense": True,
+                     "llm_defense_level": r.get("defense_level"), "text": text})
+
             levels_seen = sorted({lv["level"]
-                                  for lv in (defense_level_of(
-                                      {"classified": True, "rule_red": True,
-                                       "rule_yellow": False, "rule_green": False,
-                                       "rule_blue": False, "llm_defense": True,
-                                       "llm_defense_level": r.get("defense_level"),
-                                       "text": str(r.get("text", ""))})
-                                      for r in self.stage_labels_v5e
-                                      if (bool(r.get("classified"))
-                                          and bool(r.get("defense"))
-                                          and rule_red_v5e(str(r.get("text", "")))))
+                                  for lv in map(_red_level, self.stage_labels_v5e)
                                   if lv and lv.get("level")})
             stop = self.defense_stop
             summary["v5e"] = {

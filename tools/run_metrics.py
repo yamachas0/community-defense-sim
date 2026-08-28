@@ -26,6 +26,10 @@ if _ROOT not in sys.path:
 from src.stage_v5e import (V5E_LEVELS, defense_level_of,  # noqa: E402
                            rule_defense_level, rule_red_v5e, stage_v5e)
 
+# v5e の初出の並び（docs/world_design_v5e.md §8）。1回のコールで内心→発話→記事の
+# 順に生まれる。v5c の並びには使わない。
+KIND_RANK_V5E = {"thought": 0, "utterance": 1, "article": 2}
+
 MEETING_WORDS = ("来週", "日程", "ヒアリング", "訪問", "打ち合わせ", "アポ",
                  "面談", "お伺い", "伺いま", "調整")
 MONEY_RE = re.compile(r"\d+\s*万")
@@ -1361,7 +1365,10 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
             "rule_blue": _v5c_rule_blue(text, hs, ps),
             "rule_green": _v5c_rule_green(text, hs, ps),
             "rule_yellow": _v5c_rule_yellow(text, hs, ps),
-            "rule_red": (rule_red_v5e(text) if is_v5e
+            # v5e の赤は青（土地取引・名義・持ち主に触れている）を必要条件にする
+            # ＝自衛語の単独ヒットで一般論が赤になる穴を塞ぐ
+            # （docs/world_design_v5e.md §1-2）。
+            "rule_red": (rule_red_v5e(text, _v5c_rule_blue(text, hs, ps)) if is_v5e
                          else _v5c_rule_red(role, text)),
             "llm_deal": bool(r.get("deal")) if classified else None,
             "llm_area": bool(r.get("area")) if classified else None,
@@ -1379,8 +1386,19 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
     # 初出は「実際に起きた順」で採る＝月→シーン→ラウンド
     # （Codexレビュー 2026-08-28：月だけで並べていて、同じ月の記事や内心が
     #  先に起きた会話より前に出ることがあった）。
-    rows.sort(key=lambda r: (_v5_order(r["step"], r.get("scene") or "", r.get("round")),
-                             r["kind"], r["from"]))
+    # v5e は同じラウンド内を「内心 → 発話 → 記事」で並べる。1回のコールで
+    # この順に生まれるので、文字列順（article < thought < utterance）は誤り
+    # （Codexレビュー 2026-08-28 指摘④・docs/world_design_v5e.md §8）。
+    # 同じラウンドの別主体どうしは並列に呼ばれていて真の前後が無いので主体IDで並べる。
+    # **v5c の並び順は変えない**（既存の成果物が動かないように）。
+    if is_v5e:
+        rows.sort(key=lambda r: (_v5_order(r["step"], r.get("scene") or "",
+                                           r.get("round")),
+                                 KIND_RANK_V5E.get(r["kind"], 9), r["from"]))
+    else:
+        rows.sort(key=lambda r: (_v5_order(r["step"], r.get("scene") or "",
+                                           r.get("round")),
+                                 r["kind"], r["from"]))
     unknown = len([r for r in rows if not r["classified"]])
 
     def _venue_of(r):

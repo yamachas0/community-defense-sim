@@ -104,7 +104,9 @@ class DefenseMock(MockClient):
     オフラインで通すためのテストダブルである。
     """
 
-    S1_TAIL = "あの会社には売らない。"
+    # 赤は青（取引・名義・持ち主に触れている）を必要条件にするので、
+    # 台本で第1月に名義が動く「A社」を文に入れる（docs/world_design_v5e.md §1-2）。
+    S1_TAIL = "A社には売らない。"
 
     def __init__(self, trigger_step, **kw):
         super().__init__(**kw)
@@ -234,13 +236,14 @@ def doc_words(level):
 # 「結果を見てから動かす」ことを物理的に検出する。
 FROZEN_S3 = ("禁止", "差し止め", "差止", "届出", "義務付け", "義務づけ", "条例",
              "規制", "買い戻し", "買戻", "許可制", "制限区域", "勧告", "命令",
-             "要綱で", "指定して")
+             "要綱で", "指定して", "取引を凍結", "取引の凍結")
 FROZEN_S2 = ("回覧", "呼びかけ", "呼び掛け", "周知", "説明会", "注意喚起",
              "知らせよう", "知らせる", "広める", "記事にし", "紙面で",
              "組合として", "町内会として", "みんなに伝え", "声をかけて回")
-FROZEN_S1 = ("売らない", "売らん", "売りません", "貸さない", "貸さん", "貸しません",
+FROZEN_S1 = ("売らない", "売らん", "売りません", "売却しない", "譲渡しない",
+             "貸さない", "貸さん", "貸しません",
              "断ろう", "断る", "応じない", "手放さない", "手放すのはやめ",
-             "売るのはやめ", "控えよう", "見送ろう", "やめておこう")
+             "売るのはやめ", "売却は見送", "控えよう", "見送ろう", "やめておこう")
 
 check("S3 の語彙が凍結した表と一致", V5E_S3_WORDS == FROZEN_S3,
       str(set(FROZEN_S3) ^ set(V5E_S3_WORDS)))
@@ -256,13 +259,22 @@ check("S3 > S2 > S1 の順で当たる",
       and rule_defense_level("回覧で知らせよう。うちは売らない") == "S2"
       and rule_defense_level("うちは売らない") == "S1")
 check("当たらない文は None", rule_defense_level("空き地の活用とまちづくりの話をした") is None)
-check("rule_red_v5e は rule_defense_level が None でないこと",
-      rule_red_v5e("うちは売らない") is True
-      and rule_red_v5e("まちづくりの相談をした") is False)
+check("rule_red_v5e は 自衛語 かつ 青（取引に触れている）",
+      rule_red_v5e("うちは売らない", True) is True
+      and rule_red_v5e("まちづくりの相談をした", True) is False)
+check("【Codex指摘①】自衛語だけで青が偽なら赤にしない＝一般論が漏れない",
+      rule_red_v5e("説明会をやることにした", False) is False
+      and rule_red_v5e("条例で対応を検討する", False) is False
+      and rule_red_v5e("回覧で知らせる", False) is False)
+check("青が真なら同じ文が赤になりうる",
+      rule_red_v5e("説明会をやることにした", True) is True)
 check("役割で絞っていない（住民の文でも赤になりうる）",
-      rule_red_v5e("うちは売らない") is True)
+      rule_red_v5e("うちは売らない", True) is True)
+check("青のルールは v5c のものをそのまま使っている（判定を二重に持たない）",
+      run_metrics._v5c_rule_blue("A社に名義が変わった", {"A社"}, set()) is True
+      and run_metrics._v5c_rule_blue("説明会をやる", set(), set()) is False)
 for role in ("household", "business", "broker", "media", "municipality"):
-    row = {"classified": True, "rule_red": rule_red_v5e("うちは売らない"),
+    row = {"classified": True, "rule_red": rule_red_v5e("うちは売らない", True),
            "rule_yellow": False, "rule_green": False, "rule_blue": False,
            "llm_defense": True, "llm_defense_level": "S1", "text": "うちは売らない",
            "role": role}
@@ -400,9 +412,18 @@ check("停止後のプロンプトに停止・自衛・分類の語が1つも出
 check("停止後の月も会話・内心の観測が続いている",
       bool([u for u in sim_s.ledger.v5_utterances if int(u["step"]) > TRIG])
       and bool([t for t in sim_s.thoughts if int(t["step"]) > TRIG]))
-check("停止後の月も兆候の配布が続いている",
-      bool([t for t in jsonl(os.path.join(dir_s, "traces_v5.jsonl"))
-            if int(t.get("step", 0)) > TRIG]))
+# 起きなかった取得の兆候は配らない（CTO 判断 2026-08-29・docs/world_design_v5e.md §3）。
+# 兆候は「その取得が現実に生む痕跡」なので、取得が成立しない以上その痕跡も存在しない。
+_traces_stop = jsonl(os.path.join(dir_s, "traces_v5.jsonl"))
+_susp_ids = {d.get("acq_id") for d in stopped_rows}
+check("止めた取得に由来する兆候は1本も配られていない",
+      not [t for t in _traces_stop if t.get("acq_id") in _susp_ids],
+      str([t.get("acq_id") for t in _traces_stop if t.get("acq_id") in _susp_ids][:5]))
+check("停止前に配られた兆候はそのまま残っている（取りやめになった準備の痕跡）",
+      all(int(t.get("step", 0)) <= TRIG for t in _traces_stop
+          if t.get("acq_id") not in _susp_ids))
+check("止めなかったランの兆候は減っていない（落としたのは停止分だけ）",
+      len(jsonl(os.path.join(dir_n, "traces_v5.jsonl"))) >= len(_traces_stop))
 d_stop = jsonl(os.path.join(dir_s, "deliveries.jsonl"))
 d_none = jsonl(os.path.join(dir_n, "deliveries.jsonl"))
 check("deliveries.jsonl に停止由来の行が増えていない",
@@ -474,7 +495,7 @@ print("\n=== 10. 自衛レベルの主値と出所 ===")
 
 
 def red_row(text, llm_level):
-    return {"classified": True, "rule_red": rule_red_v5e(text), "rule_yellow": False,
+    return {"classified": True, "rule_red": rule_red_v5e(text, True), "rule_yellow": False,
             "rule_green": False, "rule_blue": False, "llm_defense": True,
             "llm_defense_level": llm_level, "text": text}
 
