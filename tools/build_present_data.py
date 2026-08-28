@@ -15,9 +15,11 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import collections
 import datetime as _dt
 import json
+import math
 import re
 import os
 import sys
@@ -35,6 +37,274 @@ from run_metrics import (_read_jsonl, _v5_mentions, _v5_s4_kind,  # noqa: E402
 
 def _load(run_dir, name):
     return _read_jsonl(os.path.join(run_dir, name))
+
+
+# ---------------------------------------------------------------------------
+# 地図の配置（マスの大きさ＝敷地面積／中央＝市街地・外側＝郊外）
+# 配置は**ここで決定論に計算して JSON に入れる**。HTML は座標を描くだけ。
+# ---------------------------------------------------------------------------
+
+LAYOUT_VIEW = {"w": 1000, "h": 760}
+LAYOUT_SEED = 8501
+LAYOUT_R = 320.0
+LAYOUT_SIDES = [30.0, 42.0, 54.0, 68.0]
+LAYOUT_ZONE_F = {"中心": 0.20, "中間": 0.52, "郊外": 0.86}
+LAYOUT_GAP = 7.0
+LAYOUT_SQUASH = 0.78
+LAYOUT_ITERS = 500
+LAYOUT_PULL = 0.12
+
+
+def _lcg(seed: int, n: int):
+    """線形合同法。決定論の [0,1) を n 個返す（乱数源を外に持たない）。"""
+    out, x = [], int(seed)
+    for _ in range(n):
+        x = (1103515245 * x + 12345) % (2 ** 31)
+        out.append(x / float(2 ** 31))
+    return out
+
+
+def _overlap(cx, cy, side, a, b, gap=0.0):
+    need = (side[a] + side[b]) / 2.0 + gap
+    ox = need - abs(cx[b] - cx[a])
+    oy = need - abs(cy[b] - cy[a])
+    return min(ox, oy) if (ox > 0 and oy > 0) else 0.0
+
+
+def _build_layout(cfg: dict, run_pids) -> dict:
+    """run の config が指す区画ファイルから配置を作る。合わなければ None。"""
+    parcels_file = cfg.get("parcels_file")
+    if not parcels_file:
+        return None                    # v5/v5b の run は区画属性を持たない
+    path = os.path.join(ROOT, *str(parcels_file).split("/"))
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        src = yaml.safe_load(f) or {}
+    items = [dict(p) for p in (src.get("parcels") or [])]
+    if not items or {str(p["pid"]) for p in items} != set(run_pids):
+        return None
+    items.sort(key=lambda p: str(p["pid"]))
+    pids = [str(p["pid"]) for p in items]
+    n = len(items)
+    cols = max(int(p["x"]) for p in items) + 1
+    rows = max(int(p["y"]) for p in items) + 1
+
+    # 1. 面積の4分位で4段階（同値は pid 昇順で安定に割る）
+    order = sorted(items, key=lambda p: (float(p["area_sqm"]), str(p["pid"])))
+    side = {str(p["pid"]): LAYOUT_SIDES[min(3, i * 4 // n)]
+            for i, p in enumerate(order)}
+    size_breaks = [float(order[k * n // 4]["area_sqm"]) for k in (1, 2, 3)]
+
+    # 2〜5. 初期角度・目標半径・決定論ジッター・初期座標
+    u = _lcg(LAYOUT_SEED, 2 * n)
+    cx, cy, rt, zone = {}, {}, {}, {}
+    for i, p in enumerate(items):
+        pid = pids[i]
+        dx = float(p["x"]) - (cols - 1) / 2.0
+        dy = float(p["y"]) - (rows - 1) / 2.0
+        theta = (2 * math.pi * i / n) if (dx == 0.0 and dy == 0.0) else math.atan2(dy, dx)
+        zone[pid] = str(p.get("zone") or "")
+        r_target = LAYOUT_ZONE_F.get(zone[pid], LAYOUT_ZONE_F["中間"]) * LAYOUT_R
+        theta += (u[2 * i] - 0.5) * 0.44
+        r_target *= 1 + (u[2 * i + 1] - 0.5) * 0.12
+        rt[pid] = r_target
+        cx[pid] = 500.0 + r_target * math.cos(theta)
+        cy[pid] = 380.0 + r_target * math.sin(theta) * LAYOUT_SQUASH
+
+    def separate():
+        for ia in range(n):
+            a = pids[ia]
+            for ib in range(ia + 1, n):
+                b = pids[ib]
+                pen = _overlap(cx, cy, side, a, b, LAYOUT_GAP)
+                if pen <= 0:
+                    continue
+                ddx, ddy = cx[b] - cx[a], cy[b] - cy[a]
+                d = math.hypot(ddx, ddy)
+                ux, uy = (1.0, 0.0) if d < 1e-9 else (ddx / d, ddy / d)
+                cx[a] -= ux * pen / 2.0
+                cy[a] -= uy * pen / 2.0
+                cx[b] += ux * pen / 2.0
+                cy[b] += uy * pen / 2.0
+
+    def worst():
+        return max((_overlap(cx, cy, side, pids[ia], pids[ib])
+                    for ia in range(n) for ib in range(ia + 1, n)), default=0.0)
+
+    # 6. 緩和（pid 昇順で走査＝浮動小数の順序を固定する）
+    for _ in range(LAYOUT_ITERS):
+        separate()
+        for pid in pids:
+            ex, ey = cx[pid] - 500.0, (cy[pid] - 380.0) / LAYOUT_SQUASH
+            r_now = math.hypot(ex, ey)
+            ang = math.atan2(ey, ex) if r_now > 1e-9 else 0.0
+            r_new = r_now + LAYOUT_PULL * (rt[pid] - r_now)
+            cx[pid] = 500.0 + r_new * math.cos(ang)
+            cy[pid] = 380.0 + r_new * math.sin(ang) * LAYOUT_SQUASH
+            h = side[pid] / 2.0
+            cx[pid] = min(max(cx[pid], h), LAYOUT_VIEW["w"] - h)
+            cy[pid] = min(max(cy[pid], h), LAYOUT_VIEW["h"] - h)
+
+    # 6b. 【スペックからの逸脱・要判断】§1-2 の定数のままでは §1-2-8 の検査を満たせない。
+    # 中心ゾーンは 48 区画中 16 で、目標半径 0.20*R=64 の楕円の面積 1.0万に対して
+    # 正方形の面積合計が 3.7万＝入りきらない。押し出された分だけ半径の戻し
+    # （0.12×差）が毎回 7 単位の隙間を超えて食い込み、最大重なりが 4.48 で止まる。
+    # 定数（ゾーン半径・gap・0.12）は動かさず、緩和のあとに**押し離しだけ**を
+    # 決定論に追い足して重なりを解く。ゾーンの順序は下の検査で担保する。
+    extra_passes = 0
+    while worst() > 1.0 and extra_passes < LAYOUT_ITERS:
+        separate()
+        extra_passes += 1
+
+    # 7. バウンディングボックスをビュー中央へ
+    x0 = min(cx[p] - side[p] / 2.0 for p in pids)
+    x1 = max(cx[p] + side[p] / 2.0 for p in pids)
+    y0 = min(cy[p] - side[p] / 2.0 for p in pids)
+    y1 = max(cy[p] + side[p] / 2.0 for p in pids)
+    sx = LAYOUT_VIEW["w"] / 2.0 - (x0 + x1) / 2.0
+    sy = LAYOUT_VIEW["h"] / 2.0 - (y0 + y1) / 2.0
+    for pid in pids:
+        cx[pid] += sx
+        cy[pid] += sy
+
+    # 8. 検査（黙って歪んだ図を出さない）
+    max_ov = 0.0
+    for ia in range(n):
+        for ib in range(ia + 1, n):
+            max_ov = max(max_ov, _overlap(cx, cy, side, pids[ia], pids[ib]))
+    if max_ov > 1.0:
+        raise SystemExit("地図の配置でマスが重なった（max_overlap=%.3f）" % max_ov)
+
+    by_zone = collections.defaultdict(list)
+    for pid in pids:
+        by_zone[zone[pid]].append(
+            math.hypot(cx[pid] - 500.0, (cy[pid] - 380.0) / LAYOUT_SQUASH))
+    attr = {str(p["pid"]): p for p in items}
+    return {
+        "view": dict(LAYOUT_VIEW),
+        "source": str(parcels_file),
+        "seed": LAYOUT_SEED,
+        "size_breaks": size_breaks,
+        "cells": {pid: {"cx": round(cx[pid], 2), "cy": round(cy[pid], 2),
+                        "side": int(side[pid]), "zone": zone[pid],
+                        "area_sqm": attr[pid].get("area_sqm"),
+                        "size_class": attr[pid].get("size_class", ""),
+                        "use": attr[pid].get("use", ""),
+                        "use_detail": attr[pid].get("use_detail", ""),
+                        "owner_name": attr[pid].get("owner_name", ""),
+                        "frontage": attr[pid].get("frontage", "")}
+                  for pid in pids},
+        "zone_radius": {z: LAYOUT_ZONE_F[z] * LAYOUT_R for z in LAYOUT_ZONE_F},
+        "checks": {"max_overlap": round(max_ov, 4),
+                   "extra_separation_passes": extra_passes,
+                   "mean_radius_by_zone": {z: round(sum(v) / len(v), 2)
+                                           for z, v in sorted(by_zone.items())}},
+    }
+
+
+# ---------------------------------------------------------------------------
+# 区画の呼び名（固有名は無い。街は区画IDか持ち主の名前で呼ぶ）— 実測で数える
+# ---------------------------------------------------------------------------
+
+def _parcel_naming(layout, utts, thoughts, articles) -> dict:
+    if not layout:
+        return None
+    texts = ([str(u.get("text", "")) for u in utts]
+             + [str(t.get("text", "")) for t in thoughts]
+             + [str(a.get("text", "")) for a in articles])
+    blob = "\n".join(texts)
+    mentions = {}
+    for pid, c in layout["cells"].items():
+        name = str(c.get("owner_name") or "")
+        mentions[pid] = blob.count(name) if name else 0
+    return {
+        "basis": "会話・内心・記事の本文に持ち主の名前（R03 等）が現れた回数を数えた実測",
+        "proper_names": 0,
+        "note": "区画に固有名は無い。街は区画ID か持ち主の名前で呼ぶ。",
+        "name_in_speech": {pid: mentions[pid] > 0 for pid in mentions},
+        "mentions": mentions,
+    }
+
+
+# ---------------------------------------------------------------------------
+# 火が点いた瞬間（原文）— 緑・黄の初出を前後の原文つきで機械抽出
+# ---------------------------------------------------------------------------
+
+SCENE_ORDER = {"plan": 0, "S1": 1, "S2": 2, "S3": 3, "S4": 4}
+
+
+def _sort_key(r) -> tuple:
+    return (int(r.get("step") or 0), SCENE_ORDER.get(r.get("scene") or "", 9),
+            int(r.get("round") or 0), str(r.get("utt_id") or ""),
+            str(r.get("from") or ""))
+
+
+def _heard_by(u):
+    hb = u.get("heard_by")
+    if isinstance(hb, str):
+        try:
+            hb = ast.literal_eval(hb)
+        except (ValueError, SyntaxError):
+            hb = []
+    return list(hb or [])
+
+
+def _ctx_row(u):
+    return {"kind": "utterance", "step": int(u.get("step") or 0),
+            "scene": u.get("scene", ""), "venue": u.get("venue", ""),
+            "round": u.get("round", 0), "from": u.get("from", ""),
+            "name": u.get("name", ""), "role": u.get("role", ""),
+            "utt_id": u.get("utt_id", ""), "text": str(u.get("text", ""))}
+
+
+def _build_ignition(rows, utts, thoughts, traces, venue_labels) -> dict:
+    utt_sorted = sorted(utts, key=_sort_key)
+    out = {}
+    for color in ("green", "yellow"):
+        hit = next((r for r in sorted(rows, key=_sort_key)
+                    if r.get("stage") == color), None)
+        if hit is None:
+            out[color] = None
+            continue
+        month, who = hit["step"], hit["from"]
+        key = _sort_key(hit)
+        same_place = [u for u in utt_sorted
+                      if int(u.get("step") or 0) == month
+                      and (u.get("scene") or "") == (hit.get("scene") or "")
+                      and (u.get("venue") or "") == (hit.get("venue") or "")]
+        if hit.get("kind") != "utterance" and not hit.get("venue"):
+            same_place = []
+        before = [u for u in same_place if _sort_key(u) < key][-5:]
+        after = [u for u in same_place if _sort_key(u) > key][:2]
+        heard = [u for u in utt_sorted
+                 if int(u.get("step") or 0) == month and _sort_key(u) < key
+                 and who in _heard_by(u)][-5:]
+        own = [{"scene": t.get("scene", ""), "text": str(t.get("text", ""))}
+               for t in sorted(thoughts, key=_sort_key)
+               if t.get("from") == who and int(t.get("step") or 0) == month]
+        tr = [{"kind": t.get("kind", ""), "parcel_id": t.get("parcel_id", ""),
+               "acq_id": t.get("acq_id", ""), "text": str(t.get("text", ""))}
+              for t in traces
+              if t.get("agent_id") == who and int(t.get("step") or 0) == month]
+        out[color] = {
+            "color": color, "month": month, "scene": hit.get("scene", ""),
+            "venue": hit.get("venue", ""),
+            "venue_label": venue_labels.get(hit.get("venue", ""), hit.get("venue", "")),
+            "from": who, "name": hit.get("name", ""), "role": hit.get("role", ""),
+            "kind": hit.get("kind", ""), "utt_id": hit.get("utt_id", ""),
+            "text": hit["text"],
+            "rule": {"blue": bool(hit["rule_blue"]), "green": bool(hit["rule_green"]),
+                     "yellow": bool(hit["rule_yellow"]), "red": bool(hit["rule_red"])},
+            "llm": {"deal": hit["llm_deal"], "area": hit["llm_area"],
+                    "same_buyer": hit["llm_same_buyer"], "admin": hit["llm_admin"]},
+            "context_before": [_ctx_row(u) for u in before],
+            "context_after": [_ctx_row(u) for u in after],
+            "heard_before": [_ctx_row(u) for u in heard],
+            "own_thoughts_that_month": own,
+            "traces_that_month": tr,
+        }
+    return out
 
 
 def build(run_dir: str) -> dict:
@@ -198,7 +468,7 @@ def build(run_dir: str) -> dict:
     # 地図に塗るのは **公の場（発話・記事）で、当事者以外が、その月までに成立した取得を
     # 名指しした行** だけ（v5b の右地図と同じ3条件）。色は run_metrics と同じ
     # 「ルール1次抽出 ∧ LLM ラベル」で、区画ごとにその時点までの最高段階を採る。
-    stage_by_parcel, stage_series, stage_stats = {}, {}, {}
+    stage_by_parcel, stage_series, stage_stats, stage_rows = {}, {}, {}, []
     if stage_labels:
         role_of = {}
         for r in utts + thoughts:
@@ -219,6 +489,8 @@ def build(run_dir: str) -> dict:
             row = {
                 "step": step, "from": r.get("from", ""), "kind": r.get("kind", ""),
                 "text": text, "venue": r.get("venue", ""), "scene": r.get("scene", ""),
+                "round": r.get("round", 0), "utt_id": r.get("utt_id", ""),
+                "name": r.get("name", ""), "role": role,
                 "classified": bool(r.get("classified", True)) and r.get("deal") is not None,
                 "rule_blue": _v5c_rule_blue(text, hs, ps),
                 "rule_green": _v5c_rule_green(text, hs, ps),
@@ -254,7 +526,10 @@ def build(run_dir: str) -> dict:
                 if cur is None or rank[row["stage"]] > rank[cur["color"]]:
                     stage_by_parcel[pid] = {"color": row["stage"], "month": row["step"],
                                             "from": row["from"], "kind": row["kind"],
-                                            "text": row["text"][:160]}
+                                            "name": row["name"], "scene": row["scene"],
+                                            "venue": row["venue"],
+                                            "utt_id": row["utt_id"],
+                                            "text": row["text"]}
         stage_series = {"public": series, "private_only": series_priv}
         stage_stats = {
             "rows_by_color": {c: len([r for r in rows if r["stage"] == c])
@@ -265,7 +540,7 @@ def build(run_dir: str) -> dict:
             "first": {c: next(({"month": r["step"], "from": r["from"],
                                 "kind": r["kind"], "venue": r["venue"],
                                 "text": r["text"][:180]}
-                               for r in sorted(rows, key=lambda z: z["step"])
+                               for r in sorted(rows, key=_sort_key)
                                if r["stage"] == c), None) for c in V5C_COLORS},
             "venue_first": {},
         }
@@ -284,6 +559,7 @@ def build(run_dir: str) -> dict:
                                        if pid not in stage_by_parcel)
         stage_stats["basis"] = ("公の場（発話・記事）で、当事者以外が、その月までに成立した"
                                 "取得を名指しした行のうち、ルール1次抽出 ∧ LLM で色が付いたもの")
+        stage_rows = rows
 
     # --- 兆候（誰にいつ見えたか）・沈黙の区画の突き合わせ用 -----------------
     trace_rows = [{"month": int(t.get("step", 0)), "agent_id": t.get("agent_id"),
@@ -511,10 +787,17 @@ def build(run_dir: str) -> dict:
         "rule_only_parcels": len(rule_only_only),
     }
 
+    venue_label_map = {v["id"]: v["label"]
+                       for v in ((cfg.get("social", {}) or {}).get("venues") or [])}
+    layout = _build_layout(cfg, {p["pid"] for p in parcels})
+    naming = _parcel_naming(layout, utts, thoughts, articles)
+    ignition = (_build_ignition(stage_rows, utts, thoughts, traces, venue_label_map)
+                if stage_rows else None)
+
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
-                 "schema": 3,
+                 "schema": 4,
                  "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},
@@ -533,8 +816,10 @@ def build(run_dir: str) -> dict:
         "stage_series": stage_series,
         "stage_stats": stage_stats,
         "prime_event": metrics.get("C_prime_event"),
-        "venue_labels": {v["id"]: v["label"]
-                         for v in ((cfg.get("social", {}) or {}).get("venues") or [])},
+        "layout": layout,
+        "parcel_naming": naming,
+        "ignition": ignition,
+        "venue_labels": venue_label_map,
         "stats": stats,
         "checks": checks,
     }
