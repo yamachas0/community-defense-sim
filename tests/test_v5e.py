@@ -98,19 +98,27 @@ def prompts_of(sim, skip_classifier=True):
 
 
 class DefenseMock(MockClient):
-    """第N月の発話に S1 語を混ぜ、その行だけ defense=true を返す配線確認用スタブ。
+    """第N月の発話に自衛の語を混ぜ、その行だけ defense=true を返す配線確認用スタブ。
 
     **シミュレーションの一部ではない。** 停止の配線（月次分類→翌月以降の取得停止）を
     オフラインで通すためのテストダブルである。
+
+    `level` で混ぜる語（S1／S2）を選ぶ。分類器の返す `defense_level` も同じ値にする。
     """
 
     # 赤は青（取引・名義・持ち主に触れている）を必要条件にするので、
     # 台本で第1月に名義が動く「A社」を文に入れる（docs/world_design_v5e.md §1-2）。
     S1_TAIL = "A社には売らない。"
+    S2_TAIL = "A社が買い集めている件、回覧で回します。"
+    TAILS = {"S1": S1_TAIL, "S2": S2_TAIL}
+    # 混ぜた行を分類器側で見分けるための目印（本文にそのまま含まれる）。
+    MARKS = {"S1": "売らない", "S2": "回覧で回します"}
 
-    def __init__(self, trigger_step, **kw):
+    def __init__(self, trigger_step, level="S1", **kw):
         super().__init__(**kw)
         self.trigger_step = int(trigger_step)
+        self.level = level
+        self.tail = self.TAILS[level]
 
     def generate(self, system_prompt, user_prompt, schema=None, temperature=None,
                  max_tokens=None, tag="agent"):
@@ -124,7 +132,7 @@ class DefenseMock(MockClient):
             m = STEP_RE.search(user_prompt)
             if m and int(m.group(1)) == self.trigger_step:
                 d = json.loads(raw)
-                d["text"] = str(d.get("text") or "") + self.S1_TAIL
+                d["text"] = str(d.get("text") or "") + self.tail
                 return json.dumps(d, ensure_ascii=False)
         return raw
 
@@ -134,10 +142,11 @@ class DefenseMock(MockClient):
             m = re.match(r"\s*(\d+)\.\s?(.*)$", line, flags=re.S)
             if not m:
                 continue
-            hit = "売らない" in m.group(2)
+            level = next((lv for lv, mark in self.MARKS.items()
+                          if mark in m.group(2)), None)
             results.append({"id": int(m.group(1)), "deal": False, "area": False,
-                            "same_buyer": False, "defense": hit,
-                            "defense_level": "S1" if hit else "none"})
+                            "same_buyer": False, "defense": level is not None,
+                            "defense_level": level or "none"})
         return json.dumps({"results": results}, ensure_ascii=False)
 
 
@@ -341,10 +350,38 @@ check("classified が偽なら None",
       stage_v5e({"classified": False, "rule_red": True, "llm_defense": True,
                  "text": "うちは売らない"}) is None)
 
-print("\n=== 6. 停止の配線（mock で S1 を模擬） ===")
+print("\n=== 6. 停止の配線（mock で S2 を模擬・S1 では止まらない） ===")
 
 TRIG = 2
-sim_s, dir_s = run_mock(CFG, 4, lambda: DefenseMock(TRIG), prefix="qa_v5e_stop_")
+
+# --- S1（個人の売買拒否）では止まらない（施主決定 2026-08-29 07:50）--------------
+# 「個人的な売買の拒否は検出しちゃダメ」＝S1 は何件出ても台本は止まらない。
+# ただし観測・集計には残る（落とすのは停止の判定だけ）。
+sim_1, dir_1 = run_mock(CFG, 4, lambda: DefenseMock(TRIG, "S1"),
+                        prefix="qa_v5e_s1_")
+stop_1 = json.load(io.open(os.path.join(dir_1, "defense_stop_v5e.json"),
+                           encoding="utf-8"))
+ledger_1 = jsonl(os.path.join(dir_1, "ledger.jsonl"))
+applied_1 = [r for r in ledger_1 if r.get("kind") in ("transfer", "lease")]
+labels_1 = jsonl(os.path.join(dir_1, "stage_labels_v5e.jsonl"))
+s1_red_1 = [r for r in labels_1 if r.get("defense") is True]
+check("発話の S1 だけでは停止しない", stop_1 == {"stopped": False, "months": 4},
+      json.dumps(stop_1, ensure_ascii=False)[:200])
+check("発話の S1 だけでは取得が台本どおり全件成立",
+      len(applied_1) == len([a for a in DST["acquisitions"] if int(a["month"]) <= 4]),
+      f"applied={len(applied_1)}")
+check("発話の S1 でも script_stopped は1件も出ない",
+      not [d for d in jsonl(os.path.join(dir_1, "deals_v5.jsonl"))
+           if d.get("kind") == "script_stopped"])
+check("それでも S1 の自衛は観測に残っている（集計からは落とさない）",
+      len(s1_red_1) > 0, f"defense rows={len(s1_red_1)}")
+check("S1 の行は summary の levels_seen に残る",
+      sim_1.summary["v5e"]["levels_seen"] == ["S1"],
+      json.dumps(sim_1.summary["v5e"], ensure_ascii=False))
+
+# --- S2（広範囲な呼びかけ・周知）では止まる ------------------------------------
+sim_s, dir_s = run_mock(CFG, 4, lambda: DefenseMock(TRIG, "S2"),
+                        prefix="qa_v5e_stop_")
 stop = json.load(io.open(os.path.join(dir_s, "defense_stop_v5e.json"), encoding="utf-8"))
 deals = jsonl(os.path.join(dir_s, "deals_v5.jsonl"))
 ledger = jsonl(os.path.join(dir_s, "ledger.jsonl"))
@@ -356,10 +393,10 @@ check("停止が立った", stop["stopped"] is True, json.dumps(stop, ensure_asc
 check(f"trigger_month = {TRIG}", stop["trigger_month"] == TRIG)
 check(f"stop_from_month = {TRIG + 1}", stop["stop_from_month"] == TRIG + 1)
 check("トリガー行に原文全文が入っている",
-      bool(stop["triggers"]) and all(DefenseMock.S1_TAIL in t["text"]
+      bool(stop["triggers"]) and all(DefenseMock.S2_TAIL in t["text"]
                                      for t in stop["triggers"]))
 check("トリガー行にレベルと出所が入っている",
-      all(t["level"] == "S1" and t["level_source"] == "llm" for t in stop["triggers"]))
+      all(t["level"] == "S2" and t["level_source"] == "llm" for t in stop["triggers"]))
 check("トリガー行に月・主体・役割・場が入っている",
       all(set(t) >= {"step", "from", "role", "kind", "scene", "venue"}
           for t in stop["triggers"]))
@@ -381,7 +418,7 @@ check("summary の v5e が実測と合う",
       and sim_s.summary["v5e"]["trigger_month"] == TRIG
       and sim_s.summary["v5e"]["acquisitions_applied"] == len(applied)
       and sim_s.summary["v5e"]["acquisitions_suspended"] == len(stopped_rows)
-      and sim_s.summary["v5e"]["levels_seen"] == ["S1"],
+      and sim_s.summary["v5e"]["levels_seen"] == ["S2"],
       json.dumps(sim_s.summary["v5e"], ensure_ascii=False))
 
 sim_n, dir_n = run_mock(CFG, 4, prefix="qa_v5e_nostop_")
@@ -403,7 +440,7 @@ check("停止しないランの summary も『出なかった』を残す",
 # 買い手は他人の頭の中を観測できない。内心の S1〜S3 は**観測には残す**が、
 # 台本の停止トリガーにはしない（docs/world_design_v5e.md §3）。
 class ThoughtOnlyDefenseMock(DefenseMock):
-    """S1 語を「内心」だけに混ぜる（発話には出さない）。"""
+    """自衛語を「内心」だけに混ぜる（発話には出さない）。"""
 
     def generate(self, system_prompt, user_prompt, schema=None, temperature=None,
                  max_tokens=None, tag="agent"):
@@ -418,12 +455,14 @@ class ThoughtOnlyDefenseMock(DefenseMock):
             m = STEP_RE.search(user_prompt)
             if m and int(m.group(1)) == self.trigger_step:
                 d = json.loads(raw)
-                d["thought"] = str(d.get("thought") or "") + self.S1_TAIL
+                d["thought"] = str(d.get("thought") or "") + self.tail
                 return json.dumps(d, ensure_ascii=False)
         return raw
 
 
-sim_t, dir_t = run_mock(CFG, 4, lambda: ThoughtOnlyDefenseMock(TRIG),
+# 発話で出れば止まる S2 を、内心だけに置いて確かめる（レベルではなく
+# 「観測できるかどうか」で落ちていることを示すため）。
+sim_t, dir_t = run_mock(CFG, 4, lambda: ThoughtOnlyDefenseMock(TRIG, "S2"),
                         prefix="qa_v5e_thought_")
 stop_t = json.load(io.open(os.path.join(dir_t, "defense_stop_v5e.json"),
                            encoding="utf-8"))
@@ -434,19 +473,92 @@ labels_t = jsonl(os.path.join(dir_t, "stage_labels_v5e.jsonl"))
 thought_red = [r for r in labels_t
                if r.get("kind") == "thought" and r.get("defense") is True]
 
-check("内心だけの S1 では停止しない", stop_t.get("stopped") is False,
+check("内心だけの S2 では停止しない", stop_t.get("stopped") is False,
       json.dumps(stop_t, ensure_ascii=False)[:200])
-check("内心だけの S1 では翌月以降も取得が続く",
+check("内心だけの S2 では翌月以降も取得が続く",
       len([d for d in deals_t if d.get("kind") == "script_stopped"]) == 0
       and len(applied_t) == len([a for a in DST["acquisitions"]
                                  if int(a["month"]) <= 4]))
 check("それでも内心の自衛は観測に残っている（集計からは落とさない）",
       len(thought_red) > 0, f"thought defense rows={len(thought_red)}")
-check("発話の S1 では止まる（対照）", stop["stopped"] is True)
+check("発話の S2 では止まる（対照）", stop["stopped"] is True)
 check("停止トリガーは観測できる行だけ",
       all(t["kind"] in ("utterance", "article", "direct")
           for t in stop["triggers"]),
       str(sorted({t["kind"] for t in stop["triggers"]})))
+
+# --- 記事でも止まる（観測できる行なので）-------------------------------------
+class ArticleDefenseMock(DefenseMock):
+    """自衛語を「記事」だけに混ぜる（発話・内心には出さない）。"""
+
+    def generate(self, system_prompt, user_prompt, schema=None, temperature=None,
+                 max_tokens=None, tag="agent"):
+        props = (schema or {}).get("properties", {})
+        item = props.get("results", {}).get("items", {}).get("properties", {})
+        if "defense" in item:
+            return self._stage(user_prompt)
+        raw = MockClient.generate(self, system_prompt, user_prompt, schema=schema,
+                                  temperature=temperature, max_tokens=max_tokens,
+                                  tag=tag)
+        m = STEP_RE.search(user_prompt)
+        if "publish" in props and m and int(m.group(1)) == self.trigger_step:
+            d = json.loads(raw)
+            d["publish"] = str(d.get("publish") or "") + self.tail
+            return json.dumps(d, ensure_ascii=False)
+        return raw
+
+
+sim_a, dir_a = run_mock(CFG, 4, lambda: ArticleDefenseMock(TRIG, "S2"),
+                        prefix="qa_v5e_article_")
+stop_a = json.load(io.open(os.path.join(dir_a, "defense_stop_v5e.json"),
+                           encoding="utf-8"))
+ledger_a = jsonl(os.path.join(dir_a, "ledger.jsonl"))
+applied_a = [r for r in ledger_a if r.get("kind") in ("transfer", "lease")]
+check("記事の S2 で止まる", stop_a.get("stopped") is True
+      and stop_a.get("trigger_month") == TRIG,
+      json.dumps(stop_a, ensure_ascii=False)[:200])
+check("記事がトリガーとして記録されている",
+      any(t["kind"] == "article" for t in stop_a.get("triggers", [])),
+      str(sorted({t["kind"] for t in stop_a.get("triggers", [])})))
+check("記事のトリガー行に書き手の役割が入っている（走行中も事後と同じ判定にする）",
+      all(t.get("role") for t in stop_a.get("triggers", [])
+          if t["kind"] == "article"))
+check("記事で止まった翌月以降の取得は0件",
+      not [r for r in applied_a if int(r.get("step", 0)) > TRIG])
+
+# --- 停止トリガーの判定そのもの（`_v5e_stop_trigger` を直接呼ぶ）--------------
+# 記事の S3 は「行政の主体が出した記事」でしか成立しない（S3 は行政の措置のみ＝
+# docs/world_design_v5e.md §2）。mock の記事の書き手は記者なので、ここは
+# 判定関数を直接呼んで確かめる。
+def trig(kind, level, role="household", text=None, defense=True):
+    body = {"S1": "A社には売らない。", "S2": "A社の件、回覧で回します。",
+            "S3": "A社との取引を凍結する。"}[level]
+    return sim_s._v5e_stop_trigger(1, {
+        "kind": kind, "classified": True, "defense": defense,
+        "defense_level": level, "role": role, "step": 1,
+        "from": "X", "scene": "S1", "venue": "V01",
+        "text": text if text is not None else body})
+
+
+check("発話の S1 は停止トリガーにならない", trig("utterance", "S1") is None)
+check("内心の S2 は停止トリガーにならない", trig("thought", "S2") is None)
+check("内心の S3 は停止トリガーにならない",
+      trig("thought", "S3", role="municipality") is None)
+check("発話の S2 は停止トリガーになる",
+      (trig("utterance", "S2") or {}).get("level") == "S2")
+check("記事の S3（行政）は停止トリガーになる",
+      (trig("article", "S3", role="municipality") or {}).get("level") == "S3",
+      json.dumps(trig("article", "S3", role="municipality"), ensure_ascii=False))
+check("記事の S2 は停止トリガーになる",
+      (trig("article", "S2", role="media") or {}).get("level") == "S2")
+check("S3 の語でも行政以外なら停止トリガーにならない（S3 は行政の措置のみ）",
+      trig("utterance", "S3", role="household") is None)
+check("defense が false の行は停止トリガーにならない",
+      trig("utterance", "S2", defense=False) is None)
+check("停止レベルは S2 と S3 だけ",
+      Simulation.V5E_STOP_LEVELS == ("S2", "S3"))
+check("設計文書に『S1 では止めない』が書いてある",
+      "S2 または S3" in DESIGN and "S1" in DESIGN)
 
 
 print("\n=== 7. 停止が主体に漏れていない ===")
@@ -667,19 +779,26 @@ met = run_metrics.metrics_v5(dir_s)
 check("version は field_v5e", met["version"] == "field_v5e")
 check("red_definition_version は v5e", met.get("red_definition_version") == "v5e")
 check("S_counts が3レベル分ある", set(met["S_counts"]) == {"S1", "S2", "S3"})
-check("S1 の行が数えられている", met["S_counts"]["S1"] > 0, str(met["S_counts"]))
-check("S_first の S1 に原文全文が入っている",
-      met["S_first"]["S1"] and DefenseMock.S1_TAIL in met["S_first"]["S1"]["text"])
-check("S_first の S1 に月・主体・役割・場が入っている",
-      set(met["S_first"]["S1"]) >= {"month", "agent_id", "role", "kind", "scene",
+check("S2 の行が数えられている", met["S_counts"]["S2"] > 0, str(met["S_counts"]))
+check("S_first の S2 に原文全文が入っている",
+      met["S_first"]["S2"] and DefenseMock.S2_TAIL in met["S_first"]["S2"]["text"])
+check("S_first の S2 に月・主体・役割・場が入っている",
+      set(met["S_first"]["S2"]) >= {"month", "agent_id", "role", "kind", "scene",
                                     "venue", "venue_label", "text"})
+# S1 は止めないが観測には残る＝S1 だけを混ぜたランでも集計に出る。
+met_s1 = run_metrics.metrics_v5(dir_1)
+check("S1 だけのランでも S1 が数えられている（止めないが観測には残す）",
+      met_s1["S_counts"]["S1"] > 0 and met_s1["S_counts"]["S2"] == 0,
+      str(met_s1["S_counts"]))
+check("S1 だけのランは停止していない",
+      met_s1["defense_stop"] == {"stopped": False, "months": 4})
 check("S_rows は赤の行の全件", len(met["S_rows"]) == met["C_red_rows"],
       f"{len(met['S_rows'])} vs {met['C_red_rows']}")
 check("S_level_agreement の4区分が揃っている",
       set(met["S_level_agreement"]) == {"llm_and_rule_same", "llm_only",
                                         "rule_only", "disagree"})
 check("LLM とルールが一致した件数が数えられている",
-      met["S_level_agreement"]["llm_and_rule_same"] == met["S_counts"]["S1"],
+      met["S_level_agreement"]["llm_and_rule_same"] == met["S_counts"]["S2"],
       json.dumps(met["S_level_agreement"]))
 check("defense_stop がそのまま入っている", met["defense_stop"] == stop)
 check("赤は行政以外の役割からも出ている（役割で絞っていない）",

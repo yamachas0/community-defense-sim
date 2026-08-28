@@ -1,0 +1,26 @@
+{
+  "run_dir": "simulations/2026-08-28_1110_100_field_v5c_runB",
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "rows": 7027,
+  "chunks": 282,
+  "batch": 25,
+  "usage": {
+    "calls": 282,
+    "input_tokens": 952657,
+    "cached_tokens": 830148,
+    "output_tokens": 387038,
+    "errors": 0,
+    "by_tag": {
+      "classify_stage_v5e": {
+        "calls": 282,
+        "input": 952657,
+        "cached": 830148,
+        "output": 387038
+      }
+    }
+  },
+  "cost_usd": 0.17536758000000002,
+  "estimated_cost_usd": 0.1980932,
+  "unknown_rows": 0
+}

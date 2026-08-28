@@ -1,0 +1,19 @@
+{
+  "stopped": true,
+  "months": 36,
+  "stop_from_month": 12,
+  "trigger_month": 11,
+  "triggers": [
+    {
+      "step": 11,
+      "from": "MU02",
+      "role": "municipality",
+      "kind": "utterance",
+      "scene": "S1",
+      "venue": "V06",
+      "text": "前回の町内会での説明会、皆さん関心が高かったようですね。特にD社の動きとスペースポート構想の関連について、色々と質問がありました。まちづくり担当さん、記者さん、あの後何か追加で把握されたことはありますか？住民の方々がより安心して今後の街の動きを理解できるよう、正確な情報発信をしていきたいのですが。",
+      "level": "S2",
+      "level_source": "llm"
+    }
+  ]
+}

@@ -1885,6 +1885,18 @@ class Simulation:
     # 買い手が現実に観測できる行（人の目に触れたもの）。内心は入らない。
     V5E_OBSERVABLE_KINDS = ("utterance", "article", "direct")
 
+    # 台本の取得を止めるレベル（施主決定 2026-08-29 07:50）。
+    # 「個人的な売買の拒否は検出しちゃダメ」＝S1（自分は売らない・貸さない）は
+    # **どれだけ出ても買い手は止まらない**。止まるのは S2（特定の買い手についての
+    # 広範囲な呼びかけ・周知）と S3（行政の禁止／差し止め措置）だけである。
+    # S1 は観測・集計には従来どおり残す（落とすのは停止の判定だけ）。
+    V5E_STOP_LEVELS = ("S2", "S3")
+
+    def _v5e_role_of(self, agent_id: Any) -> str:
+        """主体IDから役割を引く（居なければ空）。記事の行の役割を補うために使う。"""
+        a = self.by_id.get(agent_id)
+        return str(getattr(a, "role", "") or "") if a is not None else ""
+
     def _v5e_red_level(self, r: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """分類器の1行が赤なら自衛レベルを返す（赤でなければ None）。
 
@@ -1904,6 +1916,31 @@ class Simulation:
              "rule_green": False, "rule_blue": blue, "llm_defense": True,
              "llm_defense_level": r.get("defense_level"), "text": text,
              "role": role})
+
+    def _v5e_stop_trigger(self, step: int,
+                          r: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """その1行が「台本の取得を止める行」なら記録用の dict を返す。
+
+        止まる条件は2つだけで、**どちらも観測側の分類器の出力から決まる**
+        （別の仕掛け・別の閾値を作らない＝docs/world_design_v5e.md §3）：
+
+        1. **買い手が現実に観測できる行**であること（発話・記事・私信）。
+           内心では止まらない＝他人の頭の中は誰にも見えない。
+        2. その行の自衛レベルが **S2 または S3** であること（施主決定 2026-08-29 07:50
+           「個人的な売買の拒否は検出しちゃダメ」）。S1 は何件出ても止まらない。
+
+        停止判定と集計が同じ組み立てを使うための唯一の持ち場である。
+        """
+        if r.get("kind") not in self.V5E_OBSERVABLE_KINDS:
+            return None
+        lv = self._v5e_red_level(r)
+        if lv is None or lv.get("level") not in self.V5E_STOP_LEVELS:
+            return None
+        return {"step": step, "from": r.get("from", ""),
+                "role": r.get("role", ""), "kind": r.get("kind", ""),
+                "scene": r.get("scene", ""), "venue": r.get("venue", ""),
+                "text": str(r.get("text", "")), "level": lv.get("level"),
+                "level_source": lv.get("level_source")}
 
     def _v5e_trace_alive(self, tr: Dict[str, Any]) -> bool:
         """起きなかった取得の兆候を配らない（v5e で買い手が止まったあと）。
@@ -1959,7 +1996,12 @@ class Simulation:
                  if int(u.get("step", 0)) == step]
                 + [{"kind": "thought", **t} for t in self.thoughts
                    if int(t.get("step", 0)) == step]
-                + [{"kind": "article", **a} for a in self.ledger.v5_articles
+                # 記事の行には役割が入っていない（`v5_articles` は from だけ）。
+                # 事後集計（tools/run_metrics.py）は `venue_choices` から書き手の
+                # 役割を補って判定しているので、走行中も同じように補わないと
+                # **同じ行が走行中と事後で違う判定になる**（S3 は行政の主体に限る）。
+                + [{"kind": "article", "role": self._v5e_role_of(a.get("from")), **a}
+                   for a in self.ledger.v5_articles
                    if int(a.get("step", 0)) == step])
         if not rows:
             return
@@ -1968,22 +2010,10 @@ class Simulation:
                                     job_key=f"m{step:02d}_stage")
         self.stage_labels_v5e.extend(labels)
 
-        triggers = []
-        for r in labels:
-            text = str(r.get("text", ""))
-            # **停止のトリガーは買い手が観測できる行だけ**（施主指示 2026-08-29）。
-            # 内心（thought）で買い手が止まるのは非現実＝他人の頭の中は見えない。
-            # 内心は S1〜S3 の観測・集計には従来どおり含める（落とすのは停止だけ）。
-            if r.get("kind") not in self.V5E_OBSERVABLE_KINDS:
-                continue
-            lv = self._v5e_red_level(r)
-            if lv is None:
-                continue
-            triggers.append({"step": step, "from": r.get("from", ""),
-                             "role": r.get("role", ""), "kind": r.get("kind", ""),
-                             "scene": r.get("scene", ""), "venue": r.get("venue", ""),
-                             "text": text, "level": lv.get("level"),
-                             "level_source": lv.get("level_source")})
+        # **停止のトリガーは「観測できる行の S2/S3」だけ**（`_v5e_stop_trigger`）。
+        # 内心では止まらない・S1（個人の売買拒否）では止まらない。
+        triggers = [t for t in (self._v5e_stop_trigger(step, r) for r in labels)
+                    if t is not None]
         if triggers and self.defense_stop is None:
             self.defense_stop = {"stop_from_month": step + 1, "trigger_month": step,
                                  "triggers": triggers}
