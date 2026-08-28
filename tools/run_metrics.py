@@ -26,9 +26,12 @@ if _ROOT not in sys.path:
 from src.stage_v5e import (V5E_LEVELS, defense_level_of,  # noqa: E402
                            rule_defense_level, rule_red_v5e, stage_v5e)
 
-# v5e の初出の並び（docs/world_design_v5e.md §8）。1回のコールで内心→発話→記事の
-# 順に生まれる。v5c の並びには使わない。
-KIND_RANK_V5E = {"thought": 0, "utterance": 1, "article": 2}
+# v5e の初出の並び（docs/world_design_v5e.md §8）。1回のコールで生まれる3つを
+# **実際に記録される順**に並べる＝内心 → 記事 → 発話
+# （src/simulation.py の _v5_thought → _v5_publish → v5_utterances.append の順。
+#  Codexレビュー 2026-08-29 が「記事は発話より先に記録される」と実コードで指摘）。
+# v5c の並び（文字列順）には使わない。
+KIND_RANK_V5E = {"thought": 0, "article": 1, "utterance": 2}
 
 MEETING_WORDS = ("来週", "日程", "ヒアリング", "訪問", "打ち合わせ", "アポ",
                  "面談", "お伺い", "伺いま", "調整")
@@ -1257,6 +1260,11 @@ V5C_ADMIN_WORDS = ("届出", "条例", "規制", "調査", "要綱", "指導", "
 V5C_COLORS = ["blue", "green", "yellow", "red"]
 V5C_COLOR_JA = {"blue": "青（個別の売買）", "green": "緑（複数・面）",
                 "yellow": "黄（同じ買い手＝X社に届いた）", "red": "赤（行政が動いた）"}
+# v5e は赤を「静かな占領への具体的なアクション」に定義し直した（立場は問わない）。
+# 青・緑・黄の文言は v5c のまま（docs/world_design_v5e.md §1）。
+V5E_COLOR_JA = {"blue": V5C_COLOR_JA["blue"], "green": V5C_COLOR_JA["green"],
+                "yellow": V5C_COLOR_JA["yellow"],
+                "red": "赤（静かな占領への具体的なアクション＝自衛 S1〜S3）"}
 V5C_PUBLIC_KINDS = ("utterance", "article")
 
 
@@ -1386,8 +1394,8 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
     # 初出は「実際に起きた順」で採る＝月→シーン→ラウンド
     # （Codexレビュー 2026-08-28：月だけで並べていて、同じ月の記事や内心が
     #  先に起きた会話より前に出ることがあった）。
-    # v5e は同じラウンド内を「内心 → 発話 → 記事」で並べる。1回のコールで
-    # この順に生まれるので、文字列順（article < thought < utterance）は誤り
+    # v5e は同じラウンド内を「内心 → 記事 → 発話」で並べる。1回のコールで
+    # この順に記録されるので、文字列順（article < thought < utterance）は誤り
     # （Codexレビュー 2026-08-28 指摘④・docs/world_design_v5e.md §8）。
     # 同じラウンドの別主体どうしは並列に呼ばれていて真の前後が無いので主体IDで並べる。
     # **v5c の並び順は変えない**（既存の成果物が動かないように）。
@@ -1426,10 +1434,11 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
                     "text": r["text"][:200]}
         return None
 
+    definition = dict(V5E_COLOR_JA) if is_v5e else dict(V5C_COLOR_JA)
     out = {"C_available": True, "C_rows_total": len(rows),
            "C_rows_classified": len(rows) - unknown, "C_unknown": unknown,
            "C_measurable": unknown == 0,
-           "C_definition": V5C_COLOR_JA}
+           "C_definition": definition}
 
     cum_pub = {c: set() for c in V5C_COLORS}
     cum_priv = {c: set() for c in V5C_COLORS}

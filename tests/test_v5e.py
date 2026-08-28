@@ -491,6 +491,56 @@ check("解析失敗の行は赤にならない",
                  "rule_green": False, "rule_blue": False,
                  "llm_defense": out[0]["defense"], "text": rows[0]["text"]}) is None)
 
+class PartialClient:
+    model = "partial"
+
+    def generate(self, system, user, schema=None, temperature=0.0,
+                 max_tokens=0, tag="", **kw):
+        return json.dumps({"results": [{"id": 1, "frame": "our_town",
+                                        "about_acquisition": True}]})
+
+
+class ShortClient:
+    model = "short"
+
+    def generate_many(self, items, tag="", kind="", job_key=""):
+        return [json.dumps({"results": [{"id": 1, "deal": True, "area": False,
+                                         "same_buyer": False, "defense": False,
+                                         "defense_level": "none"}]})]
+
+
+class BadEnumClient:
+    model = "bad-enum"
+
+    def generate(self, system, user, schema=None, temperature=0.0,
+                 max_tokens=0, tag="", **kw):
+        return json.dumps({"results": [{"id": 1, "deal": True, "area": False,
+                                        "same_buyer": False, "defense": True,
+                                        "defense_level": "STRONG"}]})
+
+
+_p = classify_stage_v5e(PartialClient(), [{"step": 1, "text": "x"}], batch=25)
+check("missing fields stay unknown (never coerced to false)",
+      _p[0]["classified"] is False and _p[0]["deal"] is None
+      and _p[0]["defense"] is None and _p[0]["defense_level"] is None)
+
+_s = classify_stage_v5e(ShortClient(), [{"step": 1, "text": "a"}] * 30, batch=25)
+check("short raw list keeps every row (tail chunk stays unknown)",
+      len(_s) == 30 and _s[0]["classified"] is True
+      and all(r["classified"] is False for r in _s[25:]))
+
+_b = classify_stage_v5e(BadEnumClient(), [{"step": 1, "text": "y"}], batch=25)
+check("out-of-enum defense_level becomes None without dropping the row",
+      _b[0]["classified"] is True and _b[0]["defense"] is True
+      and _b[0]["defense_level"] is None)
+check("that row still gets a level from the rule side",
+      (defense_level_of({"classified": True, "rule_red": True, "rule_yellow": False,
+                         "rule_green": False, "rule_blue": True,
+                         "llm_defense": True, "llm_defense_level": None,
+                         "text": "A社には売らない"})
+       or {}).get("level_source") == "rule")
+
+
 print("\n=== 10. 自衛レベルの主値と出所 ===")
 
 

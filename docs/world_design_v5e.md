@@ -155,11 +155,11 @@ rule_red_v5e(text, holders, acquired)
 ## 8. 初出の並び順（Codexレビュー 2026-08-28 指摘④）
 
 v5c の集計は同じ (月・シーン・ラウンド) の中を `kind` の**文字列順**で並べていた
-（`article` < `thought` < `utterance`）。実際には1回のコールで「内心 → 発話 → 記事」が同時に
-生まれるので、記事が先頭に来るのは誤りである。v5e の集計では
+（`article` < `thought` < `utterance`）。実際には1回のコールで「内心 → 記事 → 発話」の順に記録される
+（`_v5_thought` → `_v5_publish` → `v5_utterances.append`）ので、記事が先頭に来るのは誤りである。v5e の集計では
 
 ```
-KIND_RANK_V5E = {"thought": 0, "utterance": 1, "article": 2}
+KIND_RANK_V5E = {"thought": 0, "article": 1, "utterance": 2}
 並び順 = (月, シーンの順, ラウンド, KIND_RANK_V5E[kind], 主体ID)
 ```
 

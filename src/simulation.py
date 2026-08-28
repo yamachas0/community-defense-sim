@@ -1882,6 +1882,24 @@ class Simulation:
         if self.field_v5e:
             self._v5e_month_end(step)
 
+    def _v5e_red_level(self, r: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """分類器の1行が赤なら自衛レベルを返す（赤でなければ None）。
+
+        **停止判定と最終集計はこの1か所だけを使う**（同じ組み立てを2度書くと
+        いつか片方だけ直されてズレる＝Codexレビュー 2026-08-29 指摘）。
+        """
+        text = str(r.get("text", ""))
+        if not (bool(r.get("classified")) and bool(r.get("defense"))):
+            return None
+        hs, ps = self._v5e_holders_acquired(int(r.get("step", 0) or 0))
+        blue = bool(self._v5e_blue(text, hs, ps))
+        if not rule_red_v5e(text, blue):
+            return None
+        return defense_level_of(
+            {"classified": True, "rule_red": True, "rule_yellow": False,
+             "rule_green": False, "rule_blue": blue, "llm_defense": True,
+             "llm_defense_level": r.get("defense_level"), "text": text})
+
     def _v5e_trace_alive(self, tr: Dict[str, Any]) -> bool:
         """起きなかった取得の兆候を配らない（v5e で買い手が止まったあと）。
 
@@ -1898,6 +1916,12 @@ class Simulation:
         if month is None:
             return True
         return int(month) < int(self.defense_stop["stop_from_month"])
+
+    def _v5e_blue(self, text, hs, ps) -> bool:
+        """青のルール1次抽出（`tools/run_metrics.py` の実装を1回だけ読み込む）。"""
+        if getattr(self, "_v5e_blue_fn", None) is None:
+            self._v5e_blue_fn = _v5e_blue_rule()
+        return bool(self._v5e_blue_fn(text, hs, ps))
 
     def _v5e_holders_acquired(self, step: int):
         """その月までに成立した名義と区画（判定に未来の取得を混ぜない）。
@@ -1939,21 +1963,12 @@ class Simulation:
                                     job_key=f"m{step:02d}_stage")
         self.stage_labels_v5e.extend(labels)
 
-        blue_rule = _v5e_blue_rule()
-        hs, ps = self._v5e_holders_acquired(step)
         triggers = []
         for r in labels:
             text = str(r.get("text", ""))
-            classified = bool(r.get("classified"))
-            blue = bool(blue_rule(text, hs, ps))
-            if not (classified and rule_red_v5e(text, blue)
-                    and bool(r.get("defense"))):
+            lv = self._v5e_red_level(r)
+            if lv is None:
                 continue
-            lv = defense_level_of({"classified": True, "rule_red": True,
-                                   "rule_yellow": False, "rule_green": False,
-                                   "rule_blue": blue, "llm_defense": True,
-                                   "llm_defense_level": r.get("defense_level"),
-                                   "text": text}) or {}
             triggers.append({"step": step, "from": r.get("from", ""),
                              "role": r.get("role", ""), "kind": r.get("kind", ""),
                              "scene": r.get("scene", ""), "venue": r.get("venue", ""),
@@ -2490,23 +2505,9 @@ class Simulation:
         if self.field_v5e:
             # v5e: 自衛の観測と、それに対する買い手の反応（台本の停止）の記録。
             # 「出なかった」も同じ重みで残す（docs/world_design_v5e.md §3）。
-            blue_rule = _v5e_blue_rule()
-
-            def _red_level(r):
-                text = str(r.get("text", ""))
-                step_ = int(r.get("step", 0) or 0)
-                hs_, ps_ = self._v5e_holders_acquired(step_)
-                blue = bool(blue_rule(text, hs_, ps_))
-                if not (bool(r.get("classified")) and bool(r.get("defense"))
-                        and rule_red_v5e(text, blue)):
-                    return None
-                return defense_level_of(
-                    {"classified": True, "rule_red": True, "rule_yellow": False,
-                     "rule_green": False, "rule_blue": blue, "llm_defense": True,
-                     "llm_defense_level": r.get("defense_level"), "text": text})
-
             levels_seen = sorted({lv["level"]
-                                  for lv in map(_red_level, self.stage_labels_v5e)
+                                  for lv in map(self._v5e_red_level,
+                                                self.stage_labels_v5e)
                                   if lv and lv.get("level")})
             stop = self.defense_stop
             summary["v5e"] = {

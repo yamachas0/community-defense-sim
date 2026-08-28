@@ -429,7 +429,10 @@ def classify_stage_v5e(client, rows: List[Dict[str, Any]], batch: int = 25,
                             STAGE_SCHEMA_V5E, 0.0, 1800, "classify_stage_v5e",
                             job_key)
     out: List[Dict[str, Any]] = []
-    for chunk, raw in zip(chunks, raws):
+    # 返ってきた raw がチャンク数より少なくても、足りない分を落とさず unknown にする
+    # （zip だと末尾のチャンクが丸ごと消える＝Codexレビュー 2026-08-29 指摘）。
+    for i, chunk in enumerate(chunks):
+        raw = raws[i] if i < len(raws) else None
         parsed: Dict[int, Dict[str, Any]] = {}
         try:
             for r in (json.loads(raw) if raw else {}).get("results", []):
@@ -438,16 +441,28 @@ def classify_stage_v5e(client, rows: List[Dict[str, Any]], batch: int = 25,
             parsed = {}
         for j, row in enumerate(chunk, start=1):
             r = parsed.get(j)
-            level = None
-            if r is not None:
-                level = str(r.get("defense_level", "none"))
-                if level not in ("none", "S1", "S2", "S3"):
-                    level = "none"
+            # 欠けた項目を false に化けさせない。4つの真偽値と defense_level が
+            # **全て揃っていて型も正しい**ときだけ classified にする
+            # （Codexレビュー 2026-08-29 指摘：部分的な結果が false になっていた）。
+            # 4つの真偽値が**全て本物の bool** のときだけ classified にする。
+            # defense_level は enum 外なら None にするだけで unknown にはしない
+            # （赤かどうかは defense が決め、レベルは defense_level_of が
+            #  ルール側へ落ちて埋まる＝1項目の揺れで行ごと捨てない）。
+            ok = isinstance(r, dict) and all(
+                isinstance(r.get(k), bool)
+                for k in ("deal", "area", "same_buyer", "defense"))
+            if not ok:
+                out.append({**row, "deal": None, "area": None, "same_buyer": None,
+                            "defense": None, "defense_level": None,
+                            "classified": False})
+                continue
             out.append({**row,
-                        "deal": bool(r.get("deal")) if r else None,
-                        "area": bool(r.get("area")) if r else None,
-                        "same_buyer": bool(r.get("same_buyer")) if r else None,
-                        "defense": bool(r.get("defense")) if r else None,
-                        "defense_level": level,
-                        "classified": r is not None})
+                        "deal": bool(r["deal"]),
+                        "area": bool(r["area"]),
+                        "same_buyer": bool(r["same_buyer"]),
+                        "defense": bool(r["defense"]),
+                        "defense_level": (r.get("defense_level")
+                                          if r.get("defense_level")
+                                          in ("none", "S1", "S2", "S3") else None),
+                        "classified": True})
     return out
