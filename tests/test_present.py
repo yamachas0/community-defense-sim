@@ -18,6 +18,7 @@ import collections
 import http.server
 import json
 import os
+import re
 import socketserver
 import sys
 import threading
@@ -67,7 +68,7 @@ def _jsonl(path):
 
 
 def json_checks(dC):
-    """schema 5 の layout / ignition（strict・loose）/ parcel_naming を JSON だけで検査する。"""
+    """schema 6 の layout / ignition（strict・loose）/ parcel_naming を JSON だけで検査する。"""
     run_dir = os.path.join(ROOT, "simulations", dC["meta"]["generated_from"])
 
     # --- layout -----------------------------------------------------------
@@ -161,9 +162,9 @@ def json_checks(dC):
           and set(ig) == {"green", "yellow", "criteria"}, str(type(ig)))
     if not isinstance(ig, dict):
         return
-    check("ignition: criteria に strict / loose の定義がある",
+    check("ignition: criteria が loose / strict_green / strict_yellow の3本",
           isinstance(ig.get("criteria"), dict)
-          and set(ig["criteria"]) == {"strict", "loose"}
+          and set(ig["criteria"]) == {"loose", "strict_green", "strict_yellow"}
           and all(isinstance(v, str) and v for v in ig["criteria"].values()),
           str(ig.get("criteria")))
     utts = _jsonl(os.path.join(run_dir, "utterances_v5.jsonl"))
@@ -266,14 +267,15 @@ def main() -> int:
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             d = json.load(f)
         check("%s: 区画属性を持たない run は layout=null（従来の格子で描く）" % lab,
-              d.get("layout") is None and d["meta"]["schema"] == 5,
+              d.get("layout") is None and d["meta"]["schema"] == 6,
               str(d["meta"]["schema"]))
         ig = d.get("ignition")
         check("%s: ignition は色の判定が無い run でも同じ形" % lab,
               isinstance(ig, dict) and set(ig) == {"green", "yellow", "criteria"}
               and all(ig[c] == {"strict": None, "loose": None}
                       for c in ("green", "yellow"))
-              and set(ig["criteria"]) == {"strict", "loose"}, str(ig))
+              and set(ig["criteria"]) == {"loose", "strict_green",
+                                          "strict_yellow"}, str(ig))
     for lab in ("v5cA", "v5cB", "v5cC"):
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             json_checks(json.load(f))
@@ -571,6 +573,22 @@ def main() -> int:
                           bool(gl) and gl["text"] in ip2, ip2[:160])
                     check("ガイド手順4: 甘さの説明が出る",
                           "まだ何も起きていない月の世間話が入る" in ip2, ip2[:160])
+                    crit = dC["ignition"]["criteria"]
+                    check("ガイド手順4: strict の説明が色ごとに JSON から出る",
+                          crit["strict_green"] in ip2 and crit["strict_yellow"] in ip2,
+                          str(crit))
+                    fire = page.eval_on_selector_all(
+                        "#pJ .say.fire .who", "els => els.map(e=>e.textContent)")
+                    check("ガイド手順4: 火が点いた行の見出しに第N月が出る",
+                          bool(fire) and all(re.search(r"／第\d+月・", t) for t in fire),
+                          str(fire[:2]))
+                    check("ガイド手順4: パネルに undefined / NaN が出ない",
+                          "undefined" not in ip2 and "NaN" not in ip2,
+                          str([w for w in ("undefined", "NaN") if w in ip2]))
+                    body = page.evaluate("() => document.body.innerText")
+                    check("present: 1280 のページ全体に undefined / NaN が出ない",
+                          "undefined" not in body and "NaN" not in body,
+                          str([w for w in ("undefined", "NaN") if w in body]))
                     roles = page.eval_on_selector_all(
                         "#mapR rect.cell",
                         "els => els.filter(e => e.tabIndex === 0)"
@@ -697,6 +715,10 @@ def main() -> int:
                                  "document.documentElement.clientWidth]")
                 check("present: 390 で火が点いた瞬間を開いても横スクロールが出ない",
                       mw5[0] <= mw5[1], str(mw5))
+                mbody = m.evaluate("() => document.body.innerText")
+                check("present: 390 のページ全体に undefined / NaN が出ない",
+                      "undefined" not in mbody and "NaN" not in mbody,
+                      str([w for w in ("undefined", "NaN") if w in mbody]))
                 m.screenshot(path=os.path.join(SHOTS2, "08_map_390.png"),
                              full_page=True)
                 m.close()

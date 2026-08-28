@@ -829,3 +829,10 @@ false に化ける**（unknown として主値から外し、D3の合格条件�
   runB 緑＝第3月 HH09 内心（P17・P34・P41）／runB 黄＝第6月 HH15 内心（A社・B社・D社）／
   runC 緑＝第2月 HH01 内心（A社・B社・D社）／runC 黄＝第3月 HH01 内心（A社・B社・D社）。
 - `tests/test_present.py` **339 passed / 0 failed**、`test_ledger.py` 619、`test_v5c.py` 73（0 failed）。
+
+**仕上げ（schema 6）**：「火が点いた瞬間」の④の見出しが `第undefined月` になっていたのを直した
+（`whoOf()` が `r.step` だけを読んでいたが、ignition 本体は `month` を持つ＝`r.step ?? r.month`）。
+併せて `ignition.criteria.strict` を `strict_green` / `strict_yellow` に分け（緑は「区画2つ**または**名義2つ」、
+黄は「名義2つ」＝条件は変えず文言だけ色ごとに正した）、画面の strict ブロックの説明はこの JSON から描く。
+strict の判定に `stage == color` を明示的に足した（実測では既に全 run で一致＝**7本再生成して strict 6件は前便と完全に同一**）。
+テストに「1280 と 390 のページ全体（`document.body.innerText`）に `undefined` / `NaN` が出ない」網を足した（他の穴は見つからなかった）。

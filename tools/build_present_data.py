@@ -260,8 +260,10 @@ def _ctx_row(u):
 
 IGNITION_CRITERIA = {
     "loose": "走行前に固定した色の定義（ルール1次抽出 ∧ LLM）どおりの初出",
-    "strict": ("上に加えて、本文にその月までに成立した取得区画IDが2つ以上、"
-               "または異なる名義が2つ以上、実際に並んでいる最初の行"),
+    "strict_green": ("その月までに成立した取得区画IDが2つ以上、または異なる名義が2つ以上、"
+                     "本文に実際に並んでいる最初の行"),
+    "strict_yellow": ("その月までに成立した異なる名義が2つ以上、"
+                      "本文に実際に並んでいる最初の行"),
 }
 
 
@@ -275,6 +277,8 @@ def _ignition_matched(row, holders_by_step, acquired_by_step):
 
 def _ignition_strict_hit(row, color, holders_by_step, acquired_by_step):
     if not row.get("classified"):
+        return None
+    if row.get("stage") != color:
         return None
     m = _ignition_matched(row, holders_by_step, acquired_by_step)
     if color == "green":
@@ -855,7 +859,7 @@ def build(run_dir: str) -> dict:
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
-                 "schema": 5,
+                 "schema": 6,
                  "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},
