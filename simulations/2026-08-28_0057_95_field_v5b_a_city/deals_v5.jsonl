@@ -1,0 +1,4 @@
+{"step": 1, "agent_id": "HH16", "acq_id": "ACQ01", "parcel_id": "P17", "holder": "B社", "kind": "sale", "note": "後継ぎがおらず、続けていく見通しが立たなくなった"}
+{"step": 2, "agent_id": "HH01", "acq_id": "ACQ02", "parcel_id": "P02", "holder": "B社", "kind": "sale", "note": "後継ぎがおらず、続けていく見通しが立たなくなった"}
+{"step": 2, "agent_id": "HH09", "acq_id": "ACQ03", "parcel_id": "P10", "holder": "A社", "kind": "sale", "note": "店を閉めることにした"}
+{"step": 3, "agent_id": "HH03", "acq_id": "ACQ04", "parcel_id": "P04", "holder": "B社", "kind": "lease", "note": "店を閉めたあと、建物を貸すことにした"}

@@ -1,0 +1,118 @@
+{"step": 1, "kind": "lease", "acq_id": "ACQ01", "parcel_id": "P17", "lessor": "HH16", "lessee": "AQ01", "under_name": "B社", "old_name": "R16"}
+{"step": 1, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 1, "kind": "publication", "by": "MD02", "headline": "A市では、P17の看板が新しいものに変わったことが、町内会で話題となった。多くの", "body": "A市では、P17の看板が新しいものに変わったことが、町内会で話題となった。多くの住民がその内容に関心を示しており、不動産仲介業者も注目している。新しい店舗の開店なのか、既存店舗の移転・リニューアルなのか、その詳細はまだ不明だが、街の変化の兆しとして注目される。また、北部地区に新しく移住してきたR10さんへの歓迎ムードも見られた。R11さんの旅館活用やR12さんの商店街の空き店舗といった、街の活性化に関する議論も活発に行われており、今後の街の動向が注目される。", "about_acquisition": false}
+{"step": 2, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P02", "seller": "HH01", "buyer": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 2, "kind": "transfer", "acq_id": "ACQ03", "parcel_id": "P10", "seller": "HH09", "buyer": "AQ01", "under_name": "A社", "old_name": "R09"}
+{"step": 2, "kind": "direct_rejected", "from_id": "BR02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "BR02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 2, "kind": "publication", "by": "MD01", "headline": "A市は温泉という魅力がある一方で、高齢化や後継者不足といった課題を抱えています。", "body": "A市は温泉という魅力がある一方で、高齢化や後継者不足といった課題を抱えています。しかし、空き店舗に新しいお店ができるといった前向きな動きもあり、そういった変化を注視していきたいと考えています。特に北部地区に引っ越してきたR10さんのように、街の雰囲気や住みやすさに関心を持つ新たな住民の声は、街の活性化に繋がる大きなチャンスです。今後も、街の課題と可能性の両面を取材し、記事にしていきます。", "about_acquisition": false}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ04", "parcel_id": "P04", "seller": "HH03", "buyer": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 3, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 3, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 3, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 3, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 3, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 3, "kind": "direct_rejected", "from_id": "HH15", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 3, "kind": "publication", "by": "MD01", "headline": "R10氏によるコワーキング施設の開設が、街の活性化の起爆剤となる可能性が示唆され", "body": "R10氏によるコワーキング施設の開設が、街の活性化の起爆剤となる可能性が示唆されている。現在、商店街では空き店舗が目立つが、R03氏の空き地の活用や、R10氏の施設と連携した新たな取り組みが期待される。街の未来を担う若手事業者たちの動きに注目が集まる。", "about_acquisition": false}
+{"step": 3, "kind": "publication", "by": "MD02", "headline": "R03さんの空き地の活用相談、R01さんの空き店舗の活用相談について、不動産仲介", "body": "R03さんの空き地の活用相談、R01さんの空き店舗の活用相談について、不動産仲介業者であるB01、B02両氏に話を聞いた。空き物件の活用相談は依然として多いが、最近は特に、将来的な街の活性化を見据えた、店舗や居住スペースとしての再利用に関する相談が増えているとのこと。R10氏のコワーキング施設構想とも連携できそうな、前向きな動きが感じられる。\n\nまた、B02氏にはA区画の件についても確認したが、現時点では具体的な進展はない模様。引き続き注視していく必要があるだろう。", "about_acquisition": false}
+{"step": 4, "kind": "transfer", "acq_id": "ACQ05", "parcel_id": "P20", "seller": "HH03", "buyer": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 4, "kind": "direct_rejected", "from_id": "HH05", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 4, "kind": "direct_rejected", "from_id": "HH05", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 4, "kind": "publication", "by": "MD01", "headline": "A区画の活用策、商店街活性化とコワーキング施設構想、空き地活用を連携させたB01", "body": "A区画の活用策、商店街活性化とコワーキング施設構想、空き地活用を連携させたB01さんの提案がS4で発表される見通し。B02さんは、この提案の詳細を注視し、近いうちにJ02さんの報道への説明機会を設ける意向。R01さん、R03さん、R14さんの相続や空き店舗・空き地活用に関する相談も進んでおり、街全体での活性化への期待が高まっている。不動産仲介業者としてのB02さんの見解が、今後の街づくりにどう影響するか注目される。", "about_acquisition": false}
+{"step": 4, "kind": "publication", "by": "MD02", "headline": "4月S4の地域イベント会場での取材で、商店街の空き店舗活用とコワーキング施設構想", "body": "4月S4の地域イベント会場での取材で、商店街の空き店舗活用とコワーキング施設構想の連携について、J01記者（MD01）がB01氏（BR01）とB02氏（BR02）から話を聞いた。B01氏はA区画の活用策を発表する準備を進めていると述べ、B02氏も進展があり次第報告するとした。また、R01氏（HH01）には不動産仲介の評判について尋ねたところ、自宅活用のため相談したいとの意向を示した。街の活性化に向けた具体的な動きが複数見られ、今後の展開が期待される。R03氏（BZ01）の空き地活用やR10氏（BZ02）のコワーキング施設構想との連携も注目点である。", "about_acquisition": false}
+{"step": 5, "kind": "lease", "acq_id": "ACQ06", "parcel_id": "P12", "lessor": "HH11", "lessee": "AQ01", "under_name": "A社", "old_name": "R11"}
+{"step": 5, "kind": "direct_rejected", "from_id": "HH03", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "HH09", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "HH03", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "HH09", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "HH09", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 5, "kind": "direct_rejected", "from_id": "HH09", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 5, "kind": "publication", "by": "MD01", "headline": "B01さんのA区画活用構想と、R03さんの所有する空き地との連携について、S4の", "body": "B01さんのA区画活用構想と、R03さんの所有する空き地との連携について、S4の町内会で議論が行われた。不動産仲介業者であるB02さんの役割や評判について、関係者から様々な意見が出された。特にR03さん、R05さんのB02さんの仲介に対する見解が注目される。B01さんの構想とR03さんの土地活用が、B02さんの仲介を通じてどのように具体化していくのか、今後の動向が注目される。また、商店街の現状や共同浴場の維持、空き店舗の相続問題など、地域が抱える課題も浮き彫りになった。街の活性化に向け、住民、事業者、行政の連携が求められている。", "about_acquisition": false}
+{"step": 6, "kind": "transfer", "acq_id": "ACQ07", "parcel_id": "P18", "seller": "HH01", "buyer": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH03", "to": "HH10", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH03", "to": "HH10", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH12", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH01", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH01", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH01", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "HH01", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 6, "kind": "publication", "by": "MD01", "headline": "旅館組合のT01（BZ01）氏は、A区画の活用構想について、地域全体の魅力を高め", "body": "旅館組合のT01（BZ01）氏は、A区画の活用構想について、地域全体の魅力を高めることが優先であり、商店街の活性化と連携させることが重要だと述べた。特に、A区画の活用が旅館事業や若い世代の誘致にどう貢献するか、また商店街との相乗効果について、J01（MD01）は詳細を尋ねた。T01氏は、A区画の活用が地域全体の魅力を高め、若い世代が訪れたくなるような仕掛けを検討中であり、商店街の活性化と連動させることで相乗効果を期待していると説明した。具体的な計画については、今後も情報交換を進めていく意向を示した。", "about_acquisition": false}
+{"step": 6, "kind": "publication", "by": "MD02", "headline": "今月も、A区画の活用構想について、関係者間の議論が活発に行われている。B02氏（", "body": "今月も、A区画の活用構想について、関係者間の議論が活発に行われている。B02氏（不動産仲介）は、古い建物の活用と新しい住民の誘致の両立が街の活性化に不可欠であるとの見解を示した。R03氏（個人）は、自身の空き地の活用とコワーキング施設構想との連携に期待を寄せ、R14氏（個人）は、建物の老朽化による相続問題への懸念を表明した。旅館組合のT01氏も、A区画の活用が地域全体の魅力向上に繋がるとして、積極的な情報発信を求めている。共同浴場の維持が困難であるというR04氏の相談も市役所に寄せられており、街のインフラ維持と活性化策のバランスが今後の焦点となりそうだ。", "about_acquisition": false}
+{"step": 7, "kind": "transfer", "acq_id": "ACQ08", "parcel_id": "P11", "seller": "HH10", "buyer": "AQ01", "under_name": "A社", "old_name": "R10"}
+{"step": 7, "kind": "transfer", "acq_id": "ACQ09", "parcel_id": "P03", "seller": "HH02", "buyer": "AQ01", "under_name": "A社", "old_name": "R02"}
+{"step": 7, "kind": "direct_rejected", "from_id": "BZ01", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MD02", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "publication", "by": "MD01", "headline": "7月、不動産仲介事務所には、A区画の活用、商店街の活性化、個人の住宅や共同浴場の", "body": "7月、不動産仲介事務所には、A区画の活用、商店街の活性化、個人の住宅や共同浴場の維持といった、A市の抱える課題について、多くの関係者が集まった。B02氏は、P11区画のA社への名義変更を機に、商店街の活性化や若者誘致に繋がる活用を期待している。また、個人の住宅改修や共同浴場の維持についても、不動産仲介として街づくりに貢献したい意向を示した。市役所との連携や、個別の相談についても、今後具体的な動きが出てくることが期待される。築古物件の相続や維持管理に関する相談も多く、街全体の持続可能性について、関係者間で活発な意見交換が行われた。", "about_acquisition": false}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "7月S1、市役所でのR13さんの不動産登記に関する質問が、街の将来に関わる重要な", "body": "7月S1、市役所でのR13さんの不動産登記に関する質問が、街の将来に関わる重要な情報への糸口となる可能性が出てきた。J02さんが市役所の〇〇課での閲覧を案内する一方、J01さんが登記情報に詳しい人物への確認を提案。A区画の活用や共同浴場の維持といった課題と関連する登記情報に、今後どのような光が当たるのか注目される。B02さんのA区画活用への積極的な姿勢も、街の活性化への期待を高めている。", "about_acquisition": false}
+{"step": 8, "kind": "transfer", "acq_id": "ACQ10", "parcel_id": "P19", "seller": "HH02", "buyer": "AQ01", "under_name": "B社", "old_name": "R02"}
+{"step": 8, "kind": "publication", "by": "MD02", "headline": "8月、地域イベント会場での記者会見にて、B02氏よりA区画の活用が共同浴場の維持", "body": "8月、地域イベント会場での記者会見にて、B02氏よりA区画の活用が共同浴場の維持に繋がる可能性について発表があった。これは、高齢化や後継者不足が進むA市において、地域インフラの維持と活性化を両立させる新たな道筋を示すものとして注目される。B02氏は、詳細について今後改めて相談の機会を設けるとしている。また、R15氏からの依頼を受け、B01氏のP11区画、B社へのP18登記、R08氏とのA区画活用、そして筆者（J02）によるR13氏の登記に関する調査についても、取材での言及が許可された。これらの情報は、A市の土地利用や所有権の現状を明らかにする上で重要な要素となるだろう。共同浴場の維持という具体的な課題と、A区画の活用という都市開発の側面が結びつくことで、今後のA市のまちづくりに新たな展開が期待される。", "about_acquisition": false}
+{"step": 9, "kind": "transfer", "acq_id": "ACQ11", "parcel_id": "P09", "seller": "HH08", "buyer": "AQ01", "under_name": "A社", "old_name": "R08"}
+{"step": 9, "kind": "lease", "acq_id": "ACQ12", "parcel_id": "P05", "lessor": "HH04", "lessee": "AQ01", "under_name": "B社", "old_name": "R04"}
+{"step": 9, "kind": "direct_rejected", "from_id": "BZ02", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "BZ02", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 9, "kind": "publication", "by": "MD01", "headline": "第9月、A区画の活用と共同浴場維持の連携について、町内会で活発な議論が行われた。", "body": "第9月、A区画の活用と共同浴場維持の連携について、町内会で活発な議論が行われた。B02氏を中心に、地域住民や事業者から様々な意見が出され、A区画の活用が共同浴場の維持に繋がる可能性が示唆された。R16氏の空き家やR03氏の空き地の活用についても、地域貢献の観点から具体的なアイデアが求められている。不動産登記に関する質問も出され、今後の情報開示が待たれる。共同浴場の維持は地域にとって喫緊の課題であり、A区画の活用と合わせた総合的な取り組みが期待される。\n\n（300字以内）", "about_acquisition": false}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 10, "kind": "transfer", "acq_id": "ACQ13", "parcel_id": "P06", "seller": "HH05", "buyer": "AQ01", "under_name": "B社", "old_name": "R05"}
+{"step": 10, "kind": "direct_rejected", "from_id": "MU01", "to": "MD02", "reason": "quota_exhausted"}
+{"step": 10, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 10, "kind": "publication", "by": "MD01", "headline": "第10月、市役所窓口にて、共同浴場の維持とA区画の活用、R03氏の空き地（P36", "body": "第10月、市役所窓口にて、共同浴場の維持とA区画の活用、R03氏の空き地（P36）活用について、R04氏と意見交換を行った。R04氏は共同浴場維持のため市役所に支援策を相談する意向を示しており、A区画の登記情報や維持費と共同浴場維持との関連、R03氏の空き地活用についても議論の必要性が確認された。R14氏がA区画の活用を懸念していることも踏まえ、今後、これらの課題について連携して取り組むことが期待される。", "about_acquisition": false}
+{"step": 10, "kind": "publication", "by": "MD02", "headline": "第10月、市役所窓口ではA区画の活用と共同浴場維持に関する議論が活発に行われた。", "body": "第10月、市役所窓口ではA区画の活用と共同浴場維持に関する議論が活発に行われた。J02（MD02）はBR01（HH01）に対し、MU01（HH13）の登記情報とA区画、共同浴場維持との関連について詳細を求めた。BR01（HH01）はMU01（HH13）と会って登記を確認し、R03（BZ03）の空き地（P36）活用について共同浴場との連携案を考えていると述べた。また、P06の登記がB社に変わった件について、T01（BZ01）からの質問に対し、BR01（HH01）からの情報提供が待たれる。これらの情報は、地域資源の活用と維持という観点から、今後のA市の活性化に繋がる可能性を秘めている。特に、空き家・空き地活用と共同浴場維持の連携は、高齢化が進むA市にとって重要な課題であり、今回の議論は第一歩となるだろう。", "about_acquisition": false}
+{"step": 10, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 11, "kind": "lease", "acq_id": "ACQ14", "parcel_id": "P07", "lessor": "HH06", "lessee": "AQ01", "under_name": "A社", "old_name": "R06"}
+{"step": 11, "kind": "publication", "by": "MD01", "headline": "第10月、A区画の活用について懸念の声が上がっている。共同浴場の維持費とA区画の", "body": "第10月、A区画の活用について懸念の声が上がっている。共同浴場の維持費とA区画の管理費の関連が指摘されており、住民の間で連携の模索が始まっている。R03さんのP36の空き地やR16さんのP33の土地なども含め、共同浴場の維持に繋がるような活用策について、不動産仲介業者B02さんの事務所に多くの住民が集まり、活発な意見交換が行われた。A区画の登記情報や活用方法についても、関係者間で情報共有が進められている。今後、地域全体でこの問題に取り組む機運が高まることが期待される。", "about_acquisition": false}
+{"step": 12, "kind": "transfer", "acq_id": "ACQ15", "parcel_id": "P16", "seller": "HH15", "buyer": "AQ01", "under_name": "A社", "old_name": "R15"}
+{"step": 12, "kind": "publication", "by": "MD01", "headline": "共同浴場維持とA区画活用へ連携の動き\n\n共同浴場の維持と、その隣接地であるA区画", "body": "共同浴場維持とA区画活用へ連携の動き\n\n共同浴場の維持と、その隣接地であるA区画の活用を巡り、地域住民や事業者、行政の間で連携を模索する動きが活発化している。不動産仲介業者のB02氏を中心に、登記情報の確認や具体的な活用方法についての議論が進められている。A区画の所有者であるR11氏は、地域活性化に繋がる活用を期待しており、共同浴場との連携が実現すれば、街の魅力向上に大きく貢献すると見ている。今後、関係者間での具体的な話し合いの場が設けられる見込みで、地域住民の関心も高まっている。\n\n（記者 J01）", "about_acquisition": false}
+{"step": 12, "kind": "publication", "by": "MD02", "headline": "第12月S4、地域イベント会場にて、記者（J02）はBR01（B01）に対し、A", "body": "第12月S4、地域イベント会場にて、記者（J02）はBR01（B01）に対し、A区画の活用と共同浴場の維持との連携について深掘りした。特に、P06のB社への名義変更、MU01の登記、P36の活用が共同浴場の存続にどう影響するのか、具体的な説明を求めた。また、P16での測量作業がA区画に関係するのかについても質問した。BR01からの回答次第では、今後の取材方針が左右される可能性があり、関係者の関心も高い。\n\n（300字）", "about_acquisition": false}
+{"step": 13, "kind": "lease", "acq_id": "ACQ16", "parcel_id": "P13", "lessor": "HH12", "lessee": "AQ01", "under_name": "C社", "old_name": "R12"}
+{"step": 13, "kind": "publication", "by": "MD02", "headline": "A区画の登記状況について、R11さんが所有者でB02さんが仲介しているとの情報が", "body": "A区画の登記状況について、R11さんが所有者でB02さんが仲介しているとの情報が入った。また、BR01さんとの連携についても関心が寄せられており、今後の進展が注目される。共同浴場との連携や、P16の測量・売却完了との関連性も含め、引き続き取材を進める。", "about_acquisition": false}
+{"step": 13, "kind": "publication", "by": "MD01", "headline": "P13の看板が外れ、新しい看板に変わった。街の風景に変化が見られる。一方、A区画", "body": "P13の看板が外れ、新しい看板に変わった。街の風景に変化が見られる。一方、A区画の活用と共同浴場の維持を巡る議論が地区公民館で活発に行われた。住民からは、共同浴場維持への協力や、A区画の活用方法、P36の空き地との連携についての意見が出された。R07氏は自身のP24を手放す意思がないことを表明し、共同浴場維持のための具体的な支援や連携のあり方について、さらなる説明を求めた。G02氏は、R06氏からの前向きな協力の感触を得ており、共同浴場との連携を進める意向を示した。来月、この件に関する情報が記者に共有される予定であり、今後の動向が注目される。", "about_acquisition": false}
+{"step": 14, "kind": "lease", "acq_id": "ACQ17", "parcel_id": "P14", "lessor": "HH13", "lessee": "AQ01", "under_name": "B社", "old_name": "R13"}
+{"step": 14, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "HH04", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "HH04", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "HH04", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "HH04", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "HH04", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 15, "kind": "publication", "by": "MD01", "headline": "A区画の登記情報と活用、共同浴場維持に向けた地域連携の動きが、地元不動産仲介事務", "body": "A区画の登記情報と活用、共同浴場維持に向けた地域連携の動きが、地元不動産仲介事務所に集まった関係者たちの間で活発に交わされた。R04氏がA区画の登記確認のため仲介業者を訪れ、R12氏も同様に活用策について相談予定であることが明らかになった。共同浴場維持への協力についても、BR02氏や他の住民から具体的な協力の意思が示されており、地域課題解決に向けた連携の可能性が広がっている。R03氏からはP36の空き地活用に関する相談も寄せられ、地域全体の活性化に向けた動きが注目される。", "about_acquisition": false}
+{"step": 16, "kind": "transfer", "acq_id": "ACQ18", "parcel_id": "P24", "seller": "HH07", "buyer": "AQ01", "under_name": "D社", "old_name": "R07"}
+{"step": 16, "kind": "direct_rejected", "from_id": "HH04", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 16, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 16, "kind": "publication", "by": "MD01", "headline": "A区画の活用と共同浴場維持に向け、地域住民・事業者が意見交換（S4地域イベント会", "body": "A区画の活用と共同浴場維持に向け、地域住民・事業者が意見交換（S4地域イベント会場）\n地域にとって喫緊の課題であるA区画の活用と共同浴場の維持について、地域イベント会場に多くの関係者が集まり、活発な意見交換が行われた。特に、P34の登記情報とA区画の登記情報との食い違いが指摘されており、不動産仲介業者への確認が急務となっている。市役所での確認も進められる予定で、共同浴場の維持とA区画の活用を両立させるための具体的な計画策定に向け、一歩前進した形だ。今後、関係者間での連携強化が期待される。", "about_acquisition": false}
+{"step": 16, "kind": "publication", "by": "MD02", "headline": "A区画の登記と共同浴場の維持、地域住民の関心高まる\n本日の地域イベント会場では、", "body": "A区画の登記と共同浴場の維持、地域住民の関心高まる\n本日の地域イベント会場では、A区画の登記状況と共同浴場の維持について、多くの関係者が集まり、活発な意見交換が行われました。記者のJ02は、登記情報の不確実性や、それが共同浴場の維持にどう影響するのか、関係者から詳しい話を聞き取ろうとしました。B01（BR01）をはじめ、T01、R02、R06、R07、R08、R09、R10、R12、R14、R16、J01、G01など、多数の関係者がこの問題に関心を示しており、登記の正確な情報共有と、共同浴場維持に向けた具体的な協力体制の構築が急務であることが浮き彫りになりました。特に、登記情報に食い違いがあるとの指摘もあり、早急な確認が求められています。今後、これらの課題がどのように解決されていくのか、引き続き取材を進めてまいります。", "about_acquisition": false}
+{"step": 17, "kind": "transfer", "acq_id": "ACQ19", "parcel_id": "P08", "seller": "HH07", "buyer": "AQ01", "under_name": "B社", "old_name": "R07"}
+{"step": 17, "kind": "publication", "by": "MD01", "headline": "共同浴場の維持とA区画の登記を巡り、住民の間で活発な議論が交わされている。登記上", "body": "共同浴場の維持とA区画の登記を巡り、住民の間で活発な議論が交わされている。登記上の所有者はR11氏だが、実際の状況との食い違いが指摘されており、記者（J01）が調査を進めている。一方、共同浴場の維持費問題は喫緊の課題であり、A区画の活用やP08の所有権変更（B社へ）との関連も視野に入れた連携が模索されている。P08周辺での不審な動きも報告されており、今後も動向が注目される。", "about_acquisition": false}
+{"step": 17, "kind": "publication", "by": "MD02", "headline": "本日の町内会にて、A区画の登記と共同浴場維持に関する情報交換が行われました。B0", "body": "本日の町内会にて、A区画の登記と共同浴場維持に関する情報交換が行われました。B01（BR01）氏によると、市役所への確認の結果、A区画の登記自体が共同浴場の維持に直接影響を与える動きはないとのことです。しかし、P08の名義がB社へ変更される件については、今後の街の動きとして注視すべき点として挙げられました。また、共同浴場の維持協力に関するR11氏からの申し出についても、引き続き連携を深めていく方針が示されました。G02（MU02）氏の記事で示唆されていた登記情報と共同浴場維持の関連性についても、継続的な情報収集と確認の必要性が確認されました。R16氏もA区画の登記について関心を示しており、今後の動向が注目されます。", "about_acquisition": false}
+{"step": 18, "kind": "lease", "acq_id": "ACQ20", "parcel_id": "P22", "lessor": "HH05", "lessee": "AQ01", "under_name": "B社", "old_name": "R05"}
+{"step": 18, "kind": "publication", "by": "MD01", "headline": "A区画の登記、混乱の中で確認へ S4、市役所窓口で登記簿謄本確認を提案\n共同浴場", "body": "A区画の登記、混乱の中で確認へ S4、市役所窓口で登記簿謄本確認を提案\n共同浴場の維持にも関わるA区画の登記について、関係者の間で情報に食い違いが生じていることが、S4の市役所窓口で明らかになった。R08さんの名義であるという見方がある一方、R11さんの名義であるという情報も錯綜。この混乱を受け、記者J01は、市役所窓口で登記簿謄本を関係者と共に確認することを提案。正確な情報を把握し、共同浴場の維持に向けた協力体制を築くことが急務となっている。登記情報の確認結果は、改めて報じる予定だ。", "about_acquisition": false}
+{"step": 18, "kind": "publication", "by": "MD02", "headline": "A区画の登記に関する混乱、解消へ\n\n共同浴場の維持とA区画（P41）の活用を巡り", "body": "A区画の登記に関する混乱、解消へ\n\n共同浴場の維持とA区画（P41）の活用を巡り、登記情報に食い違いがあるとの懸念が出ていた件について、18ヶ月目のS4、市役所窓口にて登記簿謄本が確認された。その結果、A区画はR08氏の名義であることが判明し、関係者の間で見解の相違が解消された。先月の報道内容との食い違いは、情報錯綜によるものとみられる。\n\nこの件を受け、共同浴場の維持協力については、今後も皆で協力していく方向で一致した。P08の名義変更についても、不動産市場の動向を注視していく。正確な情報共有と連携を通じて、共同浴場の持続的な運営を目指していく方針である。", "about_acquisition": false}
+{"step": 19, "kind": "transfer", "acq_id": "ACQ21", "parcel_id": "P21", "seller": "HH04", "buyer": "AQ01", "under_name": "C社", "old_name": "R04"}
+{"step": 19, "kind": "publication", "by": "MD01", "headline": "B02氏が本日、市役所の窓口でA区画の登記簿謄本を確認した結果、A区画はR08氏", "body": "B02氏が本日、市役所の窓口でA区画の登記簿謄本を確認した結果、A区画はR08氏の名義で登記されていることを確認したと報告した。報道内容とも一致しており、R16氏の認識とのずれが懸念されていた件についても、登記内容が確定した模様だ。また、P21の名義がC社へ移転したことも確認された。これにより、A区画を巡る登記上の問題は一応の決着を見たと言えるだろう。住民の皆様には、この確定情報をお伝えしたい。", "about_acquisition": false}
+{"step": 19, "kind": "publication", "by": "MD02", "headline": "A区画の登記について、不動産仲介のB02さんは、市役所窓口での登記簿謄本確認の結", "body": "A区画の登記について、不動産仲介のB02さんは、市役所窓口での登記簿謄本確認の結果、R08さんの名義であることを改めて確認したと報告した。しかし、R16さんは自身の認識とのずれを指摘しており、報道内容と実際の登記内容に一致しない点がある可能性が残る。B02さんには、R16さんの懸念も踏まえ、登記簿謄本の詳細な内容を再度確認することが求められる。また、地域経済の動向を探るため、不動産市場の現状についても関係者から情報を収集する必要がある。", "about_acquisition": false}
+{"step": 20, "kind": "lease", "acq_id": "ACQ22", "parcel_id": "P15", "lessor": "HH14", "lessee": "AQ01", "under_name": "B社", "old_name": "R14"}
+{"step": 20, "kind": "direct_rejected", "from_id": "BZ03", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH12", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 20, "kind": "publication", "by": "MD01", "headline": "A区画の登記について、R02氏が登記簿謄本を確認した結果、R08氏の名義であるこ", "body": "A区画の登記について、R02氏が登記簿謄本を確認した結果、R08氏の名義であることが判明した。これにより、一部で懸念されていたC社への移転の可能性については、現時点では確認されていない。市役所での登記簿謄本確認には、本人確認書類と申請書が必要となる。この登記情報が地域経済に与える影響については、今後も注視していく必要がある。", "about_acquisition": false}
+{"step": 21, "kind": "transfer", "acq_id": "ACQ23", "parcel_id": "P23", "seller": "HH06", "buyer": "AQ01", "under_name": "A社", "old_name": "R06"}
+{"step": 21, "kind": "direct_rejected", "from_id": "HH14", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 21, "kind": "publication", "by": "MD01", "headline": "A区画の登記情報に食い違いがあることが、S4の町内会で明らかになった。市役所職員", "body": "A区画の登記情報に食い違いがあることが、S4の町内会で明らかになった。市役所職員のR02さんは「R08さんの名義」と断言する一方、記者J01さんの認識は異なっていた。R09さんからは「以前の資料の誤解」との説明もあった。町内会では、登記簿謄本を直接確認し、正確な情報を共有する機会を設けることが提案された。また、共同浴場の維持協力費についても、月額1000円の提案を参考に、具体的な運営方法が話し合われた。土地の正確な情報と、住民間の協力体制の構築が、今後のA市の課題となるだろう。", "about_acquisition": false}
+{"step": 22, "kind": "transfer", "acq_id": "ACQ24", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "R16"}
+{"step": 22, "kind": "transfer", "acq_id": "ACQ25", "parcel_id": "P36", "seller": "HH03", "buyer": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 22, "kind": "direct_rejected", "from_id": "MU02", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 22, "kind": "publication", "by": "MD01", "headline": "A区画の登記を巡る認識のずれと、共同浴場の維持協力費について、市役所窓口に多くの", "body": "A区画の登記を巡る認識のずれと、共同浴場の維持協力費について、市役所窓口に多くの関係者が集まり、登記簿謄本の確認と直接的な話し合いが行われた。登記簿謄本を確認した結果、A区画はR08氏の名義であることが確認された。これにより、R02氏とR08氏の認識の齟齬は解消された。共同浴場の維持協力費については、R05氏の提案額を元に、今後具体的な運営方法についてさらに話し合いを進めることになった。参加者からは、協力と理解を深めることの重要性が改めて確認された。", "about_acquisition": false}
+{"step": 22, "kind": "publication", "by": "MD02", "headline": "A区画の登記に関する長引く認識のずれが、本日市役所での話し合いで解消の兆しを見せ", "body": "A区画の登記に関する長引く認識のずれが、本日市役所での話し合いで解消の兆しを見せた。R02氏（市役所職員）は、登記簿謄本でA区画がR08氏の名義であることを確認したと報告。R08氏もこれを市役所で直接確認する意向を示し、関係者の間での誤解は解かれる見込みだ。一方、共同浴場の維持協力費については、R05氏の提案額を基に、住民間で活発な意見交換が続いている。来月以降の具体的な運営方針が、この議論から生まれることが期待される。また、今月に入りP33では見慣れない人々が、P36では測量関係者が見られた。P33の登記はR16からA社へ移転しており、P36では測量が行われていることから、今後の街の変化を示唆している可能性がある。", "about_acquisition": false}
+{"step": 22, "kind": "direct_rejected", "from_id": "MU02", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 23, "kind": "transfer", "acq_id": "ACQ26", "parcel_id": "P29", "seller": "HH12", "buyer": "AQ01", "under_name": "B社", "old_name": "R12"}
+{"step": 23, "kind": "direct_rejected", "from_id": "BR01", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 23, "kind": "publication", "by": "MD01", "headline": "共同浴場の維持協力費について、T02（BZ02）は住民の意見を聞きながら、無理の", "body": "共同浴場の維持協力費について、T02（BZ02）は住民の意見を聞きながら、無理のない範囲で進めたい意向を示した。具体的な金額や徴収方法について、皆さんの意見を伺いたいとのこと。また、A区画の登記に関する住民の関心も高く、情報交換が行われた。来月でA市を離れるR15（HH16）は自宅の売却を相談。最終月となるJ01（MD01）は、これまでのA市の動きを記事にまとめるため、不動産仲介業者から最新情報や登記に関する経緯を収集した。共同浴場の維持協力費問題とA区画の登記問題は、今後も住民間の議論が必要となりそうだ。", "about_acquisition": false}
+{"step": 23, "kind": "publication", "by": "MD02", "headline": "最終月となった今、A市の様々な動きを記事にまとめる。A区画の登記については、関係", "body": "最終月となった今、A市の様々な動きを記事にまとめる。A区画の登記については、関係者間の認識の食い違いが明らかになり、仲介業者からの詳細な説明が待たれる。共同浴場の維持協力費は、住民の協力により具体的な進展を見せている。P29区画のB社への名義変更も、街の大きな変化の一つとして報じる。来月A市を離れるR15氏のP32の自宅売却相談にも触れ、街を去る人々の思いも伝える。これらの情報を統合し、A市の現在と未来への希望を込めた記事として締めくくる。", "about_acquisition": false}
+{"step": 24, "kind": "transfer", "acq_id": "ACQ27", "parcel_id": "P42", "seller": "HH09", "buyer": "AQ01", "under_name": "D社", "old_name": "R09"}
+{"step": 24, "kind": "lease", "acq_id": "ACQ28", "parcel_id": "P44", "lessor": "HH11", "lessee": "AQ01", "under_name": "C社", "old_name": "R11"}
+{"step": 24, "kind": "publication", "by": "MD02", "headline": "A市は、高齢化や人口減少といった課題に直面しながらも、地域住民の協力と新たな動き", "body": "A市は、高齢化や人口減少といった課題に直面しながらも、地域住民の協力と新たな動きによって未来への希望を見出している。特に、長年懸念されていた共同浴場の維持協力費については、住民の協力体制が整いつつあり、来月からの実施に向けて具体的な話し合いが進んでいる。また、A区画の登記に関する問題も、関係者間の情報共有が進み、記者による取材を通じて正確な情報が明らかになる見込みだ。R15氏の自宅売却や、P12、P44区画での新たな賃貸契約成立など、個々の動きが街の活性化に繋がる可能性も示唆されている。スペースポート構想が進む対岸の空港と連携し、A市が新たな賑わいを取り戻す未来に期待したい。", "about_acquisition": false}

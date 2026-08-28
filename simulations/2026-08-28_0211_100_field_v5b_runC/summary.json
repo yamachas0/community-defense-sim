@@ -1,0 +1,333 @@
+{
+  "run_name": "field_v5b_runC",
+  "steps": 24,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "parcels_tradable": 46,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 1042.0,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 10,
+  "truncated_responses": 0,
+  "max_token_finishes": 10,
+  "usage": {
+    "calls": 4715,
+    "input_tokens": 12364585,
+    "cached_tokens": 2918596,
+    "output_tokens": 1359670,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:plan": {
+        "calls": 384,
+        "input": 609714,
+        "cached": 227475,
+        "output": 92129
+      },
+      "agent:business:plan": {
+        "calls": 96,
+        "input": 143820,
+        "cached": 56032,
+        "output": 22920
+      },
+      "agent:broker:plan": {
+        "calls": 48,
+        "input": 68403,
+        "cached": 28632,
+        "output": 12093
+      },
+      "agent:municipality:plan": {
+        "calls": 48,
+        "input": 74452,
+        "cached": 27270,
+        "output": 12078
+      },
+      "agent:media:plan": {
+        "calls": 48,
+        "input": 72564,
+        "cached": 28294,
+        "output": 11863
+      },
+      "agent:household:S1r1": {
+        "calls": 342,
+        "input": 492623,
+        "cached": 190435,
+        "output": 73650
+      },
+      "agent:business:S1r1": {
+        "calls": 80,
+        "input": 110075,
+        "cached": 49031,
+        "output": 16901
+      },
+      "agent:broker:S1r1": {
+        "calls": 44,
+        "input": 59710,
+        "cached": 26291,
+        "output": 11160
+      },
+      "agent:municipality:S1r1": {
+        "calls": 42,
+        "input": 59302,
+        "cached": 25286,
+        "output": 9536
+      },
+      "agent:media:S1r1": {
+        "calls": 43,
+        "input": 61247,
+        "cached": 25113,
+        "output": 10562
+      },
+      "agent:household:S1r2": {
+        "calls": 342,
+        "input": 592007,
+        "cached": 199785,
+        "output": 79143
+      },
+      "agent:business:S1r2": {
+        "calls": 80,
+        "input": 132013,
+        "cached": 47261,
+        "output": 20085
+      },
+      "agent:broker:S1r2": {
+        "calls": 44,
+        "input": 72393,
+        "cached": 26991,
+        "output": 11850
+      },
+      "agent:municipality:S1r2": {
+        "calls": 42,
+        "input": 69308,
+        "cached": 27788,
+        "output": 10157
+      },
+      "agent:media:S1r2": {
+        "calls": 43,
+        "input": 74435,
+        "cached": 25901,
+        "output": 10566
+      },
+      "agent:business:S2r1": {
+        "calls": 30,
+        "input": 64846,
+        "cached": 20829,
+        "output": 6361
+      },
+      "agent:household:S2r1": {
+        "calls": 135,
+        "input": 291182,
+        "cached": 89325,
+        "output": 30552
+      },
+      "agent:broker:S2r1": {
+        "calls": 40,
+        "input": 79580,
+        "cached": 26487,
+        "output": 9506
+      },
+      "agent:municipality:S2r1": {
+        "calls": 42,
+        "input": 82091,
+        "cached": 26108,
+        "output": 9533
+      },
+      "agent:household:S2r2": {
+        "calls": 135,
+        "input": 314304,
+        "cached": 88645,
+        "output": 30761
+      },
+      "agent:municipality:S2r2": {
+        "calls": 42,
+        "input": 87590,
+        "cached": 28392,
+        "output": 10467
+      },
+      "agent:broker:S2r2": {
+        "calls": 40,
+        "input": 85792,
+        "cached": 28562,
+        "output": 10224
+      },
+      "agent:business:S2r2": {
+        "calls": 30,
+        "input": 68692,
+        "cached": 18596,
+        "output": 7288
+      },
+      "agent:household:S3r1": {
+        "calls": 312,
+        "input": 730286,
+        "cached": 208207,
+        "output": 72610
+      },
+      "agent:business:S3r1": {
+        "calls": 81,
+        "input": 180997,
+        "cached": 57313,
+        "output": 20985
+      },
+      "agent:media:S3r1": {
+        "calls": 43,
+        "input": 103204,
+        "cached": 25568,
+        "output": 11443
+      },
+      "agent:broker:S3r1": {
+        "calls": 45,
+        "input": 106823,
+        "cached": 30431,
+        "output": 13279
+      },
+      "agent:municipality:S3r1": {
+        "calls": 36,
+        "input": 87718,
+        "cached": 23439,
+        "output": 9262
+      },
+      "agent:business:S3r2": {
+        "calls": 81,
+        "input": 217695,
+        "cached": 55929,
+        "output": 20533
+      },
+      "agent:household:S3r2": {
+        "calls": 312,
+        "input": 881745,
+        "cached": 216232,
+        "output": 76563
+      },
+      "agent:media:S3r2": {
+        "calls": 43,
+        "input": 125123,
+        "cached": 29214,
+        "output": 11660
+      },
+      "agent:broker:S3r2": {
+        "calls": 45,
+        "input": 128130,
+        "cached": 31673,
+        "output": 13621
+      },
+      "agent:municipality:S3r2": {
+        "calls": 36,
+        "input": 103238,
+        "cached": 24027,
+        "output": 9321
+      },
+      "agent:household:S4r1": {
+        "calls": 360,
+        "input": 1211305,
+        "cached": 247313,
+        "output": 99382
+      },
+      "agent:business:S4r1": {
+        "calls": 89,
+        "input": 278436,
+        "cached": 63736,
+        "output": 27598
+      },
+      "agent:municipality:S4r1": {
+        "calls": 45,
+        "input": 145505,
+        "cached": 33907,
+        "output": 13071
+      },
+      "agent:broker:S4r1": {
+        "calls": 47,
+        "input": 161442,
+        "cached": 31976,
+        "output": 14404
+      },
+      "agent:media:S4r1": {
+        "calls": 45,
+        "input": 159261,
+        "cached": 31351,
+        "output": 14672
+      },
+      "agent:household:S4r2": {
+        "calls": 360,
+        "input": 2039856,
+        "cached": 268863,
+        "output": 114219
+      },
+      "agent:business:S4r2": {
+        "calls": 89,
+        "input": 477757,
+        "cached": 65681,
+        "output": 32319
+      },
+      "agent:municipality:S4r2": {
+        "calls": 45,
+        "input": 248436,
+        "cached": 38118,
+        "output": 16044
+      },
+      "agent:broker:S4r2": {
+        "calls": 47,
+        "input": 266183,
+        "cached": 36679,
+        "output": 20544
+      },
+      "agent:media:S4r2": {
+        "calls": 45,
+        "input": 263000,
+        "cached": 34807,
+        "output": 19874
+      },
+      "agent:media:S2r1": {
+        "calls": 19,
+        "input": 40460,
+        "cached": 13440,
+        "output": 4945
+      },
+      "agent:media:S2r2": {
+        "calls": 19,
+        "input": 44599,
+        "cached": 12163,
+        "output": 5122
+      },
+      "classify": {
+        "calls": 251,
+        "input": 597243,
+        "cached": 0,
+        "output": 198814
+      },
+      "classify_occupation": {
+        "calls": 295,
+        "input": 866807,
+        "cached": 0,
+        "output": 205457
+      }
+    }
+  },
+  "kpi": {
+    "final_acquirer_share": 0.413,
+    "final_hhi": 0.1975,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.059,
+    "cascade": {
+      "induced": 1,
+      "max_chain": 2
+    },
+    "final_effective_control_area_share": null,
+    "late_index": null,
+    "detection_lag": {
+      "step": 5,
+      "headline": "今月S4の町内会では、P17の登記とB社購入に関する情報に食い違いがある件、P0",
+      "share_at_first_report": 0.087,
+      "share_observable": 0.087
+    },
+    "final_acquirer_area_share": null,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

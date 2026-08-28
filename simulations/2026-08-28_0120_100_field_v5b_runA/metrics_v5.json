@@ -1,0 +1,981 @@
+{
+  "run": "2026-08-28_0120_100_field_v5b_runA",
+  "version": "field_v5b",
+  "steps": 24,
+  "model": "gemini-2.5-flash-lite",
+  "calls": 4663,
+  "errors": 0,
+  "input_tokens": 13621908,
+  "output_tokens": 1442368,
+  "invalid_actions": 5,
+  "llm_classified": true,
+  "classifier_unknown": 0,
+  "acquisitions": 19,
+  "leases": 9,
+  "deals": 28,
+  "acquisition_months": [
+    2,
+    2,
+    3,
+    4,
+    6,
+    7,
+    7,
+    8,
+    9,
+    10,
+    12,
+    16,
+    17,
+    19,
+    21,
+    22,
+    22,
+    23,
+    24
+  ],
+  "lease_months": [
+    1,
+    5,
+    9,
+    11,
+    13,
+    14,
+    18,
+    20,
+    24
+  ],
+  "control_share": 0.609,
+  "holders": [
+    "A社",
+    "B社",
+    "C社",
+    "D社"
+  ],
+  "final_acquirer_share": 0.413,
+  "utterance_turns": 3777,
+  "utterances_spoken": 3079,
+  "silence_rate": 0.185,
+  "mean_group_size": 6.45,
+  "directs": 184,
+  "articles": 36,
+  "home_rate": 0.186,
+  "mention_rows": 592,
+  "mention_by_channel": {
+    "utterance": 483,
+    "article": 28,
+    "direct": 81
+  },
+  "propagation_edges": 6573,
+  "speakers_by_month": {
+    "1": [
+      "HH11",
+      "MD02"
+    ],
+    "2": [
+      "HH15"
+    ],
+    "3": [
+      "HH03",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH14",
+      "HH15",
+      "MU01"
+    ],
+    "4": [
+      "HH02",
+      "HH07",
+      "HH09"
+    ],
+    "5": [
+      "BR01",
+      "HH01",
+      "HH02",
+      "HH07",
+      "HH09",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MU02"
+    ],
+    "6": [
+      "BR02",
+      "BZ01",
+      "HH02",
+      "HH15"
+    ],
+    "7": [
+      "BR01",
+      "BR02",
+      "BZ01",
+      "BZ02",
+      "HH02",
+      "HH08",
+      "HH12",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "8": [
+      "BR02",
+      "BZ01",
+      "HH02",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "9": [
+      "HH16",
+      "MD01"
+    ],
+    "10": [
+      "BR01",
+      "BZ01",
+      "BZ03",
+      "BZ04",
+      "HH09",
+      "HH11",
+      "MD01",
+      "MD02",
+      "MU01"
+    ],
+    "11": [
+      "BR01",
+      "BZ03",
+      "BZ04",
+      "HH01",
+      "HH04",
+      "HH06",
+      "HH08",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "12": [
+      "BR01",
+      "BR02",
+      "BZ01",
+      "HH05",
+      "HH08",
+      "HH10",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "13": [
+      "HH05",
+      "HH10",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "14": [
+      "BZ03",
+      "HH05",
+      "HH14"
+    ],
+    "15": [
+      "BZ01",
+      "BZ02",
+      "HH05",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH13",
+      "HH16",
+      "MD01",
+      "MU01"
+    ],
+    "16": [
+      "BR01",
+      "BZ03",
+      "HH04",
+      "HH14",
+      "HH16",
+      "MD01",
+      "MD02"
+    ],
+    "17": [
+      "BR01",
+      "BZ04",
+      "HH03",
+      "HH04",
+      "HH08",
+      "HH10",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU02"
+    ],
+    "18": [
+      "BR01",
+      "BR02",
+      "BZ01",
+      "BZ03",
+      "HH04",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH10",
+      "HH11",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "19": [
+      "BR01",
+      "BR02",
+      "BZ03",
+      "BZ04",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH14",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "20": [
+      "BR01",
+      "BR02",
+      "BZ03",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH08",
+      "HH09",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU02"
+    ],
+    "21": [
+      "BR01",
+      "BR02",
+      "BZ03",
+      "BZ04",
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH08",
+      "HH09",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "22": [
+      "BR02",
+      "HH01",
+      "HH07",
+      "MD01",
+      "MD02",
+      "MU02"
+    ],
+    "23": [
+      "BR01",
+      "BZ03",
+      "BZ04",
+      "HH01",
+      "HH03",
+      "HH05",
+      "HH10",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD01",
+      "MD02"
+    ],
+    "24": [
+      "BR01",
+      "BR02",
+      "BZ01",
+      "BZ02",
+      "BZ03",
+      "BZ04",
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ]
+  },
+  "rule_llm_cross": {
+    "rule-/llm-": 1179,
+    "rule+/llm+": 483,
+    "rule-/llm+": 68,
+    "rule+/llm-": 1349
+  },
+  "llm_only_utterances": 68,
+  "first_mention": {
+    "ACQ02": {
+      "parcel_id": "P02",
+      "transfer_month": 2,
+      "month": 6,
+      "agent_id": "HH02",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V06",
+      "lag_months": 4,
+      "available_antecedents": [
+        "registry_lookup",
+        "registry_lookup"
+      ],
+      "heard_from": []
+    },
+    "ACQ07": {
+      "parcel_id": "P18",
+      "transfer_month": 6,
+      "month": 6,
+      "agent_id": "HH02",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V06",
+      "lag_months": 0,
+      "available_antecedents": [
+        "registry_lookup"
+      ],
+      "heard_from": []
+    },
+    "ACQ08": {
+      "parcel_id": "P11",
+      "transfer_month": 7,
+      "month": 7,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V04",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": []
+    },
+    "ACQ09": {
+      "parcel_id": "P03",
+      "transfer_month": 7,
+      "month": 7,
+      "agent_id": "HH12",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V07",
+      "lag_months": 0,
+      "available_antecedents": [
+        "survey"
+      ],
+      "heard_from": [
+        "HH02",
+        "HH02"
+      ]
+    },
+    "ACQ10": {
+      "parcel_id": "P19",
+      "transfer_month": 8,
+      "month": 8,
+      "agent_id": "BR02",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V01",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": [
+        "HH02",
+        "HH02"
+      ]
+    },
+    "ACQ13": {
+      "parcel_id": "P06",
+      "transfer_month": 10,
+      "month": 10,
+      "agent_id": "BZ01",
+      "role": "business",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V06",
+      "lag_months": 0,
+      "available_antecedents": [
+        "strangers",
+        "registry_lookup"
+      ],
+      "heard_from": [
+        "BR01",
+        "BR01"
+      ]
+    },
+    "ACQ15": {
+      "parcel_id": "P16",
+      "transfer_month": 12,
+      "month": 12,
+      "agent_id": "HH05",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S3",
+      "venue": "V04",
+      "lag_months": 0,
+      "available_antecedents": [
+        "survey"
+      ],
+      "heard_from": [
+        "HH15"
+      ]
+    },
+    "ACQ18": {
+      "parcel_id": "P24",
+      "transfer_month": 16,
+      "month": 16,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S2",
+      "venue": "V07",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": []
+    },
+    "ACQ19": {
+      "parcel_id": "P08",
+      "transfer_month": 17,
+      "month": 17,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S2",
+      "venue": "V07",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": []
+    },
+    "ACQ21": {
+      "parcel_id": "P21",
+      "transfer_month": 19,
+      "month": 19,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S2",
+      "venue": "V07",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": []
+    },
+    "ACQ23": {
+      "parcel_id": "P23",
+      "transfer_month": 21,
+      "month": 21,
+      "agent_id": "HH08",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S3",
+      "venue": "V04",
+      "lag_months": 0,
+      "available_antecedents": [
+        "sign_change",
+        "sign_change",
+        "sign_change"
+      ],
+      "heard_from": []
+    },
+    "ACQ24": {
+      "parcel_id": "P33",
+      "transfer_month": 22,
+      "month": 22,
+      "agent_id": "MD02",
+      "role": "media",
+      "channel": "article",
+      "scene": "S4",
+      "venue": "",
+      "lag_months": 0,
+      "available_antecedents": [
+        "strangers",
+        "registry_lookup"
+      ],
+      "heard_from": [
+        "BZ03",
+        "BZ03"
+      ]
+    },
+    "ACQ25": {
+      "parcel_id": "P36",
+      "transfer_month": 22,
+      "month": 22,
+      "agent_id": "MD02",
+      "role": "media",
+      "channel": "article",
+      "scene": "S4",
+      "venue": "",
+      "lag_months": 0,
+      "available_antecedents": [
+        "survey",
+        "registry_lookup"
+      ],
+      "heard_from": [
+        "HH11",
+        "BR01",
+        "HH11",
+        "HH01"
+      ]
+    },
+    "ACQ26": {
+      "parcel_id": "P29",
+      "transfer_month": 23,
+      "month": 23,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V04",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": []
+    }
+  },
+  "noticed_acquisitions": 14,
+  "unnoticed_acquisitions": [
+    "ACQ03",
+    "ACQ04",
+    "ACQ05",
+    "ACQ11",
+    "ACQ27"
+  ],
+  "unnoticed_ratio_all": 0.263,
+  "unnoticed_ratio_optimistic": 0.158,
+  "cohort_followup_months": 3,
+  "cohort_size": 15,
+  "cohort_unnoticed_ratio": 0.267,
+  "detection_lag_months": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4
+  ],
+  "mean_detection_lag_months": 0.29,
+  "reference_accuracy": {
+    "error": 171,
+    "unspecific": 248,
+    "fact": 229,
+    "holder_only": 19
+  },
+  "holder_only_mentions": 19,
+  "article_months": [
+    1,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "assembly_months": [
+    5,
+    17,
+    21
+  ],
+  "counter_months": [
+    6,
+    10,
+    14,
+    18
+  ],
+  "concentration_mentions": 135,
+  "common_buyer_mentions": 5,
+  "registry_lookup_agents": [
+    "BR01",
+    "BR02",
+    "BZ01",
+    "BZ02",
+    "BZ03",
+    "BZ04",
+    "HH01",
+    "HH02",
+    "HH03",
+    "HH04",
+    "HH05",
+    "HH06",
+    "HH07",
+    "HH08",
+    "HH09",
+    "HH10",
+    "HH11",
+    "HH12",
+    "HH13",
+    "HH14",
+    "HH15",
+    "HH16",
+    "MD01",
+    "MD02",
+    "MU01",
+    "MU02"
+  ],
+  "traces_by_kind": {
+    "sign_change": 129,
+    "registry_lookup": 1430,
+    "survey": 71,
+    "broker_known": 10,
+    "tenant_swap": 12,
+    "strangers": 38,
+    "construction": 8
+  },
+  "seller_first_mention_of_own_sale": {
+    "HH01/P02": {
+      "transfer_month": 2,
+      "spoke_month": null,
+      "thought_month": 2
+    },
+    "HH09/P10": {
+      "transfer_month": 2,
+      "spoke_month": null,
+      "thought_month": 7
+    },
+    "HH03/P04": {
+      "transfer_month": 3,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH03/P20": {
+      "transfer_month": 4,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH01/P18": {
+      "transfer_month": 6,
+      "spoke_month": null,
+      "thought_month": 6
+    },
+    "HH10/P11": {
+      "transfer_month": 7,
+      "spoke_month": null,
+      "thought_month": 7
+    },
+    "HH02/P03": {
+      "transfer_month": 7,
+      "spoke_month": null,
+      "thought_month": 7
+    },
+    "HH02/P19": {
+      "transfer_month": 8,
+      "spoke_month": 8,
+      "thought_month": 8
+    },
+    "HH08/P09": {
+      "transfer_month": 9,
+      "spoke_month": null,
+      "thought_month": 9
+    },
+    "HH05/P06": {
+      "transfer_month": 10,
+      "spoke_month": null,
+      "thought_month": 10
+    },
+    "HH15/P16": {
+      "transfer_month": 12,
+      "spoke_month": 12,
+      "thought_month": 12
+    },
+    "HH07/P24": {
+      "transfer_month": 16,
+      "spoke_month": null,
+      "thought_month": 16
+    },
+    "HH07/P08": {
+      "transfer_month": 17,
+      "spoke_month": 18,
+      "thought_month": 17
+    },
+    "HH04/P21": {
+      "transfer_month": 19,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH06/P23": {
+      "transfer_month": 21,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH16/P33": {
+      "transfer_month": 22,
+      "spoke_month": null,
+      "thought_month": 23
+    },
+    "HH03/P36": {
+      "transfer_month": 22,
+      "spoke_month": null,
+      "thought_month": 22
+    },
+    "HH12/P29": {
+      "transfer_month": 23,
+      "spoke_month": null,
+      "thought_month": 23
+    },
+    "HH09/P42": {
+      "transfer_month": 24,
+      "spoke_month": null,
+      "thought_month": 24
+    }
+  },
+  "sellers_silent": 16,
+  "stance_sell": 8,
+  "stance_keep": 392,
+  "D1_exposed_acquisitions": [
+    "ACQ07",
+    "ACQ08",
+    "ACQ13",
+    "ACQ15",
+    "ACQ19",
+    "ACQ21"
+  ],
+  "D2_individual": true,
+  "D2_concentration": true,
+  "D2_common_buyer": true,
+  "D3_wiring": {
+    "api_errors": 0,
+    "transfers_recorded": 19,
+    "classified_rows": 3079,
+    "classifier_unknown": 0,
+    "parse_fail": 5,
+    "max_token_finishes": 5,
+    "groups_missing_turns": 5,
+    "utterances_misdelivered": 0,
+    "conversation_groups": 293,
+    "scenes_with_conversation": 96,
+    "rounds_max": 2,
+    "occupation_unknown": 0,
+    "ok": false
+  },
+  "O_available": true,
+  "O_rows_total": 7516,
+  "O_rows_classified": 7516,
+  "O_unknown": 0,
+  "O_measurable": true,
+  "O1_first": {
+    "month": 2,
+    "agent_id": "HH01",
+    "kind": "thought",
+    "scene": "S1",
+    "party_any": true,
+    "party_of_mentioned": true,
+    "text": "今月はP02の売却があり、S4は市役所に行くことにした。S1は駅前の飲食店で近所の人に会えるかもしれないので、ここで様子を見る。まだP17の看板の件や、R10さんの引っ越し、空き店舗の活用について気になることがある。不動産登記の確認はS4でできれば良いが、まだわからない。自分の土地は手放すつもりはない。この場面では、特に話すことはないが、周りの様子をうかがう"
+  },
+  "O1_first_public": {
+    "month": 6,
+    "agent_id": "HH02",
+    "kind": "utterance",
+    "scene": "S4",
+    "party_any": false,
+    "party_of_mentioned": false,
+    "text": "R08さん、おはようございます。本日は不動産についてご相談させていただきたく、参りました。私の所有する土地・建物については、現状維持を考えております。古い建物には愛着がありますし、この街の歴史を大切にしていきたいと考えております。B社がP02とP18の登記を取得した件についても、何か情報があればお伺いしたいです。"
+  },
+  "O1_first_non_party": {
+    "month": 2,
+    "agent_id": "HH11",
+    "kind": "thought",
+    "scene": "S4",
+    "party_any": false,
+    "party_of_mentioned": false,
+    "text": "S4は市役所の窓口。R05さんがコワーキング施設の話をしており、公的支援について市役所に相談に行くとのこと。私も旅館の活用について公的支援に興味があるので、R05さんに話しかけて情報交換したい。また、B01さん、B02さんが不動産仲介の評判について話しているようなので、その点も聞きつつ、不動産仲介の評判について尋ねてみよう。登記情報ではP02とP10の名義変"
+  },
+  "O1_count": 167,
+  "O1_public_count": 31,
+  "O1_by_party": {
+    "party_of_mentioned": 43,
+    "party_other_deal": 15,
+    "non_party": 109
+  },
+  "O1_rule_only": 41,
+  "O1_llm_only": 2799,
+  "O1_or_count": 3007,
+  "O1_agents": [
+    "BR01",
+    "BR02",
+    "BZ01",
+    "BZ02",
+    "BZ03",
+    "BZ04",
+    "HH01",
+    "HH02",
+    "HH03",
+    "HH04",
+    "HH05",
+    "HH06",
+    "HH07",
+    "HH08",
+    "HH10",
+    "HH11",
+    "HH12",
+    "HH13",
+    "HH14",
+    "HH15",
+    "HH16",
+    "MD01",
+    "MD02",
+    "MU01",
+    "MU02"
+  ],
+  "O1_months": [
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "O2_first": null,
+  "O2_first_public": null,
+  "O2_count": 0,
+  "O2_public_count": 0,
+  "O2_rule_only": 0,
+  "O2_llm_only": 1703,
+  "O2_or_count": 1703,
+  "O2_agents": [],
+  "O2_months": [],
+  "O1_and_O2_same_row": 0,
+  "O1_and_O2_same_agent": 0,
+  "O3_public_agents_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 1,
+    "7": 3,
+    "8": 5,
+    "9": 5,
+    "10": 5,
+    "11": 6,
+    "12": 6,
+    "13": 6,
+    "14": 6,
+    "15": 6,
+    "16": 7,
+    "17": 7,
+    "18": 8,
+    "19": 8,
+    "20": 8,
+    "21": 8,
+    "22": 8,
+    "23": 8,
+    "24": 8
+  },
+  "O3_public_agents_final": 8,
+  "O3_public_share_final": 0.308,
+  "O3_public_agents_at_12": 6,
+  "O3_private_only_agents_final": 17,
+  "O4_article_months": [
+    8,
+    12,
+    22,
+    24
+  ],
+  "O4_assembly_months": [],
+  "O4_counter_months": [
+    6
+  ],
+  "O4_O1_public_months": [
+    6,
+    7,
+    8,
+    11,
+    12,
+    16,
+    18,
+    22,
+    23,
+    24
+  ],
+  "O4_O2_public_months": [],
+  "O4_private_only": false
+}

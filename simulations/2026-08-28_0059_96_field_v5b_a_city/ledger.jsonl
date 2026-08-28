@@ -1,0 +1,12 @@
+{"step": 1, "kind": "transfer", "acq_id": "ACQ01", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "B社", "old_name": "R16"}
+{"step": 1, "kind": "direct_rejected", "from_id": "HH15", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 1, "kind": "direct_rejected", "from_id": "HH15", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 2, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P02", "seller": "HH01", "buyer": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 2, "kind": "transfer", "acq_id": "ACQ03", "parcel_id": "P10", "seller": "HH09", "buyer": "AQ01", "under_name": "A社", "old_name": "R09"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH12", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH13", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 3, "kind": "lease", "acq_id": "ACQ04", "parcel_id": "P04", "lessor": "HH03", "lessee": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 4, "kind": "lease", "acq_id": "ACQ05", "parcel_id": "P20", "lessor": "HH03", "lessee": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 4, "kind": "direct_rejected", "from_id": "HH01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ06", "parcel_id": "P12", "seller": "HH11", "buyer": "AQ01", "under_name": "A社", "old_name": "R11"}
+{"step": 6, "kind": "transfer", "acq_id": "ACQ07", "parcel_id": "P18", "seller": "HH01", "buyer": "AQ01", "under_name": "B社", "old_name": "R01"}
