@@ -1896,12 +1896,14 @@ class Simulation:
             return None
         hs, ps = self._v5e_holders_acquired(int(r.get("step", 0) or 0))
         blue = bool(self._v5e_blue(text, hs, ps))
-        if not rule_red_v5e(text, blue):
+        role = r.get("role") or ""
+        if not rule_red_v5e(text, blue, role):
             return None
         return defense_level_of(
             {"classified": True, "rule_red": True, "rule_yellow": False,
              "rule_green": False, "rule_blue": blue, "llm_defense": True,
-             "llm_defense_level": r.get("defense_level"), "text": text})
+             "llm_defense_level": r.get("defense_level"), "text": text,
+             "role": role})
 
     def _v5e_trace_alive(self, tr: Dict[str, Any]) -> bool:
         """起きなかった取得の兆候を配らない（v5e で買い手が止まったあと）。

@@ -32,7 +32,9 @@ import yaml  # noqa: E402
 
 from run_metrics import (_read_jsonl, _v5_mentions, _v5_s4_kind,  # noqa: E402
                          _v5c_rule_blue, _v5c_rule_green, _v5c_rule_red,
-                         _v5c_rule_yellow, _v5c_stage, V5C_COLORS, V5_PARCEL_RE)
+                         _v5c_rule_yellow, _v5c_stage, V5C_COLORS, V5_PARCEL_RE,
+                         KIND_RANK_V5E, V5E_LEVELS, defense_level_of,
+                         rule_red_v5e, stage_v5e, _parcels_in, _use_parcel_names)
 
 
 def _load(run_dir, name):
@@ -385,6 +387,28 @@ def _sort_key(r) -> tuple:
             str(r.get("from") or ""))
 
 
+def _key_factory(is_v5e: bool):
+    """行の前後関係を測る関数。v5e だけ並びが違う（docs/world_design_v5e.md §8）。
+
+    v5e は1回のコールで「内心 → 記事 → 発話」の順に記録されるので、
+    `KIND_RANK_V5E` で並べる（`tools/run_metrics.py` と同じ定数を使う）。
+    同じ (月・場面・巡・種別・主体) に複数行が並ぶことがあるので、
+    最後に読み込んだ順（seq）を入れて前後を決定論に決める。
+    **v5c の並びは1バイトも変えない。**
+    """
+    if not is_v5e:
+        def key_v5c(r, kind=None):
+            return _sort_key(r)
+        return key_v5c
+
+    def key_v5e(r, kind=None):
+        kd = kind or r.get("kind") or ""
+        return (int(r.get("step") or 0), SCENE_ORDER.get(r.get("scene") or "", 9),
+                int(r.get("round") or 0), KIND_RANK_V5E.get(kd, 9),
+                str(r.get("from") or ""), int(r.get("seq") or 0))
+    return key_v5e
+
+
 def _heard_by(u):
     hb = u.get("heard_by")
     if isinstance(hb, str):
@@ -409,6 +433,26 @@ IGNITION_CRITERIA = {
                      "本文に実際に並んでいる最初の行"),
     "strict_yellow": ("その月までに成立した異なる名義が2つ以上、"
                       "本文に実際に並んでいる最初の行"),
+    "strict_red": ("その月までに成立した異なる名義が2つ以上、"
+                   "本文に実際に並んでいる最初の赤の行"),
+}
+
+AWARENESS_CRITERIA = {
+    "targets": ("緑・黄はその色の strict の初出（区画や名義が実際に2つ以上並んだ最初の行）、"
+                "赤は自衛レベル S1・S2・S3 それぞれの初出（レベルは LLM の defense_level、"
+                "無ければルール側の最上位）"),
+    "heard": ("その月に本人へ届いた同席者の発話（deliveries.jsonl の to=本人・kind=scene）の"
+              "うち、その行より前のもの。直近5件まで出す"),
+    "traces": "その月に本人へ配られた兆候（traces_v5.jsonl の agent_id=本人・同じ月）。全件",
+    "articles": ("その月までに本人へ届いた記事（deliveries.jsonl の to=本人・kind=article）。"
+                 "月は届いた月。直近3件まで出す"),
+    "directs": ("その月までに本人へ届いた私信（deliveries.jsonl の to=本人・kind=direct）。"
+                "直近3件まで出す"),
+    "own_prior_thoughts": ("本人の過去の内心（thoughts_all.jsonl）のうち、その行より前のもの。"
+                           "前月以前も含める。直近3件まで出す"),
+    "counts": "counts は切る前の総数",
+    "order": "「その行より前」は、その本の並び順（v5e は内心→記事→発話）で厳密に比べた",
+    "caveat": "これは相関の観測であって、因果ではない",
 }
 
 
@@ -431,9 +475,14 @@ def _ignition_strict_hit(row, color, holders_by_step, acquired_by_step):
             return None
         if len(m["parcels"]) < 2 and len(m["holders"]) < 2:
             return None
-    else:
+    elif color == "yellow":
         if not row.get("llm_same_buyer"):
             return None
+        if len(m["holders"]) < 2:
+            return None
+    else:
+        # 赤は stage が立った時点で「ルール1次抽出 ∧ LLM」を通っている。
+        # strict は本文に名義が実際に2つ以上並んでいることだけを足す。
         if len(m["holders"]) < 2:
             return None
     return m
@@ -479,11 +528,12 @@ def _party_lookup(plans, events, label_of):
 
 
 def _ignition_timeline(rows, utts, venue_labels, label_of, homes,
-                       holders_by_step, acquired_by_step, party_present):
+                       holders_by_step, acquired_by_step, party_present, key=None):
     """月 → その月に初めて緑／黄に達した出来事（人ごとの初到達）。"""
+    key = key or _key_factory(False)
     heard_of = {str(u.get("utt_id") or ""): _heard_by(u) for u in utts}
     seen, picks = set(), []
-    for r in sorted(rows, key=_sort_key):
+    for r in sorted(rows, key=key):
         c = r.get("stage")
         if c not in ("green", "yellow") or (r["from"], c) in seen:
             continue
@@ -536,15 +586,18 @@ def _party_lens(timeline, excluded) -> dict:
 def _ignition_empty() -> dict:
     return {"green": {"strict": None, "loose": None},
             "yellow": {"strict": None, "loose": None},
+            "red": {"strict": None, "loose": None},
             "criteria": dict(IGNITION_CRITERIA)}
 
 
 def _build_ignition(rows, utts, thoughts, traces, venue_labels,
-                    holders_by_step, acquired_by_step, party_present=None) -> dict:
-    utt_sorted = sorted(utts, key=_sort_key)
-    rows_sorted = sorted(rows, key=_sort_key)
+                    holders_by_step, acquired_by_step, party_present=None,
+                    key=None, is_v5e=False) -> dict:
+    key = key or _key_factory(False)
+    utt_sorted = sorted(utts, key=lambda u: key(u, "utterance"))
+    rows_sorted = sorted(rows, key=key)
     out = {"criteria": dict(IGNITION_CRITERIA)}
-    for color in ("green", "yellow"):
+    for color in ("green", "yellow", "red"):
         out[color] = {"strict": None, "loose": None}
         picks = [("loose", next((r for r in rows_sorted
                                  if r.get("stage") == color), None), None)]
@@ -559,29 +612,31 @@ def _build_ignition(rows, utts, thoughts, traces, venue_labels,
             if hit is None:
                 continue
             out[color][slot] = _ignition_obj(color, hit, matched, utt_sorted,
-                                             thoughts, traces, venue_labels)
+                                             thoughts, traces, venue_labels,
+                                             key, is_v5e)
             if slot == "strict" and party_present is not None:
                 out[color][slot]["party_present"] = party_present(hit)
     return out
 
 
 def _ignition_obj(color, hit, matched, utt_sorted, thoughts, traces,
-                  venue_labels) -> dict:
+                  venue_labels, keyf=None, is_v5e=False) -> dict:
+    keyf = keyf or _key_factory(False)
     month, who = hit["step"], hit["from"]
-    key = _sort_key(hit)
+    key = keyf(hit)
     same_place = [u for u in utt_sorted
                   if int(u.get("step") or 0) == month
                   and (u.get("scene") or "") == (hit.get("scene") or "")
                   and (u.get("venue") or "") == (hit.get("venue") or "")]
     if hit.get("kind") != "utterance" and not hit.get("venue"):
         same_place = []
-    before = [u for u in same_place if _sort_key(u) < key][-5:]
-    after = [u for u in same_place if _sort_key(u) > key][:2]
+    before = [u for u in same_place if keyf(u, "utterance") < key][-5:]
+    after = [u for u in same_place if keyf(u, "utterance") > key][:2]
     heard = [u for u in utt_sorted
-             if int(u.get("step") or 0) == month and _sort_key(u) < key
+             if int(u.get("step") or 0) == month and keyf(u, "utterance") < key
              and who in _heard_by(u)][-5:]
     own = [{"scene": t.get("scene", ""), "text": str(t.get("text", ""))}
-           for t in sorted(thoughts, key=_sort_key)
+           for t in sorted(thoughts, key=lambda t: keyf(t, "thought"))
            if t.get("from") == who and int(t.get("step") or 0) == month]
     tr = [{"kind": t.get("kind", ""), "parcel_id": t.get("parcel_id", ""),
            "acq_id": t.get("acq_id", ""), "text": str(t.get("text", ""))}
@@ -596,8 +651,13 @@ def _ignition_obj(color, hit, matched, utt_sorted, thoughts, traces,
         "text": hit["text"],
         "rule": {"blue": bool(hit["rule_blue"]), "green": bool(hit["rule_green"]),
                  "yellow": bool(hit["rule_yellow"]), "red": bool(hit["rule_red"])},
-        "llm": {"deal": hit["llm_deal"], "area": hit["llm_area"],
-                "same_buyer": hit["llm_same_buyer"], "admin": hit["llm_admin"]},
+        "llm": ({"deal": hit["llm_deal"], "area": hit["llm_area"],
+                 "same_buyer": hit["llm_same_buyer"],
+                 "defense": hit.get("llm_defense"),
+                 "defense_level": hit.get("llm_defense_level")} if is_v5e
+                else {"deal": hit["llm_deal"], "area": hit["llm_area"],
+                      "same_buyer": hit["llm_same_buyer"],
+                      "admin": hit["llm_admin"]}),
         "context_before": [_ctx_row(u) for u in before],
         "context_after": [_ctx_row(u) for u in after],
         "heard_before": [_ctx_row(u) for u in heard],
@@ -607,6 +667,120 @@ def _ignition_obj(color, hit, matched, utt_sorted, thoughts, traces,
     if matched is not None:
         obj["matched"] = matched
     return obj
+
+
+# ---------------------------------------------------------------------------
+# 気づきの連鎖（docs/world_design_v5e.md §6）— その行の前に本人が受け取った入力
+# すべて既存の JSONL からの機械抽出。無ければ空配列を出す（捏造しない）。
+# ---------------------------------------------------------------------------
+
+def _chain_links(row, key, deliveries_by_to, utt_by_id, traces, thoughts,
+                 venue_labels, label_of) -> tuple:
+    who, month = str(row.get("from") or ""), int(row.get("step") or 0)
+    k = key(row)
+    mine = deliveries_by_to.get(who, [])
+
+    heard_all = []
+    for d in mine:
+        if d.get("kind") != "scene" or int(d.get("step") or 0) != month:
+            continue
+        u = utt_by_id.get(str(d.get("obs_id") or ""))
+        if u is None or key(u, "utterance") >= k:
+            continue
+        heard_all.append((key(u, "utterance"),
+                          {"month": int(u.get("step") or 0),
+                           "from": str(u.get("from") or ""),
+                           "name": label_of(u.get("from")),
+                           "venue_label": venue_labels.get(u.get("venue", ""),
+                                                           u.get("venue", "")),
+                           "text": str(d.get("text", ""))}))
+    heard_all.sort(key=lambda x: x[0])
+    heard = [r for _, r in heard_all]
+
+    tr = [{"month": int(t.get("step") or 0), "kind": t.get("kind", ""),
+           "parcel_id": t.get("parcel_id", ""), "text": str(t.get("text", ""))}
+          for t in traces
+          if t.get("agent_id") == who and int(t.get("step") or 0) == month]
+
+    def delivered(kind):
+        got = [(int(d.get("step") or 0), str(d.get("from") or ""), i, d)
+               for i, d in enumerate(mine)
+               if d.get("kind") == kind and int(d.get("step") or 0) <= month]
+        got.sort(key=lambda x: (x[0], x[1], x[2]))
+        return [{"month": s, "from": f, "name": label_of(f),
+                 "text": str(d.get("text", ""))} for s, f, _, d in got]
+
+    articles, directs = delivered("article"), delivered("direct")
+
+    own_all = sorted([t for t in thoughts
+                      if t.get("from") == who and key(t, "thought") < k],
+                     key=lambda t: key(t, "thought"))
+    own = [{"month": int(t.get("step") or 0), "scene": t.get("scene", ""),
+            "text": str(t.get("text", ""))} for t in own_all]
+
+    links = {"heard": heard[-5:], "traces": tr, "articles": articles[-3:],
+             "directs": directs[-3:], "own_prior_thoughts": own[-3:]}
+    counts = {"heard": len(heard), "traces": len(tr), "articles": len(articles),
+              "directs": len(directs), "own_prior_thoughts": len(own)}
+    return links, counts
+
+
+def _chain_obj(target, row, level_source, key, deliveries_by_to, utt_by_id,
+               traces, thoughts, venue_labels, label_of) -> dict:
+    links, counts = _chain_links(row, key, deliveries_by_to, utt_by_id, traces,
+                                 thoughts, venue_labels, label_of)
+    return {
+        "target": target, "month": int(row.get("step") or 0),
+        "from": str(row.get("from") or ""), "name": row.get("name", ""),
+        "role": row.get("role", ""), "kind": row.get("kind", ""),
+        "scene": row.get("scene", ""), "venue": row.get("venue", ""),
+        "venue_label": venue_labels.get(row.get("venue", ""), row.get("venue", "")),
+        "utt_id": row.get("utt_id", ""), "text": str(row.get("text", "")),
+        "level_source": level_source,
+        "links": links, "counts": counts,
+    }
+
+
+def _awareness_chain_empty() -> dict:
+    return {"targets": [], "missing": [], "criteria": dict(AWARENESS_CRITERIA)}
+
+
+def _build_awareness_chain(rows, ignition, deliveries, utts, traces, thoughts,
+                           venue_labels, label_of, key, is_v5e) -> dict:
+    """緑・黄の strict の初出と、赤の S1〜S3 それぞれの初出について鎖を組む。"""
+    deliveries_by_to = collections.defaultdict(list)
+    for d in deliveries:
+        deliveries_by_to[str(d.get("to") or "")].append(d)
+    utt_by_id = {str(u.get("utt_id") or ""): u for u in utts}
+    rows_sorted = sorted(rows, key=key)
+
+    picks = []
+    for color in ("green", "yellow"):
+        o = (ignition.get(color) or {}).get("strict")
+        if o is None:
+            picks.append((color, None, None))
+            continue
+        hit = next((r for r in rows_sorted
+                    if r.get("step") == o["month"] and r.get("from") == o["from"]
+                    and r.get("kind") == o["kind"] and r.get("text") == o["text"]), None)
+        picks.append((color, hit, None))
+    if is_v5e:
+        for lv in V5E_LEVELS:
+            hit = next((r for r in rows_sorted
+                        if r.get("stage") == "red"
+                        and (defense_level_of(r) or {}).get("level") == lv), None)
+            src = (defense_level_of(hit) or {}).get("level_source") if hit else None
+            picks.append((lv, hit, src))
+
+    targets, missing = [], []
+    for name, hit, src in picks:
+        if hit is None:
+            missing.append(name)
+            continue
+        targets.append(_chain_obj(name, hit, src, key, deliveries_by_to, utt_by_id,
+                                  traces, thoughts, venue_labels, label_of))
+    return {"targets": targets, "missing": missing,
+            "criteria": dict(AWARENESS_CRITERIA)}
 
 
 def build(run_dir: str) -> dict:
@@ -628,10 +802,27 @@ def build(run_dir: str) -> dict:
     deals = _load(run_dir, "deals_v5.jsonl")
     classified = _load(run_dir, "utterances.jsonl")
     occ = _load(run_dir, "occupation_labels.jsonl")
-    stage_labels = _load(run_dir, "stage_labels_v5c.jsonl")
+    # v5e のランは月次で分類済み＝stage_labels_v5e.jsonl が正（run_metrics と同じ扱い）。
+    is_v5e = os.path.exists(os.path.join(run_dir, "stage_labels_v5e.jsonl"))
+    stage_labels = _load(run_dir, "stage_labels_v5e.jsonl" if is_v5e
+                         else "stage_labels_v5c.jsonl")
+    sortkey = _key_factory(is_v5e)
+    if is_v5e:
+        # 同じ (月・場面・巡・種別・主体) の中の前後は、記録された順で決める。
+        for seq, r in enumerate(utts):
+            r["seq"] = seq
+        for seq, r in enumerate(thoughts):
+            r["seq"] = seq
 
     n_steps = int(summary.get("steps") or 0)
     version = str(cfg.get("scenario_version", "field_v5"))
+    # v5d/v5e の街は土地を呼び名で呼ぶ（P番号は世界に存在しない）。集計と同じ
+    # 対応表を有効にしないと、右地図も色も空になる（run_metrics と同じ扱い）。
+    _use_parcel_names(version)
+    # 呼び名の対応表を使うのは v5d/v5e だけ。v5c 以前は従来どおり P番号を
+    # **本文に出てきた順**で拾う（並び順まで従来と一致させるため）。
+    find_pids = (_parcels_in if version in ("field_v5d", "field_v5e")
+                 else V5_PARCEL_RE.findall)
 
     # --- 世界の形（区画） --------------------------------------------------
     world = cfg["world"]
@@ -782,7 +973,7 @@ def build(run_dir: str) -> dict:
         series = {c: {} for c in V5C_COLORS}
         series_priv = {c: {} for c in V5C_COLORS}
         rows = []
-        for r in stage_labels:
+        for seq, r in enumerate(stage_labels):
             step = int(r.get("step", 0))
             text = str(r.get("text", ""))
             role = r.get("role") or role_of.get(r.get("from"), "")
@@ -797,14 +988,24 @@ def build(run_dir: str) -> dict:
                 "rule_blue": _v5c_rule_blue(text, hs, ps),
                 "rule_green": _v5c_rule_green(text, hs, ps),
                 "rule_yellow": _v5c_rule_yellow(text, hs, ps),
-                "rule_red": _v5c_rule_red(role, text),
+                # v5e の赤は青（土地取引・名義・持ち主に触れている）を必要条件にする
+                # （docs/world_design_v5e.md §1-2）。役割の制限は付けない。
+                "rule_red": (rule_red_v5e(text, _v5c_rule_blue(text, hs, ps))
+                             if is_v5e else _v5c_rule_red(role, text)),
+                "seq": seq,
                 "llm_deal": bool(r.get("deal")) if r.get("deal") is not None else None,
                 "llm_area": bool(r.get("area")) if r.get("area") is not None else None,
                 "llm_same_buyer": (bool(r.get("same_buyer"))
                                    if r.get("same_buyer") is not None else None),
-                "llm_admin": bool(r.get("admin")) if r.get("admin") is not None else None,
+                "llm_admin": (None if is_v5e else
+                              (bool(r.get("admin")) if r.get("admin") is not None
+                               else None)),
+                "llm_defense": ((bool(r.get("defense"))
+                                 if r.get("defense") is not None else None)
+                                if is_v5e else None),
+                "llm_defense_level": r.get("defense_level") if is_v5e else None,
             }
-            row["stage"] = _v5c_stage(row)
+            row["stage"] = stage_v5e(row) if is_v5e else _v5c_stage(row)
             rows.append(row)
         for step in range(1, n_steps + 1):
             for row in rows:
@@ -820,7 +1021,7 @@ def build(run_dir: str) -> dict:
         for row in sorted(rows, key=lambda r: r["step"]):
             if not row["stage"] or row["kind"] not in ("utterance", "article"):
                 continue
-            for pid in {p for p in V5_PARCEL_RE.findall(row["text"])
+            for pid in {p for p in find_pids(row["text"])
                         if p in acquired_by_step.get(row["step"], set())}:
                 if row["from"] == party_of.get(pid):
                     continue
@@ -842,7 +1043,7 @@ def build(run_dir: str) -> dict:
             "first": {c: next(({"month": r["step"], "from": r["from"],
                                 "kind": r["kind"], "venue": r["venue"],
                                 "text": r["text"][:180]}
-                               for r in sorted(rows, key=_sort_key)
+                               for r in sorted(rows, key=sortkey)
                                if r["stage"] == c), None) for c in V5C_COLORS},
             "venue_first": {},
         }
@@ -925,7 +1126,7 @@ def build(run_dir: str) -> dict:
     best = None
     for u in utts:
         m = int(u["step"])
-        named = {p for p in V5_PARCEL_RE.findall(u["text"])
+        named = {p for p in find_pids(u["text"])
                  if p in acquired_by_step.get(m, set())}
         if best is None or len(named) > best[0]:
             best = (len(named), u)
@@ -1066,6 +1267,7 @@ def build(run_dir: str) -> dict:
     # 記事・私信もルール抽出だけで数える。右地図は**発話のLLM確定分だけ**なので、
     # 両者は一致しない。ここでは metrics と同じ基準でも組み直し、
     # **区画IDと初出月まで**突き合わせる（件数だけの照合にしない）。
+    stopped_rows = len([d for d in deals if d.get("kind") == "script_stopped"])
     sale_pids = {e["parcel_id"] for e in events if e["kind"] == "sale"}
     metrics_first = {v["parcel_id"]: v["month"]
                      for v in (metrics.get("first_mention") or {}).values()}
@@ -1077,8 +1279,12 @@ def build(run_dir: str) -> dict:
     loose_sale = {p: m for p, m in loose.items() if p in sale_pids}
     checks = {
         "loose_basis_matches_metrics": loose_sale == metrics_first,
-        "deals_matches_metrics": (len(events) == (metrics.get("deals")
-                                                  or metrics.get("acquisitions"))),
+        # v5e は自衛が出た月に台本を止める＝deals_v5.jsonl に起きなかった取得の
+        # 記録（script_stopped）が残る。地図が塗るのは実際に成立した分だけなので、
+        # 突き合わせはその記録を引いた数で行う（v5c は0件＝従来と同じ）。
+        "deals_matches_metrics": (len(events) == ((metrics.get("deals")
+                                                   or metrics.get("acquisitions"))
+                                                  - stopped_rows)),
         "map_basis": "LLM分類を通った発話のみ（当事者以外・その月までに成立）",
         "metrics_basis": ("記事・私信はルール抽出のみ・売買"
                           + str(len([e for e in events if e["kind"] == "sale"]))
@@ -1102,20 +1308,70 @@ def build(run_dir: str) -> dict:
     label_of = _label_of(labels, display)
     party_present = _party_lookup(plans, events, label_of)
     ignition = (_build_ignition(stage_rows, utts, thoughts, traces, venue_label_map,
-                                holders_by_step, acquired_by_step, party_present)
+                                holders_by_step, acquired_by_step, party_present,
+                                sortkey, is_v5e)
                 if stage_rows else _ignition_empty())
+    chain = (_build_awareness_chain(stage_rows, ignition,
+                                    _load(run_dir, "deliveries.jsonl"), utts, traces,
+                                    thoughts, venue_label_map, label_of, sortkey,
+                                    is_v5e)
+             if stage_rows else _awareness_chain_empty())
     if stage_rows:
         timeline, excluded = _ignition_timeline(
             stage_rows, utts, venue_label_map, label_of, homes,
-            holders_by_step, acquired_by_step, party_present)
+            holders_by_step, acquired_by_step, party_present, sortkey)
         lens = _party_lens(timeline, excluded)
     else:
         timeline, excluded, lens = {}, [], None
 
+    # --- v5e：買い手が止まった月と、目玉物件が起きたかどうか ----------------
+    # `defense_stop_v5e.json`（走行中の記録）と `ledger.jsonl` の実測だけで組む。
+    v5e = None
+    stop_path = os.path.join(run_dir, "defense_stop_v5e.json")
+    if is_v5e and os.path.exists(stop_path):
+        with open(stop_path, encoding="utf-8") as f:
+            stop = json.load(f)
+        sv = dict(summary.get("v5e") or {})
+        pe = metrics.get("C_prime_event") or {}
+        prime = None
+        if pe.get("parcel_id"):
+            fired = [e for e in events if e["parcel_id"] == pe["parcel_id"]]
+            prime = {"parcel_id": pe["parcel_id"], "month": pe.get("month"),
+                     "fired": bool(fired),
+                     "fired_month": (fired[0]["month"] if fired else None),
+                     "note": ("台本では第%s月に予定されていたが、買い手が止まったため"
+                              "起きなかった" % pe.get("month")) if not fired else
+                             "台本どおりに起きた"}
+        v5e = {
+            "stopped": bool(stop.get("stopped")),
+            "trigger_month": stop.get("trigger_month"),
+            "stop_from_month": stop.get("stop_from_month"),
+            "levels_seen": sv.get("levels_seen") or [],
+            "acquisitions_applied": sv.get("acquisitions_applied"),
+            "acquisitions_suspended": sv.get("acquisitions_suspended"),
+            "triggers": [{"month": int(t.get("step") or 0),
+                          "from": t.get("from", ""), "role": t.get("role", ""),
+                          "kind": t.get("kind", ""), "scene": t.get("scene", ""),
+                          "venue": t.get("venue", ""),
+                          "venue_label": venue_label_map.get(t.get("venue", ""),
+                                                             t.get("venue", "")),
+                          "name": label_of(t.get("from")),
+                          "level": t.get("level"),
+                          "level_source": t.get("level_source"),
+                          "text": str(t.get("text", ""))}
+                         for t in (stop.get("triggers") or [])],
+            "prime": prime,
+            "S_counts": metrics.get("S_counts"),
+            "S_level_agreement": metrics.get("S_level_agreement"),
+            "red_definition": (metrics.get("C_definition") or {}).get("red"),
+            "note": ("停止のトリガーになるのは買い手が現実に観測できる行だけ"
+                     "（発話・記事）。内心では止まらない"),
+        }
+
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
-                 "schema": 7,
+                 "schema": 8,
                  "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},
@@ -1137,6 +1393,8 @@ def build(run_dir: str) -> dict:
         "layout": layout,
         "parcel_naming": naming,
         "ignition": ignition,
+        "awareness_chain": chain,
+        "v5e": v5e,
         "ignition_timeline": timeline,
         "ignition_timeline_excluded": excluded,
         "ignition_timeline_note": ("月 → その月に初めて緑／黄に達した出来事（人ごとの初到達）。"

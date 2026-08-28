@@ -1376,7 +1376,7 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
             # v5e の赤は青（土地取引・名義・持ち主に触れている）を必要条件にする
             # ＝自衛語の単独ヒットで一般論が赤になる穴を塞ぐ
             # （docs/world_design_v5e.md §1-2）。
-            "rule_red": (rule_red_v5e(text, _v5c_rule_blue(text, hs, ps)) if is_v5e
+            "rule_red": (rule_red_v5e(text, _v5c_rule_blue(text, hs, ps), role) if is_v5e
                          else _v5c_rule_red(role, text)),
             "llm_deal": bool(r.get("deal")) if classified else None,
             "llm_area": bool(r.get("area")) if classified else None,

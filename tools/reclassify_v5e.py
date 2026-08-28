@@ -111,8 +111,11 @@ def _write_audit(run_dir, out_dir, labels):
     run_metrics._use_parcel_names(str(cfg.get("scenario_version", "")))
     n_steps = int(cfg.get("steps", 24))
     holders, acquired = _holders_acquired(run_dir, n_steps)
+    # v5e の run には v5c ラベルが無い。その場合は旧赤の比較を飛ばす。
     old_by = {_key(r): r for r in _read_jsonl(
         os.path.join(run_dir, "stage_labels_v5c.jsonl"))}
+    canon_by = {_key(r): r for r in _read_jsonl(
+        os.path.join(run_dir, "stage_labels_v5e.jsonl"))}
 
     rows, s_counts, s_first, reds = [], {"S1": 0, "S2": 0, "S3": 0}, {}, []
     old_red = new_red = 0
@@ -125,7 +128,8 @@ def _write_audit(run_dir, out_dir, labels):
                 "rule_blue": blue,
                 "rule_green": run_metrics._v5c_rule_green(text, hs, ps),
                 "rule_yellow": run_metrics._v5c_rule_yellow(text, hs, ps),
-                "rule_red": rule_red_v5e(text, blue),
+                "rule_red": rule_red_v5e(text, blue, r.get("role")),
+                "role": r.get("role"),
                 "llm_deal": bool(r.get("deal")) if r.get("classified") else None,
                 "llm_area": bool(r.get("area")) if r.get("classified") else None,
                 "llm_same_buyer": (bool(r.get("same_buyer"))
@@ -191,6 +195,9 @@ def main() -> int:
     ap.add_argument("--out-dir", default="reclass_v5e",
                     help="run_dir 配下の出力先（run 直下には書かない）")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--rejudge", action="store_true",
+                    help="v5e の run を締め直した分類器で再判定する（正本は書き換えず "
+                         "rejudge_v5e/ に別成果物として出す）")
     ap.add_argument("--audit-only", action="store_true",
                     help="既存の labels.jsonl から summary.json を作り直す（API を叩かない）")
     args = ap.parse_args()
@@ -202,11 +209,14 @@ def main() -> int:
     with io.open(os.path.join(run_dir, "config.yaml"), encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
     version = str(cfg.get("scenario_version", ""))
-    if version == "field_v5e":
+    if version == "field_v5e" and not args.rejudge:
         raise SystemExit("この run は v5e＝stage_labels_v5e.jsonl が正本。"
-                         "再分類はしない（取得を止めた出力と食い違わせないため）。")
-    if version not in ("field_v5c", "field_v5d"):
-        raise SystemExit(f"対象は v5c / v5d の run だけ（この run は {version}）")
+                         "再分類はしない（取得を止めた出力と食い違わせないため）。"
+                         "締め直した分類器で読み直すなら --rejudge を付ける。")
+    if version not in ("field_v5c", "field_v5d", "field_v5e"):
+        raise SystemExit(f"対象は v5c / v5d / v5e の run だけ（この run は {version}）")
+    if args.rejudge and args.out_dir == "reclass_v5e":
+        args.out_dir = "rejudge_v5e"
     llm = dict(cfg.get("llm") or {})
     if args.provider:
         llm["provider"] = args.provider
