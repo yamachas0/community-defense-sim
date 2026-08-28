@@ -258,53 +258,110 @@ def _ctx_row(u):
             "utt_id": u.get("utt_id", ""), "text": str(u.get("text", ""))}
 
 
-def _build_ignition(rows, utts, thoughts, traces, venue_labels) -> dict:
+IGNITION_CRITERIA = {
+    "loose": "走行前に固定した色の定義（ルール1次抽出 ∧ LLM）どおりの初出",
+    "strict": ("上に加えて、本文にその月までに成立した取得区画IDが2つ以上、"
+               "または異なる名義が2つ以上、実際に並んでいる最初の行"),
+}
+
+
+def _ignition_matched(row, holders_by_step, acquired_by_step):
+    step = int(row.get("step") or 0)
+    text = str(row.get("text", ""))
+    hit = _v5_mentions(text, holders_by_step.get(step, set()))
+    parcels = sorted(p for p in hit["parcels"] if p in acquired_by_step.get(step, set()))
+    return {"parcels": parcels, "holders": sorted(hit["holders"])}
+
+
+def _ignition_strict_hit(row, color, holders_by_step, acquired_by_step):
+    if not row.get("classified"):
+        return None
+    m = _ignition_matched(row, holders_by_step, acquired_by_step)
+    if color == "green":
+        if not row.get("llm_area"):
+            return None
+        if len(m["parcels"]) < 2 and len(m["holders"]) < 2:
+            return None
+    else:
+        if not row.get("llm_same_buyer"):
+            return None
+        if len(m["holders"]) < 2:
+            return None
+    return m
+
+
+def _ignition_empty() -> dict:
+    return {"green": {"strict": None, "loose": None},
+            "yellow": {"strict": None, "loose": None},
+            "criteria": dict(IGNITION_CRITERIA)}
+
+
+def _build_ignition(rows, utts, thoughts, traces, venue_labels,
+                    holders_by_step, acquired_by_step) -> dict:
     utt_sorted = sorted(utts, key=_sort_key)
-    out = {}
+    rows_sorted = sorted(rows, key=_sort_key)
+    out = {"criteria": dict(IGNITION_CRITERIA)}
     for color in ("green", "yellow"):
-        hit = next((r for r in sorted(rows, key=_sort_key)
-                    if r.get("stage") == color), None)
-        if hit is None:
-            out[color] = None
-            continue
-        month, who = hit["step"], hit["from"]
-        key = _sort_key(hit)
-        same_place = [u for u in utt_sorted
-                      if int(u.get("step") or 0) == month
-                      and (u.get("scene") or "") == (hit.get("scene") or "")
-                      and (u.get("venue") or "") == (hit.get("venue") or "")]
-        if hit.get("kind") != "utterance" and not hit.get("venue"):
-            same_place = []
-        before = [u for u in same_place if _sort_key(u) < key][-5:]
-        after = [u for u in same_place if _sort_key(u) > key][:2]
-        heard = [u for u in utt_sorted
-                 if int(u.get("step") or 0) == month and _sort_key(u) < key
-                 and who in _heard_by(u)][-5:]
-        own = [{"scene": t.get("scene", ""), "text": str(t.get("text", ""))}
-               for t in sorted(thoughts, key=_sort_key)
-               if t.get("from") == who and int(t.get("step") or 0) == month]
-        tr = [{"kind": t.get("kind", ""), "parcel_id": t.get("parcel_id", ""),
-               "acq_id": t.get("acq_id", ""), "text": str(t.get("text", ""))}
-              for t in traces
-              if t.get("agent_id") == who and int(t.get("step") or 0) == month]
-        out[color] = {
-            "color": color, "month": month, "scene": hit.get("scene", ""),
-            "venue": hit.get("venue", ""),
-            "venue_label": venue_labels.get(hit.get("venue", ""), hit.get("venue", "")),
-            "from": who, "name": hit.get("name", ""), "role": hit.get("role", ""),
-            "kind": hit.get("kind", ""), "utt_id": hit.get("utt_id", ""),
-            "text": hit["text"],
-            "rule": {"blue": bool(hit["rule_blue"]), "green": bool(hit["rule_green"]),
-                     "yellow": bool(hit["rule_yellow"]), "red": bool(hit["rule_red"])},
-            "llm": {"deal": hit["llm_deal"], "area": hit["llm_area"],
-                    "same_buyer": hit["llm_same_buyer"], "admin": hit["llm_admin"]},
-            "context_before": [_ctx_row(u) for u in before],
-            "context_after": [_ctx_row(u) for u in after],
-            "heard_before": [_ctx_row(u) for u in heard],
-            "own_thoughts_that_month": own,
-            "traces_that_month": tr,
-        }
+        out[color] = {"strict": None, "loose": None}
+        picks = [("loose", next((r for r in rows_sorted
+                                 if r.get("stage") == color), None), None)]
+        strict_row, strict_matched = None, None
+        for r in rows_sorted:
+            m = _ignition_strict_hit(r, color, holders_by_step, acquired_by_step)
+            if m is not None:
+                strict_row, strict_matched = r, m
+                break
+        picks.append(("strict", strict_row, strict_matched))
+        for slot, hit, matched in picks:
+            if hit is None:
+                continue
+            out[color][slot] = _ignition_obj(color, hit, matched, utt_sorted,
+                                             thoughts, traces, venue_labels)
     return out
+
+
+def _ignition_obj(color, hit, matched, utt_sorted, thoughts, traces,
+                  venue_labels) -> dict:
+    month, who = hit["step"], hit["from"]
+    key = _sort_key(hit)
+    same_place = [u for u in utt_sorted
+                  if int(u.get("step") or 0) == month
+                  and (u.get("scene") or "") == (hit.get("scene") or "")
+                  and (u.get("venue") or "") == (hit.get("venue") or "")]
+    if hit.get("kind") != "utterance" and not hit.get("venue"):
+        same_place = []
+    before = [u for u in same_place if _sort_key(u) < key][-5:]
+    after = [u for u in same_place if _sort_key(u) > key][:2]
+    heard = [u for u in utt_sorted
+             if int(u.get("step") or 0) == month and _sort_key(u) < key
+             and who in _heard_by(u)][-5:]
+    own = [{"scene": t.get("scene", ""), "text": str(t.get("text", ""))}
+           for t in sorted(thoughts, key=_sort_key)
+           if t.get("from") == who and int(t.get("step") or 0) == month]
+    tr = [{"kind": t.get("kind", ""), "parcel_id": t.get("parcel_id", ""),
+           "acq_id": t.get("acq_id", ""), "text": str(t.get("text", ""))}
+          for t in traces
+          if t.get("agent_id") == who and int(t.get("step") or 0) == month]
+    obj = {
+        "color": color, "month": month, "scene": hit.get("scene", ""),
+        "venue": hit.get("venue", ""),
+        "venue_label": venue_labels.get(hit.get("venue", ""), hit.get("venue", "")),
+        "from": who, "name": hit.get("name", ""), "role": hit.get("role", ""),
+        "kind": hit.get("kind", ""), "utt_id": hit.get("utt_id", ""),
+        "text": hit["text"],
+        "rule": {"blue": bool(hit["rule_blue"]), "green": bool(hit["rule_green"]),
+                 "yellow": bool(hit["rule_yellow"]), "red": bool(hit["rule_red"])},
+        "llm": {"deal": hit["llm_deal"], "area": hit["llm_area"],
+                "same_buyer": hit["llm_same_buyer"], "admin": hit["llm_admin"]},
+        "context_before": [_ctx_row(u) for u in before],
+        "context_after": [_ctx_row(u) for u in after],
+        "heard_before": [_ctx_row(u) for u in heard],
+        "own_thoughts_that_month": own,
+        "traces_that_month": tr,
+    }
+    if matched is not None:
+        obj["matched"] = matched
+    return obj
 
 
 def build(run_dir: str) -> dict:
@@ -791,13 +848,14 @@ def build(run_dir: str) -> dict:
                        for v in ((cfg.get("social", {}) or {}).get("venues") or [])}
     layout = _build_layout(cfg, {p["pid"] for p in parcels})
     naming = _parcel_naming(layout, utts, thoughts, articles)
-    ignition = (_build_ignition(stage_rows, utts, thoughts, traces, venue_label_map)
-                if stage_rows else None)
+    ignition = (_build_ignition(stage_rows, utts, thoughts, traces, venue_label_map,
+                                holders_by_step, acquired_by_step)
+                if stage_rows else _ignition_empty())
 
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
-                 "schema": 4,
+                 "schema": 5,
                  "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},

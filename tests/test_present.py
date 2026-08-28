@@ -28,6 +28,7 @@ PAGES = r"C:\Users\user\projects\quiet-acquisition-pages"
 SHOTS = os.path.join(ROOT, "docs", "shots_present")
 SHOTS2 = os.path.join(ROOT, "docs", "shots_present2")
 PASS = FAIL = 0
+SCENE_ORDER = {"plan": 0, "S1": 1, "S2": 2, "S3": 3, "S4": 4}
 
 
 def check(name, cond, detail=""):
@@ -66,7 +67,7 @@ def _jsonl(path):
 
 
 def json_checks(dC):
-    """schema 4 で足した layout / ignition / parcel_naming を JSON だけで検査する。"""
+    """schema 5 の layout / ignition（strict・loose）/ parcel_naming を JSON だけで検査する。"""
     run_dir = os.path.join(ROOT, "simulations", dC["meta"]["generated_from"])
 
     # --- layout -----------------------------------------------------------
@@ -156,59 +157,99 @@ def json_checks(dC):
 
     # --- ignition ---------------------------------------------------------
     ig = dC.get("ignition")
-    check("ignition: ある", isinstance(ig, dict) and set(ig) == {"green", "yellow"},
-          str(type(ig)))
+    check("ignition: ある", isinstance(ig, dict)
+          and set(ig) == {"green", "yellow", "criteria"}, str(type(ig)))
     if not isinstance(ig, dict):
         return
+    check("ignition: criteria に strict / loose の定義がある",
+          isinstance(ig.get("criteria"), dict)
+          and set(ig["criteria"]) == {"strict", "loose"}
+          and all(isinstance(v, str) and v for v in ig["criteria"].values()),
+          str(ig.get("criteria")))
     utts = _jsonl(os.path.join(run_dir, "utterances_v5.jsonl"))
     utt_by_id = {u.get("utt_id"): u for u in utts}
     thoughts_src = _jsonl(os.path.join(run_dir, "thoughts_all.jsonl"))
     traces_src = _jsonl(os.path.join(run_dir, "traces_v5.jsonl"))
+
+    def okey(o):
+        u = utt_by_id.get(o["utt_id"]) or {}
+        return (int(o["month"]), SCENE_ORDER.get(o["scene"], 9),
+                int(u.get("round") or 0), str(o["utt_id"] or ""), str(o["from"] or ""))
+
     for color in ("green", "yellow"):
-        o = ig[color]
-        if o is None:
-            check("ignition[%s]: 出なかった本として null" % color, True)
+        pair = ig[color]
+        check("ignition[%s]: strict と loose の2本立てになっている" % color,
+              isinstance(pair, dict) and set(pair) == {"strict", "loose"}, str(pair))
+        if not isinstance(pair, dict):
             continue
-        need = ("color", "month", "scene", "venue", "venue_label", "from", "name",
-                "role", "kind", "utt_id", "text", "rule", "llm", "context_before",
-                "context_after", "heard_before", "own_thoughts_that_month",
-                "traces_that_month")
-        check("ignition[%s]: 項目がそろっている" % color,
-              all(k in o for k in need),
-              str([k for k in need if k not in o]))
-        key = (o["month"], o["from"], o["utt_id"], o["kind"])
-        check("ignition[%s]: 元ログに該当行がある（照合が空振りしない）" % color,
-              key in src_text, str(key))
-        check("ignition[%s]: 原文が元ログと完全一致（切り詰めていない）" % color,
-              o["text"] in src_text.get(key, []), str(key))
-        own = [str(t.get("text", "")) for t in thoughts_src
-               if t.get("from") == o["from"] and int(t.get("step", 0)) == o["month"]]
-        check("ignition[%s]: 本人の内心が元ログの全行と完全一致" % color,
-              [t["text"] for t in o["own_thoughts_that_month"]] == own,
-              str(len(o["own_thoughts_that_month"])) + " vs " + str(len(own)))
-        tr = [str(t.get("text", "")) for t in traces_src
-              if t.get("agent_id") == o["from"] and int(t.get("step", 0)) == o["month"]]
-        check("ignition[%s]: その月の兆候が元ログの全行と完全一致（登記照会も含む）" % color,
-              [t["text"] for t in o["traces_that_month"]] == tr,
-              str(len(o["traces_that_month"])) + " vs " + str(len(tr)))
-        check("ignition[%s]: 色が rule ∧ llm で成立している" % color,
-              o["rule"][color] and o["llm"]["area" if color == "green" else "same_buyer"],
-              str((o["rule"], o["llm"])))
-        check("ignition[%s]: 直前の発言は5件以下" % color, len(o["context_before"]) <= 5)
-        check("ignition[%s]: 直後の反応は2件以下" % color, len(o["context_after"]) <= 2)
-        same = {(r["step"], r["scene"], r["venue"])
-                for r in o["context_before"] + o["context_after"]}
-        check("ignition[%s]: 前後の発言は同じ月・同じ場面・同じ場" % color,
-              not same or same == {(o["month"], o["scene"], o["venue"])}, str(same))
-        check("ignition[%s]: 聞いていた発言は5件以下" % color,
-              len(o["heard_before"]) <= 5)
-        miss = [r["utt_id"] for r in o["heard_before"]
-                if o["from"] not in (utt_by_id.get(r["utt_id"], {}).get("heard_by") or [])]
-        check("ignition[%s]: 聞いていた発言に本人が同席している" % color,
-              not miss, str(miss[:3]))
-        check("ignition[%s]: 前後・聞いた発言の原文が元ログと一致" % color,
-              all(utt_by_id.get(r["utt_id"], {}).get("text") == r["text"]
-                  for r in o["context_before"] + o["context_after"] + o["heard_before"]))
+        if pair["strict"] is not None and pair["loose"] is not None:
+            check("ignition[%s]: strict は loose と同じか後の行" % color,
+                  okey(pair["strict"]) >= okey(pair["loose"]),
+                  str((okey(pair["strict"]), okey(pair["loose"]))))
+        for slot in ("strict", "loose"):
+            o = pair[slot]
+            tag = "ignition[%s.%s]" % (color, slot)
+            if o is None:
+                check("%s: 出なかった本として null" % tag, True)
+                continue
+            need = ("color", "month", "scene", "venue", "venue_label", "from", "name",
+                    "role", "kind", "utt_id", "text", "rule", "llm", "context_before",
+                    "context_after", "heard_before", "own_thoughts_that_month",
+                    "traces_that_month")
+            check("%s: 項目がそろっている" % tag,
+                  all(k in o for k in need),
+                  str([k for k in need if k not in o]))
+            key = (o["month"], o["from"], o["utt_id"], o["kind"])
+            check("%s: 元ログに該当行がある（照合が空振りしない）" % tag,
+                  key in src_text, str(key))
+            check("%s: 原文が元ログと完全一致（切り詰めていない）" % tag,
+                  o["text"] in src_text.get(key, []), str(key))
+            own = [str(t.get("text", "")) for t in thoughts_src
+                   if t.get("from") == o["from"] and int(t.get("step", 0)) == o["month"]]
+            check("%s: 本人の内心が元ログの全行と完全一致" % tag,
+                  [t["text"] for t in o["own_thoughts_that_month"]] == own,
+                  str(len(o["own_thoughts_that_month"])) + " vs " + str(len(own)))
+            tr = [str(t.get("text", "")) for t in traces_src
+                  if t.get("agent_id") == o["from"] and int(t.get("step", 0)) == o["month"]]
+            check("%s: その月の兆候が元ログの全行と完全一致（登記照会も含む）" % tag,
+                  [t["text"] for t in o["traces_that_month"]] == tr,
+                  str(len(o["traces_that_month"])) + " vs " + str(len(tr)))
+            check("%s: 直前の発言は5件以下" % tag, len(o["context_before"]) <= 5)
+            check("%s: 直後の反応は2件以下" % tag, len(o["context_after"]) <= 2)
+            same = {(r["step"], r["scene"], r["venue"])
+                    for r in o["context_before"] + o["context_after"]}
+            check("%s: 前後の発言は同じ月・同じ場面・同じ場" % tag,
+                  not same or same == {(o["month"], o["scene"], o["venue"])}, str(same))
+            check("%s: 聞いていた発言は5件以下" % tag,
+                  len(o["heard_before"]) <= 5)
+            miss = [r["utt_id"] for r in o["heard_before"]
+                    if o["from"] not in (utt_by_id.get(r["utt_id"], {}).get("heard_by") or [])]
+            check("%s: 聞いていた発言に本人が同席している" % tag,
+                  not miss, str(miss[:3]))
+            check("%s: 前後・聞いた発言の原文が元ログと一致" % tag,
+                  all(utt_by_id.get(r["utt_id"], {}).get("text") == r["text"]
+                      for r in o["context_before"] + o["context_after"] + o["heard_before"]))
+            if slot == "loose":
+                check("%s: 色が rule ∧ llm で成立している" % tag,
+                      o["rule"][color]
+                      and o["llm"]["area" if color == "green" else "same_buyer"],
+                      str((o["rule"], o["llm"])))
+                check("%s: matched を持たない" % tag, "matched" not in o)
+            else:
+                m = o.get("matched")
+                check("%s: matched がある（並んだものを出せる）" % tag,
+                      isinstance(m, dict) and set(m) == {"parcels", "holders"}, str(m))
+                if isinstance(m, dict) and set(m) == {"parcels", "holders"}:
+                    check("%s: 区画IDか名義のどちらかが2件以上" % tag,
+                          len(m["parcels"]) >= 2 or len(m["holders"]) >= 2, str(m))
+                    check("%s: matched はソート済み" % tag,
+                          m["parcels"] == sorted(m["parcels"])
+                          and m["holders"] == sorted(m["holders"]), str(m))
+                    miss2 = [x for x in m["parcels"] + m["holders"] if x not in o["text"]]
+                    check("%s: matched は本文に実在する" % tag, not miss2, str(miss2))
+                check("%s: LLM ラベルが立っている" % tag,
+                      bool(o["llm"]["area" if color == "green" else "same_buyer"]),
+                      str(o["llm"]))
 
 
 def main() -> int:
@@ -225,8 +266,14 @@ def main() -> int:
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             d = json.load(f)
         check("%s: 区画属性を持たない run は layout=null（従来の格子で描く）" % lab,
-              d.get("layout") is None and d["meta"]["schema"] == 4,
+              d.get("layout") is None and d["meta"]["schema"] == 5,
               str(d["meta"]["schema"]))
+        ig = d.get("ignition")
+        check("%s: ignition は色の判定が無い run でも同じ形" % lab,
+              isinstance(ig, dict) and set(ig) == {"green", "yellow", "criteria"}
+              and all(ig[c] == {"strict": None, "loose": None}
+                      for c in ("green", "yellow"))
+              and set(ig["criteria"]) == {"strict", "loose"}, str(ig))
     for lab in ("v5cA", "v5cB", "v5cC"):
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             json_checks(json.load(f))
@@ -492,20 +539,38 @@ def main() -> int:
                     page.click("[role=tab][data-p='J']")
                     page.wait_for_timeout(250)
                     ip = page.inner_text("#pJ")
-                    g = dC["ignition"]["green"]
+                    g = dC["ignition"]["green"]["strict"]
                     check("ガイド手順4: 火が点いた瞬間のタブが開く", page.is_visible("#pJ"))
                     check("ガイド手順4: 緑の原文がそのまま出る",
                           bool(g) and g["text"] in ip, ip[:160])
                     check("ガイド手順4: 誰が・第何月・どの場かが出る",
                           bool(g) and f"第{g['month']}月" in ip and g["from"] in ip)
+                    check("ガイド手順4: 並んだものが matched から出る",
+                          bool(g) and all(x in ip for x in
+                                          g["matched"]["parcels"] + g["matched"]["holders"]),
+                          ip[:160])
                     check("ガイド手順4: 内心と発話がラベルで区別されている",
                           "口に出した（同席者に届いた）" in ip
                           or "頭の中（誰にも伝わっていない）" in ip, ip[:160])
-                    y = dC["ignition"]["yellow"]
+                    y = dC["ignition"]["yellow"]["strict"]
                     check("ガイド手順4: 黄も原文で出る（出ない本はその旨）",
-                          (y["text"] in ip) if y else ("この本ではこの色は出なかった" in ip))
+                          (y["text"] in ip) if y
+                          else ("区画や名義が2つ以上並んだ行は無かった" in ip))
+                    check("ガイド手順4: 上段が strict の説明になっている",
+                          "区画や名義が実際に2つ以上並んだ、最初の発言・内心。" in ip, ip[:160])
                     check("ガイド手順4: 判定でなく原文を出す注記がある",
                           "人が読み直すと緑どまりの行が混じる" in ip)
+                    check("ガイド手順4: loose は畳んである",
+                          "判定の定義どおりの初出（畳んである）" in ip
+                          and not page.is_visible("#pJ details.igloose > p"), ip[:160])
+                    page.click("#pJ details.igloose > summary")
+                    page.wait_for_timeout(200)
+                    ip2 = page.inner_text("#pJ")
+                    gl = dC["ignition"]["green"]["loose"]
+                    check("ガイド手順4: 開くと定義どおりの初出が原文で出る",
+                          bool(gl) and gl["text"] in ip2, ip2[:160])
+                    check("ガイド手順4: 甘さの説明が出る",
+                          "まだ何も起きていない月の世間話が入る" in ip2, ip2[:160])
                     roles = page.eval_on_selector_all(
                         "#mapR rect.cell",
                         "els => els.filter(e => e.tabIndex === 0)"

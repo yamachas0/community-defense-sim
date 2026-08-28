@@ -812,3 +812,20 @@ false に化ける**（unknown として主値から外し、D3の合格条件�
 ルールベース排除／観測に無い事実をコードで補完しない／`mvp_v1`〜`field_v5c` の設定と成果物は不変／
 プロンプトとHTMLに「AI」表記を出さない／`.env` の内容を文書に書かない／
 `git push`（ソースリポ）は施主承認制＝**本便でも未push**（Pages リポのみ push）。
+
+### 追加便（同日）— 「火が点いた瞬間」を strict／loose の2本立てに
+
+`ignition` を `{"green":{"strict","loose"},"yellow":{...},"criteria":{...}}` に変えた（`meta.schema` = **5**）。
+理由＝`tools/run_metrics.py` の `_v5c_rule_green` は「この辺り」等の面的な語だけで真になるため、
+**定義どおりの初出（loose）は3ランとも第1月の世間話**になっていた（人手監査が偽陽性と断じた種類の行）。
+ルールは変えず、表示する行の選び方を1本足して直した。
+`strict` ＝ その月までに成立した取得区画IDが2つ以上、または名義が2つ以上、本文に**実際に並んでいる**最初の行
+（緑は加えて LLM の `area`、黄は `same_buyer`、どちらも `classified`）。判定は既存の
+`_v5_mentions` / `holders_by_step` / `acquired_by_step` / `V5_PARCEL_RE` だけで作り、新しい語彙は足していない。
+画面は strict を主役にし、loose は `<details>` に畳んで「判定の甘さも見えるように」残した。
+色の判定が無い run（run94・v5bA/B/C）も同じ形（中身は null）で出す。
+
+- strict の実測：runA 緑＝第2月 HH10 内心（P33・P41）／runA 黄＝第16月 HH04 発話（A社・B社）／
+  runB 緑＝第3月 HH09 内心（P17・P34・P41）／runB 黄＝第6月 HH15 内心（A社・B社・D社）／
+  runC 緑＝第2月 HH01 内心（A社・B社・D社）／runC 黄＝第3月 HH01 内心（A社・B社・D社）。
+- `tests/test_present.py` **339 passed / 0 failed**、`test_ledger.py` 619、`test_v5c.py` 73（0 failed）。
