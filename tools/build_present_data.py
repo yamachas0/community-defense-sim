@@ -806,6 +806,24 @@ def _build_awareness_chain(rows, ignition, deliveries, utts, traces, thoughts,
             "criteria": dict(AWARENESS_CRITERIA)}
 
 
+def _rejudge(run_dir):
+    """締め直した分類器での再判定（`rejudge_v5e/summary.json`）。無ければ None。
+
+    走行中の分類（正本 `stage_labels_v5e.jsonl`）は書き換えない。こちらは
+    **事後の読み直し**であって、買い手を止めたのは走行中の分類のほうである。
+    """
+    path = os.path.join(run_dir, "rejudge_v5e", "summary.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        r = json.load(f)
+    rows = r.get("S_rows") or []
+    obs = [x["month"] for x in rows if x.get("kind") in ("utterance", "article")]
+    return {"S_counts": r.get("S_counts"), "red": r.get("red_new_v5e"),
+            "rows": r.get("rows"), "unknown": r.get("unknown"),
+            "first_observable_red_month": min(obs) if obs else None}
+
+
 def build(run_dir: str) -> dict:
     with open(os.path.join(run_dir, "summary.json"), encoding="utf-8") as f:
         summary = json.load(f)
@@ -1390,12 +1408,17 @@ def build(run_dir: str) -> dict:
                          for t in (stop.get("triggers") or [])],
             "prime": prime,
             "S_counts": metrics.get("S_counts"),
-            "S_counts_now": s_counts_now,
+            # 締め直した分類器で**実際に読み直した**結果（rejudge_v5e/summary.json）が
+            # あればそれを使う。無ければ、いまのルールで数え直した値を使う。
+            # ルールだけの数え直しは LLM ラベルが走行時のままなので近似にすぎない。
+            "S_counts_now": (_rejudge(run_dir) or {}).get("S_counts", s_counts_now),
+            "rejudge": _rejudge(run_dir),
             # 走行中の分類（stage_labels_v5e.jsonl と metrics_v5.json）と、いま
             # `src/stage_v5e.py` で数え直した結果が食い違うかどうか。語彙を
             # 締め直したあとは食い違う＝どちらの数字かを画面で言い分ける。
             "S_stale": (metrics.get("S_counts") is not None
-                        and metrics.get("S_counts") != s_counts_now),
+                        and metrics.get("S_counts")
+                        != (_rejudge(run_dir) or {}).get("S_counts", s_counts_now)),
             "S_level_agreement": metrics.get("S_level_agreement"),
             "red_definition": (metrics.get("C_definition") or {}).get("red"),
             "note": ("停止のトリガーになるのは買い手が現実に観測できる行だけ"
