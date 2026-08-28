@@ -856,3 +856,70 @@ strict の判定に `stage == color` を明示的に足した（実測では既�
 - 検証: `python tests/test_cost_saving.py`（43件）／`python tools/cost_saving_v1.py <run_dir> ...`／
   `python tools/verify_batch_classify.py <run_dir> --rows 50`（実APIを叩く）。
 - **24か月の本走は未実施**（施主GO待ち）。上の $4.14 は実測トークンに単価を掛けた試算。
+
+---
+
+## 第10便（2026-08-28）— present.html 第3弾：一般向けの「街」にする
+
+### 何をした
+
+施主FB（「もっとわかりやすい面積差」「画面いっぱい使って街だとわかるように」「建物のアイコン」
+「敷地の名前見えねぇよ」「創発が起きる区画も明示」「創発したら発光」）を、
+**シミュ本体・台本・分類器（`src/` `configs/config_*` `configs/events_*` `run.py` `simulations/`）に
+一切触れずに**、画面と `tools/build_present_data.py` と `tests/` だけで実装した。
+
+- `tools/build_present_data.py`（`meta.schema` 6→**7**）
+  - **マスの辺を面積の平方根に比例**させた（4分位を廃止）。`side = 34.0 × √(面積/最小面積)`。
+    実測 **34.0〜86.21px＝辺で 2.5355 倍・描画面積で 6.4286 倍**（`layout.checks` に出す）。
+    面積が増えるので `LAYOUT_VIEW` を **1400×900**、`LAYOUT_R` を **430.0** に上げた
+    （`LAYOUT_ZONE_F` / `LAYOUT_GAP` / `LAYOUT_SQUASH` / `LAYOUT_PULL` / `LAYOUT_SEED` は不変）。
+    重なりは **max_overlap 0.0**（追い足しの押し離し1パス）、平均半径は 中心105.31 < 中間221.94 < 郊外371.90。
+  - **区画の呼び名**：`configs/parcel_names_v5c.yaml` から `name` / `locality` / `use_word` /
+    `owner_label`（**初期**所有者の呼び名）を `layout.cells` に入れる。表に無い pid があれば例外で落とす。
+    `layout.naming = {source, n:48}`。既存の `parcel_naming`（実測）はそのまま残した。
+  - **会場を地図に置く**：`configs/venues_v5c.yaml` から `layout.venues`（id/label/badge/cx/cy/r=22）。
+    区画と同じ極座標で置き、当たったら**会場だけ**を決定論に外へ押し出す（隙間の最小 **6.089**）。
+    `layout.venues_note`＝表示位置は装飾。**集計・判定のコードがこの YAML を読んでいないことを tests で固定**。
+  - **`ignition_timeline`**（新規）：月 → その月に**人ごとに初めて**緑／黄へ達した出来事。
+    `kind` は `speech`（同席者に届いた発話）／`thought`（内心）。`heard_by` はデータにある同席者のみ。
+    材料は既存の strict と同じ（`stage` / `_v5_mentions` / `holders_by_step` / `acquired_by_step`）＝
+    **新しい語彙・新しい判定は足していない**。
+  - **`party_present` / `party_lens`**（観測レンズ）：その行の場に、その月までに成立した取引の
+    当事者（売主・貸主）本人が居合わせたか。同席は `plans_v5.jsonl` の行き先から機械抽出。
+    `ignition.*.strict` にも同じキーを足した。**v5cA の実測＝緑に初めて達した26人のうち19人（73.1%）、
+    黄は4人のうち4人（100%）が、その場に当事者本人がいた**（相関の観測であり、仕掛けは作っていない）。
+- `present.html`（Pages 作業ツリー）
+  - 地図は**2枚を切替タブ**にして1枚を大きく出す（1280 で描画幅 **1186px**・390 では横スワイプ、
+    ページの横スクロールは0）。座標は切替えても同一。
+  - **建物のピクト**（旅館＝湯気／店＝庇／事業所＝角ばったビル／家＝切妻／古家＝傾いた切妻＋ひび／
+    空き地＝破線＋草／集会所＝旗）を単色SVGで全区画に描く。絵文字は使わない。
+  - **全48区画＋会場15か所の名前を常時表示**（実効 11.86px＠1280・12.0px＠390）。
+    配置は決定論の総当たり（`Math.random` 不使用）で、**ラベルの重なりは DOM 実測で 0**。離れた場合は引き出し線。
+  - **街の下地**（海岸線・丘・環状道路・放射道路・中央の広場）は**装飾**。凡例に明記。
+  - **発光**：その月の `ignition_timeline` で、会場がパルス→残光（1.2秒）、発話なら `heard_by` の
+    本拠へ波紋の線、内心は弱い光だけ（「頭の中（誰にも伝わっていない）」と併記）、
+    当事者が同席していた場には**二重リング**。`prefers-reduced-motion` では動かさず最終状態だけ出す。
+  - 並びを ①街の地図 ②火が点いた瞬間（原文）③4色の推移（折れ線）④読み方ガイド → 補助パネル →
+    `<details>「詳しい数字」` に変えた（数表は畳んだ）。
+  - 原文は1文字も直さず、脇に「原文の P43 は『川沿いの家』のこと」の**対応注記**を機械生成。
+
+### 実測（検収）
+
+- `python tests/test_present.py` **466 passed / 0 failed**（第2弾は339本。壊さずに足した）。
+- `python tests/test_ledger.py` **619 / 0 failed**、`python tests/test_v5c.py` **73 / 0 failed**。
+- 7本すべて再生成（run94・v5bA/B/C は `layout=null` で従来表示のまま）。
+- スクリーンショット `docs/shots_present3/`（登記の地図・街の話の地図・390・発光中・残光・
+  火が点いた瞬間・詳しい数字を開いた状態・ラベルの拡大・動きを止める設定）。
+
+### 要判断（CTO へ）
+
+1. **記事（`kind:"article"`）の扱い**：スペックの `ignition_timeline` は `speech` / `thought` の2種しか
+   定義がない。記事は年表に混ぜず `ignition_timeline_excluded` に分けて出した（v5cA で黄1件）。
+   混ぜるなら第3の種別を足す必要がある。
+2. `party_present` は**本人が当事者の場合も「居合わせた」に数えている**（basis に明記）。
+   除くなら定義を変える必要がある。
+
+### 変わっていない制約
+
+ルールベース排除／観測に無い事実をコードで補完しない／`mvp_v1`〜`field_v5c` の設定と成果物は不変／
+プロンプトとHTMLに「AI」表記を出さない／`git push`（ソースリポ・Pages とも）は**本便では未実施**。

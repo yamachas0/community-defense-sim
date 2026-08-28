@@ -18,16 +18,20 @@ import collections
 import http.server
 import json
 import os
+import math
 import re
 import socketserver
 import sys
 import threading
 import time
 
+import yaml
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = r"C:\Users\user\projects\quiet-acquisition-pages"
 SHOTS = os.path.join(ROOT, "docs", "shots_present")
 SHOTS2 = os.path.join(ROOT, "docs", "shots_present2")
+SHOTS3 = os.path.join(ROOT, "docs", "shots_present3")
 PASS = FAIL = 0
 SCENE_ORDER = {"plan": 0, "S1": 1, "S2": 2, "S3": 3, "S4": 4}
 
@@ -68,7 +72,7 @@ def _jsonl(path):
 
 
 def json_checks(dC):
-    """schema 6 の layout / ignition（strict・loose）/ parcel_naming を JSON だけで検査する。"""
+    """schema 7 の layout / ignition（strict・loose）/ parcel_naming を JSON だけで検査する。"""
     run_dir = os.path.join(ROOT, "simulations", dC["meta"]["generated_from"])
 
     # --- layout -----------------------------------------------------------
@@ -76,22 +80,35 @@ def json_checks(dC):
     check("layout: v5c の JSON に layout がある", bool(L))
     if not L:
         return
-    check("layout: view が 1000x760", L["view"] == {"w": 1000, "h": 760}, str(L["view"]))
+    check("layout: view が 1400x900", L["view"] == {"w": 1400, "h": 900}, str(L["view"]))
     check("layout: 出所と種が記録されている",
           L["source"] == "configs/parcels_v5c.yaml" and L["seed"] == 8501)
     check("layout: 全区画ぶんのマスがある",
           set(L["cells"]) == {p["pid"] for p in dC["grid"]["parcels"]},
           str(sorted(set(L["cells"]) ^ {p["pid"] for p in dC["grid"]["parcels"]})[:4]))
     need = ("cx", "cy", "side", "zone", "area_sqm", "size_class", "use",
-            "use_detail", "owner_name", "frontage")
+            "use_detail", "owner_name", "frontage", "name", "locality",
+            "use_word", "owner_label")
     check("layout: 各マスに必要な項目がそろっている",
           all(all(k in c for k in need) for c in L["cells"].values()))
     order = sorted(L["cells"].items(), key=lambda kv: (kv[1]["area_sqm"], kv[0]))
     sides = [c["side"] for _, c in order]
     check("layout: マスの大きさが面積の順序と矛盾しない",
           all(sides[i] <= sides[i + 1] for i in range(len(sides) - 1)), str(sides))
-    check("layout: 使っている大きさは4段階だけ",
-          sorted(set(sides)) == [30, 42, 54, 68], str(sorted(set(sides))))
+    amin = min(c["area_sqm"] for c in L["cells"].values())
+    bad_side = [pid for pid, c in L["cells"].items()
+                if abs(c["side"] - 34.0 * math.sqrt(c["area_sqm"] / amin)) > 0.01]
+    check("layout: 辺が面積の平方根に比例している（34.0 × √(面積/最小面積））",
+          not bad_side, str(bad_side[:4]))
+    ck = L["checks"]
+    check("layout: 辺の比が実測 2.53〜2.55（sqrt 比例の帰結）",
+          2.53 <= ck["side_ratio"] <= 2.55, str(ck["side_ratio"]))
+    check("layout: 描画面積の比が辺の比の2乗と一致",
+          abs(ck["draw_area_ratio"] - ck["side_ratio"] ** 2) < 0.01,
+          str((ck["draw_area_ratio"], ck["side_ratio"])))
+    check("layout: side_min / side_max が実測どおり",
+          abs(ck["side_min"] - min(sides)) < 0.01
+          and abs(ck["side_max"] - max(sides)) < 0.01, str((ck["side_min"], ck["side_max"])))
     check("layout: マスの重なりの最大が 1.0 以下",
           L["checks"]["max_overlap"] <= 1.0, str(L["checks"]["max_overlap"]))
     ov = 0.0
@@ -109,12 +126,63 @@ def json_checks(dC):
     check("layout: 平均半径が 中心 < 中間 < 郊外",
           mr["中心"] < mr["中間"] < mr["郊外"], str(mr))
     for c in L["cells"].values():
-        if not (c["side"] / 2 <= c["cx"] <= 1000 - c["side"] / 2
-                and c["side"] / 2 <= c["cy"] <= 760 - c["side"] / 2):
+        if not (c["side"] / 2 <= c["cx"] <= L["view"]["w"] - c["side"] / 2
+                and c["side"] / 2 <= c["cy"] <= L["view"]["h"] - c["side"] / 2):
             check("layout: 全マスがビューに収まる", False, str(c))
             break
     else:
         check("layout: 全マスがビューに収まる", True)
+
+    # --- 呼び名（parcel_names_v5c.yaml） --------------------------------
+    with open(os.path.join(ROOT, "configs", "parcel_names_v5c.yaml"),
+              encoding="utf-8") as f:
+        NAMES = yaml.safe_load(f)
+    check("naming: 出所と件数が JSON に書いてある",
+          L.get("naming") == {"source": "configs/parcel_names_v5c.yaml",
+                              "n": len(L["cells"])}, str(L.get("naming")))
+    check("naming: 全48区画に名前がある",
+          len(L["cells"]) == 48
+          and all(c["name"] and c["locality"] and c["use_word"]
+                  for c in L["cells"].values()))
+    names = [c["name"] for c in L["cells"].values()]
+    locs = [c["locality"] for c in L["cells"].values()]
+    check("naming: 名前が全区画で一意", len(set(names)) == len(names))
+    check("naming: locality が全区画で一意", len(set(locs)) == len(locs))
+    check("naming: 名前が呼び名の表と1文字も違わない",
+          all(L["cells"][p]["name"] == NAMES["land"][p]["name"]
+              for p in L["cells"]))
+    check("naming: owner_label は初期所有者（parcels_v5c の owner_name）の呼び名",
+          all(c["owner_label"] == NAMES["registered_names"].get(c["owner_name"],
+                                                                c["owner_name"])
+              for c in L["cells"].values()))
+
+    # --- 会場（venues_v5c.yaml・装飾） ----------------------------------
+    with open(os.path.join(ROOT, "configs", "venues_v5c.yaml"),
+              encoding="utf-8") as f:
+        VEN = yaml.safe_load(f)["venues"]
+    vs = L.get("venues") or []
+    check("venues: 15か所ぶんの座標がある", len(vs) == 15 and len(VEN) == 15,
+          str(len(vs)))
+    check("venues: id と呼び名と1文字のバッジが表のとおり",
+          [(v["id"], v["label"], v["badge"]) for v in vs]
+          == [(v["id"], v["label"], v["badge"]) for v in VEN])
+    check("venues: 表示位置が装飾だと JSON に書いてある",
+          "装飾" in str(L.get("venues_note")) and "判定には使わない" in str(L.get("venues_note")),
+          str(L.get("venues_note")))
+    worst_v = 1e9
+    for i, v in enumerate(vs):
+        for c in L["cells"].values():
+            dx = max(abs(v["cx"] - c["cx"]) - c["side"] / 2, 0.0)
+            dy = max(abs(v["cy"] - c["cy"]) - c["side"] / 2, 0.0)
+            worst_v = min(worst_v, math.hypot(dx, dy) - v["r"])
+        for w in vs[i + 1:]:
+            worst_v = min(worst_v, math.hypot(v["cx"] - w["cx"], v["cy"] - w["cy"])
+                          - v["r"] - w["r"])
+    check("venues: 区画とも会場どうしとも重ならない（隙間 6 以上）",
+          worst_v >= 5.99, "%.3f" % worst_v)
+    check("venues: 全部がビューに収まる",
+          all(v["r"] <= v["cx"] <= L["view"]["w"] - v["r"]
+              and v["r"] <= v["cy"] <= L["view"]["h"] - v["r"] for v in vs))
 
     sys.path.insert(0, os.path.join(ROOT, "tools"))
     import build_present_data as bpd
@@ -252,12 +320,144 @@ def json_checks(dC):
                       bool(o["llm"]["area" if color == "green" else "same_buyer"]),
                       str(o["llm"]))
 
+    # --- ignition_timeline / party_lens（第3弾） --------------------------
+    tl = dC.get("ignition_timeline")
+    lens = dC.get("party_lens")
+    excl = dC.get("ignition_timeline_excluded")
+    steps = dC["stats"]["steps"]
+    check("ignition_timeline: 月をキーにした辞書がある", isinstance(tl, dict) and bool(tl))
+    check("ignition_timeline: 除外した記事の一覧がある", isinstance(excl, list))
+    rows_tl = [e for m in (tl or {}) for e in tl[m]]
+    check("ignition_timeline: 月キーが 1〜%d の範囲" % steps,
+          all(1 <= int(m) <= steps for m in (tl or {})), str(sorted(tl or {})[:3]))
+    check("ignition_timeline: 要素の月がキーと一致",
+          all(e["month"] == int(m) for m in (tl or {}) for e in tl[m]))
+    need_tl = ("month", "color", "kind", "agent", "agent_label", "venue", "venue_label",
+               "scene", "round", "utt_id", "text", "heard_by", "parcels", "holders",
+               "party_present")
+    check("ignition_timeline: 項目がそろっている",
+          all(all(k in e for k in need_tl) for e in rows_tl),
+          str([k for k in need_tl if rows_tl and k not in rows_tl[0]]))
+    check("ignition_timeline: 色は緑か黄だけ",
+          all(e["color"] in ("green", "yellow") for e in rows_tl))
+    check("ignition_timeline: 種別は発話か内心だけ",
+          all(e["kind"] in ("speech", "thought") for e in rows_tl))
+    pairs = [(e["agent"], e["color"]) for e in rows_tl]
+    check("ignition_timeline: 人ごとの初到達は1回だけ（重複しない）",
+          len(set(pairs)) == len(pairs), str(len(pairs) - len(set(pairs))))
+    check("ignition_timeline: 呼び名が内部IDのまま残っていない",
+          all(e["agent_label"] != e["agent"] for e in rows_tl),
+          str([e["agent"] for e in rows_tl if e["agent_label"] == e["agent"]][:3]))
+    miss_src = [e["utt_id"] for e in rows_tl
+                if (e["month"], e["agent"], e["utt_id"],
+                    "utterance" if e["kind"] == "speech" else "thought") not in src_text]
+    check("ignition_timeline: 元ログに該当行がある", not miss_src, str(miss_src[:3]))
+    bad_text = [e["utt_id"] for e in rows_tl
+                if e["text"] not in src_text.get(
+                    (e["month"], e["agent"], e["utt_id"],
+                     "utterance" if e["kind"] == "speech" else "thought"), [])]
+    check("ignition_timeline: 原文が元ログと完全一致", not bad_text, str(bad_text[:3]))
+    bad_heard = [e["utt_id"] for e in rows_tl
+                 if (e["kind"] == "speech"
+                     and e["heard_by"] != (utt_by_id.get(e["utt_id"], {}).get("heard_by") or []))
+                 or (e["kind"] == "thought" and e["heard_by"])]
+    check("ignition_timeline: 同席者はデータにある heard_by そのもの（内心は空）",
+          not bad_heard, str(bad_heard[:3]))
+    homes = {a: v["home"] for a, v in
+             yaml.safe_load(open(os.path.join(ROOT, "configs", "parcel_names_v5c.yaml"),
+                                 encoding="utf-8"))["agents"].items() if v.get("home")}
+    bad_home = [e["utt_id"] for e in rows_tl
+                if any(k not in e["heard_by"] or homes.get(k) != v
+                       for k, v in (e.get("homes") or {}).items())]
+    check("ignition_timeline: 本拠は同席者ぶんだけ・呼び名の表どおり",
+          not bad_home, str(bad_home[:3]))
+
+    led = _jsonl(os.path.join(run_dir, "ledger.jsonl"))
+    deals = [{"month": int(r["step"]), "pid": r["parcel_id"],
+              "party": r.get("seller") or r.get("lessor") or ""}
+             for r in led if r.get("kind") in ("transfer", "lease")]
+    bad_party = []
+    for e in rows_tl + [ig[c]["strict"] for c in ("green", "yellow") if ig[c]["strict"]]:
+        pp = e.get("party_present")
+        if not isinstance(pp, dict) or set(pp) != {"present", "agents", "labels", "parcels"}:
+            bad_party.append(("形", e.get("utt_id")))
+            continue
+        month = e["month"]
+        parties = {d["party"] for d in deals if d["month"] <= month and d["party"]}
+        if any(a not in parties for a in pp["agents"]):
+            bad_party.append(("当事者でない", e.get("utt_id")))
+        want = sorted({d["pid"] for d in deals
+                       if d["month"] <= month and d["party"] in pp["agents"]})
+        if pp["parcels"] != want or pp["present"] != bool(pp["agents"])                 or len(pp["labels"]) != len(pp["agents"]):
+            bad_party.append(("中身", e.get("utt_id")))
+    check("party_present: その月までに成立した取引の当事者だけを、区画つきで出している",
+          not bad_party, str(bad_party[:3]))
+
+    check("party_lens: 基準と但し書きがある",
+          isinstance(lens, dict) and lens.get("basis") and lens.get("caveat"),
+          str(lens if not isinstance(lens, dict) else list(lens)))
+    for color in ("green", "yellow"):
+        got = [e for e in rows_tl if e["color"] == color]
+        w = len([e for e in got if e["party_present"]["present"]])
+        share = round(w / len(got), 4) if got else None
+        check("party_lens[%s]: 年表と数が一致" % color,
+              lens[color] == {"first_n": len(got), "with_party": w, "share": share,
+                              "excluded_articles": len([e for e in (excl or [])
+                                                        if e["color"] == color])},
+              str((lens[color], len(got), w, share)))
+
+
+LABEL_JS = """() => {
+  const svg = document.querySelector('#mapR svg');
+  if (!svg) return {n: 0, nbad: 0, bad: [], fs: 0, mapw: 0};
+  const vb = svg.viewBox.baseVal;
+  const box = svg.getBoundingClientRect();
+  const sc = box.width / vb.width;
+  const ts = [...document.querySelectorAll('#mapR text.plabel, #mapR text.vlabel')];
+  const rects = ts.map(t => { const r = t.getBoundingClientRect();
+    return {t: t.textContent, x0: r.x, y0: r.y, x1: r.right, y1: r.bottom}; });
+  const bad = [];
+  for (let i = 0; i < rects.length; i++)
+    for (let j = i + 1; j < rects.length; j++) {
+      const a = rects[i], b = rects[j];
+      const ox = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+      const oy = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+      if (ox > 0.5 && oy > 0.5) bad.push([a.t, b.t, +ox.toFixed(2), +oy.toFixed(2)]);
+    }
+  const fs = Math.min.apply(null, ts.map(t => parseFloat(getComputedStyle(t).fontSize) * sc));
+  return {n: ts.length, nbad: bad.length, bad: bad.slice(0, 4),
+          fs: +fs.toFixed(2), mapw: +box.width.toFixed(1)};
+}"""
+
+
+def label_checks(page, tag, min_map_w):
+    """ラベルの重なり0と読める大きさを DOM から実測する（1280 と 390 の両方）。"""
+    r = page.evaluate(LABEL_JS)
+    check("present(%s): 地図の描画幅が %d px 以上" % (tag, min_map_w),
+          r["mapw"] >= min_map_w, str(r["mapw"]))
+    check("present(%s): 区画48＋会場15の名前が出ている" % tag, r["n"] == 63, str(r["n"]))
+    check("present(%s): ラベルの重なりが 0" % tag, r["nbad"] == 0, str(r["bad"]))
+    check("present(%s): ラベルの実効の文字が 11px 以上" % tag, r["fs"] >= 11.0, str(r["fs"]))
+    return r
+
+
+def open_numbers(page):
+    """数表は details「詳しい数字」に畳んである＝読む前に開く。"""
+    page.evaluate("() => document.querySelectorAll('details.numbers')"
+                  ".forEach(d => { d.open = true; })")
+
 
 def main() -> int:
     from playwright.sync_api import sync_playwright
 
+    try:                       # 端末が cp932 でも検査名を潰さない
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
     os.makedirs(SHOTS, exist_ok=True)
     os.makedirs(SHOTS2, exist_ok=True)
+    os.makedirs(SHOTS3, exist_ok=True)
     with open(os.path.join(PAGES, "present_data_run94.json"), encoding="utf-8") as f:
         d94 = json.load(f)
     with open(os.path.join(PAGES, "present_data_v5bB.json"), encoding="utf-8") as f:
@@ -267,7 +467,7 @@ def main() -> int:
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             d = json.load(f)
         check("%s: 区画属性を持たない run は layout=null（従来の格子で描く）" % lab,
-              d.get("layout") is None and d["meta"]["schema"] == 6,
+              d.get("layout") is None and d["meta"]["schema"] == 7,
               str(d["meta"]["schema"]))
         ig = d.get("ignition")
         check("%s: ignition は色の判定が無い run でも同じ形" % lab,
@@ -279,6 +479,24 @@ def main() -> int:
     for lab in ("v5cA", "v5cB", "v5cC"):
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             json_checks(json.load(f))
+
+    hits = []
+    for rel in ("run.py", "tools/run_metrics.py", "tools/build_audit_v5c.py",
+                "tools/build_parcels_v5c.py", "tools/build_events_v5c.py",
+                "configs/config_field_v5c.yaml", "configs/config_field_v5c_econ.yaml"):
+        path = os.path.join(ROOT, *rel.split("/"))
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                if "venues_v5c" in f.read():
+                    hits.append(rel)
+    for name in sorted(os.listdir(os.path.join(ROOT, "src"))):
+        if not name.endswith(".py"):
+            continue
+        with open(os.path.join(ROOT, "src", name), encoding="utf-8") as f:
+            if "venues_v5c" in f.read():
+                hits.append("src/" + name)
+    check("会場の表示位置は装飾＝集計・判定のコードは venues_v5c.yaml を読んでいない",
+          not hits, str(hits))
 
     httpd = serve()
     base = "http://127.0.0.1:8731/present.html"
@@ -293,6 +511,9 @@ def main() -> int:
                 page.on("pageerror", lambda e: errors.append(str(e)))
                 page.goto(base + "?run=run94", wait_until="networkidle")
                 page.wait_for_selector("#mapL .cell", timeout=10000)
+                open_numbers(page)
+                page.click("[data-m='R']")          # 地図は1枚ずつ＝押す前に開く
+                page.wait_for_timeout(150)
 
                 check("present: console エラーが出ない", not errors, str(errors[:2]))
                 w = page.evaluate("[document.documentElement.scrollWidth,"
@@ -443,8 +664,7 @@ def main() -> int:
                     check("present: 色が付かなかった区画が JSON と一致する",
                           sorted(sil) == sorted(dC["stage_stats"]["silent"]),
                           f"{sorted(sil)} vs {sorted(dC['stage_stats']['silent'])}")
-                    page.click("[role=tab][data-p='I']")
-                    page.wait_for_timeout(250)
+                    open_numbers(page)
                     panel = page.inner_text("#pI")
                     st = dC["stage_stats"]
                     check("present: 色のパネルが開く", page.is_visible("#pI"))
@@ -481,26 +701,125 @@ def main() -> int:
                     check("present: マスの位置と大きさが JSON の layout と一致",
                           not badgeo, str(badgeo[:4]))
                     labels = page.eval_on_selector_all(
-                        "#mapR text.pid", "els => els.map(e=>e.textContent)")
-                    big = sorted(p for p, c in Lc["cells"].items() if c["side"] >= 54)
-                    check("present: 大きいマスにだけ区画IDのラベルが出る",
-                          sorted(labels) == big,
-                          str(sorted(set(labels) ^ set(big))[:4]))
-                    owners = page.eval_on_selector_all(
-                        "#mapR text.owner", "els => els.map(e=>e.textContent)")
-                    want_owner = sorted(
-                        Lc["cells"][p]["owner_name"] + "さん" for p in big
-                        if dC["parcel_naming"]["name_in_speech"].get(p))
-                    check("present: 街が名前で呼ぶ区画には持ち主の名前も出る",
-                          sorted(owners) == want_owner,
-                          str(sorted(owners)[:3]) + " vs " + str(want_owner[:3]))
+                        "#mapR text.plabel", "els => els.map(e=>e.textContent)")
+                    check("present: 全48区画に名前のラベルが常時出ている",
+                          sorted(labels) == sorted(c["name"] for c in Lc["cells"].values()),
+                          str(sorted(labels)[:3]))
+                    vlabels = page.eval_on_selector_all(
+                        "#mapR text.vlabel", "els => els.map(e=>e.textContent)")
+                    check("present: 会場15か所の名前も常時出ている",
+                          sorted(vlabels) == sorted(v["label"] for v in Lc["venues"]),
+                          str(sorted(vlabels)[:3]))
+                    check("present: 会場が丸で描かれている",
+                          page.eval_on_selector_all(
+                              "#mapR circle.venue", "els => els.length") == 15)
+                    check("present: 会場の丸が layout の座標どおり",
+                          page.eval_on_selector_all(
+                              "#mapR circle.venue",
+                              "els => els.map(e=>[e.dataset.venue,+e.getAttribute('cx'),"
+                              "+e.getAttribute('cy'),+e.getAttribute('r')])")
+                          == [[v["id"], v["cx"], v["cy"], v["r"]] for v in Lc["venues"]])
+                    check("present: 全区画に用途のピクトが描かれている",
+                          page.eval_on_selector_all(
+                              "#mapR g.icon", "els => els.length") == len(Lc["cells"]))
                     legend = page.inner_text("#legendR")
                     check("present: 凡例にマスの読み方が書いてある",
-                          "マスの大きさ＝敷地面積（4段階）／中央＝市街地・外側＝郊外" in legend,
-                          legend[:120])
-                    check("present: 凡例に区画の呼び名の注記が出る",
-                          "区画に名前は無い。街は「P04」か「持ち主のR03さん」と呼ぶ。" in legend,
-                          legend[:200])
+                          "マスの大きさ＝敷地面積（辺は面積の平方根に比例）" in legend
+                          and "中央＝市街地・外側＝郊外" in legend, legend[:160])
+                    check("present: 凡例に装飾の断りが書いてある",
+                          "通り・広場・地形は装飾です（判定には使っていません）" in legend
+                          and "会場と本拠の位置も装飾です" in legend, legend[:400])
+                    check("present: 凡例に発光の読み方が書いてある",
+                          "二重リング＝この場に、取引した本人が居合わせていた" in legend
+                          and "弱い光だけ＝頭の中（誰にも伝わっていない）" in legend, legend[:600])
+
+                    # ---- 第3弾：ラベル・発光・街の下地 ----
+                    label_checks(page, "1280", 1100)
+                    page.screenshot(path=os.path.join(SHOTS3, "02_town_talk_1280.png"),
+                                    full_page=True)
+                    page.click("[data-m='L']")
+                    page.wait_for_timeout(200)
+                    check("present: 登記の地図に切り替えると1枚だけ出る",
+                          page.is_visible("#mapboxL") and not page.is_visible("#mapboxR"))
+                    same = page.evaluate(
+                        "() => {const g=id=>[...document.querySelectorAll(id+' rect.cell')]"
+                        ".map(e=>[e.dataset.pid,e.getAttribute('x'),e.getAttribute('y'),"
+                        "e.getAttribute('width')]);"
+                        "return JSON.stringify(g('#mapL'))===JSON.stringify(g('#mapR'));}")
+                    check("present: 切替えても座標は同じ", same)
+                    page.screenshot(path=os.path.join(SHOTS3, "01_town_registry_1280.png"),
+                                    full_page=True)
+                    check("present: 装飾の下地（通り・広場・地形）が描かれている",
+                          page.eval_on_selector_all("#mapL g.deco .road", "e=>e.length") >= 8
+                          and page.eval_on_selector_all("#mapL g.deco .ring", "e=>e.length") == 2
+                          and page.eval_on_selector_all("#mapL g.deco .sea", "e=>e.length") == 1)
+                    page.click("[data-m='R']")
+                    page.wait_for_timeout(200)
+
+                    # 発光：その月に初めて火が点いた人がいる月へ進める
+                    tl = dC["ignition_timeline"]
+                    fm = sorted(int(m) for m in tl
+                                if any(e["kind"] == "speech" for e in tl[m]))[0]
+                    page.fill("#slider", str(fm - 1))
+                    page.dispatch_event("#slider", "input")
+                    page.wait_for_timeout(250)
+                    page.fill("#slider", str(fm))
+                    page.dispatch_event("#slider", "input")
+                    page.wait_for_timeout(120)
+                    fx = page.evaluate(
+                        "() => ({pulse:document.querySelectorAll('#mapR .fx circle.pulse').length,"
+                        "glow:document.querySelectorAll('#mapR .fx circle.glow').length,"
+                        "wave:document.querySelectorAll('#mapR .fx line.wave').length,"
+                        "ring2:document.querySelectorAll('#mapR .fx circle.ring2').length,"
+                        "anim:getComputedStyle(document.querySelector('#mapR .fx circle.pulse'))"
+                        ".animationName})")
+                    evs = tl[str(fm)]
+                    check("発光: 火が点いた会場がパルスする",
+                          fx["pulse"] == len([e for e in evs if e["kind"] == "speech"
+                                              and e["venue"]]), str(fx))
+                    check("発光: パルスに動きが付いている（既定）",
+                          fx["anim"] == "pulse", str(fx["anim"]))
+                    want_wave = sum(len([a for a in e["heard_by"] if a in (e.get("homes") or {})])
+                                    for e in evs if e["kind"] == "speech")
+                    check("発光: 波紋はデータにある同席者の本拠ぶんだけ",
+                          fx["wave"] == want_wave, str((fx["wave"], want_wave)))
+                    check("発光: 当事者が同席した場には二重リングが出る",
+                          fx["ring2"] == len([e for e in evs
+                                              if e["party_present"]["present"] and e["venue"]]),
+                          str(fx))
+                    page.locator("#mapboxR").screenshot(
+                        path=os.path.join(SHOTS3, "04_glow_1280.png"))
+                    fxlog = page.inner_text("#fxlog")
+                    check("発光: 内心は「頭の中（誰にも伝わっていない）」と書く",
+                          all((("頭の中（誰にも伝わっていない）" in fxlog)
+                               if e["kind"] == "thought" else True) for e in evs), fxlog[:160])
+                    check("発光: 同じ月の原文が下に出る",
+                          all(e["text"][:20] in fxlog for e in evs), fxlog[:160])
+                    still = page.eval_on_selector_all("#mapR .fx > *", "e=>e.length")
+                    check("発光: 残光の間はまだ光が残っている", still > 0, str(still))
+                    page.locator("#mapboxR").screenshot(
+                        path=os.path.join(SHOTS3, "05_afterglow_1280.png"))
+                    page.wait_for_timeout(1800)
+                    check("発光: 残光のあとは消える",
+                          page.eval_on_selector_all("#mapR .fx > *", "e=>e.length") == 0)
+                    page.screenshot(path=os.path.join(SHOTS3, "06_fire_moment_1280.png"),
+                                    full_page=True)
+                    zoom = page.evaluate(
+                        "() => {const r=document.querySelector('#mapR svg')"
+                        ".getBoundingClientRect();"
+                        "return {x:r.x+r.width*0.30,y:r.y+r.height*0.16,"
+                        "width:r.width*0.40,height:r.height*0.44};}")
+                    page.screenshot(path=os.path.join(SHOTS3, "08_labels_zoom_1280.png"),
+                                    clip=zoom)
+                    open_numbers(page)
+                    page.wait_for_timeout(150)
+                    check("present: 数表は「詳しい数字」に畳んである",
+                          page.eval_on_selector_all("details.numbers", "e=>e.length") >= 2)
+                    page.screenshot(path=os.path.join(SHOTS3, "07_numbers_open_1280.png"),
+                                    full_page=True)
+                    page.fill("#slider", str(sC["steps"]))   # 月を最後まで戻す
+                    page.dispatch_event("#slider", "input")
+                    page.wait_for_timeout(300)
                     bar = page.inner_text("#colorbar")
                     check("present: 4色の定義が常に見える帯に出ている",
                           all(t in bar for t in
@@ -538,8 +857,6 @@ def main() -> int:
                     page.screenshot(path=os.path.join(SHOTS2, "05_parcel_dialog.png"))
                     page.click("#dlgClose")
                     page.wait_for_timeout(200)
-                    page.click("[role=tab][data-p='J']")
-                    page.wait_for_timeout(250)
                     ip = page.inner_text("#pJ")
                     g = dC["ignition"]["green"]["strict"]
                     check("ガイド手順4: 火が点いた瞬間のタブが開く", page.is_visible("#pJ"))
@@ -606,7 +923,6 @@ def main() -> int:
                         ".map(e => [e.dataset.pid, e.style.transitionDelay])")
                     check("present: 巻き戻し・切替の直後は遅延を持たない",
                           all(d in ("", "0s") for _, d in delays), str(delays[:3]))
-                    page.click("[role=tab][data-p='J']")
                     page.click("#reset")
                     page.wait_for_timeout(200)
                     page.click("#play")
@@ -663,6 +979,42 @@ def main() -> int:
                     page.click("[role=tab][data-p='D']")
                 page.close()
 
+                # 動きを止める設定（prefers-reduced-motion: reduce）
+                rp = browser.new_page(viewport={"width": 1280, "height": 900},
+                                      reduced_motion="reduce")
+                rerr = []
+                rp.on("console", lambda x: rerr.append(x.text)
+                      if x.type == "error" else None)
+                rp.on("pageerror", lambda e: rerr.append(str(e)))
+                rp.goto(base + "?run=v5cA", wait_until="networkidle")
+                rp.wait_for_selector("#mapR svg", state="attached", timeout=10000)
+                rp.click("[data-m='R']")
+                with open(os.path.join(PAGES, "present_data_v5cA.json"),
+                          encoding="utf-8") as f:
+                    dR = json.load(f)
+                tlR = dR["ignition_timeline"]
+                fmR = sorted(int(m) for m in tlR
+                             if any(e["kind"] == "speech" for e in tlR[m]))[0]
+                rp.fill("#slider", str(fmR))
+                rp.dispatch_event("#slider", "input")
+                rp.wait_for_timeout(400)
+                anim = rp.evaluate(
+                    "() => [...document.querySelectorAll('#mapR .fx circle, #mapR .fx line')]"
+                    ".map(e => getComputedStyle(e).animationName)")
+                check("動きを止める設定: 発光にアニメーションが掛からない",
+                      bool(anim) and all(a == "none" for a in anim), str(anim[:3]))
+                dly = rp.evaluate(
+                    "() => [...document.querySelectorAll('#mapR rect.cell')]"
+                    ".map(e => e.style.transitionDelay).filter(d => d && d !== '0s')")
+                check("動きを止める設定: 点灯の位相差も付かない", not dly, str(dly[:3]))
+                rp.wait_for_timeout(1800)
+                check("動きを止める設定: 最終状態がそのまま残る",
+                      rp.eval_on_selector_all("#mapR .fx > *", "e=>e.length") > 0)
+                check("動きを止める設定: console エラーが出ない", not rerr, str(rerr[:2]))
+                rp.screenshot(path=os.path.join(SHOTS3, "09_reduced_motion_1280.png"),
+                              full_page=True)
+                rp.close()
+
                 # モバイル
                 m = browser.new_page(viewport={"width": 390, "height": 844})
                 merr = []
@@ -671,6 +1023,9 @@ def main() -> int:
                 m.on("pageerror", lambda e: merr.append(str(e)))
                 m.goto(base + "?run=run94", wait_until="networkidle")
                 m.wait_for_selector("#mapL .cell", timeout=10000)
+                open_numbers(m)
+                m.click("[data-m='R']")
+                m.wait_for_timeout(150)
                 mw = m.evaluate("[document.documentElement.scrollWidth,"
                                 "document.documentElement.clientWidth]")
                 check("present: 390 で横スクロールが出ない", mw[0] <= mw[1], str(mw))
@@ -709,7 +1064,9 @@ def main() -> int:
                                  "document.documentElement.clientWidth]")
                 check("present: 390 の SVG 地図でも横スクロールが出ない",
                       mw4[0] <= mw4[1], str(mw4))
-                m.click("[role=tab][data-p='J']")
+                label_checks(m, "390", 1100)
+                m.screenshot(path=os.path.join(SHOTS3, "03_town_390.png"),
+                             full_page=True)
                 m.wait_for_timeout(300)
                 mw5 = m.evaluate("[document.documentElement.scrollWidth,"
                                  "document.documentElement.clientWidth]")
