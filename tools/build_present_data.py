@@ -44,15 +44,20 @@ def _load(run_dir, name):
 # 配置は**ここで決定論に計算して JSON に入れる**。HTML は座標を描くだけ。
 # ---------------------------------------------------------------------------
 
-LAYOUT_VIEW = {"w": 1000, "h": 760}
+LAYOUT_VIEW = {"w": 1400, "h": 900}
 LAYOUT_SEED = 8501
-LAYOUT_R = 320.0
-LAYOUT_SIDES = [30.0, 42.0, 54.0, 68.0]
+LAYOUT_R = 430.0
+LAYOUT_SIDE_MIN = 34.0
 LAYOUT_ZONE_F = {"中心": 0.20, "中間": 0.52, "郊外": 0.86}
 LAYOUT_GAP = 7.0
 LAYOUT_SQUASH = 0.78
 LAYOUT_ITERS = 500
 LAYOUT_PULL = 0.12
+LAYOUT_NAMES_FILE = "configs/parcel_names_v5c.yaml"
+LAYOUT_VENUES_FILE = "configs/venues_v5c.yaml"
+LAYOUT_VENUE_R = 22.0
+LAYOUT_VENUE_GAP = 6.0
+VENUES_NOTE = "表示位置は装飾。世界の同席・配送・判定には使わない"
 
 
 def _lcg(seed: int, n: int):
@@ -69,6 +74,123 @@ def _overlap(cx, cy, side, a, b, gap=0.0):
     ox = need - abs(cx[b] - cx[a])
     oy = need - abs(cy[b] - cy[a])
     return min(ox, oy) if (ox > 0 and oy > 0) else 0.0
+
+
+def _names_src() -> dict:
+    with open(os.path.join(ROOT, *LAYOUT_NAMES_FILE.split("/")), encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def _load_parcel_names(pids) -> dict:
+    """呼び名の対応表。表に無い pid があれば黙って空にせず落とす。"""
+    src = _names_src()
+    land = src.get("land") or {}
+    missing = [p for p in pids if p not in land]
+    if missing:
+        raise SystemExit("呼び名の表に無い区画がある（%s）: %s"
+                         % (LAYOUT_NAMES_FILE, ", ".join(missing)))
+    need = ("name", "locality", "use_word")
+    bad = [p for p in pids if not all(land[p].get(k) for k in need)]
+    if bad:
+        raise SystemExit("呼び名の表の項目が欠けている: " + ", ".join(bad))
+    return {"land": {p: dict(land[p]) for p in pids},
+            "registered": dict(src.get("registered_names") or {}),
+            "agents": dict(src.get("agents") or {})}
+
+
+def _agent_labels() -> dict:
+    """内部ID／旧表示名の両方から呼び名を引ける表を作る。"""
+    src = _names_src()
+    out = {}
+    for aid, a in (src.get("agents") or {}).items():
+        name = str(a.get("name") or "")
+        if not name:
+            continue
+        out[aid] = name
+        if a.get("old"):
+            out.setdefault(str(a["old"]), name)
+    return out
+
+
+def _agent_homes() -> dict:
+    """呼び名の由来になった本拠の区画（装飾の波紋の宛先に使う）。"""
+    src = _names_src()
+    out = {}
+    for aid, a in (src.get("agents") or {}).items():
+        if a.get("home"):
+            out[aid] = str(a["home"])
+            if a.get("old"):
+                out.setdefault(str(a["old"]), str(a["home"]))
+    return out
+
+
+def _rect_gap(x, y, rcx, rcy, side):
+    """点と正方形の距離（内側なら 0）。"""
+    h = side / 2.0
+    dx = max(abs(x - rcx) - h, 0.0)
+    dy = max(abs(y - rcy) - h, 0.0)
+    return math.hypot(dx, dy)
+
+
+def _place_venues(cx, cy, side, pids, ccx, ccy) -> list:
+    """会場は区画と同じ極座標に置き、重なったら**会場だけ**を決定論に押し出す。"""
+    path = os.path.join(ROOT, *LAYOUT_VENUES_FILE.split("/"))
+    with open(path, encoding="utf-8") as f:
+        src = yaml.safe_load(f) or {}
+    R, G = LAYOUT_VENUE_R, LAYOUT_VENUE_GAP
+    out = []
+
+    def free(x, y):
+        if not (R + 2 <= x <= LAYOUT_VIEW["w"] - R - 2
+                and R + 2 <= y <= LAYOUT_VIEW["h"] - R - 2):
+            return False
+        for pid in pids:
+            if _rect_gap(x, y, cx[pid], cy[pid], side[pid]) < R + G:
+                return False
+        for o in out:
+            if math.hypot(x - o["cx"], y - o["cy"]) < 2 * R + G:
+                return False
+        return True
+
+    for v in (src.get("venues") or []):
+        ang = math.radians(float(v["angle_deg"]))
+        base = float(v["radius_f"]) * LAYOUT_R
+        got = None
+        for k in range(0, 400):                      # まず外へ
+            r = base + 3.0 * k
+            x, y = ccx + r * math.cos(ang), ccy + r * math.sin(ang) * LAYOUT_SQUASH
+            if not (-R <= x <= LAYOUT_VIEW["w"] + R and -R <= y <= LAYOUT_VIEW["h"] + R):
+                break
+            if free(x, y):
+                got = (x, y)
+                break
+        if got is None:                              # 外に空きが無ければ内へ
+            for k in range(1, 200):
+                r = base - 3.0 * k
+                if r < 0:
+                    break
+                x, y = ccx + r * math.cos(ang), ccy + r * math.sin(ang) * LAYOUT_SQUASH
+                if free(x, y):
+                    got = (x, y)
+                    break
+        if got is None:
+            raise SystemExit("会場の置き場所が見つからない: %s" % v.get("id"))
+        out.append({"id": str(v["id"]), "label": str(v["label"]),
+                    "badge": str(v["badge"]), "cx": round(got[0], 2),
+                    "cy": round(got[1], 2), "r": R})
+    return out
+
+
+def _venue_clearance(venues, cx, cy, side, pids) -> float:
+    worst = 1e9
+    for i, v in enumerate(venues):
+        for pid in pids:
+            worst = min(worst, _rect_gap(v["cx"], v["cy"], cx[pid], cy[pid], side[pid])
+                        - LAYOUT_VENUE_R)
+        for w in venues[i + 1:]:
+            worst = min(worst, math.hypot(v["cx"] - w["cx"], v["cy"] - w["cy"])
+                        - 2 * LAYOUT_VENUE_R)
+    return worst if venues else 0.0
 
 
 def _build_layout(cfg: dict, run_pids) -> dict:
@@ -90,11 +212,13 @@ def _build_layout(cfg: dict, run_pids) -> dict:
     cols = max(int(p["x"]) for p in items) + 1
     rows = max(int(p["y"]) for p in items) + 1
 
-    # 1. 面積の4分位で4段階（同値は pid 昇順で安定に割る）
+    # 1. マスの辺は面積の平方根に比例させる（4分位で潰さない）
     order = sorted(items, key=lambda p: (float(p["area_sqm"]), str(p["pid"])))
-    side = {str(p["pid"]): LAYOUT_SIDES[min(3, i * 4 // n)]
-            for i, p in enumerate(order)}
+    area_min = float(order[0]["area_sqm"])
+    side = {str(p["pid"]): LAYOUT_SIDE_MIN * math.sqrt(float(p["area_sqm"]) / area_min)
+            for p in items}
     size_breaks = [float(order[k * n // 4]["area_sqm"]) for k in (1, 2, 3)]
+    cx0, cy0 = LAYOUT_VIEW["w"] / 2.0, LAYOUT_VIEW["h"] / 2.0
 
     # 2〜5. 初期角度・目標半径・決定論ジッター・初期座標
     u = _lcg(LAYOUT_SEED, 2 * n)
@@ -109,8 +233,8 @@ def _build_layout(cfg: dict, run_pids) -> dict:
         theta += (u[2 * i] - 0.5) * 0.44
         r_target *= 1 + (u[2 * i + 1] - 0.5) * 0.12
         rt[pid] = r_target
-        cx[pid] = 500.0 + r_target * math.cos(theta)
-        cy[pid] = 380.0 + r_target * math.sin(theta) * LAYOUT_SQUASH
+        cx[pid] = cx0 + r_target * math.cos(theta)
+        cy[pid] = cy0 + r_target * math.sin(theta) * LAYOUT_SQUASH
 
     def separate():
         for ia in range(n):
@@ -136,12 +260,12 @@ def _build_layout(cfg: dict, run_pids) -> dict:
     for _ in range(LAYOUT_ITERS):
         separate()
         for pid in pids:
-            ex, ey = cx[pid] - 500.0, (cy[pid] - 380.0) / LAYOUT_SQUASH
+            ex, ey = cx[pid] - cx0, (cy[pid] - cy0) / LAYOUT_SQUASH
             r_now = math.hypot(ex, ey)
             ang = math.atan2(ey, ex) if r_now > 1e-9 else 0.0
             r_new = r_now + LAYOUT_PULL * (rt[pid] - r_now)
-            cx[pid] = 500.0 + r_new * math.cos(ang)
-            cy[pid] = 380.0 + r_new * math.sin(ang) * LAYOUT_SQUASH
+            cx[pid] = cx0 + r_new * math.cos(ang)
+            cy[pid] = cy0 + r_new * math.sin(ang) * LAYOUT_SQUASH
             h = side[pid] / 2.0
             cx[pid] = min(max(cx[pid], h), LAYOUT_VIEW["w"] - h)
             cy[pid] = min(max(cy[pid], h), LAYOUT_VIEW["h"] - h)
@@ -167,6 +291,7 @@ def _build_layout(cfg: dict, run_pids) -> dict:
     for pid in pids:
         cx[pid] += sx
         cy[pid] += sy
+    ccx, ccy = cx0 + sx, cy0 + sy       # 会場・下地の装飾もこの中心を使う
 
     # 8. 検査（黙って歪んだ図を出さない）
     max_ov = 0.0
@@ -179,25 +304,44 @@ def _build_layout(cfg: dict, run_pids) -> dict:
     by_zone = collections.defaultdict(list)
     for pid in pids:
         by_zone[zone[pid]].append(
-            math.hypot(cx[pid] - 500.0, (cy[pid] - 380.0) / LAYOUT_SQUASH))
+            math.hypot(cx[pid] - ccx, (cy[pid] - ccy) / LAYOUT_SQUASH))
     attr = {str(p["pid"]): p for p in items}
+    names = _load_parcel_names(pids)
+    sides_sorted = sorted(side.values())
+    venues = _place_venues(cx, cy, side, pids, ccx, ccy)
     return {
         "view": dict(LAYOUT_VIEW),
+        "center": [round(ccx, 2), round(ccy, 2)],
         "source": str(parcels_file),
         "seed": LAYOUT_SEED,
         "size_breaks": size_breaks,
         "cells": {pid: {"cx": round(cx[pid], 2), "cy": round(cy[pid], 2),
-                        "side": int(side[pid]), "zone": zone[pid],
+                        "side": round(side[pid], 2), "zone": zone[pid],
                         "area_sqm": attr[pid].get("area_sqm"),
                         "size_class": attr[pid].get("size_class", ""),
                         "use": attr[pid].get("use", ""),
                         "use_detail": attr[pid].get("use_detail", ""),
                         "owner_name": attr[pid].get("owner_name", ""),
-                        "frontage": attr[pid].get("frontage", "")}
+                        "frontage": attr[pid].get("frontage", ""),
+                        "name": names["land"][pid]["name"],
+                        "locality": names["land"][pid]["locality"],
+                        "use_word": names["land"][pid]["use_word"],
+                        "owner_label": names["registered"].get(
+                            str(attr[pid].get("owner_name", "")),
+                            str(attr[pid].get("owner_name", "")))}
                   for pid in pids},
+        "naming": {"source": LAYOUT_NAMES_FILE, "n": len(pids)},
+        "venues": venues,
+        "venues_note": VENUES_NOTE,
         "zone_radius": {z: LAYOUT_ZONE_F[z] * LAYOUT_R for z in LAYOUT_ZONE_F},
         "checks": {"max_overlap": round(max_ov, 4),
                    "extra_separation_passes": extra_passes,
+                   "side_min": round(sides_sorted[0], 2),
+                   "side_max": round(sides_sorted[-1], 2),
+                   "side_ratio": round(sides_sorted[-1] / sides_sorted[0], 4),
+                   "draw_area_ratio": round((sides_sorted[-1] / sides_sorted[0]) ** 2, 4),
+                   "venue_min_clearance": round(_venue_clearance(venues, cx, cy, side,
+                                                                 pids), 4),
                    "mean_radius_by_zone": {z: round(sum(v) / len(v), 2)
                                            for z, v in sorted(by_zone.items())}},
     }
@@ -294,6 +438,93 @@ def _ignition_strict_hit(row, color, holders_by_step, acquired_by_step):
     return m
 
 
+PARTY_BASIS = ("その月までに成立した取引の当事者（売主・貸主）が、その行の場に居合わせたか。"
+               "同席は plans_v5.jsonl の行き先（発話・内心はその場面の同席者、"
+               "自宅・計画の内心は本人だけ）から機械抽出した。本人が当事者の場合も含む")
+PARTY_CAVEAT = "同席は主体のLLMが毎月選んだ行き先の結果であり、こちらで仕組んでいない"
+
+
+def _party_lookup(plans, events, labels):
+    """発話・内心の場に、取引の当事者本人が居合わせたかを機械抽出する。"""
+    att = collections.defaultdict(set)
+    for p in plans:
+        step = int(p.get("step") or 0)
+        for scene in ("S1", "S2", "S3", "S4"):
+            v = p.get(scene)
+            if v:
+                att[(step, scene, str(v))].add(str(p.get("agent_id") or ""))
+
+    def party_present(row):
+        step = int(row.get("step") or row.get("month") or 0)
+        who = str(row.get("from") or "")
+        here = set(att.get((step, str(row.get("scene") or ""),
+                            str(row.get("venue") or "")), set())) or {who}
+        agents = sorted(a for a in here
+                        if any(e["party"] == a and e["month"] <= step for e in events))
+        parcels = sorted({e["parcel_id"] for e in events
+                          if e["month"] <= step and e["party"] in agents})
+        return {"present": bool(agents), "agents": agents,
+                "labels": [labels.get(a, a) for a in agents], "parcels": parcels}
+
+    return party_present
+
+
+def _ignition_timeline(rows, utts, venue_labels, labels, homes,
+                       holders_by_step, acquired_by_step, party_present):
+    """月 → その月に初めて緑／黄に達した出来事（人ごとの初到達）。"""
+    heard_of = {str(u.get("utt_id") or ""): _heard_by(u) for u in utts}
+    seen, picks = set(), []
+    for r in sorted(rows, key=_sort_key):
+        c = r.get("stage")
+        if c not in ("green", "yellow") or (r["from"], c) in seen:
+            continue
+        seen.add((r["from"], c))
+        picks.append(r)
+    timeline, excluded = collections.defaultdict(list), []
+    for r in picks:
+        month = int(r.get("step") or 0)
+        if r.get("kind") == "article":
+            # 記事は「発話」でも「内心」でもない＝この年表の2種に当てはまらないので
+            # 黙って混ぜず、別に列挙する（数を隠さない）。
+            excluded.append({"month": month, "color": r["stage"],
+                             "agent": r["from"], "agent_label": labels.get(r["from"],
+                                                                           r["from"]),
+                             "kind": "article", "text": r["text"]})
+            continue
+        m = _ignition_matched(r, holders_by_step, acquired_by_step)
+        speech = r.get("kind") == "utterance"
+        timeline[str(month)].append({
+            "month": month, "color": r["stage"],
+            "kind": "speech" if speech else "thought",
+            "agent": r["from"], "agent_label": labels.get(r["from"], r["from"]),
+            "venue": r.get("venue", ""),
+            "venue_label": venue_labels.get(r.get("venue", ""), r.get("venue", "")),
+            "scene": r.get("scene", ""), "round": r.get("round", 0),
+            "utt_id": r.get("utt_id", ""), "text": r["text"],
+            "heard_by": (heard_of.get(str(r.get("utt_id") or ""), []) if speech else []),
+            "homes": {a: homes[a] for a in
+                      (heard_of.get(str(r.get("utt_id") or ""), []) if speech else [])
+                      if a in homes},
+            "parcels": m["parcels"], "holders": m["holders"],
+            "party_present": party_present(r),
+        })
+    return dict(timeline), excluded
+
+
+def _party_lens(timeline, excluded) -> dict:
+    out = {"basis": PARTY_BASIS, "caveat": PARTY_CAVEAT}
+    rows = [e for v in timeline.values() for e in v]
+    for color in ("green", "yellow"):
+        got = [e for e in rows if e["color"] == color]
+        with_party = len([e for e in got if e["party_present"]["present"]])
+        out[color] = {
+            "first_n": len(got), "with_party": with_party,
+            "share": (round(with_party / len(got), 4) if got else None),
+            "excluded_articles": len([e for e in excluded if e["color"] == color]),
+        }
+    return out
+
+
 def _ignition_empty() -> dict:
     return {"green": {"strict": None, "loose": None},
             "yellow": {"strict": None, "loose": None},
@@ -301,7 +532,7 @@ def _ignition_empty() -> dict:
 
 
 def _build_ignition(rows, utts, thoughts, traces, venue_labels,
-                    holders_by_step, acquired_by_step) -> dict:
+                    holders_by_step, acquired_by_step, party_present=None) -> dict:
     utt_sorted = sorted(utts, key=_sort_key)
     rows_sorted = sorted(rows, key=_sort_key)
     out = {"criteria": dict(IGNITION_CRITERIA)}
@@ -321,6 +552,8 @@ def _build_ignition(rows, utts, thoughts, traces, venue_labels,
                 continue
             out[color][slot] = _ignition_obj(color, hit, matched, utt_sorted,
                                              thoughts, traces, venue_labels)
+            if slot == "strict" and party_present is not None:
+                out[color][slot]["party_present"] = party_present(hit)
     return out
 
 
@@ -852,14 +1085,24 @@ def build(run_dir: str) -> dict:
                        for v in ((cfg.get("social", {}) or {}).get("venues") or [])}
     layout = _build_layout(cfg, {p["pid"] for p in parcels})
     naming = _parcel_naming(layout, utts, thoughts, articles)
+    labels = _agent_labels() if layout else {}
+    homes = _agent_homes() if layout else {}
+    party_present = _party_lookup(plans, events, labels)
     ignition = (_build_ignition(stage_rows, utts, thoughts, traces, venue_label_map,
-                                holders_by_step, acquired_by_step)
+                                holders_by_step, acquired_by_step, party_present)
                 if stage_rows else _ignition_empty())
+    if stage_rows:
+        timeline, excluded = _ignition_timeline(
+            stage_rows, utts, venue_label_map, labels, homes,
+            holders_by_step, acquired_by_step, party_present)
+        lens = _party_lens(timeline, excluded)
+    else:
+        timeline, excluded, lens = {}, [], None
 
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
-                 "schema": 6,
+                 "schema": 7,
                  "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},
@@ -881,6 +1124,12 @@ def build(run_dir: str) -> dict:
         "layout": layout,
         "parcel_naming": naming,
         "ignition": ignition,
+        "ignition_timeline": timeline,
+        "ignition_timeline_excluded": excluded,
+        "ignition_timeline_note": ("月 → その月に初めて緑／黄に達した出来事（人ごとの初到達）。"
+                                   "speech は同席者に届いた発話、thought は誰にも伝わっていない内心。"
+                                   "記事は2種のどちらでもないので ignition_timeline_excluded に分けた"),
+        "party_lens": lens,
         "venue_labels": venue_label_map,
         "stats": stats,
         "checks": checks,
