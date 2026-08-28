@@ -1,0 +1,87 @@
+{
+  "run": "2026-08-27_2136_93_field_v5_a_city",
+  "version": "field_v5",
+  "steps": 1,
+  "model": "gemini-2.5-flash-lite",
+  "calls": 191,
+  "errors": 0,
+  "input_tokens": 485868,
+  "output_tokens": 42294,
+  "invalid_actions": 0,
+  "llm_classified": true,
+  "classifier_unknown": 0,
+  "acquisitions": 1,
+  "acquisition_months": [
+    1
+  ],
+  "holders": [
+    "B社"
+  ],
+  "final_acquirer_share": 0.0217,
+  "utterance_turns": 154,
+  "utterances_spoken": 100,
+  "silence_rate": 0.351,
+  "mean_group_size": 6.42,
+  "directs": 1,
+  "articles": 1,
+  "home_rate": 0.212,
+  "mention_rows": 0,
+  "mention_by_channel": {},
+  "propagation_edges": 0,
+  "speakers_by_month": {},
+  "rule_llm_cross": {
+    "rule-/llm-": 100
+  },
+  "llm_only_utterances": 0,
+  "first_mention": {},
+  "noticed_acquisitions": 0,
+  "unnoticed_acquisitions": [
+    "ACQ01"
+  ],
+  "unnoticed_ratio_all": 1.0,
+  "unnoticed_ratio_optimistic": 1.0,
+  "cohort_followup_months": 3,
+  "cohort_size": 0,
+  "cohort_unnoticed_ratio": null,
+  "detection_lag_months": [],
+  "mean_detection_lag_months": null,
+  "reference_accuracy": {},
+  "holder_only_mentions": 0,
+  "article_months": [],
+  "assembly_months": [],
+  "counter_months": [],
+  "concentration_mentions": 0,
+  "common_buyer_mentions": 0,
+  "registry_lookup_agents": [],
+  "traces_by_kind": {
+    "sign_change": 1
+  },
+  "seller_first_mention_of_own_sale": {
+    "HH16/P17": {
+      "transfer_month": 1,
+      "spoke_month": null,
+      "thought_month": 1
+    }
+  },
+  "sellers_silent": 1,
+  "stance_sell": 0,
+  "stance_keep": 16,
+  "D1_exposed_acquisitions": [],
+  "D2_individual": false,
+  "D2_concentration": false,
+  "D2_common_buyer": false,
+  "D3_wiring": {
+    "api_errors": 0,
+    "transfers_recorded": 1,
+    "classified_rows": 100,
+    "classifier_unknown": 0,
+    "parse_fail": 0,
+    "max_token_finishes": 0,
+    "groups_missing_turns": 0,
+    "utterances_misdelivered": 0,
+    "conversation_groups": 12,
+    "scenes_with_conversation": 4,
+    "rounds_max": 2,
+    "ok": true
+  }
+}
