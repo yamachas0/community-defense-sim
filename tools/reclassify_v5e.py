@@ -35,6 +35,20 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 from src.kpi import (STAGE_SYSTEM_V5E, build_stage_prompt_v5e,  # noqa: E402
                      classify_stage_v5e)
 from src.llm_client_factory import UsageMeter, create_llm_client  # noqa: E402
+
+
+def _load_dotenv():
+    """run.py と同じ .env の読み方（鍵の値は表示も記録もしない）。"""
+    path = os.path.join(ROOT, ".env")
+    if not os.path.exists(path):
+        return
+    with io.open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 from estimate_cost import estimate_tokens  # noqa: E402
 import run_metrics  # noqa: E402
 from src.stage_v5e import defense_level_of, rule_red_v5e, stage_v5e  # noqa: E402
@@ -171,9 +185,14 @@ def main() -> int:
     ap.add_argument("run_dir")
     ap.add_argument("--provider", default=None, choices=["google", "mock"])
     ap.add_argument("--batch", type=int, default=25)
+    ap.add_argument("--workers", type=int, default=None,
+                    help="分類の並列数だけを変える（チャンクは独立・temperature 0 なので"
+                         "結果は変わらない。壁時計を縮めるためだけの指定）")
     ap.add_argument("--out-dir", default="reclass_v5e",
                     help="run_dir 配下の出力先（run 直下には書かない）")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--audit-only", action="store_true",
+                    help="既存の labels.jsonl から summary.json を作り直す（API を叩かない）")
     args = ap.parse_args()
 
     if getattr(sys.stdout, "reconfigure", None):
@@ -191,6 +210,8 @@ def main() -> int:
     llm = dict(cfg.get("llm") or {})
     if args.provider:
         llm["provider"] = args.provider
+    if args.workers:
+        llm["parallel_workers"] = int(args.workers)
     model = llm.get("model", "?")
 
     rows = build_rows(run_dir)
@@ -212,6 +233,15 @@ def main() -> int:
     print(f"[est tokens] input {in_tokens:.0f} / output {out_tokens}")
     print("[est cost] " + (f"${est:.4f}" if est is not None
                            else f"価格表に {model} が無い"))
+    if args.audit_only:
+        out_dir = os.path.join(run_dir, args.out_dir)
+        labels = _read_jsonl(os.path.join(out_dir, "labels.jsonl"))
+        if not labels:
+            raise SystemExit(f"{out_dir}/labels.jsonl が無い")
+        _write_audit(run_dir, out_dir, labels)
+        print(f"[audit-only] {out_dir}/summary.json（API は叩いていない）")
+        return 0
+
     if args.dry_run:
         print("[dry-run] API は叩いていない。ファイルも書いていない。")
         return 0
@@ -222,6 +252,7 @@ def main() -> int:
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, "labels.jsonl")
 
+    _load_dotenv()
     usage = UsageMeter()
     client = create_llm_client(llm, usage=usage)
     labels = classify_stage_v5e(client, rows, batch=args.batch)
@@ -244,6 +275,7 @@ def main() -> int:
                    "unknown_rows": len([r for r in labels
                                         if not r.get("classified")])},
                   f, ensure_ascii=False, indent=2)
+    _write_audit(run_dir, out_dir, labels)
     print(f"[out] {out_path}  ({len(labels)} 行)")
     print(f"[out] {cost_path}  実費 "
           + (f"${actual:.4f}" if actual is not None else "不明"))

@@ -1882,6 +1882,9 @@ class Simulation:
         if self.field_v5e:
             self._v5e_month_end(step)
 
+    # 買い手が現実に観測できる行（人の目に触れたもの）。内心は入らない。
+    V5E_OBSERVABLE_KINDS = ("utterance", "article", "direct")
+
     def _v5e_red_level(self, r: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """分類器の1行が赤なら自衛レベルを返す（赤でなければ None）。
 
@@ -1966,6 +1969,11 @@ class Simulation:
         triggers = []
         for r in labels:
             text = str(r.get("text", ""))
+            # **停止のトリガーは買い手が観測できる行だけ**（施主指示 2026-08-29）。
+            # 内心（thought）で買い手が止まるのは非現実＝他人の頭の中は見えない。
+            # 内心は S1〜S3 の観測・集計には従来どおり含める（落とすのは停止だけ）。
+            if r.get("kind") not in self.V5E_OBSERVABLE_KINDS:
+                continue
             lv = self._v5e_red_level(r)
             if lv is None:
                 continue

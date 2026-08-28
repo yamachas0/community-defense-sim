@@ -391,6 +391,56 @@ check("停止しないランの summary も『出なかった』を残す",
       sim_n.summary["v5e"]["stopped"] is False
       and sim_n.summary["v5e"]["acquisitions_suspended"] == 0)
 
+# --- 内心では止まらない（施主指示 2026-08-29）-------------------------------
+# 買い手は他人の頭の中を観測できない。内心の S1〜S3 は**観測には残す**が、
+# 台本の停止トリガーにはしない（docs/world_design_v5e.md §3）。
+class ThoughtOnlyDefenseMock(DefenseMock):
+    """S1 語を「内心」だけに混ぜる（発話には出さない）。"""
+
+    def generate(self, system_prompt, user_prompt, schema=None, temperature=None,
+                 max_tokens=None, tag="agent"):
+        props = (schema or {}).get("properties", {})
+        item = props.get("results", {}).get("items", {}).get("properties", {})
+        if "defense" in item:
+            return self._stage(user_prompt)
+        raw = MockClient.generate(self, system_prompt, user_prompt, schema=schema,
+                                  temperature=temperature, max_tokens=max_tokens,
+                                  tag=tag)
+        if "thought" in props:
+            m = STEP_RE.search(user_prompt)
+            if m and int(m.group(1)) == self.trigger_step:
+                d = json.loads(raw)
+                d["thought"] = str(d.get("thought") or "") + self.S1_TAIL
+                return json.dumps(d, ensure_ascii=False)
+        return raw
+
+
+sim_t, dir_t = run_mock(CFG, 4, lambda: ThoughtOnlyDefenseMock(TRIG),
+                        prefix="qa_v5e_thought_")
+stop_t = json.load(io.open(os.path.join(dir_t, "defense_stop_v5e.json"),
+                           encoding="utf-8"))
+deals_t = jsonl(os.path.join(dir_t, "deals_v5.jsonl"))
+ledger_t = jsonl(os.path.join(dir_t, "ledger.jsonl"))
+applied_t = [r for r in ledger_t if r.get("kind") in ("transfer", "lease")]
+labels_t = jsonl(os.path.join(dir_t, "stage_labels_v5e.jsonl"))
+thought_red = [r for r in labels_t
+               if r.get("kind") == "thought" and r.get("defense") is True]
+
+check("内心だけの S1 では停止しない", stop_t.get("stopped") is False,
+      json.dumps(stop_t, ensure_ascii=False)[:200])
+check("内心だけの S1 では翌月以降も取得が続く",
+      len([d for d in deals_t if d.get("kind") == "script_stopped"]) == 0
+      and len(applied_t) == len([a for a in DST["acquisitions"]
+                                 if int(a["month"]) <= 4]))
+check("それでも内心の自衛は観測に残っている（集計からは落とさない）",
+      len(thought_red) > 0, f"thought defense rows={len(thought_red)}")
+check("発話の S1 では止まる（対照）", stop["stopped"] is True)
+check("停止トリガーは観測できる行だけ",
+      all(t["kind"] in ("utterance", "article", "direct")
+          for t in stop["triggers"]),
+      str(sorted({t["kind"] for t in stop["triggers"]})))
+
+
 print("\n=== 7. 停止が主体に漏れていない ===")
 
 # 「S1」〜「S4」はこの世界のシーンID（plan_s1／S1〜S4）としてプロンプトに出るので、
