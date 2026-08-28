@@ -21,6 +21,11 @@ import tempfile
 import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 呼び名の正本（テストに文字列を焼かない）
+with io.open(os.path.join(ROOT, "configs", "parcel_names_v5c.yaml"),
+             encoding="utf-8") as _f:
+    _NAMES = yaml.safe_load(_f)
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
@@ -226,12 +231,16 @@ OLD_RE = re.compile(r"MD\d\d|AQ\d\d|[TBGJ]\d\d")
 check("旧表示名・記者の内部IDもプロンプトと原文に出ない",
       not OLD_RE.search(prompts) and not OLD_RE.search(raw),
       str(sorted(set(OLD_RE.findall(prompts)))[:10]))
+# 呼び名は configs/parcel_names_v5c.yaml が正本。テストに文字列を焼かず、表と突き合わせる
+# （「大家さん」は本拠に店子がいる4世帯だけ・残り12世帯は「持ち主さん」＝ CTO 判断 2026-08-28）。
+_ALLOWED_REGISTERED = set(_NAMES["registered_names"].values()) | {"X社", "A社", "B社", "C社", "D社"}
 check("登記名義の表示が呼び名になっている",
-      all("の大家さん" in str(p.registered_name) or str(p.registered_name)
-          in ("A市", "X社", "A社", "B社", "C社", "D社")
-          for p in sim.ledger.parcels.values()))
+      all(str(p.registered_name) in _ALLOWED_REGISTERED
+          for p in sim.ledger.parcels.values()),
+      str(sorted({str(p.registered_name) for p in sim.ledger.parcels.values()}
+                 - _ALLOWED_REGISTERED)))
 check("主体の呼び名が表のとおりに載っている",
-      sim.names["HH01"] == "浜町の大家さん" and sim.names["MD01"] == "地域紙の記者さん")
+      sim.names["HH01"] == _NAMES["agents"]["HH01"]["name"] and sim.names["MD01"] == "地域紙の記者さん")
 
 print("\n=== 7. 占領分類器 OFF のときの出力形（未計測であって false ではない） ===")
 

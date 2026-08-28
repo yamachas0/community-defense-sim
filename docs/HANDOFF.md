@@ -980,3 +980,21 @@ python run.py --config configs/config_field_v5d.yaml --provider mock --quiet -> 
 3. `sign_change` は「賃借かつ店舗」だけ残す規則だが、seed85 の賃借7件はすべて住宅の区画で**0本**になった。
 4. `src/kpi.OCCUPATION_SYSTEM` のルール文に「（P01形式）」が残る（分類器のルール文は変更禁止のため据え置き。
    既定 off なので v5d では走らない）。
+
+---
+
+## 【CTO 検収 2026-08-28】第10便・第11便のマージと確認
+
+- `main` に第10便（present 第3弾）と第11便（v5d）をマージ（`9d91820`）。HANDOFF の衝突は**両方を残して**解消。
+- **呼び名の修正**：「大家」は貸主の語なので、本拠に店子がいる4世帯（HH01/02/03/05）だけ「◯◯の大家さん」、
+  残り12世帯は「◯◯の持ち主さん」にした（`b3b6099`。Codex レビューと CTO 判断が一致）。
+  `tests/test_v5d.py` の登記名義テストが「大家さん」を焼いていたので、**対応表を読んで突き合わせる形**に直した。
+- **CTO が自分で流した実測**：`test_ledger.py` 619 / `test_v5c.py` 73 / `test_v5d.py` **128** / `test_cost_saving.py` 51 /
+  `test_present.py` 466 ＝ いずれも 0 failed。台本は取得46件が v5c と**完全一致**（traces 以外の全キーで比較）・
+  兆候 93→33・`audience: registry` は 0本。`present_data_v5cA.json` は schema 7・辺 34.0〜86.21（比 2.5355／
+  描画面積比 6.4286）・`max_overlap` 0.0・会場15・48区画すべてに名前。
+- **Pages 反映済み**：`50ca75d` を push → live 200・`schema:7`・新しい土地名（「浜町の旅館」）が live の JSON にある。
+  https://yamachas0.github.io/quiet-acquisition-report/present.html
+- **実装しなかった Codex 指摘（施主決定どおり）**：①法務局での個別登記照会を残す案 ②兆候を増やす候補
+  （管理通知・管理状態の変化・境界確認の隣地連絡）。どちらも「新しい経路も痕跡も足さない」に反するので入れていない。
+
