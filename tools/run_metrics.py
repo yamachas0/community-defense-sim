@@ -40,9 +40,46 @@ def _read_jsonl(path: str) -> List[Dict[str, Any]]:
 # ここでは解釈も評価もしない。数えるのは記録に実在する事実だけ。
 
 S4_KINDS = ["assembly", "counter", "broker_front", "press"]
+# v5d は窓口を廃止したので S4 は3か月周期になる（src/field_v5d.S4_ROTATION_V5D）。
+S4_KINDS_V5D = ["assembly", "broker_front", "press"]
+_ACTIVE_S4_KINDS = S4_KINDS
 V5_SCENES = ["S1", "S2", "S3", "S4"]
 V5_HOLDER_RE = re.compile(r"[A-Z]社")
 V5_PARCEL_RE = re.compile(r"P\d{2}")
+
+# v5d は街が土地を呼び名で呼ぶ（P番号は世界に存在しない）。抽出する語は
+# **対応表 configs/parcel_names_v5c.yaml から機械生成**する（人手で語彙を足さない）。
+# 集計の返り値は v5c 以前と同じ内部ID（pid）に揃える＝判定の定義は変わらない。
+_ACTIVE_PARCEL_RE = V5_PARCEL_RE
+_PARCEL_ALIAS: Dict[str, str] = {}
+_NAMES_YAML = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                           "configs", "parcel_names_v5c.yaml")
+
+
+def _v5d_parcel_alias(path: str = _NAMES_YAML) -> Dict[str, str]:
+    import yaml
+    with open(path, encoding="utf-8") as f:
+        book = yaml.safe_load(f)
+    return {str(row["name"]): pid for pid, row in (book.get("land") or {}).items()}
+
+
+def _use_parcel_names(version: str) -> None:
+    """集計が探す「土地の言い方」を版に合わせる（v5c 以前は P番号のまま）。"""
+    global _ACTIVE_PARCEL_RE, _PARCEL_ALIAS
+    if version == "field_v5d":
+        _PARCEL_ALIAS = _v5d_parcel_alias()
+        _ACTIVE_PARCEL_RE = re.compile(
+            "|".join(re.escape(n) for n in sorted(_PARCEL_ALIAS, key=len, reverse=True)))
+    else:
+        _PARCEL_ALIAS = {}
+        _ACTIVE_PARCEL_RE = V5_PARCEL_RE
+
+
+def _parcels_in(text: str) -> List[str]:
+    hits = _ACTIVE_PARCEL_RE.findall(text or "")
+    if _PARCEL_ALIAS:
+        return sorted({_PARCEL_ALIAS[h] for h in hits})
+    return sorted(set(hits))
 V5_WORDS = ("名義", "所有者が変わ", "持ち主", "オーナー", "売られ", "売った", "売却",
             "手放し", "買い取", "買われ", "買った", "買い占め", "取得", "買収",
             "譲渡", "登記", "地上げ", "底地", "よそ者", "外の会社", "東京の会社",
@@ -51,7 +88,7 @@ V5_FOLLOWUP_MONTHS = 3      # 右打切りの基準（走行前に固定）
 
 
 def _v5_s4_kind(step: int) -> str:
-    return S4_KINDS[(int(step) - 1) % len(S4_KINDS)]
+    return _ACTIVE_S4_KINDS[(int(step) - 1) % len(_ACTIVE_S4_KINDS)]
 
 
 def _v5_order(step, scene, rnd=0):
@@ -62,7 +99,7 @@ def _v5_order(step, scene, rnd=0):
 
 def _v5_mentions(text, holders):
     """走行前に固定したルールベース1次抽出（絞り込みであって判定ではない）。"""
-    parcels = sorted(set(V5_PARCEL_RE.findall(text)))
+    parcels = _parcels_in(text)
     named = sorted({h for h in holders if h and h in text})
     words = [w for w in V5_WORDS if w in text]
     return {"parcels": parcels, "holders": named, "words": words,
@@ -83,7 +120,7 @@ V5B_INTENT_WORDS = ("買い占め", "買い集め", "地上げ", "乗っ取り",
 
 def _v5b_rule_links(text, holders, acquired_pids):
     hs = {h for h in holders if h and h in text}
-    ps = {p for p in V5_PARCEL_RE.findall(text) if p in acquired_pids}
+    ps = {p for p in _parcels_in(text) if p in acquired_pids}
     return len(hs) >= 2 or len(ps) >= 2 or (len(hs) >= 1 and len(ps) >= 2)
 
 
@@ -269,6 +306,10 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         for line in open(cfgp, encoding="utf-8"):
             if line.startswith("scenario_version:"):
                 scen_version = line.split(":",1)[1].strip(); break
+    # 版に合わせて「土地の言い方」と S4 の周期を切り替える（v5c 以前は従来どおり）。
+    global _ACTIVE_S4_KINDS
+    _use_parcel_names(scen_version)
+    _ACTIVE_S4_KINDS = S4_KINDS_V5D if scen_version == "field_v5d" else S4_KINDS
 
     deals = _read_jsonl(os.path.join(run_dir, "deals_v5.jsonl"))
     leases = [r for r in ledger if r.get("kind") == "lease"]
@@ -1210,7 +1251,7 @@ def _v5c_rule_blue(text, holders, acquired):
 
 def _v5c_rule_green(text, holders, acquired):
     hs = {h for h in holders if h and h in text}
-    ps = {p for p in V5_PARCEL_RE.findall(text) if p in acquired}
+    ps = {p for p in _parcels_in(text) if p in acquired}
     return (len(ps) >= 2 or len(hs) >= 2
             or any(w in text for w in V5C_AREA_WORDS))
 
@@ -1506,7 +1547,7 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        if version in ("field_v5", "field_v5b", "field_v5c"):
+        if version in ("field_v5", "field_v5b", "field_v5c", "field_v5d"):
             rows.append(metrics_v5(run))
         elif version == "field_v4_1b":
             rows.append(metrics_v41b(run))

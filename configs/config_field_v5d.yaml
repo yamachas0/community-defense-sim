@@ -1,0 +1,106 @@
+# A市フィールド v5d — 役場の窓口を廃止／土地と持ち主を街の呼び名で呼ぶ／台本の兆候を絞る
+# 設計の正: docs/world_design_v5d.md（§4 の節約設定だけは CEO 決定 2026-08-28 22:26/22:27 で上書き）
+# v1〜v5c の設定・成果物は変更しない。世界・ペルソナ・seed・区画は v5c と同一（比較のため）。
+#
+# v5c との差は4点だけ（**街に気づかせる経路・観測者・機構は1本も足していない**）：
+#   ①S4 から「市役所の窓口」を外した（町内会／仲介の店先／記者の取材の3か月周期）。
+#     会場としての「市役所の待合」(V06) は S1〜S3 の行き先として残る。
+#   ②土地と主体を内部ID(P01/HH01/V01)ではなく街の呼び名で呼ぶ
+#     （対応表 configs/parcel_names_v5c.yaml・区画の事実は parcels_v5c.yaml のまま）。
+#   ③台本の兆候を「買い手の戦略が現実に生む痕跡」に絞った（configs/events_v5d_seed85.yaml）。
+#     取得（順番・月・区画・名義・kind・note）は v5c と1バイトも変わらない。
+#   ④v5b 比較用の占領分類器を既定 off にした（4色の判定には一切影響しない）。
+run_name: field_v5d_a_city
+scenario_version: field_v5d
+seed: 85
+steps: 24
+personas_file: configs/personas/field_v4_1.yaml
+events_file: configs/events_v5d_seed85.yaml
+parcels_file: configs/parcels_v5c.yaml
+names_file: configs/parcel_names_v5c.yaml
+
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.75
+  max_tokens: 2200
+  parallel_workers: 8
+  enable_cache: false
+  # Batch は使わない（施主決定 2026-08-28 22:27）。実時間を伸ばす節約は不可。
+  batch_classify: false
+  batch_agents: false
+  # キャッシュの再判定（countTokens 実測 2026-08-28・docs/_v5d_token_counts.json）：
+  # 主体の system prompt は26体で 845〜942・中央値 878 トークン（v5c は 844〜962・中央値 896）。
+  # 呼び名を入れても前置きは**伸びず**、暗黙キャッシュの最低 1,024 に届かない。
+  # 水増しで届かせるのは禁止なので prompt_order は legacy のまま。
+  prompt_order: legacy
+
+agents:
+  households: 16
+  businesses: 4
+  brokers: 2
+  acquirers: 1            # X社。台帳上の名義の器としてのみ存在し、LLMは一度も呼ばれない
+  municipality: 2
+  media: 2
+
+world:
+  town_name: A市
+  background: |
+    A市は湾岸にある人口約12万人の温泉観光都市である。対岸の空港では
+    スペースポート構想が進むが、時期と需要規模は確定していない。
+    市内では人口減少、高齢化、相続、築古建物の改修負担、旅館と商店の
+    後継者不足が同時に進む。住民には住み続けたい人、土地を手放すことを
+    考えうる人、まだ何も考えていない人がいる。事業者、仲介、行政、記者も
+    通常の日常を送る。個々の取引・会話・報道が将来どうなるかは
+    開始時点では決まっていない。
+  grid: {cols: 8, rows: 6}
+  block_names: [湾岸観光地区, 中央駅前地区, 北部学術・生活地区, 温泉丘陵地区]
+  area_pattern_sqm: [70, 90, 110, 140, 180, 240, 320, 450]
+  shop_coords:
+    [[1,0],[2,0],[3,0],[5,0],[6,0],[1,1],[2,1],[5,1],[6,1],[1,3],[2,3],[5,3]]
+  vacant_coords: [[0,2],[3,2],[7,2],[0,5],[3,5],[6,5]]
+  # 賃料はこの世界に存在しない。0固定（共通の初期化が本キーを要求するため残す）。
+  initial_shop_rent: 0
+  public_coords: [[0,0],[7,5]]
+
+social:
+  # 会場は v5c と同一（V06 市役所の待合も残す）。v5d ではプロンプトに会場名だけを出す。
+  venues:
+    - {id: V01, label: 駅前の飲食店}
+    - {id: V02, label: 地区公民館}
+    - {id: V03, label: 共同浴場}
+    - {id: V04, label: 湾岸の喫茶店}
+    - {id: V05, label: 旅館組合の会議室}
+    - {id: V06, label: 市役所の待合}
+    - {id: V07, label: 地元不動産仲介の事務所}
+    - {id: V08, label: 地域イベント会場}
+    - {id: V09, label: 商店街の床屋}
+    - {id: V10, label: スーパーのレジ待ち}
+    - {id: V11, label: 神社の境内（掃除・祭りの準備）}
+    - {id: V12, label: 小学校の校門前（送り迎え）}
+    - {id: V13, label: 隣家の玄関先（回覧板の受け渡し）}
+    - {id: V14, label: バス停と駅のホーム}
+    - {id: V15, label: 診療所の待合}
+
+scenario:
+  initial_cash: {}
+  scene_rounds: 2               # 1シーンあたりの往復数（2〜3）
+  direct_quota_per_month: 2     # 1主体が1か月に出せる私信
+  article_quota_per_month: 1    # 記者が1か月に出せる記事
+  # X社は v5 系では主体ではない（LLMを呼ばれない）。この文は build_roster が要求するため
+  # 残しているだけで、どのプロンプトにも一切出ない（テストで固定）。
+  acquirer_mandate: |
+    （v5では未使用。取得は configs/events_v5d_seed85.yaml の台本が決める。）
+
+kpi:
+  classify_utterances: true
+  # v5b 比較用の占領分類器（O1〜O4）。既定 off＝O1〜O4 は「未計測」として出力から落ちる
+  # （unknown や false には化けない）。4段階の色（青緑黄赤）の判定には一切影響しない。
+  classify_occupation: false
+  classify_batch: 25
+  cascade_window: 3
+
+cost:
+  price_table:
+    gemini-2.5-flash-lite: {input: 0.10, output: 0.40, cache_read: 0.01, cache_storage_hour: 1.00}
+  safety_factor: 2.0

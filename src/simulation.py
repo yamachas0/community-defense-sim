@@ -58,6 +58,8 @@ from .field_v5 import (DIRECT_NONE as DIRECT_NONE_V5, HOME as HOME_V5,
                        registry_rows_v5, s4_for_step, scene_schema_v5,
                        venue_traces_v5)
 from .field_v5c import build_system_prompt_v5c, venue_candidates_for_all
+from .field_v5d import (TRACE_TEXTS_V5D, build_system_prompt_v5d, load_names_v5d,
+                        s4_for_step_v5d, scene_schema_v5d, venue_labels_v5d)
 from .kpi import (classify_occupation, classify_publications, classify_utterances,
                   classify_stage_v5c,
                   cognition_series,
@@ -181,11 +183,15 @@ class Simulation:
         self.field_v4 = cfg.get("scenario_version") == "field_v4"
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
         self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b",
-                                                        "field_v5c")
+                                                        "field_v5c", "field_v5d")
         self.field_v5b = cfg.get("scenario_version") == "field_v5b"
         # v5c は v5b の世界に「買い手の戦略で組んだ台本」と「日常の場」を足しただけ。
         # 観測の作り方・兆候・プロンプトの文面は v5/v5b と同一である。
         self.field_v5c = cfg.get("scenario_version") == "field_v5c"
+        # v5d は v5c の世界から「役場の窓口」を外し、土地と主体を街の呼び名で呼ぶ層。
+        # 区画・日常の場・4段階の色は v5c と同じものを使う（docs/world_design_v5d.md）。
+        self.field_v5d = cfg.get("scenario_version") == "field_v5d"
+        self.v5c_like = self.field_v5c or self.field_v5d
         # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
         self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
@@ -221,6 +227,22 @@ class Simulation:
         self.agents: List[Agent] = build_roster(personas, cfg["agents"], cfg["scenario"])
         self.by_id = index_by_id(self.agents)
         self.names = name_map(self.agents)
+        # v5d: 土地と持ち主の呼び名（対応表は configs/parcel_names_v5c.yaml の1枚だけ）。
+        self.pnames: Dict[str, str] = {}
+        self.registered_display: Dict[str, str] = {}
+        self._display_before_v5d: Dict[str, str] = dict(self.names)
+        if self.field_v5d:
+            _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            _nf = str(cfg.get("names_file", "configs/parcel_names_v5c.yaml"))
+            if not os.path.isabs(_nf):
+                _nf = os.path.join(_root, _nf)
+            _book = load_names_v5d(_nf)
+            self.pnames = _book["parcels"]
+            self.registered_display = _book["registered"]
+            for a in self.agents:
+                if a.agent_id in _book["agents"]:
+                    a.name = _book["agents"][a.agent_id]
+            self.names = name_map(self.agents)
         self.acquirer_ids = [a.agent_id for a in self.agents if a.role == "acquirer"]
         self.household_ids = [a.agent_id for a in self.agents if a.role == "household"]
         self.business_ids = [a.agent_id for a in self.agents if a.role == "business"]
@@ -230,7 +252,13 @@ class Simulation:
                              self.municipality_id)
         assign_tenancies(parcels, self.business_ids, int(cfg["world"]["initial_shop_rent"]))
         for p in parcels:
-            p.registered_name = self.names.get(p.owner_id, p.owner_id)
+            if self.field_v5d:
+                # 登記名義の表示も同じ対応表から引く（公有地は個人名ではなく「A市」）。
+                old = self._display_before_v5d.get(p.owner_id, "")
+                p.registered_name = self.registered_display.get(
+                    old, self.names.get(p.owner_id, p.owner_id))
+            else:
+                p.registered_name = self.names.get(p.owner_id, p.owner_id)
         cash: Dict[str, int] = {}
         for a in self.agents:
             cash[a.agent_id] = int(cfg["scenario"]["initial_cash"].get(a.role, 0))
@@ -278,17 +306,26 @@ class Simulation:
             venues = cfg.get("social", {}).get("venues", [])
             self.venue_ids = [v["id"] for v in venues]
             self.venue_labels = {v["id"]: f"{v['id']} {v['label']}" for v in venues}
+            self.venue_by_label: Dict[str, str] = {}
+            self.agent_by_name: Dict[str, str] = {}
+            if self.field_v5d:
+                # 会場も呼び名で呼ぶ（V番号は出さない）。返ってきた呼び名は内部IDへ戻す。
+                self.venue_labels = venue_labels_v5d(cfg)
+                self.venue_by_label = {lb: vid for vid, lb in self.venue_labels.items()}
+                self.agent_by_name = {a.name: a.agent_id for a in self.actors}
             scen = cfg.get("scenario", {})
             self.scene_rounds = int(scen.get("scene_rounds", 2))
             self.direct_quota = int(scen.get("direct_quota_per_month", 2))
             self.article_quota = int(scen.get("article_quota_per_month", 1))
-            if self.field_v5c:
+            if self.v5c_like:
                 # 行ける場所は主体ごとに違う（世界の事実＝生活動線）。毎月どこへ行くかは
                 # 主体が選ぶ。system プロンプトの文面は v5 と同一で、並ぶ会場だけが違う。
                 self.venue_choices = venue_candidates_for_all(self.actors, self.venue_ids)
+                builder = (build_system_prompt_v5d if self.field_v5d
+                           else build_system_prompt_v5c)
                 self.system_prompts = {
-                    a.agent_id: build_system_prompt_v5c(a, cfg, len(parcels),
-                                                        self.venue_choices[a.agent_id])
+                    a.agent_id: builder(a, cfg, len(parcels),
+                                        self.venue_choices[a.agent_id])
                     for a in self.actors}
             else:
                 self.venue_choices = {a.agent_id: list(self.venue_ids)
@@ -1548,6 +1585,19 @@ class Simulation:
             self.truncated_count += 1
         return act
 
+    def _v5d_decode(self, act: Dict[str, Any]) -> None:
+        """呼び名で返ってきた相手を内部IDへ戻す。
+
+        スキーマの構造は v5 と同一で、enum に並ぶ値が呼び名になっただけである
+        （docs/world_design_v5d.md §1-3）。
+        """
+        to = str(act.get("direct_to", "") or "").strip()
+        if to and to != DIRECT_NONE_V5:
+            act["direct_to"] = self.agent_by_name.get(to, to)
+        if act.get("talk_to"):
+            act["talk_to"] = [self.agent_by_name.get(str(t), str(t))
+                              for t in act["talk_to"]]
+
     def _step_v5(self, step: int) -> None:
         ensure_v5_state(self.ledger)
         acquirer_id = self.acquirer_ids[0] if self.acquirer_ids else ""
@@ -1569,7 +1619,9 @@ class Simulation:
                                             "under_name": done.get("under_name")}})
 
         # --- 1) 会場に依らない兆候を配る ------------------------------------
-        ambient = ambient_traces_v5(self.ledger, step, self.script, old_names, acquirer_id)
+        ambient = ambient_traces_v5(self.ledger, step, self.script, old_names, acquirer_id,
+                                    self.pnames or None,
+                                    TRACE_TEXTS_V5D if self.field_v5d else None)
         for a in self.actors:
             a.extra["traces"] = list(ambient.get(a.agent_id, []))
             a.extra["heard"] = []
@@ -1579,16 +1631,23 @@ class Simulation:
                 self.ledger.v5_traces_seen.append(
                     {"step": step, "agent_id": a.agent_id, "scene": "", "venue": "", **tr})
 
-        kind4, venue4, label4 = s4_for_step(step)
+        kind4, venue4, label4 = (s4_for_step_v5d(step) if self.field_v5d
+                                 else s4_for_step(step))
 
         # --- 2) 計画コール（月1回・全主体） ---------------------------------
         items = []
         for a in self.actors:
             prompt = build_plan_prompt_v5(a, self.ledger, step, self.n_steps, self.names,
                                           a.extra["traces"], label4, venue4,
-                                          prompt_order=self.prompt_order)
-            items.append((a, self.system_prompts[a.agent_id], prompt,
-                          plan_schema_v5(self.venue_choices[a.agent_id], venue4)))
+                                          prompt_order=self.prompt_order,
+                                          pnames=self.pnames or None)
+            choices = self.venue_choices[a.agent_id]
+            if self.field_v5d:
+                schema = plan_schema_v5([self.venue_labels[v] for v in choices],
+                                        self.venue_labels[venue4])
+            else:
+                schema = plan_schema_v5(choices, venue4)
+            items.append((a, self.system_prompts[a.agent_id], prompt, schema))
         results = self._call_batch(items, "plan", job_key=f"m{step:02d}_plan")
         for a in self.actors:
             a.inbox = []      # 観測を作り終えた直後に空にする（以降は翌月ぶん）
@@ -1601,6 +1660,8 @@ class Simulation:
                 self._v5_thought(a, act, step, "plan", "")
                 for sid in SCENE_IDS:
                     value = str(act.get(f"plan_{sid.lower()}", "") or "").strip()
+                    if self.field_v5d:
+                        value = self.venue_by_label.get(value, value)
                     allowed = ([venue4] if sid == "S4"
                                else self.venue_choices[a.agent_id])
                     if value in allowed:
@@ -1641,14 +1702,18 @@ class Simulation:
             # 会話が成立するかどうかとは別（Codexレビュー 2026-08-27）。
             attendance = dict(groups)
             for venue_id, members in sorted(attendance.items()):
-                for tr in venue_traces_v5(step, self.script, venue_id, old_names):
+                for tr in venue_traces_v5(step, self.script, venue_id, old_names,
+                                          self.pnames or None,
+                                          TRACE_TEXTS_V5D if self.field_v5d else None):
                     for a in members:
                         a.extra["traces"].append(tr)
                         self.ledger.v5_traces_seen.append(
                             {"step": step, "agent_id": a.agent_id, "scene": sid,
                              "venue": venue_id, **tr})
+            # v5d には窓口が無い（S4 に counter が来ない）＝registry_rows_v5 は呼ばれない。
             registry = (registry_rows_v5(self.ledger, step)
-                        if (sid == "S4" and kind4 == "counter") else None)
+                        if (sid == "S4" and kind4 == "counter" and not self.field_v5d)
+                        else None)
             if registry:
                 # 誰がどの名義変更を窓口で見たかを、取得ごとに観測へ残す。
                 viewed = [r for r in self.ledger.records
@@ -1687,10 +1752,17 @@ class Simulation:
                             self.scene_rounds, registry, owns, can_publish,
                             self.direct_quota - a.extra.get("directs_used", 0),
                             self.article_quota - a.extra.get("articles_used", 0),
-                            prompt_order=self.prompt_order)
-                        items.append((a, self.system_prompts[a.agent_id], prompt,
-                                      scene_schema_v5(a, present, self.actor_ids,
-                                                      owns, can_publish)))
+                            prompt_order=self.prompt_order,
+                            pnames=self.pnames or None)
+                        if self.field_v5d:
+                            schema = scene_schema_v5d(
+                                a.name, [self.names[p] for p in present],
+                                [self.names[i] for i in self.actor_ids],
+                                owns, can_publish)
+                        else:
+                            schema = scene_schema_v5(a, present, self.actor_ids,
+                                                     owns, can_publish)
+                        items.append((a, self.system_prompts[a.agent_id], prompt, schema))
                         ctx[a.agent_id] = (venue_id, present)
                 results = self._call_batch(items, f"{sid}r{rnd}",
                                            job_key=f"m{step:02d}_{sid}r{rnd}")
@@ -1702,6 +1774,8 @@ class Simulation:
                     act = self._v5_parse(a, results, step, f"{sid}r{rnd}")
                     if act is None:
                         continue
+                    if self.field_v5d:
+                        self._v5d_decode(act)
                     self._v5_thought(a, act, step, sid, venue_id, rnd)
                     self._v5_stance(a, act, step, sid)
                     self._v5_direct(a, act, step, sid)
@@ -2211,11 +2285,15 @@ class Simulation:
             occ_rows = ([{"kind": "utterance", **u} for u in self.ledger.v5_utterances]
                         + [{"kind": "thought", **t} for t in self.thoughts]
                         + [{"kind": "article", **a} for a in self.ledger.v5_articles])
-            if ((self.field_v5b or self.field_v5c)
-                    and kcfg.get("classify_utterances", True) and occ_rows):
+            # v5b 比較用の占領分類器。config で切れる（既定は従来どおり on）。
+            # off のときは occupation_labels.jsonl を書かない＝O1〜O4 は
+            # 「未計測」として集計から落ちる（欠損を false に化けさせない）。
+            if ((self.field_v5b or self.v5c_like)
+                    and kcfg.get("classify_utterances", True)
+                    and kcfg.get("classify_occupation", True) and occ_rows):
                 occ_labels = classify_occupation(
                     self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
-            if (self.field_v5c and kcfg.get("classify_utterances", True) and occ_rows):
+            if (self.v5c_like and kcfg.get("classify_utterances", True) and occ_rows):
                 # 定義は走行前に固定（docs/world_design_v5c_buyer_strategy.md §1）。
                 stage_labels = classify_stage_v5c(
                     self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
@@ -2296,7 +2374,7 @@ class Simulation:
             # 一切見せない・世界には戻らない）。判定の定義は実装仕様6章で走行前に固定。
             if occ_labels:
                 _write_jsonl(os.path.join(d, "occupation_labels.jsonl"), occ_labels)
-            if self.field_v5c:
+            if self.v5c_like:
                 if stage_labels:
                     _write_jsonl(os.path.join(d, "stage_labels_v5c.jsonl"), stage_labels)
                 _write_jsonl(os.path.join(d, "venue_choices_v5c.jsonl"),
