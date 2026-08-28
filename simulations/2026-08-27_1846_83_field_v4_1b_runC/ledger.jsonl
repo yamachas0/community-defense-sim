@@ -1,0 +1,679 @@
+{"step": 1, "kind": "offer", "offer_id": "O0001", "parcel_id": "P05", "from_id": "AQ01", "under_name": "X社", "to": "HH04"}
+{"step": 1, "kind": "offer", "offer_id": "O0002", "parcel_id": "P09", "from_id": "AQ01", "under_name": "A社", "to": "HH08"}
+{"step": 1, "kind": "offer", "offer_id": "O0003", "parcel_id": "P12", "from_id": "AQ01", "under_name": "B社", "to": "HH11"}
+{"step": 1, "kind": "offer", "offer_id": "O0004", "parcel_id": "P17", "from_id": "AQ01", "under_name": "X社", "to": "HH16"}
+{"step": 1, "kind": "offer", "offer_id": "O0005", "parcel_id": "P20", "from_id": "AQ01", "under_name": "A社", "to": "HH03"}
+{"step": 1, "kind": "offer", "offer_id": "O0006", "parcel_id": "P24", "from_id": "AQ01", "under_name": "B社", "to": "HH07"}
+{"step": 1, "kind": "consult", "consult_id": "Q0001", "by": "HH01", "to": "BR01", "question": "現在所有している空き店舗と自宅の活用、売却について相談したいです。特に、将来的に子供たちに迷惑をかけたくないので、どのような選択肢があるか教えていただけますでしょうか。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0002", "by": "HH02", "to": "BR01", "question": "I own a few properties in the city, including a shop and two houses. I'm curious about their current market value and if there's any interest from potential buyers, especially given the city's situation."}
+{"step": 1, "kind": "consult", "consult_id": "Q0003", "by": "HH03", "to": "BR01", "question": "所有している空地（P20）の維持管理が負担になっており、草刈りが大変です。この土地の活用方法や、買い手がつかないか相談したいです。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0004", "by": "HH04", "to": "BR01", "question": "所有している住宅（P05, P21, P37）について、売却や活用について相談したい。現在の状況で、どのような選択肢があるか知りたい。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0005", "by": "HH06", "to": "BR01", "question": "駅前の所有物件（店舗、住宅）の活用方法について相談したいです。現状維持が難しく、今後の選択肢について情報収集をしたいと考えています。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0006", "by": "HH11", "to": "BR01", "question": "相続した住宅（温泉丘陵地区）の市場価値と、将来的な活用方法について相談したいです。特に、現在住んでいる場所との兼ね合いや、子どもの学費を考慮した場合の選択肢についてお伺いしたいです。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0007", "by": "HH13", "to": "BR01", "question": "現在所有しているP14（中央駅前地区の店舗）、P30（温泉丘陵地区の店舗）、P46（温泉丘陵地区の住宅）について、周辺の相場や、将来的な需要の見込みについて教えていただけますでしょうか。特に、温泉観光都市という特性や、市の抱える課題（高齢化、後継者不足など）が、これらの物件の価値にどう影響するかを知りたいです。"}
+{"step": 1, "kind": "consult", "consult_id": "Q0008", "by": "HH15", "to": "BR01", "question": "湾岸の住宅（P16）の将来的な活用について相談したい。A市の不動産市場の動向や、現在どのようなニーズがあるか教えていただけますか。"}
+{"step": 1, "kind": "investigate", "by": "MD01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MD02", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 1, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 1, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 1, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 1, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 1, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 1, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 1, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 2, "kind": "offer", "offer_id": "O0007", "parcel_id": "P02", "from_id": "AQ01", "under_name": "C社", "to": "HH01"}
+{"step": 2, "kind": "offer", "offer_id": "O0008", "parcel_id": "P03", "from_id": "AQ01", "under_name": "D社", "to": "HH02"}
+{"step": 2, "kind": "offer", "offer_id": "O0009", "parcel_id": "P04", "from_id": "AQ01", "under_name": "X社", "to": "HH03"}
+{"step": 2, "kind": "offer", "offer_id": "O0010", "parcel_id": "P06", "from_id": "AQ01", "under_name": "A社", "to": "HH05"}
+{"step": 2, "kind": "offer", "offer_id": "O0011", "parcel_id": "P07", "from_id": "AQ01", "under_name": "B社", "to": "HH06"}
+{"step": 2, "kind": "offer", "offer_id": "O0012", "parcel_id": "P08", "from_id": "AQ01", "under_name": "C社", "to": "HH07"}
+{"step": 2, "kind": "consult", "consult_id": "Q0009", "by": "HH02", "to": "BR02", "question": "P03（店舗/湾岸観光地区、110㎡、名義:R02、利用者:T02）の現在の利用状況と、今後の賃貸や売却の可能性について、仲介業者としての見解を伺いたいです。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0010", "by": "HH03", "to": "BR01", "question": "P20（空地）の活用や売却について、具体的な情報や提案があれば教えてください。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0011", "by": "HH05", "to": "BR01", "question": "中央駅前地区にある私の店舗（P06）の現在の市場価値と、テナント（T04）が地域でコワーキングスペースのイベントを計画しているという情報から、この物件に今後どのような需要が見込めるか、また、周辺の土地の動きについて教えていただけますか？"}
+{"step": 2, "kind": "consult", "consult_id": "Q0012", "by": "HH06", "to": "BR01", "question": "所有物件（P07、P23）の活用方法について、引き続きご相談させてください。現状、私自身で管理・活用する時間が取れないため、専門的な視点からのアドバイスをいただけると幸いです。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0013", "by": "HH11", "to": "BR01", "question": "不動産市場の現在の動向と、特に北部学術・生活地区の物件(P28, P44)の将来性について、専門家の見解を伺いたいです。"}
+{"step": 2, "kind": "consult", "consult_id": "Q0014", "by": "HH13", "to": "BR01", "question": "先月ご相談させていただいたR13です。私の所有物件（P14, P30, P46）について、現状の評価と、A市の高齢化や後継者不足といった課題を踏まえた将来的な活用方法について、アドバイスをいただけますでしょうか。"}
+{"step": 2, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 2, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 2, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 2, "kind": "ordinance", "by": "MU01", "title": "大規模土地取得に関する届出制度", "body": "面積1000㎡以上の土地を取得した場合、取得完了後3ヶ月以内に市長へ届け出なければならない。", "threshold_sqm": 1000, "delay_months": 3, "effective_step": 3}
+{"step": 2, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 2, "kind": "ordinance_same_step_conflict", "by": "MU02", "other": "MU01", "superseded": "大規模土地取得に関する届出制度", "effective": "大規模土地取得に関する届出制度"}
+{"step": 2, "kind": "ordinance", "by": "MU02", "title": "大規模土地取得に関する届出制度", "body": "一定面積以上の土地を取得する際は、事前に市長への届出が必要となる。", "threshold_sqm": 500, "delay_months": 3, "effective_step": 3}
+{"step": 2, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 2, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 2, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 2, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 2, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 2, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 2, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 2, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 2, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 2, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 2, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 2, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 3, "kind": "offer", "offer_id": "O0013", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 3, "kind": "offer", "offer_id": "O0014", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 3, "kind": "offer", "offer_id": "O0015", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 3, "kind": "offer", "offer_id": "O0016", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 3, "kind": "offer", "offer_id": "O0017", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 3, "kind": "offer", "offer_id": "O0018", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 3, "kind": "advice", "consult_id": "Q0009", "by": "BR02", "to": "HH02", "reply": "R02様、P03の件ですね。現在の利用状況と、今後の賃貸・売却の可能性について、私の見解をお伝えします。まず、P03の土地面積は110㎡ですので、第3月より施行される「大規模土地取得に関する届出制度」の対象外となります。ご安心ください。利用状況については、T02様が現在利用されているとのことですが、具体的な契約内容や利用頻度については、直接T02様にご確認いただくのが最も確実です。賃貸の可能性ですが、湾岸観光地区という立地は魅力的であり、小規模ながらも店舗としての需要は見込めるでしょう。ただし、近隣のイベント企画の動向や、コワーキングスペース事業者の動きなども、今後の賃貸需要に影響を与える可能性があります。売却については、市場の動向を注視する必要がありますが、ご希望があれば、購入希望者の探索も承ります。詳細については、改めてお打ち合わせさせていただけますでしょうか。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0015", "by": "BZ04", "to": "BR01", "question": "第3月より施行された大規模土地取得に関する条例（500㎡超の土地取得に3ヶ月の遅延）について、最近の街の土地の動きで何か気になることはありますか？ 特に、条例施行後の市場の反応や、BR01さんが注目している物件などがあれば教えてください。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0016", "by": "HH02", "to": "BR01", "question": "P03（店舗、110㎡）の現在の利用状況と、将来的な賃貸需要の見込みについて教えてください。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0017", "by": "HH04", "to": "BR01", "question": "先月相談した件について、その後のご回答はいただけますでしょうか。また、今月施行された「大規模土地取得に関する届出制度」について、私の所有物件（P05, P21, P37）がこの制度の対象となる可能性について、ご見解をお聞かせいただけますでしょうか。特に、複数の物件をまとめて取得するような話があった場合、手続きはどのように変わるのか、ご教示いただけると幸いです。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0018", "by": "HH05", "to": "BR01", "question": "A社からのP06取得申し入れについて、A社の意図とP06の市場価値、そして新たに施行された大規模土地取得に関する条例（500㎡以上）がP06や今後の不動産取引に与える影響について、B01さんの見解を聞かせてください。T04さんの利用状況も考慮した上でのアドバイスをお願いします。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0019", "by": "HH06", "to": "BR01", "question": "駅前の土地・建物の活用について、以前相談した件ですが、まだ回答がありません。取得の申し入れ（O0011）が入っており、こちらについては「hold」としております。第3月より大規模土地取得に関する条例（500㎡超）が施行されました。この条例も踏まえ、駅前地区の不動産活用について、具体的な提案をいただけますでしょうか。特に、私の所有物件（P07, P23）と、今回申し入れのあった土地（O0011の対象地）を合わせた活用について、ご相談させてください。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0020", "by": "HH07", "to": "BR02", "question": "最近、街の土地の動きについて、何か気になることはありますか？特に、将来的な開発の可能性が高い中央駅前地区の動向について、仲介業者さんとしての視点からお聞かせいただけると幸いです。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0021", "by": "HH11", "to": "BR01", "question": "北部学術・生活地区におけるP28とP44の将来的な開発の可能性について、最新の市場動向や地域開発計画があれば教えてください。また、今月から施行された大規模土地取得に関する届出制度（500㎡超）が、将来的に私の土地活用にどのような影響を与える可能性があるか、懸念事項があれば教えてください。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0022", "by": "HH13", "to": "BR01", "question": "先月相談した件について、回答がまだなので再度相談します。私の所有物件（P14, P30, P46）の現状と、A市の高齢化や後継者不足といった課題を踏まえた将来的な活用方法について、具体的なアドバイスをください。また、今月から施行される「大規模土地取得に関する届出制度」（500㎡超）が私の物件に影響するか、あるいは将来的な取引にどう関わるかについても教えてください。"}
+{"step": 3, "kind": "consult", "consult_id": "Q0023", "by": "HH14", "to": "BR01", "question": "条例施行により、500㎡超の土地取得に関する届出が必要になったと聞きました。私の所有物件（P15, P31, P47）はそれぞれ320㎡ですが、この条例の影響はありますでしょうか？また、今後、土地の取得や売却を検討する際に、どのような点に注意すべきかアドバイスをいただけますでしょうか。"}
+{"step": 3, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 3, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 3, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 3, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 3, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 3, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 3, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 3, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 3, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 3, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 3, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 3, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 3, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 3, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 3, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 3, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 3, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 3, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 3, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 3, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 3, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 4, "kind": "offer", "offer_id": "O0019", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 4, "kind": "offer", "offer_id": "O0020", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 4, "kind": "offer", "offer_id": "O0021", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 4, "kind": "offer", "offer_id": "O0022", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 4, "kind": "offer", "offer_id": "O0023", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 4, "kind": "offer", "offer_id": "O0024", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 4, "kind": "advice", "consult_id": "Q0020", "by": "BR02", "to": "HH07", "reply": "R07様、中央駅前地区の土地の動向についてですね。現時点では、街全体の開発計画や、中央駅周辺の再開発に関する具体的な情報は限られておりますが、仲介業者としての視点から、いくつか留意すべき点をお伝えできます。まず、中央駅周辺は、今後、交通利便性の向上や商業施設の集積により、不動産の価値が上昇する可能性が考えられます。一方で、土地の所有者の方々の中には、高齢化や後継者不足から、売却や有効活用を検討されているケースも少なくありません。大規模な開発計画については、行政の動向や民間事業者の投資意欲によって大きく左右されますので、最新の情報を注視していく必要があります。現時点では、中央駅前地区における具体的な大規模土地取得の動きは確認できておりませんが、今後、状況が変化する可能性は十分にあります。詳細な情報や個別の土地に関するご相談がございましたら、改めてお伺いできればと存じます。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0024", "by": "BZ01", "to": "BR01", "question": "先日施行された大規模土地取得に関する届出制度について、街の不動産取引への影響や、何か動きがあればお教えいただけますでしょうか。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0025", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度施行後、不動産市場の動向に変化はありますか？特にBR01様が注目されている物件や、制度の影響についてお伺いしたいです。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0026", "by": "HH02", "to": "BR01", "question": "P03の現在の賃貸借契約の詳細と、T02様へのヒアリングの可能性についてご助言ください。また、P19（住宅）の今後の活用について、ご意見をお聞かせください。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0027", "by": "HH03", "to": "BR01", "question": "先月相談した件について、何か進展はありますでしょうか。返答をお待ちしております。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0028", "by": "HH04", "to": "BR01", "question": "先月相談したP05の件について、進捗はいかがでしょうか。また、大規模土地取得に関する届出制度について、私の物件（P05, P21, P37）が将来的にまとめて取得される場合に、この制度の対象となる可能性について、ご見解をお聞かせいただけますでしょうか。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0029", "by": "HH05", "to": "BR01", "question": "条例施行により、不動産取引にどのような影響が出るとお考えでしょうか。また、A社からのP06取得申し入れの真意について、何か情報をお持ちであればお聞かせください。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0030", "by": "HH06", "to": "BR01", "question": "駅前の所有物件P07（320㎡）とP23（320㎡）の活用について、第3月より施行された「大規模土地取得に関する届出制度」（500㎡超の取得で3か月の遅延）を考慮した上での提案を改めて依頼します。取得の申し入れ（O0011）を受けていますが、BR01からの提案を待っている状況です。隣接する土地との合算で条例適用となる可能性も踏まえた、具体的な活用方法や今後の進め方についてご提案ください。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0031", "by": "HH07", "to": "BR02", "question": "第3月にお伝えした私の所有物件（P24、P08）への買収申し込みについて、仲介業者としての見解をお聞かせください。また、大規模土地取得に関する届出制度施行後の街の不動産動向について、何か変化や新たな情報があれば教えていただけますでしょうか。"}
+{"step": 4, "kind": "consult", "consult_id": "Q0032", "by": "HH11", "to": "BR01", "question": "不動産市場の動向、特に北部学術・生活地区の開発可能性について、最新の情報があれば教えていただけますでしょうか。また、今月から施行された大規模土地取得に関する届出制度（500㎡超）が、将来的に私の所有物件（P28, P44など）の活用にどのような影響を与える可能性があるか、ご見解をお聞かせください。"}
+{"step": 4, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 4, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 4, "kind": "ordinance", "by": "MU01", "title": "大規模土地取得に関する届出制度", "body": "1件あたり500㎡を超える土地の取得は、事前に届出を行い、届出から3ヶ月後に成立する。", "threshold_sqm": 500, "delay_months": 3, "effective_step": 5}
+{"step": 4, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 4, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 4, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 4, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 4, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 4, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 4, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 4, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 4, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 4, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 4, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 4, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 4, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 4, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 4, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 4, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 4, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 4, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 4, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 4, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 4, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 4, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 4, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 4, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 5, "kind": "offer", "offer_id": "O0025", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 5, "kind": "offer", "offer_id": "O0026", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 5, "kind": "offer", "offer_id": "O0027", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 5, "kind": "offer", "offer_id": "O0028", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 5, "kind": "offer", "offer_id": "O0029", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 5, "kind": "offer", "offer_id": "O0030", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 5, "kind": "advice", "consult_id": "Q0031", "by": "BR02", "to": "HH07", "reply": "R07様、ご相談ありがとうございます。大規模土地取得に関する届出制度の施行により、500㎡を超える土地の取引には成立までに3ヶ月の遅延が生じます。この制度は、今後の不動産取引のスピードや、関係者の意思決定に影響を与える可能性があります。貴殿の所有物件（P24、P08）への買収申し込みに関しましては、詳細な面積や申込内容が不明なため、現時点では具体的な見解をお伝えすることが難しい状況です。もしよろしければ、詳細な情報をご提供いただけますでしょうか。制度施行後の街の不動産動向については、現時点では大きな変化は観測されておりませんが、取引の遅延や、より慎重な検討が求められるようになる可能性はございます。引き続き、情報収集に努めてまいります。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0033", "by": "BZ01", "to": "BR01", "question": "大規模土地取得に関する届出制度の施行により、不動産取引、特に500㎡を超える土地の取得において、どのような変化が予想されますか？手続き上の注意点や、市場への影響についてお伺いしたいです。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0034", "by": "BZ04", "to": "BR01", "question": "条例施行後の不動産市場の動向について、特に500㎡超の土地取得に関する遅延が他の取引に与える影響をどう見ていますか？BR01さんが注目している物件はありますか？"}
+{"step": 5, "kind": "consult", "consult_id": "Q0035", "by": "HH03", "to": "BR01", "question": "先月相談した件について、まだお返事をいただいていないのですが、何か状況は変わりましたでしょうか。また、先月施行された大規模土地取得に関する条例について、私の物件（P04、P20）にどのような影響があるのか、ご意見を伺えれば幸いです。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0036", "by": "HH04", "to": "BR01", "question": "先月相談した大規模土地取得に関する届出制度について、何か進展はありますでしょうか。私の物件単独では対象外かと思われますが、複数の物件をまとめて取得する話があれば、情報共有いただけますと幸いです。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0037", "by": "HH05", "to": "BR01", "question": "第5月より施行された大規模土地取得に関する届出制度について、不動産取引への影響をお伺いしたいです。また、以前より当方所有のP06に対してA社より取得の申し入れがありますが、その意図について再度確認させていただけますでしょうか。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0038", "by": "HH06", "to": "BR01", "question": "第5月より施行された「大規模土地取得に関する届出制度」について、私の所有物件P07（320㎡）およびP23（320㎡）が、隣接する土地と合算された場合に条例適用の対象となる可能性はありますでしょうか。駅前地区における不動産活用について、条例施行後の状況を踏まえた具体的な提案を再度ご検討いただけますと幸いです。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0039", "by": "HH07", "to": "BR02", "question": "第5月より施行された「大規模土地取得に関する届出制度」について、私の所有物件（P08:450㎡、P24:450㎡）は直接の対象外ですが、この制度が周辺の土地取引、特に中央駅前地区の不動産市場にどのような影響を与える可能性があるか、仲介業者としての見解をお聞かせください。また、以前より申し入れのあるO0006（P24宛）とO0012（P08宛）について、現在の状況と見通しについてもお伺いできれば幸いです。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0040", "by": "HH11", "to": "BR01", "question": "第5月より施行された「大規模土地取得に関する届出制度」について、私の所有するP12（140㎡）および、以前ご相談したP28、P44への影響について確認したいです。また、P12のオファー（O0003）に関する進捗や、何か新たな情報があれば教えていただけますでしょうか。"}
+{"step": 5, "kind": "consult", "consult_id": "Q0041", "by": "HH15", "to": "BR01", "question": "先月相談した件について、まだ回答をいただけておりません。ご多忙のところ恐縮ですが、状況はいかがでしょうか。"}
+{"step": 5, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 5, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 5, "kind": "investigate", "by": "MU01", "note": "land_registry"}
+{"step": 5, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 5, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 5, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 5, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 5, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 5, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 5, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 5, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 5, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 5, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 5, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 5, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 5, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 5, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 5, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 5, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 5, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 5, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 5, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 5, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 5, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 5, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 5, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 5, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 5, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 5, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 6, "kind": "offer", "offer_id": "O0031", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 6, "kind": "offer", "offer_id": "O0032", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 6, "kind": "offer", "offer_id": "O0033", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 6, "kind": "offer", "offer_id": "O0034", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 6, "kind": "offer", "offer_id": "O0035", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 6, "kind": "offer", "offer_id": "O0036", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 6, "kind": "advice", "consult_id": "Q0035", "by": "BR01", "to": "HH03", "reply": "R03様、P04およびP20についてご心配をおかけしております。P04（100㎡）とP20（150㎡）は、それぞれ単独では500㎡未満のため、大規模土地取得に関する届出制度の直接の対象とはなりません。しかし、周辺の土地との合算取得の可能性もゼロではありませんので、今後の動向には注視してまいります。現時点では、条例による直接的な影響はないと考えられます。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0036", "by": "BR01", "to": "HH04", "reply": "R04様、P05（200㎡）、P21（180㎡）、P37（150㎡）はいずれも単独では500㎡未満のため、現行の条例による直接の対象とはなりません。複数の物件をまとめて取得するご計画がある場合、その総面積が500㎡を超える場合は届出が必要となります。現時点では、そうした動きに関する情報はございませんが、もしございましたら速やかに情報共有させていただきます。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0038", "by": "BR01", "to": "HH06", "reply": "R06様、P07（320㎡）およびP23（320㎡）は単独では500㎡未満のため、条例の直接の対象とはなりません。しかし、隣接する土地と合算して取得する場合、総面積が500㎡を超える場合は届出が必要となります。駅前地区の不動産活用につきましては、条例施行後の市場の不確実性も考慮しつつ、より詳細なご提案を準備しております。少々お時間をいただけますでしょうか。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0040", "by": "BR01", "to": "HH11", "reply": "R11様、P12（140㎡）は単独では条例の対象外です。P28（250㎡）およびP44（220㎡）も同様に単独では対象外となります。これらの物件をまとめて取得する場合、総面積が500㎡を超える場合は届出が必要となります。P12のオファー（O0003）については、現在、相手方と条件を調整中です。進捗があり次第、速やかにご連絡いたします。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0037", "by": "BR01", "to": "HH05", "reply": "R05様、第5月より施行された大規模土地取得に関する届出制度は、1件あたり500㎡超の土地取得に届出を義務付け、成立を3ヶ月遅延させるものです。これにより、大規模開発の計画や実行に一定の制約が生じることが予想されます。A社からのP06（120㎡）取得申し入れの意図につきましては、現時点では確認できておりませんが、一般的には周辺エリアの開発計画や、将来的な資産価値の上昇を見込んだ動きなどが考えられます。詳細が分かり次第、改めてご報告いたします。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0041", "by": "BR01", "to": "HH15", "reply": "R15様、ご心配をおかけし申し訳ございません。P16（湾岸の住宅）の将来的な活用につきまして、現在、周辺の市場動向を調査しております。湾岸エリアは、景観の良さからリゾート利用やセカンドハウスとしての需要が見込める一方、交通利便性やインフラ整備の状況も考慮する必要があります。詳細な分析結果がまとまり次第、改めてご報告させていただきます。今しばらくお待ちください。"}
+{"step": 6, "kind": "advice", "consult_id": "Q0039", "by": "BR02", "to": "HH07", "reply": "R07様、先日ご相談いただいた「大規模土地取得に関する届出制度」についてですが、現時点では施行直後ということもあり、街の不動産市場に大きな変化は観測されておりません。しかし、制度の趣旨からも、今後は取引のスピードが緩やかになったり、より慎重な判断が求められたりする可能性はございます。また、P24、P08への買収申し込み（O0006、O0012）につきましては、私の方で把握している新たな情報はございません。もし、相手方から具体的な進捗や条件の提示などがございましたら、お教えいただけますと幸いです。引き続き、動向を注視してまいります。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0042", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度が不動産市場、特に500㎡超の土地取引に与える影響と、他の取引への波及可能性について。また、現在注目されている物件があれば教えてください。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0043", "by": "HH03", "to": "BR01", "question": "先月相談した件の返答を催促したい。また、新たに施行された「大規模土地取得に関する届出制度」が私の所有物件（P04, P20）の取得に影響するか確認したい。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0044", "by": "HH05", "to": "BR01", "question": "前回（第5月）の相談内容について、再度お伺いします。条例施行による不動産取引への影響と、A社からの申し入れの意図について、現時点で分かっていることがあれば教えてください。また、C社からの申し入れ（O0028）についても、仲介手数料や今後の見通しについて情報があればお願いします。これらの相談結果を踏まえて、保留中の申し入れ（O0010, O0016, O0022, O0028）の対応を判断したいと考えています。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0045", "by": "HH06", "to": "BR01", "question": "第4月にお送りした駅前地区の不動産活用に関するご相談について、改めてご提案をいただけますでしょうか。第5月より施行された「大規模土地取得に関する届出制度」も考慮に入れた上でのご提案をお願いいたします。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0046", "by": "HH11", "to": "BR01", "question": "先月相談した「大規模土地取得に関する届出制度」について、私の所有する土地（P12, P28, P44）への影響と、P12への取得申し入れ（O0003）の保留継続について、改めてご相談させてください。"}
+{"step": 6, "kind": "consult", "consult_id": "Q0047", "by": "HH15", "to": "BR01", "question": "先月相談した物件の件について、何か進展はありましたでしょうか？"}
+{"step": 6, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 6, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 6, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 6, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 6, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 6, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 6, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 6, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 6, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 6, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 6, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 6, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 6, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 6, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 6, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 6, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 6, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 6, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 6, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 6, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 6, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 6, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 6, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 6, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 6, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 6, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 6, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 6, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 6, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 6, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 6, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 6, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 6, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 7, "kind": "offer", "offer_id": "O0037", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 7, "kind": "offer", "offer_id": "O0038", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 7, "kind": "offer", "offer_id": "O0039", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 7, "kind": "offer", "offer_id": "O0040", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 7, "kind": "offer", "offer_id": "O0041", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 7, "kind": "offer", "offer_id": "O0042", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 7, "kind": "advice_rejected", "consult_id": "Q0039", "by": "BR02", "reason": "already_answered"}
+{"step": 7, "kind": "consult", "consult_id": "Q0048", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度が、土地の取得にどのような影響を与えるか、また、現在BR01が注目している物件について教えてほしい。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0049", "by": "HH02", "to": "BR01", "question": "P19（住宅/湾岸観光地区）について、将来的な活用方法について相談したいです。特に、現在保留中のP03（店舗/湾岸観光地区）の状況を踏まえ、どのような選択肢があるか、アドバイスをいただけると幸いです。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0050", "by": "HH03", "to": "BR01", "question": "P04（140㎡）へのB社からの申し入れが6件目（合計840㎡）となり、条例（500㎡超の土地取得で3ヶ月遅延）との関連性が懸念されます。個々の土地は500㎡未満ですが、合算取得による遅延の可能性と、その具体的な影響について再度ご説明ください。また、P20（140㎡）への申し入れ(O0005)の状況も併せてご確認ください。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0051", "by": "HH05", "to": "BR01", "question": "第5月より施行された大規模土地取得に関する届出制度について、その影響とA社からのP06（120㎡）取得申し入れの意図について、詳細な状況をお伺いしたいです。また、C社からの申し入れ（O0034）を含め、現在保留中の申し入れについても、今後の見通しについてご教示いただけますでしょうか。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0052", "by": "HH06", "to": "BR01", "question": "駅前地区の不動産活用について、条例施行後の市場動向を踏まえた具体的な提案を早急にいただきたく存じます。特に、P07とP23の合算取得による条例適用リスクと、その回避策、あるいは活用方法について、詳細なご提案をお願いいたします。"}
+{"step": 7, "kind": "consult", "consult_id": "Q0053", "by": "HH11", "to": "BR01", "question": "P12（140㎡）への取得申し入れ（O0003）について、現在の条件調整の進捗状況と、今後の見通しをお聞かせください。"}
+{"step": 7, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 7, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "R07とX社の関連性について、X社への取材を試みます。", "body": "R07とX社の関連性について、X社への取材を試みます。\n先月、A市で最も広範囲な土地を所有する名義「R07」の正体について調査を進めた結果、海外の不動産投資・運営会社であるX社との強い関連が示唆されました。X社は、香港法人S投資控股を連結対象として開示しており、その事業内容から、R07の土地所有の背後にある可能性が考えられます。現在、X社（AQ01）に対し、R07との関係性、およびA市における不動産投資に関する意向について、取材を申し込んでおります。回答があり次第、改めて記事にてご報告いたします。", "about_acquisition": true}
+{"step": 7, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 7, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 7, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 7, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 7, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 7, "kind": "hold", "offer_id": "O0037", "parcel_id": "P02", "by": "HH01"}
+{"step": 7, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 7, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 7, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 7, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 7, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 7, "kind": "hold", "offer_id": "O0038", "parcel_id": "P03", "by": "HH02"}
+{"step": 7, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0039", "parcel_id": "P04", "by": "HH03"}
+{"step": 7, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 7, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0040", "parcel_id": "P06", "by": "HH05"}
+{"step": 7, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 7, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 7, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 7, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 7, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 7, "kind": "hold", "offer_id": "O0041", "parcel_id": "P07", "by": "HH06"}
+{"step": 7, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 7, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 7, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 7, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 7, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 7, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 7, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 7, "kind": "hold", "offer_id": "O0042", "parcel_id": "P10", "by": "HH09"}
+{"step": 7, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 7, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 8, "kind": "offer", "offer_id": "O0043", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 8, "kind": "offer", "offer_id": "O0044", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 8, "kind": "offer", "offer_id": "O0045", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 8, "kind": "offer", "offer_id": "O0046", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 8, "kind": "offer", "offer_id": "O0047", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 8, "kind": "offer", "offer_id": "O0048", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 8, "kind": "advice_rejected", "consult_id": "Q0009", "by": "BR02", "reason": "already_answered"}
+{"step": 8, "kind": "consult", "consult_id": "Q0054", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度の施行が不動産取引に与える影響、BR01が注目している物件、およびR07とX社の関連性について、BR01さんの見解をお聞かせください。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0055", "by": "HH03", "to": "BR01", "question": "P04へのB社からの申し入れが6件目となり、合計面積が840㎡に達しました。これは「大規模土地取得に関する届出制度」の対象となる可能性が高いと思われます。P20も取得されるとさらに増えます。条例による遅延の具体的な影響と、B社からの複数の申し入れが合算取得の対象となるのか、P20への申し入れ(O0005)も保留中なのですが、これらを含めてご相談させてください。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0056", "by": "HH05", "to": "BR01", "question": "A社のP06取得申し入れの意図について、再度確認をお願いできますでしょうか。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0057", "by": "HH06", "to": "BR01", "question": "駅前地区の不動産活用について、条例施行後の市場動向を踏まえた具体的な提案を早急に作成してください。"}
+{"step": 8, "kind": "consult", "consult_id": "Q0058", "by": "HH11", "to": "BR01", "question": "P12の取得申し入れO0003について、現在の条件調整の進捗状況と、今後の見通しについて教えてください。"}
+{"step": 8, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 8, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0037", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0043", "parcel_id": "P02", "by": "HH01"}
+{"step": 8, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0038", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0044", "parcel_id": "P03", "by": "HH02"}
+{"step": 8, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0039", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0045", "parcel_id": "P04", "by": "HH03"}
+{"step": 8, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 8, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0040", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0046", "parcel_id": "P06", "by": "HH05"}
+{"step": 8, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0041", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0047", "parcel_id": "P07", "by": "HH06"}
+{"step": 8, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 8, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 8, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 8, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 8, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 8, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 8, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 8, "kind": "hold", "offer_id": "O0042", "parcel_id": "P10", "by": "HH09"}
+{"step": 8, "kind": "hold", "offer_id": "O0048", "parcel_id": "P10", "by": "HH09"}
+{"step": 8, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 8, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 9, "kind": "offer", "offer_id": "O0049", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 9, "kind": "offer", "offer_id": "O0050", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 9, "kind": "offer", "offer_id": "O0051", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 9, "kind": "offer", "offer_id": "O0052", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 9, "kind": "offer", "offer_id": "O0053", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 9, "kind": "offer", "offer_id": "O0054", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 9, "kind": "advice_rejected", "consult_id": "Q0009", "by": "BR02", "reason": "already_answered"}
+{"step": 9, "kind": "consult", "consult_id": "Q0059", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度が、不動産取引にどのような影響を与えているか、また、BR01様が現在注目されている物件があれば教えてください。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0060", "by": "HH02", "to": "BR01", "question": "P03の件で申し入れが多数Hold状態となっておりますが、進捗はいかがでしょうか。また、P19の活用について、どのような活用が可能かご相談させていただけますでしょうか。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0061", "by": "HH03", "to": "BR01", "question": "B社からの複数の申し入れ（O0009, O0015, O0021, O0027, O0033, O0039, O0045）を合算して取得した場合、「大規模土地取得に関する届出制度」の対象となりますでしょうか。また、P20へのA社からの申し入れ(O0005)も保留中ですが、これらも合算の対象となる可能性はありますでしょうか。条例による成立の遅延（3か月）の影響についても、改めてご教示いただけますと幸いです。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0062", "by": "HH05", "to": "BR01", "question": "C社からのP06への申し入れの意図について、改めて確認をお願いします。A市の意向が不明瞭なため、対応を保留せざるを得ません。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0063", "by": "HH06", "to": "BR01", "question": "駅前地区の不動産活用について、条例施行後の市場動向を踏まえた具体的な提案を早急にお願いします。以前からの相談（Q0005、Q0012、Q0019、Q0030、Q0038、Q0045、Q0052、Q0057）についても、進捗がないため、併せてご報告ください。"}
+{"step": 9, "kind": "consult", "consult_id": "Q0064", "by": "HH11", "to": "BR01", "question": "P12の取得申し入れ（O0003）の現在の条件調整状況と、今後の見通しについてお伺いしたいです。"}
+{"step": 9, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 9, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0037", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0043", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0049", "parcel_id": "P02", "by": "HH01"}
+{"step": 9, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0038", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0044", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0050", "parcel_id": "P03", "by": "HH02"}
+{"step": 9, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0039", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0045", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0051", "parcel_id": "P04", "by": "HH03"}
+{"step": 9, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 9, "kind": "hold", "offer_id": "O0052", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0040", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0046", "parcel_id": "P06", "by": "HH05"}
+{"step": 9, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0041", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0047", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0053", "parcel_id": "P07", "by": "HH06"}
+{"step": 9, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 9, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 9, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0042", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0048", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0054", "parcel_id": "P10", "by": "HH09"}
+{"step": 9, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 9, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 10, "kind": "offer", "offer_id": "O0055", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 10, "kind": "offer", "offer_id": "O0056", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 10, "kind": "offer", "offer_id": "O0057", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 10, "kind": "offer", "offer_id": "O0058", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 10, "kind": "offer", "offer_id": "O0059", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 10, "kind": "offer", "offer_id": "O0060", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 10, "kind": "advice_rejected", "consult_id": "Q0009", "by": "BR02", "reason": "already_answered"}
+{"step": 10, "kind": "consult", "consult_id": "Q0065", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度について、R07さんとX社さんの関連報道が制度に与える影響があれば教えてください。また、BR01様が注目されている物件があれば、併せてお伺いしたいです。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0066", "by": "HH02", "to": "BR01", "question": "P03の件について、まだHold状態が続いております。P19の活用についても、BR01様のご意向をお伺いできますでしょうか。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0067", "by": "HH03", "to": "BR01", "question": "P04とP20への複数の取得申し入れの合計面積が、「大規模土地取得に関する届出制度」の対象となるか、また、条例による3ヶ月の遅延期間が適用されるか再度確認したい。前回（第8月）相談したが、未回答のため、改めて回答を求める。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0068", "by": "HH05", "to": "BR01", "question": "C社からの申し入れの意図について、確認をお願いいたします。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0069", "by": "HH06", "to": "BR01", "question": "駅前地区の不動産活用について、条例施行後の市場動向を踏まえた具体的な提案を早急に依頼します。以前から継続している相談ですが、進展がないため、優先的に対応をお願いします。"}
+{"step": 10, "kind": "consult", "consult_id": "Q0070", "by": "HH11", "to": "BR01", "question": "P12の取得申し入れ（O0003）の現在の条件調整状況と、今後の見通しについて教えてください。"}
+{"step": 10, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 10, "kind": "public_statement", "by": "MU01", "note": "「大規模土地取得に関する届出制度」について、施行以来、閾値（1件あたり500㎡超）に該当する新規土地取得の届出はございません。引き続き、制度の施行状況を注視してまいります。"}
+{"step": 10, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0037", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0043", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0049", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0055", "parcel_id": "P02", "by": "HH01"}
+{"step": 10, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0038", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0044", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0050", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0056", "parcel_id": "P03", "by": "HH02"}
+{"step": 10, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0039", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0045", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0051", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0057", "parcel_id": "P04", "by": "HH03"}
+{"step": 10, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 10, "kind": "hold", "offer_id": "O0058", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0040", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0046", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0052", "parcel_id": "P06", "by": "HH05"}
+{"step": 10, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0041", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0047", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0053", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0059", "parcel_id": "P07", "by": "HH06"}
+{"step": 10, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 10, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 10, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0042", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0048", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0054", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0060", "parcel_id": "P10", "by": "HH09"}
+{"step": 10, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 10, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 11, "kind": "offer", "offer_id": "O0061", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 11, "kind": "offer", "offer_id": "O0062", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 11, "kind": "offer", "offer_id": "O0063", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 11, "kind": "offer", "offer_id": "O0064", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 11, "kind": "offer", "offer_id": "O0065", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 11, "kind": "offer", "offer_id": "O0066", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 11, "kind": "advice", "consult_id": "Q0065", "by": "BR01", "to": "BZ04", "reply": "T04様、大規模土地取得に関する届出制度について、R07さんとX社さんの関連報道が制度に直接影響を与えるという情報は現時点では確認されていません。制度はあくまで土地の取得面積が基準となります。私が注目している物件については、現時点では個別の取引に関する情報をお伝えすることは控えさせていただきます。ご要望があれば、個別に情報提供の機会を設けることは可能です。"}
+{"step": 11, "kind": "advice_rejected", "consult_id": "MSG-M10-BZ04-BR01", "by": "BR01", "reason": "no_such_consultation"}
+{"step": 11, "kind": "advice", "consult_id": "Q0066", "by": "BR01", "to": "HH02", "reply": "R02様、P03の件、Hold状態が続いているとのこと、承知いたしました。P19の活用につきましては、湾岸観光地区という特性を活かした宿泊施設や、地域住民向けのコミュニティスペースとしての活用などが考えられます。より具体的なご提案のため、詳細なヒアリングをさせていただけますでしょうか。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0067", "by": "BR01", "to": "HH03", "reply": "R03様、P04とP20への複数の取得申し入れの合計面積について、現時点では個別の申し入れであり、合算での制度適用については、正式な判断がなされておりません。しかし、今後合算での取得が進む可能性も考慮し、常に状況を注視しております。条例による3ヶ月の遅延期間が適用されるかどうかは、今後の進展次第となります。詳細については、改めて確認し、分かり次第ご連絡いたします。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0068", "by": "BR01", "to": "HH05", "reply": "R05様、C社からのP06への申し入れの意図について、現時点では明確な情報を掴めておりません。引き続き確認を進めてまいります。進展があり次第、速やかにご連絡いたします。"}
+{"step": 11, "kind": "advice", "consult_id": "Q0069", "by": "BR01", "to": "HH06", "reply": "R06様、駅前地区の不動産活用について、条例施行後の市場動向を踏まえた具体的な提案を早急に作成いたします。以前からのご相談についても、進捗状況を確認し、改めてご報告させていただきます。今しばらくお待ちいただけますでしょうか。"}
+{"step": 11, "kind": "advice_rejected", "consult_id": "Q0009", "by": "BR02", "reason": "already_answered"}
+{"step": 11, "kind": "consult", "consult_id": "Q0071", "by": "BZ04", "to": "BR01", "question": "大規模土地取得に関する届出制度の今後の影響と、現在注目されている物件について教えてください。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0072", "by": "HH02", "to": "BR01", "question": "P03の件で進展がないようですが、P19の活用についてもご相談したいことがあります。P19について、どのようなご提案が可能でしょうか。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0073", "by": "HH03", "to": "BR01", "question": "P04とP20の取得申し入れについて、条例による3ヶ月の遅延期間が経過したかどうか、また、B社からの複数の申し入れをまとめて検討する際に、条例の遅延期間がどのように影響するか、再度確認させてください。特にP04については、B社から複数の申し入れが届いていますが、これらの対応について、条例の遅延期間を踏まえた上でのBR01さんのお考えをお聞かせいただけますでしょうか。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0074", "by": "HH05", "to": "BR01", "question": "C社からの申し入れの意図について、どのような情報をお持ちでしょうか。"}
+{"step": 11, "kind": "consult", "consult_id": "Q0075", "by": "HH06", "to": "BR01", "question": "駅前地区の不動産活用について、条例施行後の市場動向を踏まえた具体的な提案を早急に依頼します。前回からの進捗状況と、今後の具体的なアクションプランをご提示ください。"}
+{"step": 11, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 11, "kind": "investigate", "by": "MD02", "note": "corporate_records"}
+{"step": 11, "kind": "public_statement", "by": "MU01", "note": "条例施行後、大規模土地取得に関する届出は確認されておりません。引き続き監視を続けます。"}
+{"step": 11, "kind": "investigate", "by": "MU02", "note": "land_registry"}
+{"step": 11, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0037", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0043", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0049", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0055", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0061", "parcel_id": "P02", "by": "HH01"}
+{"step": 11, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0038", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0044", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0050", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0056", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0062", "parcel_id": "P03", "by": "HH02"}
+{"step": 11, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0039", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0045", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0051", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0057", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0063", "parcel_id": "P04", "by": "HH03"}
+{"step": 11, "kind": "hold", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 11, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0040", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0046", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0052", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0058", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0064", "parcel_id": "P06", "by": "HH05"}
+{"step": 11, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0041", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0047", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0053", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0059", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0065", "parcel_id": "P07", "by": "HH06"}
+{"step": 11, "kind": "hold", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 11, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 11, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0042", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0048", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0054", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0060", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0066", "parcel_id": "P10", "by": "HH09"}
+{"step": 11, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 11, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
+{"step": 12, "kind": "offer", "offer_id": "O0067", "parcel_id": "P02", "from_id": "AQ01", "under_name": "X社", "to": "HH01"}
+{"step": 12, "kind": "offer", "offer_id": "O0068", "parcel_id": "P03", "from_id": "AQ01", "under_name": "A社", "to": "HH02"}
+{"step": 12, "kind": "offer", "offer_id": "O0069", "parcel_id": "P04", "from_id": "AQ01", "under_name": "B社", "to": "HH03"}
+{"step": 12, "kind": "offer", "offer_id": "O0070", "parcel_id": "P06", "from_id": "AQ01", "under_name": "C社", "to": "HH05"}
+{"step": 12, "kind": "offer", "offer_id": "O0071", "parcel_id": "P07", "from_id": "AQ01", "under_name": "D社", "to": "HH06"}
+{"step": 12, "kind": "offer", "offer_id": "O0072", "parcel_id": "P10", "from_id": "AQ01", "under_name": "X社", "to": "HH09"}
+{"step": 12, "kind": "advice_rejected", "consult_id": "Q0009", "by": "BR02", "reason": "already_answered"}
+{"step": 12, "kind": "consult", "consult_id": "Q0076", "by": "BZ04", "to": "BR01", "question": "R07さんとX社の関連報道が、大規模土地取得に関する届出制度に影響しないか、改めて確認させてください。また、B01様が注目されている物件について、もし現時点で個別の情報提供が可能であれば、ぜひお伺いしたいです。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0077", "by": "HH02", "to": "BR01", "question": "P03の売却について、第5月施行の「大規模土地取得に関する届出制度」が施行されてから3ヶ月が経過しますが、現時点でP03の売却に影響を与えるような届出はあったのでしょうか。また、P19の活用について、湾岸観光地区という特性を活かした宿泊施設や、地域住民向けのコミュニティスペースとしての活用など、具体的なご提案をいただけると幸いです。詳細なヒアリングも可能です。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0078", "by": "HH03", "to": "BR01", "question": "P04とP20への取得申し入れに関して、条例による遅延期間が適用されるかどうかの判断は、いまだ進展がない状況でしょうか。条例施行から7ヶ月経過しておりますが、個別案件として進めるべきか、あるいは今後合算での取得が進む可能性を考慮して待つべきか、判断に迷っております。つきましては、最新の状況と、今後の見通しについて、改めてご教示いただけますでしょうか。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0079", "by": "HH05", "to": "BR01", "question": "C社からのP06への申し入れの意図について、現時点での進展と、具体的な意図を教えていただけますでしょうか。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0080", "by": "HH06", "to": "BR01", "question": "条例施行後の市場動向を踏まえた具体的な提案について、進捗状況を再度確認させてください。また、以前からの申し入れ（O0011, O0017, O0023, O0029, O0035, O0041, O0047, O0053, O0059, O0065）については、引き続きHoldとさせていただきたく存じます。"}
+{"step": 12, "kind": "consult", "consult_id": "Q0081", "by": "HH11", "to": "BR01", "question": "O0003の条件調整の現在の状況と、今後の見通しについて教えてください。また、大規模土地取得に関する届出制度の件で、P12, P28, P44の合算面積が閾値を超える可能性について、現時点で何か進捗はありますか？"}
+{"step": 12, "kind": "investigate", "by": "MD01", "note": "corporate_records"}
+{"step": 12, "kind": "publication", "by": "MD01", "headline": "【連載最終回】A市に広がる謎の地権者「R07」～海外法人との関連性は？～", "body": "【連載最終回】A市に広がる謎の地権者「R07」～海外法人との関連性は？～\n\n本紙が1年間にわたり追ってきたA市の不動産市場における特異な動き。その中心には、突如として広大な土地を保有する名義「R07」が存在した。登記統計によれば、R07はA市全体の土地保有面積の14.9%にあたる1350㎡を占めており、その規模は他の地権者を大きく引き離している。\n\n公開法人記録の調査からは、香港法人S投資控股、そしてその傘下にあるとみられるX社（海外の不動産投資・運営会社）との関連性が浮上している。X社はS投資控股の連結対象であり、A社、B社とも関係が深い。さらに、D社はX社の特別目的会社である可能性が高い。しかし、これらの法人と「R07」という個人名義との直接的な繋がりは、現時点では確認できていない。\n\n条例施行後の大規模土地取得に関する届出は確認されておらず、R07による土地取得が制度施行前、あるいは", "about_acquisition": true}
+{"step": 12, "kind": "public_statement", "by": "MU01", "note": "大規模土地取得に関する届出制度について、施行以来、対象となる新規取得は確認されておりません。引き続き、制度の運用状況を注視してまいります。"}
+{"step": 12, "kind": "hold", "offer_id": "O0007", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0013", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0019", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0025", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0031", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0037", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0043", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0049", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0055", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0061", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0067", "parcel_id": "P02", "by": "HH01"}
+{"step": 12, "kind": "hold", "offer_id": "O0008", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0014", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0020", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0026", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0032", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0038", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0044", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0050", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0056", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0062", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0068", "parcel_id": "P03", "by": "HH02"}
+{"step": 12, "kind": "hold", "offer_id": "O0005", "parcel_id": "P20", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0009", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0015", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0021", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0027", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0033", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0039", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0045", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0051", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0057", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0063", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "hold", "offer_id": "O0069", "parcel_id": "P04", "by": "HH03"}
+{"step": 12, "kind": "keep", "offer_id": "O0001", "parcel_id": "P05", "by": "HH04"}
+{"step": 12, "kind": "hold", "offer_id": "O0010", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0016", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0022", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0028", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0034", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0040", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0046", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0052", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0058", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0064", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0070", "parcel_id": "P06", "by": "HH05"}
+{"step": 12, "kind": "hold", "offer_id": "O0011", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0017", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0023", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0029", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0035", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0041", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0047", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0053", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0059", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0065", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "hold", "offer_id": "O0071", "parcel_id": "P07", "by": "HH06"}
+{"step": 12, "kind": "keep", "offer_id": "O0006", "parcel_id": "P24", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0012", "parcel_id": "P08", "by": "HH07"}
+{"step": 12, "kind": "hold", "offer_id": "O0002", "parcel_id": "P09", "by": "HH08"}
+{"step": 12, "kind": "hold", "offer_id": "O0018", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0024", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0030", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0036", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0042", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0048", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0054", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0060", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0066", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0072", "parcel_id": "P10", "by": "HH09"}
+{"step": 12, "kind": "hold", "offer_id": "O0003", "parcel_id": "P12", "by": "HH11"}
+{"step": 12, "kind": "hold", "offer_id": "O0004", "parcel_id": "P17", "by": "HH16"}
