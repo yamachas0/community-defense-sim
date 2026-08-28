@@ -121,13 +121,24 @@ X社の戦略＝**土地の実質支配が目的・当面は解体も新築も�
 
 ---
 
-## 4. 節約設定を既定に（B-3）
+## 4. 費用の既定（施主決定 2026-08-28 22:26 / 22:27 で上書き）
 
-`configs/config_field_v5d.yaml` は `docs/cost_saving_v1.md` の結論をそのまま既定にする。
+`configs/config_field_v5d.yaml` の既定：
 
-- `batch_classify: true`（効くのはこれだけ・分類器を Batch へ＝半額）
-- `batch_agents: false`（**既定 off**。Batch の往復が中央値301s・216回直列で18〜44時間/本）
-- `enable_cache: false`（前置き929トークンでは物理的に載らない）／`prompt_order: legacy`／`thought_max_tokens: 2200`
+- **`classify_occupation`（v5b 比較用の占領分類器）を OFF**（施主 22:26）。−$0.24/3本。4色の判定には影響しない。
+  OFF のとき O1〜O4 は「未計測」として出力から落とす（欠損を false に化けさせない）。
+- **`batch_classify: false` / `batch_agents: false`**（施主 22:27「Batch はだめ」＝実時間を伸ばす節約は不可）。
+- `enable_cache: false`（明示キャッシュは前置き929トークンでは物理的に載らない＝APIの最低2,048）。
+- **キャッシュの再判定**（施主 22:27）：v5d は土地名・呼び名・会場の説明が前置きに入って**自然に**トークンが増える。
+  主体 system prompt の安定部分を26体ぶん実測し、**自然に暗黙キャッシュの最低 1,024 を超えるなら**
+  `prompt_order: stable_first` を既定 ON にする。超えないなら `legacy` のまま。
+  **水増し・埋め草で 1,024 に届かせるのは禁止**（世界設計上の理由で必要な文だけ）。
+  1か月スモークで `cached_tokens` 比率と $ を before/after で測る。
+- `thought_max_tokens: 2200`（据え置き。上限に一度も当たっていない）。
+
+**見込み**：`docs/cost_saving_v1.md` の baseline は 24か月3本 **$4.89**。Batch を使わないので
+節約は占領分類器の停止だけ＝**約 $4.65/3本**。施主目標「3本 $1」には**届かない**。
+届かせるにはコール数・巡数・同席者を削る（＝観測条件の変更）しかなく、それは世界設計の変更にあたる。
 
 ---
 
