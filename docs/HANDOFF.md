@@ -924,3 +924,59 @@ strict の判定に `stage == color` を明示的に足した（実測では既�
 
 ルールベース排除／観測に無い事実をコードで補完しない／`mvp_v1`〜`field_v5c` の設定と成果物は不変／
 プロンプトとHTMLに「AI」表記を出さない／`git push`（ソースリポ・Pages とも）は**本便では未実施**。
+---
+## 第11便（2026-08-28）— v5d：役場の窓口の廃止・街の呼び名・兆候の絞り込み
+
+設計の正は `docs/world_design_v5d.md`（§4 の節約設定だけ CEO 決定 2026-08-28 22:26/22:27 で上書き）。
+**足したものは無い**（気づかせる経路・観測者・機構・語彙・確率・閾値は1本も足していない）。
+直したのは「世界が住民に渡している入力の非現実」と「呼び名」だけ。v1〜v5c の設定・成果物は不変。
+
+### 何をした
+
+- 新規：`configs/config_field_v5d.yaml`／`configs/events_v5d_seed85.yaml`（台本・凍結）／
+  `tools/build_events_v5d.py`／`src/field_v5d.py`／`tests/test_v5d.py`（128件）／
+  `docs/events_v5d_trace_diff.md`（兆候の before/after）／`docs/_v5d_token_counts.json`（前置きの実測）
+- 追記：`src/field_v5`（呼び名を渡す任意引数・**既定は従来どおり**）／`src/simulation`（v5d 分岐）／
+  `tools/run_metrics`（版ごとの土地の言い方・S4周期）／`src/viz`（MONEYLESS に v5d）
+- **窓口の廃止**：v5d の S4 は 町内会／仲介の店先／記者の取材 の3か月周期。`registry_rows_v5` は
+  一度も呼ばれず `registry_lookup` の観測は0。**市役所の待合(V06)は会場として残る**。
+- **呼び名**：対応表は `configs/parcel_names_v5c.yaml` の1枚だけ。プロンプト・原文・観測行に
+  P/R/HH/BZ/BR/MU/ME/V番号が1つも出ない（テストで固定）。`talk_to`／`direct_to`／行き先も呼び名で受け、
+  内部IDへ戻してから台帳に書く（スキーマの構造は v5 と同一・値だけが呼び名）。
+- **台本**：取得46件（順番・月・区画・名義・kind・note）は v5c と**完全一致**。兆候だけ 93→33 本に濾した
+  （registry 33・construction 9・sign_change 13 は全削除、moving_out 7→4、survey 9→8、strangers 7→6、
+  tenant_swap 8・broker_known 7 はそのまま）。
+- **占領分類器（O1〜O4）は既定 off**（`kpi.classify_occupation: false`）。off のとき
+  `occupation_labels.jsonl` を書かず、集計は `{"O_available": false}`＝**未計測**（false に化けない）。
+  4段階の色（青緑黄赤）の判定には一切影響しない。
+- **Batch は使わない**（`batch_classify: false` / `batch_agents: false`）。
+- **キャッシュ**：主体の system prompt は26体で 845〜942・中央値 878 トークン（v5c は 844〜962・中央値 896）。
+  呼び名を入れても前置きは**伸びず**、暗黙キャッシュの最低 1,024 に届かない → `prompt_order: legacy` のまま
+  （水増しで届かせるのは禁止）。
+
+### 実測
+
+```
+python tests/test_ledger.py       -> 619 passed, 0 failed
+python tests/test_v5c.py          ->  73 passed, 0 failed
+python tests/test_cost_saving.py  ->  51 passed, 0 failed
+python tests/test_v5d.py          -> 128 passed, 0 failed（新設）
+python run.py --config configs/config_field_v5d.yaml --provider mock --quiet -> 24か月完走・配線エラー0
+実API 1か月スモーク（legacy）      $0.0582  calls 179  cached  6.3%  truncated 0 / parse_fail 1
+実API 1か月スモーク（stable_first）$0.0658  calls 202  cached 14.1%  truncated 0 / parse_fail 0
+```
+
+**24か月×3本の見込み ＝ $4.2〜$4.7**（v5c 3本 $4.89 の実測に1か月スモークの比 0.866 を掛けると $4.24／
+占領分類器 off ぶん −$0.24 だけを引く保守側だと $4.65。**本走は施主GO待ちで未実施**。）
+
+### 残っている判断
+
+1. `ROLE_TEXT_V5["municipality"]`（「窓口業務を含む通常業務」）と行政ペルソナ本文
+   （`configs/personas/field_v4_1.yaml` の「窓口、資料作成、庁内調整」）に「窓口」の語が残る。
+   **登記を見に行く機構ではない**（待合は残っている）ため v5c 共通のまま触っていない。
+   消すなら v5d 専用の役割文が要る。
+2. 対応表の記者の内部IDが `ME01/ME02`、名簿の実際は `MD01/MD02`。表は凍結なので
+   `src/field_v5d.AGENT_ID_ALIAS` で読み替えている。表のキーを直すかは要判断（画面側も同じ表を読む）。
+3. `sign_change` は「賃借かつ店舗」だけ残す規則だが、seed85 の賃借7件はすべて住宅の区画で**0本**になった。
+4. `src/kpi.OCCUPATION_SYSTEM` のルール文に「（P01形式）」が残る（分類器のルール文は変更禁止のため据え置き。
+   既定 off なので v5d では走らない）。

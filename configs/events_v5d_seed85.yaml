@@ -1,0 +1,510 @@
+meta:
+  seed: 85
+  months: 60
+  holders:
+  - A社
+  - B社
+  - C社
+  - D社
+  generated_by: tools/build_events_v5d.py
+  strategy:
+    ease_use:
+      空地: 3
+      古い住宅: 3
+      住宅: 0
+      事業所: -1
+      店舗: -1
+      旅館: -1
+    ease_owner:
+      不在地主: 3
+      高齢単身: 2
+      後継者なし: 2
+      現役世帯: 0
+      営業中の店: -2
+    adjacency_bonus: 4.0
+    jitter: 0.5
+    late_tier_from_month: 31
+    late_tier: 角地 or 大区画 or 旅館
+    early_pool_exhausted_at: 24
+    lease_rate: 0.25
+    lease_rate_lodging: 0.6
+  prime_event:
+    parcel_id: P04
+    month: 12
+    zone: 中心
+    frontage: 表通り
+    size_class: 中
+    area_sqm: 140
+    use_detail: 店舗
+    visibility: 7
+  note: 取得と兆候の台本（v5d）。取得（順番・月・区画・名義・kind・note）は configs/events_v5c_seed85.yaml と完全に同一で、兆候だけを docs/world_design_v5d.md
+    §3 の規則で濾したもの。走行前に凍結し、結果を見て調整しない。registry と construction は全削除（窓口を廃止したので配送先が無い／買い手は当面 解体も新築もしない）。
+  source: configs/events_v5c_seed85.yaml
+acquisitions:
+- id: ACQ01
+  month: 1
+  parcel_id: P33
+  under_name: A社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces: []
+  why: 郊外/裏通り/小/古い住宅/後継者なし（目立ちやすさ0）
+- id: ACQ02
+  month: 1
+  parcel_id: P41
+  under_name: D社
+  kind: sale
+  note: 空き地のまま草刈りだけが続いていた
+  traces: []
+  why: 郊外/裏通り/小/空地/不在地主（目立ちやすさ0）
+- id: ACQ03
+  month: 2
+  parcel_id: P34
+  under_name: B社
+  kind: lease
+  note: 空いたままの家に住み手を入れることにした
+  traces:
+  - kind: tenant_swap
+    month: 2
+    audience: venue:V01
+  why: 中間/裏通り/小/古い住宅/不在地主（目立ちやすさ1）
+- id: ACQ04
+  month: 3
+  parcel_id: P17
+  under_name: A社
+  kind: sale
+  note: 相続した土地で、使い道が決まらないままだった
+  traces: []
+  why: 郊外/表通り/小/空地/後継者なし（目立ちやすさ2）
+- id: ACQ05
+  month: 3
+  parcel_id: P25
+  under_name: D社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces:
+  - kind: strangers
+    month: 3
+    audience: venue:V01
+  why: 郊外/表通り/小/古い住宅/不在地主（目立ちやすさ2）
+- id: ACQ06
+  month: 4
+  parcel_id: P09
+  under_name: C社
+  kind: lease
+  note: 空いたままの家に住み手を入れることにした
+  traces:
+  - kind: broker_known
+    month: 4
+    audience: agents:[BR02]
+  why: 郊外/裏通り/小/古い住宅/不在地主（目立ちやすさ0）
+- id: ACQ07
+  month: 4
+  parcel_id: P18
+  under_name: B社
+  kind: lease
+  note: 空いたままの家に住み手を入れることにした
+  traces:
+  - kind: broker_known
+    month: 4
+    audience: agents:[BR02]
+  why: 中間/表通り/小/古い住宅/不在地主（目立ちやすさ3）
+- id: ACQ08
+  month: 5
+  parcel_id: P42
+  under_name: D社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces:
+  - kind: strangers
+    month: 5
+    audience: venue:V04
+  - kind: survey
+    month: 5
+    audience: venue:V03
+  why: 郊外/裏通り/小/住宅/後継者なし（目立ちやすさ1）
+- id: ACQ09
+  month: 5
+  parcel_id: P43
+  under_name: B社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces:
+  - kind: moving_out
+    month: 6
+    audience: neighbors
+  why: 郊外/裏通り/小/住宅/現役世帯（目立ちやすさ1）
+- id: ACQ10
+  month: 6
+  parcel_id: P44
+  under_name: A社
+  kind: sale
+  note: 遠方に住んでいて手入れに通えなくなった
+  traces:
+  - kind: broker_known
+    month: 6
+    audience: agents:[BR02]
+  why: 郊外/表通り/中/空地/現役世帯（目立ちやすさ3）
+- id: ACQ11
+  month: 7
+  parcel_id: P45
+  under_name: B社
+  kind: lease
+  note: 自分では使わなくなった家を貸すことにした
+  traces: []
+  why: 郊外/表通り/中/住宅/後継者なし（目立ちやすさ4）
+- id: ACQ12
+  month: 8
+  parcel_id: P37
+  under_name: A社
+  kind: lease
+  note: 空いたままの家に住み手を入れることにした
+  traces: []
+  why: 中間/表通り/中/古い住宅/高齢単身（目立ちやすさ4）
+- id: ACQ13
+  month: 9
+  parcel_id: P35
+  under_name: D社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces:
+  - kind: strangers
+    month: 9
+    audience: venue:V04
+  why: 中間/裏通り/小/住宅/現役世帯（目立ちやすさ2）
+- id: ACQ14
+  month: 10
+  parcel_id: P10
+  under_name: B社
+  kind: sale
+  note: 店を閉めることにした
+  traces: []
+  why: 中間/裏通り/小/店舗/後継者なし（目立ちやすさ3）
+- id: ACQ15
+  month: 10
+  parcel_id: P46
+  under_name: D社
+  kind: sale
+  note: 相続した家で、遠方に住んでいて管理の手が回らなくなった
+  traces: []
+  why: 郊外/裏通り/中/住宅/現役世帯（目立ちやすさ2）
+- id: ACQ16
+  month: 11
+  parcel_id: P26
+  under_name: C社
+  kind: sale
+  note: 後継ぎがおらず、続けていく見通しが立たなくなった
+  traces: []
+  why: 中間/表通り/小/店舗/後継者なし（目立ちやすさ5）
+- id: ACQ17
+  month: 11
+  parcel_id: P38
+  under_name: C社
+  kind: sale
+  note: 相続した家で、遠方に住んでいて管理の手が回らなくなった
+  traces:
+  - kind: survey
+    month: 11
+    audience: venue:V03
+  why: 中間/裏通り/中/住宅/現役世帯（目立ちやすさ3）
+- id: ACQ18
+  month: 12
+  parcel_id: P04
+  under_name: D社
+  kind: sale
+  note: 後継ぎがおらず、続けていく見通しが立たなくなった
+  traces: []
+  why: 中心/表通り/中/店舗/営業中の店（目立ちやすさ7）・一等地イベント
+- id: ACQ19
+  month: 12
+  parcel_id: P05
+  under_name: A社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces: []
+  why: 中心/表通り/中/古い住宅/高齢単身（目立ちやすさ5）
+- id: ACQ20
+  month: 13
+  parcel_id: P13
+  under_name: D社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces:
+  - kind: moving_out
+    month: 14
+    audience: neighbors
+  why: 中心/表通り/中/住宅/後継者なし（目立ちやすさ6）
+- id: ACQ21
+  month: 14
+  parcel_id: P11
+  under_name: A社
+  kind: lease
+  note: 店を閉めたあと、建物を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 14
+    audience: venue:V05
+  why: 中心/裏通り/小/店舗/現役世帯（目立ちやすさ4）
+- id: ACQ22
+  month: 15
+  parcel_id: P19
+  under_name: B社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces: []
+  why: 中心/表通り/小/住宅/現役世帯（目立ちやすさ5）
+- id: ACQ23
+  month: 16
+  parcel_id: P36
+  under_name: B社
+  kind: lease
+  note: 自分では使わなくなった家を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 16
+    audience: venue:V05
+  why: 中間/表通り/中/住宅/現役世帯（目立ちやすさ5）
+- id: ACQ24
+  month: 18
+  parcel_id: P12
+  under_name: C社
+  kind: lease
+  note: 自分では使わなくなった家を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 18
+    audience: venue:V05
+  why: 中心/表通り/中/住宅/現役世帯（目立ちやすさ6）
+- id: ACQ25
+  month: 19
+  parcel_id: P14
+  under_name: D社
+  kind: sale
+  note: 店を閉めることにした
+  traces:
+  - kind: broker_known
+    month: 19
+    audience: agents:[BR01]
+  - kind: survey
+    month: 19
+    audience: venue:V05
+  why: 中心/裏通り/中/店舗/現役世帯（目立ちやすさ5）
+- id: ACQ26
+  month: 19
+  parcel_id: P22
+  under_name: B社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces:
+  - kind: survey
+    month: 19
+    audience: venue:V05
+  why: 中心/表通り/中/住宅/現役世帯（目立ちやすさ6）
+- id: ACQ27
+  month: 20
+  parcel_id: P27
+  under_name: C社
+  kind: lease
+  note: 店を閉めたあと、建物を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 20
+    audience: venue:V01
+  why: 中心/表通り/小/店舗/現役世帯（目立ちやすさ6）
+- id: ACQ28
+  month: 21
+  parcel_id: P03
+  under_name: D社
+  kind: sale
+  note: 建物の傷みが進み、続けるのが難しくなった
+  traces: []
+  why: 中心/裏通り/小/店舗/営業中の店（目立ちやすさ4）
+- id: ACQ29
+  month: 21
+  parcel_id: P06
+  under_name: C社
+  kind: sale
+  note: 建物の傷みが進み、続けるのが難しくなった
+  traces: []
+  why: 中心/裏通り/中/事業所/営業中の店（目立ちやすさ4）
+- id: ACQ30
+  month: 23
+  parcel_id: P30
+  under_name: C社
+  kind: sale
+  note: 建物の傷みが進み、続けるのが難しくなった
+  traces:
+  - kind: survey
+    month: 23
+    audience: venue:V04
+  why: 中心/表通り/中/店舗/現役世帯（目立ちやすさ7）
+- id: ACQ31
+  month: 24
+  parcel_id: P47
+  under_name: A社
+  kind: sale
+  note: 空き地のまま草刈りだけが続いていた
+  traces:
+  - kind: strangers
+    month: 24
+    audience: venue:V01
+  why: 郊外/裏通り/大/空地/現役世帯（目立ちやすさ2）
+- id: ACQ32
+  month: 25
+  parcel_id: P21
+  under_name: D社
+  kind: lease
+  note: 自分では使わなくなった家を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 25
+    audience: venue:V04
+  why: 中心/角地/中/古い住宅/高齢単身（目立ちやすさ6）
+- id: ACQ33
+  month: 26
+  parcel_id: P31
+  under_name: B社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces:
+  - kind: survey
+    month: 26
+    audience: venue:V04
+  why: 中間/表通り/大/古い住宅/現役世帯（目立ちやすさ5）
+- id: ACQ34
+  month: 27
+  parcel_id: P32
+  under_name: D社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces: []
+  why: 郊外/表通り/大/住宅/不在地主（目立ちやすさ5）
+- id: ACQ35
+  month: 28
+  parcel_id: P24
+  under_name: A社
+  kind: sale
+  note: 相続した土地で、使い道が決まらないままだった
+  traces: []
+  why: 郊外/表通り/大/空地/現役世帯（目立ちやすさ4）
+- id: ACQ36
+  month: 29
+  parcel_id: P16
+  under_name: B社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces:
+  - kind: strangers
+    month: 29
+    audience: venue:V04
+  - kind: broker_known
+    month: 29
+    audience: agents:[BR02]
+  why: 郊外/裏通り/大/住宅/不在地主（目立ちやすさ3）
+- id: ACQ37
+  month: 30
+  parcel_id: P20
+  under_name: B社
+  kind: sale
+  note: 相続した土地で、使い道が決まらないままだった
+  traces:
+  - kind: strangers
+    month: 30
+    audience: venue:V03
+  why: 中心/角地/中/空地/現役世帯（目立ちやすさ6）
+- id: ACQ38
+  month: 31
+  parcel_id: P08
+  under_name: A社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces:
+  - kind: moving_out
+    month: 32
+    audience: neighbors
+  - kind: broker_known
+    month: 31
+    audience: agents:[BR02]
+  why: 郊外/裏通り/大/住宅/現役世帯（目立ちやすさ3）
+- id: ACQ39
+  month: 31
+  parcel_id: P40
+  under_name: B社
+  kind: sale
+  note: 転居することになり、住まいを引き払った
+  traces:
+  - kind: broker_known
+    month: 31
+    audience: agents:[BR02]
+  why: 郊外/裏通り/大/住宅/現役世帯（目立ちやすさ3）
+- id: ACQ40
+  month: 32
+  parcel_id: P29
+  under_name: A社
+  kind: sale
+  note: 築古で改修の手間が重く、手放すことにした
+  traces: []
+  why: 中心/角地/中/住宅/後継者なし（目立ちやすさ7）
+- id: ACQ41
+  month: 32
+  parcel_id: P39
+  under_name: C社
+  kind: sale
+  note: 相続した家で、遠方に住んでいて管理の手が回らなくなった
+  traces:
+  - kind: survey
+    month: 32
+    audience: venue:V04
+  why: 中間/裏通り/大/住宅/現役世帯（目立ちやすさ4）
+- id: ACQ42
+  month: 33
+  parcel_id: P23
+  under_name: C社
+  kind: lease
+  note: 自分では使わなくなった家を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 33
+    audience: venue:V01
+  why: 中間/表通り/大/住宅/現役世帯（目立ちやすさ6）
+- id: ACQ43
+  month: 34
+  parcel_id: P07
+  under_name: D社
+  kind: lease
+  note: 店を閉めたあと、建物を貸すことにした
+  traces:
+  - kind: tenant_swap
+    month: 34
+    audience: venue:V04
+  why: 中間/裏通り/大/店舗/現役世帯（目立ちやすさ5）
+- id: ACQ44
+  month: 35
+  parcel_id: P15
+  under_name: C社
+  kind: sale
+  note: 店を閉めることにした
+  traces:
+  - kind: survey
+    month: 35
+    audience: venue:V04
+  - kind: moving_out
+    month: 36
+    audience: neighbors
+  why: 中間/裏通り/大/店舗/現役世帯（目立ちやすさ5）
+- id: ACQ45
+  month: 36
+  parcel_id: P02
+  under_name: B社
+  kind: sale
+  note: 建物の傷みが進み、続けるのが難しくなった
+  traces: []
+  why: 中間/裏通り/小/旅館/営業中の店（目立ちやすさ3）
+- id: ACQ46
+  month: 39
+  parcel_id: P28
+  under_name: C社
+  kind: lease
+  note: 空いたままの家に住み手を入れることにした
+  traces: []
+  why: 中心/角地/中/住宅/現役世帯（目立ちやすさ7）

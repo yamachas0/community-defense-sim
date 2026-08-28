@@ -202,10 +202,17 @@ def apply_script_v5(ledger: Ledger, step: int, script: Dict[str, Any],
 # 兆候（trace）の配布
 # ---------------------------------------------------------------------------
 
+def _pname(pnames: Optional[Dict[str, str]], pid: str) -> str:
+    """区画の呼び名。`pnames` を渡さない版（v5c 以前）は内部IDのままである。"""
+    return pnames.get(pid, pid) if pnames else pid
+
+
 def _trace_text(kind: str, acq: Dict[str, Any], month: int,
-                old_name: str) -> str:
-    return TRACE_TEXTS[kind].format(month=month, parcel=acq["parcel_id"],
-                                    old=old_name, new=acq["under_name"])
+                old_name: str, pnames: Optional[Dict[str, str]] = None,
+                texts: Optional[Dict[str, str]] = None) -> str:
+    return (texts or TRACE_TEXTS)[kind].format(
+        month=month, parcel=_pname(pnames, acq["parcel_id"]),
+        old=old_name, new=acq["under_name"])
 
 
 def _occupants(ledger: Ledger, pid: str) -> List[str]:
@@ -220,7 +227,10 @@ def _occupants(ledger: Ledger, pid: str) -> List[str]:
 
 def ambient_traces_v5(ledger: Ledger, step: int, script: Dict[str, Any],
                       old_names: Dict[str, str],
-                      acquirer_id: str) -> Dict[str, List[Dict[str, Any]]]:
+                      acquirer_id: str,
+                      pnames: Optional[Dict[str, str]] = None,
+                      texts: Optional[Dict[str, str]] = None
+                      ) -> Dict[str, List[Dict[str, Any]]]:
     """会場に依らず見える兆候（neighbors / agents 指名）を、見える主体へ配る。
 
     venue: と registry はシーンで解決するのでここには含めない。
@@ -241,7 +251,7 @@ def ambient_traces_v5(ledger: Ledger, step: int, script: Dict[str, Any],
             else:
                 continue
             text = _trace_text(tr["kind"], acq, step,
-                               old_names.get(acq["parcel_id"], ""))
+                               old_names.get(acq["parcel_id"], ""), pnames, texts)
             for aid in dict.fromkeys(targets):
                 if not aid or aid == acquirer_id:
                     continue     # 買い手は主体ではない（観測を持たない）
@@ -253,7 +263,9 @@ def ambient_traces_v5(ledger: Ledger, step: int, script: Dict[str, Any],
 
 
 def venue_traces_v5(step: int, script: Dict[str, Any], venue_id: str,
-                    old_names: Dict[str, str]) -> List[Dict[str, Any]]:
+                    old_names: Dict[str, str],
+                    pnames: Optional[Dict[str, str]] = None,
+                    texts: Optional[Dict[str, str]] = None) -> List[Dict[str, Any]]:
     """その月にその会場で見える兆候（venue: 指定）。"""
     rows: List[Dict[str, Any]] = []
     for acq in script.get("acquisitions", []):
@@ -266,7 +278,8 @@ def venue_traces_v5(step: int, script: Dict[str, Any], venue_id: str,
             rows.append({"kind": tr["kind"], "acq_id": acq["id"],
                          "parcel_id": acq["parcel_id"], "audience": aud,
                          "text": _trace_text(tr["kind"], acq, step,
-                                             old_names.get(acq["parcel_id"], ""))})
+                                             old_names.get(acq["parcel_id"], ""),
+                                             pnames, texts)})
     return rows
 
 
@@ -290,10 +303,12 @@ def registry_rows_v5(ledger: Ledger, step: int) -> List[str]:
 # ---------------------------------------------------------------------------
 
 def own_parcels_rows_v5(agent: Agent, ledger: Ledger,
-                        names: Dict[str, str]) -> List[str]:
+                        names: Dict[str, str],
+                        pnames: Optional[Dict[str, str]] = None) -> List[str]:
     rows = []
     for parcel in sorted(ledger.owned_by(agent.agent_id), key=lambda p: p.pid):
-        line = (f"  {parcel.pid}[{USE_JA.get(parcel.use, parcel.use)}/{parcel.block}] "
+        line = (f"  {_pname(pnames, parcel.pid)}"
+                f"[{USE_JA.get(parcel.use, parcel.use)}/{parcel.block}] "
                 f"{parcel.area_sqm}㎡ 名義:{parcel.registered_name}")
         if parcel.tenant_id:
             tenant = names.get(parcel.tenant_id, parcel.tenant_id)
@@ -305,12 +320,14 @@ def own_parcels_rows_v5(agent: Agent, ledger: Ledger,
         rows.append(line)
     occupied = [p for p in ledger.parcels.values() if p.tenant_id == agent.agent_id]
     for parcel in sorted(occupied, key=lambda p: p.pid):
-        rows.append(f"  {parcel.pid}[{USE_JA.get(parcel.use, parcel.use)}/{parcel.block}] "
+        rows.append(f"  {_pname(pnames, parcel.pid)}"
+                    f"[{USE_JA.get(parcel.use, parcel.use)}/{parcel.block}] "
                     f"（自分が使っている・名義:{parcel.registered_name}）")
     return rows or ["  （所有・使用している物件はない）"]
 
 
-def own_history_rows_v5(agent: Agent, ledger: Ledger, step: int) -> List[str]:
+def own_history_rows_v5(agent: Agent, ledger: Ledger, step: int,
+                        pnames: Optional[Dict[str, str]] = None) -> List[str]:
     """自分がした取引（当事者としての事実）。
 
     施主追記 2026-08-27 22:27：所有者の知らないうちに登記が変わるのは詐欺なので、
@@ -322,7 +339,8 @@ def own_history_rows_v5(agent: Agent, ledger: Ledger, step: int) -> List[str]:
         if deal.get("agent_id") != agent.agent_id or int(deal.get("step", 0)) > step:
             continue
         verb = "賃貸した" if deal.get("kind") == "lease" else "売却した"
-        line = (f"  第{deal['step']}月　あなたは {deal['parcel_id']} を "
+        line = (f"  第{deal['step']}月　あなたは "
+                f"{_pname(pnames, deal['parcel_id'])} を "
                 f"{deal['holder']} へ{verb}")
         if deal.get("note"):
             line += f"（事情：{deal['note']}）"
@@ -334,13 +352,15 @@ def own_history_rows_v5(agent: Agent, ledger: Ledger, step: int) -> List[str]:
                 continue
             if rec.get("step", 0) > step:
                 continue
-            rows.append(f"  第{rec['step']}月　{rec['parcel_id']}　"
+            rows.append(f"  第{rec['step']}月　"
+                        f"{_pname(pnames, rec['parcel_id'])}　"
                         f"の名義が{rec.get('under_name', '')}に移った")
     return rows
 
 
 def neighbourhood_rows_v5(agent: Agent, ledger: Ledger,
-                          names: Dict[str, str]) -> List[str]:
+                          names: Dict[str, str],
+                          pnames: Optional[Dict[str, str]] = None) -> List[str]:
     """隣の区画について、日ごろ目に入る範囲。
 
     **現在の登記名義は出さない**（Codexレビュー 2026-08-27）。名義の変化を毎月ここに
@@ -361,7 +381,7 @@ def neighbourhood_rows_v5(agent: Agent, ledger: Ledger,
     for pid in sorted(seen):
         parcel = ledger.parcels[pid]
         known = initial.get(pid, "")
-        rows.append(f"  {pid}[{USE_JA.get(parcel.use, parcel.use)}] "
+        rows.append(f"  {_pname(pnames, pid)}[{USE_JA.get(parcel.use, parcel.use)}] "
                     + (f"もとから{known}のところ" if known else "（誰の土地かは知らない）"))
     return rows or ["  （隣接区画はない）"]
 
@@ -545,19 +565,24 @@ JSONの最初に thought を書く。thought は誰にも伝わらないあな�
 def build_plan_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                          names: Dict[str, str], traces: List[Dict[str, Any]],
                          s4_label: str, s4_venue: str,
-                         prompt_order: str = PROMPT_ORDER_LEGACY) -> str:
+                         prompt_order: str = PROMPT_ORDER_LEGACY,
+                         pnames: Optional[Dict[str, str]] = None) -> str:
     rows = [f"=== 第{step}月 / 全{n_steps}月 ==="]
     thought = agent.extra.get("thought", "")
     rows += ["[前の場面からの自分の内心（そのまま持ち越したもの）]",
              ("  " + thought) if thought else "  （まだ無い）"]
     rows += ["[自分に届いたもの]"] + inbox_rows_v5(agent, names)
     rows += ["[この1か月で自分の目についたこと]"] + traces_rows_v5(traces)
-    rows += ["[自分の所有・使用している物件]"] + own_parcels_rows_v5(agent, ledger, names)
-    history = own_history_rows_v5(agent, ledger, step)
+    rows += ["[自分の所有・使用している物件]"] + own_parcels_rows_v5(agent, ledger, names,
+                                                                  pnames)
+    history = own_history_rows_v5(agent, ledger, step, pnames)
     if history:
         rows += ["[自分がした取引（当事者として知っていること）]"] + history
-    rows += ["[隣接する区画の名義（日ごろ目に入る範囲）]"] + neighbourhood_rows_v5(agent, ledger, names)
-    rows += ["", f"今月のS4は「{s4_label}」（会場 {s4_venue}）。行くかどうかは自分で決める。"]
+    rows += ["[隣接する区画の名義（日ごろ目に入る範囲）]"] + neighbourhood_rows_v5(agent, ledger,
+                                                                          names, pnames)
+    # 呼び名で呼ぶ版（v5d）では会場の内部IDを出さない。文の他の部分は同じ。
+    rows += ["", (f"今月のS4は「{s4_label}」。行くかどうかは自分で決める。" if pnames
+                  else f"今月のS4は「{s4_label}」（会場 {s4_venue}）。行くかどうかは自分で決める。")]
     stable = ["まず thought（内心）を書き、それを踏まえて S1〜S4 をどこで過ごすかをJSONで返す。",
               "説明文を付けずＪＳＯＮだけ返す。"]
     return _assemble_v5(rows, stable, prompt_order)
@@ -573,8 +598,10 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                           can_publish: bool = False,
                           directs_left: int = 0,
                           articles_left: int = 0,
-                          prompt_order: str = PROMPT_ORDER_LEGACY) -> str:
-    others = [f"{names.get(p, p)}（{p}）" for p in present if p != agent.agent_id]
+                          prompt_order: str = PROMPT_ORDER_LEGACY,
+                          pnames: Optional[Dict[str, str]] = None) -> str:
+    others = [(names.get(p, p) if pnames else f"{names.get(p, p)}（{p}）")
+              for p in present if p != agent.agent_id]
     rows = [f"=== 第{step}月 / 全{n_steps}月　{scene_id} {scene_label} ===",
             f"場所: {venue_label}",
             "居合わせている人: " + ("、".join(others) if others else "（誰もいない）")]
@@ -584,8 +611,9 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     rows += ["[この1か月で自分の目についたこと]"] + traces_rows_v5(traces)
     if registry:
         rows += ["[窓口で閲覧した登記の記録]"] + registry
-    rows += ["[自分の所有・使用している物件]"] + own_parcels_rows_v5(agent, ledger, names)
-    history = own_history_rows_v5(agent, ledger, step)
+    rows += ["[自分の所有・使用している物件]"] + own_parcels_rows_v5(agent, ledger, names,
+                                                                  pnames)
+    history = own_history_rows_v5(agent, ledger, step, pnames)
     if history:
         rows += ["[自分がした取引（当事者として知っていること）]"] + history
     rows += [""]
