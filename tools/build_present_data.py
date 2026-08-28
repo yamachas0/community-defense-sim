@@ -312,6 +312,7 @@ def _build_layout(cfg: dict, run_pids) -> dict:
     return {
         "view": dict(LAYOUT_VIEW),
         "center": [round(ccx, 2), round(ccy, 2)],
+        "squash": LAYOUT_SQUASH,
         "source": str(parcels_file),
         "seed": LAYOUT_SEED,
         "size_breaks": size_breaks,
@@ -444,7 +445,15 @@ PARTY_BASIS = ("その月までに成立した取引の当事者（売主・貸�
 PARTY_CAVEAT = "同席は主体のLLMが毎月選んだ行き先の結果であり、こちらで仕組んでいない"
 
 
-def _party_lookup(plans, events, labels):
+def _label_of(labels, display):
+    """内部IDで引けない主体（run 側の記者IDなど）は表示名から引き直す。"""
+    def get(agent_id):
+        a = str(agent_id or "")
+        return labels.get(a) or labels.get(str(display.get(a, ""))) or a
+    return get
+
+
+def _party_lookup(plans, events, label_of):
     """発話・内心の場に、取引の当事者本人が居合わせたかを機械抽出する。"""
     att = collections.defaultdict(set)
     for p in plans:
@@ -464,12 +473,12 @@ def _party_lookup(plans, events, labels):
         parcels = sorted({e["parcel_id"] for e in events
                           if e["month"] <= step and e["party"] in agents})
         return {"present": bool(agents), "agents": agents,
-                "labels": [labels.get(a, a) for a in agents], "parcels": parcels}
+                "labels": [label_of(a) for a in agents], "parcels": parcels}
 
     return party_present
 
 
-def _ignition_timeline(rows, utts, venue_labels, labels, homes,
+def _ignition_timeline(rows, utts, venue_labels, label_of, homes,
                        holders_by_step, acquired_by_step, party_present):
     """月 → その月に初めて緑／黄に達した出来事（人ごとの初到達）。"""
     heard_of = {str(u.get("utt_id") or ""): _heard_by(u) for u in utts}
@@ -487,8 +496,7 @@ def _ignition_timeline(rows, utts, venue_labels, labels, homes,
             # 記事は「発話」でも「内心」でもない＝この年表の2種に当てはまらないので
             # 黙って混ぜず、別に列挙する（数を隠さない）。
             excluded.append({"month": month, "color": r["stage"],
-                             "agent": r["from"], "agent_label": labels.get(r["from"],
-                                                                           r["from"]),
+                             "agent": r["from"], "agent_label": label_of(r["from"]),
                              "kind": "article", "text": r["text"]})
             continue
         m = _ignition_matched(r, holders_by_step, acquired_by_step)
@@ -496,7 +504,7 @@ def _ignition_timeline(rows, utts, venue_labels, labels, homes,
         timeline[str(month)].append({
             "month": month, "color": r["stage"],
             "kind": "speech" if speech else "thought",
-            "agent": r["from"], "agent_label": labels.get(r["from"], r["from"]),
+            "agent": r["from"], "agent_label": label_of(r["from"]),
             "venue": r.get("venue", ""),
             "venue_label": venue_labels.get(r.get("venue", ""), r.get("venue", "")),
             "scene": r.get("scene", ""), "round": r.get("round", 0),
@@ -1087,13 +1095,18 @@ def build(run_dir: str) -> dict:
     naming = _parcel_naming(layout, utts, thoughts, articles)
     labels = _agent_labels() if layout else {}
     homes = _agent_homes() if layout else {}
-    party_present = _party_lookup(plans, events, labels)
+    display = {}
+    for r in utts + thoughts:
+        if r.get("from") and r.get("name"):
+            display.setdefault(str(r["from"]), str(r["name"]))
+    label_of = _label_of(labels, display)
+    party_present = _party_lookup(plans, events, label_of)
     ignition = (_build_ignition(stage_rows, utts, thoughts, traces, venue_label_map,
                                 holders_by_step, acquired_by_step, party_present)
                 if stage_rows else _ignition_empty())
     if stage_rows:
         timeline, excluded = _ignition_timeline(
-            stage_rows, utts, venue_label_map, labels, homes,
+            stage_rows, utts, venue_label_map, label_of, homes,
             holders_by_step, acquired_by_step, party_present)
         lens = _party_lens(timeline, excluded)
     else:
