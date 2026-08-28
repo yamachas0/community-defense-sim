@@ -442,12 +442,14 @@ AWARENESS_CRITERIA = {
                 "赤は自衛レベル S1・S2・S3 それぞれの初出（レベルは LLM の defense_level、"
                 "無ければルール側の最上位）"),
     "heard": ("その月に本人へ届いた同席者の発話（deliveries.jsonl の to=本人・kind=scene）の"
-              "うち、その行より前のもの。直近5件まで出す"),
+              "うち、その行より前のもの。本文は utterances_v5.jsonl の原文全文。"
+              "直近5件まで出す"),
     "traces": "その月に本人へ配られた兆候（traces_v5.jsonl の agent_id=本人・同じ月）。全件",
     "articles": ("その月までに本人へ届いた記事（deliveries.jsonl の to=本人・kind=article）。"
-                 "月は届いた月。直近3件まで出す"),
+                 "月は届いた月。本文は articles_v5.jsonl の原文全文"
+                 "（配送記録は200字で切った控えなので使わない）。直近3件まで出す"),
     "directs": ("その月までに本人へ届いた私信（deliveries.jsonl の to=本人・kind=direct）。"
-                "直近3件まで出す"),
+                "本文は directs_v5.jsonl の原文全文。直近3件まで出す"),
     "own_prior_thoughts": ("本人の過去の内心（thoughts_all.jsonl）のうち、その行より前のもの。"
                            "前月以前も含める。直近3件まで出す"),
     "counts": "counts は切る前の総数",
@@ -674,8 +676,19 @@ def _ignition_obj(color, hit, matched, utt_sorted, thoughts, traces,
 # すべて既存の JSONL からの機械抽出。無ければ空配列を出す（捏造しない）。
 # ---------------------------------------------------------------------------
 
+def _full_text(d, pool) -> str:
+    """配送記録の本文は 200 字で切った控え（`src/simulation.py`）。原文は元の
+    JSONL 側にあるので、そこから復元して出す（画面には原文全文を出すため）。"""
+    short = str(d.get("text", ""))
+    for r in pool:
+        full = str(r.get("text", ""))
+        if full == short or full.startswith(short):
+            return full
+    return short
+
+
 def _chain_links(row, key, deliveries_by_to, utt_by_id, traces, thoughts,
-                 venue_labels, label_of) -> tuple:
+                 art_by, dir_by, venue_labels, label_of) -> tuple:
     who, month = str(row.get("from") or ""), int(row.get("step") or 0)
     k = key(row)
     mine = deliveries_by_to.get(who, [])
@@ -693,7 +706,7 @@ def _chain_links(row, key, deliveries_by_to, utt_by_id, traces, thoughts,
                            "name": label_of(u.get("from")),
                            "venue_label": venue_labels.get(u.get("venue", ""),
                                                            u.get("venue", "")),
-                           "text": str(d.get("text", ""))}))
+                           "text": str(u.get("text", ""))}))
     heard_all.sort(key=lambda x: x[0])
     heard = [r for _, r in heard_all]
 
@@ -702,15 +715,17 @@ def _chain_links(row, key, deliveries_by_to, utt_by_id, traces, thoughts,
           for t in traces
           if t.get("agent_id") == who and int(t.get("step") or 0) == month]
 
-    def delivered(kind):
+    def delivered(kind, src):
         got = [(int(d.get("step") or 0), str(d.get("from") or ""), i, d)
                for i, d in enumerate(mine)
                if d.get("kind") == kind and int(d.get("step") or 0) <= month]
         got.sort(key=lambda x: (x[0], x[1], x[2]))
-        return [{"month": s, "from": f, "name": label_of(f),
-                 "text": str(d.get("text", ""))} for s, f, _, d in got]
+        return [{"month": st, "from": f, "name": label_of(f),
+                 "text": _full_text(d, src.get((st, f), []))}
+                for st, f, _, d in got]
 
-    articles, directs = delivered("article"), delivered("direct")
+    articles = delivered("article", art_by)
+    directs = delivered("direct", dir_by)
 
     own_all = sorted([t for t in thoughts
                       if t.get("from") == who and key(t, "thought") < k],
@@ -726,9 +741,9 @@ def _chain_links(row, key, deliveries_by_to, utt_by_id, traces, thoughts,
 
 
 def _chain_obj(target, row, level_source, key, deliveries_by_to, utt_by_id,
-               traces, thoughts, venue_labels, label_of) -> dict:
+               traces, thoughts, art_by, dir_by, venue_labels, label_of) -> dict:
     links, counts = _chain_links(row, key, deliveries_by_to, utt_by_id, traces,
-                                 thoughts, venue_labels, label_of)
+                                 thoughts, art_by, dir_by, venue_labels, label_of)
     return {
         "target": target, "month": int(row.get("step") or 0),
         "from": str(row.get("from") or ""), "name": row.get("name", ""),
@@ -746,12 +761,19 @@ def _awareness_chain_empty() -> dict:
 
 
 def _build_awareness_chain(rows, ignition, deliveries, utts, traces, thoughts,
-                           venue_labels, label_of, key, is_v5e) -> dict:
+                           articles, directs, venue_labels, label_of, key,
+                           is_v5e) -> dict:
     """緑・黄の strict の初出と、赤の S1〜S3 それぞれの初出について鎖を組む。"""
     deliveries_by_to = collections.defaultdict(list)
     for d in deliveries:
         deliveries_by_to[str(d.get("to") or "")].append(d)
     utt_by_id = {str(u.get("utt_id") or ""): u for u in utts}
+    art_by = collections.defaultdict(list)
+    for a in articles:
+        art_by[(int(a.get("step") or 0), str(a.get("from") or ""))].append(a)
+    dir_by = collections.defaultdict(list)
+    for a in directs:
+        dir_by[(int(a.get("step") or 0), str(a.get("from") or ""))].append(a)
     rows_sorted = sorted(rows, key=key)
 
     picks = []
@@ -778,7 +800,8 @@ def _build_awareness_chain(rows, ignition, deliveries, utts, traces, thoughts,
             missing.append(name)
             continue
         targets.append(_chain_obj(name, hit, src, key, deliveries_by_to, utt_by_id,
-                                  traces, thoughts, venue_labels, label_of))
+                                  traces, thoughts, art_by, dir_by, venue_labels,
+                                  label_of))
     return {"targets": targets, "missing": missing,
             "criteria": dict(AWARENESS_CRITERIA)}
 
@@ -1313,8 +1336,8 @@ def build(run_dir: str) -> dict:
                 if stage_rows else _ignition_empty())
     chain = (_build_awareness_chain(stage_rows, ignition,
                                     _load(run_dir, "deliveries.jsonl"), utts, traces,
-                                    thoughts, venue_label_map, label_of, sortkey,
-                                    is_v5e)
+                                    thoughts, articles, directs, venue_label_map,
+                                    label_of, sortkey, is_v5e)
              if stage_rows else _awareness_chain_empty())
     if stage_rows:
         timeline, excluded = _ignition_timeline(
@@ -1332,6 +1355,11 @@ def build(run_dir: str) -> dict:
         with open(stop_path, encoding="utf-8") as f:
             stop = json.load(f)
         sv = dict(summary.get("v5e") or {})
+        s_counts_now = {lv: 0 for lv in V5E_LEVELS}
+        for r in stage_rows:
+            lv = (defense_level_of(r) or {}).get("level")
+            if lv in s_counts_now:
+                s_counts_now[lv] += 1
         pe = metrics.get("C_prime_event") or {}
         prime = None
         if pe.get("parcel_id"):
@@ -1362,6 +1390,12 @@ def build(run_dir: str) -> dict:
                          for t in (stop.get("triggers") or [])],
             "prime": prime,
             "S_counts": metrics.get("S_counts"),
+            "S_counts_now": s_counts_now,
+            # 走行中の分類（stage_labels_v5e.jsonl と metrics_v5.json）と、いま
+            # `src/stage_v5e.py` で数え直した結果が食い違うかどうか。語彙を
+            # 締め直したあとは食い違う＝どちらの数字かを画面で言い分ける。
+            "S_stale": (metrics.get("S_counts") is not None
+                        and metrics.get("S_counts") != s_counts_now),
             "S_level_agreement": metrics.get("S_level_agreement"),
             "red_definition": (metrics.get("C_definition") or {}).get("red"),
             "note": ("停止のトリガーになるのは買い手が現実に観測できる行だけ"

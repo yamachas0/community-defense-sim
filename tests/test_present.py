@@ -32,6 +32,7 @@ PAGES = r"C:\Users\user\projects\quiet-acquisition-pages"
 SHOTS = os.path.join(ROOT, "docs", "shots_present")
 SHOTS2 = os.path.join(ROOT, "docs", "shots_present2")
 SHOTS3 = os.path.join(ROOT, "docs", "shots_present3")
+SHOTS4 = os.path.join(ROOT, "docs", "shots_present4")
 PASS = FAIL = 0
 SCENE_ORDER = {"plan": 0, "S1": 1, "S2": 2, "S3": 3, "S4": 4}
 
@@ -227,12 +228,13 @@ def json_checks(dC):
     # --- ignition ---------------------------------------------------------
     ig = dC.get("ignition")
     check("ignition: ある", isinstance(ig, dict)
-          and set(ig) == {"green", "yellow", "criteria"}, str(type(ig)))
+          and set(ig) == {"green", "yellow", "red", "criteria"}, str(type(ig)))
     if not isinstance(ig, dict):
         return
-    check("ignition: criteria が loose / strict_green / strict_yellow の3本",
+    check("ignition: criteria が loose / strict_green / strict_yellow / strict_red の4本",
           isinstance(ig.get("criteria"), dict)
-          and set(ig["criteria"]) == {"loose", "strict_green", "strict_yellow"}
+          and set(ig["criteria"]) == {"loose", "strict_green", "strict_yellow",
+                                      "strict_red"}
           and all(isinstance(v, str) and v for v in ig["criteria"].values()),
           str(ig.get("criteria")))
     utts = _jsonl(os.path.join(run_dir, "utterances_v5.jsonl"))
@@ -245,6 +247,9 @@ def json_checks(dC):
         return (int(o["month"]), SCENE_ORDER.get(o["scene"], 9),
                 int(u.get("round") or 0), str(o["utt_id"] or ""), str(o["from"] or ""))
 
+    check("ignition[red]: strict と loose の2本立てになっている",
+          isinstance(ig["red"], dict) and set(ig["red"]) == {"strict", "loose"},
+          str(ig["red"]))
     for color in ("green", "yellow"):
         pair = ig[color]
         check("ignition[%s]: strict と loose の2本立てになっている" % color,
@@ -407,6 +412,192 @@ def json_checks(dC):
               str((lens[color], len(got), w, share)))
 
 
+def chain_checks(dC, tag):
+    """awareness_chain の全行が元の JSONL に実在するかを突き合わせる（第5弾）。"""
+    run_dir = os.path.join(ROOT, "simulations", dC["meta"]["generated_from"])
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import build_present_data as bpd
+    is_v5e = os.path.exists(os.path.join(run_dir, "stage_labels_v5e.jsonl"))
+    key = bpd._key_factory(is_v5e)
+    ac = dC.get("awareness_chain")
+    check("%s chain: awareness_chain がある" % tag,
+          isinstance(ac, dict) and set(ac) == {"targets", "missing", "criteria"},
+          str(type(ac)))
+    if not isinstance(ac, dict):
+        return
+    need_cr = ("targets", "heard", "traces", "articles", "directs",
+               "own_prior_thoughts", "counts", "order", "caveat")
+    check("%s chain: criteria に各リンクの引き方が文章である" % tag,
+          all(isinstance(ac["criteria"].get(k), str) and ac["criteria"][k]
+              for k in need_cr),
+          str([k for k in need_cr if not ac["criteria"].get(k)]))
+    check("%s chain: 相関であって因果ではないと書いてある" % tag,
+          "因果ではない" in ac["criteria"].get("caveat", ""),
+          ac["criteria"].get("caveat", ""))
+    names = ("green", "yellow") + (("S1", "S2", "S3") if is_v5e else ())
+    got = [t["target"] for t in ac["targets"]]
+    check("%s chain: 対象は決められた初出だけ（重複なし）" % tag,
+          all(g in names for g in got) and len(set(got)) == len(got)
+          and set(got) | set(ac["missing"]) <= set(names), str(got))
+    if is_v5e:
+        check("%s chain: 出なかった対象は missing に出す（空欄で濁さない）" % tag,
+              sorted(set(names) - set(got)) == sorted(ac["missing"]),
+              str((got, ac["missing"])))
+
+    utts = _jsonl(os.path.join(run_dir, "utterances_v5.jsonl"))
+    thoughts = _jsonl(os.path.join(run_dir, "thoughts_all.jsonl"))
+    traces = _jsonl(os.path.join(run_dir, "traces_v5.jsonl"))
+    arts = _jsonl(os.path.join(run_dir, "articles_v5.jsonl"))
+    directs = _jsonl(os.path.join(run_dir, "directs_v5.jsonl"))
+    deliveries = _jsonl(os.path.join(run_dir, "deliveries.jsonl"))
+    stage = _jsonl(os.path.join(run_dir, "stage_labels_v5e.jsonl" if is_v5e
+                                else "stage_labels_v5c.jsonl"))
+    if is_v5e:
+        for seq, r in enumerate(utts):
+            r["seq"] = seq
+        for seq, r in enumerate(thoughts):
+            r["seq"] = seq
+    src_stage = {(int(r["step"]), r.get("from", ""), r.get("kind", ""),
+                  str(r.get("text", ""))) for r in stage}
+    utt_by_id = {u.get("utt_id"): u for u in utts}
+    deliv = {}
+    for d in deliveries:
+        deliv.setdefault((d.get("kind"), d.get("to")), []).append(d)
+    art_text = {(a.get("from", ""), str(a.get("text", ""))) for a in arts}
+    dir_text = {(a.get("from", ""), a.get("to", ""), str(a.get("text", "")))
+                for a in directs}
+
+    for ch in ac["targets"]:
+        t = "%s chain[%s]" % (tag, ch["target"])
+        need = ("target", "month", "from", "name", "role", "kind", "venue",
+                "venue_label", "text", "level_source", "links", "counts")
+        check("%s: 項目がそろっている" % t, all(k in ch for k in need),
+              str([k for k in need if k not in ch]))
+        check("%s: 火が点いた行が元ログに実在する（原文完全一致）" % t,
+              (ch["month"], ch["from"], ch["kind"], ch["text"]) in src_stage,
+              str((ch["month"], ch["from"], ch["kind"])))
+        check("%s: 赤のときだけレベルの出所が付く" % t,
+              (ch["level_source"] in ("llm", "rule")) if ch["target"].startswith("S")
+              else (ch["level_source"] is None), str(ch["level_source"]))
+        L, C = ch["links"], ch["counts"]
+        check("%s: リンクの種類が5つそろっている" % t,
+              set(L) == {"heard", "traces", "articles", "directs",
+                         "own_prior_thoughts"} and set(C) == set(L), str(list(L)))
+        check("%s: 表示件数の上限（heard 5・その他3）を守っている" % t,
+              len(L["heard"]) <= 5 and len(L["articles"]) <= 3
+              and len(L["directs"]) <= 3 and len(L["own_prior_thoughts"]) <= 3,
+              str({k: len(v) for k, v in L.items()}))
+        check("%s: counts は切る前の総数（表示件数以上）" % t,
+              all(C[k] >= len(L[k]) for k in L),
+              str((C, {k: len(v) for k, v in L.items()})))
+
+        mine = deliv.get(("scene", ch["from"]), [])
+        heard_src = {}
+        for d in mine:
+            u = utt_by_id.get(str(d.get("obs_id") or ""))
+            if u is None:
+                continue
+            heard_src.setdefault((int(d.get("step") or 0), str(d.get("from") or ""),
+                                  str(u.get("text", ""))), u)
+        bad = [r for r in L["heard"]
+               if (r["month"], r["from"], r["text"]) not in heard_src]
+        check("%s: 聞いていた発話は deliveries(to=本人・kind=scene) に実在し、"
+              "本文は utterances_v5.jsonl の原文全文" % t, not bad, str(bad[:2]))
+        check("%s: 聞いていた発話はその月のもの" % t,
+              all(r["month"] == ch["month"] for r in L["heard"]),
+              str([r["month"] for r in L["heard"]]))
+
+        idx = [i for i, r in enumerate(stage)
+               if int(r["step"]) == ch["month"] and r.get("from") == ch["from"]
+               and r.get("kind") == ch["kind"]
+               and str(r.get("text", "")) == ch["text"]]
+        if idx:
+            srow = dict(stage[idx[0]])
+            srow["seq"] = idx[0]
+            k0 = key(srow)
+            late = [r["text"][:20] for r in L["heard"]
+                    if key(heard_src[(r["month"], r["from"], r["text"])],
+                           "utterance") >= k0]
+            check("%s: 聞いていた発話はその行より前だけ" % t, not late, str(late[:2]))
+            own_late = [o["text"][:20] for o in L["own_prior_thoughts"]
+                        if not any(key(x, "thought") < k0 for x in thoughts
+                                   if x.get("from") == ch["from"]
+                                   and int(x.get("step", 0)) == o["month"]
+                                   and str(x.get("text", "")) == o["text"])]
+            check("%s: 過去の内心はその行より前だけ" % t, not own_late, str(own_late[:2]))
+            n_heard = len([1 for d in mine
+                           if int(d.get("step") or 0) == ch["month"]
+                           and utt_by_id.get(str(d.get("obs_id") or "")) is not None
+                           and key(utt_by_id[str(d["obs_id"])], "utterance") < k0])
+            n_own = len([1 for x in thoughts
+                         if x.get("from") == ch["from"] and key(x, "thought") < k0])
+            check("%s: counts(heard/own) が数え直した総数と一致" % t,
+                  C["heard"] == n_heard and C["own_prior_thoughts"] == n_own,
+                  str((C["heard"], n_heard, C["own_prior_thoughts"], n_own)))
+        bad_tr = [r for r in L["traces"]
+                  if not any(x.get("agent_id") == ch["from"]
+                             and int(x.get("step", 0)) == r["month"]
+                             and str(x.get("text", "")) == r["text"] for x in traces)]
+        check("%s: 兆候は traces_v5.jsonl に実在する" % t, not bad_tr, str(bad_tr[:2]))
+        check("%s: 兆候はその月のものだけ" % t,
+              all(r["month"] == ch["month"] for r in L["traces"]),
+              str([r["month"] for r in L["traces"]]))
+        bad_a = [r for r in L["articles"]
+                 if (r["from"], r["text"]) not in art_text]
+        check("%s: 記事は articles_v5.jsonl に実在する（原文完全一致）" % t,
+              not bad_a, str(bad_a[:2]))
+        bad_d = [r for r in L["directs"]
+                 if (r["from"], ch["from"], r["text"]) not in dir_text]
+        check("%s: 私信は directs_v5.jsonl に実在する（宛先＝本人）" % t,
+              not bad_d, str(bad_d[:2]))
+        check("%s: 記事・私信はその月まで" % t,
+              all(r["month"] <= ch["month"] for r in L["articles"] + L["directs"]),
+              str([r["month"] for r in L["articles"] + L["directs"]]))
+        bad_o = [o for o in L["own_prior_thoughts"]
+                 if not any(x.get("from") == ch["from"]
+                            and int(x.get("step", 0)) == o["month"]
+                            and str(x.get("text", "")) == o["text"] for x in thoughts)]
+        check("%s: 過去の内心は thoughts_all.jsonl に実在する" % t, not bad_o,
+              str(bad_o[:2]))
+
+
+def v5e_checks(dC):
+    """停止の記録と目玉物件の事実が、走行中の記録と一致するか。"""
+    run_dir = os.path.join(ROOT, "simulations", dC["meta"]["generated_from"])
+    with open(os.path.join(run_dir, "defense_stop_v5e.json"), encoding="utf-8") as f:
+        stop = json.load(f)
+    with open(os.path.join(run_dir, "summary.json"), encoding="utf-8") as f:
+        sm = json.load(f)
+    v = dC.get("v5e")
+    check("v5e: 停止の記録がある", isinstance(v, dict), str(type(v)))
+    if not isinstance(v, dict):
+        return
+    check("v5e: 停止月・翌月・件数が走行中の記録と一致",
+          (v["stopped"], v["trigger_month"], v["stop_from_month"])
+          == (stop["stopped"], stop["trigger_month"], stop["stop_from_month"])
+          and v["acquisitions_applied"] == sm["v5e"]["acquisitions_applied"]
+          and v["acquisitions_suspended"] == sm["v5e"]["acquisitions_suspended"],
+          str(v)[:200])
+    check("v5e: トリガー行の原文が defense_stop_v5e.json と1文字も違わない",
+          [t["text"] for t in v["triggers"]] == [t["text"] for t in stop["triggers"]],
+          str(len(v["triggers"])))
+    check("v5e: トリガーは発話・記事だけ（内心では止まらない）",
+          all(t["kind"] in ("utterance", "article") for t in v["triggers"]),
+          str(sorted({t["kind"] for t in v["triggers"]})))
+    led = _jsonl(os.path.join(run_dir, "ledger.jsonl"))
+    fired = [r for r in led if r.get("kind") in ("transfer", "lease")
+             and r.get("parcel_id") == (v["prime"] or {}).get("parcel_id")]
+    check("v5e: 目玉物件が起きたかどうかが登記の実測と一致",
+          bool(v["prime"]) and v["prime"]["fired"] == bool(fired),
+          str(v.get("prime")))
+    check("v5e: 起きなかった目玉は「起きなかった」と書く",
+          bool(fired) or "起きなかった" in (v["prime"] or {}).get("note", ""),
+          str((v.get("prime") or {}).get("note")))
+    check("v5e: 台本の停止が地図の取引件数と整合",
+          len(dC["events"]) == v["acquisitions_applied"],
+          str((len(dC["events"]), v["acquisitions_applied"])))
+
+
 LABEL_JS = """() => {
   const svg = document.querySelector('#mapR svg');
   if (!svg) return {n: 0, nbad: 0, bad: [], fs: 0, mapw: 0};
@@ -458,6 +649,7 @@ def main() -> int:
     os.makedirs(SHOTS, exist_ok=True)
     os.makedirs(SHOTS2, exist_ok=True)
     os.makedirs(SHOTS3, exist_ok=True)
+    os.makedirs(SHOTS4, exist_ok=True)
     with open(os.path.join(PAGES, "present_data_run94.json"), encoding="utf-8") as f:
         d94 = json.load(f)
     with open(os.path.join(PAGES, "present_data_v5bB.json"), encoding="utf-8") as f:
@@ -467,18 +659,37 @@ def main() -> int:
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
             d = json.load(f)
         check("%s: 区画属性を持たない run は layout=null（従来の格子で描く）" % lab,
-              d.get("layout") is None and d["meta"]["schema"] == 7,
+              d.get("layout") is None and d["meta"]["schema"] == 8,
               str(d["meta"]["schema"]))
         ig = d.get("ignition")
         check("%s: ignition は色の判定が無い run でも同じ形" % lab,
-              isinstance(ig, dict) and set(ig) == {"green", "yellow", "criteria"}
+              isinstance(ig, dict) and set(ig) == {"green", "yellow", "red", "criteria"}
               and all(ig[c] == {"strict": None, "loose": None}
-                      for c in ("green", "yellow"))
-              and set(ig["criteria"]) == {"loose", "strict_green",
-                                          "strict_yellow"}, str(ig))
+                      for c in ("green", "yellow", "red"))
+              and set(ig["criteria"]) == {"loose", "strict_green", "strict_yellow",
+                                          "strict_red"}, str(ig))
+        ac = d.get("awareness_chain")
+        check("%s: awareness_chain は色の判定が無い run でも同じ形（空）" % lab,
+              isinstance(ac, dict) and ac.get("targets") == []
+              and ac.get("missing") == [] and isinstance(ac.get("criteria"), dict),
+              str(ac))
+        check("%s: v5e の停止の記録は無い run では null" % lab, d.get("v5e") is None,
+              str(d.get("v5e")))
     for lab in ("v5cA", "v5cB", "v5cC"):
         with open(os.path.join(PAGES, "present_data_%s.json" % lab), encoding="utf-8") as f:
-            json_checks(json.load(f))
+            dcc = json.load(f)
+        json_checks(dcc)
+        chain_checks(dcc, lab)
+        check("%s: 赤の判定が無い本でも v5e の停止は null" % lab,
+              dcc.get("v5e") is None, str(dcc.get("v5e")))
+    v5e_json = os.path.join(PAGES, "present_data_v5eA.json")
+    dE = None
+    if os.path.exists(v5e_json):
+        with open(v5e_json, encoding="utf-8") as f:
+            dE = json.load(f)
+        check("v5eA: schema が 8", dE["meta"]["schema"] == 8, str(dE["meta"]["schema"]))
+        chain_checks(dE, "v5eA")
+        v5e_checks(dE)
 
     hits = []
     for rel in ("run.py", "tools/run_metrics.py", "tools/build_audit_v5c.py",
@@ -817,6 +1028,30 @@ def main() -> int:
                           page.eval_on_selector_all("details.numbers", "e=>e.length") >= 2)
                     page.screenshot(path=os.path.join(SHOTS3, "07_numbers_open_1280.png"),
                                     full_page=True)
+                    # ---- 第5弾：気づきの連鎖・買い手が止まった行（v5c は空でも壊れない）
+                    page.click("[role=tab][data-p='K']")
+                    page.wait_for_timeout(250)
+                    ck = page.inner_text("#pK")
+                    acc = dC["awareness_chain"]
+                    check("v5cA: 気づきの連鎖のタブが開く", page.is_visible("#pK"))
+                    check("v5cA: 鎖の対象ぶんの原文が全文出る",
+                          all(t["text"] in ck for t in acc["targets"]), ck[:160])
+                    check("v5cA: 相関であって因果ではないと画面に書いてある",
+                          "因果ではない" in ck, ck[:160])
+                    check("v5cA: 連鎖のパネルに undefined / NaN が出ない",
+                          "undefined" not in ck and "NaN" not in ck, ck[:200])
+                    page.screenshot(path=os.path.join(SHOTS4, "05_chain_v5cA_1280.png"),
+                                    full_page=True)
+                    page.click("[role=tab][data-p='L']")
+                    page.wait_for_timeout(200)
+                    cl = page.inner_text("#pL")
+                    check("v5cA: 停止の無い本では「停止が無い」と書く",
+                          "買い手の停止が無い" in cl, cl[:120])
+                    page.screenshot(path=os.path.join(SHOTS4, "06_stop_empty_1280.png"),
+                                    full_page=True)
+                    page.click("[role=tab][data-p='D']")
+                    page.wait_for_timeout(150)
+
                     page.fill("#slider", str(sC["steps"]))   # 月を最後まで戻す
                     page.dispatch_event("#slider", "input")
                     page.wait_for_timeout(300)
@@ -977,6 +1212,104 @@ def main() -> int:
                     page.dispatch_event("#slider", "input")
                     page.wait_for_timeout(200)
                     page.click("[role=tab][data-p='D']")
+
+                # ---- v5e：停止した本（気づきの連鎖・止まった行・地図の印） ----
+                if dE is not None:
+                    page.select_option("#runsel", "v5eA")
+                    page.wait_for_timeout(1200)
+                    vE = dE["v5e"]
+                    sE = dE["stats"]
+                    check("v5eA: 月数が 36 になる",
+                          page.get_attribute("#slider", "max") == str(sE["steps"])
+                          and sE["steps"] == 36, str(sE["steps"]))
+                    barE = page.inner_text("#colorbar")
+                    check("v5eA: 赤の定義が v5e のものに入れ替わる",
+                          vE["red_definition"] in barE
+                          and "行政が規制に動いた" not in barE, barE[:200])
+                    page.fill("#slider", str(sE["steps"]))
+                    page.dispatch_event("#slider", "input")
+                    page.wait_for_timeout(400)
+                    legE = page.inner_text("#legendR")
+                    check("v5eA: 凡例に買い手が止まった月が出る",
+                          ("第%d月" % vE["trigger_month"]) in legE
+                          and str(vE["acquisitions_suspended"]) in legE, legE[:400])
+                    check("v5eA: 凡例に目玉物件の月と起きなかった事実が出る",
+                          vE["prime"]["parcel_id"] in legE
+                          and ("第%d月" % vE["prime"]["month"]) in legE
+                          and vE["prime"]["note"] in legE, legE[:600])
+                    check("v5eA: 目玉物件の区画に印が付く",
+                          page.eval_on_selector_all(
+                              "#mapR rect.primemark",
+                              "els => els.map(e => e.dataset.prime)")
+                          == [vE["prime"]["parcel_id"]])
+                    fxE = page.inner_text("#fxlog")
+                    check("v5eA: 年表にも停止月と目玉の月が出る",
+                          ("第%d月" % vE["trigger_month"]) in fxE
+                          and vE["prime"]["note"] in fxE, fxE[:300])
+                    page.screenshot(path=os.path.join(SHOTS4, "01_v5eA_map_1280.png"),
+                                    full_page=True)
+                    page.click("[role=tab][data-p='K']")
+                    page.wait_for_timeout(300)
+                    ckE = page.inner_text("#pK")
+                    check("v5eA: 気づきの連鎖のタブが開く", page.is_visible("#pK"))
+                    check("v5eA: 対象の火が点いた行が全文出る",
+                          all(t["text"] in ckE for t in dE["awareness_chain"]["targets"]),
+                          ckE[:200])
+                    miss = dE["awareness_chain"]["missing"]
+                    check("v5eA: 出なかった対象は「出なかった」と書く",
+                          all(m in ckE for m in miss) and ("出なかった" in ckE if miss else True),
+                          str(miss))
+                    n_links = 0
+                    for t in dE["awareness_chain"]["targets"]:
+                        for k in ("heard", "traces", "articles", "directs",
+                                  "own_prior_thoughts"):
+                            for r in t["links"][k]:
+                                n_links += 1
+                                if r["text"] not in ckE:
+                                    n_links = -10000
+                    check("v5eA: 鎖の入力の原文がすべて画面に出る（切っていない）",
+                          n_links > 0, str(n_links))
+                    zero = [(t["target"], k) for t in dE["awareness_chain"]["targets"]
+                            for k in ("heard", "traces", "articles", "directs")
+                            if t["counts"][k] == 0]
+                    check("v5eA: 0件のリンクは「無い」と明示する",
+                          (not zero) or ("は無い" in ckE), str(zero[:3]))
+                    more = [t for t in dE["awareness_chain"]["targets"]
+                            for k in ("heard", "articles", "directs",
+                                      "own_prior_thoughts")
+                            if t["counts"][k] > len(t["links"][k])]
+                    check("v5eA: 切った分は「他 n 件」と出す",
+                          (not more) or ("他 " in ckE), str(len(more)))
+                    check("v5eA: 連鎖のパネルに undefined / NaN が出ない",
+                          "undefined" not in ckE and "NaN" not in ckE, ckE[:200])
+                    page.screenshot(path=os.path.join(SHOTS4, "02_chain_v5eA_1280.png"),
+                                    full_page=True)
+                    page.click("[role=tab][data-p='L']")
+                    page.wait_for_timeout(250)
+                    clE = page.inner_text("#pL")
+                    check("v5eA: 止まった行のタブが開く", page.is_visible("#pL"))
+                    check("v5eA: 停止トリガーの原文が全文そのまま出る",
+                          all(t["text"] in clE for t in vE["triggers"]),
+                          str(len(vE["triggers"])))
+                    check("v5eA: 停止した月と起きなかった取得の件数が出る",
+                          ("第%d月" % vE["trigger_month"]) in clE
+                          and str(vE["acquisitions_suspended"]) in clE, clE[:200])
+                    check("v5eA: 内心では止まらないと書いてある",
+                          "内心" in clE, clE[:300])
+                    check("v5eA: 止まった行のパネルに undefined / NaN が出ない",
+                          "undefined" not in clE and "NaN" not in clE, clE[:200])
+                    page.screenshot(path=os.path.join(SHOTS4, "03_stop_v5eA_1280.png"),
+                                    full_page=True)
+                    wE = page.evaluate("[document.documentElement.scrollWidth,"
+                                       "document.documentElement.clientWidth]")
+                    check("v5eA: 1280 で横スクロールが出ない", wE[0] <= wE[1], str(wE))
+                    bodyE = page.evaluate("() => document.body.innerText")
+                    check("v5eA: 1280 のページ全体に undefined / NaN が出ない",
+                          "undefined" not in bodyE and "NaN" not in bodyE,
+                          str([w for w in ("undefined", "NaN") if w in bodyE]))
+                    check("v5eA: 画面に「AI」表記が出ない", "AI" not in bodyE,
+                          bodyE[max(0, bodyE.find("AI") - 40):bodyE.find("AI") + 40])
+                    page.click("[role=tab][data-p='D']")
                 page.close()
 
                 # 動きを止める設定（prefers-reduced-motion: reduce）
@@ -1072,6 +1405,34 @@ def main() -> int:
                                  "document.documentElement.clientWidth]")
                 check("present: 390 で火が点いた瞬間を開いても横スクロールが出ない",
                       mw5[0] <= mw5[1], str(mw5))
+                if dE is not None:
+                    m.select_option("#runsel", "v5eA")
+                    m.wait_for_timeout(1200)
+                    m.click("[role=tab][data-p='K']")
+                    m.wait_for_timeout(250)
+                    mk = m.evaluate("[document.documentElement.scrollWidth,"
+                                    "document.documentElement.clientWidth]")
+                    check("present: 390 で気づきの連鎖を開いても横スクロールが出ない",
+                          mk[0] <= mk[1], str(mk))
+                    m.screenshot(path=os.path.join(SHOTS4, "04_chain_v5eA_390.png"),
+                                 full_page=True)
+                    m.click("[role=tab][data-p='L']")
+                    m.wait_for_timeout(250)
+                    ml = m.evaluate("[document.documentElement.scrollWidth,"
+                                    "document.documentElement.clientWidth]")
+                    check("present: 390 で止まった行を開いても横スクロールが出ない",
+                          ml[0] <= ml[1], str(ml))
+                    mbE = m.evaluate("() => document.body.innerText")
+                    check("present: 390 の v5eA に undefined / NaN が出ない",
+                          "undefined" not in mbE and "NaN" not in mbE,
+                          str([w for w in ("undefined", "NaN") if w in mbE]))
+                    m.screenshot(path=os.path.join(SHOTS4, "07_stop_v5eA_390.png"),
+                                 full_page=True)
+                    m.select_option("#runsel", "v5cA")
+                    m.wait_for_timeout(1000)
+                    m.fill("#slider", "24")
+                    m.dispatch_event("#slider", "input")
+                    m.wait_for_timeout(400)
                 mbody = m.evaluate("() => document.body.innerText")
                 check("present: 390 のページ全体に undefined / NaN が出ない",
                       "undefined" not in mbody and "NaN" not in mbody,
