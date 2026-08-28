@@ -17,3 +17,5 @@ _scratch/
 Thumbs.db
 .vscode/
 .idea/
+
+.claude/
