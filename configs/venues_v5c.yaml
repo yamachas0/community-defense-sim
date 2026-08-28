@@ -1,0 +1,36 @@
+# 会場（創発が起きる場所）の表示用の位置表
+#
+# 施主FB 2026-08-28 20:42「創発が起きる区画も明示して」への対応。
+# 会場には世界のデータ上の位置が無い（configs/config_field_v5c.yaml の social.venues は
+# id と label だけ）。ここで決めるのは**地図に描く座標だけ**であり、
+# 誰がどこへ行くか・誰と居合わせるかには一切影響しない＝**装飾**である。
+# 判定・集計はこのファイルを一切読まない（tests で固定）。
+#
+# 座標系は tools/build_present_data.py の配置と同じ極座標：
+#   中心 (500, 380)、半径 R=320、angle_deg は右方向=0°・時計回り、
+#   y は 0.78 に潰す。radius_f は R に対する比。
+# 区画と重なったときは、区画を動かさずに**会場だけ**を外へ押し出す（決定論）。
+#
+# badge = 地図上の丸の中に出す1文字。kind = 描き分け（区画は四角、会場は丸）。
+
+meta:
+  applies_to: configs/config_field_v5c.yaml (social.venues)
+  decoration: true
+  note: 表示位置は装飾。世界の同席・配送・判定には使わない。
+
+venues:
+  - {id: V01, label: 駅前の飲食店,                   badge: 食, radius_f: 0.30, angle_deg: 200}
+  - {id: V02, label: 地区公民館,                     badge: 公, radius_f: 0.62, angle_deg: 150}
+  - {id: V03, label: 共同浴場,                       badge: 湯, radius_f: 0.58, angle_deg: 55}
+  - {id: V04, label: 湾岸の喫茶店,                   badge: 茶, radius_f: 0.70, angle_deg: 250}
+  - {id: V05, label: 旅館組合の会議室,               badge: 組, radius_f: 0.44, angle_deg: 25}
+  - {id: V06, label: 市役所の待合,                   badge: 役, radius_f: 0.26, angle_deg: 340}
+  - {id: V07, label: 地元不動産仲介の事務所,         badge: 仲, radius_f: 0.34, angle_deg: 120}
+  - {id: V08, label: 地域イベント会場,               badge: 催, radius_f: 0.88, angle_deg: 300}
+  - {id: V09, label: 商店街の床屋,                   badge: 床, radius_f: 0.48, angle_deg: 175}
+  - {id: V10, label: スーパーのレジ待ち,             badge: ス, radius_f: 0.52, angle_deg: 285}
+  - {id: V11, label: 神社の境内,                     badge: 社, radius_f: 0.92, angle_deg: 80}
+  - {id: V12, label: 小学校の校門前,                 badge: 校, radius_f: 0.84, angle_deg: 130}
+  - {id: V13, label: 隣家の玄関先（回覧板）,         badge: 回, radius_f: 0.76, angle_deg: 15}
+  - {id: V14, label: バス停と駅のホーム,             badge: 停, radius_f: 0.40, angle_deg: 320}
+  - {id: V15, label: 診療所の待合,                   badge: 診, radius_f: 0.66, angle_deg: 215}
