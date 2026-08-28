@@ -1,0 +1,17 @@
+{"step": 1, "agent_id": "HH01", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH02", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH03", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH04", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH05", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH06", "role": "household", "stance": "sell", "scene": "S4"}
+{"step": 1, "agent_id": "HH07", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH08", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH09", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH10", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH11", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH12", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH13", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH14", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH15", "role": "household", "stance": "keep", "scene": "S4"}
+{"step": 1, "agent_id": "HH16", "role": "household", "stance": "sell", "scene": "S4"}
+{"step": 1, "agent_id": "MU01", "role": "municipality", "stance": "keep", "scene": "S4"}
