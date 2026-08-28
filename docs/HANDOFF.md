@@ -998,3 +998,89 @@ python run.py --config configs/config_field_v5d.yaml --provider mock --quiet -> 
 - **実装しなかった Codex 指摘（施主決定どおり）**：①法務局での個別登記照会を残す案 ②兆候を増やす候補
   （管理通知・管理状態の変化・境界確認の隣地連絡）。どちらも「新しい経路も痕跡も足さない」に反するので入れていない。
 
+---
+
+## 第12便（2026-08-29）— v5e Phase1：赤の再定義／自衛レベル／自衛が出たら台本停止／目玉第15月／36か月
+
+設計の正は `docs/world_design_v5e.md`。実装はスペック `spec_v5e_phase1.md`（CTO発注）に忠実。
+**v1〜v5d の設定・出力・テストは1バイトも変えていない。v5e は「足す」だけ。**
+住民（主体）への入力（プロンプト・スキーマ・兆候・同席・巡数・S4周期・会場・ペルソナ・seed・
+区画・呼び名）は v5d と完全に同一であることを mock ランの実測で固定した。
+
+### 何をした
+
+- 新規 `src/stage_v5e.py`：赤（自衛の具体的な行動）と自衛レベル S1〜S3 の**唯一の持ち場**。
+  `rule_defense_level` / `rule_red_v5e` / `stage_v5e` / `defense_level_of`（全て純関数）。
+  走行中の停止判定と事後集計が同じコードを使う（判定が二本に割れない）。
+  青・緑・黄のルール関数は v5c の実装（`tools/run_metrics.py` の `_v5c_rule_*`）が正のまま。
+- 新規 `STAGE_SYSTEM_V5E` / `STAGE_SCHEMA_V5E` / `classify_stage_v5e`（`src/kpi.py` に追加）。
+  `deal`/`area`/`same_buyer` の段落は `STAGE_SYSTEM` から**一字一句そのまま**（テストで文字列一致を固定）。
+  `admin` を落とし `defense` / `defense_level`(none/S1/S2/S3) を足した。v5c の定数は無改造。
+- `src/simulation.py`：`field_v5e` の配線。世界の層は v5d を使う（`field_v5d` フラグが
+  `("field_v5d","field_v5e")` になった＝**v5d のテスト128件が緑のままであることを確認済み**）。
+  月末に `classify_stage_v5e`（job_key `mNN_stage`）を回して `stage_labels_v5e` へ追記し、
+  赤が1行でも立ったら `defense_stop` を立てて**翌月以降 `apply_script_v5` を呼ばない**。
+  止めた取得は `ledger._rec(..., "script_suspended", reason="defense_detected")` と
+  `deals_v5.jsonl` の `kind:"script_stopped"` に残す。**主体には一切見せない**。
+  終了時に `stage_labels_v5e.jsonl` / `defense_stop_v5e.json`（停止しなくても
+  `{"stopped": false, "months": N}` を書く）と `summary["v5e"]` を出す。
+  v5e では事後の `classify_stage_v5c` を呼ばない（同じ入力に二重課金しない）。
+- 新規 `tools/build_events_v5e.py`（乱数なし）→ `configs/events_v5e_seed85.yaml`。
+  ACQ18/P04 を第12月→第15月へ移しただけ。id は振り直さない。(month, 元の並び順) で安定ソート。
+- 新規 `configs/config_field_v5e.yaml`：v5d の写しで差は4点だけ（run_name / scenario_version /
+  steps 24→36 / events_file）。占領分類器 off・Batch off・prompt_order legacy のまま。
+- `tools/run_metrics.py`：`stage_labels_v5e.jsonl` があれば v5e として集計。赤だけ
+  `rule_red_v5e ∧ llm_defense`。追加出力 `S_counts` / `S_first` / `S_level_agreement` /
+  `S_rows` / `defense_stop` / `red_definition_version`。**v5c/v5d の集計は不変**。
+- 新規 `tools/reclassify_v5e.py`：既存 run を新しい赤で読み直す（`--dry-run` は API を叩かない）。
+- 新規 `tests/test_v5e.py`（110件）／`src/viz.py` の `MONEYLESS_VERSIONS` に v5e を追加。
+
+### 実測
+
+```
+python tests/test_v5e.py        -> 110 passed, 0 failed（新設）
+python tests/test_v5d.py        -> 128 passed, 0 failed
+python tests/test_v5c.py        ->  73 passed, 0 failed
+python tests/test_ledger.py     -> 619 passed, 0 failed
+python tests/test_cost_saving.py->  51 passed, 0 failed
+python tests/test_present.py    -> 466 passed, 0 failed
+python run.py --config configs/config_field_v5e.yaml --provider mock --quiet
+  -> 36か月完走 simulations/2026-08-29_0012_100_field_v5e_a_city
+     取得 45件成立（未発火は ACQ46 の1件だけ）／stage_labels_v5e 9,536行／停止なし
+python tools/run_metrics.py --run <その run_dir>
+  -> version field_v5e / red_definition_version v5e / C_rows_total 9536 / C_unknown 0
+     S_counts {"S1":0,"S2":0,"S3":0}（mock の分類器は defense を返さないので当然）
+python tools/reclassify_v5e.py simulations/2026-08-28_1016_100_field_v5c_runA --dry-run
+  -> 7,284行（utterance 2,958 / thought 4,295 / article 31）／292チャンク／概算 $0.2092
+v5c runA/B/C・v5d の metrics_v5.json を再集計 -> 4本ともバイト一致（v5c の集計は不変）
+```
+
+停止の配線は mock（第2月の発話に「売らない」を混ぜ、その行だけ `defense=true, defense_level="S1"`）で
+実測：第3月以降の取得0件・`defense_stop_v5e.json` に trigger_month 2 / stop_from_month 3 と原文全文・
+`deals_v5.jsonl` に `script_stopped`・停止後のプロンプトに停止／自衛／分類の語が0件。
+赤が出ない mock では取得が台本どおり全件成立。
+
+### 残った判断（CTO へ）
+
+1. **`docs/world_design_v5e.md` が 00:08 に更新され、発注スペックと食い違っている。**
+   ①ルール側の赤が `rule_red_v5e(text, holders, acquired) = S語 ∧ _v5c_rule_blue` になった
+   （スペックは `rule_red_v5e(text)` で青の要求なし）②S1 語彙に「売却しない／譲渡しない／売却は見送」
+   の3語が増えた ③S3 に「取引を凍結／取引の凍結」を足すと本文にある ④凍結時刻を
+   `src/stage_v5e.py` 冒頭に書く指示。**現状はスペックどおり（青の要求なし・S1 15語・S3 16語）で
+   実装してある。** 反映するかは CTO 判断（反映は語彙の追加と関数シグネチャの変更＝走行前に確定が必要）。
+2. **停止した取得の兆候は配られ続ける。** `apply_script_v5` を呼ばなくても
+   `ambient_traces_v5` は台本を直接読むので、成立しなかった取得の兆候（survey・strangers 等）が
+   その月に配られる。スペックは「兆候の配布は最終月まで続く」としか書いておらず、
+   「止めた取得の兆候だけ止める」指示は無いので触っていない。要判断。
+3. `summary["v5e"]["levels_seen"]` は**ランの赤の行 全件**から採ったレベルの集合にした
+   （トリガー行だけに限る案もある＝スペック未定義）。
+4. `STAGE_SYSTEM_V5E` の冒頭は v5c の「4つの点だけを判定する／4つとも false にする」を
+   そのまま残した（deal・area・same_buyer・defense の4つ＋ defense_level は副分類、という読み）。
+5. `configs/config_field_v5e.yaml` の `scenario.acquirer_mandate` 内のコメントは
+   `configs/events_v5d_seed85.yaml` を指したまま（「他は1バイトも変えない」に従った）。
+
+### 変わっていない制約
+
+ルールベース排除／観測に無い事実をコードで補完しない／`mvp_v1`〜`field_v5d` の設定と成果物は不変／
+プロンプトとHTMLに「AI」表記を出さない／`.env` の内容を文書に書かない／
+**実APIは一度も叩いていない（本便は mock のみ）**／ソースリポの `git push` はしない。

@@ -14,7 +14,17 @@ import collections
 import json
 import os
 import re
+import sys
 from typing import Any, Dict, List
+
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
+
+# v5e の赤（自衛の具体的な行動）と自衛レベル。走行中の停止判定と同じコードを使う
+# （判定が二本に割れないように）。青・緑・黄は v5c の実装（この下の _v5c_rule_*）が正。
+from src.stage_v5e import (V5E_LEVELS, defense_level_of,  # noqa: E402
+                           rule_defense_level, rule_red_v5e, stage_v5e)
 
 MEETING_WORDS = ("来週", "日程", "ヒアリング", "訪問", "打ち合わせ", "アポ",
                  "面談", "お伺い", "伺いま", "調整")
@@ -66,7 +76,7 @@ def _v5d_parcel_alias(path: str = _NAMES_YAML) -> Dict[str, str]:
 def _use_parcel_names(version: str) -> None:
     """集計が探す「土地の言い方」を版に合わせる（v5c 以前は P番号のまま）。"""
     global _ACTIVE_PARCEL_RE, _PARCEL_ALIAS
-    if version == "field_v5d":
+    if version in ("field_v5d", "field_v5e"):
         _PARCEL_ALIAS = _v5d_parcel_alias()
         _ACTIVE_PARCEL_RE = re.compile(
             "|".join(re.escape(n) for n in sorted(_PARCEL_ALIAS, key=len, reverse=True)))
@@ -309,7 +319,8 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
     # 版に合わせて「土地の言い方」と S4 の周期を切り替える（v5c 以前は従来どおり）。
     global _ACTIVE_S4_KINDS
     _use_parcel_names(scen_version)
-    _ACTIVE_S4_KINDS = S4_KINDS_V5D if scen_version == "field_v5d" else S4_KINDS
+    _ACTIVE_S4_KINDS = (S4_KINDS_V5D if scen_version in ("field_v5d", "field_v5e")
+                        else S4_KINDS)
 
     deals = _read_jsonl(os.path.join(run_dir, "deals_v5.jsonl"))
     leases = [r for r in ledger if r.get("kind") == "lease"]
@@ -1305,7 +1316,12 @@ def _v5c_prime_event(run_dir):
 def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent,
                       n_steps, n_actors):
     """4段階の色。定義は走行前に固定（施主指示 2026-08-28 09:21）。"""
-    labels = _read_jsonl(os.path.join(run_dir, "stage_labels_v5c.jsonl"))
+    # v5e のランは月次で分類済み＝stage_labels_v5e.jsonl が正（事後に分類し直さない）。
+    # 無ければ従来どおり stage_labels_v5c.jsonl を読む（v5c の集計は1バイトも変えない）。
+    v5e_path = os.path.join(run_dir, "stage_labels_v5e.jsonl")
+    is_v5e = os.path.exists(v5e_path)
+    labels = _read_jsonl(v5e_path if is_v5e
+                         else os.path.join(run_dir, "stage_labels_v5c.jsonl"))
     if not labels:
         return {"C_available": False}
     traces = _read_jsonl(os.path.join(run_dir, "traces_v5.jsonl"))
@@ -1345,16 +1361,21 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
             "rule_blue": _v5c_rule_blue(text, hs, ps),
             "rule_green": _v5c_rule_green(text, hs, ps),
             "rule_yellow": _v5c_rule_yellow(text, hs, ps),
-            "rule_red": _v5c_rule_red(role, text),
+            "rule_red": (rule_red_v5e(text) if is_v5e
+                         else _v5c_rule_red(role, text)),
             "llm_deal": bool(r.get("deal")) if classified else None,
             "llm_area": bool(r.get("area")) if classified else None,
             "llm_same_buyer": bool(r.get("same_buyer")) if classified else None,
-            "llm_admin": bool(r.get("admin")) if classified else None,
+            "llm_admin": (None if is_v5e
+                          else (bool(r.get("admin")) if classified else None)),
+            "llm_defense": ((bool(r.get("defense")) if classified else None)
+                            if is_v5e else None),
+            "llm_defense_level": r.get("defense_level") if is_v5e else None,
             "classified": classified,
             "party_any": bool([d for d in own if int(d.get("step", 0)) <= step]),
         })
     for r in rows:
-        r["stage"] = _v5c_stage(r)
+        r["stage"] = stage_v5e(r) if is_v5e else _v5c_stage(r)
     # 初出は「実際に起きた順」で採る＝月→シーン→ラウンド
     # （Codexレビュー 2026-08-28：月だけで並べていて、同じ月の記事や内心が
     #  先に起きた会話より前に出ることがあった）。
@@ -1452,7 +1473,8 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
         rule_key = {"blue": "rule_blue", "green": "rule_green",
                     "yellow": "rule_yellow", "red": "rule_red"}[c]
         llm_key = {"blue": "llm_deal", "green": "llm_area",
-                   "yellow": "llm_same_buyer", "red": "llm_admin"}[c]
+                   "yellow": "llm_same_buyer",
+                   "red": "llm_defense" if is_v5e else "llm_admin"}[c]
         out["C_%s_rows" % c] = len(sel)
         out["C_%s_public_rows" % c] = len([r for r in sel
                                            if r["kind"] in V5C_PUBLIC_KINDS])
@@ -1492,6 +1514,49 @@ def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent
         _venue_of(r) for r in rows if r["stage"]).most_common())
     out["C_all_rows_by_venue"] = dict(collections.Counter(
         _venue_of(r) for r in rows).most_common())
+
+    if is_v5e:
+        # 赤の副分類（自衛レベル S1〜S3）。色の判定には影響しない（赤は赤のまま）。
+        out["red_definition_version"] = "v5e"
+        reds = [r for r in rows if r["stage"] == "red"]
+        lv_of = {id(r): (defense_level_of(r) or {}) for r in reds}
+        out["S_counts"] = {lv: len([r for r in reds
+                                    if lv_of[id(r)].get("level") == lv])
+                           for lv in V5E_LEVELS}
+        s_first = {}
+        for lv in V5E_LEVELS:
+            hit = next((r for r in reds if lv_of[id(r)].get("level") == lv), None)
+            s_first[lv] = None if hit is None else {
+                "month": hit["step"], "agent_id": hit["from"], "role": hit["role"],
+                "kind": hit["kind"], "scene": hit["scene"],
+                "venue": _venue_of(hit),
+                "venue_label": venue_label.get(hit["venue"], _venue_of(hit)),
+                "text": hit["text"]}
+        out["S_first"] = s_first
+        agree = {"llm_and_rule_same": 0, "llm_only": 0, "rule_only": 0, "disagree": 0}
+        for r in reds:
+            lv = lv_of[id(r)]
+            a, b = lv.get("llm_level"), lv.get("rule_level")
+            if a and b:
+                agree["llm_and_rule_same" if a == b else "disagree"] += 1
+            elif a:
+                agree["llm_only"] += 1
+            elif b:
+                agree["rule_only"] += 1
+        out["S_level_agreement"] = agree
+        out["S_rows"] = [{"month": r["step"], "agent_id": r["from"], "role": r["role"],
+                          "kind": r["kind"], "scene": r["scene"],
+                          "venue": _venue_of(r),
+                          "venue_label": venue_label.get(r["venue"], _venue_of(r)),
+                          "level": lv_of[id(r)].get("level"),
+                          "level_source": lv_of[id(r)].get("level_source"),
+                          "llm_level": lv_of[id(r)].get("llm_level"),
+                          "rule_level": lv_of[id(r)].get("rule_level"),
+                          "text": r["text"]} for r in reds]
+        stop_path = os.path.join(run_dir, "defense_stop_v5e.json")
+        if os.path.exists(stop_path):
+            with open(stop_path, encoding="utf-8") as f:
+                out["defense_stop"] = json.load(f)
 
     prime = _v5c_prime_event(run_dir)
     if prime:
@@ -1547,7 +1612,8 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        if version in ("field_v5", "field_v5b", "field_v5c", "field_v5d"):
+        if version in ("field_v5", "field_v5b", "field_v5c", "field_v5d",
+                       "field_v5e"):
             rows.append(metrics_v5(run))
         elif version == "field_v4_1b":
             rows.append(metrics_v41b(run))

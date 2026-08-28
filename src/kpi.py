@@ -347,3 +347,107 @@ def classify_stage_v5c(client, rows: List[Dict[str, Any]],
                         "admin": bool(r.get("admin")) if r else None,
                         "classified": r is not None})
     return out
+
+
+# ---------------------------------------------------------------------------
+# v5e: 赤の再定義（自衛の具体的な行動）と自衛レベル S1〜S3
+#   施主指示 2026-08-28 23:43／設計の正 docs/world_design_v5e.md §1。
+#   deal / area / same_buyer の文言は STAGE_SYSTEM から一字一句そのまま写した
+#   （青・緑・黄の定義は v5c から1文字も変えない）。admin を落とし、
+#   defense と defense_level を足したのが v5e の全差分である。
+#   定義は走行前に固定する。観測であって世界には戻らない（主体には一切見せない）。
+# ---------------------------------------------------------------------------
+
+STAGE_SYSTEM_V5E = """あなたは会話ログの分類器である。架空都市A市の住民・事業者・仲介・行政・記者の
+発言や内心を読み、4つの点だけを判定する。判定に使ってよいのは渡された文そのものだけで、
+背景を推測しない。文がどれにも当たらないなら4つとも false にする。
+
+deal: その文が、土地・建物の売買、賃貸、名義（登記）の変更について話しているなら true。
+  1件でもよい。土地や建物の話が出てこないなら false。
+area: その文が、2件以上の取引を互いに関係づけている、または「この辺一帯」「あの通り」
+  「次々に」のように、ひとつの取引を超えた広がり・面として語っているなら true。
+  1件の取引だけを語っているなら false。
+same_buyer: その文が、名義の違う複数の会社（A社・B社・C社・D社など）や複数の取引を、
+  **同じひとつの買い手・同じ主体の動き**として結びつけているなら true。
+  会社名を2つ並べただけ、別々の話として触れただけなら false。
+defense: その文が、「複数の土地が同じ相手に渡っている」という事態そのものに対して、
+  それを止める・防ぐ・広く知らせるための**具体的な行動**を、話し手が
+  取った・取ると決めた・取るよう呼びかけている、と述べているなら true。
+  次はすべて false にする。
+   - 空き地の活用、まちづくり、面的な開発、地域の活性化といった一般論
+   - 個別の案件についての相談・問い合わせ・窓口でのやり取り
+   - 「関係部署と連携して検討する」「実態を把握したい」のような、対象もやることも
+     定まっていない言い回し
+   - 記者からの取材依頼と、それに答えただけの発言
+   - 心配・不安・噂の共有・感想だけの発言
+defense_level: defense が true のときだけ次のどれかを返す。false のときは "none"。
+   "S3" 行政の立場で、売買の禁止・届出の義務づけ・条例・買い戻し・差し止めなど、
+        取引そのものを止める／縛る措置を取る・決めたと述べている。
+   "S2" 特定の買い手（A社・B社・C社・D社など）について、回覧・説明会・記事・
+        組合や町内会としての呼びかけなど、広く知らせる行動を取る・呼びかけている。
+   "S1" 話し手自身（自分の家・自分の店）が、その買い手には売らない・貸さないと決めた、
+        あるいは身近な人にそうするよう勧めている。
+
+JSONだけを返す。"""
+
+
+STAGE_SCHEMA_V5E = {
+    "type": "object",
+    "properties": {
+        "results": {"type": "array", "items": {"type": "object", "properties": {
+            "id": {"type": "integer"},
+            "deal": {"type": "boolean"},
+            "area": {"type": "boolean"},
+            "same_buyer": {"type": "boolean"},
+            "defense": {"type": "boolean"},
+            "defense_level": {"type": "string",
+                              "enum": ["none", "S1", "S2", "S3"]},
+        }, "required": ["id", "deal", "area", "same_buyer", "defense",
+                        "defense_level"]}},
+    },
+    "required": ["results"],
+}
+
+
+def build_stage_prompt_v5e(rows: List[Dict[str, Any]]) -> str:
+    out = ["次の文をそれぞれ判定して results を返す。"]
+    for i, r in enumerate(rows, start=1):
+        out.append(f"{i}. {str(r.get('text', ''))[:STAGE_TEXT_LIMIT]}")
+    return "\n".join(out)
+
+
+def classify_stage_v5e(client, rows: List[Dict[str, Any]], batch: int = 25,
+                       job_key: Optional[str] = None) -> List[Dict[str, Any]]:
+    """4段階の色の材料（deal / area / same_buyer / defense / defense_level）を付ける。
+
+    v5e では走行中の月末にも同じ関数を呼ぶ（停止判定と事後集計で判定が二本に割れないように）。
+    解析できなかった行は None を入れて **unknown** として残す（false と混同しない）。
+    """
+    chunks = [rows[i:i + batch] for i in range(0, len(rows), batch)]
+    raws = _generate_chunks(client, STAGE_SYSTEM_V5E,
+                            [build_stage_prompt_v5e(c) for c in chunks],
+                            STAGE_SCHEMA_V5E, 0.0, 1800, "classify_stage_v5e",
+                            job_key)
+    out: List[Dict[str, Any]] = []
+    for chunk, raw in zip(chunks, raws):
+        parsed: Dict[int, Dict[str, Any]] = {}
+        try:
+            for r in (json.loads(raw) if raw else {}).get("results", []):
+                parsed[int(r["id"])] = r
+        except Exception:
+            parsed = {}
+        for j, row in enumerate(chunk, start=1):
+            r = parsed.get(j)
+            level = None
+            if r is not None:
+                level = str(r.get("defense_level", "none"))
+                if level not in ("none", "S1", "S2", "S3"):
+                    level = "none"
+            out.append({**row,
+                        "deal": bool(r.get("deal")) if r else None,
+                        "area": bool(r.get("area")) if r else None,
+                        "same_buyer": bool(r.get("same_buyer")) if r else None,
+                        "defense": bool(r.get("defense")) if r else None,
+                        "defense_level": level,
+                        "classified": r is not None})
+    return out

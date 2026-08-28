@@ -52,6 +52,7 @@ from .field_v4_1b import (CONSULT_NONE, DEFAULT_ADVICE_CAPACITY,
                           phase1_schema_v41b, record_consult_v41b)
 from .field_v5 import (DIRECT_NONE as DIRECT_NONE_V5, HOME as HOME_V5,
                        SCENE_IDS, SCENE_LABELS,
+                       acquisitions_at,
                        ambient_traces_v5, apply_script_v5, build_plan_prompt_v5,
                        build_scene_prompt_v5, build_system_prompt_v5,
                        ensure_v5_state, load_script_v5, plan_schema_v5,
@@ -61,9 +62,10 @@ from .field_v5c import build_system_prompt_v5c, venue_candidates_for_all
 from .field_v5d import (TRACE_TEXTS_V5D, build_system_prompt_v5d, load_names_v5d,
                         s4_for_step_v5d, scene_schema_v5d, venue_labels_v5d)
 from .kpi import (classify_occupation, classify_publications, classify_utterances,
-                  classify_stage_v5c,
+                  classify_stage_v5c, classify_stage_v5e,
                   cognition_series,
                   detection_lag, late_index, step_metrics)
+from .stage_v5e import defense_level_of, rule_red_v5e
 from .llm_client_factory import UsageMeter, create_llm_client
 from .prompts import build_system_prompt, build_user_prompt
 from .schemas import action_schema, verbs_for
@@ -183,15 +185,25 @@ class Simulation:
         self.field_v4 = cfg.get("scenario_version") == "field_v4"
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
         self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b",
-                                                        "field_v5c", "field_v5d")
+                                                        "field_v5c", "field_v5d",
+                                                        "field_v5e")
         self.field_v5b = cfg.get("scenario_version") == "field_v5b"
         # v5c は v5b の世界に「買い手の戦略で組んだ台本」と「日常の場」を足しただけ。
         # 観測の作り方・兆候・プロンプトの文面は v5/v5b と同一である。
         self.field_v5c = cfg.get("scenario_version") == "field_v5c"
         # v5d は v5c の世界から「役場の窓口」を外し、土地と主体を街の呼び名で呼ぶ層。
         # 区画・日常の場・4段階の色は v5c と同じものを使う（docs/world_design_v5d.md）。
-        self.field_v5d = cfg.get("scenario_version") == "field_v5d"
+        # v5e の世界（主体への入力）は v5d と完全に同一なので、世界の層は v5d を使う。
+        # v5e で変わるのは観測側（赤の定義・自衛レベル）・買い手の台本（目玉の月・停止）・
+        # 月数だけである（docs/world_design_v5e.md §0）。
+        self.field_v5d = cfg.get("scenario_version") in ("field_v5d", "field_v5e")
+        self.field_v5e = cfg.get("scenario_version") == "field_v5e"
         self.v5c_like = self.field_v5c or self.field_v5d
+        # v5e: 月末に回す分類の結果と、自衛が出て台本を止めた記録（主体には一切見せない）。
+        self.stage_labels_v5e: List[Dict[str, Any]] = []
+        self.defense_stop: Optional[Dict[str, Any]] = None
+        self.v5e_applied = 0
+        self.v5e_suspended = 0
         # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
         self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
@@ -1605,7 +1617,23 @@ class Simulation:
         # --- 0) 台本どおりに名義が移る（LLMは関与しない） --------------------
         old_names = {p.pid: (p.registered_name or self.names.get(p.owner_id, p.owner_id))
                      for p in self.ledger.parcels.values()}
-        for done in apply_script_v5(self.ledger, step, self.script, acquirer_id):
+        # v5e: 自衛の具体的な行動が観測された翌月から、買い手は台本の取得を止める
+        # （買い手側の反応であって、主体には一切知らされない＝docs/world_design_v5e.md §3）。
+        if (self.field_v5e and self.defense_stop
+                and step >= int(self.defense_stop["stop_from_month"])):
+            for acq in acquisitions_at(self.script, step):
+                self.v5e_suspended += 1
+                self.ledger._rec(step, "script_suspended", acq_id=acq["id"],
+                                 parcel_id=acq["parcel_id"],
+                                 reason="defense_detected")
+                self.ledger.v5_deals.append(
+                    {"step": step, "kind": "script_stopped", "acq_id": acq["id"],
+                     "parcel_id": acq["parcel_id"], "reason": "defense_detected"})
+            done_list = []
+        else:
+            done_list = apply_script_v5(self.ledger, step, self.script, acquirer_id)
+            self.v5e_applied += len(done_list)
+        for done in done_list:
             self.events.append({"step": step, "agent_id": "SCRIPT", "role": "script",
                                 "name": "台本",
                                 "action_type": ("scripted_lease"
@@ -1825,6 +1853,53 @@ class Simulation:
                                 {"step": step, "to": pid_, "from": row["from"],
                                  "kind": "scene", "location": row["venue"],
                                  "obs_id": row["utt_id"], "text": row["text"][:200]})
+
+        if self.field_v5e:
+            self._v5e_month_end(step)
+
+    def _v5e_month_end(self, step: int) -> None:
+        """その月の発話・内心・記事を観測側と同じ分類器で読む（v5e だけ）。
+
+        結果は最終の `stage_labels_v5e.jsonl` にそのまま使う（事後に分類し直さない＝
+        同じ入力に二重課金しない・判定が二本に割れない）。赤が1行でも立ったら
+        翌月以降の台本の取得を止める。**主体には一切見せない**（inbox・traces・
+        プロンプトのどこにも入らない）。
+        """
+        kcfg = self.cfg.get("kpi", {})
+        if not kcfg.get("classify_utterances", True):
+            return
+        rows = ([{"kind": "utterance", **u} for u in self.ledger.v5_utterances
+                 if int(u.get("step", 0)) == step]
+                + [{"kind": "thought", **t} for t in self.thoughts
+                   if int(t.get("step", 0)) == step]
+                + [{"kind": "article", **a} for a in self.ledger.v5_articles
+                   if int(a.get("step", 0)) == step])
+        if not rows:
+            return
+        labels = classify_stage_v5e(self.client, rows,
+                                    batch=int(kcfg.get("classify_batch", 25)),
+                                    job_key=f"m{step:02d}_stage")
+        self.stage_labels_v5e.extend(labels)
+
+        triggers = []
+        for r in labels:
+            text = str(r.get("text", ""))
+            classified = bool(r.get("classified"))
+            if not (classified and rule_red_v5e(text) and bool(r.get("defense"))):
+                continue
+            lv = defense_level_of({"classified": True, "rule_red": True,
+                                   "rule_yellow": False, "rule_green": False,
+                                   "rule_blue": False, "llm_defense": True,
+                                   "llm_defense_level": r.get("defense_level"),
+                                   "text": text}) or {}
+            triggers.append({"step": step, "from": r.get("from", ""),
+                             "role": r.get("role", ""), "kind": r.get("kind", ""),
+                             "scene": r.get("scene", ""), "venue": r.get("venue", ""),
+                             "text": text, "level": lv.get("level"),
+                             "level_source": lv.get("level_source")})
+        if triggers and self.defense_stop is None:
+            self.defense_stop = {"stop_from_month": step + 1, "trigger_month": step,
+                                 "triggers": triggers}
 
     def _record_own_results(self, step: int) -> None:
         """今月自分が選んだ行為が帳簿でどうなったかを、本人の翌月観測へ渡す。
@@ -2293,7 +2368,8 @@ class Simulation:
                     and kcfg.get("classify_occupation", True) and occ_rows):
                 occ_labels = classify_occupation(
                     self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
-            if (self.v5c_like and kcfg.get("classify_utterances", True) and occ_rows):
+            if (self.v5c_like and not self.field_v5e
+                    and kcfg.get("classify_utterances", True) and occ_rows):
                 # 定義は走行前に固定（docs/world_design_v5c_buyer_strategy.md §1）。
                 stage_labels = classify_stage_v5c(
                     self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
@@ -2349,6 +2425,32 @@ class Simulation:
             },
         }
 
+        if self.field_v5e:
+            # v5e: 自衛の観測と、それに対する買い手の反応（台本の停止）の記録。
+            # 「出なかった」も同じ重みで残す（docs/world_design_v5e.md §3）。
+            levels_seen = sorted({lv["level"]
+                                  for lv in (defense_level_of(
+                                      {"classified": True, "rule_red": True,
+                                       "rule_yellow": False, "rule_green": False,
+                                       "rule_blue": False, "llm_defense": True,
+                                       "llm_defense_level": r.get("defense_level"),
+                                       "text": str(r.get("text", ""))})
+                                      for r in self.stage_labels_v5e
+                                      if (bool(r.get("classified"))
+                                          and bool(r.get("defense"))
+                                          and rule_red_v5e(str(r.get("text", "")))))
+                                  if lv and lv.get("level")})
+            stop = self.defense_stop
+            summary["v5e"] = {
+                "stopped": bool(stop),
+                "trigger_month": stop["trigger_month"] if stop else None,
+                "stop_from_month": stop["stop_from_month"] if stop else None,
+                "trigger_count": len(stop["triggers"]) if stop else 0,
+                "levels_seen": levels_seen,
+                "acquisitions_applied": self.v5e_applied,
+                "acquisitions_suspended": self.v5e_suspended,
+            }
+
         # 自分が作った明示キャッシュを片付ける（保存料は保持時間で課金されるため）。
         try:
             closed = self.client.close_caches()
@@ -2374,6 +2476,16 @@ class Simulation:
             # 一切見せない・世界には戻らない）。判定の定義は実装仕様6章で走行前に固定。
             if occ_labels:
                 _write_jsonl(os.path.join(d, "occupation_labels.jsonl"), occ_labels)
+            if self.field_v5e:
+                _write_jsonl(os.path.join(d, "stage_labels_v5e.jsonl"),
+                             self.stage_labels_v5e)
+                stop = self.defense_stop or {"stopped": False, "months": self.n_steps}
+                if self.defense_stop:
+                    stop = {"stopped": True, "months": self.n_steps,
+                            **self.defense_stop}
+                with open(os.path.join(d, "defense_stop_v5e.json"), "w",
+                          encoding="utf-8") as f:
+                    json.dump(stop, f, ensure_ascii=False, indent=2)
             if self.v5c_like:
                 if stage_labels:
                     _write_jsonl(os.path.join(d, "stage_labels_v5c.jsonl"), stage_labels)
