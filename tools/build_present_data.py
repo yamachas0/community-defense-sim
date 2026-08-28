@@ -29,7 +29,8 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 import yaml  # noqa: E402
 
 from run_metrics import (_read_jsonl, _v5_mentions, _v5_s4_kind,  # noqa: E402
-                         V5_PARCEL_RE)
+                         _v5c_rule_blue, _v5c_rule_green, _v5c_rule_red,
+                         _v5c_rule_yellow, _v5c_stage, V5C_COLORS, V5_PARCEL_RE)
 
 
 def _load(run_dir, name):
@@ -55,6 +56,7 @@ def build(run_dir: str) -> dict:
     deals = _load(run_dir, "deals_v5.jsonl")
     classified = _load(run_dir, "utterances.jsonl")
     occ = _load(run_dir, "occupation_labels.jsonl")
+    stage_labels = _load(run_dir, "stage_labels_v5c.jsonl")
 
     n_steps = int(summary.get("steps") or 0)
     version = str(cfg.get("scenario_version", "field_v5"))
@@ -191,6 +193,97 @@ def build(run_dir: str) -> dict:
                 o1_month_any.setdefault(pid, step)
                 if public:
                     o1_month.setdefault(pid, step)
+
+    # --- v5c: 4段階の色（青／緑／黄／赤） -----------------------------------
+    # 地図に塗るのは **公の場（発話・記事）で、当事者以外が、その月までに成立した取得を
+    # 名指しした行** だけ（v5b の右地図と同じ3条件）。色は run_metrics と同じ
+    # 「ルール1次抽出 ∧ LLM ラベル」で、区画ごとにその時点までの最高段階を採る。
+    stage_by_parcel, stage_series, stage_stats = {}, {}, {}
+    if stage_labels:
+        role_of = {}
+        for r in utts + thoughts:
+            if r.get("from") and r.get("role"):
+                role_of[r["from"]] = r["role"]
+        rank = {c: i for i, c in enumerate(V5C_COLORS)}
+        cum = {c: set() for c in V5C_COLORS}
+        cum_priv = {c: set() for c in V5C_COLORS}
+        series = {c: {} for c in V5C_COLORS}
+        series_priv = {c: {} for c in V5C_COLORS}
+        rows = []
+        for r in stage_labels:
+            step = int(r.get("step", 0))
+            text = str(r.get("text", ""))
+            role = r.get("role") or role_of.get(r.get("from"), "")
+            hs = holders_by_step.get(step, set())
+            ps = acquired_by_step.get(step, set())
+            row = {
+                "step": step, "from": r.get("from", ""), "kind": r.get("kind", ""),
+                "text": text, "venue": r.get("venue", ""), "scene": r.get("scene", ""),
+                "classified": bool(r.get("classified", True)) and r.get("deal") is not None,
+                "rule_blue": _v5c_rule_blue(text, hs, ps),
+                "rule_green": _v5c_rule_green(text, hs, ps),
+                "rule_yellow": _v5c_rule_yellow(text, hs, ps),
+                "rule_red": _v5c_rule_red(role, text),
+                "llm_deal": bool(r.get("deal")) if r.get("deal") is not None else None,
+                "llm_area": bool(r.get("area")) if r.get("area") is not None else None,
+                "llm_same_buyer": (bool(r.get("same_buyer"))
+                                   if r.get("same_buyer") is not None else None),
+                "llm_admin": bool(r.get("admin")) if r.get("admin") is not None else None,
+            }
+            row["stage"] = _v5c_stage(row)
+            rows.append(row)
+        for step in range(1, n_steps + 1):
+            for row in rows:
+                if row["step"] != step or not row["stage"]:
+                    continue
+                if row["kind"] in ("utterance", "article"):
+                    cum[row["stage"]].add(row["from"])
+                else:
+                    cum_priv[row["stage"]].add(row["from"])
+            for c in V5C_COLORS:
+                series[c][str(step)] = len(cum[c])
+                series_priv[c][str(step)] = len(cum_priv[c] - cum[c])
+        for row in sorted(rows, key=lambda r: r["step"]):
+            if not row["stage"] or row["kind"] not in ("utterance", "article"):
+                continue
+            for pid in {p for p in V5_PARCEL_RE.findall(row["text"])
+                        if p in acquired_by_step.get(row["step"], set())}:
+                if row["from"] == party_of.get(pid):
+                    continue
+                cur = stage_by_parcel.get(pid)
+                if cur is None or rank[row["stage"]] > rank[cur["color"]]:
+                    stage_by_parcel[pid] = {"color": row["stage"], "month": row["step"],
+                                            "from": row["from"], "kind": row["kind"],
+                                            "text": row["text"][:160]}
+        stage_series = {"public": series, "private_only": series_priv}
+        stage_stats = {
+            "rows_by_color": {c: len([r for r in rows if r["stage"] == c])
+                              for c in V5C_COLORS},
+            "public_agents_final": {c: len(cum[c]) for c in V5C_COLORS},
+            "private_only_final": {c: len(cum_priv[c] - cum[c]) for c in V5C_COLORS},
+            "unknown": len([r for r in rows if not r["classified"]]),
+            "first": {c: next(({"month": r["step"], "from": r["from"],
+                                "kind": r["kind"], "venue": r["venue"],
+                                "text": r["text"][:180]}
+                               for r in sorted(rows, key=lambda z: z["step"])
+                               if r["stage"] == c), None) for c in V5C_COLORS},
+            "venue_first": {},
+        }
+        seen_pair = set()
+        vf = {c: {} for c in V5C_COLORS}
+        for r in sorted(rows, key=lambda z: z["step"]):
+            if not r["stage"] or (r["from"], r["stage"]) in seen_pair:
+                continue
+            seen_pair.add((r["from"], r["stage"]))
+            key = ("記事" if r["kind"] == "article"
+                   else r["venue"] or ("自宅・計画" if r["scene"] == "plan" else "—"))
+            vf[r["stage"]][key] = vf[r["stage"]].get(key, 0) + 1
+        stage_stats["venue_first"] = vf
+        # 4色で塗るときの「語られなかった区画」＝取得済みなのに一度も色が付かなかったもの。
+        stage_stats["silent"] = sorted(pid for pid in acquired_month
+                                       if pid not in stage_by_parcel)
+        stage_stats["basis"] = ("公の場（発話・記事）で、当事者以外が、その月までに成立した"
+                                "取得を名指しした行のうち、ルール1次抽出 ∧ LLM で色が付いたもの")
 
     # --- 兆候（誰にいつ見えたか）・沈黙の区画の突き合わせ用 -----------------
     trace_rows = [{"month": int(t.get("step", 0)), "agent_id": t.get("agent_id"),
@@ -375,6 +468,17 @@ def build(run_dir: str) -> dict:
         "rule_only_parcels": len(rule_only_only),
         "public_transfers": public_transfers,
         "cost_note": "トークン数×公開単価からの推計（請求実績ではない）",
+        # v5c（4段階の色）
+        "C_blue": metrics.get("C_blue_rows"), "C_green": metrics.get("C_green_rows"),
+        "C_yellow": metrics.get("C_yellow_rows"), "C_red": metrics.get("C_red_rows"),
+        # 「到達した最高段階」は排他的な状態で出す（一度でも達した人数は別値）。
+        "C_state_public": (metrics.get("C_state_public_final")
+                           if metrics.get("C_available") else None),
+        "C_ever_public_agents": ({c: metrics.get("C_%s_ever_public_agents_final" % c)
+                                  for c in V5C_COLORS}
+                                 if metrics.get("C_available") else None),
+        "C_unknown": metrics.get("C_unknown"),
+        "venues": len((cfg.get("social", {}) or {}).get("venues") or []),
     }
 
     # 公開済み metrics との突き合わせ（画面の数字が集計と食い違わないことの担保）
@@ -398,7 +502,9 @@ def build(run_dir: str) -> dict:
         "deals_matches_metrics": (len(events) == (metrics.get("deals")
                                                   or metrics.get("acquisitions"))),
         "map_basis": "LLM分類を通った発話のみ（当事者以外・その月までに成立）",
-        "metrics_basis": "記事・私信はルール抽出のみ・売買19件のみ",
+        "metrics_basis": ("記事・私信はルール抽出のみ・売買"
+                          + str(len([e for e in events if e["kind"] == "sale"]))
+                          + "件のみ"),
         "noticed_map": len(awareness),
         "silent_map": len(silent),
         "noticed_metrics_basis_sale": len(loose_sale),
@@ -408,7 +514,7 @@ def build(run_dir: str) -> dict:
     return {
         "meta": {"generated_from": os.path.basename(run_dir),
                  "generator": "tools/build_present_data.py",
-                 "schema": 2,
+                 "schema": 3,
                  "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
                  "note": "画面の数値・塗りはこのJSONだけから描く（手打ち禁止）"},
         "grid": {"cols": cols, "rows": rows, "blocks": blocks, "parcels": parcels},
@@ -423,6 +529,12 @@ def build(run_dir: str) -> dict:
         "agent_timeline": agent_timeline,
         "agent_deals": {k: v for k, v in agent_deals.items() if k in agent_timeline},
         "scene_replay": scene_replay,
+        "stage_by_parcel": stage_by_parcel,
+        "stage_series": stage_series,
+        "stage_stats": stage_stats,
+        "prime_event": metrics.get("C_prime_event"),
+        "venue_labels": {v["id"]: v["label"]
+                         for v in ((cfg.get("social", {}) or {}).get("venues") or [])},
         "stats": stats,
         "checks": checks,
     }

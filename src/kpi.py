@@ -244,3 +244,88 @@ def classify_occupation(client, rows: List[Dict[str, Any]],
                         "intent": bool(r.get("intent")) if r else None,
                         "classified": r is not None})
     return out
+
+
+# ---------------------------------------------------------------------------
+# v5c: 4段階の色（青／緑／黄／赤）の事後分類
+#   施主指示 2026-08-28 09:21：
+#     ①個別の売買の話題だけは青、複数の売買の関係性や面的な話に話が及んだら緑、
+#      X社にたどり着いたら黄色、行政が規制に動いたら赤
+#   定義は**走行前に固定**する。観測であって世界には戻らない（主体には一切見せない）。
+#   ここでは「連結」「意図」という語を使わない（施主指示）。
+# ---------------------------------------------------------------------------
+
+STAGE_SYSTEM = """あなたは会話ログの分類器である。架空都市A市の住民・事業者・仲介・行政・記者の
+発言や内心を読み、4つの点だけを判定する。判定に使ってよいのは渡された文そのものだけで、
+背景を推測しない。文がどれにも当たらないなら4つとも false にする。
+
+deal: その文が、土地・建物の売買、賃貸、名義（登記）の変更について話しているなら true。
+  1件でもよい。土地や建物の話が出てこないなら false。
+area: その文が、2件以上の取引を互いに関係づけている、または「この辺一帯」「あの通り」
+  「次々に」のように、ひとつの取引を超えた広がり・面として語っているなら true。
+  1件の取引だけを語っているなら false。
+same_buyer: その文が、名義の違う複数の会社（A社・B社・C社・D社など）や複数の取引を、
+  **同じひとつの買い手・同じ主体の動き**として結びつけているなら true。
+  会社名を2つ並べただけ、別々の話として触れただけなら false。
+admin: 話し手が市役所・行政の立場として、届出・条例・規制・調査・指導・要綱・実態の把握など、
+  **行政としての対応**を取る、検討する、決めたと述べているなら true。
+  住民が「市に相談したい」と言っただけ、行政が世間話をしただけなら false。
+
+JSONだけを返す。"""
+
+
+STAGE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "results": {"type": "array", "items": {"type": "object", "properties": {
+            "id": {"type": "integer"},
+            "deal": {"type": "boolean"},
+            "area": {"type": "boolean"},
+            "same_buyer": {"type": "boolean"},
+            "admin": {"type": "boolean"},
+        }, "required": ["id", "deal", "area", "same_buyer", "admin"]}},
+    },
+    "required": ["results"],
+}
+
+
+# 分類器に渡す文の上限。ルール抽出は全文を見るのに LLM だけ 400 字で切ると、
+# 後半に結びつきや行政対応が書かれた長文が必ず落ちる（Codexレビュー 2026-08-28）。
+# 内心の目安は250字・発言150字・記事300字なので、1200字あれば実質切らない。
+STAGE_TEXT_LIMIT = 1200
+
+
+def build_stage_prompt_v5c(rows: List[Dict[str, Any]]) -> str:
+    out = ["次の文をそれぞれ判定して results を返す。"]
+    for i, r in enumerate(rows, start=1):
+        out.append(f"{i}. {str(r.get('text', ''))[:STAGE_TEXT_LIMIT]}")
+    return "\n".join(out)
+
+
+def classify_stage_v5c(client, rows: List[Dict[str, Any]],
+                       batch: int = 25) -> List[Dict[str, Any]]:
+    """4段階の色の材料（deal / area / same_buyer / admin）を事後に付ける。
+
+    解析できなかった行は None を入れて **unknown** として残す（false と混同しない）。
+    """
+    out: List[Dict[str, Any]] = []
+    for i in range(0, len(rows), batch):
+        chunk = rows[i:i + batch]
+        raw = client.generate(STAGE_SYSTEM, build_stage_prompt_v5c(chunk),
+                              schema=STAGE_SCHEMA, temperature=0.0,
+                              max_tokens=1800, tag="classify_stage_v5c")
+        parsed: Dict[int, Dict[str, Any]] = {}
+        try:
+            for r in (json.loads(raw) if raw else {}).get("results", []):
+                parsed[int(r["id"])] = r
+        except Exception:
+            parsed = {}
+        for j, row in enumerate(chunk, start=1):
+            r = parsed.get(j)
+            out.append({**row,
+                        "deal": bool(r.get("deal")) if r else None,
+                        "area": bool(r.get("area")) if r else None,
+                        "same_buyer": bool(r.get("same_buyer")) if r else None,
+                        "admin": bool(r.get("admin")) if r else None,
+                        "classified": r is not None})
+    return out

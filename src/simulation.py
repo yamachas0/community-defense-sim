@@ -57,7 +57,9 @@ from .field_v5 import (DIRECT_NONE as DIRECT_NONE_V5, HOME as HOME_V5,
                        ensure_v5_state, load_script_v5, plan_schema_v5,
                        registry_rows_v5, s4_for_step, scene_schema_v5,
                        venue_traces_v5)
+from .field_v5c import build_system_prompt_v5c, venue_candidates_for_all
 from .kpi import (classify_occupation, classify_publications, classify_utterances,
+                  classify_stage_v5c,
                   cognition_series,
                   detection_lag, late_index, step_metrics)
 from .llm_client_factory import UsageMeter, create_llm_client
@@ -172,8 +174,12 @@ class Simulation:
         self.field_v3 = cfg.get("scenario_version") == "field_v3"
         self.field_v4 = cfg.get("scenario_version") == "field_v4"
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
-        self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b")
+        self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b",
+                                                        "field_v5c")
         self.field_v5b = cfg.get("scenario_version") == "field_v5b"
+        # v5c は v5b の世界に「買い手の戦略で組んだ台本」と「日常の場」を足しただけ。
+        # 観測の作り方・兆候・プロンプトの文面は v5/v5b と同一である。
+        self.field_v5c = cfg.get("scenario_version") == "field_v5c"
         # v4.1b は v4.1 の世界に相談経路と行政の面積観測を足しただけ＝土台は v4.1 と同じ。
         self.field_v41 = cfg.get("scenario_version") in ("field_v4_1", "field_v4_1b")
         self.personas = personas
@@ -260,8 +266,20 @@ class Simulation:
             self.scene_rounds = int(scen.get("scene_rounds", 2))
             self.direct_quota = int(scen.get("direct_quota_per_month", 2))
             self.article_quota = int(scen.get("article_quota_per_month", 1))
-            self.system_prompts = {a.agent_id: build_system_prompt_v5(a, cfg, len(parcels))
-                                   for a in self.actors}
+            if self.field_v5c:
+                # 行ける場所は主体ごとに違う（世界の事実＝生活動線）。毎月どこへ行くかは
+                # 主体が選ぶ。system プロンプトの文面は v5 と同一で、並ぶ会場だけが違う。
+                self.venue_choices = venue_candidates_for_all(self.actors, self.venue_ids)
+                self.system_prompts = {
+                    a.agent_id: build_system_prompt_v5c(a, cfg, len(parcels),
+                                                        self.venue_choices[a.agent_id])
+                    for a in self.actors}
+            else:
+                self.venue_choices = {a.agent_id: list(self.venue_ids)
+                                      for a in self.actors}
+                self.system_prompts = {a.agent_id: build_system_prompt_v5(a, cfg,
+                                                                          len(parcels))
+                                       for a in self.actors}
         elif self.field_v41b:
             self.system_prompts = {
                 a.agent_id: build_system_prompt_v41b(a, cfg, len(parcels),
@@ -1393,14 +1411,16 @@ class Simulation:
         return any(p.owner_id == agent.agent_id for p in self.ledger.parcels.values())
 
     def _v5_thought(self, agent: Agent, act: Dict[str, Any], step: int,
-                    scene: str, venue: str) -> None:
+                    scene: str, venue: str, round_no: int = 0) -> None:
         thought = str(act.get("thought", "") or "").strip()
         if not thought:
             return
         agent.extra["thought"] = thought
+        # round は同じ月の中の前後関係を後から復元するために残す
+        # （Codexレビュー 2026-08-28：初出の時系列が月単位でしか分からなかった）。
         self.thoughts.append({"step": step, "from": agent.agent_id, "role": agent.role,
                               "name": agent.name, "text": thought,
-                              "scene": scene, "venue": venue})
+                              "scene": scene, "venue": venue, "round": round_no})
 
     def _v5_stance(self, agent: Agent, act: Dict[str, Any], step: int,
                    scene: str) -> None:
@@ -1447,7 +1467,7 @@ class Simulation:
                                 "kind": "direct", "location": scene, "text": text[:200]})
 
     def _v5_publish(self, agent: Agent, act: Dict[str, Any], step: int,
-                    scene: str) -> None:
+                    scene: str, round_no: int = 0) -> None:
         text = str(act.get("publish", "") or "").strip()
         if not text:
             return
@@ -1458,7 +1478,8 @@ class Simulation:
         agent.extra["articles_used"] = agent.extra.get("articles_used", 0) + 1
         self.ledger.record_publication(step, agent.agent_id, text[:40], text, False)
         self.ledger.v5_articles.append({"step": step, "from": agent.agent_id,
-                                        "scene": scene, "text": text})
+                                        "scene": scene, "round": round_no,
+                                        "text": text})
         for other in self.actors:
             other.inbox.append({"kind": "article", "from": agent.agent_id,
                                 "text": text, "step": step})
@@ -1525,7 +1546,7 @@ class Simulation:
             prompt = build_plan_prompt_v5(a, self.ledger, step, self.n_steps, self.names,
                                           a.extra["traces"], label4, venue4)
             items.append((a, self.system_prompts[a.agent_id], prompt,
-                          plan_schema_v5(self.venue_ids, venue4)))
+                          plan_schema_v5(self.venue_choices[a.agent_id], venue4)))
         results = self._call_batch(items, "plan")
         for a in self.actors:
             a.inbox = []      # 観測を作り終えた直後に空にする（以降は翌月ぶん）
@@ -1538,7 +1559,8 @@ class Simulation:
                 self._v5_thought(a, act, step, "plan", "")
                 for sid in SCENE_IDS:
                     value = str(act.get(f"plan_{sid.lower()}", "") or "").strip()
-                    allowed = [venue4] if sid == "S4" else self.venue_ids
+                    allowed = ([venue4] if sid == "S4"
+                               else self.venue_choices[a.agent_id])
                     if value in allowed:
                         plan[sid] = value
                     elif value and value != HOME_V5:
@@ -1636,11 +1658,11 @@ class Simulation:
                     act = self._v5_parse(a, results, step, f"{sid}r{rnd}")
                     if act is None:
                         continue
-                    self._v5_thought(a, act, step, sid, venue_id)
+                    self._v5_thought(a, act, step, sid, venue_id, rnd)
                     self._v5_stance(a, act, step, sid)
                     self._v5_direct(a, act, step, sid)
                     if a.role == "media":
-                        self._v5_publish(a, act, step, sid)
+                        self._v5_publish(a, act, step, sid, rnd)
                     text = str(act.get("text", "") or "").strip()
                     raw_to = [str(t) for t in (act.get("talk_to") or [])]
                     talk_to = [t for t in raw_to if t in present and t != aid]
@@ -2131,6 +2153,26 @@ class Simulation:
         cog = cognition_series(
             classified_thoughts or classified_feelings or classified, self.n_steps)
 
+        # 「占領の認知」と「4段階の色」の事後分類は **summary より前に** 済ませる。
+        # 分類器の消費と打切りを usage / max_token_finishes に含めるため
+        # （Codexレビュー 2026-08-28：分類前に summary を確定していて費用が過少計上だった）。
+        # どちらも走行中の主体には一切見せず、世界には戻らない。
+        occ_rows: List[Dict[str, Any]] = []
+        occ_labels: List[Dict[str, Any]] = []
+        stage_labels: List[Dict[str, Any]] = []
+        if self.field_v5:
+            occ_rows = ([{"kind": "utterance", **u} for u in self.ledger.v5_utterances]
+                        + [{"kind": "thought", **t} for t in self.thoughts]
+                        + [{"kind": "article", **a} for a in self.ledger.v5_articles])
+            if ((self.field_v5b or self.field_v5c)
+                    and kcfg.get("classify_utterances", True) and occ_rows):
+                occ_labels = classify_occupation(
+                    self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
+            if (self.field_v5c and kcfg.get("classify_utterances", True) and occ_rows):
+                # 定義は走行前に固定（docs/world_design_v5c_buyer_strategy.md §1）。
+                stage_labels = classify_stage_v5c(
+                    self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
+
         summary = {
             "run_name": self.cfg.get("run_name"),
             "steps": self.n_steps,
@@ -2186,14 +2228,15 @@ class Simulation:
         if self.field_v5:
             # 「占領の認知」の事後分類。発話と内心の両方を対象にする（走行中の主体には
             # 一切見せない・世界には戻らない）。判定の定義は実装仕様6章で走行前に固定。
-            occ_rows = ([{"kind": "utterance", **u} for u in self.ledger.v5_utterances]
-                        + [{"kind": "thought", **t} for t in self.thoughts]
-                        + [{"kind": "article", **a} for a in self.ledger.v5_articles])
-            if self.field_v5b and kcfg.get("classify_utterances", True) and occ_rows:
-                _write_jsonl(os.path.join(d, "occupation_labels.jsonl"),
-                             classify_occupation(
-                                 self.client, occ_rows,
-                                 batch=int(kcfg.get("classify_batch", 25))))
+            if occ_labels:
+                _write_jsonl(os.path.join(d, "occupation_labels.jsonl"), occ_labels)
+            if self.field_v5c:
+                if stage_labels:
+                    _write_jsonl(os.path.join(d, "stage_labels_v5c.jsonl"), stage_labels)
+                _write_jsonl(os.path.join(d, "venue_choices_v5c.jsonl"),
+                             [{"agent_id": a.agent_id, "role": a.role, "name": a.name,
+                               "venues": self.venue_choices.get(a.agent_id, [])}
+                              for a in self.actors])
             _write_jsonl(os.path.join(d, "deals_v5.jsonl"), self.ledger.v5_deals)
             _write_jsonl(os.path.join(d, "thoughts.jsonl"),
                          classified_thoughts or self.thoughts)

@@ -485,8 +485,33 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
     acquired_pids = ({a["parcel_id"] for a in acqs} | {r["parcel_id"] for r in leases})
     n_actors = sum(v for k, v in (summary.get("agents") or {}).items()
                    if k != "acquirer")
+    # 機会量：計画（plans）から、実際に出向いた枠と同席の量を数える。
+    attend_slots = sum(1 for p in plans for sc in V5_SCENES
+                       if p.get(sc) and p.get(sc) != "HOME")
+    slots_with_partner = 0
+    cop_pairs, cop_pair_slots = set(), 0
+    for (st_, sc_, ve_), who in expected.items():
+        if len(who) >= 2:
+            slots_with_partner += len(who)
+            members = sorted(who)
+            cop_pair_slots += len(members) * (len(members) - 1) // 2
+            for i_ in range(len(members)):
+                for j_ in range(i_ + 1, len(members)):
+                    cop_pairs.add((members[i_], members[j_]))
+    venue_ids_cfg = []
+    if os.path.exists(cfgp):
+        import yaml as _yaml
+        with open(cfgp, encoding="utf-8") as _f:
+            venue_ids_cfg = [v["id"] for v in
+                             ((_yaml.safe_load(_f).get("social") or {}).get("venues")
+                              or [])]
+
     occ = occupation_metrics(run_dir, holders_by_step, acquired_by_step,
                              deals_by_agent, n_steps, n_actors)
+    # v5c の4段階の色（stage_labels_v5c.jsonl があるランだけ）。
+    # v5 / v5b のランではファイルが無く {"C_available": False} を返す＝出力は不変。
+    stage = stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step,
+                              deals_by_agent, n_steps, n_actors)
 
     n_classified = len([r for r in classified if "about_acquisition" in r])
     d3 = {
@@ -502,11 +527,13 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "scenes_with_conversation": len(scenes_with_talk),
         "rounds_max": max(rounds_seen.values()) if rounds_seen else 0,
         "occupation_unknown": occ.get("O_unknown", 0),
+        "stage_unknown": stage.get("C_unknown", 0),
         "ok": (parse_fail == 0 and max_tok == 0 and not missing_turns
                and not bad_delivery and bool(conv_groups)
                and summary.get("usage", {}).get("errors", 0) == 0
                and (not llm_ran or (n_classified == len(utts) and unknown_cls == 0))
-               and occ.get("O_unknown", 0) == 0),
+               and occ.get("O_unknown", 0) == 0
+               and stage.get("C_unknown", 0) == 0),
     }
 
     with open(os.path.join(run_dir, "edges_v5.jsonl"), "w", encoding="utf-8") as f:
@@ -555,6 +582,18 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "home_rate": (round(sum(1 for p in plans for s in V5_SCENES
                                 if p.get(s) == "HOME") / max(1, len(plans) * 4), 3)
                       if plans else None),
+        # 機会量（会場の増減が会話量に効いたかを、v5b と同じ定義で見るための実測）
+        "venues_in_world": len(venue_ids_cfg),
+        "attend_slots": attend_slots,
+        "slots_with_partner": slots_with_partner,
+        "solo_slot_rate": (round(1 - slots_with_partner / attend_slots, 3)
+                           if attend_slots else None),
+        "copresence_pairs_unique": len(cop_pairs),
+        "copresence_pair_slots": cop_pair_slots,
+        "utterances_per_actor_month": (round(len(utts) / max(1, n_steps * n_actors), 2)
+                                       if n_steps else None),
+        "traces_delivered": len([t for t in traces
+                                 if t.get("kind") != "registry_lookup"]),
         # 気づき
         "mention_rows": len(mention_rows),
         "mention_by_channel": dict(collections.Counter(r["kind"] for r in mention_rows)),
@@ -600,6 +639,7 @@ def metrics_v5(run_dir: str) -> Dict[str, Any]:
         "D2_common_buyer": bool(common_buyer),
         "D3_wiring": d3,
         **occ,
+        **stage,
     }
 
 
@@ -1138,6 +1178,319 @@ def metrics(run_dir: str) -> Dict[str, Any]:
     }
 
 
+# --- v5c: 4段階の色（青／緑／黄／赤）の判定 --------------------------------
+# 施主指示 2026-08-28 09:21 の定義を**走行前に固定**したもの。
+#   青＝個別の売買の話題／緑＝複数の売買の関係性・面的な話／
+#   黄＝名義の違う取引を同じ買い手として結びつけた（X社にたどり着いた）／
+#   赤＝行政の主体が規制・届出・調査等の対応を口にした・決めた。
+# 主値は **ルール1次抽出 ∧ LLM ラベル**（v5b の O1/O2 と同じ読み方）。
+# 分類に失敗した行は false ではなく unknown として主値から外す。
+# 「連結」「意図」の語は使わない（施主指示）。
+
+V5C_AREA_WORDS = ("一帯", "この辺", "その辺", "あの通り", "この通り", "界隈",
+                  "地区ごと", "街ごと", "町ごと", "次々", "相次", "立て続け",
+                  "あちこち", "周辺の土地", "まとめて", "軒並み", "近隣でも",
+                  "他にも", "同じ時期に", "続けて")
+V5C_SAME_BUYER_WORDS = ("同じ会社", "同一", "同じ相手", "同じ買い手", "同じところ",
+                        "一つの会社", "ひとつの会社", "裏で", "背後", "実は同じ",
+                        "つながって", "繋がって", "関係している", "同じ人",
+                        "名義を変えて", "別の名前")
+V5C_ADMIN_WORDS = ("届出", "条例", "規制", "調査", "要綱", "指導", "実態把握",
+                   "実態を把握", "庁内", "議会", "制度", "対応を検討", "照会",
+                   "手続", "所管", "把握する必要", "報告する")
+V5C_COLORS = ["blue", "green", "yellow", "red"]
+V5C_COLOR_JA = {"blue": "青（個別の売買）", "green": "緑（複数・面）",
+                "yellow": "黄（同じ買い手＝X社に届いた）", "red": "赤（行政が動いた）"}
+V5C_PUBLIC_KINDS = ("utterance", "article")
+
+
+def _v5c_rule_blue(text, holders, acquired):
+    return _v5_mentions(text, holders)["hit"]
+
+
+def _v5c_rule_green(text, holders, acquired):
+    hs = {h for h in holders if h and h in text}
+    ps = {p for p in V5_PARCEL_RE.findall(text) if p in acquired}
+    return (len(ps) >= 2 or len(hs) >= 2
+            or any(w in text for w in V5C_AREA_WORDS))
+
+
+def _v5c_rule_yellow(text, holders, acquired):
+    hs = {h for h in holders if h and h in text}
+    return len(hs) >= 2 or (len(hs) >= 1
+                            and any(w in text for w in V5C_SAME_BUYER_WORDS))
+
+
+def _v5c_rule_red(role, text):
+    return role == "municipality" and any(w in text for w in V5C_ADMIN_WORDS)
+
+
+def _v5c_stage(row):
+    """その1行が到達した色（rule かつ LLM）。どれにも当たらなければ None。"""
+    if not row["classified"]:
+        return None
+    if row["rule_red"] and row["llm_admin"]:
+        return "red"
+    if row["rule_yellow"] and row["llm_same_buyer"]:
+        return "yellow"
+    if row["rule_green"] and row["llm_area"]:
+        return "green"
+    if row["rule_blue"] and row["llm_deal"]:
+        return "blue"
+    return None
+
+
+def _v5c_prime_event(run_dir):
+    """一等地イベント（台本 meta）。run の config が指す台本から読む。"""
+    cfgp = os.path.join(run_dir, "config.yaml")
+    if not os.path.exists(cfgp):
+        return None
+    import yaml
+    with open(cfgp, encoding="utf-8") as f:
+        cfg = yaml.safe_load(f)
+    path = str(cfg.get("events_file", ""))
+    if not path:
+        return None
+    if not os.path.isabs(path):
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                            path)
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        script = yaml.safe_load(f)
+    return (script.get("meta") or {}).get("prime_event")
+
+
+def stage_metrics_v5c(run_dir, holders_by_step, acquired_by_step, deals_by_agent,
+                      n_steps, n_actors):
+    """4段階の色。定義は走行前に固定（施主指示 2026-08-28 09:21）。"""
+    labels = _read_jsonl(os.path.join(run_dir, "stage_labels_v5c.jsonl"))
+    if not labels:
+        return {"C_available": False}
+    traces = _read_jsonl(os.path.join(run_dir, "traces_v5.jsonl"))
+    venue_choices = _read_jsonl(os.path.join(run_dir, "venue_choices_v5c.jsonl"))
+    articles = _read_jsonl(os.path.join(run_dir, "articles_v5.jsonl"))
+    venue_label = {}
+    cfgp = os.path.join(run_dir, "config.yaml")
+    if os.path.exists(cfgp):
+        import yaml
+        with open(cfgp, encoding="utf-8") as f:
+            cfg = yaml.safe_load(f)
+        venue_label = {v["id"]: v["label"]
+                       for v in (cfg.get("social", {}).get("venues") or [])}
+    role_of = {r.get("agent_id"): r.get("role") for r in venue_choices}
+    for r in labels:
+        if r.get("from") and r.get("role"):
+            role_of.setdefault(r["from"], r["role"])
+    trace_by = collections.defaultdict(list)
+    for t in traces:
+        trace_by[(t.get("agent_id"), int(t.get("step", 0)))].append(t)
+
+    rows = []
+    for r in labels:
+        text = str(r.get("text", ""))
+        step = int(r.get("step", 0))
+        hs = holders_by_step.get(step, set())
+        ps = acquired_by_step.get(step, set())
+        speaker = r.get("from", "")
+        role = r.get("role") or role_of.get(speaker, "")
+        classified = bool(r.get("classified", True)) and r.get("deal") is not None
+        own = deals_by_agent.get(speaker, [])
+        rows.append({
+            "step": step, "from": speaker, "role": role,
+            "kind": r.get("kind", ""), "scene": r.get("scene", ""),
+            "round": int(r.get("round", 0) or 0),
+            "venue": r.get("venue", ""), "text": text,
+            "rule_blue": _v5c_rule_blue(text, hs, ps),
+            "rule_green": _v5c_rule_green(text, hs, ps),
+            "rule_yellow": _v5c_rule_yellow(text, hs, ps),
+            "rule_red": _v5c_rule_red(role, text),
+            "llm_deal": bool(r.get("deal")) if classified else None,
+            "llm_area": bool(r.get("area")) if classified else None,
+            "llm_same_buyer": bool(r.get("same_buyer")) if classified else None,
+            "llm_admin": bool(r.get("admin")) if classified else None,
+            "classified": classified,
+            "party_any": bool([d for d in own if int(d.get("step", 0)) <= step]),
+        })
+    for r in rows:
+        r["stage"] = _v5c_stage(r)
+    # 初出は「実際に起きた順」で採る＝月→シーン→ラウンド
+    # （Codexレビュー 2026-08-28：月だけで並べていて、同じ月の記事や内心が
+    #  先に起きた会話より前に出ることがあった）。
+    rows.sort(key=lambda r: (_v5_order(r["step"], r.get("scene") or "", r.get("round")),
+                             r["kind"], r["from"]))
+    unknown = len([r for r in rows if not r["classified"]])
+
+    def _venue_of(r):
+        if r["kind"] == "article":
+            return "article"
+        return r["venue"] or ("HOME/計画" if r["scene"] == "plan" else "")
+
+    def first(color, public=None):
+        for r in rows:
+            if r["stage"] != color:
+                continue
+            if public is True and r["kind"] not in V5C_PUBLIC_KINDS:
+                continue
+            if public is False and r["kind"] in V5C_PUBLIC_KINDS:
+                continue
+            here = _v5_order(r["step"], r.get("scene") or "", r.get("round"))
+            ante = [t.get("text", "") for t in trace_by.get((r["from"], r["step"]), [])
+                    if _v5_order(int(t.get("step", 0)), t.get("scene") or "", 0) <= here]
+            return {"month": r["step"], "agent_id": r["from"], "role": r["role"],
+                    "kind": r["kind"], "scene": r["scene"],
+                    "venue": _venue_of(r),
+                    "venue_label": venue_label.get(r["venue"], _venue_of(r)),
+                    "party_any": r["party_any"],
+                    "available_antecedents": ante[:3],
+                    "text": r["text"][:200]}
+        return None
+
+    out = {"C_available": True, "C_rows_total": len(rows),
+           "C_rows_classified": len(rows) - unknown, "C_unknown": unknown,
+           "C_measurable": unknown == 0,
+           "C_definition": V5C_COLOR_JA}
+
+    cum_pub = {c: set() for c in V5C_COLORS}
+    cum_priv = {c: set() for c in V5C_COLORS}
+    series_pub = {c: {} for c in V5C_COLORS}
+    series_priv = {c: {} for c in V5C_COLORS}
+    for step in range(1, n_steps + 1):
+        for r in rows:
+            if r["step"] != step or not r["stage"]:
+                continue
+            (cum_pub if r["kind"] in V5C_PUBLIC_KINDS else cum_priv)[r["stage"]].add(
+                r["from"])
+        for c in V5C_COLORS:
+            series_pub[c][step] = len(cum_pub[c])
+            series_priv[c][step] = len(cum_priv[c] - cum_pub[c])
+
+    # 主体ごと・月ごとの「その月までに到達した最高段階」（排他的な状態）。
+    # 色ごとの累積集合（下の C_*_ever_*）は「一度でもその色に達した人数」で、
+    # 足すと主体数を超える補助値である（Codexレビュー 2026-08-28）。
+    rank = {c: i for i, c in enumerate(V5C_COLORS)}
+    best_pub, best_any = {}, {}
+    state_pub, state_any = {}, {}
+    for step in range(1, n_steps + 1):
+        for r in rows:
+            if r["step"] != step or not r["stage"]:
+                continue
+            if r["kind"] in V5C_PUBLIC_KINDS and (
+                    r["from"] not in best_pub
+                    or rank[r["stage"]] > rank[best_pub[r["from"]]]):
+                best_pub[r["from"]] = r["stage"]
+            if (r["from"] not in best_any
+                    or rank[r["stage"]] > rank[best_any[r["from"]]]):
+                best_any[r["from"]] = r["stage"]
+        state_pub[step] = {c: len([1 for v in best_pub.values() if v == c])
+                           for c in V5C_COLORS}
+        state_pub[step]["none"] = n_actors - sum(state_pub[step].values())
+        state_any[step] = {c: len([1 for v in best_any.values() if v == c])
+                           for c in V5C_COLORS}
+        state_any[step]["none"] = n_actors - sum(state_any[step].values())
+    out["C_state_public_by_month"] = state_pub
+    out["C_state_any_by_month"] = state_any
+    out["C_state_public_final"] = state_pub.get(n_steps, {})
+    out["C_state_any_final"] = state_any.get(n_steps, {})
+    out["C_state_public_agents"] = {c: sorted([a for a, v in best_pub.items() if v == c])
+                                    for c in V5C_COLORS}
+
+    venue_first = {c: collections.Counter() for c in V5C_COLORS}
+    seen_pair = set()
+    for r in rows:
+        if not r["stage"]:
+            continue
+        key = (r["from"], r["stage"])
+        if key in seen_pair:
+            continue
+        seen_pair.add(key)
+        venue_first[r["stage"]][_venue_of(r)] += 1
+
+    for c in V5C_COLORS:
+        sel = [r for r in rows if r["stage"] == c]
+        rule_key = {"blue": "rule_blue", "green": "rule_green",
+                    "yellow": "rule_yellow", "red": "rule_red"}[c]
+        llm_key = {"blue": "llm_deal", "green": "llm_area",
+                   "yellow": "llm_same_buyer", "red": "llm_admin"}[c]
+        out["C_%s_rows" % c] = len(sel)
+        out["C_%s_public_rows" % c] = len([r for r in sel
+                                           if r["kind"] in V5C_PUBLIC_KINDS])
+        out["C_%s_first" % c] = first(c)
+        out["C_%s_first_public" % c] = first(c, public=True)
+        out["C_%s_first_private" % c] = first(c, public=False)
+        out["C_%s_ever_agents_public" % c] = sorted(cum_pub[c])
+        out["C_%s_ever_agents_private_only" % c] = sorted(cum_priv[c] - cum_pub[c])
+        out["C_%s_ever_public_by_month" % c] = series_pub[c]
+        out["C_%s_ever_private_only_by_month" % c] = series_priv[c]
+        out["C_%s_ever_public_agents_final" % c] = series_pub[c].get(n_steps, 0)
+        out["C_%s_ever_public_share_final" % c] = (round(series_pub[c].get(n_steps, 0)
+                                                    / n_actors, 3) if n_actors else None)
+        out["C_%s_months" % c] = sorted({r["step"] for r in sel})
+        out["C_%s_venue_first" % c] = dict(venue_first[c].most_common())
+        out["C_%s_venue_rows" % c] = dict(collections.Counter(
+            _venue_of(r) for r in sel).most_common())
+        out["C_%s_by_role" % c] = dict(collections.Counter(
+            r["role"] for r in sel).most_common())
+        out["C_%s_article_months" % c] = sorted({r["step"] for r in sel
+                                                 if r["kind"] == "article"})
+        out["C_%s_assembly_months" % c] = sorted(
+            {r["step"] for r in sel if r["kind"] == "utterance"
+             and r["scene"] == "S4" and _v5_s4_kind(r["step"]) == "assembly"})
+        out["C_%s_counter_months" % c] = sorted(
+            {r["step"] for r in sel if r["kind"] == "utterance"
+             and r["scene"] == "S4" and _v5_s4_kind(r["step"]) == "counter"})
+        out["C_%s_rule_only" % c] = len([r for r in rows if r["classified"]
+                                         and r[rule_key] and not r[llm_key]])
+        out["C_%s_llm_only" % c] = len([r for r in rows if r["classified"]
+                                        and r[llm_key] and not r[rule_key]])
+        out["C_%s_or_rows" % c] = len([r for r in rows if r["classified"]
+                                       and (r[rule_key] or r[llm_key])])
+
+    out["C_venue_labels"] = venue_label
+    out["C_rows_by_venue"] = dict(collections.Counter(
+        _venue_of(r) for r in rows if r["stage"]).most_common())
+    out["C_all_rows_by_venue"] = dict(collections.Counter(
+        _venue_of(r) for r in rows).most_common())
+
+    prime = _v5c_prime_event(run_dir)
+    if prime:
+        pm = int(prime.get("month", 0))
+        win = 3
+
+        def window(lo, hi):
+            sel = [r for r in rows if lo <= r["step"] <= hi and r["stage"]]
+            agents = {c: sorted({r["from"] for r in sel if r["stage"] == c})
+                      for c in V5C_COLORS}
+            return {
+                "months": [lo, hi],
+                "rows_by_color": {c: len([r for r in sel if r["stage"] == c])
+                                  for c in V5C_COLORS},
+                "public_rows_by_color": {
+                    c: len([r for r in sel if r["stage"] == c
+                            and r["kind"] in V5C_PUBLIC_KINDS])
+                    for c in V5C_COLORS},
+                "agents_by_color": {c: len(v) for c, v in agents.items()},
+                "articles": len([a for a in articles
+                                 if lo <= int(a.get("step", 0)) <= hi]),
+                "articles_about_deals": len([r for r in sel
+                                             if r["kind"] == "article"]),
+                "venues": dict(collections.Counter(_venue_of(r)
+                                                   for r in sel).most_common(5)),
+            }
+
+        out["C_prime_event"] = {
+            "parcel_id": prime.get("parcel_id"), "month": pm,
+            "zone": prime.get("zone"), "frontage": prime.get("frontage"),
+            "size_class": prime.get("size_class"), "area_sqm": prime.get("area_sqm"),
+            "use_detail": prime.get("use_detail"), "visibility": prime.get("visibility"),
+            "before_window": window(max(1, pm - win), pm - 1),
+            "after_window": window(pm, min(n_steps, pm + win - 1)),
+            "before_all": window(1, pm - 1),
+            "after_all": window(pm, n_steps),
+        }
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", required=True, nargs="+")
@@ -1153,7 +1506,7 @@ def main() -> int:
                     if line.startswith("scenario_version:"):
                         version = line.split(":", 1)[1].strip()
                         break
-        if version in ("field_v5", "field_v5b"):
+        if version in ("field_v5", "field_v5b", "field_v5c"):
             rows.append(metrics_v5(run))
         elif version == "field_v4_1b":
             rows.append(metrics_v41b(run))

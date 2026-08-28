@@ -118,7 +118,7 @@ def build_payload_from_dir(run_dir: str) -> Dict[str, Any]:
     }
 
 
-MONEYLESS_VERSIONS = ("field_v4_1b", "field_v5", "field_v5b")
+MONEYLESS_VERSIONS = ("field_v4_1b", "field_v5", "field_v5b", "field_v5c")
 
 # 金額を持たない世界のレポートから、金額を前提にしたUIと文言を外すための差し替え。
 # 共通テンプレートは v1〜v4（金額のある世界）のために書かれている。v4.1b では

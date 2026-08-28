@@ -182,6 +182,65 @@ def main() -> int:
                       page.get_attribute("#slider", "max") == str(sB["steps"]))
                 page.screenshot(path=os.path.join(SHOTS, "10_v5bB_1280.png"),
                                 full_page=True)
+
+                # v5c：4段階の色で描けているか
+                v5c_path = os.path.join(PAGES, "present_data_v5cA.json")
+                if os.path.exists(v5c_path):
+                    with open(v5c_path, encoding="utf-8") as f:
+                        dC = json.load(f)
+                    page.select_option("#runsel", "v5cA")
+                    page.wait_for_timeout(900)
+                    sC = dC["stats"]
+                    stats_c = page.inner_text("#stats")
+                    check("present: v5c の取引数が JSON と一致",
+                          f"{sC['deals']}（{sC['sales']}／{sC['leases']}）" in stats_c,
+                          stats_c[:120])
+                    check("present: v5c は会場数（15）を出す",
+                          str(sC["venues"]) in stats_c and sC["venues"] == 15)
+                    check("present: v5c は到達した最高段階（排他）を出す",
+                          " / ".join(str(sC["C_state_public"][c])
+                                     for c in ("blue", "green", "yellow", "red"))
+                          in stats_c, stats_c[:200])
+                    check("present: 排他的な段階の合計が主体数と一致",
+                          sum(sC["C_state_public"].values()) == sC["agents"],
+                          str(sC["C_state_public"]))
+                    page.fill("#slider", str(sC["steps"]))
+                    page.dispatch_event("#slider", "input")
+                    page.wait_for_timeout(300)
+                    colors = page.eval_on_selector_all(
+                        "#mapR .cell",
+                        "els => els.map(e => [e.dataset.pid, e.style.background])")
+                    want = {"blue": "29, 78, 216", "green": "4, 120, 87",
+                            "yellow": "202, 138, 4", "red": "185, 28, 28"}
+                    bad = [pid for pid, bg in colors
+                           if pid in dC["stage_by_parcel"]
+                           and want[dC["stage_by_parcel"][pid]["color"]] not in bg]
+                    check("present: 右地図の色が JSON の色と一致する", not bad, str(bad[:4]))
+                    painted = {pid for pid, bg in colors if bg}
+                    check("present: 4色で塗った区画が JSON と一致する",
+                          painted == set(dC["stage_by_parcel"]),
+                          str(sorted(painted ^ set(dC["stage_by_parcel"]))[:4]))
+                    sil = page.eval_on_selector_all(
+                        "#mapR .cell.silent", "els => els.map(e => e.dataset.pid)")
+                    check("present: 色が付かなかった区画が JSON と一致する",
+                          sorted(sil) == sorted(dC["stage_stats"]["silent"]),
+                          f"{sorted(sil)} vs {sorted(dC['stage_stats']['silent'])}")
+                    page.click("[role=tab][data-p='I']")
+                    page.wait_for_timeout(250)
+                    panel = page.inner_text("#pI")
+                    st = dC["stage_stats"]
+                    check("present: 色のパネルが開く", page.is_visible("#pI"))
+                    check("present: 色ごとの行数が JSON と一致",
+                          all(str(st["rows_by_color"][c]) in panel
+                              for c in ("blue", "green", "yellow", "red")),
+                          panel[:200])
+                    pe = dC.get("prime_event")
+                    check("present: 一等地イベントの月と区画がパネルに出る",
+                          bool(pe) and f"第{pe['month']}月" in panel
+                          and pe["parcel_id"] in panel)
+                    page.screenshot(path=os.path.join(SHOTS, "14_v5cA_1280.png"),
+                                    full_page=True)
+                    page.click("[role=tab][data-p='D']")
                 page.close()
 
                 # モバイル

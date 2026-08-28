@@ -1,0 +1,16 @@
+{
+  "_note": "CTO が docs/audit_v5c_sample.md の全200行を読んで付けた判定（2026-08-28）。機械の判定と食い違った行だけ色を書き、残りは既定の none / 機械値と一致。A層は「本来は色が付くべきだった行」、B層は「LLMが否定したが人は色を付ける行」、C層は「機械が付けた色が過大・過少だった行」。",
+  "A42": "blue", "A79": "blue", "A88": "blue", "A91": "green",
+  "A95": "blue", "A98": "blue", "A99": "blue", "A100": "green",
+  "B36": "blue", "B46": "green", "B49": "blue", "B50": "blue",
+  "C1": "blue", "C2": "blue", "C3": "none", "C4": "blue", "C5": "blue",
+  "C6": "blue", "C7": "blue", "C8": "blue", "C9": "none", "C10": "blue",
+  "C11": "blue", "C12": "blue", "C13": "blue", "C14": "blue", "C15": "blue",
+  "C16": "none", "C17": "blue", "C18": "blue", "C19": "blue", "C20": "blue",
+  "C21": "blue", "C22": "green", "C23": "blue", "C24": "blue", "C25": "green",
+  "C26": "blue", "C27": "green", "C28": "green", "C29": "green", "C30": "blue",
+  "C31": "green", "C32": "green", "C33": "green", "C34": "green", "C35": "green",
+  "C36": "blue", "C37": "green", "C38": "green", "C39": "green", "C40": "blue",
+  "C41": "green", "C42": "green", "C43": "blue", "C44": "green", "C45": "green",
+  "C46": "green", "C47": "blue", "C48": "green", "C49": "green", "C50": "green"
+}
