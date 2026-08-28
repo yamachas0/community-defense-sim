@@ -1,0 +1,349 @@
+{
+  "run_name": "field_v5c_econ",
+  "steps": 24,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "parcels_tradable": 46,
+  "model": "mock",
+  "provider": "mock",
+  "elapsed_sec": 1.4,
+  "acquirer_model": "mock",
+  "invalid_actions": 0,
+  "truncated_responses": 0,
+  "max_token_finishes": 0,
+  "usage": {
+    "calls": 4613,
+    "input_tokens": 0,
+    "cached_tokens": 0,
+    "output_tokens": 0,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:plan": {
+        "calls": 384,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:plan": {
+        "calls": 48,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:plan": {
+        "calls": 96,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:plan": {
+        "calls": 48,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:plan": {
+        "calls": 48,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S1r1": {
+        "calls": 71,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S1r1": {
+        "calls": 254,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S1r1": {
+        "calls": 32,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S1r1": {
+        "calls": 31,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S1r1": {
+        "calls": 29,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S1r2": {
+        "calls": 71,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S1r2": {
+        "calls": 254,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S1r2": {
+        "calls": 32,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S1r2": {
+        "calls": 31,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S1r2": {
+        "calls": 29,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S2r1": {
+        "calls": 233,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S2r1": {
+        "calls": 27,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S2r1": {
+        "calls": 30,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S2r2": {
+        "calls": 233,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S2r2": {
+        "calls": 27,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S2r2": {
+        "calls": 30,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S3r1": {
+        "calls": 62,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S3r1": {
+        "calls": 227,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S3r1": {
+        "calls": 28,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S3r2": {
+        "calls": 62,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S3r2": {
+        "calls": 28,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S3r2": {
+        "calls": 227,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S4r1": {
+        "calls": 298,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S4r1": {
+        "calls": 67,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S4r1": {
+        "calls": 31,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S4r1": {
+        "calls": 35,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S4r1": {
+        "calls": 35,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:household:S4r2": {
+        "calls": 298,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S4r2": {
+        "calls": 67,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S4r2": {
+        "calls": 35,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S4r2": {
+        "calls": 35,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S4r2": {
+        "calls": 31,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S2r1": {
+        "calls": 53,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:business:S2r2": {
+        "calls": 53,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S3r1": {
+        "calls": 29,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:municipality:S3r2": {
+        "calls": 29,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S2r1": {
+        "calls": 28,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:media:S2r2": {
+        "calls": 28,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S3r1": {
+        "calls": 23,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "agent:broker:S3r2": {
+        "calls": 23,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "classify": {
+        "calls": 225,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "classify_occupation": {
+        "calls": 259,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      },
+      "classify_stage_v5c": {
+        "calls": 259,
+        "input": 0,
+        "cached": 0,
+        "output": 0
+      }
+    }
+  },
+  "saving": {
+    "prompt_order": "stable_first",
+    "agent_max_tokens": 2200,
+    "enable_cache": true,
+    "batch_kinds": [],
+    "cache_created": 0,
+    "cache_failed": 0,
+    "batch_fallback_calls": 0,
+    "batch_jobs": []
+  },
+  "kpi": {
+    "final_acquirer_share": 0.4783,
+    "final_hhi": 0.2552,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.5153,
+    "cascade": {
+      "induced": 5,
+      "max_chain": 2
+    },
+    "final_effective_control_area_share": null,
+    "late_index": null,
+    "detection_lag": {
+      "step": 3,
+      "headline": "この街で名義の移った土地がある、という話を聞いた。",
+      "share_at_first_report": 0.087,
+      "share_observable": 0.0435
+    },
+    "final_acquirer_area_share": null,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  }
+}

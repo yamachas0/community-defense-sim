@@ -1,0 +1,5 @@
+{"step": 1, "agent_id": "HH16", "acq_id": "ACQ01", "parcel_id": "P33", "holder": "A社", "kind": "sale", "note": "築古で改修の手間が重く、手放すことにした"}
+{"step": 1, "agent_id": "HH08", "acq_id": "ACQ02", "parcel_id": "P41", "holder": "D社", "kind": "sale", "note": "空き地のまま草刈りだけが続いていた"}
+{"step": 2, "agent_id": "HH01", "acq_id": "ACQ03", "parcel_id": "P34", "holder": "B社", "kind": "lease", "note": "空いたままの家に住み手を入れることにした"}
+{"step": 3, "agent_id": "HH16", "acq_id": "ACQ04", "parcel_id": "P17", "holder": "A社", "kind": "sale", "note": "相続した土地で、使い道が決まらないままだった"}
+{"step": 3, "agent_id": "HH08", "acq_id": "ACQ05", "parcel_id": "P25", "holder": "D社", "kind": "sale", "note": "築古で改修の手間が重く、手放すことにした"}

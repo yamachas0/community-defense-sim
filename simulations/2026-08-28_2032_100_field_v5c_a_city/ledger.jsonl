@@ -1,0 +1,64 @@
+{"step": 1, "kind": "transfer", "acq_id": "ACQ01", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "R16"}
+{"step": 1, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "R08"}
+{"step": 1, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH04", "reason": "quota_exhausted"}
+{"step": 2, "kind": "lease", "acq_id": "ACQ03", "parcel_id": "P34", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH15", "to": "HH14", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH08", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 2, "kind": "publication", "by": "MD01", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ04", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "R16"}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ05", "parcel_id": "P25", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "R08"}
+{"step": 3, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH02", "reason": "quota_exhausted"}
+{"step": 4, "kind": "lease", "acq_id": "ACQ06", "parcel_id": "P09", "lessor": "HH08", "lessee": "AQ01", "under_name": "C社", "old_name": "R08"}
+{"step": 4, "kind": "lease", "acq_id": "ACQ07", "parcel_id": "P18", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "R01"}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ08", "parcel_id": "P42", "seller": "HH09", "buyer": "AQ01", "under_name": "D社", "old_name": "R09"}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ09", "parcel_id": "P43", "seller": "HH10", "buyer": "AQ01", "under_name": "B社", "old_name": "R10"}
+{"step": 5, "kind": "publication", "by": "MD01", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 6, "kind": "transfer", "acq_id": "ACQ10", "parcel_id": "P44", "seller": "HH11", "buyer": "AQ01", "under_name": "A社", "old_name": "R11"}
+{"step": 6, "kind": "publication", "by": "MD01", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 7, "kind": "lease", "acq_id": "ACQ11", "parcel_id": "P45", "lessor": "HH12", "lessee": "AQ01", "under_name": "B社", "old_name": "R12"}
+{"step": 7, "kind": "direct_rejected", "from_id": "HH03", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 7, "kind": "publication", "by": "MD01", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 8, "kind": "lease", "acq_id": "ACQ12", "parcel_id": "P37", "lessor": "HH04", "lessee": "AQ01", "under_name": "A社", "old_name": "R04"}
+{"step": 8, "kind": "direct_rejected", "from_id": "BR02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 9, "kind": "transfer", "acq_id": "ACQ13", "parcel_id": "P35", "seller": "HH02", "buyer": "AQ01", "under_name": "D社", "old_name": "R02"}
+{"step": 10, "kind": "transfer", "acq_id": "ACQ14", "parcel_id": "P10", "seller": "HH09", "buyer": "AQ01", "under_name": "B社", "old_name": "R09"}
+{"step": 10, "kind": "transfer", "acq_id": "ACQ15", "parcel_id": "P46", "seller": "HH13", "buyer": "AQ01", "under_name": "D社", "old_name": "R13"}
+{"step": 10, "kind": "direct_rejected", "from_id": "MD02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 10, "kind": "publication", "by": "MD02", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 11, "kind": "transfer", "acq_id": "ACQ16", "parcel_id": "P26", "seller": "HH09", "buyer": "AQ01", "under_name": "C社", "old_name": "R09"}
+{"step": 11, "kind": "transfer", "acq_id": "ACQ17", "parcel_id": "P38", "seller": "HH05", "buyer": "AQ01", "under_name": "C社", "old_name": "R05"}
+{"step": 11, "kind": "publication", "by": "MD02", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 12, "kind": "transfer", "acq_id": "ACQ18", "parcel_id": "P04", "seller": "HH03", "buyer": "AQ01", "under_name": "D社", "old_name": "R03"}
+{"step": 12, "kind": "transfer", "acq_id": "ACQ19", "parcel_id": "P05", "seller": "HH04", "buyer": "AQ01", "under_name": "A社", "old_name": "R04"}
+{"step": 12, "kind": "direct_rejected", "from_id": "HH12", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 12, "kind": "direct_rejected", "from_id": "HH09", "to": "HH06", "reason": "quota_exhausted"}
+{"step": 13, "kind": "transfer", "acq_id": "ACQ20", "parcel_id": "P13", "seller": "HH12", "buyer": "AQ01", "under_name": "D社", "old_name": "R12"}
+{"step": 13, "kind": "direct_rejected", "from_id": "BZ04", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 14, "kind": "lease", "acq_id": "ACQ21", "parcel_id": "P11", "lessor": "HH10", "lessee": "AQ01", "under_name": "A社", "old_name": "R10"}
+{"step": 14, "kind": "direct_rejected", "from_id": "HH13", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 14, "kind": "direct_rejected", "from_id": "MU01", "to": "HH14", "reason": "quota_exhausted"}
+{"step": 15, "kind": "transfer", "acq_id": "ACQ22", "parcel_id": "P19", "seller": "HH02", "buyer": "AQ01", "under_name": "B社", "old_name": "R02"}
+{"step": 15, "kind": "direct_rejected", "from_id": "HH13", "to": "HH10", "reason": "quota_exhausted"}
+{"step": 15, "kind": "publication", "by": "MD01", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 16, "kind": "lease", "acq_id": "ACQ23", "parcel_id": "P36", "lessor": "HH03", "lessee": "AQ01", "under_name": "B社", "old_name": "R03"}
+{"step": 17, "kind": "direct_rejected", "from_id": "HH03", "to": "HH05", "reason": "quota_exhausted"}
+{"step": 17, "kind": "direct_rejected", "from_id": "HH09", "to": "HH16", "reason": "quota_exhausted"}
+{"step": 17, "kind": "direct_rejected", "from_id": "BZ02", "to": "HH06", "reason": "quota_exhausted"}
+{"step": 18, "kind": "lease", "acq_id": "ACQ24", "parcel_id": "P12", "lessor": "HH11", "lessee": "AQ01", "under_name": "C社", "old_name": "R11"}
+{"step": 18, "kind": "publication", "by": "MD02", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 19, "kind": "transfer", "acq_id": "ACQ25", "parcel_id": "P14", "seller": "HH13", "buyer": "AQ01", "under_name": "D社", "old_name": "R13"}
+{"step": 19, "kind": "transfer", "acq_id": "ACQ26", "parcel_id": "P22", "seller": "HH05", "buyer": "AQ01", "under_name": "B社", "old_name": "R05"}
+{"step": 19, "kind": "direct_rejected", "from_id": "HH03", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 19, "kind": "direct_rejected", "from_id": "HH16", "to": "HH09", "reason": "quota_exhausted"}
+{"step": 20, "kind": "lease", "acq_id": "ACQ27", "parcel_id": "P27", "lessor": "HH10", "lessee": "AQ01", "under_name": "C社", "old_name": "R10"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH10", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 20, "kind": "publication", "by": "MD02", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 20, "kind": "direct_rejected", "from_id": "BZ03", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 21, "kind": "transfer", "acq_id": "ACQ28", "parcel_id": "P03", "seller": "HH02", "buyer": "AQ01", "under_name": "D社", "old_name": "R02"}
+{"step": 21, "kind": "transfer", "acq_id": "ACQ29", "parcel_id": "P06", "seller": "HH05", "buyer": "AQ01", "under_name": "C社", "old_name": "R05"}
+{"step": 21, "kind": "direct_rejected", "from_id": "HH05", "to": "HH16", "reason": "quota_exhausted"}
+{"step": 21, "kind": "publication", "by": "MD02", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}
+{"step": 23, "kind": "transfer", "acq_id": "ACQ30", "parcel_id": "P30", "seller": "HH13", "buyer": "AQ01", "under_name": "C社", "old_name": "R13"}
+{"step": 24, "kind": "transfer", "acq_id": "ACQ31", "parcel_id": "P47", "seller": "HH14", "buyer": "AQ01", "under_name": "A社", "old_name": "R14"}
+{"step": 24, "kind": "direct_rejected", "from_id": "HH09", "to": "HH10", "reason": "quota_exhausted"}
