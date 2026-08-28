@@ -111,8 +111,29 @@ def detection_lag(ledger: Ledger, share_by_step: Dict[int, float],
 # ② 認知転相率 — LLM による発話の意味分類
 # ---------------------------------------------------------------------------
 
+def _generate_chunks(client, system_prompt: str, prompts: List[str], schema,
+                     temperature: float, max_tokens: int, tag: str,
+                     job_key: Optional[str] = None) -> List[str]:
+    """分類器のチャンクをまとめて投げる。
+
+    `generate_many` を持つクライアントには一括で渡す（Batch API が使える設定なら
+    そちらへ回り、半額になる）。持たないクライアントは従来どおり1件ずつ呼ぶ。
+    **プロンプト・スキーマ・temperature・max_tokens は一切変えない。**
+    """
+    items = [{"system_prompt": system_prompt, "user_prompt": p, "schema": schema,
+              "temperature": temperature, "max_tokens": max_tokens}
+             for p in prompts]
+    if hasattr(client, "generate_many"):
+        return client.generate_many(items, tag=tag, kind="classify",
+                                    job_key=job_key or tag)
+    return [client.generate(system_prompt, p, schema=schema, temperature=temperature,
+                            max_tokens=max_tokens, tag=tag) for p in prompts]
+
+
 def classify_utterances(client, utterances: List[Dict[str, Any]], batch: int = 25,
-                        temperature: float = 0.0, max_tokens: int = 1400) -> List[Dict[str, Any]]:
+                        temperature: float = 0.0, max_tokens: int = 1400,
+                        tag: str = "classify",
+                        job_key: Optional[str] = None) -> List[Dict[str, Any]]:
     """住民・事業者の公開発話を our_town / their_town / neutral に分類する。
 
     分類器はシミュレーション本体と分離され、結果は世界に戻らない（純粋な観測）。
@@ -120,17 +141,13 @@ def classify_utterances(client, utterances: List[Dict[str, Any]], batch: int = 2
     from .prompts import CLASSIFY_SYSTEM, build_classify_prompt
     from .schemas import CLASSIFY_SCHEMA
 
+    chunks = [utterances[i:i + batch] for i in range(0, len(utterances), batch)]
+    raws = _generate_chunks(client, CLASSIFY_SYSTEM,
+                            [build_classify_prompt(c) for c in chunks],
+                            CLASSIFY_SCHEMA, temperature, max_tokens,
+                            tag or "classify", job_key)
     out: List[Dict[str, Any]] = []
-    for i in range(0, len(utterances), batch):
-        chunk = utterances[i:i + batch]
-        raw = client.generate(
-            CLASSIFY_SYSTEM,
-            build_classify_prompt(chunk),
-            schema=CLASSIFY_SCHEMA,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            tag="classify",
-        )
+    for chunk, raw in zip(chunks, raws):
         parsed: Dict[int, Dict[str, Any]] = {}
         try:
             data = json.loads(raw) if raw else {}
@@ -156,7 +173,8 @@ def classify_publications(client, publications: List[Dict[str, Any]],
     if not publications:
         return []
     rows = [{"step": p["step"], "text": p["headline"]} for p in publications]
-    classified = classify_utterances(client, rows, batch=batch)
+    classified = classify_utterances(client, rows, batch=batch,
+                                     tag="classify", job_key="classify_publications")
     return sorted({c["step"] for c in classified if c.get("about_acquisition")})
 
 
@@ -225,12 +243,12 @@ def build_occupation_prompt(rows: List[Dict[str, Any]]) -> str:
 def classify_occupation(client, rows: List[Dict[str, Any]],
                         batch: int = 25) -> List[Dict[str, Any]]:
     """発話・内心が『複数を結びつけているか』『街ぐるみの意図に触れたか』を事後分類する。"""
+    chunks = [rows[i:i + batch] for i in range(0, len(rows), batch)]
+    raws = _generate_chunks(client, OCCUPATION_SYSTEM,
+                            [build_occupation_prompt(c) for c in chunks],
+                            OCCUPATION_SCHEMA, 0.0, 1400, "classify_occupation")
     out: List[Dict[str, Any]] = []
-    for i in range(0, len(rows), batch):
-        chunk = rows[i:i + batch]
-        raw = client.generate(OCCUPATION_SYSTEM, build_occupation_prompt(chunk),
-                              schema=OCCUPATION_SCHEMA, temperature=0.0,
-                              max_tokens=1400, tag="classify_occupation")
+    for chunk, raw in zip(chunks, raws):
         parsed: Dict[int, Dict[str, Any]] = {}
         try:
             for r in (json.loads(raw) if raw else {}).get("results", []):
@@ -308,12 +326,12 @@ def classify_stage_v5c(client, rows: List[Dict[str, Any]],
 
     解析できなかった行は None を入れて **unknown** として残す（false と混同しない）。
     """
+    chunks = [rows[i:i + batch] for i in range(0, len(rows), batch)]
+    raws = _generate_chunks(client, STAGE_SYSTEM,
+                            [build_stage_prompt_v5c(c) for c in chunks],
+                            STAGE_SCHEMA, 0.0, 1800, "classify_stage_v5c")
     out: List[Dict[str, Any]] = []
-    for i in range(0, len(rows), batch):
-        chunk = rows[i:i + batch]
-        raw = client.generate(STAGE_SYSTEM, build_stage_prompt_v5c(chunk),
-                              schema=STAGE_SCHEMA, temperature=0.0,
-                              max_tokens=1800, tag="classify_stage_v5c")
+    for chunk, raw in zip(chunks, raws):
         parsed: Dict[int, Dict[str, Any]] = {}
         try:
             for r in (json.loads(raw) if raw else {}).get("results", []):

@@ -73,6 +73,12 @@ _JSON_RE = re.compile(r"\{.*\}", re.S)
 _FIELD_RE = re.compile(r'"(\w+)"\s*:\s*(?:"((?:[^"\\]|\\.)*)"|(-?\d+))')
 
 
+def _latency_sec(result: Dict[str, Any]) -> Optional[float]:
+    """1コールの所要秒。Batch 経路では個別に測れないので None を返す。"""
+    value = result.get("latency", 0.0)
+    return None if value is None else round(value, 2)
+
+
 def _repair_truncated_json(raw: str) -> Optional[Dict[str, Any]]:
     """max_tokens で途中で切れた JSON から、拾える限りのフィールドを回収する。
 
@@ -186,7 +192,17 @@ class Simulation:
         self.run_dir = run_dir
         self.n_steps = int(cfg["steps"])
         self.usage = UsageMeter()
-        self.client = create_llm_client({**cfg["llm"], "seed": cfg.get("seed", 42)}, self.usage)
+        # Batch ジョブ台帳の置き場（途中で落ちても同じジョブを取り直せる）
+        self.jobs_dir = os.path.join(run_dir, "batch_jobs")
+        self.client = create_llm_client({**cfg["llm"], "seed": cfg.get("seed", 42)},
+                                        self.usage, jobs_dir=self.jobs_dir)
+        # 主体コールの出力上限。既定は llm.max_tokens（＝従来どおり）。
+        # llm.thought_max_tokens を置いたときだけ、そちらを使う（節約設定用）。
+        self.agent_max_tokens = int(cfg["llm"].get("thought_max_tokens",
+                                                   cfg["llm"].get("max_tokens", 420)))
+        # プロンプトの並び順。legacy＝従来／stable_first＝毎回同じ指示文を先頭に置き、
+        # 変わる部分を後ろにする（**文言は1文字も変えない**。キャッシュのための並べ替え）。
+        self.prompt_order = str(cfg["llm"].get("prompt_order", "legacy"))
         acquirer_cfg = dict(cfg["llm"])
         acquirer_model = str(acquirer_cfg.get("acquirer_model", "")).strip()
         if self.field_v3 and acquirer_model:
@@ -380,7 +396,7 @@ class Simulation:
             act = _parse_action(r.get("raw", ""))
             ev: Dict[str, Any] = {
                 "step": step, "agent_id": a.agent_id, "role": a.role, "name": a.name,
-                "latency_sec": round(r.get("latency", 0.0), 2),
+                "latency_sec": _latency_sec(r),
             }
             if act is None:
                 self.invalid_count += 1
@@ -489,7 +505,7 @@ class Simulation:
             act = _parse_action(result.get("raw", ""))
             event: Dict[str, Any] = {
                 "step": step, "agent_id": a.agent_id, "role": a.role, "name": a.name,
-                "latency_sec": round(result.get("latency", 0.0), 2),
+                "latency_sec": _latency_sec(result),
             }
             if act is None:
                 self.invalid_count += 1
@@ -631,21 +647,46 @@ class Simulation:
 
     # -- v4: 同期3フェーズ（提示 → 応答 → 清算） ---------------------------
 
-    def _call_batch(self, items, tag: str):
-        """(agent, system_prompt, user_prompt, schema) をまとめて呼ぶ。"""
+    def _call_batch(self, items, tag: str, job_key: Optional[str] = None):
+        """(agent, system_prompt, user_prompt, schema) をまとめて呼ぶ。
+
+        `llm.batch_agents` が真なら Batch API（半額・返却時刻の保証なし）へ回す。
+        既定は従来どおり同期の並列。プロンプト・スキーマは一切変えない。
+        """
         workers = int(self.cfg["llm"].get("parallel_workers", 8))
         results: Dict[str, Dict[str, Any]] = {}
+        if not items:
+            return results
+
+        use_batch = ("agents" in getattr(self.client, "batch_kinds", set())
+                     and hasattr(self.client, "generate_many"))
+        if use_batch:
+            started = time.time()
+            raws = self.client.generate_many(
+                [{"system_prompt": sp, "user_prompt": up, "schema": sc,
+                  "max_tokens": self.agent_max_tokens,
+                  "tag": f"agent:{ag.role}:{tag}"} for ag, sp, up, sc in items],
+                tag=f"agent:{tag}", kind="agents", job_key=job_key or tag)
+            elapsed = time.time() - started
+            for (agent, _sp, user_prompt, _sc), raw in zip(items, raws):
+                # Batch では1件ごとの所要時間は測れない。ジョブ全体の時間を主体の数だけ
+                # 複製すると latency_sec の合計・平均が壊れるので、個別の値は持たせない
+                # （ジョブ全体の時間は summary.saving.batch_jobs に残る。
+                #   Codexレビュー 2026-08-28）。
+                results[agent.agent_id] = {"raw": raw, "user_prompt": user_prompt,
+                                           "latency": None,
+                                           "batch_job_sec": elapsed}
+            return results
 
         def call(item):
             agent, system_prompt, user_prompt, schema = item
             started = time.time()
             raw = self.client.generate(system_prompt, user_prompt, schema=schema,
+                                       max_tokens=self.agent_max_tokens,
                                        tag=f"agent:{agent.role}:{tag}")
             return agent.agent_id, {"raw": raw, "user_prompt": user_prompt,
                                     "latency": time.time() - started}
 
-        if not items:
-            return results
         with ThreadPoolExecutor(max_workers=workers) as ex:
             for aid, result in ex.map(call, items):
                 results[aid] = result
@@ -693,7 +734,7 @@ class Simulation:
             act = _parse_action(result.get("raw", ""))
             event: Dict[str, Any] = {
                 "step": step, "phase": 1, "agent_id": a.agent_id, "role": a.role,
-                "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2),
+                "name": a.name, "latency_sec": _latency_sec(result),
             }
             if act is None:
                 self.invalid_count += 1
@@ -890,7 +931,7 @@ class Simulation:
             result = results2.get(a.agent_id, {})
             act = _parse_action(result.get("raw", ""))
             event = {"step": step, "phase": 2, "agent_id": a.agent_id, "role": a.role,
-                     "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2)}
+                     "name": a.name, "latency_sec": _latency_sec(result)}
             if act is None:
                 self.invalid_count += 1
                 event.update({"action_type": "PARSE_FAIL",
@@ -1034,7 +1075,7 @@ class Simulation:
             act = _parse_action(result.get("raw", ""))
             event: Dict[str, Any] = {
                 "step": step, "phase": 1, "agent_id": a.agent_id, "role": a.role,
-                "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2),
+                "name": a.name, "latency_sec": _latency_sec(result),
             }
             if act is None:
                 self.invalid_count += 1
@@ -1297,7 +1338,7 @@ class Simulation:
             result = results2.get(a.agent_id, {})
             act = _parse_action(result.get("raw", ""))
             event = {"step": step, "phase": 2, "agent_id": a.agent_id, "role": a.role,
-                     "name": a.name, "latency_sec": round(result.get("latency", 0.0), 2)}
+                     "name": a.name, "latency_sec": _latency_sec(result)}
             if act is None:
                 self.invalid_count += 1
                 # 本人の判断を捏造しない。open のまま残った打診を事実として記録する。
@@ -1544,10 +1585,11 @@ class Simulation:
         items = []
         for a in self.actors:
             prompt = build_plan_prompt_v5(a, self.ledger, step, self.n_steps, self.names,
-                                          a.extra["traces"], label4, venue4)
+                                          a.extra["traces"], label4, venue4,
+                                          prompt_order=self.prompt_order)
             items.append((a, self.system_prompts[a.agent_id], prompt,
                           plan_schema_v5(self.venue_choices[a.agent_id], venue4)))
-        results = self._call_batch(items, "plan")
+        results = self._call_batch(items, "plan", job_key=f"m{step:02d}_plan")
         for a in self.actors:
             a.inbox = []      # 観測を作り終えた直後に空にする（以降は翌月ぶん）
 
@@ -1644,12 +1686,14 @@ class Simulation:
                             present, a.extra["traces"], a.extra["heard"], rnd,
                             self.scene_rounds, registry, owns, can_publish,
                             self.direct_quota - a.extra.get("directs_used", 0),
-                            self.article_quota - a.extra.get("articles_used", 0))
+                            self.article_quota - a.extra.get("articles_used", 0),
+                            prompt_order=self.prompt_order)
                         items.append((a, self.system_prompts[a.agent_id], prompt,
                                       scene_schema_v5(a, present, self.actor_ids,
                                                       owns, can_publish)))
                         ctx[a.agent_id] = (venue_id, present)
-                results = self._call_batch(items, f"{sid}r{rnd}")
+                results = self._call_batch(items, f"{sid}r{rnd}",
+                                           job_key=f"m{step:02d}_{sid}r{rnd}")
 
                 spoken: List[Dict[str, Any]] = []
                 for aid in sorted(ctx):
@@ -1873,7 +1917,7 @@ class Simulation:
             "agent_id": a.agent_id,
             "role": a.role,
             "name": a.name,
-            "latency_sec": round(result.get("latency", 0.0), 2),
+            "latency_sec": _latency_sec(result),
             "action_type": "operation_portfolio",
             "target": "",
             "amount": 0,
@@ -2132,7 +2176,8 @@ class Simulation:
         pub_steps = None
         if kcfg.get("classify_utterances", True) and targets:
             classified = classify_utterances(
-                self.client, targets, batch=int(kcfg.get("classify_batch", 25)))
+                self.client, targets, batch=int(kcfg.get("classify_batch", 25)),
+                job_key="classify_utterances")
         if kcfg.get("classify_utterances", True) and self.ledger.publications:
             pub_steps = classify_publications(
                 self.client, self.ledger.publications,
@@ -2144,11 +2189,13 @@ class Simulation:
                                 if t["role"] in ("household", "business")]
             classified_thoughts = classify_utterances(
                 self.client, targets_thoughts,
-                batch=int(kcfg.get("classify_batch", 25)))
+                batch=int(kcfg.get("classify_batch", 25)),
+                job_key="classify_thoughts")
         classified_feelings: List[Dict[str, Any]] = []
         if self.field_v4 and kcfg.get("classify_utterances", True) and self.feelings:
             classified_feelings = classify_utterances(
-                self.client, self.feelings, batch=int(kcfg.get("classify_batch", 25)))
+                self.client, self.feelings, batch=int(kcfg.get("classify_batch", 25)),
+                job_key="classify_feelings")
         # v4 の認知は「毎月の実感（feeling）」の事後分類から測る。
         cog = cognition_series(
             classified_thoughts or classified_feelings or classified, self.n_steps)
@@ -2189,6 +2236,17 @@ class Simulation:
             "truncated_responses": self.truncated_count,
             "max_token_finishes": getattr(self.client, "max_token_finishes", 0),
             "usage": self.usage.as_dict(),
+            # 節約設定の実測（既定では全部 従来どおりの値になる）
+            "saving": {
+                "prompt_order": self.prompt_order,
+                "agent_max_tokens": self.agent_max_tokens,
+                "enable_cache": bool(self.cfg["llm"].get("enable_cache", False)),
+                "batch_kinds": sorted(getattr(self.client, "batch_kinds", set())),
+                "cache_created": getattr(self.client, "cache_created", 0),
+                "cache_failed": getattr(self.client, "cache_failed", 0),
+                "batch_fallback_calls": getattr(self.client, "batch_fallback_calls", 0),
+                "batch_jobs": list(getattr(self.client, "batch_stats", [])),
+            },
             "kpi": {
                 "final_acquirer_share": self.kpi_rows[-1]["acquirer_share"] if self.kpi_rows else 0,
                 "final_hhi": self.kpi_rows[-1]["hhi"] if self.kpi_rows else 0,
@@ -2212,6 +2270,14 @@ class Simulation:
                 "resident_outflow": self.kpi_rows[-1]["resident_outflow"] if self.kpi_rows else None,
             },
         }
+
+        # 自分が作った明示キャッシュを片付ける（保存料は保持時間で課金されるため）。
+        try:
+            closed = self.client.close_caches()
+            if closed:
+                summary["saving"]["cache_closed"] = closed
+        except Exception:  # 片付けの失敗で走行結果を落とさない（TTLで消える）
+            pass
 
         d = self.run_dir
         _write_jsonl(os.path.join(d, "events.jsonl"), self.events)

@@ -1,0 +1,117 @@
+# A市フィールド v5c（節約設定）— API費だけを下げる差分。世界は v5c と同一。
+# 発注: docs/cost_saving_v1.md（施主採用 2026-08-28「1〜3は採用」）
+#
+# configs/config_field_v5c.yaml との差は **llm: の5行だけ** である。
+# 世界・ペルソナ・台本・seed・区画・会場・シーン数・分類器の定義は1文字も変えていない。
+#   - batch_classify: 事後の分類器を Gemini Batch API（半額）へ回す
+#   - batch_agents  : 主体のコールも Batch へ回す（既定 false＝往復時間が読めないため）
+#   - enable_cache  : 共通の前置き（system prompt）を明示キャッシュに載せる
+#   - prompt_order  : 毎回同じ指示文を先頭へ（**文言は不変・並びだけ**）
+#   - thought_max_tokens: 主体コールの出力上限（既定は max_tokens と同じ 2200）
+# 検証は docs/cost_saving_v1.md。従来設定を再現したいときは
+# configs/config_field_v5c.yaml をそのまま使う。
+
+run_name: field_v5c_econ
+scenario_version: field_v5c
+seed: 85
+steps: 24
+personas_file: configs/personas/field_v4_1.yaml
+events_file: configs/events_v5c_seed85.yaml
+parcels_file: configs/parcels_v5c.yaml
+
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.75
+  max_tokens: 2200
+  parallel_workers: 8
+  # --- ここから下だけが v5c との差 ---
+  batch_classify: true        # 事後の分類器（1か月スモークで費用の27.6%）を Batch へ＝半額
+  batch_agents: false         # 主体のコールは同期のまま（往復時間の実測が3分を大幅に超えたため）
+  batch_poll_interval: 10
+  batch_timeout_sec: 7200
+  # 並び替え（毎回同じ指示文を先頭へ・文言は1文字も変えない）。スイッチは残すが
+  # **既定は legacy**。理由は実測：先頭へ移せる指示文は 43 トークンしかなく、
+  # 共通の前置きは 929→972 トークンにしかならない（暗黙キャッシュの最低は 1,024）。
+  # 1か月スモークでもキャッシュ読みは 9.4%（legacy）→ 8.0%（stable_first）で
+  # 改善しなかった＝効果が無いのに並びだけ変わるので、既定では使わない。
+  prompt_order: legacy
+  # 明示キャッシュは **この前置きの長さでは物理的に作れない**。
+  # 実測（2026-08-28・API のエラーそのもの）:
+  #   Cached content is too small. total_token_count=929, min_total_token_count=2048
+  # 主体の system prompt は 844〜962 トークン（26体・中央値 897）、
+  # 分類器は 185/215/352 トークン。前置きを長くすれば載るが、それは
+  # 「記憶の渡し方＝実験条件」を変えることなので、しない。
+  enable_cache: false
+  # 出力上限。実測では 221 コールの平均出力が 294 トークン・max_token_finishes=0 で、
+  # 2200 は一度も当たっていない＝下げても請求は1円も減らず、打切りの危険だけが増える。
+  # スイッチは残すが既定は据え置き。
+  thought_max_tokens: 2200
+
+agents:
+  households: 16
+  businesses: 4
+  brokers: 2
+  acquirers: 1            # X社。台帳上の名義の器としてのみ存在し、LLMは一度も呼ばれない
+  municipality: 2
+  media: 2
+
+world:
+  town_name: A市
+  background: |
+    A市は湾岸にある人口約12万人の温泉観光都市である。対岸の空港では
+    スペースポート構想が進むが、時期と需要規模は確定していない。
+    市内では人口減少、高齢化、相続、築古建物の改修負担、旅館と商店の
+    後継者不足が同時に進む。住民には住み続けたい人、土地を手放すことを
+    考えうる人、まだ何も考えていない人がいる。事業者、仲介、行政、記者も
+    通常の日常を送る。個々の取引・会話・報道が将来どうなるかは
+    開始時点では決まっていない。
+  grid: {cols: 8, rows: 6}
+  block_names: [湾岸観光地区, 中央駅前地区, 北部学術・生活地区, 温泉丘陵地区]
+  area_pattern_sqm: [70, 90, 110, 140, 180, 240, 320, 450]
+  shop_coords:
+    [[1,0],[2,0],[3,0],[5,0],[6,0],[1,1],[2,1],[5,1],[6,1],[1,3],[2,3],[5,3]]
+  vacant_coords: [[0,2],[3,2],[7,2],[0,5],[3,5],[6,5]]
+  # 賃料はこの世界に存在しない。0固定（共通の初期化が本キーを要求するため残す）。
+  initial_shop_rent: 0
+  public_coords: [[0,0],[7,5]]
+
+social:
+  # V01〜V08 は v5b と同一。V09〜V15 が本便で足した「なんでもない日常の場」。
+  # 会場が増えても月のシーン数は4のまま＝1か月に行ける場所の数は変わらない。
+  venues:
+    - {id: V01, label: 駅前の飲食店}
+    - {id: V02, label: 地区公民館}
+    - {id: V03, label: 共同浴場}
+    - {id: V04, label: 湾岸の喫茶店}
+    - {id: V05, label: 旅館組合の会議室}
+    - {id: V06, label: 市役所の待合}
+    - {id: V07, label: 地元不動産仲介の事務所}
+    - {id: V08, label: 地域イベント会場}
+    - {id: V09, label: 商店街の床屋}
+    - {id: V10, label: スーパーのレジ待ち}
+    - {id: V11, label: 神社の境内（掃除・祭りの準備）}
+    - {id: V12, label: 小学校の校門前（送り迎え）}
+    - {id: V13, label: 隣家の玄関先（回覧板の受け渡し）}
+    - {id: V14, label: バス停と駅のホーム}
+    - {id: V15, label: 診療所の待合}
+
+scenario:
+  initial_cash: {}
+  scene_rounds: 2               # 1シーンあたりの往復数（2〜3）
+  direct_quota_per_month: 2     # 1主体が1か月に出せる私信
+  article_quota_per_month: 1    # 記者が1か月に出せる記事
+  # X社は v5 系では主体ではない（LLMを呼ばれない）。この文は build_roster が要求するため
+  # 残しているだけで、どのプロンプトにも一切出ない（テストで固定）。
+  acquirer_mandate: |
+    （v5では未使用。取得は configs/events_v5c_seed85.yaml の台本が決める。）
+
+kpi:
+  classify_utterances: true
+  classify_batch: 25
+  cascade_window: 3
+
+cost:
+  price_table:
+    gemini-2.5-flash-lite: {input: 0.10, output: 0.40, cache_read: 0.01, cache_storage_hour: 1.00}
+  safety_factor: 2.0

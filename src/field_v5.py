@@ -454,6 +454,26 @@ def scene_schema_v5(agent: Agent, present_ids: List[str], all_ids: List[str],
 # プロンプト
 # ---------------------------------------------------------------------------
 
+PROMPT_ORDER_LEGACY = "legacy"
+PROMPT_ORDER_STABLE_FIRST = "stable_first"
+
+
+def _assemble_v5(body: List[str], stable: List[str], prompt_order: str) -> str:
+    """Order the rows only. The wording itself is never touched.
+
+    legacy       : body first, then the always-identical instruction lines
+                   (the historical layout; reproduces every earlier run).
+    stable_first : the always-identical instruction lines come first, so the
+                   unchanging prefix that follows the system prompt gets
+                   longer and more of it can be charged at the cached rate.
+                   Everything that changes (memory, this month, what the
+                   others said) stays at the end.
+    """
+    if prompt_order == PROMPT_ORDER_STABLE_FIRST:
+        return "\n".join(stable + [""] + body)
+    return "\n".join(body + stable)
+
+
 def build_system_prompt_v5(agent: Agent, cfg: Dict[str, Any], n_parcels: int) -> str:
     world = cfg["world"]
     venues = cfg.get("social", {}).get("venues", [])
@@ -524,7 +544,8 @@ JSONの最初に thought を書く。thought は誰にも伝わらないあな�
 
 def build_plan_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                          names: Dict[str, str], traces: List[Dict[str, Any]],
-                         s4_label: str, s4_venue: str) -> str:
+                         s4_label: str, s4_venue: str,
+                         prompt_order: str = PROMPT_ORDER_LEGACY) -> str:
     rows = [f"=== 第{step}月 / 全{n_steps}月 ==="]
     thought = agent.extra.get("thought", "")
     rows += ["[前の場面からの自分の内心（そのまま持ち越したもの）]",
@@ -536,10 +557,10 @@ def build_plan_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     if history:
         rows += ["[自分がした取引（当事者として知っていること）]"] + history
     rows += ["[隣接する区画の名義（日ごろ目に入る範囲）]"] + neighbourhood_rows_v5(agent, ledger, names)
-    rows += ["", f"今月のS4は「{s4_label}」（会場 {s4_venue}）。行くかどうかは自分で決める。",
-             "まず thought（内心）を書き、それを踏まえて S1〜S4 をどこで過ごすかをJSONで返す。"]
-    rows += ["説明文を付けずＪＳＯＮだけ返す。"]
-    return "\n".join(rows)
+    rows += ["", f"今月のS4は「{s4_label}」（会場 {s4_venue}）。行くかどうかは自分で決める。"]
+    stable = ["まず thought（内心）を書き、それを踏まえて S1〜S4 をどこで過ごすかをJSONで返す。",
+              "説明文を付けずＪＳＯＮだけ返す。"]
+    return _assemble_v5(rows, stable, prompt_order)
 
 
 def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
@@ -551,7 +572,8 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                           owns_parcel: bool = False,
                           can_publish: bool = False,
                           directs_left: int = 0,
-                          articles_left: int = 0) -> str:
+                          articles_left: int = 0,
+                          prompt_order: str = PROMPT_ORDER_LEGACY) -> str:
     others = [f"{names.get(p, p)}（{p}）" for p in present if p != agent.agent_id]
     rows = [f"=== 第{step}月 / 全{n_steps}月　{scene_id} {scene_label} ===",
             f"場所: {venue_label}",
@@ -567,9 +589,11 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
     if history:
         rows += ["[自分がした取引（当事者として知っていること）]"] + history
     rows += [""]
-    rows += [f"この場面のやりとりは{rounds}回で、今は{round_no}回目である。",
-             "まず thought（内心）を書き、それを踏まえてこの場で話すことを書く。",
-             "話すことがなければ text は空文字でよい。"]
+    stable = ["まず thought（内心）を書き、それを踏まえてこの場で話すことを書く。",
+              "話すことがなければ text は空文字でよい。"]
+    rows += [f"この場面のやりとりは{rounds}回で、今は{round_no}回目である。"]
+    if prompt_order == PROMPT_ORDER_LEGACY:
+        rows += stable
     if directs_left <= 0:
         rows += ["今月の個人的な連絡はもう出せない（direct_to は NONE にする）。"]
     else:
@@ -583,8 +607,10 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         rows += ["あわせて stance に、今のあなたが自分の土地を手放すことを考えているか"
                  "（sell）、そうでないか（keep）を書く。これは記録に残るだけで"
                  "誰にも伝わらず、何も起こさない。"]
-    rows += ["説明文を付けずJSONだけ返す。"]
-    return "\n".join(rows)
+    tail = ["説明文を付けずJSONだけ返す。"]
+    if prompt_order == PROMPT_ORDER_STABLE_FIRST:
+        return _assemble_v5(rows, stable + tail, prompt_order)
+    return "\n".join(rows + tail)
 
 
 __all__ = [
@@ -597,4 +623,5 @@ __all__ = [
     "neighbourhood_rows_v5", "traces_rows_v5", "heard_rows_v5", "inbox_rows_v5",
     "plan_schema_v5", "scene_schema_v5", "build_system_prompt_v5",
     "build_plan_prompt_v5", "build_scene_prompt_v5",
+    "PROMPT_ORDER_LEGACY", "PROMPT_ORDER_STABLE_FIRST",
 ]

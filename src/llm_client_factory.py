@@ -23,6 +23,7 @@ import random
 import re
 import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -113,7 +114,13 @@ class GeminiClient:
     def __init__(self, model: str = "gemini-2.5-flash-lite", temperature: float = 0.9,
                  max_tokens: int = 420, enable_cache: bool = False,
                  thinking_budget: Optional[int] = None,
-                 usage: Optional[UsageMeter] = None, api_key_env: str = "GOOGLE_API_KEY"):
+                 usage: Optional[UsageMeter] = None, api_key_env: str = "GOOGLE_API_KEY",
+                 cache_ttl_seconds: Optional[int] = None,
+                 batch_kinds: Optional[List[str]] = None,
+                 batch_poll_interval: float = 5.0,
+                 batch_timeout_sec: float = 3600.0,
+                 jobs_dir: Optional[str] = None,
+                 parallel_workers: int = 8):
         self.model = model
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -122,6 +129,19 @@ class GeminiClient:
         self.usage = usage or UsageMeter()
         self._cache_handles: Dict[str, Any] = {}
         self._cache_lock = threading.Lock()
+        if cache_ttl_seconds is not None:
+            self.CACHE_TTL_SECONDS = int(cache_ttl_seconds)
+        # 明示キャッシュが実際に作れたか（最小トークン数に届かないと作成は失敗する）
+        self.cache_created = 0
+        self.cache_failed = 0
+        # Batch API を使う枠。"classify" / "agents" のいずれか（既定は空＝全部同期）
+        self.batch_kinds = set(batch_kinds or [])
+        self.batch_poll_interval = float(batch_poll_interval)
+        self.batch_timeout_sec = float(batch_timeout_sec)
+        self.jobs_dir = jobs_dir
+        self.parallel_workers = int(parallel_workers)
+        self._batch_runner = None
+        self.batch_fallback_calls = 0
         # API が返す finish_reason=MAX_TOKENS の件数（本当の打切りの唯一の証拠）
         self.max_token_finishes = 0
         self.backend = None
@@ -175,6 +195,7 @@ class GeminiClient:
                         ),
                     )
                     self._cache_handles[key] = cache.name
+                    self.cache_created += 1
                     logger.info("Gemini cache created: %s", cache.name)
                     return cache.name
                 else:
@@ -186,12 +207,35 @@ class GeminiClient:
                         ttl=datetime.timedelta(seconds=self.CACHE_TTL_SECONDS),
                     )
                     self._cache_handles[key] = cache
+                    self.cache_created += 1
                     logger.info("Gemini cache created: %s", cache.name)
                     return cache
             except Exception as e:
                 logger.warning("Gemini cache 作成失敗 (uncached で続行): %s", e)
                 self._cache_handles[key] = False
+                self.cache_failed += 1
                 return None
+
+    def close_caches(self) -> int:
+        """自分が作った明示キャッシュを消す（保存料は保持時間で課金されるため）。
+
+        消せなくても TTL で自然に消えるので、失敗しても走行は止めない。
+        削除するのは **このプロセスが作ったハンドルだけ** である。
+        """
+        removed = 0
+        with self._cache_lock:
+            handles = [h for h in self._cache_handles.values() if h]
+            self._cache_handles = {}
+        for handle in handles:
+            try:
+                if self.backend == "genai":
+                    self._client.caches.delete(name=handle)
+                else:
+                    handle.delete()
+                removed += 1
+            except Exception as e:
+                logger.warning("Gemini cache 削除失敗 (TTLで消える): %s", e)
+        return removed
 
     def generate(self, system_prompt: str, user_prompt: str,
                  schema: Optional[Dict[str, Any]] = None,
@@ -307,6 +351,80 @@ class GeminiClient:
             self.max_token_finishes += 1
         return text.strip(), usage
 
+    # -- まとめて投げる（Batch API か、同期の並列か） ----------------------
+
+    def _runner(self):
+        if self._batch_runner is None:
+            from .llm_batch import BatchRunner
+            self._batch_runner = BatchRunner(
+                self._client, self._types, self.model, jobs_dir=self.jobs_dir,
+                poll_interval=self.batch_poll_interval,
+                timeout_sec=self.batch_timeout_sec)
+        return self._batch_runner
+
+    @property
+    def batch_stats(self) -> List[Dict[str, Any]]:
+        return list(self._batch_runner.stats) if self._batch_runner else []
+
+    def generate_many(self, items: List[Dict[str, Any]], tag: str = "agent",
+                      kind: str = "agents", job_key: Optional[str] = None
+                      ) -> List[str]:
+        """同じ枠のコールをまとめて実行し、items と同じ順序で JSON 文字列を返す。
+
+        items の各要素は generate() と同じ引数（system_prompt / user_prompt /
+        schema / temperature / max_tokens）。**中身は一切作らない・変えない。**
+        kind が batch_kinds に入っていれば Batch API（半額・返却時刻の保証なし）を使い、
+        取れなかった行だけ同期で埋める。入っていなければ従来どおり同期の並列で投げる。
+        """
+        if not items:
+            return []
+        norm = [{
+            "system_prompt": it["system_prompt"],
+            "user_prompt": it["user_prompt"],
+            "schema": it.get("schema"),
+            "temperature": self.temperature if it.get("temperature") is None
+            else it["temperature"],
+            "max_tokens": self.max_tokens if it.get("max_tokens") is None
+            else it["max_tokens"],
+            "thinking_budget": self.thinking_budget,
+            "tag": it.get("tag") or tag,
+        } for it in items]
+
+        out: List[Optional[str]] = [None] * len(norm)
+        used_batch = kind in self.batch_kinds and self.backend == "genai"
+        if used_batch:
+            texts, usages = self._runner().run(job_key or tag, norm)
+            for i, (text, usage) in enumerate(zip(texts, usages)):
+                # 空文字は「取れなかった行」とみなす。どのスキーマも空文字を正当な
+                # 構造化出力とは認めない（Codexレビュー 2026-08-28）。
+                if not text:
+                    continue
+                out[i] = text
+                self.usage.add(f"{norm[i]['tag']}|batch", **(usage or {}))
+
+        def _sync(i: int):
+            r = norm[i]
+            return self.generate(r["system_prompt"], r["user_prompt"],
+                                 schema=r["schema"], temperature=r["temperature"],
+                                 max_tokens=r["max_tokens"], tag=r["tag"])
+
+        pending = [i for i, t in enumerate(out) if t is None]
+        if pending and not used_batch:
+            # Batch を使わない設定では **従来どおり1件ずつ順番に** 呼ぶ。
+            # 並列に変えると呼び出し順・同時数が変わる＝「既定は従来どおり」に反する
+            # （Codexレビュー 2026-08-28）。並列化は Batch の埋め直しのときだけ。
+            for i in pending:
+                out[i] = _sync(i)
+        elif pending:
+            self.batch_fallback_calls += len(pending)
+            logger.warning("batch %s: %d/%d 行を同期で埋め直す",
+                           tag, len(pending), len(norm))
+            workers = max(1, min(self.parallel_workers, len(pending)))
+            with ThreadPoolExecutor(max_workers=workers) as ex:
+                for i, text in zip(pending, ex.map(_sync, pending)):
+                    out[i] = text
+        return [t or "" for t in out]
+
     def count_tokens(self, text: str) -> int:
         """countTokens API。生成を伴わないメータリング呼び出し。"""
         if self.backend == "genai":
@@ -370,6 +488,23 @@ class OpenAIClient:
         ch = resp.choices[0] if resp.choices else None
         return (ch.message.content or "").strip() if ch and ch.message else ""
 
+    def generate_many(self, items, tag: str = "agent", kind: str = "agents",
+                      job_key=None):
+        """OpenAI 側は Batch を使わない（比較用の経路なので同期のまま）。"""
+        return [self.generate(it["system_prompt"], it["user_prompt"],
+                              schema=it.get("schema"),
+                              temperature=it.get("temperature"),
+                              max_tokens=it.get("max_tokens"),
+                              tag=it.get("tag") or tag)
+                for it in items]
+
+    def close_caches(self) -> int:
+        return 0
+
+    @property
+    def batch_stats(self):
+        return []
+
 
 # ---------------------------------------------------------------------------
 # Mock (API を一切叩かない。E2E 配線確認とコスト見積り用)
@@ -400,6 +535,10 @@ class MockClient:
         self.usage = usage or UsageMeter()
         self.backend = "mock"
         self.max_token_finishes = 0
+        self.cache_created = 0
+        self.cache_failed = 0
+        self.batch_kinds = set()
+        self.batch_fallback_calls = 0
         self._rng_lock = threading.Lock()
         self._seed = seed
         self.prompt_log: List[Dict[str, Any]] = []
@@ -889,6 +1028,24 @@ class MockClient:
             }, ensure_ascii=False)
         return json.dumps(act, ensure_ascii=False)
 
+    def generate_many(self, items: List[Dict[str, Any]], tag: str = "agent",
+                      kind: str = "agents", job_key: Optional[str] = None
+                      ) -> List[str]:
+        """Batch API は叩かず、同じ順序で generate() を回すだけ（配線確認用）。"""
+        return [self.generate(it["system_prompt"], it["user_prompt"],
+                              schema=it.get("schema"),
+                              temperature=it.get("temperature"),
+                              max_tokens=it.get("max_tokens"),
+                              tag=it.get("tag") or tag)
+                for it in items]
+
+    def close_caches(self) -> int:
+        return 0
+
+    @property
+    def batch_stats(self) -> List[Dict[str, Any]]:
+        return []
+
     def count_tokens(self, text: str) -> int:
         raise RuntimeError("MockClient は count_tokens を持たない")
 
@@ -897,7 +1054,8 @@ class MockClient:
 # factory
 # ---------------------------------------------------------------------------
 
-def create_llm_client(llm_config: Dict[str, Any], usage: Optional[UsageMeter] = None):
+def create_llm_client(llm_config: Dict[str, Any], usage: Optional[UsageMeter] = None,
+                      jobs_dir: Optional[str] = None):
     provider = (llm_config.get("provider") or "mock").lower()
     model = llm_config.get("model")
     temperature = float(llm_config.get("temperature", 0.9))
@@ -906,12 +1064,28 @@ def create_llm_client(llm_config: Dict[str, Any], usage: Optional[UsageMeter] = 
     if provider == "mock":
         return MockClient(seed=int(llm_config.get("seed", 42)), usage=usage)
     if provider == "google":
+        batch_kinds = []
+        if llm_config.get("batch_classify"):
+            batch_kinds.append("classify")
+        if llm_config.get("batch_agents"):
+            batch_kinds.append("agents")
         return GeminiClient(model=model or "gemini-2.5-flash-lite", temperature=temperature,
                             max_tokens=max_tokens,
                             enable_cache=bool(llm_config.get("enable_cache", False)),
                             thinking_budget=(int(llm_config["thinking_budget"])
                                              if "thinking_budget" in llm_config else None),
-                            usage=usage)
+                            usage=usage,
+                            cache_ttl_seconds=(int(llm_config["cache_ttl_seconds"])
+                                               if "cache_ttl_seconds" in llm_config
+                                               else None),
+                            batch_kinds=batch_kinds,
+                            batch_poll_interval=float(
+                                llm_config.get("batch_poll_interval", 5.0)),
+                            batch_timeout_sec=float(
+                                llm_config.get("batch_timeout_sec", 3600.0)),
+                            jobs_dir=jobs_dir,
+                            parallel_workers=int(
+                                llm_config.get("parallel_workers", 8)))
     if provider == "openai":
         return OpenAIClient(model=model or "gpt-5.4-nano", temperature=temperature,
                             max_tokens=max_tokens, usage=usage)

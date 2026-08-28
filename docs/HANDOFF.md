@@ -836,3 +836,23 @@ false に化ける**（unknown として主値から外し、D3の合格条件�
 黄は「名義2つ」＝条件は変えず文言だけ色ごとに正した）、画面の strict ブロックの説明はこの JSON から描く。
 strict の判定に `stage == color` を明示的に足した（実測では既に全 run で一致＝**7本再生成して strict 6件は前便と完全に同一**）。
 テストに「1280 と 390 のページ全体（`document.body.innerText`）に `undefined` / `NaN` が出ない」網を足した（他の穴は見つからなかった）。
+
+---
+
+## 【追記 2026-08-28】API費の節約 第1便（CTO）
+
+正本は `docs/cost_saving_v1.md`。要点だけ：
+
+- **既定は従来どおり。** `configs/config_field_v5c.yaml` は無改造で v5c を再現する
+  （改修前の mock ランと出力9本がバイト一致することを確認済み）。
+- **節約設定は `configs/config_field_v5c_econ.yaml`**（v5c との差は `llm:` と `run_name` だけ）。
+  中身は `batch_classify: true` の1点だけが効いている。
+- **効くのは①分類器の Batch 化だけ**（24か月3本 $4.89 → $4.14）。
+  ②キャッシュは前置き 929 トークンでは載らない（API の最低は明示2,048／暗黙1,024）。
+  ③出力上限は 2,200 に一度も当たっておらず削減額ゼロ。
+- `batch_agents` のスイッチはあるが **既定 false**（Batch の往復が中央値301s・最長728s ＝
+  216回直列で 18〜44時間/本）。
+- Batch のジョブIDは `run_dir/batch_jobs/<tag>.json` に残る＝落ちても取り直せる（実APIで確認）。
+- 検証: `python tests/test_cost_saving.py`（43件）／`python tools/cost_saving_v1.py <run_dir> ...`／
+  `python tools/verify_batch_classify.py <run_dir> --rows 50`（実APIを叩く）。
+- **24か月の本走は未実施**（施主GO待ち）。上の $4.14 は実測トークンに単価を掛けた試算。
