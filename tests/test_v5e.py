@@ -483,9 +483,14 @@ check("それでも内心の自衛は観測に残っている（集計からは�
       len(thought_red) > 0, f"thought defense rows={len(thought_red)}")
 check("発話の S2 では止まる（対照）", stop["stopped"] is True)
 check("停止トリガーは観測できる行だけ",
-      all(t["kind"] in ("utterance", "article", "direct")
+      all(t["kind"] in ("utterance", "article")
           for t in stop["triggers"]),
       str(sorted({t["kind"] for t in stop["triggers"]})))
+check("観測できる行は発話と記事だけ（私信は入れない）",
+      Simulation.V5E_OBSERVABLE_KINDS == ("utterance", "article"))
+check("トリガー行に LLM 側とルール側のレベルを両方残す（監査用）",
+      all(set(t) >= {"llm_level", "rule_level"} for t in stop["triggers"]),
+      json.dumps(stop["triggers"][0], ensure_ascii=False)[:300])
 
 # --- 記事でも止まる（観測できる行なので）-------------------------------------
 class ArticleDefenseMock(DefenseMock):
@@ -801,6 +806,22 @@ check("LLM とルールが一致した件数が数えられている",
       met["S_level_agreement"]["llm_and_rule_same"] == met["S_counts"]["S2"],
       json.dumps(met["S_level_agreement"]))
 check("defense_stop がそのまま入っている", met["defense_stop"] == stop)
+# 走行中の判定（Simulation._v5e_red_level）と事後集計（run_metrics の S_rows）は
+# 別々に組み立てている。同じ行に同じレベルが付くことを実測で固定する
+# （Codexレビュー 2026-08-29 指摘③：組み立ては一本化されていない）。
+_lab = jsonl(os.path.join(dir_s, "stage_labels_v5e.jsonl"))
+_run_red = {}
+for _r in _lab:
+    _lv = sim_s._v5e_red_level(_r)
+    if _lv:
+        _run_red[(int(_r.get("step", 0)), _r.get("from"),
+                  str(_r.get("text", ""))[:60])] = _lv["level"]
+_met_red = {(int(x["month"]), x["agent_id"], str(x["text"])[:60]): x["level"]
+            for x in met["S_rows"]}
+check("走行中の赤・レベルと事後集計の S_rows が完全に一致",
+      _run_red == _met_red,
+      f"run={len(_run_red)} metrics={len(_met_red)} "
+      f"diff={list(set(_run_red.items()) ^ set(_met_red.items()))[:2]}")
 check("赤は行政以外の役割からも出ている（役割で絞っていない）",
       set(met["C_red_by_role"]) - {"municipality"} != set(),
       json.dumps(met["C_red_by_role"], ensure_ascii=False))

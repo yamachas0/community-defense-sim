@@ -1883,7 +1883,10 @@ class Simulation:
             self._v5e_month_end(step)
 
     # 買い手が現実に観測できる行（人の目に触れたもの）。内心は入らない。
-    V5E_OBSERVABLE_KINDS = ("utterance", "article", "direct")
+    # **私信（direct）は入れない**（Codexレビュー 2026-08-29 指摘）。私信は今も分類対象外だが、
+    # ここに残しておくと、将来分類対象に足しただけで停止条件まで黙って広がる。
+    # 私信を停止に入れるかは、その時に別途 施主決定を取る。
+    V5E_OBSERVABLE_KINDS = ("utterance", "article")
 
     # 台本の取得を止めるレベル（施主決定 2026-08-29 07:50）。
     # 「個人的な売買の拒否は検出しちゃダメ」＝S1（自分は売らない・貸さない）は
@@ -1929,6 +1932,15 @@ class Simulation:
         2. その行の自衛レベルが **S2 または S3** であること（施主決定 2026-08-29 07:50
            「個人的な売買の拒否は検出しちゃダメ」）。S1 は何件出ても止まらない。
 
+        **「観測できる」の意味**（走行前に確定・Codexレビュー 2026-08-29）：ここで見ているのは
+        「その買い手がその行を実際に聞いたか」ではなく、**街に人の目に触れる形で表出したか**
+        である（買い手には受信の経路が無い＝台本だから）。したがってこれは
+        「街に S2/S3 が表出したら買い手が手を引く」という**撤退の方針**であって、
+        買い手の観測の再現ではない。報告にもそう書く。
+
+        **レベルが割れたとき**：主値は LLM の `defense_level`（`defense_level_of`）なので、
+        ルール側が S1・LLM 側が S2 なら**止まる**。両方の値をトリガー行に残して監査する。
+
         停止判定と集計が同じ組み立てを使うための唯一の持ち場である。
         """
         if r.get("kind") not in self.V5E_OBSERVABLE_KINDS:
@@ -1940,7 +1952,11 @@ class Simulation:
                 "role": r.get("role", ""), "kind": r.get("kind", ""),
                 "scene": r.get("scene", ""), "venue": r.get("venue", ""),
                 "text": str(r.get("text", "")), "level": lv.get("level"),
-                "level_source": lv.get("level_source")}
+                "level_source": lv.get("level_source"),
+                # 監査用に LLM 側とルール側のレベルを両方残す（Codexレビュー 2026-08-29）。
+                # 主値は LLM 側なので、rule=S1 / llm=S2 の行でも止まる。
+                # 走行前に決めた仕様であり、結果を見てから変えない。
+                "llm_level": lv.get("llm_level"), "rule_level": lv.get("rule_level")}
 
     def _v5e_trace_alive(self, tr: Dict[str, Any]) -> bool:
         """起きなかった取得の兆候を配らない（v5e で買い手が止まったあと）。
@@ -2000,7 +2016,8 @@ class Simulation:
                 # 事後集計（tools/run_metrics.py）は `venue_choices` から書き手の
                 # 役割を補って判定しているので、走行中も同じように補わないと
                 # **同じ行が走行中と事後で違う判定になる**（S3 は行政の主体に限る）。
-                + [{"kind": "article", "role": self._v5e_role_of(a.get("from")), **a}
+                + [{**a, "kind": "article",
+                    "role": a.get("role") or self._v5e_role_of(a.get("from"))}
                    for a in self.ledger.v5_articles
                    if int(a.get("step", 0)) == step])
         if not rows:
