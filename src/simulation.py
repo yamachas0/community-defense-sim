@@ -62,6 +62,7 @@ from .field_v5c import build_system_prompt_v5c, venue_candidates_for_all
 from .field_v5d import (TRACE_TEXTS_V5D, build_system_prompt_v5d, load_names_v5d,
                         s4_for_step_v5d, scene_schema_v5d, venue_labels_v5d)
 from .field_v6 import (MAX_ACT_TEXT_CHARS, MEASURE_NONE, MEASURE_PAPER_LABEL,
+                       system_prompt_v6b,
                        MEASURE_VALUES, PAPER_LABELS, PUBLIC_ACT_NONE,
                        PUBLIC_ACT_VALUES, SELL_INTENT_CLEAR, SELL_INTENT_KEEP,
                        SELL_INTENT_REFUSE,
@@ -210,7 +211,8 @@ class Simulation:
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
         self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b",
                                                         "field_v5c", "field_v5d",
-                                                        "field_v5e", "field_v6")
+                                                        "field_v5e", "field_v6",
+                                                        "field_v6b")
         self.field_v5b = cfg.get("scenario_version") == "field_v5b"
         # v5c は v5b の世界に「買い手の戦略で組んだ台本」と「日常の場」を足しただけ。
         # 観測の作り方・兆候・プロンプトの文面は v5/v5b と同一である。
@@ -224,9 +226,14 @@ class Simulation:
         # v6 で足すのは「町の人が選べる中立な行動」だけで、v5e の分類・停止は一切通らない
         # （docs/world_design_v6_two_worlds.md §2・§3）。
         self.field_v5d = cfg.get("scenario_version") in ("field_v5d", "field_v5e",
-                                                         "field_v6")
+                                                         "field_v6", "field_v6b")
         self.field_v5e = cfg.get("scenario_version") == "field_v5e"
-        self.field_v6 = cfg.get("scenario_version") == "field_v6"
+        self.field_v6 = cfg.get("scenario_version") in ("field_v6", "field_v6b")
+        # v6b: 毎月の行動欄の問いかけをやめ、制度の存在を system プロンプトに1回だけ書く。
+        # 欄は必須から外す（本人が使いたい月にだけ書く）。他は v6 と同一である。
+        # ねらい＝「毎月かならず答えさせること（＝土地の方針を思い出させる効果）」と
+        # 「選択肢があること」を分けて測る（docs/world_design_v6_two_worlds.md §9）。
+        self.field_v6b = cfg.get("scenario_version") == "field_v6b"
         # v6: 行動ログ（enum の選択そのもの）・紙・買えなかった取得。全部決定論。
         self.v6_actions: List[Dict[str, Any]] = []
         self.v6_papers: List[Dict[str, Any]] = []
@@ -376,9 +383,10 @@ class Simulation:
                 builder = (build_system_prompt_v5d if self.field_v5d
                            else build_system_prompt_v5c)
                 self.system_prompts = {
-                    a.agent_id: builder(a, cfg, len(parcels),
-                                        self.venue_choices[a.agent_id])
-                    for a in self.actors}
+                    a.agent_id: (system_prompt_v6b(sp) if self.field_v6b else sp)
+                    for a, sp in ((a, builder(a, cfg, len(parcels),
+                                              self.venue_choices[a.agent_id]))
+                                  for a in self.actors)}
             else:
                 self.venue_choices = {a.agent_id: list(self.venue_ids)
                                       for a in self.actors}
@@ -1929,7 +1937,8 @@ class Simulation:
                         # v6: 行動欄は「その月の最後のターン」でだけ尋ねる（stance と同じ）。
                         is_muni = a.role == "municipality"
                         act_rows = (action_rows_v6(owns, is_muni)
-                                    if (self.field_v6 and final_turn) else None)
+                                    if (self.field_v6 and final_turn
+                                        and not self.field_v6b) else None)
                         prompt = build_scene_prompt_v5(
                             a, self.ledger, step, self.n_steps, self.names, sid,
                             scene_label, self.venue_labels.get(venue_id, venue_id),
@@ -1945,7 +1954,8 @@ class Simulation:
                                 a.name, [self.names[p] for p in present],
                                 [self.names[i] for i in self.actor_ids],
                                 owns, can_publish, ask_actions=final_turn,
-                                is_municipality=is_muni)
+                                is_municipality=is_muni,
+                                required_actions=not self.field_v6b)
                         elif self.field_v5d:
                             schema = scene_schema_v5d(
                                 a.name, [self.names[p] for p in present],

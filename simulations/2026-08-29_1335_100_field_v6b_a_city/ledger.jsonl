@@ -1,0 +1,11 @@
+{"step": 1, "kind": "transfer", "acq_id": "ACQ01", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "岬道の持ち主さん"}
+{"step": 1, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "船着場裏の持ち主さん"}
+{"step": 2, "kind": "lease", "acq_id": "ACQ03", "parcel_id": "P34", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "浜町の大家さん"}
+{"step": 2, "kind": "direct_rejected", "from_id": "HH14", "to": "HH04", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH15", "reason": "quota_exhausted"}
+{"step": 2, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ04", "parcel_id": "P17", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "岬道の持ち主さん"}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ05", "parcel_id": "P25", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "船着場裏の持ち主さん"}
+{"step": 3, "kind": "direct_rejected", "from_id": "HH04", "to": "HH16", "reason": "quota_exhausted"}
+{"step": 3, "kind": "direct_rejected", "from_id": "HH13", "to": "HH15", "reason": "quota_exhausted"}
+{"step": 3, "kind": "publication", "by": "MD01", "headline": "この街で名義の移った土地がある、という話を聞いた。", "body": "この街で名義の移った土地がある、という話を聞いた。", "about_acquisition": false}

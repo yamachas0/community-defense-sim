@@ -502,5 +502,70 @@ check("空欄では登記簿も紙も動かない",
       and sum_e["v6"]["acquisitions_blocked"] == 0)
 
 
+# ===========================================================================
+print("\n[9] v6b（任意回答）：毎月の問いかけをやめ、欄を必須から外した変種")
+# ===========================================================================
+
+from src.field_v6 import ACTION_FIELDS, WORLD_KNOWLEDGE_V6B                # noqa: E402
+
+CFG_B = load("configs/config_field_v6b.yaml")
+diff_b = {k for k in set(CFG_B) | set(CFG)
+          if CFG_B.get(k) != CFG.get(k)}
+check("v6b と v6 の設定の差は run_name / scenario_version だけ",
+      diff_b == {"run_name", "scenario_version"}, str(sorted(diff_b)))
+check("scenario_version は field_v6b", CFG_B["scenario_version"] == "field_v6b")
+check("採点用LLMは v6b でも全廃", CFG_B["kpi"]["classify_utterances"] is False)
+
+sb = scene_schema_v6("甲", ["甲", "乙"], ["甲", "乙", "丙"], True, False,
+                     ask_actions=True, required_actions=False)
+check("v6b でも行動の欄はスキーマにある",
+      {"sell_intent", "public_act", "public_act_text"} <= set(sb["properties"]))
+check("**v6b では行動の欄は必須でない**",
+      not (set(ACTION_FIELDS) & set(sb["required"])), str(sb["required"]))
+check("行動以外の欄は v6 と同じく必須のまま",
+      {"thought", "text", "talk_to", "direct_to", "stance"} <= set(sb["required"]))
+sb_m = scene_schema_v6("甲", ["甲", "乙"], ["甲", "乙", "丙"], True, False,
+                       ask_actions=True, is_municipality=True,
+                       required_actions=False)
+check("行政の measure も必須でない",
+      "measure" in sb_m["properties"] and "measure" not in sb_m["required"])
+
+check("世界知識の文に促し・当為の語が無い",
+      not [w for w in BANNED if w in WORLD_KNOWLEDGE_V6B],
+      str([w for w in BANNED if w in WORLD_KNOWLEDGE_V6B]))
+check("世界知識は「使う／使わない」を対称に書いてある（Codexレビュー反映）",
+      "またはいずれも使わないかは、各人が決める" in WORLD_KNOWLEDGE_V6B)
+check("片側だけを明示する「義務はない」は使っていない",
+      "義務はない" not in WORLD_KNOWLEDGE_V6B)
+
+sim_b, d_b = run_mock(CFG_B, 3, prefix="qa_v6b_")
+sys_prompts = {p.get("system", "") for p in (sim_b.client.prompt_log or [])}
+key = "この街にある手続き"
+check("system プロンプトに制度の説明が入っている",
+      all(key in s for s in sys_prompts if s), str(len(sys_prompts)))
+check("制度の説明は**1回だけ**（毎月くり返さない）",
+      all(s.count(key) == 1 for s in sys_prompts if s))
+user_prompts = [p.get("user", "") for p in (sim_b.client.prompt_log or [])]
+check("**毎月の問いかけは出ない**（user 側に行動欄の説明が1つも無い）",
+      not any(("sell_intent" in u) or ("public_act" in u) or ("measure に" in u)
+              for u in user_prompts))
+muni_sys = [q.get("system", "") for q in (sim_b.client.prompt_log or [])
+            if "市役所の待合で人の話を聞く" in q.get("system", "")]
+check("v6b では行政の「特別な権限や制度はこの街には無い」を外してある（制度と矛盾するため）",
+      bool(muni_sys) and all("特別な権限や制度はこの街には無い" not in q
+                             for q in muni_sys), str(len(muni_sys)))
+check("v6b でも紙・登記簿の配線は同じ（mock は行動しないので0件）",
+      json.load(io.open(os.path.join(d_b, "summary.json"),
+                        encoding="utf-8"))["v6"]["acquisitions_blocked"] == 0)
+
+sim_v6, d_v6 = run_mock(CFG, 3, prefix="qa_v6_ask_")
+u6 = [p.get("user", "") for p in (sim_v6.client.prompt_log or [])]
+check("v6（元の版）では毎月の問いかけが出ている（対照）",
+      any("sell_intent" in u for u in u6))
+s6 = {p.get("system", "") for p in (sim_v6.client.prompt_log or [])}
+check("v6（元の版）の system プロンプトに制度の説明は入らない",
+      not any(key in s for s in s6 if s))
+
+
 print(f"\n{PASS} passed, {FAIL} failed")
 sys.exit(1 if FAIL else 0)

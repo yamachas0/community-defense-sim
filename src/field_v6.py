@@ -56,13 +56,18 @@ MEASURE_PAPER_LABEL = "役場からのお知らせ"
 
 MAX_ACT_TEXT_CHARS = 150
 
+# 行動の欄（v6b ではこれだけを必須から外す）
+ACTION_FIELDS = ("sell_intent", "public_act", "public_act_text",
+                 "measure", "measure_text")
+
 
 # --- 出力スキーマ -----------------------------------------------------------
 
 def scene_schema_v6(agent_name: str, present_names: List[str],
                     all_names: List[str], owns_parcel: bool = False,
                     can_publish: bool = False, ask_actions: bool = False,
-                    is_municipality: bool = False) -> Dict[str, Any]:
+                    is_municipality: bool = False,
+                    required_actions: bool = True) -> Dict[str, Any]:
     """`scene_schema_v5d` に行動欄を足しただけ（構造も既存の項目も同一）。
 
     `ask_actions` は**その主体のその月の最後のターンでだけ** True にする
@@ -81,7 +86,13 @@ def scene_schema_v6(agent_name: str, present_names: List[str],
         else:
             props["public_act"] = {"type": "string", "enum": list(PUBLIC_ACT_VALUES)}
             props["public_act_text"] = {"type": "string"}
-    schema["required"] = list(props)
+    if required_actions:
+        schema["required"] = list(props)
+    else:
+        # v6b（任意回答）：欄はあるが**必須にしない**＝毎月の問いかけが無く、
+        # 本人が使いたい月にだけ書く。書かなければ既定（変えない／なし）として扱う。
+        schema["required"] = [k for k in props
+                              if k not in ACTION_FIELDS]
     return schema
 
 
@@ -116,6 +127,37 @@ def action_rows_v6(owns_parcel: bool, is_municipality: bool) -> List[str]:
                  f"「{PUBLIC_ACT_NONE}」以外のときは public_act_text に1行書く。"
                  "その1行は翌月、紙として街に配られる。"]
     return rows
+
+
+# --- v6b：選択肢の存在を「世界の知識」として1回だけ書く -------------------
+# v6 は毎月の最後のターンで行動欄の説明を出していた（＝毎月かならず答える）。
+# v6b はそれをやめ、**system プロンプトに1回だけ**制度の存在を書く。
+# 毎月の問いかけはせず、欄も必須にしない（本人が使いたい月にだけ書く）。
+# 文面は制度の説明だけで、使うことも使わないことも勧めない。
+
+WORLD_KNOWLEDGE_V6B = f"""
+--- この街にある手続き ---
+土地の持ち主は、自分の土地を「{SELL_INTENT_REFUSE}」としておくことができる。その間、
+その人の土地の売買は成立しない。この扱いはあとで解除できる。
+街に向けた手続きとして、「{PUBLIC_ACT_CIRCULAR}」「{PUBLIC_ACT_ASSEMBLY}」
+「{PUBLIC_ACT_PETITION}」がある。その内容は翌月、紙として街に配られる。
+市役所の担当が行えるものとして、「{MEASURE_DESK}」「{MEASURE_BRIEFING}」
+「{MEASURE_STUDY}」がある。
+どの手続きを使うか、またはいずれも使わないかは、各人が決める。
+"""
+
+# v6b では、行政ロール向けの既存の一文と制度の説明が文字どおり矛盾する
+# （「特別な権限や制度はこの街には無い」と「条例・届出の検討」が同居できない）。
+# **v5d の原文は旧世界では正しいので変えず**、v6b の組み立て側でこの一文だけを外す
+# （Codexレビュー 2026-08-29 走行前）。
+MUNI_LINE_V5D = "市役所の待合で人の話を聞くことがある。特別な権限や制度はこの街には無い。"
+MUNI_LINE_V6B = "市役所の待合で人の話を聞くことがある。"
+
+
+def system_prompt_v6b(text: str) -> str:
+    """v6b の system プロンプト＝v5d の文面 − 矛盾する一文 ＋ 制度の説明1回。"""
+    return text.replace(MUNI_LINE_V5D, MUNI_LINE_V6B) + WORLD_KNOWLEDGE_V6B
+
 
 
 # --- 登記簿の refusal 列 ----------------------------------------------------
@@ -200,5 +242,5 @@ __all__ = [
     "MEASURE_VALUES", "PAPER_LABELS", "MEASURE_PAPER_LABEL",
     "MAX_ACT_TEXT_CHARS", "scene_schema_v6", "action_rows_v6",
     "is_refused", "set_refusal", "blocked_acquisitions_v6", "script_without",
-    "paper_row", "first_month",
+    "paper_row", "first_month", "ACTION_FIELDS", "WORLD_KNOWLEDGE_V6B", "system_prompt_v6b",
 ]
