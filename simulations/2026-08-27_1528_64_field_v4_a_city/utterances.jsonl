@@ -1,7 +1,0 @@
-{"step": 2, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "共同浴場の修繕、そろそろしないといけないね。でも、この前のお祭りで思ったよりお金使っちゃったし、どうしたものか。", "frame": "our_town", "about_acquisition": false}
-{"step": 2, "from": "HH04", "role": "household", "name": "R04", "location": "V03", "text": "共同浴場のお湯の温度、ちょうどいい?", "frame": "neutral", "about_acquisition": false}
-{"step": 3, "from": "HH01", "role": "household", "name": "R01", "location": "HOME:HH01", "text": "共同浴場の修繕費、そろそろまた集めないといけない時期かしらね。町内会の人たちと相談しないと。", "frame": "our_town", "about_acquisition": false}
-{"step": 5, "from": "HH12", "role": "household", "name": "R12", "location": "HOME:HH12", "text": "市から土地登記の統計情報が公開されたようですね。R07さんが最多保有者とは驚きです。私たちの近隣でも、土地の所有状況がどうなっているのか、少し気になりますね。", "frame": "our_town", "about_acquisition": true}
-{"step": 9, "from": "BZ04", "role": "business", "name": "T04", "location": "OFFICE:BZ04", "text": "第9月施行の「一定面積以上の土地売買に関する届出制度」について、対象となる500㎡超の土地売買は、届出から成立まで3ヶ月遅延するとのこと。この制度について、事業者や住民の皆様への周知をさらに強化する必要があると感じています。特に、不動産取引を検討されている方々には、この遅延が事業計画に影響を与える可能性も考慮していただくよう、情報提供を積極的に行っていきたいと考えています。", "frame": "neutral", "about_acquisition": true}
-{"step": 10, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "条例施行で、土地の売買が遅れるのは困りますね。うちのような賃借の店でも、大家さんが何か考えてるんじゃないかと気になります。", "frame": "their_town", "about_acquisition": true}
-{"step": 12, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "来月施行される土地売買の届出制度、うちには関係ないけど、街全体にどう影響するかな。", "frame": "their_town", "about_acquisition": true}

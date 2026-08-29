@@ -1,3 +1,0 @@
-{"step": 1, "from": "BR01", "role": "broker", "name": "B01", "location": "OFFICE:BR01", "text": "今月も、地域の皆様のお役に立てるよう、精一杯頑張ります。どうぞよろしくお願いいたします。"}
-{"step": 1, "from": "BZ02", "role": "business", "name": "T02", "location": "V01", "text": "今日も一日頑張ろう！"}
-{"step": 1, "from": "MD02", "role": "media", "name": "J02", "location": "OFFICE:MD02", "text": "A市もいよいよ高齢化と人口減少が本格化してきましたね。この街の未来をどう描いていくか、関係者で議論する場を設けるべきではないでしょうか。"}
