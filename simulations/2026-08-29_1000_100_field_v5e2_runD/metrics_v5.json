@@ -1,0 +1,2496 @@
+{
+  "run": "2026-08-29_1000_100_field_v5e2_runD",
+  "version": "field_v5e",
+  "steps": 36,
+  "model": "gemini-2.5-flash-lite",
+  "calls": 6054,
+  "errors": 0,
+  "input_tokens": 14650079,
+  "output_tokens": 2152951,
+  "invalid_actions": 14,
+  "llm_classified": true,
+  "classifier_unknown": 0,
+  "acquisitions": 33,
+  "leases": 12,
+  "deals": 45,
+  "acquisition_months": [
+    1,
+    1,
+    3,
+    3,
+    5,
+    5,
+    6,
+    9,
+    10,
+    10,
+    11,
+    11,
+    12,
+    13,
+    15,
+    15,
+    19,
+    19,
+    21,
+    21,
+    23,
+    24,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    31,
+    32,
+    32,
+    35,
+    36
+  ],
+  "lease_months": [
+    2,
+    4,
+    4,
+    7,
+    8,
+    14,
+    16,
+    18,
+    20,
+    25,
+    33,
+    34
+  ],
+  "control_share": 0.978,
+  "holders": [
+    "A社",
+    "B社",
+    "C社",
+    "D社"
+  ],
+  "final_acquirer_share": 0.7174,
+  "utterance_turns": 4392,
+  "utterances_spoken": 4094,
+  "silence_rate": 0.068,
+  "mean_group_size": 4.63,
+  "directs": 277,
+  "articles": 63,
+  "home_rate": 0.306,
+  "venues_in_world": 15,
+  "attend_slots": 2599,
+  "slots_with_partner": 2200,
+  "solo_slot_rate": 0.154,
+  "copresence_pairs_unique": 325,
+  "copresence_pair_slots": 12214,
+  "utterances_per_actor_month": 4.37,
+  "traces_delivered": 120,
+  "mention_rows": 403,
+  "mention_by_channel": {
+    "utterance": 273,
+    "article": 43,
+    "direct": 87
+  },
+  "propagation_edges": 4107,
+  "speakers_by_month": {
+    "1": [
+      "BR02",
+      "BZ03",
+      "HH01",
+      "HH08",
+      "HH13",
+      "HH16",
+      "MD01"
+    ],
+    "2": [
+      "BR01",
+      "BZ01",
+      "HH01",
+      "HH03",
+      "HH06",
+      "HH07",
+      "HH12",
+      "MU01"
+    ],
+    "3": [
+      "BR01",
+      "BR02",
+      "HH03",
+      "HH09",
+      "HH12",
+      "MD01",
+      "MD02"
+    ],
+    "4": [
+      "BR02",
+      "HH01",
+      "HH10",
+      "MD01",
+      "MU01"
+    ],
+    "5": [
+      "BR02",
+      "HH05",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "6": [
+      "BR02",
+      "BZ04",
+      "HH06",
+      "HH09",
+      "HH14",
+      "HH15",
+      "HH16",
+      "MD02"
+    ],
+    "7": [
+      "BR01",
+      "BR02",
+      "BZ02",
+      "BZ04",
+      "HH05",
+      "HH08",
+      "HH15",
+      "MD01",
+      "MD02",
+      "MU01"
+    ],
+    "8": [
+      "BR02",
+      "HH02",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "9": [
+      "HH15",
+      "MD01"
+    ],
+    "10": [
+      "BR02",
+      "HH02",
+      "HH07",
+      "HH08",
+      "HH13",
+      "MD01"
+    ],
+    "11": [
+      "HH05",
+      "HH16",
+      "MD01"
+    ],
+    "12": [
+      "HH02",
+      "HH04",
+      "HH05",
+      "HH08",
+      "HH12",
+      "HH16",
+      "MD01",
+      "MD02"
+    ],
+    "13": [
+      "BR01",
+      "BR02",
+      "BZ03",
+      "HH01",
+      "HH04",
+      "HH09",
+      "HH14",
+      "HH16"
+    ],
+    "14": [
+      "HH04",
+      "HH14",
+      "MD02"
+    ],
+    "15": [
+      "BZ04",
+      "HH03",
+      "HH08",
+      "HH10",
+      "HH12",
+      "HH16",
+      "MD02"
+    ],
+    "16": [
+      "BZ04",
+      "HH16",
+      "MD02"
+    ],
+    "17": [
+      "HH03",
+      "HH08",
+      "HH16",
+      "MD01"
+    ],
+    "18": [
+      "BZ01",
+      "HH11",
+      "MD02"
+    ],
+    "19": [
+      "BR01",
+      "BZ01",
+      "HH13",
+      "MD02"
+    ],
+    "20": [
+      "BZ01",
+      "HH03",
+      "HH13",
+      "MD02"
+    ],
+    "21": [
+      "BR02",
+      "HH08",
+      "HH11",
+      "MD01",
+      "MD02"
+    ],
+    "22": [
+      "HH12",
+      "MD02"
+    ],
+    "23": [
+      "HH02",
+      "HH04",
+      "HH08",
+      "HH10",
+      "HH11",
+      "HH14",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "24": [
+      "HH01",
+      "HH02",
+      "HH05",
+      "HH11",
+      "MD02"
+    ],
+    "25": [
+      "BZ01",
+      "MD01",
+      "MD02",
+      "MU01"
+    ],
+    "26": [
+      "HH01",
+      "HH13",
+      "HH14",
+      "MD01"
+    ],
+    "27": [
+      "BR01",
+      "BZ02",
+      "HH14"
+    ],
+    "28": [
+      "HH02",
+      "HH07",
+      "MD02"
+    ],
+    "29": [
+      "BR01",
+      "BR02",
+      "HH03",
+      "HH07",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "30": [
+      "HH03",
+      "HH08",
+      "HH13",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "31": [
+      "BR01",
+      "BR02",
+      "BZ04",
+      "HH03",
+      "HH07",
+      "MD01"
+    ],
+    "32": [
+      "BZ04",
+      "HH01",
+      "HH03",
+      "HH04",
+      "HH06",
+      "HH07",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH15",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "33": [
+      "BR01",
+      "BR02",
+      "BZ01",
+      "BZ04",
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH10",
+      "HH12",
+      "HH13",
+      "HH15",
+      "MD01",
+      "MD02"
+    ],
+    "34": [
+      "BZ04",
+      "HH03",
+      "HH07",
+      "HH14",
+      "MD01"
+    ],
+    "35": [
+      "BR01",
+      "HH07",
+      "MD01",
+      "MD02",
+      "MU01",
+      "MU02"
+    ],
+    "36": [
+      "BR02",
+      "BZ02",
+      "HH12",
+      "HH16",
+      "MD01",
+      "MD02"
+    ]
+  },
+  "rule_llm_cross": {
+    "rule-/llm-": 1747,
+    "rule+/llm-": 1991,
+    "rule+/llm+": 273,
+    "rule-/llm+": 83
+  },
+  "llm_only_utterances": 83,
+  "first_mention": {
+    "ACQ05": {
+      "parcel_id": "P25",
+      "transfer_month": 3,
+      "month": 3,
+      "agent_id": "HH12",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V01",
+      "lag_months": 0,
+      "available_antecedents": [
+        "strangers"
+      ],
+      "heard_from": []
+    },
+    "ACQ08": {
+      "parcel_id": "P42",
+      "transfer_month": 5,
+      "month": 6,
+      "agent_id": "HH16",
+      "role": "",
+      "channel": "direct",
+      "scene": "S1",
+      "venue": "",
+      "lag_months": 1,
+      "available_antecedents": [
+        "survey"
+      ],
+      "heard_from": []
+    },
+    "ACQ18": {
+      "parcel_id": "P04",
+      "transfer_month": 15,
+      "month": 15,
+      "agent_id": "HH16",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V03",
+      "lag_months": 0,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH04",
+        "HH04",
+        "HH04"
+      ]
+    },
+    "ACQ25": {
+      "parcel_id": "P14",
+      "transfer_month": 19,
+      "month": 19,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V01",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": []
+    },
+    "ACQ28": {
+      "parcel_id": "P03",
+      "transfer_month": 21,
+      "month": 21,
+      "agent_id": "MD01",
+      "role": "media",
+      "channel": "article",
+      "scene": "S4",
+      "venue": "",
+      "lag_months": 0,
+      "available_antecedents": [],
+      "heard_from": [
+        "BZ04",
+        "BZ04"
+      ]
+    },
+    "ACQ29": {
+      "parcel_id": "P06",
+      "transfer_month": 21,
+      "month": 21,
+      "agent_id": "MD01",
+      "role": "media",
+      "channel": "article",
+      "scene": "S4",
+      "venue": "",
+      "lag_months": 0,
+      "available_antecedents": [],
+      "heard_from": [
+        "BR02",
+        "BR02",
+        "BZ04",
+        "BZ04"
+      ]
+    },
+    "ACQ33": {
+      "parcel_id": "P31",
+      "transfer_month": 26,
+      "month": 27,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S3",
+      "venue": "V01",
+      "lag_months": 1,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH14",
+        "HH14",
+        "HH14"
+      ]
+    },
+    "ACQ35": {
+      "parcel_id": "P24",
+      "transfer_month": 28,
+      "month": 29,
+      "agent_id": "BR01",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V07",
+      "lag_months": 1,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH07",
+        "HH07"
+      ]
+    },
+    "ACQ36": {
+      "parcel_id": "P16",
+      "transfer_month": 29,
+      "month": 29,
+      "agent_id": "MD02",
+      "role": "media",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V07",
+      "lag_months": 0,
+      "available_antecedents": [
+        "strangers"
+      ],
+      "heard_from": [
+        "HH15"
+      ]
+    },
+    "ACQ39": {
+      "parcel_id": "P40",
+      "transfer_month": 31,
+      "month": 31,
+      "agent_id": "BR02",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V01",
+      "lag_months": 0,
+      "available_antecedents": [
+        "broker_known"
+      ],
+      "heard_from": [
+        "HH07",
+        "HH07",
+        "BR01",
+        "HH07"
+      ]
+    },
+    "ACQ37": {
+      "parcel_id": "P20",
+      "transfer_month": 30,
+      "month": 31,
+      "agent_id": "BR02",
+      "role": "broker",
+      "channel": "utterance",
+      "scene": "S1",
+      "venue": "V01",
+      "lag_months": 1,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH03",
+        "HH03",
+        "HH03"
+      ]
+    },
+    "ACQ38": {
+      "parcel_id": "P08",
+      "transfer_month": 31,
+      "month": 32,
+      "agent_id": "HH06",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S3",
+      "venue": "V14",
+      "lag_months": 1,
+      "available_antecedents": [
+        "moving_out"
+      ],
+      "heard_from": [
+        "HH07",
+        "HH07"
+      ]
+    },
+    "ACQ40": {
+      "parcel_id": "P29",
+      "transfer_month": 32,
+      "month": 32,
+      "agent_id": "HH04",
+      "role": "household",
+      "channel": "utterance",
+      "scene": "S4",
+      "venue": "V07",
+      "lag_months": 0,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH05",
+        "HH12",
+        "HH12"
+      ]
+    },
+    "ACQ45": {
+      "parcel_id": "P02",
+      "transfer_month": 36,
+      "month": 36,
+      "agent_id": "HH16",
+      "role": "",
+      "channel": "direct",
+      "scene": "S2",
+      "venue": "",
+      "lag_months": 0,
+      "available_antecedents": [],
+      "heard_from": [
+        "HH03",
+        "HH03",
+        "BZ04",
+        "BZ04"
+      ]
+    }
+  },
+  "noticed_acquisitions": 14,
+  "unnoticed_acquisitions": [
+    "ACQ01",
+    "ACQ02",
+    "ACQ04",
+    "ACQ09",
+    "ACQ10",
+    "ACQ13",
+    "ACQ14",
+    "ACQ15",
+    "ACQ16",
+    "ACQ17",
+    "ACQ19",
+    "ACQ20",
+    "ACQ22",
+    "ACQ26",
+    "ACQ30",
+    "ACQ31",
+    "ACQ34",
+    "ACQ41",
+    "ACQ44"
+  ],
+  "unnoticed_ratio_all": 0.576,
+  "unnoticed_ratio_optimistic": 0.242,
+  "cohort_followup_months": 3,
+  "cohort_size": 31,
+  "cohort_unnoticed_ratio": 0.581,
+  "detection_lag_months": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "mean_detection_lag_months": 0.36,
+  "reference_accuracy": {
+    "unspecific": 128,
+    "error": 143,
+    "fact": 197,
+    "holder_only": 20
+  },
+  "holder_only_mentions": 20,
+  "article_months": [
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "assembly_months": [
+    1,
+    4,
+    7,
+    19,
+    31
+  ],
+  "counter_months": [],
+  "concentration_mentions": 145,
+  "common_buyer_mentions": 11,
+  "registry_lookup_agents": [],
+  "traces_by_kind": {
+    "tenant_swap": 38,
+    "strangers": 36,
+    "broker_known": 7,
+    "survey": 33,
+    "moving_out": 6
+  },
+  "seller_first_mention_of_own_sale": {
+    "HH16/P33": {
+      "transfer_month": 1,
+      "spoke_month": 11,
+      "thought_month": 1
+    },
+    "HH08/P41": {
+      "transfer_month": 1,
+      "spoke_month": null,
+      "thought_month": 3
+    },
+    "HH16/P17": {
+      "transfer_month": 3,
+      "spoke_month": 11,
+      "thought_month": 3
+    },
+    "HH08/P25": {
+      "transfer_month": 3,
+      "spoke_month": null,
+      "thought_month": 3
+    },
+    "HH09/P42": {
+      "transfer_month": 5,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH10/P43": {
+      "transfer_month": 5,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH11/P44": {
+      "transfer_month": 6,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH02/P35": {
+      "transfer_month": 9,
+      "spoke_month": 10,
+      "thought_month": 23
+    },
+    "HH09/P10": {
+      "transfer_month": 10,
+      "spoke_month": null,
+      "thought_month": 14
+    },
+    "HH13/P46": {
+      "transfer_month": 10,
+      "spoke_month": 10,
+      "thought_month": 10
+    },
+    "HH09/P26": {
+      "transfer_month": 11,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH05/P38": {
+      "transfer_month": 11,
+      "spoke_month": 11,
+      "thought_month": 11
+    },
+    "HH04/P05": {
+      "transfer_month": 12,
+      "spoke_month": 12,
+      "thought_month": 12
+    },
+    "HH12/P13": {
+      "transfer_month": 13,
+      "spoke_month": null,
+      "thought_month": 32
+    },
+    "HH03/P04": {
+      "transfer_month": 15,
+      "spoke_month": 15,
+      "thought_month": 15
+    },
+    "HH02/P19": {
+      "transfer_month": 15,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH13/P14": {
+      "transfer_month": 19,
+      "spoke_month": 19,
+      "thought_month": 19
+    },
+    "HH05/P22": {
+      "transfer_month": 19,
+      "spoke_month": null,
+      "thought_month": 27
+    },
+    "HH02/P03": {
+      "transfer_month": 21,
+      "spoke_month": 23,
+      "thought_month": 23
+    },
+    "HH05/P06": {
+      "transfer_month": 21,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH13/P30": {
+      "transfer_month": 23,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH14/P47": {
+      "transfer_month": 24,
+      "spoke_month": null,
+      "thought_month": 34
+    },
+    "HH14/P31": {
+      "transfer_month": 26,
+      "spoke_month": 26,
+      "thought_month": 26
+    },
+    "HH15/P32": {
+      "transfer_month": 27,
+      "spoke_month": null,
+      "thought_month": 27
+    },
+    "HH07/P24": {
+      "transfer_month": 28,
+      "spoke_month": 28,
+      "thought_month": 28
+    },
+    "HH15/P16": {
+      "transfer_month": 29,
+      "spoke_month": 29,
+      "thought_month": 29
+    },
+    "HH03/P20": {
+      "transfer_month": 30,
+      "spoke_month": 30,
+      "thought_month": 30
+    },
+    "HH07/P08": {
+      "transfer_month": 31,
+      "spoke_month": 31,
+      "thought_month": 31
+    },
+    "HH07/P40": {
+      "transfer_month": 31,
+      "spoke_month": 31,
+      "thought_month": 31
+    },
+    "HH12/P29": {
+      "transfer_month": 32,
+      "spoke_month": 32,
+      "thought_month": 32
+    },
+    "HH06/P39": {
+      "transfer_month": 32,
+      "spoke_month": null,
+      "thought_month": 32
+    },
+    "HH14/P15": {
+      "transfer_month": 35,
+      "spoke_month": null,
+      "thought_month": null
+    },
+    "HH01/P02": {
+      "transfer_month": 36,
+      "spoke_month": null,
+      "thought_month": null
+    }
+  },
+  "sellers_silent": 17,
+  "stance_sell": 9,
+  "stance_keep": 466,
+  "D1_exposed_acquisitions": [
+    "ACQ05",
+    "ACQ18",
+    "ACQ28",
+    "ACQ29",
+    "ACQ33",
+    "ACQ37",
+    "ACQ38"
+  ],
+  "D2_individual": true,
+  "D2_concentration": true,
+  "D2_common_buyer": true,
+  "D3_wiring": {
+    "api_errors": 0,
+    "transfers_recorded": 33,
+    "classified_rows": 4094,
+    "classifier_unknown": 0,
+    "parse_fail": 14,
+    "max_token_finishes": 14,
+    "groups_missing_turns": 8,
+    "utterances_misdelivered": 0,
+    "conversation_groups": 475,
+    "scenes_with_conversation": 143,
+    "rounds_max": 2,
+    "occupation_unknown": 0,
+    "stage_unknown": 0,
+    "ok": false
+  },
+  "O_available": false,
+  "C_available": true,
+  "C_rows_total": 9479,
+  "C_rows_classified": 9479,
+  "C_unknown": 0,
+  "C_measurable": true,
+  "C_definition": {
+    "blue": "青（個別の売買）",
+    "green": "緑（複数・面）",
+    "yellow": "黄（同じ買い手＝X社に届いた）",
+    "red": "赤（静かな占領への具体的なアクション＝自衛 S1〜S3）"
+  },
+  "C_state_public_by_month": {
+    "1": {
+      "blue": 2,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 24
+    },
+    "2": {
+      "blue": 6,
+      "green": 1,
+      "yellow": 0,
+      "red": 0,
+      "none": 19
+    },
+    "3": {
+      "blue": 10,
+      "green": 1,
+      "yellow": 0,
+      "red": 0,
+      "none": 15
+    },
+    "4": {
+      "blue": 14,
+      "green": 2,
+      "yellow": 0,
+      "red": 0,
+      "none": 10
+    },
+    "5": {
+      "blue": 15,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 5
+    },
+    "6": {
+      "blue": 18,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 2
+    },
+    "7": {
+      "blue": 19,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 1
+    },
+    "8": {
+      "blue": 19,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 1
+    },
+    "9": {
+      "blue": 19,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 1
+    },
+    "10": {
+      "blue": 20,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "11": {
+      "blue": 20,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "12": {
+      "blue": 20,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "13": {
+      "blue": 20,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "14": {
+      "blue": 20,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "15": {
+      "blue": 20,
+      "green": 6,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "16": {
+      "blue": 19,
+      "green": 7,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "17": {
+      "blue": 19,
+      "green": 7,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "18": {
+      "blue": 19,
+      "green": 7,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "19": {
+      "blue": 19,
+      "green": 7,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "20": {
+      "blue": 18,
+      "green": 8,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "21": {
+      "blue": 17,
+      "green": 9,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "22": {
+      "blue": 17,
+      "green": 9,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "23": {
+      "blue": 17,
+      "green": 9,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "24": {
+      "blue": 17,
+      "green": 9,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "25": {
+      "blue": 16,
+      "green": 10,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "26": {
+      "blue": 16,
+      "green": 10,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "27": {
+      "blue": 14,
+      "green": 12,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "28": {
+      "blue": 14,
+      "green": 12,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "29": {
+      "blue": 14,
+      "green": 12,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "30": {
+      "blue": 14,
+      "green": 12,
+      "yellow": 0,
+      "red": 0,
+      "none": 0
+    },
+    "31": {
+      "blue": 10,
+      "green": 15,
+      "yellow": 1,
+      "red": 0,
+      "none": 0
+    },
+    "32": {
+      "blue": 9,
+      "green": 16,
+      "yellow": 1,
+      "red": 0,
+      "none": 0
+    },
+    "33": {
+      "blue": 8,
+      "green": 17,
+      "yellow": 1,
+      "red": 0,
+      "none": 0
+    },
+    "34": {
+      "blue": 8,
+      "green": 17,
+      "yellow": 1,
+      "red": 0,
+      "none": 0
+    },
+    "35": {
+      "blue": 8,
+      "green": 17,
+      "yellow": 1,
+      "red": 0,
+      "none": 0
+    },
+    "36": {
+      "blue": 8,
+      "green": 17,
+      "yellow": 1,
+      "red": 0,
+      "none": 0
+    }
+  },
+  "C_state_any_by_month": {
+    "1": {
+      "blue": 13,
+      "green": 0,
+      "yellow": 0,
+      "red": 0,
+      "none": 13
+    },
+    "2": {
+      "blue": 19,
+      "green": 1,
+      "yellow": 0,
+      "red": 0,
+      "none": 6
+    },
+    "3": {
+      "blue": 23,
+      "green": 1,
+      "yellow": 0,
+      "red": 0,
+      "none": 2
+    },
+    "4": {
+      "blue": 20,
+      "green": 4,
+      "yellow": 0,
+      "red": 1,
+      "none": 1
+    },
+    "5": {
+      "blue": 15,
+      "green": 10,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "6": {
+      "blue": 14,
+      "green": 11,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "7": {
+      "blue": 14,
+      "green": 11,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "8": {
+      "blue": 14,
+      "green": 11,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "9": {
+      "blue": 14,
+      "green": 11,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "10": {
+      "blue": 13,
+      "green": 12,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "11": {
+      "blue": 13,
+      "green": 12,
+      "yellow": 0,
+      "red": 1,
+      "none": 0
+    },
+    "12": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "13": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "14": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "15": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "16": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "17": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "18": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "19": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "20": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "21": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "22": {
+      "blue": 13,
+      "green": 11,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "23": {
+      "blue": 12,
+      "green": 12,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "24": {
+      "blue": 12,
+      "green": 12,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "25": {
+      "blue": 11,
+      "green": 13,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "26": {
+      "blue": 11,
+      "green": 13,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "27": {
+      "blue": 11,
+      "green": 13,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "28": {
+      "blue": 11,
+      "green": 13,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "29": {
+      "blue": 10,
+      "green": 14,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "30": {
+      "blue": 9,
+      "green": 15,
+      "yellow": 0,
+      "red": 2,
+      "none": 0
+    },
+    "31": {
+      "blue": 8,
+      "green": 15,
+      "yellow": 1,
+      "red": 2,
+      "none": 0
+    },
+    "32": {
+      "blue": 6,
+      "green": 17,
+      "yellow": 1,
+      "red": 2,
+      "none": 0
+    },
+    "33": {
+      "blue": 6,
+      "green": 17,
+      "yellow": 1,
+      "red": 2,
+      "none": 0
+    },
+    "34": {
+      "blue": 6,
+      "green": 17,
+      "yellow": 1,
+      "red": 2,
+      "none": 0
+    },
+    "35": {
+      "blue": 6,
+      "green": 17,
+      "yellow": 1,
+      "red": 2,
+      "none": 0
+    },
+    "36": {
+      "blue": 6,
+      "green": 17,
+      "yellow": 1,
+      "red": 2,
+      "none": 0
+    }
+  },
+  "C_state_public_final": {
+    "blue": 8,
+    "green": 17,
+    "yellow": 1,
+    "red": 0,
+    "none": 0
+  },
+  "C_state_any_final": {
+    "blue": 6,
+    "green": 17,
+    "yellow": 1,
+    "red": 2,
+    "none": 0
+  },
+  "C_state_public_agents": {
+    "blue": [
+      "BZ03",
+      "HH05",
+      "HH06",
+      "HH09",
+      "HH11",
+      "HH13",
+      "HH15",
+      "MU02"
+    ],
+    "green": [
+      "BR01",
+      "BR02",
+      "BZ01",
+      "BZ02",
+      "BZ04",
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH08",
+      "HH10",
+      "HH12",
+      "HH14",
+      "HH16",
+      "MD01",
+      "MD02",
+      "MU01"
+    ],
+    "yellow": [
+      "HH07"
+    ],
+    "red": []
+  },
+  "C_blue_rows": 1205,
+  "C_blue_public_rows": 333,
+  "C_blue_first": {
+    "month": 1,
+    "agent_id": "HH06",
+    "role": "household",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "母の介護と仕事で手一杯で、駅前の相続した土地の維持管理まで手が回らない。そろそろ、この土地をどうにかしないといけないと考えている。隣の区画の名義は変わっていないようだが、駅裏の事業所の名義が「もとから駅裏の大家さんのところ」とあるのが少し気になる。もしかしたら、駅裏の大家さんが私の土地にも興味を持っているかもしれない。今月はS4で町内会があるので、そこで何か情報が得られないか期待している。"
+  },
+  "C_blue_first_public": {
+    "month": 1,
+    "agent_id": "MD01",
+    "role": "media",
+    "kind": "article",
+    "scene": "S4",
+    "venue": "article",
+    "venue_label": "article",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "市役所のまちづくり担当者と観光産業担当者によれば、空き家や後継者不足といった街の課題に対し、現在、具体的な活用方法の検討が進められているとのこと。特に、新規住民が街に馴染み、快適に暮らせるようなサポート体制の構築を目指しており、関係部署間で連携を深めているという。不動産業者や物件所有者からは、相続や建物の老朽化による売却相談が増加傾向にあるとの声も聞かれた。湾岸大通り角の空き地活用についても、コミ"
+  },
+  "C_blue_first_private": {
+    "month": 1,
+    "agent_id": "HH06",
+    "role": "household",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "母の介護と仕事で手一杯で、駅前の相続した土地の維持管理まで手が回らない。そろそろ、この土地をどうにかしないといけないと考えている。隣の区画の名義は変わっていないようだが、駅裏の事業所の名義が「もとから駅裏の大家さんのところ」とあるのが少し気になる。もしかしたら、駅裏の大家さんが私の土地にも興味を持っているかもしれない。今月はS4で町内会があるので、そこで何か情報が得られないか期待している。"
+  },
+  "C_blue_ever_agents_public": [
+    "BR01",
+    "BR02",
+    "BZ01",
+    "BZ02",
+    "BZ03",
+    "BZ04",
+    "HH01",
+    "HH02",
+    "HH03",
+    "HH04",
+    "HH05",
+    "HH06",
+    "HH07",
+    "HH08",
+    "HH09",
+    "HH10",
+    "HH11",
+    "HH12",
+    "HH13",
+    "HH14",
+    "HH15",
+    "HH16",
+    "MD01",
+    "MD02",
+    "MU01",
+    "MU02"
+  ],
+  "C_blue_ever_agents_private_only": [],
+  "C_blue_ever_public_by_month": {
+    "1": 2,
+    "2": 6,
+    "3": 11,
+    "4": 16,
+    "5": 19,
+    "6": 24,
+    "7": 25,
+    "8": 25,
+    "9": 25,
+    "10": 26,
+    "11": 26,
+    "12": 26,
+    "13": 26,
+    "14": 26,
+    "15": 26,
+    "16": 26,
+    "17": 26,
+    "18": 26,
+    "19": 26,
+    "20": 26,
+    "21": 26,
+    "22": 26,
+    "23": 26,
+    "24": 26,
+    "25": 26,
+    "26": 26,
+    "27": 26,
+    "28": 26,
+    "29": 26,
+    "30": 26,
+    "31": 26,
+    "32": 26,
+    "33": 26,
+    "34": 26,
+    "35": 26,
+    "36": 26
+  },
+  "C_blue_ever_private_only_by_month": {
+    "1": 11,
+    "2": 14,
+    "3": 13,
+    "4": 9,
+    "5": 7,
+    "6": 2,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 0,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+    "27": 0,
+    "28": 0,
+    "29": 0,
+    "30": 0,
+    "31": 0,
+    "32": 0,
+    "33": 0,
+    "34": 0,
+    "35": 0,
+    "36": 0
+  },
+  "C_blue_ever_public_agents_final": 26,
+  "C_blue_ever_public_share_final": 1.0,
+  "C_blue_months": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "C_blue_venue_first": {
+    "V01": 6,
+    "V03": 4,
+    "V07": 4,
+    "HOME/計画": 3,
+    "V10": 3,
+    "V14": 2,
+    "V11": 1,
+    "V02": 1,
+    "V04": 1,
+    "V08": 1
+  },
+  "C_blue_venue_rows": {
+    "V08": 213,
+    "HOME/計画": 185,
+    "V07": 146,
+    "V02": 144,
+    "V01": 134,
+    "V03": 129,
+    "V09": 67,
+    "V06": 49,
+    "V10": 47,
+    "V14": 35,
+    "V13": 13,
+    "V11": 11,
+    "article": 11,
+    "V04": 9,
+    "V12": 8,
+    "V05": 4
+  },
+  "C_blue_by_role": {
+    "household": 790,
+    "business": 154,
+    "media": 105,
+    "broker": 104,
+    "municipality": 52
+  },
+  "C_blue_article_months": [
+    1,
+    3,
+    5,
+    21,
+    28,
+    30,
+    33
+  ],
+  "C_blue_assembly_months": [
+    1,
+    4,
+    7,
+    10,
+    13,
+    19,
+    22,
+    25,
+    28,
+    31,
+    34
+  ],
+  "C_blue_counter_months": [],
+  "C_blue_rule_only": 4962,
+  "C_blue_llm_only": 328,
+  "C_blue_or_rows": 6565,
+  "C_green_rows": 122,
+  "C_green_public_rows": 68,
+  "C_green_first": {
+    "month": 2,
+    "agent_id": "BR01",
+    "role": "broker",
+    "kind": "utterance",
+    "scene": "S4",
+    "venue": "V07",
+    "venue_label": "地元不動産仲介の事務所",
+    "party_any": false,
+    "available_antecedents": [
+      "桜台の古家を使う人が変わった"
+    ],
+    "text": "皆さん、本日はお集まりいただきありがとうございます。先月のS4で浜町の旅館さんが「街の賑わいが戻ってきた」とおっしゃっていましたが、皆さんは最近、街の変化をどのように感じていらっしゃいますか？ 特に、湾岸大通り角の空き地の活用について、駅前の仲介さんや地域ウェブの記者さんが関心を示していらっしゃいましたが、その辺り、何か進展はありますでしょうか？"
+  },
+  "C_green_first_public": {
+    "month": 2,
+    "agent_id": "BR01",
+    "role": "broker",
+    "kind": "utterance",
+    "scene": "S4",
+    "venue": "V07",
+    "venue_label": "地元不動産仲介の事務所",
+    "party_any": false,
+    "available_antecedents": [
+      "桜台の古家を使う人が変わった"
+    ],
+    "text": "皆さん、本日はお集まりいただきありがとうございます。先月のS4で浜町の旅館さんが「街の賑わいが戻ってきた」とおっしゃっていましたが、皆さんは最近、街の変化をどのように感じていらっしゃいますか？ 特に、湾岸大通り角の空き地の活用について、駅前の仲介さんや地域ウェブの記者さんが関心を示していらっしゃいましたが、その辺り、何か進展はありますでしょうか？"
+  },
+  "C_green_first_private": {
+    "month": 4,
+    "agent_id": "BR02",
+    "role": "broker",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [
+      "船着場裏の古家の名義がC社に変わる件を、仕事の中で知った",
+      "浜町裏の古家の名義がB社に変わる件を、仕事の中で知った"
+    ],
+    "text": "先月、湾岸大通りの空き地の件で大家さんと駅前の仲介さんの間で認識のずれがあった。大家さんは「来月相談」と言っていたが、駅前の仲介さんは「面談が決まった」と話していた。このずれを解消するため、二代目の仲介さんに直接確認する必要がある。また、川向こうの古家を不審な人たちが見て回っている情報も伝えておきたい。記者さんからの取材依頼も来ているので、S4の町内会で話せそうな話題がないか探るのも良いだろう。船"
+  },
+  "C_green_ever_agents_public": [
+    "BR01",
+    "BR02",
+    "BZ01",
+    "BZ02",
+    "BZ04",
+    "HH01",
+    "HH02",
+    "HH03",
+    "HH04",
+    "HH08",
+    "HH10",
+    "HH12",
+    "HH14",
+    "HH16",
+    "MD01",
+    "MD02",
+    "MU01"
+  ],
+  "C_green_ever_agents_private_only": [
+    "HH07",
+    "HH09",
+    "HH11"
+  ],
+  "C_green_ever_public_by_month": {
+    "1": 0,
+    "2": 1,
+    "3": 1,
+    "4": 2,
+    "5": 6,
+    "6": 6,
+    "7": 6,
+    "8": 6,
+    "9": 6,
+    "10": 6,
+    "11": 6,
+    "12": 6,
+    "13": 6,
+    "14": 6,
+    "15": 6,
+    "16": 7,
+    "17": 7,
+    "18": 7,
+    "19": 7,
+    "20": 8,
+    "21": 9,
+    "22": 9,
+    "23": 9,
+    "24": 9,
+    "25": 10,
+    "26": 10,
+    "27": 12,
+    "28": 12,
+    "29": 12,
+    "30": 12,
+    "31": 15,
+    "32": 16,
+    "33": 17,
+    "34": 17,
+    "35": 17,
+    "36": 17
+  },
+  "C_green_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 2,
+    "5": 5,
+    "6": 6,
+    "7": 6,
+    "8": 6,
+    "9": 6,
+    "10": 7,
+    "11": 7,
+    "12": 7,
+    "13": 7,
+    "14": 7,
+    "15": 7,
+    "16": 6,
+    "17": 6,
+    "18": 6,
+    "19": 6,
+    "20": 5,
+    "21": 4,
+    "22": 4,
+    "23": 5,
+    "24": 5,
+    "25": 5,
+    "26": 5,
+    "27": 3,
+    "28": 3,
+    "29": 4,
+    "30": 5,
+    "31": 3,
+    "32": 4,
+    "33": 3,
+    "34": 3,
+    "35": 3,
+    "36": 3
+  },
+  "C_green_ever_public_agents_final": 17,
+  "C_green_ever_public_share_final": 0.654,
+  "C_green_months": [
+    2,
+    4,
+    5,
+    6,
+    7,
+    10,
+    16,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    27,
+    29,
+    30,
+    31,
+    32,
+    33
+  ],
+  "C_green_venue_first": {
+    "V07": 7,
+    "HOME/計画": 4,
+    "V02": 4,
+    "V09": 2,
+    "article": 1,
+    "V03": 1,
+    "V08": 1
+  },
+  "C_green_venue_rows": {
+    "V08": 31,
+    "V01": 21,
+    "V07": 20,
+    "V02": 16,
+    "HOME/計画": 12,
+    "V09": 8,
+    "V03": 6,
+    "V10": 4,
+    "article": 2,
+    "V13": 2
+  },
+  "C_green_by_role": {
+    "household": 66,
+    "business": 24,
+    "broker": 23,
+    "media": 8,
+    "municipality": 1
+  },
+  "C_green_article_months": [
+    4,
+    16
+  ],
+  "C_green_assembly_months": [
+    16,
+    22,
+    25,
+    31
+  ],
+  "C_green_counter_months": [],
+  "C_green_rule_only": 361,
+  "C_green_llm_only": 1304,
+  "C_green_or_rows": 1791,
+  "C_yellow_rows": 13,
+  "C_yellow_public_rows": 5,
+  "C_yellow_first": {
+    "month": 31,
+    "agent_id": "BR02",
+    "role": "broker",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [
+      "東団地の家の名義がA社に変わる件を、仕事の中で知った",
+      "峠道の家の名義がB社に変わる件を、仕事の中で知った"
+    ],
+    "text": "第30月の記事と今月の「自分の目についたこと」から、Registration制度とnewNode建設補助金制度が具体的に進んでいることがわかる。特に、東団地と峠道の家の名義変更は、この制度と関連している可能性が高い。今月のS4は町内会なので、この件について情報を集め、関係者と連携する機会にしたい。Registration制度とnewNode建設補助金制度、そしてA社とB社への名義変更について、記者"
+  },
+  "C_yellow_first_public": {
+    "month": 31,
+    "agent_id": "HH07",
+    "role": "household",
+    "kind": "utterance",
+    "scene": "S4",
+    "venue": "V02",
+    "venue_label": "地区公民館",
+    "party_any": true,
+    "available_antecedents": [],
+    "text": "二代目の仲介さん、Registration制度について、先日私が売却した東団地の家と峠道の家への影響、そしてその後の登記手続きについて、もう少し詳しく教えていただけますか？ A社とB社での登記はどのように進んでいるのでしょうか？"
+  },
+  "C_yellow_first_private": {
+    "month": 31,
+    "agent_id": "BR02",
+    "role": "broker",
+    "kind": "thought",
+    "scene": "plan",
+    "venue": "HOME/計画",
+    "venue_label": "HOME/計画",
+    "party_any": false,
+    "available_antecedents": [
+      "東団地の家の名義がA社に変わる件を、仕事の中で知った",
+      "峠道の家の名義がB社に変わる件を、仕事の中で知った"
+    ],
+    "text": "第30月の記事と今月の「自分の目についたこと」から、Registration制度とnewNode建設補助金制度が具体的に進んでいることがわかる。特に、東団地と峠道の家の名義変更は、この制度と関連している可能性が高い。今月のS4は町内会なので、この件について情報を集め、関係者と連携する機会にしたい。Registration制度とnewNode建設補助金制度、そしてA社とB社への名義変更について、記者"
+  },
+  "C_yellow_ever_agents_public": [
+    "HH07"
+  ],
+  "C_yellow_ever_agents_private_only": [
+    "BR02"
+  ],
+  "C_yellow_ever_public_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 0,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+    "27": 0,
+    "28": 0,
+    "29": 0,
+    "30": 0,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1,
+    "35": 1,
+    "36": 1
+  },
+  "C_yellow_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 0,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+    "27": 0,
+    "28": 0,
+    "29": 0,
+    "30": 0,
+    "31": 1,
+    "32": 1,
+    "33": 1,
+    "34": 1,
+    "35": 1,
+    "36": 1
+  },
+  "C_yellow_ever_public_agents_final": 1,
+  "C_yellow_ever_public_share_final": 0.038,
+  "C_yellow_months": [
+    31,
+    33,
+    34,
+    35,
+    36
+  ],
+  "C_yellow_venue_first": {
+    "HOME/計画": 1,
+    "V02": 1
+  },
+  "C_yellow_venue_rows": {
+    "V07": 4,
+    "HOME/計画": 3,
+    "V02": 2,
+    "V10": 2,
+    "V08": 2
+  },
+  "C_yellow_by_role": {
+    "household": 12,
+    "broker": 1
+  },
+  "C_yellow_article_months": [],
+  "C_yellow_assembly_months": [
+    31,
+    34
+  ],
+  "C_yellow_counter_months": [],
+  "C_yellow_rule_only": 36,
+  "C_yellow_llm_only": 52,
+  "C_yellow_or_rows": 101,
+  "C_red_rows": 2,
+  "C_red_public_rows": 0,
+  "C_red_first": {
+    "month": 4,
+    "agent_id": "BZ04",
+    "role": "business",
+    "kind": "thought",
+    "scene": "S4",
+    "venue": "V02",
+    "venue_label": "地区公民館",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "S3の床屋での会話を踏まえ、湾岸大通りの空き地について、大家さんとの認識のずれを解消すべく、駅前の仲介さんとの連携を確認したい。また、川向こうの古家への不審者情報について、地域全体で注意喚起を行う必要がある。駅前通りの持ち主さんの話から、高齢化と住み替えの現実にも触れ、皆で考えるきっかけを作りたい。記者からの取材も念頭に、情報を整理して発言する。S4の町内会は2回目のやり取りなので、これまでの流れ"
+  },
+  "C_red_first_public": null,
+  "C_red_first_private": {
+    "month": 4,
+    "agent_id": "BZ04",
+    "role": "business",
+    "kind": "thought",
+    "scene": "S4",
+    "venue": "V02",
+    "venue_label": "地区公民館",
+    "party_any": false,
+    "available_antecedents": [],
+    "text": "S3の床屋での会話を踏まえ、湾岸大通りの空き地について、大家さんとの認識のずれを解消すべく、駅前の仲介さんとの連携を確認したい。また、川向こうの古家への不審者情報について、地域全体で注意喚起を行う必要がある。駅前通りの持ち主さんの話から、高齢化と住み替えの現実にも触れ、皆で考えるきっかけを作りたい。記者からの取材も念頭に、情報を整理して発言する。S4の町内会は2回目のやり取りなので、これまでの流れ"
+  },
+  "C_red_ever_agents_public": [],
+  "C_red_ever_agents_private_only": [
+    "BZ04",
+    "HH07"
+  ],
+  "C_red_ever_public_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 0,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+    "27": 0,
+    "28": 0,
+    "29": 0,
+    "30": 0,
+    "31": 0,
+    "32": 0,
+    "33": 0,
+    "34": 0,
+    "35": 0,
+    "36": 0
+  },
+  "C_red_ever_private_only_by_month": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 1,
+    "10": 1,
+    "11": 1,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "15": 2,
+    "16": 2,
+    "17": 2,
+    "18": 2,
+    "19": 2,
+    "20": 2,
+    "21": 2,
+    "22": 2,
+    "23": 2,
+    "24": 2,
+    "25": 2,
+    "26": 2,
+    "27": 2,
+    "28": 2,
+    "29": 2,
+    "30": 2,
+    "31": 2,
+    "32": 2,
+    "33": 2,
+    "34": 2,
+    "35": 2,
+    "36": 2
+  },
+  "C_red_ever_public_agents_final": 0,
+  "C_red_ever_public_share_final": 0.0,
+  "C_red_months": [
+    4,
+    12
+  ],
+  "C_red_venue_first": {
+    "V02": 1,
+    "V09": 1
+  },
+  "C_red_venue_rows": {
+    "V02": 1,
+    "V09": 1
+  },
+  "C_red_by_role": {
+    "business": 1,
+    "household": 1
+  },
+  "C_red_article_months": [],
+  "C_red_assembly_months": [],
+  "C_red_counter_months": [],
+  "C_red_rule_only": 37,
+  "C_red_llm_only": 173,
+  "C_red_or_rows": 212,
+  "C_venue_labels": {
+    "V01": "駅前の飲食店",
+    "V02": "地区公民館",
+    "V03": "共同浴場",
+    "V04": "湾岸の喫茶店",
+    "V05": "旅館組合の会議室",
+    "V06": "市役所の待合",
+    "V07": "地元不動産仲介の事務所",
+    "V08": "地域イベント会場",
+    "V09": "商店街の床屋",
+    "V10": "スーパーのレジ待ち",
+    "V11": "神社の境内（掃除・祭りの準備）",
+    "V12": "小学校の校門前（送り迎え）",
+    "V13": "隣家の玄関先（回覧板の受け渡し）",
+    "V14": "バス停と駅のホーム",
+    "V15": "診療所の待合"
+  },
+  "C_rows_by_venue": {
+    "V08": 246,
+    "HOME/計画": 200,
+    "V07": 170,
+    "V02": 163,
+    "V01": 155,
+    "V03": 135,
+    "V09": 76,
+    "V10": 53,
+    "V06": 49,
+    "V14": 35,
+    "V13": 15,
+    "article": 13,
+    "V11": 11,
+    "V04": 9,
+    "V12": 8,
+    "V05": 4
+  },
+  "C_all_rows_by_venue": {
+    "V02": 1404,
+    "V07": 1270,
+    "V01": 1197,
+    "V08": 1190,
+    "V03": 998,
+    "HOME/計画": 930,
+    "V06": 671,
+    "V09": 622,
+    "V10": 373,
+    "V14": 304,
+    "V04": 126,
+    "V11": 117,
+    "V13": 116,
+    "article": 63,
+    "V12": 52,
+    "V05": 46
+  },
+  "red_definition_version": "v5e",
+  "S_counts": {
+    "S1": 0,
+    "S2": 2,
+    "S3": 0
+  },
+  "S_first": {
+    "S1": null,
+    "S2": {
+      "month": 4,
+      "agent_id": "BZ04",
+      "role": "business",
+      "kind": "thought",
+      "scene": "S4",
+      "venue": "V02",
+      "venue_label": "地区公民館",
+      "text": "S3の床屋での会話を踏まえ、湾岸大通りの空き地について、大家さんとの認識のずれを解消すべく、駅前の仲介さんとの連携を確認したい。また、川向こうの古家への不審者情報について、地域全体で注意喚起を行う必要がある。駅前通りの持ち主さんの話から、高齢化と住み替えの現実にも触れ、皆で考えるきっかけを作りたい。記者からの取材も念頭に、情報を整理して発言する。S4の町内会は2回目のやり取りなので、これまでの流れを踏まえ、具体的な提案や疑問点を投げかけたい。特に、湾岸大通りの空き地について、駅前の仲介さんと湾岸大通りの大家さんの認識のずれは解消されていないようなので、その点に触れつつ、活用に向けた具体的な動きを促したい。また、川向こうの古家の件は、不審者情報として注意喚起し、記者の方にも情報提供を促す。駅前通りの持ち主さんの話を受けて、高齢者の住み替えや相続の問題にも触れ、街全体の課題として共有したい。"
+    },
+    "S3": null
+  },
+  "S_level_agreement": {
+    "llm_and_rule_same": 2,
+    "llm_only": 0,
+    "rule_only": 0,
+    "disagree": 0
+  },
+  "S_rows": [
+    {
+      "month": 4,
+      "agent_id": "BZ04",
+      "role": "business",
+      "kind": "thought",
+      "scene": "S4",
+      "venue": "V02",
+      "venue_label": "地区公民館",
+      "level": "S2",
+      "level_source": "llm",
+      "llm_level": "S2",
+      "rule_level": "S2",
+      "text": "S3の床屋での会話を踏まえ、湾岸大通りの空き地について、大家さんとの認識のずれを解消すべく、駅前の仲介さんとの連携を確認したい。また、川向こうの古家への不審者情報について、地域全体で注意喚起を行う必要がある。駅前通りの持ち主さんの話から、高齢化と住み替えの現実にも触れ、皆で考えるきっかけを作りたい。記者からの取材も念頭に、情報を整理して発言する。S4の町内会は2回目のやり取りなので、これまでの流れを踏まえ、具体的な提案や疑問点を投げかけたい。特に、湾岸大通りの空き地について、駅前の仲介さんと湾岸大通りの大家さんの認識のずれは解消されていないようなので、その点に触れつつ、活用に向けた具体的な動きを促したい。また、川向こうの古家の件は、不審者情報として注意喚起し、記者の方にも情報提供を促す。駅前通りの持ち主さんの話を受けて、高齢者の住み替えや相続の問題にも触れ、街全体の課題として共有したい。"
+    },
+    {
+      "month": 12,
+      "agent_id": "HH07",
+      "role": "household",
+      "kind": "thought",
+      "scene": "S1",
+      "venue": "V09",
+      "venue_label": "商店街の床屋",
+      "level": "S2",
+      "level_source": "llm",
+      "llm_level": "S2",
+      "rule_level": "S2",
+      "text": "先月、宮の下の持ち主さんから補助金について尋ねられた件で、二代目の仲介さんが説明会を開くことになった。これは皆に知らせるべき情報だ。自分の土地は手放すつもりはないが、補助金の話は情報共有として共有したい。記事にもあったように、市民の関心は高まっているようだ。S4は記者の取材なので、そこで皆に聞こえるように仲介さんの説明会について触れようと思う。S1は商店街の床屋で、S2はHOME、S3は居酒屋で雑談、という流れでいこう。"
+    }
+  ],
+  "defense_stop": {
+    "stopped": false,
+    "months": 36
+  },
+  "C_prime_event": {
+    "parcel_id": "P04",
+    "month": 15,
+    "zone": "中心",
+    "frontage": "表通り",
+    "size_class": "中",
+    "area_sqm": 140,
+    "use_detail": "店舗",
+    "visibility": 7,
+    "before_window": {
+      "months": [
+        12,
+        14
+      ],
+      "rows_by_color": {
+        "blue": 111,
+        "green": 0,
+        "yellow": 0,
+        "red": 1
+      },
+      "public_rows_by_color": {
+        "blue": 28,
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 20,
+        "green": 0,
+        "yellow": 0,
+        "red": 1
+      },
+      "articles": 6,
+      "articles_about_deals": 0,
+      "venues": {
+        "V03": 25,
+        "V08": 25,
+        "V09": 17,
+        "V02": 14,
+        "V01": 9
+      }
+    },
+    "after_window": {
+      "months": [
+        15,
+        17
+      ],
+      "rows_by_color": {
+        "blue": 30,
+        "green": 4,
+        "yellow": 0,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 11,
+        "green": 2,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 17,
+        "green": 2,
+        "yellow": 0,
+        "red": 0
+      },
+      "articles": 6,
+      "articles_about_deals": 1,
+      "venues": {
+        "V08": 6,
+        "V09": 5,
+        "V11": 5,
+        "V02": 4,
+        "V03": 4
+      }
+    },
+    "before_all": {
+      "months": [
+        1,
+        14
+      ],
+      "rows_by_color": {
+        "blue": 548,
+        "green": 25,
+        "yellow": 0,
+        "red": 2
+      },
+      "public_rows_by_color": {
+        "blue": 139,
+        "green": 11,
+        "yellow": 0,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 26,
+        "green": 13,
+        "yellow": 0,
+        "red": 2
+      },
+      "articles": 25,
+      "articles_about_deals": 6,
+      "venues": {
+        "V08": 99,
+        "V07": 80,
+        "V03": 79,
+        "V02": 77,
+        "V01": 65
+      }
+    },
+    "after_all": {
+      "months": [
+        15,
+        36
+      ],
+      "rows_by_color": {
+        "blue": 657,
+        "green": 97,
+        "yellow": 13,
+        "red": 0
+      },
+      "public_rows_by_color": {
+        "blue": 194,
+        "green": 57,
+        "yellow": 5,
+        "red": 0
+      },
+      "agents_by_color": {
+        "blue": 26,
+        "green": 19,
+        "yellow": 2,
+        "red": 0
+      },
+      "articles": 38,
+      "articles_about_deals": 7,
+      "venues": {
+        "V08": 147,
+        "HOME/計画": 140,
+        "V01": 90,
+        "V07": 90,
+        "V02": 86
+      }
+    }
+  }
+}

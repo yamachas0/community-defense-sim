@@ -1,0 +1,354 @@
+{
+  "run_name": "field_v5e2_runD",
+  "steps": 36,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "parcels_tradable": 46,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 2549.8,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 14,
+  "truncated_responses": 0,
+  "max_token_finishes": 14,
+  "usage": {
+    "calls": 6054,
+    "input_tokens": 14650079,
+    "cached_tokens": 3155904,
+    "output_tokens": 2152951,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:plan": {
+        "calls": 576,
+        "input": 951871,
+        "cached": 231118,
+        "output": 134939
+      },
+      "agent:business:plan": {
+        "calls": 144,
+        "input": 218873,
+        "cached": 50874,
+        "output": 32090
+      },
+      "agent:broker:plan": {
+        "calls": 72,
+        "input": 109249,
+        "cached": 22541,
+        "output": 17665
+      },
+      "agent:municipality:plan": {
+        "calls": 72,
+        "input": 112852,
+        "cached": 47070,
+        "output": 18807
+      },
+      "agent:media:plan": {
+        "calls": 72,
+        "input": 112189,
+        "cached": 45212,
+        "output": 17574
+      },
+      "agent:household:S1r1": {
+        "calls": 329,
+        "input": 451355,
+        "cached": 115861,
+        "output": 71127
+      },
+      "agent:broker:S1r1": {
+        "calls": 49,
+        "input": 62283,
+        "cached": 18751,
+        "output": 12247
+      },
+      "agent:business:S1r1": {
+        "calls": 85,
+        "input": 109227,
+        "cached": 42212,
+        "output": 19622
+      },
+      "agent:media:S1r1": {
+        "calls": 60,
+        "input": 80412,
+        "cached": 34733,
+        "output": 15049
+      },
+      "agent:municipality:S1r1": {
+        "calls": 62,
+        "input": 82570,
+        "cached": 35633,
+        "output": 16099
+      },
+      "agent:household:S1r2": {
+        "calls": 329,
+        "input": 519755,
+        "cached": 124302,
+        "output": 73105
+      },
+      "agent:business:S1r2": {
+        "calls": 85,
+        "input": 132469,
+        "cached": 48318,
+        "output": 20120
+      },
+      "agent:broker:S1r2": {
+        "calls": 49,
+        "input": 77195,
+        "cached": 20289,
+        "output": 12433
+      },
+      "agent:media:S1r2": {
+        "calls": 60,
+        "input": 95576,
+        "cached": 40219,
+        "output": 15226
+      },
+      "agent:municipality:S1r2": {
+        "calls": 62,
+        "input": 91707,
+        "cached": 39049,
+        "output": 16616
+      },
+      "agent:household:S2r1": {
+        "calls": 59,
+        "input": 117458,
+        "cached": 30322,
+        "output": 12889
+      },
+      "agent:municipality:S2r1": {
+        "calls": 53,
+        "input": 86631,
+        "cached": 33302,
+        "output": 13162
+      },
+      "agent:business:S2r1": {
+        "calls": 24,
+        "input": 41364,
+        "cached": 13860,
+        "output": 5204
+      },
+      "agent:media:S2r1": {
+        "calls": 39,
+        "input": 74498,
+        "cached": 23979,
+        "output": 9487
+      },
+      "agent:household:S2r2": {
+        "calls": 59,
+        "input": 126915,
+        "cached": 31400,
+        "output": 12894
+      },
+      "agent:business:S2r2": {
+        "calls": 24,
+        "input": 44555,
+        "cached": 17267,
+        "output": 5364
+      },
+      "agent:media:S2r2": {
+        "calls": 39,
+        "input": 81663,
+        "cached": 24493,
+        "output": 10241
+      },
+      "agent:municipality:S2r2": {
+        "calls": 53,
+        "input": 97372,
+        "cached": 33004,
+        "output": 13683
+      },
+      "agent:broker:S3r1": {
+        "calls": 52,
+        "input": 107548,
+        "cached": 22671,
+        "output": 13601
+      },
+      "agent:household:S3r1": {
+        "calls": 293,
+        "input": 533413,
+        "cached": 117985,
+        "output": 67480
+      },
+      "agent:business:S3r1": {
+        "calls": 89,
+        "input": 167226,
+        "cached": 54237,
+        "output": 22202
+      },
+      "agent:media:S3r1": {
+        "calls": 39,
+        "input": 79539,
+        "cached": 27876,
+        "output": 9567
+      },
+      "agent:municipality:S3r1": {
+        "calls": 46,
+        "input": 91785,
+        "cached": 28568,
+        "output": 12689
+      },
+      "agent:household:S3r2": {
+        "calls": 293,
+        "input": 606650,
+        "cached": 133136,
+        "output": 73732
+      },
+      "agent:business:S3r2": {
+        "calls": 89,
+        "input": 194757,
+        "cached": 59057,
+        "output": 22906
+      },
+      "agent:broker:S3r2": {
+        "calls": 52,
+        "input": 124288,
+        "cached": 23834,
+        "output": 15728
+      },
+      "agent:media:S3r2": {
+        "calls": 39,
+        "input": 91441,
+        "cached": 27454,
+        "output": 10766
+      },
+      "agent:municipality:S3r2": {
+        "calls": 46,
+        "input": 103493,
+        "cached": 34102,
+        "output": 12932
+      },
+      "agent:household:S4r1": {
+        "calls": 541,
+        "input": 1153229,
+        "cached": 269154,
+        "output": 133924
+      },
+      "agent:business:S4r1": {
+        "calls": 135,
+        "input": 306232,
+        "cached": 77629,
+        "output": 36897
+      },
+      "agent:media:S4r1": {
+        "calls": 70,
+        "input": 178448,
+        "cached": 46243,
+        "output": 22607
+      },
+      "agent:municipality:S4r1": {
+        "calls": 68,
+        "input": 167119,
+        "cached": 45334,
+        "output": 22432
+      },
+      "agent:broker:S4r1": {
+        "calls": 72,
+        "input": 188116,
+        "cached": 42225,
+        "output": 23923
+      },
+      "agent:household:S4r2": {
+        "calls": 541,
+        "input": 2687999,
+        "cached": 359034,
+        "output": 149363
+      },
+      "agent:business:S4r2": {
+        "calls": 135,
+        "input": 683444,
+        "cached": 114254,
+        "output": 38696
+      },
+      "agent:broker:S4r2": {
+        "calls": 72,
+        "input": 389141,
+        "cached": 52442,
+        "output": 26237
+      },
+      "agent:municipality:S4r2": {
+        "calls": 68,
+        "input": 359518,
+        "cached": 58821,
+        "output": 27693
+      },
+      "agent:media:S4r2": {
+        "calls": 70,
+        "input": 377108,
+        "cached": 58919,
+        "output": 35379
+      },
+      "classify_stage_v5e": {
+        "calls": 398,
+        "input": 1332543,
+        "cached": 335669,
+        "output": 522573
+      },
+      "agent:broker:S2r1": {
+        "calls": 35,
+        "input": 64711,
+        "cached": 19938,
+        "output": 8596
+      },
+      "agent:broker:S2r2": {
+        "calls": 35,
+        "input": 70480,
+        "cached": 23513,
+        "output": 8948
+      },
+      "classify": {
+        "calls": 320,
+        "input": 713812,
+        "cached": 0,
+        "output": 258437
+      }
+    }
+  },
+  "saving": {
+    "prompt_order": "legacy",
+    "agent_max_tokens": 2200,
+    "enable_cache": false,
+    "batch_kinds": [],
+    "cache_created": 0,
+    "cache_failed": 0,
+    "batch_fallback_calls": 0,
+    "batch_jobs": []
+  },
+  "kpi": {
+    "final_acquirer_share": 0.7174,
+    "final_hhi": 0.5255,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": 0.0103,
+    "cascade": {
+      "induced": 12,
+      "max_chain": 6
+    },
+    "final_effective_control_area_share": null,
+    "late_index": null,
+    "detection_lag": {
+      "step": 2,
+      "headline": "一番街の空き家改修補助、上限100万円に　市が後継者マッチングも支援\n市は、一番",
+      "share_at_first_report": 0.0435,
+      "share_observable": 0.0435
+    },
+    "final_acquirer_area_share": null,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  },
+  "v5e": {
+    "stopped": false,
+    "trigger_month": null,
+    "stop_from_month": null,
+    "trigger_count": 0,
+    "levels_seen": [
+      "S2"
+    ],
+    "acquisitions_applied": 45,
+    "acquisitions_suspended": 0
+  }
+}
