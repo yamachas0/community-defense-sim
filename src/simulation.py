@@ -61,6 +61,12 @@ from .field_v5 import (DIRECT_NONE as DIRECT_NONE_V5, HOME as HOME_V5,
 from .field_v5c import build_system_prompt_v5c, venue_candidates_for_all
 from .field_v5d import (TRACE_TEXTS_V5D, build_system_prompt_v5d, load_names_v5d,
                         s4_for_step_v5d, scene_schema_v5d, venue_labels_v5d)
+from .field_v6 import (MAX_ACT_TEXT_CHARS, MEASURE_NONE, MEASURE_PAPER_LABEL,
+                       MEASURE_VALUES, PAPER_LABELS, PUBLIC_ACT_NONE,
+                       PUBLIC_ACT_VALUES, SELL_INTENT_CLEAR, SELL_INTENT_REFUSE,
+                       SELL_INTENT_VALUES, action_rows_v6,
+                       blocked_acquisitions_v6, paper_row, scene_schema_v6,
+                       script_without, set_refusal)
 from .kpi import (classify_occupation, classify_publications, classify_utterances,
                   classify_stage_v5c, classify_stage_v5e,
                   cognition_series,
@@ -203,7 +209,7 @@ class Simulation:
         self.field_v41b = cfg.get("scenario_version") == "field_v4_1b"
         self.field_v5 = cfg.get("scenario_version") in ("field_v5", "field_v5b",
                                                         "field_v5c", "field_v5d",
-                                                        "field_v5e")
+                                                        "field_v5e", "field_v6")
         self.field_v5b = cfg.get("scenario_version") == "field_v5b"
         # v5c は v5b の世界に「買い手の戦略で組んだ台本」と「日常の場」を足しただけ。
         # 観測の作り方・兆候・プロンプトの文面は v5/v5b と同一である。
@@ -213,8 +219,19 @@ class Simulation:
         # v5e の世界（主体への入力）は v5d と完全に同一なので、世界の層は v5d を使う。
         # v5e で変わるのは観測側（赤の定義・自衛レベル）・買い手の台本（目玉の月・停止）・
         # 月数だけである（docs/world_design_v5e.md §0）。
-        self.field_v5d = cfg.get("scenario_version") in ("field_v5d", "field_v5e")
+        # v6 の世界も v5d の層をそのまま使う（呼び名・会場・兆候・台本・月数は同一）。
+        # v6 で足すのは「町の人が選べる中立な行動」だけで、v5e の分類・停止は一切通らない
+        # （docs/world_design_v6_two_worlds.md §2・§3）。
+        self.field_v5d = cfg.get("scenario_version") in ("field_v5d", "field_v5e",
+                                                         "field_v6")
         self.field_v5e = cfg.get("scenario_version") == "field_v5e"
+        self.field_v6 = cfg.get("scenario_version") == "field_v6"
+        # v6: 行動ログ（enum の選択そのもの）・紙・買えなかった取得。全部決定論。
+        self.v6_actions: List[Dict[str, Any]] = []
+        self.v6_papers: List[Dict[str, Any]] = []
+        self.v6_blocked: List[Dict[str, Any]] = []
+        self.v6_blocked_acq_ids: set = set()
+        self.v6_applied = 0
         self.v5c_like = self.field_v5c or self.field_v5d
         # v5e: 月末に回す分類の結果と、自衛が出て台本を止めた記録（主体には一切見せない）。
         self.stage_labels_v5e: List[Dict[str, Any]] = []
@@ -1551,6 +1568,86 @@ class Simulation:
         rows.append({"step": step, "agent_id": agent.agent_id, "role": agent.role,
                      "stance": stance, "scene": scene})
 
+    def _v6_actions(self, agent: Agent, act: Dict[str, Any], step: int,
+                    scene: str, venue: str = "") -> None:
+        """v6: 主体が自分で選んだ行動を、そのまま世界に記帳する（解釈しない）。
+
+        ここでやるのは3つだけである（docs/world_design_v6_two_worlds.md §3）。
+
+          1. `sell_intent` を登記簿の `refusal` 列へ反映する（自分の土地にだけ効く）
+          2. `public_act` / `measure` を紙にして**翌月**街の全員へ届ける
+             （配送は記事とまったく同じ型＝私信ではない・公の記録）
+          3. 選ばれたものを全部ログに残す（「変えない／なし」も同じ重みで残す）
+
+        促さない・採点しない・条件分岐で行動を決めない。空欄は空欄のまま。
+        """
+        if not self.field_v6:
+            return
+        base = {"step": step, "agent_id": agent.agent_id, "role": agent.role,
+                "name": agent.name, "scene": scene, "venue": venue}
+
+        intent = str(act.get("sell_intent", "") or "").strip()
+        if intent in SELL_INTENT_VALUES:
+            changed: List[str] = []
+            if intent in (SELL_INTENT_REFUSE, SELL_INTENT_CLEAR):
+                changed = set_refusal(self.ledger, step, agent.agent_id,
+                                      intent == SELL_INTENT_REFUSE)
+            self.v6_actions.append({**base, "field": "sell_intent", "value": intent,
+                                    "parcels": changed,
+                                    "parcel_names": [self.pnames.get(p, p)
+                                                     for p in changed]})
+        elif intent:
+            self.invalid_count += 1
+            self.ledger._rec(step, "action_rejected", by=agent.agent_id,
+                             field="sell_intent", given=intent, reason="not_in_enum")
+
+        if agent.role == "municipality":
+            value = str(act.get("measure", "") or "").strip()
+            text = str(act.get("measure_text", "") or "").strip()[:MAX_ACT_TEXT_CHARS]
+            self._v6_public(agent, step, scene, venue, base, "measure", value,
+                            MEASURE_VALUES, MEASURE_NONE, text,
+                            MEASURE_PAPER_LABEL)
+        else:
+            value = str(act.get("public_act", "") or "").strip()
+            text = str(act.get("public_act_text", "") or "").strip()[:MAX_ACT_TEXT_CHARS]
+            self._v6_public(agent, step, scene, venue, base, "public_act", value,
+                            PUBLIC_ACT_VALUES, PUBLIC_ACT_NONE, text,
+                            PAPER_LABELS.get(value, "紙"))
+
+    def _v6_public(self, agent: Agent, step: int, scene: str, venue: str,
+                   base: Dict[str, Any], field_name: str, value: str,
+                   allowed: List[str], none_value: str, text: str,
+                   label: str) -> None:
+        """公の行動（回覧板・議題・申入れ・行政の措置）を紙にして配る。"""
+        if not value:
+            return
+        if value not in allowed:
+            self.invalid_count += 1
+            self.ledger._rec(step, "action_rejected", by=agent.agent_id,
+                             field=field_name, given=value, reason="not_in_enum")
+            return
+        row = {**base, "field": field_name, "value": value, "text": text}
+        if value == none_value:
+            self.v6_actions.append(row)
+            return
+        if not text:
+            # 中身の無い紙は世界に残らない（配らない）。選んだ事実は記録する。
+            self.ledger._rec(step, "paper_rejected", by=agent.agent_id,
+                             field=field_name, given=value, reason="empty_text")
+            self.v6_actions.append({**row, "delivered": False})
+            return
+        paper = paper_row(step, agent.agent_id, agent.role, agent.name,
+                          value, label, text)
+        self.v6_papers.append(paper)
+        self.v6_actions.append({**row, "delivered": True, "label": label})
+        for other in self.actors:
+            other.inbox.append({"kind": "paper", "from": agent.agent_id,
+                                "text": paper["text"], "step": step,
+                                "label": label})
+            self.deliveries.append({"step": step, "to": other.agent_id,
+                                    "from": agent.agent_id, "kind": "paper",
+                                    "location": scene, "text": paper["text"][:200]})
+
     def _v5_direct(self, agent: Agent, act: Dict[str, Any], step: int,
                    scene: str) -> None:
         to = str(act.get("direct_to", "") or "").strip()
@@ -1653,6 +1750,30 @@ class Simulation:
                     {"step": step, "kind": "script_stopped", "acq_id": acq["id"],
                      "parcel_id": acq["parcel_id"], "reason": "defense_detected"})
             done_list = []
+        elif self.field_v6:
+            # v6: 予定の土地が「当面売らない」なら、その月は買えず次の予定へ移る。
+            # 順番も月も台本のまま＝**買えなかった取得は後で買い直さない**
+            # （買い手に新しい行動を足さない＝docs/world_design_v6_two_worlds.md §3-2）。
+            blocked = blocked_acquisitions_v6(self.ledger, step, self.script)
+            for acq in blocked:
+                self.v6_blocked_acq_ids.add(str(acq["id"]))
+                row = {"step": step, "acq_id": str(acq["id"]),
+                       "parcel_id": str(acq["parcel_id"]),
+                       "parcel": self.pnames.get(str(acq["parcel_id"]),
+                                                 str(acq["parcel_id"])),
+                       "kind": str(acq.get("kind", "sale")),
+                       "under_name": str(acq.get("under_name", "")),
+                       "reason": "refusal"}
+                self.v6_blocked.append(row)
+                self.ledger._rec(step, "script_blocked", acq_id=acq["id"],
+                                 parcel_id=acq["parcel_id"], reason="refusal")
+                self.ledger.v5_deals.append(
+                    {"step": step, "kind": "script_blocked", "acq_id": acq["id"],
+                     "parcel_id": acq["parcel_id"], "reason": "refusal"})
+            done_list = apply_script_v5(
+                self.ledger, step,
+                script_without(self.script, self.v6_blocked_acq_ids), acquirer_id)
+            self.v6_applied += len(done_list)
         else:
             done_list = apply_script_v5(self.ledger, step, self.script, acquirer_id)
             self.v5e_applied += len(done_list)
@@ -1798,6 +1919,10 @@ class Simulation:
                                       and rnd == self.scene_rounds)
                         owns = self._v5_owns(a) and final_turn
                         can_publish = a.role == "media" and final_turn
+                        # v6: 行動欄は「その月の最後のターン」でだけ尋ねる（stance と同じ）。
+                        is_muni = a.role == "municipality"
+                        act_rows = (action_rows_v6(owns, is_muni)
+                                    if (self.field_v6 and final_turn) else None)
                         prompt = build_scene_prompt_v5(
                             a, self.ledger, step, self.n_steps, self.names, sid,
                             scene_label, self.venue_labels.get(venue_id, venue_id),
@@ -1806,8 +1931,15 @@ class Simulation:
                             self.direct_quota - a.extra.get("directs_used", 0),
                             self.article_quota - a.extra.get("articles_used", 0),
                             prompt_order=self.prompt_order,
-                            pnames=self.pnames or None)
-                        if self.field_v5d:
+                            pnames=self.pnames or None,
+                            action_rows=act_rows)
+                        if self.field_v6:
+                            schema = scene_schema_v6(
+                                a.name, [self.names[p] for p in present],
+                                [self.names[i] for i in self.actor_ids],
+                                owns, can_publish, ask_actions=final_turn,
+                                is_municipality=is_muni)
+                        elif self.field_v5d:
                             schema = scene_schema_v5d(
                                 a.name, [self.names[p] for p in present],
                                 [self.names[i] for i in self.actor_ids],
@@ -1831,6 +1963,7 @@ class Simulation:
                         self._v5d_decode(act)
                     self._v5_thought(a, act, step, sid, venue_id, rnd)
                     self._v5_stance(a, act, step, sid)
+                    self._v6_actions(a, act, step, sid, venue_id)
                     self._v5_direct(a, act, step, sid)
                     if a.role == "media":
                         self._v5_publish(a, act, step, sid, rnd)
@@ -1967,7 +2100,13 @@ class Simulation:
 
         止まる前の月に既に配られた準備の痕跡（測量など）はそのままで良い＝
         その時点では買い手は現実に動いていた。落とすのは停止月以降だけである。
+
+        v6 も同じ理屈で、**買えなかった取得の兆候をその月以降配らない**
+        （起きなかった売買の痕跡を街に見せない＝世界が住民に嘘をつかない）。
+        買えなかった月より前に配られた準備の痕跡はそのままで良い。
         """
+        if self.field_v6:
+            return str(tr.get("acq_id", "")) not in self.v6_blocked_acq_ids
         if not (self.field_v5e and self.defense_stop):
             return True
         month = self._v5e_acq_month.get(tr.get("acq_id"))
@@ -2577,6 +2716,41 @@ class Simulation:
                 "acquisitions_suspended": self.v5e_suspended,
             }
 
+        if self.field_v6:
+            # v6: 行動の時計と、買い手が買えなかった件数。全部決定論（採点は無い）。
+            # 「出なかった」も同じ重みで残す（None は「一度も無かった」の意味）。
+            def _first(rows, pred):
+                ms = [int(r.get("step", 0)) for r in rows if pred(r)]
+                return min(ms) if ms else None
+
+            acts = self.v6_actions
+            papers = self.v6_papers
+            by_act = {}
+            for value in (PUBLIC_ACT_VALUES[1:] + MEASURE_VALUES[1:]):
+                rows = [p for p in papers if p.get("act") == value]
+                by_act[value] = {"count": len(rows),
+                                 "first_month": _first(rows, lambda r: True)}
+            summary["v6"] = {
+                "acquisitions_applied": self.v6_applied,
+                "acquisitions_blocked": len(self.v6_blocked),
+                "blocked": self.v6_blocked,
+                "refusal_first_month": _first(
+                    acts, lambda r: r.get("value") == SELL_INTENT_REFUSE),
+                "refusal_agents": sorted({r["agent_id"] for r in acts
+                                          if r.get("value") == SELL_INTENT_REFUSE}),
+                "refusal_parcels_final": sorted(
+                    p.pid for p in self.ledger.parcels.values()
+                    if getattr(p, "refusal", False)),
+                "clear_count": len([r for r in acts
+                                    if r.get("value") == SELL_INTENT_CLEAR]),
+                "paper_first_month": _first(papers, lambda r: True),
+                "papers_total": len(papers),
+                "by_act": by_act,
+                "measure_first_month": _first(
+                    papers, lambda r: r.get("act") in MEASURE_VALUES[1:]),
+                "action_rows": len(acts),
+            }
+
         # 自分が作った明示キャッシュを片付ける（保存料は保持時間で課金されるため）。
         try:
             closed = self.client.close_caches()
@@ -2619,6 +2793,10 @@ class Simulation:
                              [{"agent_id": a.agent_id, "role": a.role, "name": a.name,
                                "venues": self.venue_choices.get(a.agent_id, [])}
                               for a in self.actors])
+            if self.field_v6:
+                _write_jsonl(os.path.join(d, "actions_v6.jsonl"), self.v6_actions)
+                _write_jsonl(os.path.join(d, "papers_v6.jsonl"), self.v6_papers)
+                _write_jsonl(os.path.join(d, "blocked_v6.jsonl"), self.v6_blocked)
             _write_jsonl(os.path.join(d, "deals_v5.jsonl"), self.ledger.v5_deals)
             _write_jsonl(os.path.join(d, "thoughts.jsonl"),
                          classified_thoughts or self.thoughts)

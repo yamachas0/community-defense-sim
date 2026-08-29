@@ -414,6 +414,13 @@ def inbox_rows_v5(agent: Agent, names: Dict[str, str]) -> List[str]:
         if item.get("kind") == "article":
             rows.append(f"  [記事・第{item.get('step')}月] {names.get(item.get('from',''), '')}"
                         f":「{item.get('text', '')}」")
+        elif item.get("kind") == "paper":
+            # v6 の紙（回覧板・町内会の議題・役場への申入れ・役場からのお知らせ）。
+            # 配送は記事と同じ型で、私信ではない＝街の全員が見られる公の記録である。
+            # v1〜v5e2 では kind="paper" の届きものが1件も作られないので、この枝は通らない。
+            rows.append(f"  [{item.get('label', '紙')}・第{item.get('step')}月] "
+                        f"{names.get(item.get('from',''), '')}"
+                        f":「{item.get('text', '')}」")
         else:
             rows.append(f"  [私信・第{item.get('step')}月] "
                         f"{names.get(item.get('from',''), item.get('from',''))}"
@@ -599,8 +606,13 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
                           directs_left: int = 0,
                           articles_left: int = 0,
                           prompt_order: str = PROMPT_ORDER_LEGACY,
-                          pnames: Optional[Dict[str, str]] = None) -> str:
-    others = [(names.get(p, p) if pnames else f"{names.get(p, p)}（{p}）")
+                          pnames: Optional[Dict[str, str]] = None,
+                          action_rows: Optional[List[str]] = None) -> str:
+    """`action_rows` は v6 の行動欄の説明（`src/field_v6.action_rows_v6`）。
+
+    既定 None＝v1〜v5e2 のプロンプトは1文字も変わらない（テストで固定）。
+    """
+    others =[(names.get(p, p) if pnames else f"{names.get(p, p)}（{p}）")
               for p in present if p != agent.agent_id]
     rows = [f"=== 第{step}月 / 全{n_steps}月　{scene_id} {scene_label} ===",
             f"場所: {venue_label}",
@@ -635,6 +647,8 @@ def build_scene_prompt_v5(agent: Agent, ledger: Ledger, step: int, n_steps: int,
         rows += ["あわせて stance に、今のあなたが自分の土地を手放すことを考えているか"
                  "（sell）、そうでないか（keep）を書く。これは記録に残るだけで"
                  "誰にも伝わらず、何も起こさない。"]
+    if action_rows:
+        rows += list(action_rows)
     tail = ["説明文を付けずJSONだけ返す。"]
     if prompt_order == PROMPT_ORDER_STABLE_FIRST:
         return _assemble_v5(rows, stable + tail, prompt_order)

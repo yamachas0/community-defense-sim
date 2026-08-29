@@ -45,6 +45,9 @@ class Parcel:
     registered_name: str = ""    # 登記上の名義。買い手がalias を使えば実体(owner_id)と食い違う
     listed_price: Optional[int] = None   # 売り出し中の希望価格 (万円)
     listed_at_step: Optional[int] = None
+    # v6: 持ち主が「当面売らない」を宣言中か（登記簿の1列・決定論）。
+    # 既定 False＝v1〜v5e2 の世界では一度も True にならない（挙動も出力も不変）。
+    refusal: bool = False
 
     def label(self) -> str:
         use_ja = {"residential": "住宅", "shop": "商店", "vacant": "空地", "public": "公有地"}
