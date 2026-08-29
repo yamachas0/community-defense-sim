@@ -1,0 +1,156 @@
+run_name: field_v6_runB
+scenario_version: field_v6
+seed: 85
+steps: 36
+personas_file: configs/personas/field_v4_1.yaml
+events_file: configs/events_v5e_seed85.yaml
+parcels_file: configs/parcels_v5c.yaml
+names_file: configs/parcel_names_v5c.yaml
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.75
+  max_tokens: 2200
+  parallel_workers: 8
+  enable_cache: false
+  batch_classify: false
+  batch_agents: false
+  prompt_order: legacy
+agents:
+  households: 16
+  businesses: 4
+  brokers: 2
+  acquirers: 1
+  municipality: 2
+  media: 2
+world:
+  town_name: A市
+  background: 'A市は湾岸にある人口約12万人の温泉観光都市である。対岸の空港では
+
+    スペースポート構想が進むが、時期と需要規模は確定していない。
+
+    市内では人口減少、高齢化、相続、築古建物の改修負担、旅館と商店の
+
+    後継者不足が同時に進む。住民には住み続けたい人、土地を手放すことを
+
+    考えうる人、まだ何も考えていない人がいる。事業者、仲介、行政、記者も
+
+    通常の日常を送る。個々の取引・会話・報道が将来どうなるかは
+
+    開始時点では決まっていない。
+
+    '
+  grid:
+    cols: 8
+    rows: 6
+  block_names:
+  - 湾岸観光地区
+  - 中央駅前地区
+  - 北部学術・生活地区
+  - 温泉丘陵地区
+  area_pattern_sqm:
+  - 70
+  - 90
+  - 110
+  - 140
+  - 180
+  - 240
+  - 320
+  - 450
+  shop_coords:
+  - - 1
+    - 0
+  - - 2
+    - 0
+  - - 3
+    - 0
+  - - 5
+    - 0
+  - - 6
+    - 0
+  - - 1
+    - 1
+  - - 2
+    - 1
+  - - 5
+    - 1
+  - - 6
+    - 1
+  - - 1
+    - 3
+  - - 2
+    - 3
+  - - 5
+    - 3
+  vacant_coords:
+  - - 0
+    - 2
+  - - 3
+    - 2
+  - - 7
+    - 2
+  - - 0
+    - 5
+  - - 3
+    - 5
+  - - 6
+    - 5
+  initial_shop_rent: 0
+  public_coords:
+  - - 0
+    - 0
+  - - 7
+    - 5
+social:
+  venues:
+  - id: V01
+    label: 駅前の飲食店
+  - id: V02
+    label: 地区公民館
+  - id: V03
+    label: 共同浴場
+  - id: V04
+    label: 湾岸の喫茶店
+  - id: V05
+    label: 旅館組合の会議室
+  - id: V06
+    label: 市役所の待合
+  - id: V07
+    label: 地元不動産仲介の事務所
+  - id: V08
+    label: 地域イベント会場
+  - id: V09
+    label: 商店街の床屋
+  - id: V10
+    label: スーパーのレジ待ち
+  - id: V11
+    label: 神社の境内（掃除・祭りの準備）
+  - id: V12
+    label: 小学校の校門前（送り迎え）
+  - id: V13
+    label: 隣家の玄関先（回覧板の受け渡し）
+  - id: V14
+    label: バス停と駅のホーム
+  - id: V15
+    label: 診療所の待合
+scenario:
+  initial_cash: {}
+  scene_rounds: 2
+  direct_quota_per_month: 2
+  article_quota_per_month: 1
+  acquirer_mandate: '（v5では未使用。取得は configs/events_v5d_seed85.yaml の台本が決める。）
+
+    '
+kpi:
+  classify_utterances: false
+  classify_occupation: false
+  classify_batch: 25
+  cascade_window: 3
+cost:
+  price_table:
+    gemini-2.5-flash-lite:
+      input: 0.1
+      output: 0.4
+      cache_read: 0.01
+      cache_storage_hour: 1.0
+  safety_factor: 2.0
