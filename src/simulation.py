@@ -63,7 +63,8 @@ from .field_v5d import (TRACE_TEXTS_V5D, build_system_prompt_v5d, load_names_v5d
                         s4_for_step_v5d, scene_schema_v5d, venue_labels_v5d)
 from .field_v6 import (MAX_ACT_TEXT_CHARS, MEASURE_NONE, MEASURE_PAPER_LABEL,
                        MEASURE_VALUES, PAPER_LABELS, PUBLIC_ACT_NONE,
-                       PUBLIC_ACT_VALUES, SELL_INTENT_CLEAR, SELL_INTENT_REFUSE,
+                       PUBLIC_ACT_VALUES, SELL_INTENT_CLEAR, SELL_INTENT_KEEP,
+                       SELL_INTENT_REFUSE,
                        SELL_INTENT_VALUES, action_rows_v6,
                        blocked_acquisitions_v6, paper_row, scene_schema_v6,
                        script_without, set_refusal)
@@ -1586,7 +1587,11 @@ class Simulation:
         base = {"step": step, "agent_id": agent.agent_id, "role": agent.role,
                 "name": agent.name, "scene": scene, "venue": venue}
 
+        # 欠けていたら既定（「変えない」「なし」）として扱う＝**本当の既定**を実装する
+        # （Codexレビュー 2026-08-29 走行前指摘）。選ばれなかった月も同じ重みで残す。
         intent = str(act.get("sell_intent", "") or "").strip()
+        if not intent and "sell_intent" in act:
+            intent = SELL_INTENT_KEEP
         if intent in SELL_INTENT_VALUES:
             changed: List[str] = []
             if intent in (SELL_INTENT_REFUSE, SELL_INTENT_CLEAR):
@@ -1620,7 +1625,9 @@ class Simulation:
                    label: str) -> None:
         """公の行動（回覧板・議題・申入れ・行政の措置）を紙にして配る。"""
         if not value:
-            return
+            if field_name not in ("public_act", "measure"):
+                return
+            value = none_value    # 欠けていたら既定（なし）として扱う
         if value not in allowed:
             self.invalid_count += 1
             self.ledger._rec(step, "action_rejected", by=agent.agent_id,
@@ -1963,7 +1970,11 @@ class Simulation:
                         self._v5d_decode(act)
                     self._v5_thought(a, act, step, sid, venue_id, rnd)
                     self._v5_stance(a, act, step, sid)
-                    self._v6_actions(a, act, step, sid, venue_id)
+                    if last_scene.get(aid) == sid and rnd == self.scene_rounds:
+                        # v6: 行動欄はその月の最後のターンでだけ受け取る。
+                        # 他のターンに行動のキーが混ざって返っても無視する
+                        # （Codexレビュー 2026-08-29 走行前指摘）。
+                        self._v6_actions(a, act, step, sid, venue_id)
                     self._v5_direct(a, act, step, sid)
                     if a.role == "media":
                         self._v5_publish(a, act, step, sid, rnd)
@@ -2590,23 +2601,28 @@ class Simulation:
 
         classified: List[Dict[str, Any]] = []
         kcfg = self.cfg.get("kpi", {})
+        # v6 は**採点用の LLM を持たない世界**である（施主の絶対原則）。
+        # config の設定に関わらずコード側で遮断する＝設定の事故で分類器が
+        # 復活しない（Codexレビュー 2026-08-29 走行前指摘）。
+        # v1〜v5e2 では従来どおり kpi.classify_utterances がそのまま効く。
+        classify_on = (not self.field_v6) and bool(kcfg.get("classify_utterances", True))
         targets = [u for u in self.all_utterances
                    if u["role"] in ("household", "business")]
         if self.field_v5:
             # v5 は仲介・行政・記者も同じ場で話す（会話が観測の本体）ので全主体を分類する。
             targets = list(self.all_utterances)
         pub_steps = None
-        if kcfg.get("classify_utterances", True) and targets:
+        if classify_on and targets:
             classified = classify_utterances(
                 self.client, targets, batch=int(kcfg.get("classify_batch", 25)),
                 job_key="classify_utterances")
-        if kcfg.get("classify_utterances", True) and self.ledger.publications:
+        if classify_on and self.ledger.publications:
             pub_steps = classify_publications(
                 self.client, self.ledger.publications,
                 batch=int(kcfg.get("classify_batch", 25)))
         classified_thoughts: List[Dict[str, Any]] = []
         if ((self.field_v41 or self.field_v5)
-                and kcfg.get("classify_utterances", True) and self.thoughts):
+                and classify_on and self.thoughts):
             targets_thoughts = [t for t in self.thoughts
                                 if t["role"] in ("household", "business")]
             classified_thoughts = classify_utterances(
@@ -2614,7 +2630,7 @@ class Simulation:
                 batch=int(kcfg.get("classify_batch", 25)),
                 job_key="classify_thoughts")
         classified_feelings: List[Dict[str, Any]] = []
-        if self.field_v4 and kcfg.get("classify_utterances", True) and self.feelings:
+        if self.field_v4 and classify_on and self.feelings:
             classified_feelings = classify_utterances(
                 self.client, self.feelings, batch=int(kcfg.get("classify_batch", 25)),
                 job_key="classify_feelings")
@@ -2637,12 +2653,12 @@ class Simulation:
             # off のときは occupation_labels.jsonl を書かない＝O1〜O4 は
             # 「未計測」として集計から落ちる（欠損を false に化けさせない）。
             if ((self.field_v5b or self.v5c_like)
-                    and kcfg.get("classify_utterances", True)
+                    and classify_on
                     and kcfg.get("classify_occupation", True) and occ_rows):
                 occ_labels = classify_occupation(
                     self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))
             if (self.v5c_like and not self.field_v5e
-                    and kcfg.get("classify_utterances", True) and occ_rows):
+                    and classify_on and occ_rows):
                 # 定義は走行前に固定（docs/world_design_v5c_buyer_strategy.md §1）。
                 stage_labels = classify_stage_v5c(
                     self.client, occ_rows, batch=int(kcfg.get("classify_batch", 25)))

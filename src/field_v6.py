@@ -88,24 +88,33 @@ def scene_schema_v6(agent_name: str, present_names: List[str],
 # --- プロンプトに足す文（中立・これで全文）----------------------------------
 
 def action_rows_v6(owns_parcel: bool, is_municipality: bool) -> List[str]:
-    """最後のターンにだけ足す行動欄の説明。選択肢を示すだけで、促さない。"""
+    """最後のターンにだけ足す行動欄の説明。選択肢を示すだけで、促さない。
+
+    文言は Codex レビュー（2026-08-29 走行前）を受けて中立側へ寄せてある：
+    「何かするか」「取る措置」のような行動を意識させる問いかけの形をやめ、
+    「街の全員が見られる」という到達力の宣伝もやめた。残しているのは
+    **選ばれたものが世界でどうなるか**という事実だけである（それが無いと
+    選択の意味が分からない＝選べない）。
+    """
     rows: List[str] = []
     if owns_parcel:
-        rows += ["今月、自分の土地の方針を sell_intent に書く"
-                 f"（{SELL_INTENT_KEEP}／{SELL_INTENT_REFUSE}／{SELL_INTENT_CLEAR}）。",
-                 f"「{SELL_INTENT_REFUSE}」を選ぶと、自分が解除するまでその土地は"
-                 "売買の対象にならない。"]
+        rows += [f"sell_intent は次のどれかを書く（{SELL_INTENT_KEEP}／"
+                 f"{SELL_INTENT_REFUSE}／{SELL_INTENT_CLEAR}）。書かなければ"
+                 f"「{SELL_INTENT_KEEP}」として扱う。",
+                 f"「{SELL_INTENT_REFUSE}」は、解除するまで自分が持っている土地の"
+                 "売買が成立しないことを意味する（貸し借りには関わらない）。"]
     if is_municipality:
-        rows += ["measure に、今月あなたが役場として取る措置を書く"
-                 f"（{MEASURE_NONE}／{MEASURE_DESK}／{MEASURE_BRIEFING}／{MEASURE_STUDY}）。",
-                 f"「{MEASURE_NONE}」以外のときは measure_text に内容を1行で書く。"
-                 "措置は翌月、街の全員が見られる紙として残る。"]
+        rows += [f"measure は次のどれかを書く（{MEASURE_NONE}／{MEASURE_DESK}／"
+                 f"{MEASURE_BRIEFING}／{MEASURE_STUDY}）。書かなければ"
+                 f"「{MEASURE_NONE}」として扱う。",
+                 f"「{MEASURE_NONE}」以外のときは measure_text に1行書く。"
+                 "その1行は翌月、紙として街に配られる。"]
     else:
-        rows += ["public_act に、今月あなたが街に向けて何かするかを書く"
-                 f"（{PUBLIC_ACT_NONE}／{PUBLIC_ACT_CIRCULAR}／{PUBLIC_ACT_ASSEMBLY}"
-                 f"／{PUBLIC_ACT_PETITION}）。",
-                 f"「{PUBLIC_ACT_NONE}」以外を選んだときは public_act_text に内容を1行で書く。",
-                 "回覧板・議題・申入れは翌月、街の全員が見られる紙として残る。"]
+        rows += [f"public_act は次のどれかを書く（{PUBLIC_ACT_NONE}／"
+                 f"{PUBLIC_ACT_CIRCULAR}／{PUBLIC_ACT_ASSEMBLY}／"
+                 f"{PUBLIC_ACT_PETITION}）。書かなければ「{PUBLIC_ACT_NONE}」として扱う。",
+                 f"「{PUBLIC_ACT_NONE}」以外のときは public_act_text に1行書く。"
+                 "その1行は翌月、紙として街に配られる。"]
     return rows
 
 
@@ -141,9 +150,15 @@ def set_refusal(ledger: Ledger, step: int, agent_id: str,
 
 def blocked_acquisitions_v6(ledger: Ledger, step: int,
                             script: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """その月の予定のうち、対象が「当面売らない」で買えないもの。"""
+    """その月の予定のうち、対象が「当面売らない」で買えないもの。
+
+    **売買（sale）だけを止める。** 賃借（lease）は止めない＝選択肢の文言が
+    「当面売らない」だからである（文言と実装を一致させる・Codexレビュー
+    2026-08-29 走行前指摘）。台本の45件のうち賃借は止まらない。
+    """
     return [acq for acq in acquisitions_at(script, step)
-            if is_refused(ledger, str(acq["parcel_id"]))]
+            if str(acq.get("kind", "sale")) == "sale"
+            and is_refused(ledger, str(acq["parcel_id"]))]
 
 
 def script_without(script: Dict[str, Any],

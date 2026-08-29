@@ -124,9 +124,17 @@ for owns in (True, False):
         hit = [w for w in BANNED if w in rows]
         check(f"行動欄の文言に促し・当為の語が無い(owns={owns},muni={muni})",
               not hit, str(hit))
-check("行動欄は選択肢の提示と保存の説明だけ（全4行以内×2種）",
-      len(action_rows_v6(True, False)) == 5 and len(action_rows_v6(False, True)) == 2,
+check("行動欄は選択肢の提示と保存の説明だけ（2行×種類）",
+      len(action_rows_v6(True, False)) == 4 and len(action_rows_v6(False, True)) == 2,
       str((len(action_rows_v6(True, False)), len(action_rows_v6(False, True)))))
+# Codexレビュー（走行前）で落とした語＝行動を意識させる問いかけ・到達力の宣伝。
+for word in ("何かするか", "取る措置", "全員が見られる"):
+    check(f"行動欄に『{word}』が無い（Codexレビュー反映）",
+          all(word not in "|".join(action_rows_v6(o, m))
+              for o in (True, False) for m in (True, False)))
+check("書かなければ既定として扱う、と明記してある",
+      all("書かなければ" in "|".join(action_rows_v6(o, m))
+          for o in (True, False) for m in (True, False)))
 check("設計文書に『狙った動きを仕組まない』が明記されている",
       "狙った動きを仕組まない" in DESIGN)
 
@@ -215,6 +223,11 @@ SCRIPT = {"meta": {"months": 6},
               {"id": "ACQ3", "month": 5, "parcel_id": "P02", "under_name": "B社",
                "kind": "sale", "traces": []}]}
 
+SCRIPT_LEASE = {"meta": {"months": 6},
+                "acquisitions": [
+                    {"id": "ACQ9", "month": 2, "parcel_id": "P01",
+                     "under_name": "A社", "kind": "lease", "traces": []}]}
+
 led = tiny_ledger()
 check("既定では誰も『当面売らない』ではない",
       all(not is_refused(led, p) for p in ("P01", "P02", "P03")))
@@ -229,6 +242,9 @@ check("同じ宣言を繰り返しても記録は増えない（変化した分�
 blocked = blocked_acquisitions_v6(led, 2, SCRIPT)
 check("第2月に買えないのは P01 の1件だけ",
       [b["id"] for b in blocked] == ["ACQ1"], str(blocked))
+check("**賃借（lease）は止まらない**（選択肢の文言は「当面売らない」）",
+      blocked_acquisitions_v6(led, 2, SCRIPT_LEASE) == [],
+      "refusal は売買だけに効く")
 rest = script_without(SCRIPT, {"ACQ1"})
 check("外した台本から ACQ1 が消える",
       [a["id"] for a in rest["acquisitions"]] == ["ACQ2", "ACQ3"])
@@ -401,6 +417,89 @@ check("誰も行動しなければ登記の動きは v5e2 と同一", key(led0) 
 check("誰も行動しなければ買えなかった件は0",
       json.load(io.open(os.path.join(d0, "summary.json"),
                         encoding="utf-8"))["v6"]["acquisitions_blocked"] == 0)
+
+
+# ===========================================================================
+print("\n[8] Codexレビュー（走行前）で凍結した3点")
+# ===========================================================================
+
+# (1) config を事故で true に戻しても、v6 では採点用LLMが1本も走らない。
+cfg_on = yaml.safe_load(yaml.safe_dump(CFG))
+cfg_on["kpi"]["classify_utterances"] = True
+cfg_on["kpi"]["classify_occupation"] = True
+sim_on, d_on = run_mock(cfg_on, 3, prefix="qa_v6_gate_")
+tags_on = {str(p.get("tag", "")) for p in (sim_on.client.prompt_log or [])}
+check("config が true でも v6 では採点用LLMが0本（コード側で遮断）",
+      not any(t.startswith("classify") or t.endswith("_stage") for t in tags_on),
+      str(sorted(t for t in tags_on if "class" in t or "stage" in t)))
+check("4色・占領の分類ファイルも作られない",
+      not os.path.exists(os.path.join(d_on, "stage_labels_v5c.jsonl"))
+      and not os.path.exists(os.path.join(d_on, "occupation_labels.jsonl")))
+
+
+class AlwaysActMock(MockClient):
+    """全ターンで行動のキーを返す（本来は最後のターンにしか出ない）。"""
+
+    def generate(self, system_prompt, user_prompt, schema=None, temperature=None,
+                 max_tokens=None, tag="agent"):
+        raw = super().generate(system_prompt, user_prompt, schema=schema,
+                               temperature=temperature, max_tokens=max_tokens,
+                               tag=tag)
+        props = (schema or {}).get("properties", {})
+        if "talk_to" not in props:
+            return raw
+        d = json.loads(raw)
+        d["sell_intent"] = SELL_INTENT_REFUSE
+        d["public_act"] = PUBLIC_ACT_CIRCULAR
+        d["public_act_text"] = "混ぜた行"
+        return json.dumps(d, ensure_ascii=False)
+
+
+sim_a, d_a = run_mock(CFG, 3, lambda: AlwaysActMock(), prefix="qa_v6_final_")
+acts_a = jsonl(os.path.join(d_a, "actions_v6.jsonl"))
+per_month = {}
+for r in acts_a:
+    key = (r["step"], r["agent_id"], r["field"])
+    per_month[key] = per_month.get(key, 0) + 1
+check("最後のターン以外の行動は無視する（月・主体・欄ごとに1回だけ）",
+      bool(acts_a) and max(per_month.values()) == 1,
+      str(max(per_month.values()) if per_month else 0))
+papers_a = jsonl(os.path.join(d_a, "papers_v6.jsonl"))
+check("紙も月に1人1枚まで",
+      len({(p["step"], p["from"]) for p in papers_a}) == len(papers_a))
+
+
+class EmptyActMock(MockClient):
+    """行動欄を空で返す（欠損の扱いを確かめる）。"""
+
+    def generate(self, system_prompt, user_prompt, schema=None, temperature=None,
+                 max_tokens=None, tag="agent"):
+        raw = super().generate(system_prompt, user_prompt, schema=schema,
+                               temperature=temperature, max_tokens=max_tokens,
+                               tag=tag)
+        props = (schema or {}).get("properties", {})
+        if not ({"sell_intent", "public_act", "measure"} & set(props)):
+            return raw
+        d = json.loads(raw)
+        for k in ("sell_intent", "public_act", "measure"):
+            if k in props:
+                d[k] = ""
+        return json.dumps(d, ensure_ascii=False)
+
+
+sim_e, d_e = run_mock(CFG, 3, lambda: EmptyActMock(), prefix="qa_v6_empty_")
+acts_e = jsonl(os.path.join(d_e, "actions_v6.jsonl"))
+sum_e = json.load(io.open(os.path.join(d_e, "summary.json"), encoding="utf-8"))
+check("空欄は「変えない」として記録される",
+      any(r["field"] == "sell_intent" and r["value"] == SELL_INTENT_KEEP
+          for r in acts_e))
+check("空欄は「なし」として記録される",
+      any(r["field"] == "public_act" and r["value"] == PUBLIC_ACT_NONE
+          for r in acts_e))
+check("空欄では登記簿も紙も動かない",
+      sum_e["v6"]["papers_total"] == 0
+      and sum_e["v6"]["refusal_first_month"] is None
+      and sum_e["v6"]["acquisitions_blocked"] == 0)
 
 
 print(f"\n{PASS} passed, {FAIL} failed")
