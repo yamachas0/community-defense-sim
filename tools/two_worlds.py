@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import re
 import os
 import sys
 
@@ -60,6 +61,9 @@ HUMAN_NOTICED = {
     ("path", "A"): None,     # 機械は m32 を出すが、読むと「A社とB社どちらが買ったのか」の取り違え
     ("path", "B"): 3,
     ("path", "C"): 12,       # 機械は m11（記事）を出すが、採るのは m12 の発話（明確に2名義の関連を問う）
+    ("path_opt", "A"): None, # 候補0件。36か月のあいだ公の場で名義を結びつけた行が無い
+    ("path_opt", "B"): 8,    # 機械は m6 を出すが、読むと「物件の動向の関係」＝名義同士ではない。
+                             # m8「D社の古い家やA社の学園裏の土地購入との関連性について」を採る
 }
 
 
@@ -169,12 +173,26 @@ def read_run(run_dir: str, label: str, world_key: str = "") -> dict:
         th = [t for t in thoughts
               if int(t.get("step", 0)) == int(r0["step"])
               and t.get("from") == r0.get("agent_id")]
+        # 引用は**その月のいちばん早い内心**（月初の計画）から採り、
+        # 英字が混じったもの（出力欄の語がそのまま内心に出た行）は避ける。
+        # 台本 docs/presentation_script.md と画面の引用を一致させるため
+        # （施主指示 2026-08-29）。原文どおり・切り詰めない。
+        order = lambda t: (0 if t.get("scene") == "plan" else 1,
+                           int(t.get("round", 0) or 0))
+        clean = sorted([t for t in th
+                        if not re.search(r"[A-Za-z]", str(t.get("text", "")))],
+                       key=order)
+        pick = clean or sorted(th, key=order)
         samples.append({"step": r0["step"],
                         "head": (f"第{r0['step']}月に "
                                  f"{r0.get('name') or r0.get('agent_id')} が"
                                  "「当面売らない」を選んだ"),
                         "who": r0.get("name", ""), "kind": "そのときの内心",
-                        "text": (th[-1]["text"] if th else "")})
+                        "text": (pick[0]["text"] if pick else ""),
+                        "src": (f"{os.path.basename(run_dir)} 第{r0['step']}月 "
+                                f"{r0.get('agent_id','')} scene="
+                                f"{(pick[0].get('scene') if pick else '')} "
+                                f"round={(pick[0].get('round') if pick else '')}")})
     muni = [p for p in papers if p.get("role") == "municipality"]
     if muni:
         m0 = min(muni, key=lambda r: int(r["step"]))
@@ -240,29 +258,39 @@ def main() -> int:
                     help="経路なしの世界のラン（run_dir）")
     ap.add_argument("--path", nargs="*", default=None,
                     help="経路ありの世界のラン（run_dir）")
+    ap.add_argument("--path-opt", nargs="*", default=None,
+                    help="経路あり（任意回答）の世界のラン（run_dir）")
     args = ap.parse_args()
 
     sims = os.path.join(ROOT, "simulations")
 
     def _find(pattern):
+        # 走行中のフォルダ（summary.json がまだ無い）は拾わない
         return sorted(os.path.join(sims, d) for d in os.listdir(sims)
-                      if pattern in d)
+                      if pattern in d
+                      and os.path.exists(os.path.join(sims, d, "summary.json")))
 
     no_path = (args.no_path if args.no_path is not None
                else _find("field_v5e2_run"))
     path = args.path if args.path is not None else _find("field_v6_run")
+    path_opt = (args.path_opt if args.path_opt is not None
+                else _find("field_v6b_run"))
 
-    out = {"no_path": [], "path": []}
+    out = {"no_path": [], "path": [], "path_opt": []}
     for d in no_path:
         out["no_path"].append(read_run(d, os.path.basename(d).split("_run")[-1], "no_path"))
     for d in path:
         out["path"].append(read_run(d, os.path.basename(d).split("_run")[-1], "path"))
+    for d in path_opt:
+        out["path_opt"].append(
+            read_run(d, os.path.basename(d).split("_run")[-1], "path_opt"))
 
     dst = os.path.join(ROOT, args.out)
     with open(dst, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
 
-    for key, title in (("no_path", "経路なしの世界"), ("path", "経路ありの世界")):
+    for key, title in (("no_path", "経路なしの世界"), ("path", "経路ありの世界"),
+                       ("path_opt", "経路ありの世界（任意回答）")):
         print(f"\n== {title} ==")
         for r in out[key]:
             print(f"  {r['label']}: 気づいた月 {r['noticed_human']}"
