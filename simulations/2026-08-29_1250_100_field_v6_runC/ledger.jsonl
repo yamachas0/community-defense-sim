@@ -1,0 +1,228 @@
+{"step": 1, "kind": "transfer", "acq_id": "ACQ01", "parcel_id": "P33", "seller": "HH16", "buyer": "AQ01", "under_name": "A社", "old_name": "岬道の持ち主さん"}
+{"step": 1, "kind": "transfer", "acq_id": "ACQ02", "parcel_id": "P41", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "船着場裏の持ち主さん"}
+{"step": 1, "kind": "refusal_set", "by": "HH16", "parcel_id": "P17"}
+{"step": 1, "kind": "refusal_set", "by": "HH01", "parcel_id": "P02"}
+{"step": 1, "kind": "refusal_set", "by": "HH01", "parcel_id": "P18"}
+{"step": 1, "kind": "refusal_set", "by": "HH01", "parcel_id": "P34"}
+{"step": 1, "kind": "refusal_set", "by": "HH06", "parcel_id": "P07"}
+{"step": 1, "kind": "refusal_set", "by": "HH06", "parcel_id": "P23"}
+{"step": 1, "kind": "refusal_set", "by": "HH06", "parcel_id": "P39"}
+{"step": 1, "kind": "refusal_set", "by": "HH07", "parcel_id": "P08"}
+{"step": 1, "kind": "refusal_set", "by": "HH07", "parcel_id": "P24"}
+{"step": 1, "kind": "refusal_set", "by": "HH07", "parcel_id": "P40"}
+{"step": 1, "kind": "refusal_set", "by": "HH14", "parcel_id": "P15"}
+{"step": 1, "kind": "refusal_set", "by": "HH14", "parcel_id": "P31"}
+{"step": 1, "kind": "refusal_set", "by": "HH14", "parcel_id": "P47"}
+{"step": 1, "kind": "publication", "by": "MD01", "headline": "皆様、本日は地区公民館での町内会にお集まりいただき、ありがとうございます。A市で", "body": "皆様、本日は地区公民館での町内会にお集まりいただき、ありがとうございます。A市では、高齢化や後継者不足による空き家・空き店舗の増加が深刻な課題となっています。しかし、本日の会合では、灯台下さんの駅前店舗の空きスペース提供や、一番街の持ち主さんの移住など、新たな動きや活用への意欲も感じられました。民間と行政が連携し、空き家をリノベーションして新たな店舗や住居にする、移住希望者へのサポートを強化するなど、市民一人ひとりの力で街の活性化を目指していくことが重要だと考えます。今後も、地域の実情を伝えるべく、取材を続けてまいります。", "about_acquisition": false}
+{"step": 2, "kind": "lease", "acq_id": "ACQ03", "parcel_id": "P34", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "浜町の大家さん"}
+{"step": 2, "kind": "refusal_set", "by": "HH12", "parcel_id": "P13"}
+{"step": 2, "kind": "refusal_set", "by": "HH12", "parcel_id": "P29"}
+{"step": 2, "kind": "refusal_set", "by": "HH12", "parcel_id": "P45"}
+{"step": 2, "kind": "publication", "by": "MD01", "headline": "A市では空き家や後継者不足が深刻な課題となっています。桜台の古家のように、少しず", "body": "A市では空き家や後継者不足が深刻な課題となっています。桜台の古家のように、少しずつ活用が進む動きはありますが、具体的な活用方法や街の将来像に関する情報はまだ不足しています。地域住民の声に耳を傾け、街の課題と可能性について取材を深めていくことが重要です。皆様からの情報提供が、街の活性化に繋がることを期待します。", "about_acquisition": false}
+{"step": 2, "kind": "publication", "by": "MD02", "headline": "桜台の古家、活用進むか？\n最近、桜台の古家に人の出入りがあり、活用が始まった様子", "body": "桜台の古家、活用進むか？\n最近、桜台の古家に人の出入りがあり、活用が始まった様子が見られる。街の空き家や空き店舗の活用は、後継者不足や人口減少が進むA市にとって喫緊の課題だ。岬道の持ち主さんの空き家売却とも関連があるのか、また、どのような方が利用されているのか、今後の街の活性化に繋がる動きとして注目したい。関係者への取材を継続し、詳細を追っていく。", "about_acquisition": false}
+{"step": 3, "kind": "script_blocked", "acq_id": "ACQ04", "parcel_id": "P17", "reason": "refusal"}
+{"step": 3, "kind": "transfer", "acq_id": "ACQ05", "parcel_id": "P25", "seller": "HH08", "buyer": "AQ01", "under_name": "D社", "old_name": "船着場裏の持ち主さん"}
+{"step": 3, "kind": "publication", "by": "MD01", "headline": "A市、空き家問題解決へ住民と行政の連携強化を。地域イベント会場での取材で、記者〇", "body": "A市、空き家問題解決へ住民と行政の連携強化を。地域イベント会場での取材で、記者〇〇は空き家問題の深刻化に触れ、行政の支援策拡充と住民協力の必要性を訴えた。空き家バンクの機能強化や改修費補助、地域資源活用による新たな事例創出などが提案された。所有者からは具体的な支援策を求める声が上がっており、街の活性化には住民一人ひとりの積極的な関与が不可欠である。", "about_acquisition": false}
+{"step": 3, "kind": "publication", "by": "MD02", "headline": "湾岸大通りの大家さんから、角の空き地の活用について、駅前の仲介さんと二代目の仲介", "body": "湾岸大通りの大家さんから、角の空き地の活用について、駅前の仲介さんと二代目の仲介さんに来月相談したいとの意向がありました。市役所のまちづくり担当さんも空き家活用に関心を示しており、情報共有いたしました。また、川向こうの古家には見慣れない方々が訪れているとの情報もあり、今後の動向が注目されます。", "about_acquisition": false}
+{"step": 4, "kind": "lease", "acq_id": "ACQ06", "parcel_id": "P09", "lessor": "HH08", "lessee": "AQ01", "under_name": "C社", "old_name": "船着場裏の持ち主さん"}
+{"step": 4, "kind": "lease", "acq_id": "ACQ07", "parcel_id": "P18", "lessor": "HH01", "lessee": "AQ01", "under_name": "B社", "old_name": "浜町の大家さん"}
+{"step": 4, "kind": "refusal_set", "by": "HH04", "parcel_id": "P05"}
+{"step": 4, "kind": "refusal_set", "by": "HH04", "parcel_id": "P21"}
+{"step": 4, "kind": "refusal_set", "by": "HH04", "parcel_id": "P37"}
+{"step": 4, "kind": "publication", "by": "MD01", "headline": "湾岸大通りの角の空き地活用について、来月、湾岸大通りの大家さん、二代目の仲介さん", "body": "湾岸大通りの角の空き地活用について、来月、湾岸大通りの大家さん、二代目の仲介さん、市役所の観光産業担当さんによる相談が予定されている。また、岬道の空き家や川向こうの古家についても、活用や状況について情報交換が行われた。空き家問題は地域全体の課題として認識されており、今後の具体的な動きが注目される。", "about_acquisition": false}
+{"step": 4, "kind": "publication", "by": "MD02", "headline": "湾岸大通りの大家さんが駅前の仲介さんと連携して物件活用を進める動きがある。また、", "body": "湾岸大通りの大家さんが駅前の仲介さんと連携して物件活用を進める動きがある。また、川向こうの古家では不審な人影が目撃されており、街の安全と空き家活用について、地域全体での関心が高まっている。", "about_acquisition": false}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ08", "parcel_id": "P42", "seller": "HH09", "buyer": "AQ01", "under_name": "D社", "old_name": "灯台下の持ち主さん"}
+{"step": 5, "kind": "transfer", "acq_id": "ACQ09", "parcel_id": "P43", "seller": "HH10", "buyer": "AQ01", "under_name": "B社", "old_name": "魚市場前の持ち主さん"}
+{"step": 5, "kind": "publication", "by": "MD01", "headline": "岬道の空き家周辺での不審者情報と市の対応、空き家活用策について", "body": "岬道の空き家周辺での不審者情報と市の対応、空き家活用策について", "about_acquisition": false}
+{"step": 6, "kind": "transfer", "acq_id": "ACQ10", "parcel_id": "P44", "seller": "HH11", "buyer": "AQ01", "under_name": "A社", "old_name": "波止場通りの持ち主さん"}
+{"step": 6, "kind": "direct_rejected", "from_id": "BR01", "to": "HH11", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 6, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 6, "kind": "refusal_set", "by": "HH02", "parcel_id": "P03"}
+{"step": 6, "kind": "refusal_set", "by": "HH02", "parcel_id": "P19"}
+{"step": 6, "kind": "refusal_set", "by": "HH02", "parcel_id": "P35"}
+{"step": 6, "kind": "publication", "by": "MD01", "headline": "岬道の空き家について、市役所は宇宙港構想との関連で活用を検討中だが、具体的な計画", "body": "岬道の空き家について、市役所は宇宙港構想との関連で活用を検討中だが、具体的な計画は未定。湾岸大通りの空き地に関する情報は現時点では不明。商店街はずれの持ち主さんには、来月、岬道の空き家活用について取材機会を設けることを約束した。", "about_acquisition": false}
+{"step": 6, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "lease", "acq_id": "ACQ11", "parcel_id": "P45", "lessor": "HH12", "lessee": "AQ01", "under_name": "B社", "old_name": "本町通りの持ち主さん"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "direct_rejected", "from_id": "MU02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 7, "kind": "publication", "by": "MD01", "headline": "岬道の空き家と周辺の空き家について、記者会見での情報交換をまとめました。市役所担", "body": "岬道の空き家と周辺の空き家について、記者会見での情報交換をまとめました。市役所担当者によると、岬道の空き家については具体的な活用策の検討が進められています。一方、湾岸大通り、団地下、船着場裏の空き家については、現時点で目立った動きはありません。今後も関係各所への取材を継続し、最新情報をお伝えしていきます。（300字）", "about_acquisition": false}
+{"step": 7, "kind": "publication", "by": "MD02", "headline": "岬道の空き家活用について、町内会で具体的な計画が示唆された。市役所のまちづくり担", "body": "岬道の空き家活用について、町内会で具体的な計画が示唆された。市役所のまちづくり担当者、観光産業担当者、そして一番街の持ち主さんが連携し、住民の意見を聞きながら活用方法を検討していく意向が示された。スペースポート構想との関連性も指摘されており、今後の街の活性化に繋がる動きとして注目される。詳細については、今後さらに情報が共有される見込みである。", "about_acquisition": false}
+{"step": 8, "kind": "lease", "acq_id": "ACQ12", "parcel_id": "P37", "lessor": "HH04", "lessee": "AQ01", "under_name": "A社", "old_name": "駅前通りの持ち主さん"}
+{"step": 8, "kind": "direct_rejected", "from_id": "MD02", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "HH11", "to": "HH16", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "MD02", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "HH08", "to": "MD02", "reason": "quota_exhausted"}
+{"step": 8, "kind": "direct_rejected", "from_id": "HH11", "to": "HH16", "reason": "quota_exhausted"}
+{"step": 8, "kind": "publication", "by": "MD01", "headline": "岬道の空き家活用について、一番街の持ち主さんが発表準備を進めているとの情報が複数", "body": "岬道の空き家活用について、一番街の持ち主さんが発表準備を進めているとの情報が複数から寄せられた。市役所のまちづくり担当者への取材によると、発表は間近とのこと。具体的な内容はまだ明かされていないが、地域活性化への期待が高まっている。湾岸大通りの空き地についても、関係者間で活用の模索が続いている模様だ。空き家・空き地の有効活用は、A市の今後の発展にとって重要な課題となるだろう。", "about_acquisition": false}
+{"step": 8, "kind": "direct_rejected", "from_id": "MD02", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 8, "kind": "publication", "by": "MD02", "headline": "岬道の空き家について、地域住民の関心が高まっている。特に船着場裏の持ち主さんは、", "body": "岬道の空き家について、地域住民の関心が高まっている。特に船着場裏の持ち主さんは、空き家活用による街の活性化に期待を寄せるとともに、スペースポート構想との関連性について疑問を呈している。一番街の持ち主さんは、市役所観光産業担当者からの具体的な提案準備が進んでいると認識しており、この場での情報共有を求めている。今後、これらの関心事を踏まえ、空き家活用に向けた具体的な議論が進むことが期待される。", "about_acquisition": false}
+{"step": 9, "kind": "script_blocked", "acq_id": "ACQ13", "parcel_id": "P35", "reason": "refusal"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 9, "kind": "direct_rejected", "from_id": "MU01", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 9, "kind": "refusal_set", "by": "HH13", "parcel_id": "P14"}
+{"step": 9, "kind": "refusal_set", "by": "HH13", "parcel_id": "P30"}
+{"step": 9, "kind": "refusal_set", "by": "HH13", "parcel_id": "P46"}
+{"step": 9, "kind": "publication", "by": "MD01", "headline": "岬道の空き家と湾岸大通りの空き地について、それぞれの持ち主の方々の動きや、スペー", "body": "岬道の空き家と湾岸大通りの空き地について、それぞれの持ち主の方々の動きや、スペースポート構想との関連性、そして東団地の持ち主さんからの手紙の件など、多くの点が明らかになってきました。これらの情報を整理し、次号で記事としてまとめ、市民の皆様にもA市の今後のまちづくりに関心を持っていただく機会としたいです。特に、一番街の持ち主さんの発表準備や、東団地の持ち主さんからの手紙の件など、具体的な進展があれば、ぜひ記事で紹介させていただきます。", "about_acquisition": false}
+{"step": 9, "kind": "publication", "by": "MD02", "headline": "地域イベント会場での取材を元に、岬道の空き家活用とスペースポート構想との関連性に", "body": "地域イベント会場での取材を元に、岬道の空き家活用とスペースポート構想との関連性について、市役所担当者への質問内容と、それに対する回答の断片をまとめた記事を作成する。現時点では具体的な進展は不明だが、市民の関心の高さを伝える。", "about_acquisition": false}
+{"step": 10, "kind": "script_blocked", "acq_id": "ACQ15", "parcel_id": "P46", "reason": "refusal"}
+{"step": 10, "kind": "transfer", "acq_id": "ACQ14", "parcel_id": "P10", "seller": "HH09", "buyer": "AQ01", "under_name": "B社", "old_name": "灯台下の持ち主さん"}
+{"step": 10, "kind": "direct_rejected", "from_id": "HH13", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 10, "kind": "publication", "by": "MD01", "headline": "湾岸大通りの空き地と岬道の空き家について、スペースポート構想との関連性を軸に、地", "body": "湾岸大通りの空き地と岬道の空き家について、スペースポート構想との関連性を軸に、地域活性化に向けた活用方法について町内会で議論が交わされた。湾岸大通りの大家さんは、スペースポート構想と絡めた活用を検討したい意向を示しており、まちづくり担当者や仲介者との連携が模索されている。岬道の空き家については、所有者が売却意思がないことを明言し、地域での活用が期待される。今後、これらの物件がどのように地域に貢献していくか、注目が集まる。", "about_acquisition": false}
+{"step": 11, "kind": "transfer", "acq_id": "ACQ16", "parcel_id": "P26", "seller": "HH09", "buyer": "AQ01", "under_name": "C社", "old_name": "灯台下の持ち主さん"}
+{"step": 11, "kind": "transfer", "acq_id": "ACQ17", "parcel_id": "P38", "seller": "HH05", "buyer": "AQ01", "under_name": "C社", "old_name": "駅裏の大家さん"}
+{"step": 11, "kind": "direct_rejected", "from_id": "HH03", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 11, "kind": "direct_rejected", "from_id": "MD01", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 11, "kind": "refusal_set", "by": "HH03", "parcel_id": "P04"}
+{"step": 11, "kind": "refusal_set", "by": "HH03", "parcel_id": "P20"}
+{"step": 11, "kind": "refusal_set", "by": "HH03", "parcel_id": "P36"}
+{"step": 11, "kind": "direct_rejected", "from_id": "HH03", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 11, "kind": "refusal_set", "by": "HH08", "parcel_id": "P09"}
+{"step": 11, "kind": "publication", "by": "MD01", "headline": "本日は、不動産仲介事務所に多くの関係者が集まり、岬道の空き家や湾岸大通りの空き地", "body": "本日は、不動産仲介事務所に多くの関係者が集まり、岬道の空き家や湾岸大通りの空き地といった遊休地の活用について活発な意見交換が行われた。浜町の大家さんからは、岬道の空き家は売却せず地域での活用を、湾岸大通りの空き地も活用が進むことに期待する声が上がった。市役所の担当者も民間からの積極的な提案を求めている。スペースポート構想の進展も見据え、地域の実情を踏まえた具体的な活用策が求められる。大家さんの持つ地域情報が、今後のまちづくりに不可欠となるだろう。", "about_acquisition": false}
+{"step": 11, "kind": "publication", "by": "MD02", "headline": "本日は不動産仲介事務所に多くの関係者が集まり、岬道の空き家や湾岸大通りの空き地を", "body": "本日は不動産仲介事務所に多くの関係者が集まり、岬道の空き家や湾岸大通りの空き地をはじめとする遊休資産の活用について活発な意見交換が行われた。スペースポート構想を背景に、物流拠点や宿泊施設などのアイデアが出され、民間事業者と市役所が連携して地域活性化を目指す動きが活発化している。C社やB社といった企業も複数の物件に関与しており、今後の街の変化が注目される。大家さんや持ち主さんたちの積極的な姿勢が、街の未来を切り拓く鍵となりそうだ。", "about_acquisition": false}
+{"step": 12, "kind": "script_blocked", "acq_id": "ACQ19", "parcel_id": "P05", "reason": "refusal"}
+{"step": 12, "kind": "direct_rejected", "from_id": "BZ03", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 12, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 12, "kind": "publication", "by": "MD01", "headline": "地域イベント会場では、岬道と湾岸大通りの遊休資産活用を巡り、関係者から活発な意見", "body": "地域イベント会場では、岬道と湾岸大通りの遊休資産活用を巡り、関係者から活発な意見交換が行われた。市役所の観光産業担当者は、来月より相談窓口を設置し、事業者や土地所有者からの具体的な提案を受け付けると表明。スペースポート構想との連携も視野に入れ、街のポテンシャルを最大限に引き出すための取り組みが加速する見込みだ。浜町の旅館さんや駅裏の事業所さんからは、地域連携や新たな拠点づくりへの期待が寄せられた。今後、これらの動きがどのように具体化していくか、注目が集まる。", "about_acquisition": false}
+{"step": 12, "kind": "publication", "by": "MD02", "headline": "来月開設される遊休資産活用相談窓口について、市役所のまちづくり担当者と観光産業担", "body": "来月開設される遊休資産活用相談窓口について、市役所のまちづくり担当者と観光産業担当者から詳細を聞き取った。窓口では、土地所有者や事業者からの具体的な提案を受け付け、スペースポート構想とも連携した街の活性化を目指す。岬道や湾岸大通りの空き家・空き地活用についても、地域に根差した活用や新たな拠点づくりに向けた具体的な方向性が示された。今後、この窓口が街の未来を切り拓く一助となることが期待される。", "about_acquisition": false}
+{"step": 13, "kind": "script_blocked", "acq_id": "ACQ20", "parcel_id": "P13", "reason": "refusal"}
+{"step": 13, "kind": "publication", "by": "MD02", "headline": "来月開設される遊休資産活用相談窓口について、市役所のまちづくり担当者と観光産業担", "body": "来月開設される遊休資産活用相談窓口について、市役所のまちづくり担当者と観光産業担当者から話を聞いた。スペースポート構想との連携も視野に入れ、遊休資産の活用による地域活性化を目指すとのこと。特に湾岸大通りや岬道の空き地・空き家について、具体的な活用策が検討されている。詳細は次号で。", "about_acquisition": false}
+{"step": 13, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 13, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 13, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 13, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 13, "kind": "publication", "by": "MD01", "headline": "湾岸大通りと岬道の遊休資産活用、スペースポート構想との連携について、地域住民と市", "body": "湾岸大通りと岬道の遊休資産活用、スペースポート構想との連携について、地域住民と市役所担当者が意見交換。共同浴場設立の可能性も浮上。来月開設される遊休資産活用相談窓口への期待が高まる。", "about_acquisition": false}
+{"step": 14, "kind": "lease", "acq_id": "ACQ21", "parcel_id": "P11", "lessor": "HH10", "lessee": "AQ01", "under_name": "A社", "old_name": "魚市場前の持ち主さん"}
+{"step": 14, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 14, "kind": "direct_rejected", "from_id": "HH04", "to": "BZ04", "reason": "quota_exhausted"}
+{"step": 14, "kind": "publication", "by": "MD01", "headline": "湾岸大通りや岬道周辺の遊休資産活用について、住民や事業者の関心が高まっています。", "body": "湾岸大通りや岬道周辺の遊休資産活用について、住民や事業者の関心が高まっています。来月開設される市役所の相談窓口への期待が集まる一方、具体的な活用アイデアや、湾岸大通りの店さんが抱えるような建物の名義問題など、個別の課題も浮き彫りになっています。不動産業者からは、スペースポート構想との連携を見据えた活用提案を募る動きもあり、今後の街の変化に注目が集まります。", "about_acquisition": false}
+{"step": 14, "kind": "publication", "by": "MD02", "headline": "市役所の観光産業担当者から、遊休資産の活用とスペースポート構想を連携させ、国際的", "body": "市役所の観光産業担当者から、遊休資産の活用とスペースポート構想を連携させ、国際的なイベントの拠点や研究開発施設としての活用も視野に入れているとの話を聞いた。不動産仲介業者からは、湾岸大通りや岬道の遊休資産について、具体的な活用イメージや、そのような用途への適合性についての意見を収集したい。", "about_acquisition": false}
+{"step": 15, "kind": "script_blocked", "acq_id": "ACQ18", "parcel_id": "P04", "reason": "refusal"}
+{"step": 15, "kind": "script_blocked", "acq_id": "ACQ22", "parcel_id": "P19", "reason": "refusal"}
+{"step": 15, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "BZ01", "to": "HH11", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 15, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 15, "kind": "publication", "by": "MD01", "headline": "本日は地域イベントにご参加いただき、誠にありがとうございます。市役所では、遊休資", "body": "本日は地域イベントにご参加いただき、誠にありがとうございます。市役所では、遊休資産の活用とスペースポート構想の連携に向け、事業者向け相談会を今月中に開催予定です。個別の物件に関する名義や相続の問題についても、相談窓口でサポートしていく方針です。不動産業者も連携を模索しており、街の活性化への期待が高まっています。一方で、湾岸大通りの店さんのように、名義問題が活用への課題となっているケースも散見されます。市や関係者と連携し、これらの課題を一つずつ解決していくことが、今後の街の発展に不可欠でしょう。", "about_acquisition": false}
+{"step": 15, "kind": "publication", "by": "MD02", "headline": "遊休資産の活用とスペースポート構想の連携は、単なる空き家・空き地の活用に留まらな", "body": "遊休資産の活用とスペースポート構想の連携は、単なる空き家・空き地の活用に留まらない。湾岸大通りの店さんのように、古い建物の名義問題が、その活用を阻む大きな壁となっていることが明らかになった。船着場裏の持ち主さんや岬道の持ち主さんは、名義問題の重要性を指摘しつつ、リモートワーク拠点化などの新しい活用法を模索している。市役所も相談窓口の設置を検討しており、関係者間の連携が不可欠となるだろう。名義問題の解決なくして、街の活性化は進まない。", "about_acquisition": false}
+{"step": 16, "kind": "lease", "acq_id": "ACQ23", "parcel_id": "P36", "lessor": "HH03", "lessee": "AQ01", "under_name": "B社", "old_name": "湾岸大通りの大家さん"}
+{"step": 16, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 16, "kind": "direct_rejected", "from_id": "BZ01", "to": "BZ02", "reason": "quota_exhausted"}
+{"step": 16, "kind": "publication", "by": "MD01", "headline": "今月S4の地区公民館での寄り合いでは、潮見横丁の店さんが浜町の旅館さんと遊休資産", "body": "今月S4の地区公民館での寄り合いでは、潮見横丁の店さんが浜町の旅館さんと遊休資産の活用について話し合う機会を持つことが明らかになった。この活用はスペースポート構想とも連携する可能性があり、街の活性化に繋がると期待されている。また、来月には事業者向け意見交換会が開催される予定で、詳細が地域イベントで発表される。遊休資産活用相談窓口の設置についても、市役所が検討を進めていることが示唆された。これらの動きは、A市の将来にとって重要な意味を持つだろう。", "about_acquisition": false}
+{"step": 16, "kind": "publication", "by": "MD02", "headline": "スペースポート構想と遊休資産活用に関する意見交換会、来月開催。詳細は今月末の地域", "body": "スペースポート構想と遊休資産活用に関する意見交換会、来月開催。詳細は今月末の地域イベントで発表。市役所、事業者向けに相談窓口設置も検討中。記者会見にて。（地域ウェブの記者）", "about_acquisition": false}
+{"step": 17, "kind": "direct_rejected", "from_id": "BZ01", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 17, "kind": "publication", "by": "MD01", "headline": "来月開催される事業者向け意見交換会を前に、本日は不動産仲介事務所に多くの関係者が", "body": "来月開催される事業者向け意見交換会を前に、本日は不動産仲介事務所に多くの関係者が集まり、遊休資産や空き家問題、そしてスペースポート構想との連携について活発な意見交換が行われた。湾岸大通りの店さんの建物の名義問題や岬道の持ち主さんの土地など、具体的な活用が進んでいない案件への課題が提起される一方、スペースポート構想が街の活性化に繋がる可能性への期待も寄せられた。来月の意見交換会が、これらの課題解決に向けた具体的な一歩となることが期待される。", "about_acquisition": false}
+{"step": 17, "kind": "publication", "by": "MD02", "headline": "来月開催される事業者向け意見交換会に向けて、街の遊休資産活用とスペースポート構想", "body": "来月開催される事業者向け意見交換会に向けて、街の遊休資産活用とスペースポート構想の連携が注目されています。地元不動産仲介の事務所では、二代目の仲介さんを中心に、多くの関係者が集まり、活発な意見交換が行われました。駅前通りの持ち主さんからの相続情報や、船着場裏の古家所有者からの記事化依頼など、具体的な案件についても言及がありました。仲介業者の視点からは、遊休資産の活用が進まない背景には、名義問題や後継者不足などが複雑に絡み合っていることが示唆されました。今後、これらの遊休資産がどのように活用され、スペースポート構想と連携していくのか、注目が集まります。", "about_acquisition": false}
+{"step": 18, "kind": "lease", "acq_id": "ACQ24", "parcel_id": "P12", "lessor": "HH11", "lessee": "AQ01", "under_name": "C社", "old_name": "波止場通りの持ち主さん"}
+{"step": 18, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 18, "kind": "publication", "by": "MD01", "headline": "皆さんのところでは、商店街の空き物件や、来月開かれる意見交換会について、何か具体", "body": "皆さんのところでは、商店街の空き物件や、来月開かれる意見交換会について、何か具体的な話は出ていますか？例えば、どのような活用法が考えられるか、あるいは、そもそも活用すること自体に前向きなのか、といった皆さんの率直なご意見を伺いたいと思いまして。スペースポート構想との連携という観点からも、何かお考えがあればぜひお聞かせください。特に、遊休資産の活用は、地域経済の活性化や新しいビジネスチャンスに繋がる可能性を秘めています。市役所の担当者の方々にも、こうした市民の声を集め、今後の政策に活かしていただければ幸いです。", "about_acquisition": false}
+{"step": 18, "kind": "publication", "by": "MD02", "headline": "東団地の持ち主さんが遊休資産活用の相談窓口設置を進めているとの情報が入りました。", "body": "東団地の持ち主さんが遊休資産活用の相談窓口設置を進めているとの情報が入りました。スペースポート構想との連携も視野に入れており、今後の具体的な進捗が注目されます。二代目の仲介さんと駅前の仲介さんによると、窓口設置の準備は進んでおり、スペースポート構想との連携による新たな活用法が期待されているとのことです。詳細については、今後も取材を続けてまいります。", "about_acquisition": false}
+{"step": 19, "kind": "script_blocked", "acq_id": "ACQ25", "parcel_id": "P14", "reason": "refusal"}
+{"step": 19, "kind": "transfer", "acq_id": "ACQ26", "parcel_id": "P22", "seller": "HH05", "buyer": "AQ01", "under_name": "B社", "old_name": "駅裏の大家さん"}
+{"step": 19, "kind": "direct_rejected", "from_id": "BZ01", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 19, "kind": "direct_rejected", "from_id": "MD02", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 19, "kind": "publication", "by": "MD01", "headline": "来月、市役所で空き家活用に関する相談窓口と意見交換会が開催されます。スペースポー", "body": "来月、市役所で空き家活用に関する相談窓口と意見交換会が開催されます。スペースポート構想との連携についても、市が積極的に取り組む姿勢を示していました。遊休資産の活用に関心のある方には、有益な情報かと思います。", "about_acquisition": false}
+{"step": 19, "kind": "direct_rejected", "from_id": "MD02", "to": "HH07", "reason": "quota_exhausted"}
+{"step": 19, "kind": "publication", "by": "MD02", "headline": "町内会の集まりで、遊休資産の活用とスペースポート構想の連携について活発な意見交換", "body": "町内会の集まりで、遊休資産の活用とスペースポート構想の連携について活発な意見交換が行われました。特に東団地周辺の活用について、具体的な相談の動きが出てきています。来月には市役所に相談窓口が設置される予定で、街の活性化への期待が高まっています。", "about_acquisition": false}
+{"step": 20, "kind": "lease", "acq_id": "ACQ27", "parcel_id": "P27", "lessor": "HH10", "lessee": "AQ01", "under_name": "C社", "old_name": "魚市場前の持ち主さん"}
+{"step": 20, "kind": "direct_rejected", "from_id": "HH09", "to": "HH01", "reason": "quota_exhausted"}
+{"step": 20, "kind": "publication", "by": "MD01", "headline": "来月開催される空き家活用とスペースポート構想の連携イベントについて、市役所のまち", "body": "来月開催される空き家活用とスペースポート構想の連携イベントについて、市役所のまちづくり担当さんと観光産業担当さんが詳細を詰めている。具体的な連携内容や参加者へのメリットについて、現在調整中とのこと。イベントは遊休資産の活用とスペースポート構想を具体的に結びつける第一歩となる見込みで、事業者や地域住民からの意見交換の場が設けられる予定。続報が待たれる。", "about_acquisition": false}
+{"step": 21, "kind": "script_blocked", "acq_id": "ACQ28", "parcel_id": "P03", "reason": "refusal"}
+{"step": 21, "kind": "transfer", "acq_id": "ACQ29", "parcel_id": "P06", "seller": "HH05", "buyer": "AQ01", "under_name": "C社", "old_name": "駅裏の大家さん"}
+{"step": 21, "kind": "direct_rejected", "from_id": "HH02", "to": "MD02", "reason": "quota_exhausted"}
+{"step": 21, "kind": "direct_rejected", "from_id": "HH02", "to": "MD02", "reason": "quota_exhausted"}
+{"step": 21, "kind": "publication", "by": "MD01", "headline": "来月開催される「空き家活用とスペースポート構想の連携イベント」について、市役所担", "body": "来月開催される「空き家活用とスペースポート構想の連携イベント」について、市役所担当者への取材を実施。スペースポート構想と市内遊休資産の活用がどのように結びつくのか、具体的な計画や期待される地域活性化のビジョンについて、詳細な情報を得る予定。地域ウェブの記者とも情報交換を行い、多角的な視点での報道を目指す。", "about_acquisition": false}
+{"step": 21, "kind": "publication", "by": "MD02", "headline": "来月開催される「空き家活用とスペースポート構想の連携イベント」について、市役所の", "body": "来月開催される「空き家活用とスペースポート構想の連携イベント」について、市役所のまちづくり担当者と観光産業担当者から詳細な話を聞くことができた。イベントでは、スペースポート構想と連携した具体的な空き家活用プランの提案や、住民参加型のアイデアソンが予定されている。特に、岬道の土地活用や湾岸大通りの商店街活性化といった具体的な事例に触れ、地域経済の活性化と人口減少・高齢化対策への期待が語られた。イベントを通じて、遊休資産の新たな価値創出と、街全体の魅力向上が目指される。", "about_acquisition": false}
+{"step": 22, "kind": "refusal_set", "by": "HH10", "parcel_id": "P11"}
+{"step": 22, "kind": "refusal_set", "by": "HH10", "parcel_id": "P27"}
+{"step": 22, "kind": "refusal_set", "by": "HH15", "parcel_id": "P16"}
+{"step": 22, "kind": "refusal_set", "by": "HH15", "parcel_id": "P32"}
+{"step": 22, "kind": "publication", "by": "MD01", "headline": "来月開催される「空き家活用とスペースポート構想の連携イベント」に向けて、本日の町", "body": "来月開催される「空き家活用とスペースポート構想の連携イベント」に向けて、本日の町内会寄り合いでは、参加者から様々な意見が交わされた。特に駅裏の空き家活用については、短期滞在施設や地域交流スペースとしての活用案が示唆された。また、岬道の土地活用や湾岸大通りの店さんの名義問題といった個別の課題も浮上しており、これらがどのようにイベントで議論され、街の活性化に繋がるかが注目される。関係者間の情報交換が活発に行われ、今後の街づくりへの期待が高まった。", "about_acquisition": false}
+{"step": 22, "kind": "publication", "by": "MD02", "headline": "来月開催される意見交換会では、船着場裏の持ち主さんが岬道の土地活用と喫茶店を情報", "body": "来月開催される意見交換会では、船着場裏の持ち主さんが岬道の土地活用と喫茶店を情報発信拠点とする提案を行う予定です。この提案は、スペースポート構想とも連携し、地域活性化の大きな起爆剤となる可能性があります。市役所の担当者もこの動きを後押ししており、具体的な活用事例として駅裏の空き家を短期滞在施設や交流スペースとして活用する案も浮上しています。街の賑わい創出に向けた新たな動きに注目が集まります。", "about_acquisition": false}
+{"step": 23, "kind": "script_blocked", "acq_id": "ACQ30", "parcel_id": "P30", "reason": "refusal"}
+{"step": 23, "kind": "direct_rejected", "from_id": "MD02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 23, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR02", "reason": "quota_exhausted"}
+{"step": 23, "kind": "direct_rejected", "from_id": "MD02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 23, "kind": "direct_rejected", "from_id": "MD01", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 23, "kind": "publication", "by": "MD01", "headline": "来月開催される岬道の土地活用イベントについて、市役所のまちづくり担当者から詳細な", "body": "来月開催される岬道の土地活用イベントについて、市役所のまちづくり担当者から詳細な情報を得た。イベントでは、岬道の土地活用とスペースポート構想の連携が具体的に議論される見込みである。また、駅裏の空き家活用についても、まちづくり担当者との情報交換を通じて、今後の取材の糸口が見つかった。来月のイベントと並行して、駅裏の空き家活用についても深掘りしていく予定だ。", "about_acquisition": false}
+{"step": 23, "kind": "direct_rejected", "from_id": "MD02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 23, "kind": "publication", "by": "MD02", "headline": "岬道の土地活用と情報発信拠点化の動きについて、船着場裏の持ち主さんが来月、意見交", "body": "岬道の土地活用と情報発信拠点化の動きについて、船着場裏の持ち主さんが来月、意見交換会を開催する予定です。この会では、岬道のポテンシャルを多くの人に知ってもらうため、喫茶店を情報発信のハブとする構想が語られる見込みです。スペースポート構想との連携も視野に入れ、街の活性化に繋がる具体的な議論が期待されます。地域ウェブでは、この動きを積極的に取材していく予定です。", "about_acquisition": false}
+{"step": 24, "kind": "script_blocked", "acq_id": "ACQ31", "parcel_id": "P47", "reason": "refusal"}
+{"step": 24, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 24, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 24, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 24, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 24, "kind": "publication", "by": "MD01", "headline": "来月開催される岬道での土地活用イベントでは、スペースポート構想との連携が大きなテ", "body": "来月開催される岬道での土地活用イベントでは、スペースポート構想との連携が大きなテーマとなる見込みだ。駅裏の空き家活用への波及効果や、湾岸大通りの大家さんとの名義問題など、地域経済の活性化に繋がる様々な議論が期待される。市役所の観光産業担当者は、駅裏の空き家活用について、体験型コンテンツ導入や移住促進支援など、観光促進の観点からの支援を表明しており、今後の具体的な取り組みに注目が集まる。イベント当日の議論や関係者の動向を注視し、続報をお伝えしていく。", "about_acquisition": false}
+{"step": 24, "kind": "publication", "by": "MD02", "headline": "来月開催される岬道での土地活用イベントについて、スペースポート構想との連携を中心", "body": "来月開催される岬道での土地活用イベントについて、スペースポート構想との連携を中心に取材しました。特に湾岸大通りの大家さんとの連携の進捗と、商店街の活性化策との関連性に注目しています。市役所のまちづくり担当者からは、観光促進の観点から支援策を検討しているとの話がありました。イベント当日は、関係者間の意見交換が活発に行われることが期待されます。", "about_acquisition": false}
+{"step": 24, "kind": "direct_rejected", "from_id": "MU01", "to": "MU02", "reason": "quota_exhausted"}
+{"step": 25, "kind": "lease", "acq_id": "ACQ32", "parcel_id": "P21", "lessor": "HH04", "lessee": "AQ01", "under_name": "D社", "old_name": "駅前通りの持ち主さん"}
+{"step": 25, "kind": "direct_rejected", "from_id": "HH16", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "direct_rejected", "from_id": "HH16", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "direct_rejected", "from_id": "HH16", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "direct_rejected", "from_id": "BZ04", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "direct_rejected", "from_id": "HH16", "to": "MD01", "reason": "quota_exhausted"}
+{"step": 25, "kind": "publication", "by": "MD01", "headline": "岬道の土地活用イベントでは、スペースポート構想との連携や、湾岸大通りの名義問題、", "body": "岬道の土地活用イベントでは、スペースポート構想との連携や、湾岸大通りの名義問題、駅裏の空き家問題など、街の活性化に繋がるテーマが取り上げられる。イベントの企画者や関係者からは、これらの課題解決に向けた具体的な議論やアイデアが提案される見込み。市役所の担当者も、イベントを通じて街の将来像を描き、具体的なアクションに繋がることを期待している。イベントは、地域住民が街の未来について共に考え、行動する契機となるだろう。", "about_acquisition": false}
+{"step": 25, "kind": "publication", "by": "MD02", "headline": "岬道での土地活用イベント開催迫る。船着場裏の持ち主さんより、喫茶店を情報発信拠点", "body": "岬道での土地活用イベント開催迫る。船着場裏の持ち主さんより、喫茶店を情報発信拠点とした活用提案あり。市役所まちづくり担当者へ協力依頼と取材の打診を進める。", "about_acquisition": false}
+{"step": 26, "kind": "script_blocked", "acq_id": "ACQ33", "parcel_id": "P31", "reason": "refusal"}
+{"step": 26, "kind": "publication", "by": "MD01", "headline": "来月開催される岬道でのイベントについて、湾岸大通りの空き地活用やスペースポート構", "body": "来月開催される岬道でのイベントについて、湾岸大通りの空き地活用やスペースポート構想との連携をテーマに、関係者が集まり議論しました。湾岸大通りの大家さんの懸念に対し、仲介業者や市役所担当者から具体的な活用案や連携の可能性が示唆されました。また、来月のS4会場として地区公民館での開催が提案され、関係者の意見交換が行われました。イベント成功と地域活性化に向けた期待が高まっています。", "about_acquisition": false}
+{"step": 27, "kind": "script_blocked", "acq_id": "ACQ34", "parcel_id": "P32", "reason": "refusal"}
+{"step": 27, "kind": "direct_rejected", "from_id": "HH12", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 27, "kind": "direct_rejected", "from_id": "HH12", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 27, "kind": "direct_rejected", "from_id": "HH12", "to": "BZ01", "reason": "quota_exhausted"}
+{"step": 27, "kind": "publication", "by": "MD01", "headline": "湾岸大通りの空き地活用とスペースポート構想の連携について、市は将来的な可能性とし", "body": "湾岸大通りの空き地活用とスペースポート構想の連携について、市は将来的な可能性として検討を進めている段階であることが、観光産業担当者への取材で明らかになった。来月開催される岬道のイベントでの活用案も挙がっており、湾岸大通りの大家さんの名義問題の進展が注目される。関係者は、この空き地活用が街の活性化に繋がることに期待を寄せている。記者としては、具体的な計画の進展と、地域住民の意向を注視していく必要がある。", "about_acquisition": false}
+{"step": 27, "kind": "publication", "by": "MD02", "headline": "来月開催される岬道での土地活用イベントについて、取材を進めたいと考えております。", "body": "来月開催される岬道での土地活用イベントについて、取材を進めたいと考えております。特に、湾岸大通りの空き地活用とスペースポート構想の連携に注目しており、関係者への取材を通じて、この街の将来像を多角的に描きたいと考えています。また、船着場裏の持ち主さんへの取材依頼についても、関係者を集めてお話を聞ける機会を設け、イベントへの理解を深めるとともに、街の活性化に繋がるような記事を作成できるよう努めます。\n\n（298文字）", "about_acquisition": false}
+{"step": 28, "kind": "script_blocked", "acq_id": "ACQ35", "parcel_id": "P24", "reason": "refusal"}
+{"step": 28, "kind": "direct_rejected", "from_id": "MD02", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 28, "kind": "direct_rejected", "from_id": "BZ02", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 28, "kind": "direct_rejected", "from_id": "BZ02", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 28, "kind": "direct_rejected", "from_id": "BZ02", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 28, "kind": "direct_rejected", "from_id": "BZ03", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 28, "kind": "publication", "by": "MD01", "headline": "岬道のイベントと湾岸大通りの空き地活用、スペースポート構想との連携について、関係", "body": "岬道のイベントと湾岸大通りの空き地活用、スペースポート構想との連携について、関係者間の意見交換が活発に行われた。湾岸大通りの大家さんは、空き地の活用についてスペースポート構想との連携に前向きな姿勢を示し、更なる詳細な話し合いを求めている。市役所のまちづくり担当者は、イベントでのアピールに役立つデータ提供の可能性について言及しており、岬道の持ち主は具体的なデータ提供を求めている。これらの動きは、地域活性化に向けた具体的な進展の兆しと言える。", "about_acquisition": false}
+{"step": 28, "kind": "publication", "by": "MD02", "headline": "岬道のイベントと湾岸大通りの空き地活用、スペースポート構想の連携について、地域関", "body": "岬道のイベントと湾岸大通りの空き地活用、スペースポート構想の連携について、地域関係者による情報交換の場を設けることが提案された。この連携は、地域活性化と将来的な発展に繋がる可能性を秘めており、市役所のまちづくり担当者にも協力を仰ぐ方針である。今後、具体的な計画の策定と関係者間の連携強化が期待される。", "about_acquisition": false}
+{"step": 29, "kind": "script_blocked", "acq_id": "ACQ36", "parcel_id": "P16", "reason": "refusal"}
+{"step": 29, "kind": "publication", "by": "MD01", "headline": "市役所のまちづくり担当者と岬道の持ち主の間で、スペースポート構想と湾岸大通りの空", "body": "市役所のまちづくり担当者と岬道の持ち主の間で、スペースポート構想と湾岸大通りの空き地活用に関するデータ提供のやり取りが進んでいる。担当者は岬道のイベントでのデータ提供を検討しているが、岬道の持ち主が具体的にどのようなデータに関心があるのか、市役所が提供できる範囲はどの程度か、詳細な確認が必要である。湾岸大通りの大家、浜町の旅館、潮見横丁の店などもこの連携に前向きであり、今後の進展が注目される。", "about_acquisition": false}
+{"step": 29, "kind": "publication", "by": "MD02", "headline": "岬道イベントと湾岸大通りの空き地活用、スペースポート構想との連携について、不動産", "body": "岬道イベントと湾岸大通りの空き地活用、スペースポート構想との連携について、不動産仲介事務所で関係者が集まり意見交換が行われました。船着場裏の持ち主さんが中心となり、湾岸大通りの大家さんの意向や市役所の動き、岬道の持ち主へのデータ提供の件などが話し合われました。街全体の活性化に向け、具体的な連携策の模索が始まりました。", "about_acquisition": false}
+{"step": 30, "kind": "script_blocked", "acq_id": "ACQ37", "parcel_id": "P20", "reason": "refusal"}
+{"step": 30, "kind": "direct_rejected", "from_id": "BZ04", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 30, "kind": "direct_rejected", "from_id": "BZ04", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 30, "kind": "direct_rejected", "from_id": "BZ04", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 30, "kind": "direct_rejected", "from_id": "MD01", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 30, "kind": "direct_rejected", "from_id": "BZ04", "to": "HH03", "reason": "quota_exhausted"}
+{"step": 30, "kind": "refusal_set", "by": "HH11", "parcel_id": "P12"}
+{"step": 30, "kind": "refusal_set", "by": "HH11", "parcel_id": "P28"}
+{"step": 30, "kind": "direct_rejected", "from_id": "MD01", "to": "MU01", "reason": "quota_exhausted"}
+{"step": 30, "kind": "publication", "by": "MD01", "headline": "湾岸大通りの空き地活用とスペースポート構想の連携について、関係者間の情報交換が進", "body": "湾岸大通りの空き地活用とスペースポート構想の連携について、関係者間の情報交換が進んでいる。市役所のまちづくり担当者は、岬道の持ち主からのデータ提供依頼に対し、提供可能な範囲とイベントで提示したい具体的なデータを整理中である。浜町の旅館、潮見横丁の店、湾岸大通りの大家、二代目の仲介などもこの連携に強い関心を示しており、具体的な事業化に向けた動きが期待される。今後、関係者間の情報共有と連携がさらに進むことで、A市の新たな発展に繋がる可能性が高い。", "about_acquisition": false}
+{"step": 30, "kind": "publication", "by": "MD02", "headline": "岬道のイベントと湾岸大通りの空き地活用が、スペースポート構想と連携し、A市の新た", "body": "岬道のイベントと湾岸大通りの空き地活用が、スペースポート構想と連携し、A市の新たな発展に繋がる可能性について、市役所の担当者や関係者の意見をまとめた。船着場裏の持ち主さんからの連携提案が、具体的な動き出しのきっかけとなりそうだ。市役所は岬道の持ち主さんへのデータ提供を進めており、関係者間の情報共有が鍵となる。今後、湾岸大通りの大家さんや駅前の仲介さんとの連携も重要になるだろう。", "about_acquisition": false}
+{"step": 31, "kind": "script_blocked", "acq_id": "ACQ38", "parcel_id": "P08", "reason": "refusal"}
+{"step": 31, "kind": "script_blocked", "acq_id": "ACQ39", "parcel_id": "P40", "reason": "refusal"}
+{"step": 31, "kind": "publication", "by": "MD01", "headline": "湾岸大通りの空き地活用とスペースポート構想の連携に向け、地域住民や事業者の間で具", "body": "湾岸大通りの空き地活用とスペースポート構想の連携に向け、地域住民や事業者の間で具体的な議論が深まった。特に、岬道の持ち主が求めるデータ提供が、この連携を進める上での鍵となることが示唆された。市役所のまちづくり担当者には、岬道へのデータ提供の迅速な対応が求められている。この連携が実現すれば、街の活性化に大きく寄与する可能性がある。", "about_acquisition": false}
+{"step": 31, "kind": "publication", "by": "MD02", "headline": "湾岸大通りの空き地活用とスペースポート構想の連携について、町内会で活発な議論が行", "body": "湾岸大通りの空き地活用とスペースポート構想の連携について、町内会で活発な議論が行われた。岬道の持ち主さんが求めるデータ提供の進捗について、市役所のまちづくり担当者から具体的な説明がなされ、船着場裏の持ち主さんの提案との関連性も示唆された。関係者間の情報共有が進み、今後の街の発展に向けた期待が高まった。特に、スペースポート構想との連携による新たな賑わいの創出が焦点となった。", "about_acquisition": false}
+{"step": 32, "kind": "script_blocked", "acq_id": "ACQ40", "parcel_id": "P29", "reason": "refusal"}
+{"step": 32, "kind": "script_blocked", "acq_id": "ACQ41", "parcel_id": "P39", "reason": "refusal"}
+{"step": 32, "kind": "direct_rejected", "from_id": "HH13", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 32, "kind": "publication", "by": "MD01", "headline": "市役所の担当者からは、岬道の持ち主さんへのデータ提供について週明けに進捗を報告で", "body": "市役所の担当者からは、岬道の持ち主さんへのデータ提供について週明けに進捗を報告できるとの説明があったが、東団地の持ち主さんには心当たりがないという。情報伝達に齟齬があるのか、あるいは意図的な情報操作の可能性も。湾岸大通りの空き地活用とスペースポート構想の連携は、市民の関心も高く、正確な情報開示が求められる。", "about_acquisition": false}
+{"step": 32, "kind": "publication", "by": "MD02", "headline": "船着場裏の持ち主さんが提案する岬道のイベント活用と湾岸大通りの空き地活用、そして", "body": "船着場裏の持ち主さんが提案する岬道のイベント活用と湾岸大通りの空き地活用、そしてスペースポート構想との連携について、詳細が明らかになってきました。岬道の持ち主さんへのデータ提供はこれからですが、イベントの成功が湾岸大通りの活用にも繋がるという相乗効果が期待されています。湾岸大通りの大家さんや駅前の仲介さんとも具体的な連携が相談される予定です。街全体の活性化に繋がる動きとして、今後の展開に注目が集まります。", "about_acquisition": false}
+{"step": 33, "kind": "lease", "acq_id": "ACQ42", "parcel_id": "P23", "lessor": "HH06", "lessee": "AQ01", "under_name": "C社", "old_name": "線路沿いの持ち主さん"}
+{"step": 33, "kind": "direct_rejected", "from_id": "HH09", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 33, "kind": "direct_rejected", "from_id": "HH09", "to": "HH08", "reason": "quota_exhausted"}
+{"step": 33, "kind": "publication", "by": "MD01", "headline": "湾岸大通りの空き地と岬道の活用、そしてスペースポート構想との連携について、市役所", "body": "湾岸大通りの空き地と岬道の活用、そしてスペースポート構想との連携について、市役所のまちづくり担当者と観光産業担当者から具体的な計画や見通し、観光振興策のデータ提供に向けた準備が進んでいることが明らかになった。これらの連携は、新たな観光ルートや体験コンテンツの開発、国内外からの注目を集める可能性を秘めている。詳細については、来月以降、さらなる情報開示が期待される。", "about_acquisition": false}
+{"step": 33, "kind": "publication", "by": "MD02", "headline": "今月S4の地域イベント会場で、船着場裏の持ち主さんと岬道の持ち主さんの連携、湾岸", "body": "今月S4の地域イベント会場で、船着場裏の持ち主さんと岬道の持ち主さんの連携、湾岸大通りの空き地活用について話を聞いた。船着場裏の持ち主さんは、湾岸大通りの空き地活用に繋がる具体的な連携方法をさらに詳しく説明する意向を示した。また、駅裏の事業所さんが提案する湾岸大通りの活用案や、スペースポート構想との連携についても、関係者間で情報共有が進んでいる様子がうかがえた。街の変化を促進する上で、これらの動きがどのように影響していくか注目したい。", "about_acquisition": false}
+{"step": 34, "kind": "lease", "acq_id": "ACQ43", "parcel_id": "P07", "lessor": "HH06", "lessee": "AQ01", "under_name": "D社", "old_name": "線路沿いの持ち主さん"}
+{"step": 34, "kind": "publication", "by": "MD01", "headline": "最終月を迎えるにあたり、本日の町内会で得られた情報をもとに、岬道と湾岸大通りの活", "body": "最終月を迎えるにあたり、本日の町内会で得られた情報をもとに、岬道と湾岸大通りの活用、そしてスペースポート構想との連携が、A市の未来にどのような可能性をもたらすのかをまとめた記事を掲載する。市役所担当者からは、具体的なデータ提供の準備が進んでいること、また連携強化の意向が示された。これらの情報を基に、街の活性化に向けた具体的な展望を報じる。", "about_acquisition": false}
+{"step": 34, "kind": "publication", "by": "MD02", "headline": "湾岸大通りの空き地とスペースポート構想の連携について、各方面から関心が寄せられて", "body": "湾岸大通りの空き地とスペースポート構想の連携について、各方面から関心が寄せられている。船着場裏の持ち主さんによると、岬道の空き地活用とスペースポート構想の連携について、灯台下の持ち主さんから詳細を尋ねたいという連絡があったという。この動きが湾岸大通りの空き地活用とどう関連するのか、今後の情報交換が注目される。街の活性化に向けた具体的な取り組みが進むか、引き続き取材していく。", "about_acquisition": false}
+{"step": 35, "kind": "script_blocked", "acq_id": "ACQ44", "parcel_id": "P15", "reason": "refusal"}
+{"step": 35, "kind": "direct_rejected", "from_id": "HH09", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 35, "kind": "direct_rejected", "from_id": "MU02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 35, "kind": "direct_rejected", "from_id": "HH09", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 35, "kind": "direct_rejected", "from_id": "MU02", "to": "BR01", "reason": "quota_exhausted"}
+{"step": 35, "kind": "publication", "by": "MD01", "headline": "最終月となる来月、スペースポート構想と連動した岬道・湾岸大通りの空き地活用につい", "body": "最終月となる来月、スペースポート構想と連動した岬道・湾岸大通りの空き地活用について、市役所担当者と地元関係者から得られた情報を基に、街の将来像を展望する記事を執筆する。具体的なデータや計画のタイムライン、そしてそれが地域経済や住民生活に与える影響について、多角的に報じる予定だ。これにより、市民の関心を高め、今後の街づくりへの参加を促したい。", "about_acquisition": false}
+{"step": 35, "kind": "publication", "by": "MD02", "headline": "船着場裏の持ち主さんと灯台下の持ち主さんの連携を中心に、スペースポート構想と湾岸", "body": "船着場裏の持ち主さんと灯台下の持ち主さんの連携を中心に、スペースポート構想と湾岸大通りの空き地活用、岬道について、街の未来像を描く記事を来月掲載します。来月の説明会についても、参加者への影響や、共有される情報について詳しく報じます。", "about_acquisition": false}
+{"step": 36, "kind": "script_blocked", "acq_id": "ACQ45", "parcel_id": "P02", "reason": "refusal"}
+{"step": 36, "kind": "direct_rejected", "from_id": "HH01", "to": "MD02", "reason": "quota_exhausted"}
+{"step": 36, "kind": "direct_rejected", "from_id": "HH01", "to": "MD02", "reason": "quota_exhausted"}
+{"step": 36, "kind": "publication", "by": "MD01", "headline": "最終月となり、街の未来を左右するスペースポート構想と湾岸大通りの開発計画について", "body": "最終月となり、街の未来を左右するスペースポート構想と湾岸大通りの開発計画について、関係者から詳細な情報を集めた。市役所担当者によると、来月の説明会で具体的な計画が示される予定。岬道・湾岸通りの開発は、地域経済への波及効果が期待されており、時期も概ね固まっているとのこと。東団地の持ち主からの連絡についても、開発計画との関連性が示唆された。詳細については、来月の説明会での発表を待つことになる。", "about_acquisition": false}
+{"step": 36, "kind": "publication", "by": "MD02", "headline": "最終月を迎え、これまでの取材を総括し、地域ウェブサイトにて記事を公開します。スペ", "body": "最終月を迎え、これまでの取材を総括し、地域ウェブサイトにて記事を公開します。スペースポート構想、湾岸大通りの空き地活用、そして街全体の活性化に向けた様々な動きを、関係者の皆様の声と共にまとめました。街の未来を考える上での一助となれば幸いです。", "about_acquisition": false}

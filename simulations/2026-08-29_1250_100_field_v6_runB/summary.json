@@ -1,0 +1,659 @@
+{
+  "run_name": "field_v6_runB",
+  "steps": 36,
+  "agents": {
+    "acquirer": 1,
+    "broker": 2,
+    "business": 4,
+    "household": 16,
+    "media": 2,
+    "municipality": 2
+  },
+  "parcels": 48,
+  "parcels_tradable": 46,
+  "model": "gemini-2.5-flash-lite",
+  "provider": "google",
+  "elapsed_sec": 1345.2,
+  "acquirer_model": "gemini-2.5-flash-lite",
+  "invalid_actions": 6,
+  "truncated_responses": 0,
+  "max_token_finishes": 5,
+  "usage": {
+    "calls": 5550,
+    "input_tokens": 13539886,
+    "cached_tokens": 3320553,
+    "output_tokens": 1427025,
+    "errors": 0,
+    "by_tag": {
+      "agent:household:plan": {
+        "calls": 576,
+        "input": 994817,
+        "cached": 291463,
+        "output": 124272
+      },
+      "agent:business:plan": {
+        "calls": 144,
+        "input": 225603,
+        "cached": 60039,
+        "output": 30065
+      },
+      "agent:broker:plan": {
+        "calls": 72,
+        "input": 112779,
+        "cached": 27618,
+        "output": 17940
+      },
+      "agent:municipality:plan": {
+        "calls": 72,
+        "input": 115970,
+        "cached": 50262,
+        "output": 18889
+      },
+      "agent:media:plan": {
+        "calls": 72,
+        "input": 116212,
+        "cached": 48480,
+        "output": 18000
+      },
+      "agent:business:S1r1": {
+        "calls": 96,
+        "input": 122731,
+        "cached": 57528,
+        "output": 22411
+      },
+      "agent:broker:S1r1": {
+        "calls": 47,
+        "input": 60456,
+        "cached": 20144,
+        "output": 12151
+      },
+      "agent:household:S1r1": {
+        "calls": 392,
+        "input": 534422,
+        "cached": 153610,
+        "output": 82652
+      },
+      "agent:media:S1r1": {
+        "calls": 54,
+        "input": 72534,
+        "cached": 32704,
+        "output": 12387
+      },
+      "agent:municipality:S1r1": {
+        "calls": 57,
+        "input": 75112,
+        "cached": 32974,
+        "output": 14964
+      },
+      "agent:media:S1r2": {
+        "calls": 54,
+        "input": 85777,
+        "cached": 33951,
+        "output": 13675
+      },
+      "agent:business:S1r2": {
+        "calls": 96,
+        "input": 153972,
+        "cached": 61592,
+        "output": 23514
+      },
+      "agent:broker:S1r2": {
+        "calls": 47,
+        "input": 74129,
+        "cached": 23570,
+        "output": 12251
+      },
+      "agent:household:S1r2": {
+        "calls": 392,
+        "input": 630383,
+        "cached": 160139,
+        "output": 86715
+      },
+      "agent:municipality:S1r2": {
+        "calls": 57,
+        "input": 82888,
+        "cached": 33497,
+        "output": 15805
+      },
+      "agent:media:S2r1": {
+        "calls": 37,
+        "input": 72820,
+        "cached": 26375,
+        "output": 8565
+      },
+      "agent:household:S2r1": {
+        "calls": 75,
+        "input": 154978,
+        "cached": 45437,
+        "output": 16024
+      },
+      "agent:broker:S2r1": {
+        "calls": 44,
+        "input": 79839,
+        "cached": 28359,
+        "output": 10828
+      },
+      "agent:municipality:S2r1": {
+        "calls": 54,
+        "input": 86021,
+        "cached": 36519,
+        "output": 14657
+      },
+      "agent:household:S2r2": {
+        "calls": 75,
+        "input": 168283,
+        "cached": 45642,
+        "output": 17099
+      },
+      "agent:media:S2r2": {
+        "calls": 37,
+        "input": 80077,
+        "cached": 25354,
+        "output": 9185
+      },
+      "agent:broker:S2r2": {
+        "calls": 44,
+        "input": 87011,
+        "cached": 31370,
+        "output": 11084
+      },
+      "agent:municipality:S2r2": {
+        "calls": 54,
+        "input": 97805,
+        "cached": 36547,
+        "output": 14660
+      },
+      "agent:household:S3r1": {
+        "calls": 316,
+        "input": 609448,
+        "cached": 152403,
+        "output": 69356
+      },
+      "agent:broker:S3r1": {
+        "calls": 49,
+        "input": 103665,
+        "cached": 23522,
+        "output": 12675
+      },
+      "agent:business:S3r1": {
+        "calls": 96,
+        "input": 190271,
+        "cached": 62017,
+        "output": 23577
+      },
+      "agent:household:S3r2": {
+        "calls": 316,
+        "input": 696581,
+        "cached": 163546,
+        "output": 76427
+      },
+      "agent:broker:S3r2": {
+        "calls": 49,
+        "input": 118438,
+        "cached": 23820,
+        "output": 14259
+      },
+      "agent:business:S3r2": {
+        "calls": 96,
+        "input": 218620,
+        "cached": 63902,
+        "output": 24163
+      },
+      "agent:household:S4r1": {
+        "calls": 544,
+        "input": 1247154,
+        "cached": 323945,
+        "output": 143117
+      },
+      "agent:business:S4r1": {
+        "calls": 138,
+        "input": 336304,
+        "cached": 86676,
+        "output": 37847
+      },
+      "agent:broker:S4r1": {
+        "calls": 72,
+        "input": 184655,
+        "cached": 47511,
+        "output": 21337
+      },
+      "agent:municipality:S4r1": {
+        "calls": 71,
+        "input": 170792,
+        "cached": 47986,
+        "output": 22516
+      },
+      "agent:media:S4r1": {
+        "calls": 66,
+        "input": 171604,
+        "cached": 53412,
+        "output": 22306
+      },
+      "agent:household:S4r2": {
+        "calls": 544,
+        "input": 2903391,
+        "cached": 453188,
+        "output": 173291
+      },
+      "agent:business:S4r2": {
+        "calls": 138,
+        "input": 740489,
+        "cached": 116623,
+        "output": 43291
+      },
+      "agent:broker:S4r2": {
+        "calls": 72,
+        "input": 395687,
+        "cached": 68106,
+        "output": 24659
+      },
+      "agent:municipality:S4r2": {
+        "calls": 71,
+        "input": 382523,
+        "cached": 64303,
+        "output": 27059
+      },
+      "agent:media:S4r2": {
+        "calls": 66,
+        "input": 369204,
+        "cached": 62127,
+        "output": 32397
+      },
+      "agent:media:S3r1": {
+        "calls": 37,
+        "input": 75489,
+        "cached": 27026,
+        "output": 9312
+      },
+      "agent:municipality:S3r1": {
+        "calls": 42,
+        "input": 82894,
+        "cached": 30678,
+        "output": 10764
+      },
+      "agent:media:S3r2": {
+        "calls": 37,
+        "input": 86063,
+        "cached": 26532,
+        "output": 10166
+      },
+      "agent:municipality:S3r2": {
+        "calls": 42,
+        "input": 91747,
+        "cached": 31565,
+        "output": 11171
+      },
+      "agent:business:S2r1": {
+        "calls": 20,
+        "input": 38467,
+        "cached": 13745,
+        "output": 4662
+      },
+      "agent:business:S2r2": {
+        "calls": 20,
+        "input": 41781,
+        "cached": 14746,
+        "output": 4880
+      }
+    }
+  },
+  "saving": {
+    "prompt_order": "legacy",
+    "agent_max_tokens": 2200,
+    "enable_cache": false,
+    "batch_kinds": [],
+    "cache_created": 0,
+    "cache_failed": 0,
+    "batch_fallback_calls": 0,
+    "batch_jobs": []
+  },
+  "kpi": {
+    "final_acquirer_share": 0.1522,
+    "final_hhi": 0.0728,
+    "final_acquirer_control_share": null,
+    "cognition_shift_final": null,
+    "cascade": {
+      "induced": 0,
+      "max_chain": 1
+    },
+    "final_effective_control_area_share": null,
+    "late_index": null,
+    "detection_lag": null,
+    "final_acquirer_area_share": null,
+    "business_survival": 1.0,
+    "resident_outflow": 0.0
+  },
+  "v6": {
+    "acquisitions_applied": 19,
+    "acquisitions_blocked": 26,
+    "blocked": [
+      {
+        "step": 3,
+        "acq_id": "ACQ05",
+        "parcel_id": "P25",
+        "parcel": "川向こうの古家",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 5,
+        "acq_id": "ACQ08",
+        "parcel_id": "P42",
+        "parcel": "団地下の家",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 6,
+        "acq_id": "ACQ10",
+        "parcel_id": "P44",
+        "parcel": "学園裏の空き地",
+        "kind": "sale",
+        "under_name": "A社",
+        "reason": "refusal"
+      },
+      {
+        "step": 9,
+        "acq_id": "ACQ13",
+        "parcel_id": "P35",
+        "parcel": "北山の家",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 10,
+        "acq_id": "ACQ14",
+        "parcel_id": "P10",
+        "parcel": "灯台下の店",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 11,
+        "acq_id": "ACQ16",
+        "parcel_id": "P26",
+        "parcel": "学園前の店",
+        "kind": "sale",
+        "under_name": "C社",
+        "reason": "refusal"
+      },
+      {
+        "step": 11,
+        "acq_id": "ACQ17",
+        "parcel_id": "P38",
+        "parcel": "丘の中腹の家",
+        "kind": "sale",
+        "under_name": "C社",
+        "reason": "refusal"
+      },
+      {
+        "step": 13,
+        "acq_id": "ACQ20",
+        "parcel_id": "P13",
+        "parcel": "本町通りの家",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 15,
+        "acq_id": "ACQ18",
+        "parcel_id": "P04",
+        "parcel": "湾岸大通りの店",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 15,
+        "acq_id": "ACQ22",
+        "parcel_id": "P19",
+        "parcel": "潮見坂の家",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 19,
+        "acq_id": "ACQ25",
+        "parcel_id": "P14",
+        "parcel": "一番街の店",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 19,
+        "acq_id": "ACQ26",
+        "parcel_id": "P22",
+        "parcel": "銀杏通りの家",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 21,
+        "acq_id": "ACQ28",
+        "parcel_id": "P03",
+        "parcel": "潮見横丁の店",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 21,
+        "acq_id": "ACQ29",
+        "parcel_id": "P06",
+        "parcel": "駅裏の事業所",
+        "kind": "sale",
+        "under_name": "C社",
+        "reason": "refusal"
+      },
+      {
+        "step": 23,
+        "acq_id": "ACQ30",
+        "parcel_id": "P30",
+        "parcel": "湯の町通りの店",
+        "kind": "sale",
+        "under_name": "C社",
+        "reason": "refusal"
+      },
+      {
+        "step": 24,
+        "acq_id": "ACQ31",
+        "parcel_id": "P47",
+        "parcel": "丘のはずれの空き地",
+        "kind": "sale",
+        "under_name": "A社",
+        "reason": "refusal"
+      },
+      {
+        "step": 26,
+        "acq_id": "ACQ33",
+        "parcel_id": "P31",
+        "parcel": "湯坂の古家",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 27,
+        "acq_id": "ACQ34",
+        "parcel_id": "P32",
+        "parcel": "見晴らし台の家",
+        "kind": "sale",
+        "under_name": "D社",
+        "reason": "refusal"
+      },
+      {
+        "step": 29,
+        "acq_id": "ACQ36",
+        "parcel_id": "P16",
+        "parcel": "宮の下の家",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 30,
+        "acq_id": "ACQ37",
+        "parcel_id": "P20",
+        "parcel": "湾岸の角の空き地",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 31,
+        "acq_id": "ACQ38",
+        "parcel_id": "P08",
+        "parcel": "東団地の家",
+        "kind": "sale",
+        "under_name": "A社",
+        "reason": "refusal"
+      },
+      {
+        "step": 31,
+        "acq_id": "ACQ39",
+        "parcel_id": "P40",
+        "parcel": "峠道の家",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      },
+      {
+        "step": 32,
+        "acq_id": "ACQ40",
+        "parcel_id": "P29",
+        "parcel": "湯坂の角の家",
+        "kind": "sale",
+        "under_name": "A社",
+        "reason": "refusal"
+      },
+      {
+        "step": 32,
+        "acq_id": "ACQ41",
+        "parcel_id": "P39",
+        "parcel": "石段下の家",
+        "kind": "sale",
+        "under_name": "C社",
+        "reason": "refusal"
+      },
+      {
+        "step": 35,
+        "acq_id": "ACQ44",
+        "parcel_id": "P15",
+        "parcel": "商店街はずれの店",
+        "kind": "sale",
+        "under_name": "C社",
+        "reason": "refusal"
+      },
+      {
+        "step": 36,
+        "acq_id": "ACQ45",
+        "parcel_id": "P02",
+        "parcel": "浜町の旅館",
+        "kind": "sale",
+        "under_name": "B社",
+        "reason": "refusal"
+      }
+    ],
+    "refusal_first_month": 1,
+    "refusal_agents": [
+      "HH01",
+      "HH02",
+      "HH03",
+      "HH04",
+      "HH05",
+      "HH06",
+      "HH07",
+      "HH08",
+      "HH09",
+      "HH10",
+      "HH11",
+      "HH12",
+      "HH13",
+      "HH14",
+      "HH15",
+      "MU01"
+    ],
+    "refusal_parcels_final": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "P18",
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "P23",
+      "P25",
+      "P26",
+      "P27",
+      "P28",
+      "P29",
+      "P30",
+      "P31",
+      "P32",
+      "P34",
+      "P35",
+      "P36",
+      "P37",
+      "P38",
+      "P39",
+      "P40",
+      "P42",
+      "P44",
+      "P45",
+      "P47",
+      "P48"
+    ],
+    "clear_count": 3,
+    "paper_first_month": 1,
+    "papers_total": 63,
+    "by_act": {
+      "回覧板に載せる": {
+        "count": 6,
+        "first_month": 4
+      },
+      "町内会の議題にする": {
+        "count": 34,
+        "first_month": 4
+      },
+      "役場へ申し入れる": {
+        "count": 0,
+        "first_month": null
+      },
+      "相談窓口を開く": {
+        "count": 10,
+        "first_month": 1
+      },
+      "説明会を開く": {
+        "count": 13,
+        "first_month": 6
+      },
+      "条例・届出の検討を始める": {
+        "count": 0,
+        "first_month": null
+      }
+    },
+    "measure_first_month": 1,
+    "action_rows": 1490
+  }
+}

@@ -45,6 +45,24 @@ LINK_WORDS = ("関係があ", "関係し", "関連", "繋がって", "つなが�
               "一つの会社", "ひとつの会社")
 HOLDER_NAMES = ("A社", "B社", "C社", "D社")
 
+# 人が読んで下した判定（`docs/audit_v6.md` が正本）。
+# 機械の候補（`noticed_linked_month`）は「結びつけの語」で並べ替えるだけなので、
+# 読むと外れている本がある（例：制度の質問・別の場所の取り違え）。
+# **画面と報告に出す「気づいた月」はこの表の値**であり、外した理由は監査に書いてある。
+# key = (世界, 本), value = 月（None＝36か月のあいだ一度も無かった）
+HUMAN_NOTICED = {
+    ("no_path", "A"): 6,
+    ("no_path", "B"): 4,
+    ("no_path", "C"): 9,     # 機械は m7 を出すが、読むと「コワーキングとの連携」＝別件
+    ("no_path", "D"): None,  # 候補5件はすべて制度・測量の質問。最後まで結びつけていない
+    ("no_path", "E"): 6,
+    ("no_path", "F"): 5,
+    ("path", "A"): None,     # 機械は m32 を出すが、読むと「A社とB社どちらが買ったのか」の取り違え
+    ("path", "B"): 3,
+    ("path", "C"): 12,       # 機械は m11（記事）を出すが、採るのは m12 の発話（明確に2名義の関連を問う）
+}
+
+
 
 def _linked(text: str) -> bool:
     names = [n for n in HOLDER_NAMES if n in text]
@@ -64,7 +82,7 @@ def _summary(run_dir):
         return json.load(f)
 
 
-def read_run(run_dir: str, label: str) -> dict:
+def read_run(run_dir: str, label: str, world_key: str = "") -> dict:
     """1本のランを4つの観測で読む（世界の版に関わらず同じ読み方）。"""
     summary = _summary(run_dir)
     n_steps = int(summary.get("steps") or 36)
@@ -137,6 +155,35 @@ def read_run(run_dir: str, label: str) -> dict:
         d["count"] += 1
         d["first"] = p["step"] if d["first"] is None else min(d["first"], p["step"])
 
+    # 行動の瞬間の原文（画面3で読む）。作文はしない＝走行が出した文をそのまま載せる。
+    #   紙 … その紙の本文（本人が書いた1行）
+    #   「当面売らない」… 選んだ人のその月の内心（自由文はこれしか無い＝enum の選択には本文が無い）
+    thoughts = _jsonl(os.path.join(run_dir, "thoughts_all.jsonl"))
+    samples = []
+    if papers:
+        p0 = min(papers, key=lambda r: (int(r["step"]), r.get("label", "")))
+        samples.append({"step": p0["step"], "head": f"第{p0['step']}月に「{p0['label']}」が出た",
+                        "who": p0.get("name", ""), "kind": "紙", "text": p0.get("text", "")})
+    if refusals:
+        r0 = min(refusals, key=lambda r: int(r["step"]))
+        th = [t for t in thoughts
+              if int(t.get("step", 0)) == int(r0["step"])
+              and t.get("from") == r0.get("agent_id")]
+        samples.append({"step": r0["step"],
+                        "head": (f"第{r0['step']}月に "
+                                 f"{r0.get('name') or r0.get('agent_id')} が"
+                                 "「当面売らない」を選んだ"),
+                        "who": r0.get("name", ""), "kind": "そのときの内心",
+                        "text": (th[-1]["text"] if th else "")})
+    muni = [p for p in papers if p.get("role") == "municipality"]
+    if muni:
+        m0 = min(muni, key=lambda r: int(r["step"]))
+        samples.append({"step": m0["step"],
+                        "head": f"第{m0['step']}月に役場が「{m0['act']}」を選んだ",
+                        "who": m0.get("name", ""), "kind": "役場からのお知らせ",
+                        "text": m0.get("text", "")})
+    acted["samples"] = samples
+
     # --- 4) 買えなかった件数 ------------------------------------------------
     blocked_by_month = collections.Counter(int(b["step"]) for b in blocked)
 
@@ -156,13 +203,22 @@ def read_run(run_dir: str, label: str) -> dict:
         "line": line,
         "parcels_final": line[-1]["parcels"] if line else 0,
         "final_share": share,
-        "noticed_month": noticed,
+        # **画面が読むのはこれ**＝人が読んで決めた「気づいた月」（null＝一度も無かった）
+        "noticed_month": HUMAN_NOTICED.get((world_key, label), noticed_linked),
+        # 参考：機械の候補（緩い網の初出／結びつけの語つきの初出）
+        "noticed_loose_month": noticed,
         "noticed_hits": hits,
         "noticed_hit_count": len(hits),
         # 採用する「気づいた月」＝結びつけの語つき（原文を必ず載せる）
         "noticed_linked_month": noticed_linked,
         "noticed_linked_first": linked[0] if linked else None,
         "noticed_linked_count": len(linked),
+        # **画面と報告に出すのはこれ**（人が読んで決めた月・監査 docs/audit_v6.md）
+        "noticed_human": HUMAN_NOTICED.get((world_key, label), noticed_linked),
+        "noticed_human_row": next(
+            (h for h in linked
+             if h["step"] == HUMAN_NOTICED.get((world_key, label), noticed_linked)),
+            None),
         "acted": acted,
         "blocked": len(blocked),
         "blocked_by_month": dict(sorted(blocked_by_month.items())),
@@ -198,9 +254,9 @@ def main() -> int:
 
     out = {"no_path": [], "path": []}
     for d in no_path:
-        out["no_path"].append(read_run(d, os.path.basename(d).split("_run")[-1]))
+        out["no_path"].append(read_run(d, os.path.basename(d).split("_run")[-1], "no_path"))
     for d in path:
-        out["path"].append(read_run(d, os.path.basename(d).split("_run")[-1]))
+        out["path"].append(read_run(d, os.path.basename(d).split("_run")[-1], "path"))
 
     dst = os.path.join(ROOT, args.out)
     with open(dst, "w", encoding="utf-8") as f:
@@ -209,7 +265,7 @@ def main() -> int:
     for key, title in (("no_path", "経路なしの世界"), ("path", "経路ありの世界")):
         print(f"\n== {title} ==")
         for r in out[key]:
-            print(f"  {r['label']}: 気づいた月 {r['noticed_linked_month']}"
+            print(f"  {r['label']}: 気づいた月 {r['noticed_human']}"
                   f"（緩い網の初出 {r['noticed_month']}）"
                   f" / 売らない {r['acted']['refusal_first']}"
                   f" / 紙 {r['acted']['paper_first']}"
