@@ -1,0 +1,920 @@
+{
+  "run": {
+    "run_dir": "2026-08-30_0111_104_v8c_reasons_chat_A",
+    "run_name": "v8c_reasons_chat_A",
+    "chat": true,
+    "seed": 85,
+    "months_run": 36,
+    "acquired_parcels": 0,
+    "sold_agents": 0,
+    "cost_usd": 0.4374
+  },
+  "reason_candidates": {
+    "listing": {
+      "written": 510,
+      "candidate_counts": {
+        "自分の事情": 140,
+        "X社の条件": 129,
+        "聞いた話": 45,
+        "どれにも当たらない": 221
+      },
+      "samples": {
+        "自分の事情": [
+          {
+            "month": 1,
+            "name": "灯台下の宿の主人",
+            "choice": "出さない",
+            "reason": "経営は順調で、すぐに手放すつもりはない。"
+          },
+          {
+            "month": 1,
+            "name": "宮の下の共同浴場の組合",
+            "choice": "出さない",
+            "reason": "現状維持を最優先する"
+          },
+          {
+            "month": 2,
+            "name": "駅前通りの持ち主さん",
+            "choice": "出さない",
+            "reason": "日々の生活を大切にしたいから"
+          },
+          {
+            "month": 2,
+            "name": "一番街の持ち主さん",
+            "choice": "出さない",
+            "reason": "まだ様子を見たい"
+          },
+          {
+            "month": 2,
+            "name": "浜町の旅館のご主人",
+            "choice": "出さない",
+            "reason": "家族との話し合いを優先するため"
+          },
+          {
+            "month": 2,
+            "name": "灯台下の宿の主人",
+            "choice": "出さない",
+            "reason": "経営は順調なので"
+          },
+          {
+            "month": 2,
+            "name": "宮の下の共同浴場の組合",
+            "choice": "出さない",
+            "reason": "現状維持を最優先する"
+          },
+          {
+            "month": 2,
+            "name": "船着場裏の不在地主",
+            "choice": "出さない",
+            "reason": "情報収集のため様子を見る"
+          }
+        ],
+        "X社の条件": [
+          {
+            "month": 1,
+            "name": "駅裏の持ち主さん",
+            "choice": "出す",
+            "reason": "X社からの交換の申し出があったため"
+          },
+          {
+            "month": 1,
+            "name": "波止場通りのご夫婦",
+            "choice": "出さない",
+            "reason": "相手の意図を確認してから"
+          },
+          {
+            "month": 1,
+            "name": "線路沿いの持ち主さん",
+            "choice": "出さない",
+            "reason": "交換の申し出について情報収集を優先"
+          },
+          {
+            "month": 1,
+            "name": "岬道の持ち主さん",
+            "choice": "出さない",
+            "reason": "交換の申し出があるので、今は売らない"
+          },
+          {
+            "month": 1,
+            "name": "学園西のご夫婦",
+            "choice": "出さない",
+            "reason": "交換条件が届いているため"
+          },
+          {
+            "month": 1,
+            "name": "駅前広場の食堂のご夫婦",
+            "choice": "出さない",
+            "reason": "交換の申し出を検討するため"
+          },
+          {
+            "month": 1,
+            "name": "湯の元前の店のご主人",
+            "choice": "出さない",
+            "reason": "交換条件の詳細を待つため"
+          },
+          {
+            "month": 1,
+            "name": "学園前の貸オフィスの支配人",
+            "choice": "出さない",
+            "reason": "交換の申し出であり、売却ではないため"
+          }
+        ],
+        "聞いた話": [
+          {
+            "month": 1,
+            "name": "線路沿いの持ち主さん",
+            "choice": "出さない",
+            "reason": "交換の申し出について情報収集を優先"
+          },
+          {
+            "month": 1,
+            "name": "駅裏北の駐車場の会社",
+            "choice": "出さない",
+            "reason": "情報収集のため"
+          },
+          {
+            "month": 1,
+            "name": "船着場裏の不在地主",
+            "choice": "出さない",
+            "reason": "情報収集のため"
+          },
+          {
+            "month": 2,
+            "name": "学園北の持ち主さん",
+            "choice": "出さない",
+            "reason": "情報収集を優先するため"
+          },
+          {
+            "month": 2,
+            "name": "一番街の持ち主さん",
+            "choice": "出さない",
+            "reason": "まだ様子を見たい"
+          },
+          {
+            "month": 2,
+            "name": "本町通りの持ち主さん",
+            "choice": "出さない",
+            "reason": "まだ情報収集を続けたいから"
+          },
+          {
+            "month": 2,
+            "name": "線路沿いの持ち主さん",
+            "choice": "出さない",
+            "reason": "情報収集と父への相談を優先するため"
+          },
+          {
+            "month": 2,
+            "name": "浜町の旅館のご主人",
+            "choice": "出さない",
+            "reason": "家族との話し合いを優先するため"
+          }
+        ],
+        "どれにも当たらない": [
+          {
+            "month": 1,
+            "name": "駅前通りの持ち主さん",
+            "choice": "出さない",
+            "reason": "現在の住まいに満足しているため"
+          },
+          {
+            "month": 1,
+            "name": "観音坂の持ち主さん",
+            "choice": "出す",
+            "reason": "土地の手入れが負担なので"
+          },
+          {
+            "month": 1,
+            "name": "湾岸大通りのホテルの支配人",
+            "choice": "出さない",
+            "reason": "突然の提案のため、今は売り出す段階ではない"
+          },
+          {
+            "month": 1,
+            "name": "魚市場前の診療所の院長",
+            "choice": "出さない",
+            "reason": "現時点では売却の意思がないため"
+          },
+          {
+            "month": 2,
+            "name": "観音坂の持ち主さん",
+            "choice": "出す",
+            "reason": "空き地の売却を検討するため"
+          },
+          {
+            "month": 2,
+            "name": "湾岸大通りのホテルの支配人",
+            "choice": "出さない",
+            "reason": "買収提案への返答を慎重に行いたい"
+          },
+          {
+            "month": 3,
+            "name": "観音坂の持ち主さん",
+            "choice": "出す",
+            "reason": "空き地の手入れ負担軽減のため"
+          },
+          {
+            "month": 3,
+            "name": "線路沿いの持ち主さん",
+            "choice": "出さない",
+            "reason": "父と相談したいので、まだ売らない"
+          }
+        ]
+      },
+      "note": "語彙による候補抽出。確定は人が原文を読む（採点LLMは使わない）"
+    },
+    "sell": {
+      "written": 187,
+      "candidate_counts": {
+        "自分の事情": 25,
+        "X社の条件": 113,
+        "聞いた話": 16,
+        "どれにも当たらない": 47
+      },
+      "samples": {
+        "自分の事情": [
+          {
+            "month": 1,
+            "name": "浜町の旅館のご主人",
+            "choice": "売らない",
+            "reason": "家族と相談し、慎重に検討したい"
+          },
+          {
+            "month": 1,
+            "name": "灯台下の宿の主人",
+            "choice": "売らない",
+            "reason": "現在の経営は順調であり、直ちに手放す必要はないため。"
+          },
+          {
+            "month": 1,
+            "name": "神明社の自治会長",
+            "choice": "売らない",
+            "reason": "地域のコミュニティ維持のため、今は時期尚早"
+          },
+          {
+            "month": 1,
+            "name": "魚市場前の診療所の院長",
+            "choice": "売らない",
+            "reason": "地域医療維持のため、まずは直接話を聞きたい"
+          },
+          {
+            "month": 2,
+            "name": "駅裏北の駐車場の会社",
+            "choice": "売らない",
+            "reason": "将来性を見極めたいので"
+          },
+          {
+            "month": 2,
+            "name": "湾岸大通りのホテルの支配人",
+            "choice": "売らない",
+            "reason": "将来的な価値を見込み、現時点では売却する意思がない"
+          },
+          {
+            "month": 2,
+            "name": "灯台下の宿の主人",
+            "choice": "売らない",
+            "reason": "経営が順調なため、今は売却の必要がない"
+          },
+          {
+            "month": 2,
+            "name": "魚市場前の診療所の院長",
+            "choice": "売らない",
+            "reason": "後継者がいないため、今すぐには売却できません"
+          }
+        ],
+        "X社の条件": [
+          {
+            "month": 1,
+            "name": "湯坂下の持ち主さん",
+            "choice": "売らない",
+            "reason": "条件の具体性が不明瞭のため"
+          },
+          {
+            "month": 1,
+            "name": "波止場通りのご夫婦",
+            "choice": "売らない",
+            "reason": "交換条件を詳しく聞きたいから"
+          },
+          {
+            "month": 1,
+            "name": "北団地の持ち主さん",
+            "choice": "売らない",
+            "reason": "交換の条件を保留したい"
+          },
+          {
+            "month": 1,
+            "name": "線路沿いの持ち主さん",
+            "choice": "売らない",
+            "reason": "交換条件の情報が不足しており、父に相談したい"
+          },
+          {
+            "month": 1,
+            "name": "岬道の持ち主さん",
+            "choice": "売らない",
+            "reason": "相手の店舗への影響を考慮し、交換はしない"
+          },
+          {
+            "month": 1,
+            "name": "学園西のご夫婦",
+            "choice": "売らない",
+            "reason": "条件が不明確なため交換しない"
+          },
+          {
+            "month": 1,
+            "name": "駅前広場の食堂のご夫婦",
+            "choice": "売らない",
+            "reason": "条件が不明確なため"
+          },
+          {
+            "month": 1,
+            "name": "湯の元前の店のご主人",
+            "choice": "売らない",
+            "reason": "交換条件の詳細を確認したい"
+          }
+        ],
+        "聞いた話": [
+          {
+            "month": 1,
+            "name": "線路沿いの持ち主さん",
+            "choice": "売らない",
+            "reason": "交換条件の情報が不足しており、父に相談したい"
+          },
+          {
+            "month": 1,
+            "name": "魚市場前の診療所の院長",
+            "choice": "売らない",
+            "reason": "地域医療維持のため、まずは直接話を聞きたい"
+          },
+          {
+            "month": 2,
+            "name": "船着場裏の不在地主",
+            "choice": "売らない",
+            "reason": "情報不足のため、現時点では売却しない"
+          },
+          {
+            "month": 4,
+            "name": "観音坂の持ち主さん",
+            "choice": "売らない",
+            "reason": "条件に一番街の家が含まれており、私の所有ではないため"
+          },
+          {
+            "month": 4,
+            "name": "湯の元前の店のご主人",
+            "choice": "売らない",
+            "reason": "条件を吟味し、情報を集めてから判断する"
+          },
+          {
+            "month": 5,
+            "name": "湯の元のひとり暮らしさん",
+            "choice": "売らない",
+            "reason": "この家への愛着と共同浴場の世話を続けたいから"
+          },
+          {
+            "month": 8,
+            "name": "灯台下の宿の主人",
+            "choice": "売らない",
+            "reason": "条件が不明確なため、情報収集を優先"
+          },
+          {
+            "month": 10,
+            "name": "湯の元のひとり暮らしさん",
+            "choice": "売らない",
+            "reason": "相手の情報が不十分なため、交換はしない"
+          }
+        ],
+        "どれにも当たらない": [
+          {
+            "month": 1,
+            "name": "駅裏北の駐車場の会社",
+            "choice": "売らない",
+            "reason": "詳細な計画を確認したい"
+          },
+          {
+            "month": 1,
+            "name": "湾岸大通りのホテルの支配人",
+            "choice": "売らない",
+            "reason": "事業継続のため、現時点では売却不可"
+          },
+          {
+            "month": 1,
+            "name": "船着場裏の不在地主",
+            "choice": "売らない",
+            "reason": "港湾開発の詳細が不明なため"
+          },
+          {
+            "month": 2,
+            "name": "観音坂の持ち主さん",
+            "choice": "売らない",
+            "reason": "交換対象が不明なため応じられない"
+          },
+          {
+            "month": 2,
+            "name": "湯坂奥の空き家の共有代表",
+            "choice": "売らない",
+            "reason": "計画が不明瞭なため"
+          },
+          {
+            "month": 2,
+            "name": "神明社の自治会長",
+            "choice": "売らない",
+            "reason": "地域との関わりを重視したいから"
+          },
+          {
+            "month": 4,
+            "name": "北団地の持ち主さん",
+            "choice": "売らない",
+            "reason": "学園南の家との交換は時期尚早"
+          },
+          {
+            "month": 4,
+            "name": "岬道の持ち主さん",
+            "choice": "売らない",
+            "reason": "交換提案を待つため。直接交渉したい。"
+          }
+        ]
+      },
+      "note": "語彙による候補抽出。確定は人が原文を読む（採点LLMは使わない）"
+    }
+  },
+  "heard_before_decision": {
+    "売った": {
+      "n": 0,
+      "heard_mean": 0.0,
+      "heard_about_x_mean": 0.0,
+      "share_with_any_x_talk": 0.0
+    },
+    "出した": {
+      "n": 33,
+      "heard_mean": 5.24,
+      "heard_about_x_mean": 2.18,
+      "share_with_any_x_talk": 0.8485
+    },
+    "どちらもしない": {
+      "n": 975,
+      "heard_mean": 4.98,
+      "heard_about_x_mean": 1.51,
+      "share_with_any_x_talk": 0.5036
+    },
+    "window_months": 3
+  },
+  "contagion": {
+    "window_months": 3,
+    "events": [],
+    "exposed_agents": 0,
+    "exposed_acted_share": 0.0,
+    "not_exposed_agents": 28,
+    "not_exposed_acted_share": 0.1071,
+    "note": "『触れた人』＝売った人の隣人 or 売った月に同席した人。相関であって因果ではない"
+  },
+  "acquirer_adaptation": {
+    "distinct_texts": 98,
+    "offers_total": 187,
+    "offers_with_decline_note": 187,
+    "notes_followed_by_another_offer": 163,
+    "text_changes_between_consecutive_offers": 78,
+    "changes_right_after_a_note": 78,
+    "examples": [
+      {
+        "to": "湯坂下の持ち主さん",
+        "month_before": 1,
+        "month_after": 4,
+        "decline_reason": "条件の具体性が不明瞭のため",
+        "text_before": "湯坂下の家と、湯坂上の空き店舗を交換で譲ってほしい。",
+        "text_after": "湯坂下の家と、湯坂上の古家を交換で譲ってほしい。"
+      },
+      {
+        "to": "湯坂下の持ち主さん",
+        "month_before": 4,
+        "month_after": 24,
+        "decline_reason": "条件の具体性に欠けるため、交換に応じられない",
+        "text_before": "湯坂下の家と、湯坂上の古家を交換で譲ってほしい。",
+        "text_after": "湯坂下の家と、湾岸大通りの社員寮を交換で譲ってください。"
+      },
+      {
+        "to": "波止場通りのご夫婦",
+        "month_before": 1,
+        "month_after": 4,
+        "decline_reason": "交換条件を詳しく聞きたいから",
+        "text_before": "波止場通りの元店舗と家を交換で譲ってほしい。",
+        "text_after": "波止場通りの元店舗と家を、岬道の家と交換で譲ってほしい。"
+      },
+      {
+        "to": "波止場通りのご夫婦",
+        "month_before": 4,
+        "month_after": 24,
+        "decline_reason": "交換条件を慎重に検討するため",
+        "text_before": "波止場通りの元店舗と家を、岬道の家と交換で譲ってほしい。",
+        "text_after": "波止場通りの元店舗と家を、潮見横丁の改装した古家と交換で譲ってください。"
+      },
+      {
+        "to": "北団地の持ち主さん",
+        "month_before": 1,
+        "month_after": 4,
+        "decline_reason": "交換の条件を保留したい",
+        "text_before": "北団地の中古住宅と、学園北の家を交換で譲ってほしい。",
+        "text_after": "北団地の中古住宅と、学園南の家を交換で譲ってほしい。"
+      },
+      {
+        "to": "北団地の持ち主さん",
+        "month_before": 4,
+        "month_after": 24,
+        "decline_reason": "学園南の家との交換は時期尚早",
+        "text_before": "北団地の中古住宅と、学園南の家を交換で譲ってほしい。",
+        "text_after": "北団地の中古住宅と、学園西の空き家を交換で譲ってください。"
+      },
+      {
+        "to": "線路沿いの持ち主さん",
+        "month_before": 1,
+        "month_after": 4,
+        "decline_reason": "交換条件の情報が不足しており、父に相談したい",
+        "text_before": "線路沿いの実家と、駅裏の小区画を交換で譲ってほしい。",
+        "text_after": "線路沿いの実家と、一番街の資材置場を交換で譲ってほしい。"
+      },
+      {
+        "to": "線路沿いの持ち主さん",
+        "month_before": 4,
+        "month_after": 24,
+        "decline_reason": "相手の条件が成立しないため",
+        "text_before": "線路沿いの実家と、一番街の資材置場を交換で譲ってほしい。",
+        "text_after": "線路沿いの実家と、一番街の資材置場を交換で譲ってください。"
+      },
+      {
+        "to": "岬道の持ち主さん",
+        "month_before": 4,
+        "month_after": 24,
+        "decline_reason": "交換提案を待つため。直接交渉したい。",
+        "text_before": "岬道の家と、湯の元前の店を交換で譲ってほしい。",
+        "text_after": "岬道の家と、湯の元前の店を交換で譲ってください。"
+      },
+      {
+        "to": "学園西のご夫婦",
+        "month_before": 4,
+        "month_after": 24,
+        "decline_reason": "条件が不明確",
+        "text_before": "学園西の家と学園西の空き家を、駅前通りの家と交換で譲ってほしい。",
+        "text_after": "学園西の家と学園西の空き家を、駅前通りの家と交換で譲ってください。"
+      }
+    ]
+  },
+  "monthly": [
+    {
+      "month": 1,
+      "offers": 18,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 18,
+      "utterances": 11,
+      "attended": 15
+    },
+    {
+      "month": 2,
+      "offers": 10,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 10,
+      "utterances": 11,
+      "attended": 13
+    },
+    {
+      "month": 3,
+      "offers": 2,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 2,
+      "utterances": 11,
+      "attended": 14
+    },
+    {
+      "month": 4,
+      "offers": 12,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 12,
+      "utterances": 12,
+      "attended": 14
+    },
+    {
+      "month": 5,
+      "offers": 5,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 11,
+      "attended": 14
+    },
+    {
+      "month": 6,
+      "offers": 6,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 7,
+      "attended": 12
+    },
+    {
+      "month": 7,
+      "offers": 3,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 3,
+      "utterances": 6,
+      "attended": 11
+    },
+    {
+      "month": 8,
+      "offers": 13,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 13,
+      "utterances": 9,
+      "attended": 10
+    },
+    {
+      "month": 9,
+      "offers": 6,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 7,
+      "attended": 9
+    },
+    {
+      "month": 10,
+      "offers": 6,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 6,
+      "attended": 9
+    },
+    {
+      "month": 11,
+      "offers": 6,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 9,
+      "attended": 11
+    },
+    {
+      "month": 12,
+      "offers": 0,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 6,
+      "attended": 8
+    },
+    {
+      "month": 13,
+      "offers": 1,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 1,
+      "utterances": 7,
+      "attended": 7
+    },
+    {
+      "month": 14,
+      "offers": 1,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 1,
+      "utterances": 5,
+      "attended": 9
+    },
+    {
+      "month": 15,
+      "offers": 6,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 5,
+      "attended": 9
+    },
+    {
+      "month": 16,
+      "offers": 6,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 6,
+      "attended": 10
+    },
+    {
+      "month": 17,
+      "offers": 14,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 14,
+      "utterances": 5,
+      "attended": 8
+    },
+    {
+      "month": 18,
+      "offers": 0,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 5,
+      "attended": 8
+    },
+    {
+      "month": 19,
+      "offers": 0,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 4,
+      "attended": 7
+    },
+    {
+      "month": 20,
+      "offers": 8,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 8,
+      "utterances": 0,
+      "attended": 3
+    },
+    {
+      "month": 21,
+      "offers": 0,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 0,
+      "attended": 5
+    },
+    {
+      "month": 22,
+      "offers": 0,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 2,
+      "attended": 6
+    },
+    {
+      "month": 23,
+      "offers": 5,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 6,
+      "attended": 9
+    },
+    {
+      "month": 24,
+      "offers": 18,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 18,
+      "utterances": 4,
+      "attended": 7
+    },
+    {
+      "month": 25,
+      "offers": 6,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 2,
+      "attended": 6
+    },
+    {
+      "month": 26,
+      "offers": 0,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 3,
+      "attended": 7
+    },
+    {
+      "month": 27,
+      "offers": 0,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 3,
+      "attended": 5
+    },
+    {
+      "month": 28,
+      "offers": 5,
+      "listed": 0,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 4,
+      "attended": 7
+    },
+    {
+      "month": 29,
+      "offers": 5,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 3,
+      "attended": 5
+    },
+    {
+      "month": 30,
+      "offers": 5,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 5,
+      "attended": 7
+    },
+    {
+      "month": 31,
+      "offers": 5,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 7,
+      "attended": 8
+    },
+    {
+      "month": 32,
+      "offers": 6,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 6,
+      "utterances": 6,
+      "attended": 7
+    },
+    {
+      "month": 33,
+      "offers": 0,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 4,
+      "attended": 6
+    },
+    {
+      "month": 34,
+      "offers": 5,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 5,
+      "utterances": 5,
+      "attended": 6
+    },
+    {
+      "month": 35,
+      "offers": 0,
+      "listed": 1,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 0,
+      "utterances": 4,
+      "attended": 6
+    },
+    {
+      "month": 36,
+      "offers": 4,
+      "listed": 2,
+      "sold": 0,
+      "parcels_cum": 0,
+      "declines_with_reason": 4,
+      "utterances": 2,
+      "attended": 3
+    }
+  ]
+}

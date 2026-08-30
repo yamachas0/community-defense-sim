@@ -1,0 +1,74 @@
+# A市フィールド v8d - 会話ありの世界（v8c と同じ町・同じ seed・同じ36か月）
+# 設計の正: docs/world_design_v8d.md（土台 = docs/world_design_v8c.md）
+#
+# v8c との差は3つだけ（設計 §1・施主決定 2026-08-30 01:34）:
+#   1. 月末の問い2から「売ると今月末に名義がX社へ移り、その後は戻らない。…」の一文を削除
+#   2. X社の前置きに事実を3つ追加（A市に不動産を持っていない／金銭の額は扱わない／
+#      約束できるのは自分が実行できることだけ）
+#   3. 理由の一言は「出す・出さない」「売る・売らない」「X社の提示判断」の3つだけ
+#      （= 行き先の理由欄を無くす）
+# 名簿・場所・世界の背景・会話の仕組み・出品の仕組み・隣近所・seed・月数は v8c と同一。
+#
+# 機械の都合（世界は不変）: request timeout 60秒（1回だけ再試行）／月ごとのチェックポイント／
+# parallel_workers 4（v8c 本走1回目の MemoryError 墜落の再発防止）。
+run_name: field_v8d_no_irreversible_chat
+scenario_version: field_v8d
+seed: 85
+steps: 36
+personas_file: configs/personas_v8.yaml
+
+# 場での会話の有無。false にすると場での会話を飛ばす（隣近所の配送も止まる）。
+# **行き先を選ぶコールは false でも残す**。
+chat: true
+# 1か月に各自が場で話す回数（v8c と同じ 1）。
+scene_rounds: 1
+# X社のコールを何人ずつに区切るか（出力の切れを避けるためだけの分割）。
+acquirer_chunk: 10
+# X社の理由欄。費用が上限に収まらないときの唯一の削りしろ（世界の側は1文字も変えない）。
+acquirer_reason: true
+
+# 手元集計の費用がこれを超えたら止める（月末だけでなく場面と場面のあいだでも見る）。
+# 施主の上限 = 手元 $0.6。判定は月内3か所（X社ターン後・行き先後・場面後）でしか走らないので、
+# 最悪は月末コール1回ぶん（30コール x 出力上限2,200トークン = 約$0.034）超過しうる。
+# Codex 走行前レビューの必須指摘により 0.56 にする（0.56 + 0.034 = 0.594 < 0.6）。
+# 実走時は「$0.6 - 実APIスモークの実測 - 0.04」を --max-cost で渡す。
+max_cost_usd: 0.56
+
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.75
+  max_tokens: 2200
+  # v8c 本走1回目は workers 8 で MemoryError 墜落（施主PCのメモリ逼迫）。2回目と同じ 4 にする。
+  parallel_workers: 4
+  # 1コールの締切（秒）。google-genai の HttpOptions(timeout=...) に渡る。
+  # 超えたら1回だけやり直し、それでも駄目なら「答えが返らなかった」として数える。
+  request_timeout_sec: 60
+  # 明示キャッシュ（CachedContent）は使わない（最低 2,048 トークンに届かないため）。
+  # 暗黙キャッシュは効きうる（v8c 実測 48.8%）。
+  enable_cache: false
+  batch_classify: false
+  batch_agents: false
+
+world:
+  town_name: A市
+  background: |
+    A市は湾岸にある人口約12万人の温泉観光都市である。対岸の空港では
+    スペースポート構想が進むが、時期と需要規模は確定していない。
+    市内では人口減少、高齢化、相続、築古建物の改修負担、旅館と商店の
+    後継者不足が同時に進む。住民、事業者、行政は、それぞれ通常の日常を送っている。
+    個々の取引・会話が将来どうなるかは開始時点では決まっていない。
+
+social:
+  # 公共の場5か所（v8c と同一）+「今月はどこにも行かない」。
+  venues:
+    - {id: V06, label: 公共施設, note: 市役所と公民館}
+    - {id: V14, label: 交通拠点, note: 駅とバス停}
+    - {id: V09, label: 商業施設, note: 店や飲食店が並ぶ通り}
+    - {id: V12, label: 公園,     note: 広場とベンチ}
+    - {id: V15, label: 医療施設, note: 診療所}
+
+cost:
+  price_table:
+    gemini-2.5-flash-lite: {input: 0.10, output: 0.40, cache_read: 0.01, cache_storage_hour: 1.00}
+  safety_factor: 2.0

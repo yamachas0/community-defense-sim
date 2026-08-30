@@ -1,0 +1,200 @@
+[
+  {
+    "step": 1,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 6,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 6,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 7,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 7,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 8,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 8,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 9,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 9,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 10,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 11,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 12,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 13,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 14,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 15,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 29,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 30,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 31,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 32,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 33,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 34,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 35,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "sold_same_month": false
+  }
+]
