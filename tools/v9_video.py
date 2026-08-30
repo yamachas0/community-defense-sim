@@ -54,7 +54,7 @@ MUTED = "#98a1ad"
 DIM = "#5b6673"
 ACCENT = "#34d399"
 
-TITLE_MAIN_1 = "外的不動産投資への"
+TITLE_MAIN_1 = "外的不動産買収への"
 TITLE_MAIN_2 = "コミュニティ自衛"
 TITLE_Q_1 = "コミュニティの創発は、"
 TITLE_Q_2 = "外的な不動産投資を抑制できるのか？"
