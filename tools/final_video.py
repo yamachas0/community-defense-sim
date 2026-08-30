@@ -50,11 +50,11 @@ BODY = (200, 208, 218)
 
 K = 1.4                      # 0.7倍速（読める速さ）にする係数
 SEC = {
-    # ナレーション（v5）が収まる長さ。値はナレーション実測長＋余白。
-    "title": 9.5, "why": 7.5 * K, "world": 7.0 * K, "flow": 14.35,
-    "m0": 9.3, "m36": 3.0, "black": 1.5, "end": 4.0 * K,
+    # ナレーション（v6）が収まる長さ。値はナレーション実測長＋余白。
+    "title": 10.0, "why": 11.0, "world": 9.9, "flow": 13.2,
+    "m0": 2.0, "m36": 4.8, "black": 1.5, "end": 5.6,
 }
-MONTH_SEC = 0.28
+MONTH_SEC = 0.34
 
 
 # ---------------------------------------------------------------------------
@@ -151,39 +151,19 @@ def fade_out(c: Canvas, t: float, total: float, tail: float = 0.45) -> None:
 # ① タイトル
 # ---------------------------------------------------------------------------
 
-TITLE_1 = "外的不動産買収への"
-TITLE_2 = "コミュニティ自衛"
-Q_1 = "コミュニティの創発は、"
-Q_2 = "外的な不動産投資を"
-Q_3 = "抑制できるのか？"
+TITLE_SLIDE = os.path.join(ROOT, "docs", "submission", "video_assets",
+                           "title_slide_p1.png")
 
 
-def scene_title(t: float) -> Canvas:
-    c = Canvas()
+def scene_title(t: float, slide: Image.Image) -> Canvas:
+    """スライド P1（最新デザイン）をそのまま冒頭に置く。"""
+    k = max(0.0, min(1.0, V._ease(0.0, 1.0, t)))
+    c = Canvas(Image.blend(Image.new("RGB", (W, H), (0, 0, 0)), slide, k))
     total = SEC["title"]
-    a0 = ease(0.15, 0.8, t)
-    c.text(W / 2, 66, "エージェントシミュレーション", 30, DIM, a0, anchor="c")
-    a1 = ease(0.3, 1.1, t)
-    c.text(W / 2, 116, TITLE_1 + "　" + TITLE_2, 54, MUTED, a1, True,
-           anchor="c", dy=18)
-    a2 = ease(1.0, 1.5, t)
-    half = int(150 * a2)
-    c.rule(W / 2 - half, 205, W / 2 + half, ACCENT, a2)
-
-    a3 = ease(1.2, 2.4, t)
-    c.text(W / 2, 262, Q_1, 76, FG, a3, True, anchor="c", dy=26)
-    a4 = ease(1.7, 2.9, t)
-    c.text(W / 2, 396, Q_2, 92, ACCENT, a4, True, anchor="c", dy=26)
-    a5 = ease(2.1, 3.3, t)
-    c.text(W / 2, 522, Q_3, 92, ACCENT, a5, True, anchor="c", dy=26)
-
-    a6 = ease(3.2, 4.2, t)
-    c.text(W / 2, 700, "制度でも規制でもなく、人が人と話すことだけで。",
-           38, MUTED, a6, anchor="c", dy=16)
-    a7 = ease(4.1, 5.1, t)
-    c.rule(W / 2 - 60, 830, W / 2 + 60, DIM, a7, h=3)
-    c.text(W / 2, 862, "やまちゃそ", 40, FG, a7, True, anchor="c")
-    fade_out(c, t, total)
+    kk = max(0.0, min(1.0, V._ease(total - 0.6, total, t)))
+    if kk > 0.001:
+        c.img.paste(Image.blend(c.img, Image.new("RGB", (W, H), (0, 0, 0)),
+                                kk), (0, 0))
     return c
 
 
@@ -250,7 +230,7 @@ def scene_world(t: float, xco: Image.Image, town: Image.Image) -> Canvas:
     c.d.rectangle([px, py, px + pw, py + ph], outline=V._mix(
         (70, 78, 92), max(0.0, min(1.0, a3))), width=3)
     c.text(px + pw / 2, py + ph + 26, "X社", 46, WHITE, a3, True, anchor="c")
-    c.text(px + pw / 2, py + ph + 88, "町の外から来た 海外の不動産投資会社",
+    c.text(px + pw / 2, py + ph + 88, "X社は海外不動産投資会社",
            30, BODY, a3, anchor="c")
 
     a4 = ease(2.4, 3.3, t)
@@ -269,8 +249,7 @@ def scene_world(t: float, xco: Image.Image, town: Image.Image) -> Canvas:
         c.d.line([(x0, ay), (x1 - 26, ay)], fill=col, width=7)
         c.d.polygon([(x1, ay), (x1 - 30, ay - 20), (x1 - 30, ay + 20)],
                     fill=col)
-        c.text((x0 + x1) / 2, ay - 132, "毎月、", 34, BODY, a5, anchor="c")
-        c.text((x0 + x1) / 2, ay - 86, "金額付きの手紙", 40, ACCENT, a5, True,
+        c.text((x0 + x1) / 2, ay - 90, "買収提案", 44, ACCENT, a5, True,
                anchor="c")
     fade_out(c, t, total)
     return c
@@ -356,7 +335,7 @@ def scene_flow(t: float, xco_small: Image.Image) -> Canvas:
     x0, gap, bw = 78, 20, 328
     top, bh = 356, 400
     for i, (icon, num, who, head) in enumerate(FLOW):
-        a = ease(0.9 + i * 0.7, 1.7 + i * 0.7, t)
+        a = V._ease(0.9 + i * 2.2, 1.7 + i * 2.2, t)
         x = x0 + i * (bw + gap)
         c.card(x, top, x + bw, top + bh, a, edge=(46, 54, 66))
         c.text(x + bw / 2, top + 30, num, 40, ACCENT, a, True, anchor="c")
@@ -364,11 +343,11 @@ def scene_flow(t: float, xco_small: Image.Image) -> Canvas:
         icon(d, x + bw / 2, top + 216, 68, ACCENT, max(0.0, min(1.0, a)))
         c.text(x + bw / 2, top + 308, head, 38, FG, a, True, anchor="c")
         if i < len(FLOW) - 1:
-            aa = ease(1.25 + i * 0.7, 1.85 + i * 0.7, t)
+            aa = V._ease(1.9 + i * 2.2, 2.5 + i * 2.2, t)
             c.text(x + bw + gap / 2, top + 186, "▶", 40, ACCENT, aa, True,
                    anchor="c")
 
-    a2 = ease(4.6, 5.4, t)
+    a2 = V._ease(10.4, 11.2, t)
     d.rectangle([78, 832, 1842, 838], fill=V._mix((40, 46, 56),
                                                   max(0.0, min(1.0, a2))))
     c.text(W / 2, 880, "×36か月（3年）", 58, FG, a2, True, anchor="c")
@@ -494,15 +473,15 @@ def build_frames(assets: Dict[str, Image.Image],
     m36_img = month_image(paths[-1])
 
     plan = [
-        ("title", SEC["title"], lambda t: scene_title(t).img, 6.4),
+        ("title", SEC["title"], lambda t: scene_title(t, assets["slide"]).img, 4.0),
         ("why", SEC["why"], lambda t: scene_why(t, assets["map"]).img, 9.0),
         ("world", SEC["world"],
          lambda t: scene_world(t, assets["xco"], assets["town"]).img, 7.0),
         ("flow", SEC["flow"],
-         lambda t: scene_flow(t, assets["xco_small"]).img, 8.6),
+         lambda t: scene_flow(t, assets["xco_small"]).img, 11.6),
         ("m0", SEC["m0"],
          lambda t: banner(m0_img, t, LEGEND,
-                          "これから36か月を早回しで見る。", True), 2.0),
+                          "これから36か月を早回しで見る。", True), 1.6),
         ("m36", SEC["m36"], lambda t: banner(m36_img, t, END_LINE, "", False),
          2.4),
         ("black", SEC["black"], lambda t: scene_black(t).img, 0.5),
@@ -567,6 +546,8 @@ def main() -> int:
         "xco": cover(raw("xco_building"), 560, 380),
         "xco_small": cover(raw("xco_building"), 300, 200),
         "town": cover(raw("town_photo"), 560, 380),
+        "slide": Image.open(TITLE_SLIDE).convert("RGB").resize(
+            (W, H), Image.LANCZOS),
         "end": Image.open(BG.owner_bg(end_src, end_out, 0.42, "cover", 0.5,
                                       None, 0.5, 0.45)).convert("RGB"),
     }
