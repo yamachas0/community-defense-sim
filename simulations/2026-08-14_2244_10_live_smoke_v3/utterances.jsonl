@@ -1,7 +1,0 @@
-{"step": 1, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今日も元気に営業中！近所の皆様、ご来店お待ちしております！", "frame": "our_town", "about_acquisition": false}
-{"step": 1, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "まだまだ元気いっぱいだよ！修理も設置も、何でも言ってね。", "frame": "our_town", "about_acquisition": false}
-{"step": 1, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月も元気に営業中です！みなさんのお越しをお待ちしてます！", "frame": "our_town", "about_acquisition": false}
-{"step": 2, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今日も元気に営業中！近所の皆様、ご来店お待ちしております！", "frame": "our_town", "about_acquisition": false}
-{"step": 2, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "まだまだ元気いっぱいだよ！修理も設置も、何でも言ってね。", "frame": "our_town", "about_acquisition": false}
-{"step": 2, "from": "HH01", "role": "household", "name": "佐々木 靖夫", "text": "この度、長年住んだ家を売りに出すことにしました。駅前で利便性も良いP14です。ご興味のある方はご連絡ください。", "frame": "our_town", "about_acquisition": true}
-{"step": 2, "from": "HH04", "role": "household", "name": "立花 千代", "text": "お隣の岡田さん、元気にしてるかしら。この家の庭の手入れが厳しくなってきたから、思い切って売ることにしたの。もし興味があったら声をかけてね。", "frame": "our_town", "about_acquisition": true}

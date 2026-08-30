@@ -1,5 +1,0 @@
-{"step": 1, "from": "BZ01", "role": "business", "name": "「みやこ食堂」店主 宮本", "text": "今日も元気に営業中！", "frame": "neutral", "about_acquisition": false}
-{"step": 1, "from": "BZ02", "role": "business", "name": "「ヤマグチ電器」山口", "text": "今年もなんとかやっていくしかないな。修理と設置の依頼、どっかにないもんかね。", "frame": "neutral", "about_acquisition": false}
-{"step": 1, "from": "BZ03", "role": "business", "name": "「カフェ ノーク」大西", "text": "今月もカフェ ノーク、元気に営業します！美味しいコーヒーと軽食をご用意してお待ちしております。", "frame": "neutral", "about_acquisition": false}
-{"step": 1, "from": "HH04", "role": "household", "name": "立花 千代", "text": "いやはや、庭の手入れが年々こたえるようになってねぇ。隣の岡田さんもそうだけど、みんな年を取るもんだね。", "frame": "neutral", "about_acquisition": false}
-{"step": 1, "from": "HH09", "role": "household", "name": "森 里美", "text": "この町に引っ越してきたばかりで、まずは町の雰囲気を掴みたい。お店とかも見て回りたいな。", "frame": "neutral", "about_acquisition": false}
