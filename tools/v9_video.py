@@ -421,14 +421,15 @@ def draw_progress(fig, run: Run, m: int) -> None:
 
 
 def draw_month(run: Run, m: int, out: str,
-               subtitle: Optional[str] = None) -> str:
+               subtitle: Optional[str] = None,
+               mark_transfers: bool = True) -> str:
     plt.rcParams["font.family"] = M._pick_font()
     plt.rcParams["axes.unicode_minus"] = False
     fig = new_fig()
     rows = run.ledger[m]
     ts = run.transfers_by_month.get(m, [])
     lv = run.left_by_month.get(m, [])
-    highlight = {t["parcel"] for t in ts}
+    highlight = {t["parcel"] for t in ts} if mark_transfers else set()
     last = run.months[-1]
 
     # ── 最上部：第N月（特大）
