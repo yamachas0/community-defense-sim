@@ -1,0 +1,52 @@
+[
+  {
+    "step": 1,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "parcel": "魚市場前の診療所の駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "魚市場前の診療所の院長"
+    },
+    "left_town": false,
+    "was_user": true,
+    "user_after": "魚市場前の診療所の院長"
+  },
+  {
+    "step": 7,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "parcel": "船着場裏の資材置場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "船着場裏の不在地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": null
+  },
+  {
+    "step": 36,
+    "agent_id": "CF",
+    "name": "波止場通りの元店舗の家主",
+    "parcel": "波止場通りの元店舗",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "波止場通りの元店舗の家主",
+      "建物": "波止場通りの元店舗の家主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "波止場通りの借り店主"
+  }
+]

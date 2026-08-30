@@ -1,0 +1,1342 @@
+[
+  {
+    "step": 1,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "in_town": true,
+    "parcel": "魚市場前の診療所の駐車場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": true
+  },
+  {
+    "step": 2,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "in_town": true,
+    "parcel": "浜町の旅館",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "in_town": true,
+    "parcel": "浜町の旅館の駐車場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "in_town": true,
+    "parcel": "浜町の旅館",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "in_town": true,
+    "parcel": "浜町の旅館の駐車場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 6,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 6,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 6,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 6,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 7,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 7,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 7,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "in_town": false,
+    "parcel": "船着場裏の資材置場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": true
+  },
+  {
+    "step": 8,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 8,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 8,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 9,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 9,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 9,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 9,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 10,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 10,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 10,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 10,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 11,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 11,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 11,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 11,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 12,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 12,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 12,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 12,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 13,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 13,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 13,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 13,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 14,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 14,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 14,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 14,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 15,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 15,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 15,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 15,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 16,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 16,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 16,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 16,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 17,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 17,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 17,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 17,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 18,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 18,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 18,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 18,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 19,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 19,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 19,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 19,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 20,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 20,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 20,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 20,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 21,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 21,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 21,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 21,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 22,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 22,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 22,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 22,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 22,
+    "agent_id": "CL",
+    "name": "駅前通りの地主",
+    "in_town": false,
+    "parcel": "駅前通りの家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 23,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 23,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 23,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 23,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 24,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 24,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 24,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 24,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 25,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 25,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 25,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 25,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 26,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 26,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 26,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 26,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 27,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 27,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 27,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 27,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 28,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 28,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 28,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "in_town": true,
+    "parcel": "学園北の家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 28,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 29,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 29,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 30,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 30,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 31,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 31,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 32,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 32,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 33,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 33,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 34,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 34,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 35,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 35,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 35,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "in_town": true,
+    "parcel": "学園北の家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 35,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "in_town": true,
+    "parcel": "神明社の境内地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の空き地",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "in_town": true,
+    "parcel": "学園北の家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "in_town": true,
+    "parcel": "浜町の旅館",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  },
+  {
+    "step": 36,
+    "agent_id": "CF",
+    "name": "波止場通りの元店舗の家主",
+    "in_town": false,
+    "parcel": "波止場通りの元店舗",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": true
+  }
+]
