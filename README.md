@@ -1,5 +1,51 @@
 # 外的不動産投資へのコミュニティ自衛
 
+## 提出版（この4パターン）
+
+湾岸の温泉観光都市A市（架空・49人・44区画・36か月）を舞台に、海外の不動産投資会社X社が
+毎月、区画ごとに金額を添えて所有権の買取を持ちかける社会シミュレーションです。町の人は
+全員LLM（大規模言語モデル）が演じ、行動を決めるコードは一切ありません。帳簿の更新と
+手紙の配達だけを機械が担います。買い手が「街の過半の取得を目指す」とはじめから**明言**
+するかどうか、そして町に**会話**（5つの場＋隣近所への伝播）があるかどうかを組み合わせ、
+次の4パターンを走らせました。
+
+| | 会話あり | 会話なし |
+|---|---|---|
+| **明言なし** | 成約11件・面積13.7%・意図を疑う断り1件 | 成約5件・面積6.9%・意図を疑う断り0件 |
+| **明言あり** | 成約3件・面積4.5%・意図を疑う断り58件 | 成約8件・面積8.8%・意図を疑う断り21件 |
+
+一旦の結論：**気づかれずに占領が進む可能性は大いにある。売買の促進も抑制も、会話によって
+どちらにも後押しされる可能性がある。**
+
+※ 各パターンは1本ずつの走行です。
+
+| | リンク |
+|---|---|
+| 提出スライド | https://yamachas0.github.io/community-defense-sim-report/slides10.html |
+| 同・PDF | https://yamachas0.github.io/community-defense-sim-report/0105_KentaYamakawa_CommunityDefense_Slides.pdf |
+| 4パターンの全記録 | https://yamachas0.github.io/community-defense-sim-report/reports.html |
+| 動画 | [`docs/submission/0105_KentaYamakawa_CommunityDefense_Demo.mp4`](docs/submission/0105_KentaYamakawa_CommunityDefense_Demo.mp4) |
+| YouTube | （提出時に記載） |
+
+走行データの所在：
+
+- 明言なし×会話あり：[`simulations/2026-08-30_1711_132_field_v9f_pay_more_if_needed_chat/`](simulations/2026-08-30_1711_132_field_v9f_pay_more_if_needed_chat/)
+- 明言なし×会話なし：[`simulations/2026-08-30_1846_134_field_v9f_pay_more_if_needed_nochat/`](simulations/2026-08-30_1846_134_field_v9f_pay_more_if_needed_nochat/)
+- 明言あり×会話あり：[`simulations/2026-08-30_2017_138_field_v9h_declared_majority_chat/`](simulations/2026-08-30_2017_138_field_v9h_declared_majority_chat/)
+- 明言あり×会話なし：[`simulations/2026-08-30_2043_140_field_v9h_declared_majority_nochat/`](simulations/2026-08-30_2043_140_field_v9h_declared_majority_nochat/)
+
+実行入口：`run_v9f.py` / `run_v9h.py`（例：`python run_v9f.py --config configs/config_field_v9f_nochat.yaml`）
+
+関連ドキュメント：[`docs/v9f_run.md`](docs/v9f_run.md) ／
+[`docs/v9f_nochat_run.md`](docs/v9f_nochat_run.md) ／
+[`docs/v9h_run.md`](docs/v9h_run.md) ／
+[`docs/v9h_nochat_run.md`](docs/v9h_nochat_run.md) ／
+[`docs/v9h_chat_vs_nochat.md`](docs/v9h_chat_vs_nochat.md)（数字の裏取り元）
+
+---
+
+## 以下は開発の経緯（v9〜v9h の各版）
+
 **問い：コミュニティの創発は、外的な不動産投資を抑制できるのか？**
 
 湾岸の温泉観光都市A市（架空）を、まるごと言葉で動かしたエージェントシミュレーションです。
