@@ -1,0 +1,282 @@
+[
+  {
+    "step": 1,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "in_town": true,
+    "parcel": "駅前通りの家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "in_town": true,
+    "parcel": "学園北の家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "in_town": true,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "in_town": false,
+    "parcel": "駅前広場の店舗兼住宅",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": true
+  },
+  {
+    "step": 1,
+    "agent_id": "CC",
+    "name": "湾岸のホテルの所有会社",
+    "in_town": false,
+    "parcel": "湾岸大通りの社員寮",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": true
+  },
+  {
+    "step": 1,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "in_town": false,
+    "parcel": "学園南の家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": true
+  },
+  {
+    "step": 1,
+    "agent_id": "CI",
+    "name": "潮見横丁の地主",
+    "in_town": false,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "in_town": true,
+    "parcel": "駅前通りの家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "in_town": true,
+    "parcel": "学園北の家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "in_town": true,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 2,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "in_town": true,
+    "parcel": "魚市場前の診療所の駐車場",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": true
+  },
+  {
+    "step": 2,
+    "agent_id": "CI",
+    "name": "潮見横丁の地主",
+    "in_town": false,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "in_town": true,
+    "parcel": "駅前通りの家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "in_town": true,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 3,
+    "agent_id": "CI",
+    "name": "潮見横丁の地主",
+    "in_town": false,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "in_town": true,
+    "parcel": "駅前通りの家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "in_town": true,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 4,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "in_town": true,
+    "parcel": "学園西の空き家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": true
+  },
+  {
+    "step": 4,
+    "agent_id": "CI",
+    "name": "潮見横丁の地主",
+    "in_town": false,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "in_town": true,
+    "parcel": "駅前通りの家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "in_town": true,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 5,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "in_town": false,
+    "parcel": "学園西の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": true
+  },
+  {
+    "step": 5,
+    "agent_id": "CI",
+    "name": "潮見横丁の地主",
+    "in_town": false,
+    "parcel": "潮見横丁の改装した古家",
+    "listing": "土地だけ",
+    "kind": "土地",
+    "sold_same_month": false
+  }
+]

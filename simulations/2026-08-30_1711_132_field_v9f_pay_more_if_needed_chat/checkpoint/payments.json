@@ -1,0 +1,112 @@
+[
+  {
+    "step": 1,
+    "to": "船着場裏の不在地主",
+    "to_id": "AA",
+    "parcel": "船着場裏の駐車場",
+    "kind": "土地",
+    "amount": 12000000,
+    "valuation": 10000000,
+    "budget_left_after": 1159800000
+  },
+  {
+    "step": 2,
+    "to": "船着場裏の不在地主",
+    "to_id": "AA",
+    "parcel": "船着場裏の資材置場",
+    "kind": "土地",
+    "amount": 8000000,
+    "valuation": 8000000,
+    "budget_left_after": 1151800000
+  },
+  {
+    "step": 3,
+    "to": "観音坂の持ち主さん",
+    "to_id": "C",
+    "parcel": "観音坂の空き地",
+    "kind": "土地",
+    "amount": 13000000,
+    "valuation": 11000000,
+    "budget_left_after": 1138800000
+  },
+  {
+    "step": 10,
+    "to": "湯の元前の店のご主人",
+    "to_id": "S",
+    "parcel": "湯の元前の店",
+    "kind": "両方",
+    "amount": 15000000,
+    "valuation": 13600000,
+    "budget_left_after": 1123800000
+  },
+  {
+    "step": 11,
+    "to": "湯の元のひとり暮らしさん",
+    "to_id": "D",
+    "parcel": "湯の元の古家",
+    "kind": "両方",
+    "amount": 18515000,
+    "valuation": 12500000,
+    "budget_left_after": 1105285000
+  },
+  {
+    "step": 13,
+    "to": "湯坂上のご夫婦",
+    "to_id": "A",
+    "parcel": "湯坂上の古家",
+    "kind": "両方",
+    "amount": 28728000,
+    "valuation": 12500000,
+    "budget_left_after": 1076557000
+  },
+  {
+    "step": 14,
+    "to": "湯坂上のご夫婦",
+    "to_id": "A",
+    "parcel": "湯坂上の空き店舗",
+    "kind": "両方",
+    "amount": 15000000,
+    "valuation": 13600000,
+    "budget_left_after": 1061557000
+  },
+  {
+    "step": 14,
+    "to": "波止場通りのご夫婦",
+    "to_id": "L",
+    "parcel": "波止場通りの家",
+    "kind": "両方",
+    "amount": 32000000,
+    "valuation": 19700000,
+    "budget_left_after": 1029557000
+  },
+  {
+    "step": 21,
+    "to": "駅裏の駐車場の地主",
+    "to_id": "CA",
+    "parcel": "駅裏北の月極駐車場",
+    "kind": "土地",
+    "amount": 82800000,
+    "valuation": 36000000,
+    "budget_left_after": 946757000
+  },
+  {
+    "step": 30,
+    "to": "線路沿いの持ち主さん",
+    "to_id": "N",
+    "parcel": "線路沿いの実家",
+    "kind": "両方",
+    "amount": 44928000,
+    "valuation": 26900000,
+    "budget_left_after": 901829000
+  },
+  {
+    "step": 34,
+    "to": "本町通りの持ち主さん",
+    "to_id": "I",
+    "parcel": "本町通りの家",
+    "kind": "両方",
+    "amount": 60000000,
+    "valuation": 26900000,
+    "budget_left_after": 841829000
+  }
+]

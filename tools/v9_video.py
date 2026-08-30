@@ -574,9 +574,10 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
     row_step = 0.115 if n_rows <= 4 else (0.685 - 0.340) / (n_rows - 1)
 
     y = 0.685
+    label_objs: List[Any] = []
     for meta in metas:
-        ax.text(0.035, y, clip_cjk(meta.get("label", ""), 20),
-                fontsize=px(34), color=FG, va="center", ha="left")
+        label_objs.append(ax.text(0.035, y, clip_cjk(meta.get("label", ""), 20),
+                fontsize=px(34), color=FG, va="center", ha="left"))
         for x, (_, key, unit) in zip(xs, cols):
             v = meta.get(key)
             if key == "x_parcels_end":
@@ -586,6 +587,17 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
             ax.text(x, y, txt, fontsize=px(40), color=ACCENT, va="center",
                     ha="center", fontweight="bold")
         y -= row_step
+
+    # 版名（ラベル）が長いと最初の数値列（xs[0]）に食い込むので、実際の
+    # 描画幅を測って自動で縮める（版が増えるほど1行の持ち場が狭くなる）。
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    max_label_x = (xs[0] - 0.02) * W
+    for obj in label_objs:
+        bbox = obj.get_window_extent(renderer=renderer)
+        if bbox.x1 > max_label_x and bbox.x1 > bbox.x0:
+            scale = max(0.55, (max_label_x - bbox.x0) / (bbox.x1 - bbox.x0))
+            obj.set_fontsize(px(34) * scale)
 
     m0 = metas[0]
     rule = max(0.30, y + 0.045)
@@ -619,13 +631,17 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
             ax.text(cx, yy, t, fontsize=px(size), color=FG, va="center",
                     ha="left")
             yy -= step
-    yy = top - step * n_note
+    # 出典の1行は、最後の注記行から常に一定の間隔をあける（版が増えて
+    # 注記が下まで詰まると、下端の固定値へのクランプで最後の行に潰れて
+    # 重なっていたのを、最後の行を基準にした相対位置に直す）。
+    last_note_y = top - step * (n_note - 1)
+    src_y = max(0.018, last_note_y - max(step * 0.9, 0.03))
     srcs = ["summary.json"] + [
         f"emergence_{str(m.get('label', '')).split()[0]}.json"
         for m in metas
         if m.get("rented_offers") is not None and m.get("label")]
     src_text = "数字はすべて走行の記録（" + "・".join(srcs) + "）から。"
-    src_obj = ax.text(0.035, max(0.05, yy - 0.02), src_text,
+    src_obj = ax.text(0.035, src_y, src_text,
                       fontsize=px(25.0), color=MUTED, va="center", ha="left")
     # 版が増えて出典の列挙が長くなったら、右端からはみ出さないよう縮める
     # （実際の描画幅を測って合わせる＝文字幅の見積りに頼らない）。
