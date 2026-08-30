@@ -1,0 +1,58 @@
+run_name: field_v9f_pay_more_if_needed_nochat
+scenario_version: field_v9f
+seed: 85
+steps: 36
+personas_file: configs/personas_v9c.yaml
+chat: false
+scene_rounds: 1
+acquirer_chunk: 10
+acquirer_reason: true
+max_cost_usd: 1.87
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.75
+  max_tokens: 2200
+  parallel_workers: 4
+  request_timeout_sec: 60
+  enable_cache: false
+  batch_classify: false
+  batch_agents: false
+world:
+  town_name: A市
+  background: 'A市は湾岸にある人口約12万人の温泉観光都市である。対岸の空港では
+
+    スペースポート構想が進むが、時期と需要規模は確定していない。
+
+    市内では人口減少、高齢化、相続、築古建物の改修負担、旅館と商店の
+
+    後継者不足が同時に進む。住民、事業者、行政は、それぞれ通常の日常を送っている。
+
+    個々の取引・会話が将来どうなるかは開始時点では決まっていない。
+
+    '
+social:
+  venues:
+  - id: V06
+    label: 公共施設
+    note: 市役所と公民館
+  - id: V14
+    label: 交通拠点
+    note: 駅とバス停
+  - id: V09
+    label: 商業施設
+    note: 店や飲食店が並ぶ通り
+  - id: V12
+    label: 公園
+    note: 広場とベンチ
+  - id: V15
+    label: 医療施設
+    note: 診療所
+cost:
+  price_table:
+    gemini-2.5-flash-lite:
+      input: 0.1
+      output: 0.4
+      cache_read: 0.01
+      cache_storage_hour: 1.0
+  safety_factor: 2.0

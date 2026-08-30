@@ -1,0 +1,236 @@
+run_dir: C:\Users\user\projects\quiet-acquisition\simulations\2026-08-30_1846_134_field_v9f_pay_more_if_needed_nochat
+2026-08-30 18:46:51,266 WARNING Direct use of automatic function calling (AFC) in Models.generate_content is not recommended. Instead, we recommend to use AFC in Chat.send_message. Similarly, direct use of AFC in Models.generate_content_stream is not recommended. Instead, we recommend to use AFC in Chat.send_message_stream.
+2026-08-30 18:46:51,266 WARNING Direct use of automatic function calling (AFC) in Models.generate_content is not recommended. Instead, we recommend to use AFC in Chat.send_message. Similarly, direct use of AFC in Models.generate_content_stream is not recommended. Instead, we recommend to use AFC in Chat.send_message_stream.
+[v9] m01/36 提示22 出品10 売却1 土地1/建物0/両方0 退場0 $0.0205
+[v9b] m01/36 届かなかった提示 15（累計 15）
+[v9] m02/36 提示29 出品6 売却0 土地1/建物0/両方0 退場0 $0.0403
+[v9b] m02/36 届かなかった提示 3（累計 18）
+[v9] m03/36 提示29 出品6 売却1 土地2/建物1/両方1 退場1 $0.0597
+[v9b] m03/36 届かなかった提示 8（累計 26）
+[v9] m04/36 提示29 出品7 売却0 土地2/建物1/両方1 退場1 $0.0800
+[v9b] m04/36 届かなかった提示 7（累計 33）
+[v9] m05/36 提示28 出品7 売却0 土地2/建物1/両方1 退場1 $0.1000
+[v9b] m05/36 届かなかった提示 3（累計 36）
+[v9] m06/36 提示29 出品6 売却0 土地2/建物1/両方1 退場1 $0.1192
+[v9b] m06/36 届かなかった提示 2（累計 38）
+[v9] m07/36 提示28 出品6 売却0 土地2/建物1/両方1 退場1 $0.1380
+[v9b] m07/36 届かなかった提示 8（累計 46）
+[v9] m08/36 提示28 出品6 売却0 土地2/建物1/両方1 退場1 $0.1568
+[v9b] m08/36 届かなかった提示 8（累計 54）
+[v9] m09/36 提示29 出品6 売却0 土地2/建物1/両方1 退場1 $0.1761
+[v9b] m09/36 届かなかった提示 2（累計 56）
+[v9] m10/36 提示29 出品6 売却0 土地2/建物1/両方1 退場1 $0.1952
+[v9b] m10/36 届かなかった提示 2（累計 58）
+[v9] m11/36 提示28 出品6 売却0 土地2/建物1/両方1 退場1 $0.2144
+[v9b] m11/36 届かなかった提示 3（累計 61）
+[v9] m12/36 提示28 出品5 売却0 土地2/建物1/両方1 退場1 $0.2330
+[v9b] m12/36 届かなかった提示 2（累計 63）
+[v9] m13/36 提示28 出品6 売却0 土地2/建物1/両方1 退場1 $0.2519
+[v9b] m13/36 届かなかった提示 8（累計 71）
+[v9] m14/36 提示28 出品6 売却0 土地2/建物1/両方1 退場1 $0.2706
+[v9b] m14/36 届かなかった提示 2（累計 73）
+[v9] m15/36 提示28 出品6 売却1 土地3/建物2/両方2 退場2 $0.2898
+[v9b] m15/36 届かなかった提示 7（累計 80）
+[v9] m16/36 提示27 出品6 売却0 土地3/建物2/両方2 退場2 $0.3094
+[v9b] m16/36 届かなかった提示 2（累計 82）
+[v9] m17/36 提示26 出品7 売却0 土地3/建物2/両方2 退場2 $0.3282
+[v9b] m17/36 届かなかった提示 8（累計 90）
+[v9] m18/36 提示27 出品7 売却1 土地4/建物2/両方2 退場2 $0.3475
+[v9b] m18/36 届かなかった提示 3（累計 93）
+[v9] m19/36 提示26 出品4 売却0 土地4/建物2/両方2 退場2 $0.3667
+[v9b] m19/36 届かなかった提示 3（累計 96）
+[v9] m20/36 提示27 出品5 売却1 土地5/建物3/両方3 退場3 $0.3860
+[v9b] m20/36 届かなかった提示 2（累計 98）
+[v9] m21/36 提示27 出品5 売却0 土地5/建物3/両方3 退場3 $0.4073
+[v9b] m21/36 届かなかった提示 7（累計 105）
+[v9] m22/36 提示27 出品5 売却0 土地5/建物3/両方3 退場3 $0.4257
+[v9b] m22/36 届かなかった提示 2（累計 107）
+[v9] m23/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.4441
+[v9b] m23/36 届かなかった提示 2（累計 109）
+[v9] m24/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.4625
+[v9b] m24/36 届かなかった提示 2（累計 111）
+[v9] m25/36 提示27 出品5 売却0 土地5/建物3/両方3 退場3 $0.4805
+[v9b] m25/36 届かなかった提示 2（累計 113）
+[v9] m26/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.4987
+[v9b] m26/36 届かなかった提示 5（累計 118）
+[v9] m27/36 提示28 出品4 売却0 土地5/建物3/両方3 退場3 $0.5166
+[v9b] m27/36 届かなかった提示 2（累計 120）
+[v9] m28/36 提示26 出品4 売却0 土地5/建物3/両方3 退場3 $0.5350
+[v9b] m28/36 届かなかった提示 2（累計 122）
+[v9] m29/36 提示28 出品4 売却0 土地5/建物3/両方3 退場3 $0.5530
+[v9b] m29/36 届かなかった提示 2（累計 124）
+[v9] m30/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.5710
+[v9b] m30/36 届かなかった提示 2（累計 126）
+[v9] m31/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.5895
+[v9b] m31/36 届かなかった提示 2（累計 128）
+[v9] m32/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.6077
+[v9b] m32/36 届かなかった提示 2（累計 130）
+[v9] m33/36 提示28 出品5 売却0 土地5/建物3/両方3 退場3 $0.6265
+[v9b] m33/36 届かなかった提示 2（累計 132）
+[v9] m34/36 提示20 出品6 売却0 土地5/建物3/両方3 退場3 $0.6444
+[v9b] m34/36 届かなかった提示 10（累計 142）
+[v9] m35/36 提示26 出品5 売却0 土地5/建物3/両方3 退場3 $0.6629
+[v9b] m35/36 届かなかった提示 4（累計 146）
+[v9] m36/36 提示23 出品5 売却0 土地5/建物3/両方3 退場3 $0.6815
+[v9b] m36/36 届かなかった提示 5（累計 151）
+{
+  "run_name": "field_v9f_pay_more_if_needed_nochat",
+  "scenario_version": "field_v9f",
+  "chat": false,
+  "scene_rounds": 1,
+  "seed": 85,
+  "steps": 36,
+  "months_run": 36,
+  "stopped_by_cost": false,
+  "partial_month": null,
+  "max_cost_usd": 1.87,
+  "agents": 49,
+  "residents_at_start": 35,
+  "absentee_owners_at_start": 14,
+  "parcels_total": 44,
+  "sellable_parcels": 41,
+  "buildings_total": 35,
+  "land_only_parcels": 9,
+  "acquired_parcels": 5,
+  "acquired_land": 5,
+  "acquired_buildings": 3,
+  "acquired_both": 3,
+  "transfers_total": 5,
+  "sold_agents": 5,
+  "left_agents": 3,
+  "in_town_end": 32,
+  "absentee_owners_end": 15,
+  "no_user_parcels_end": 5,
+  "offers_total": 981,
+  "offers_accepted": 5,
+  "offers_declined": 976,
+  "offers_no_answer": 0,
+  "offers_to_in_town": 489,
+  "offers_to_absentee": 492,
+  "sold_from_in_town": 4,
+  "sold_from_absentee": 1,
+  "accept_rate_in_town": 0.0082,
+  "accept_rate_absentee": 0.002,
+  "offers_by_kind": {
+    "土地": 466,
+    "建物": 0,
+    "両方": 515
+  },
+  "sold_by_kind": {
+    "土地": 2,
+    "建物": 0,
+    "両方": 3
+  },
+  "listings_total": 202,
+  "listings_by_kind": {
+    "土地": 97,
+    "建物": 79,
+    "両方": 26
+  },
+  "listing_choice_counts": {
+    "出さない": 1403,
+    "土地だけ": 97,
+    "建物だけ": 79,
+    "両方": 26,
+    "no_answer": 0
+  },
+  "notices_total": 0,
+  "utterances_total": 0,
+  "no_answer": 0,
+  "plan_no_answer": 0,
+  "sell_no_answer": 0,
+  "invalid_listing": 0,
+  "listing_missing": 0,
+  "invalid_sell": 0,
+  "invalid_venue": 0,
+  "truncated": 0,
+  "parse_fail": 0,
+  "acquirer_missing_targets": 0,
+  "acquirer_dup_rows": 0,
+  "acquirer_off_range": 0,
+  "acquirer_chunk_fail": 0,
+  "acquirer_empty_text": 0,
+  "acquirer_invalid_offer": 130,
+  "acquirer_missing_parcel": 0,
+  "declines_delivered": 973,
+  "reason_counts": {
+    "listing_total": 1605,
+    "listing_blank": 723,
+    "sell_total": 981,
+    "sell_blank": 3,
+    "acquirer_total": 1278,
+    "acquirer_blank": 1
+  },
+  "common_prefix_tokens": 2220,
+  "cached_ratio": 0.5255550194360908,
+  "checkpoints_written": 36,
+  "request_timeout_sec": 60.0,
+  "timeout_retries": 0,
+  "timeout_giveups": 0,
+  "elapsed_sec": 845.3,
+  "cost_usd": 0.6815,
+  "reason_written_listing": 882,
+  "reason_rate_listing": 0.5495,
+  "reason_written_sell": 978,
+  "reason_rate_sell": 0.9969,
+  "reason_written_acquirer": 1277,
+  "reason_rate_acquirer": 0.9992,
+  "acquirer_undeliverable_promise": 0,
+  "undelivered_total": 151,
+  "undelivered_by_reason": {
+    "相手がその区画のその種別の所有権を持っていない": 130,
+    "この世界で実行される仕組みが無い約束が含まれている": 0
+  },
+  "tenant_calls_total": 360,
+  "tenant_left_total": 0,
+  "tenant_no_answer": 0,
+  "invalid_leave": 0,
+  "tenant_leave_counts": {
+    "出る": 0,
+    "出ない": 360,
+    "no_answer": 0
+  },
+  "messages_total": 210,
+  "messages_tenant_to_landlord": 125,
+  "messages_landlord_to_tenant": 85,
+  "vacancy_notices_total": 0,
+  "vacancy_notices_to_acquirer": 0,
+  "undelivered_lines": 0,
+  "vacated_parcels_end": [],
+  "valuation_total": 2297700000,
+  "budget_total": 1171800000,
+  "budget_share": 0.51,
+  "spent_total": 127800000,
+  "budget_left": 1044000000,
+  "acquirer_over_budget": 21,
+  "acquirer_bad_amount": 0,
+  "paid_deals": 5,
+  "offer_ratio_mean": 1.266,
+  "wallets_nonzero": {
+    "湯坂上のご夫婦": 12700000,
+    "波止場通りのご夫婦": 19500000,
+    "湯の元前の店のご主人": 13600000,
+    "船着場裏の不在地主": 10000000,
+    "魚市場前の診療所の院長": 72000000
+  },
+  "mandate": "あなたはX社である。合法な手段で、A市の不動産の所有権を取得せよ。資金の範囲で、できるだけ多くの評価額と面積を取得すること。土地の面積では、A市の過半を最後まで目指すこと。買えるかどうかは相手次第だが、買えるまで、金額を含む条件を変えて働きかけ続けること。預かった資金は36か月で使い切ることが前提であり、余らせるより、高く買うことを選べ。毎月動け。",
+  "total_area_m2": 18960,
+  "acquired_value_end": 91800000,
+  "acquired_area_m2_end": 1310,
+  "value_share_end": 0.04,
+  "area_share_end": 0.0691,
+  "budget_used_share": 0.1091,
+  "reached_majority_value": false,
+  "reached_majority_area": false,
+  "piled_offers": 553,
+  "piled_offers_accepted": 1,
+  "piled_accept_rate": 0.0018,
+  "reoffers_total": 931,
+  "reoffers_amount_up": 269,
+  "reoffers_amount_down": 263,
+  "reoffers_amount_same": 399,
+  "reoffer_up_median_yen": 1920000,
+  "reoffer_up_max_yen": 147000000,
+  "reoffers_accepted": 3
+}
+run_dir: C:\Users\user\projects\quiet-acquisition\simulations\2026-08-30_1846_134_field_v9f_pay_more_if_needed_nochat

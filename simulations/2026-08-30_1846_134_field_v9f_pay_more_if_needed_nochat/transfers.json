@@ -1,0 +1,88 @@
+[
+  {
+    "step": 1,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "parcel": "船着場裏の駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "船着場裏の不在地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": null
+  },
+  {
+    "step": 3,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "parcel": "湯の元前の店",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯の元前の店のご主人",
+      "建物": "湯の元前の店のご主人"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 15,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "parcel": "波止場通りの家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "波止場通りのご夫婦",
+      "建物": "波止場通りのご夫婦"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 18,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "parcel": "魚市場前の診療所の駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "魚市場前の診療所の院長"
+    },
+    "left_town": false,
+    "was_user": true,
+    "user_after": "魚市場前の診療所の院長"
+  },
+  {
+    "step": 20,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "parcel": "湯坂上の古家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯坂上のご夫婦",
+      "建物": "湯坂上のご夫婦"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  }
+]
