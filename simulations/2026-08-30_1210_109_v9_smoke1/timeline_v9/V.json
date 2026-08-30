@@ -1,0 +1,44 @@
+{
+  "agent_id": "V",
+  "name": "湾岸大通りのホテルの支配人",
+  "role": "ホテル運営",
+  "district": "湾岸観光地区",
+  "resident_at_start": true,
+  "sellable": true,
+  "owned_at_start": [],
+  "used_at_start": [
+    "湾岸大通りのホテル"
+  ],
+  "neighbours": [
+    "波止場通りのご夫婦",
+    "浜町の旅館のご主人",
+    "波止場通りの借り店主"
+  ],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "今月はまず、ホテルの状況を把握することから始めよう。稼働率や清掃の状況、設備の点検など、日常業務の確認が最優先だ。来客の動向も注視し、今後の戦略を練る必要がある。まだ初月なので、大きな動きはせず、現状維持に努める。不動産の売買に関する動きは特にない。隣接する不動産の状況も特に気になる点はない。",
+      "went": "今月はどこにも行かない",
+      "notices": [],
+      "said": [],
+      "heard": [
+        {
+          "from": "波止場通りの借り店主",
+          "route": "隣近所",
+          "at": "商業施設",
+          "text": "皆さん、こんにちは。今日も賑わっていますね。"
+        }
+      ],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    }
+  ]
+}

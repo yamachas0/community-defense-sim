@@ -1,0 +1,46 @@
+{
+  "agent_id": "CC",
+  "name": "湾岸のホテルの所有会社",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "湾岸大通りのホテル",
+    "湾岸大通りの社員寮"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [
+    {
+      "month": 1,
+      "parcel": "湾岸大通りの社員寮",
+      "kind": "両方"
+    }
+  ],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "この社員寮と土地の所有権を譲渡していただけるなら、引き続き社員寮として使用していただいて構いません。",
+      "offer_parcel": "湾岸大通りの社員寮",
+      "offer_kind": "両方",
+      "listings": {
+        "湾岸大通りのホテル": "出さない",
+        "湾岸大通りの社員寮": "出さない"
+      },
+      "listing_reasons": {
+        "湾岸大通りのホテル": "",
+        "湾岸大通りの社員寮": ""
+      },
+      "sell": "売る",
+      "sell_reason": "利用継続を前提とした売却機会",
+      "thought_at_decision": "The user is a company that owns property in A city but does not live there. This is the end of the first month. I need to decide whether to list my properties and whether to accept the offer from X company for the employee dormitory. The hotel is currently managed by a director and the dormitory by residents. X company has made an offer for the dormitory, offering to let the current users continue to occupy it. Since I don't live in A city and the dormitory is managed by residents, there's no immediate personal benefit or loss from accepting the offer, other than the transfer of ownership. The offer is for both land and building. It seems like a reasonable offer that allows the current situation to continue. I should accept it. For the hotel, I don't have any specific reason to sell it or not sell it at this moment, and no offers have come in. Therefore, I will not list it for sale this month. For the dormitory, since I am accepting X company's offer, I don't need to list it for sale separately. I will set 'listings' for the hotel to '出さない' and for the dormitory to '出さない' as well since the offer is being accepted. The reason for accepting the offer is that it's a good opportunity to divest without disrupting current usage. The reason for not listing the hotel is that there's no compelling reason to do so now."
+    }
+  ]
+}

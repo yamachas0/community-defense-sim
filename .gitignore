@@ -12,6 +12,11 @@ venv/
 *.log
 _scratch/
 
+# v9 動画作成の中間生成物（mock走行・作業用フレーム）
+simulations/*/video_frames/
+docs/submission/_video_parts/
+simulations/*mock*/
+
 # OS / editor
 .DS_Store
 Thumbs.db

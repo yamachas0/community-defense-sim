@@ -1,0 +1,26 @@
+[
+  {
+    "step": 1,
+    "offers_sent": 0,
+    "listed_this_month": 1,
+    "accepted_this_month": 0,
+    "sold_this_month": 0,
+    "parcels_this_month": 0,
+    "sold_cum": 0,
+    "parcels_cum": 0,
+    "risk_set": 28,
+    "attended": 27,
+    "by_venue": {
+      "公共施設": 5,
+      "交通拠点": 3,
+      "商業施設": 17,
+      "公園": 1,
+      "医療施設": 1,
+      "今月はどこにも行かない": 3
+    },
+    "utterances": 21,
+    "heard_mean": 10.0,
+    "heard_max": 16,
+    "heard_min": 1
+  }
+]

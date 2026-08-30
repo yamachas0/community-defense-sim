@@ -1,0 +1,65 @@
+[
+  {
+    "step": 1,
+    "offers_sent": 28,
+    "sold_this_month": 0,
+    "parcels_this_month": 0,
+    "sold_cum": 0,
+    "parcels_cum": 0,
+    "risk_set": 28,
+    "attended": 20,
+    "by_venue": {
+      "共同浴場": 4,
+      "商店街": 6,
+      "公民館": 2,
+      "近所の道端": 8,
+      "今月はどこにも行かない": 10
+    },
+    "utterances": 20,
+    "heard_mean": 5.27,
+    "heard_max": 10,
+    "heard_min": 0
+  },
+  {
+    "step": 2,
+    "offers_sent": 28,
+    "sold_this_month": 4,
+    "parcels_this_month": 5,
+    "sold_cum": 4,
+    "parcels_cum": 5,
+    "risk_set": 24,
+    "attended": 19,
+    "by_venue": {
+      "共同浴場": 2,
+      "商店街": 6,
+      "公民館": 6,
+      "近所の道端": 5,
+      "今月はどこにも行かない": 11
+    },
+    "utterances": 19,
+    "heard_mean": 4.83,
+    "heard_max": 9,
+    "heard_min": 1
+  },
+  {
+    "step": 3,
+    "offers_sent": 24,
+    "sold_this_month": 1,
+    "parcels_this_month": 1,
+    "sold_cum": 5,
+    "parcels_cum": 6,
+    "risk_set": 23,
+    "attended": 25,
+    "by_venue": {
+      "共同浴場": 10,
+      "商店街": 6,
+      "公民館": 4,
+      "近所の道端": 5,
+      "今月はどこにも行かない": 5
+    },
+    "utterances": 25,
+    "heard_mean": 7.6,
+    "heard_max": 12,
+    "heard_min": 2
+  }
+]

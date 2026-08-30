@@ -1,0 +1,737 @@
+{
+  "agent_id": "CK",
+  "name": "駅裏の地主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "駅裏の小区画"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "駅裏の小区画の土地を所有している。現状、建物の所有者は駅裏の持ち主さんで、土地を借りている。特に売却の意思はないので、まずは「出さない」を選択する。"
+    },
+    {
+      "month": 2,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "駅裏の小区画の土地は現状維持で良い。売却の意思はないため、引き続き「出さない」を選択する。特に理由はない。"
+    },
+    {
+      "month": 3,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "今月も駅裏の小区画の土地は売却する意思がないため、「出さない」を選択する。特に理由はない。"
+    },
+    {
+      "month": 4,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "今月も駅裏の小区画の土地は売却する意思がない。特に理由はないが、引き続き「出さない」を選択する。来月以降も状況が変わらなければ同様の判断を続けるだろう。"
+    },
+    {
+      "month": 5,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "今月も駅裏の小区画の土地は売却する意思がない。特に理由はないが、引き続き「出さない」を選択する。来月以降も状況が変わらなければ同様の判断を続けるだろう。"
+    },
+    {
+      "month": 6,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "今月も駅裏の小区画の土地は売却する意思がない。特に理由はないが、引き続き「出さない」を選択する。来月以降も状況が変わらなければ同様の判断を続けるだろう。"
+    },
+    {
+      "month": 7,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "駅裏の小区画の土地は引き続き売却する意思はない。特に変化もないため、来月も同様の判断を継続する。"
+    },
+    {
+      "month": 8,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第8月。駅裏の小区画の土地は、所有して30年になるが、引き続き売却する意思はない。特に変化もなく、来月も同様の判断を継続する。"
+    },
+    {
+      "month": 9,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡していただけるなら、私どもで管理し、有効活用いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "所有し続けている土地であり、売却の意思はない"
+      },
+      "sell": "売らない",
+      "sell_reason": "所有権を譲渡するつもりはないため",
+      "thought_at_decision": "第9月。駅裏の小区画の土地は、引き続き売却する意思はない。X社からの申し出があったが、所有権を譲渡するつもりはない。来月も同様の判断を継続する。"
+    },
+    {
+      "month": 10,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡していただけるなら、私どもで管理し、有効活用いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "所有権を譲渡するつもりはありません",
+      "thought_at_decision": "第9月時点では「駅裏の小区画の土地は、引き続き売却する意思はない。X社からの申し出があったが、所有権を譲渡するつもりはない。来月も同様の判断を継続する。」と考えていた。しかし、今月もX社から同様の申し出が届いている。所有権を譲渡するつもりはないという意思は変わらない。そのため、引き続き「出さない」を選択する。また、届いた条件についても「売らない」を選択する。理由は、所有権を譲渡するつもりがないことを明確に伝えるため。"
+    },
+    {
+      "month": 11,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡していただけるなら、私どもで管理し、有効活用いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "所有権譲渡の意思はありません",
+      "thought_at_decision": "第9月時点から引き続き、駅裏の小区画の土地の所有権を譲渡する意思はない。X社からの申し出は今回も断る。所有権はあくまで維持する。"
+    },
+    {
+      "month": 12,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡していただけるなら、私どもで管理し、有効活用いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "所有権は維持する",
+      "thought_at_decision": "第9月時点から引き続き、駅裏の小区画の土地の所有権を譲渡する意思はない。X社からの申し出も断る。所有権は維持する。売りに出す理由はない。"
+    },
+    {
+      "month": 13,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の内心を維持する。駅裏の小区画の土地の所有権は維持する。X社からの申し出はないため、売りに出す必要はない。よって、「出さない」を選択する。"
+    },
+    {
+      "month": 14,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の内心を維持する。駅裏の小区画の土地の所有権は維持する。X社からの申し出はないため、売りに出す必要はない。よって、「出さない」を選択する。"
+    },
+    {
+      "month": 15,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡していただけるなら、私どもで管理し、地域開発の恩恵を受けられるようにします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "所有権は維持し、様子を見る"
+      },
+      "sell": "売らない",
+      "sell_reason": "開発計画が不明瞭なため、現時点では売却しない",
+      "thought_at_decision": "第12月時点の内心を維持する。駅裏の小区画の土地の所有権は維持する。X社からの申し出はあったが、海外の不動産投資会社というだけで、具体的な開発計画やメリットが不明瞭。現時点では保有を続け、様子を見るのが賢明と判断。よって、「出さない」を選択する。"
+    },
+    {
+      "month": 16,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子見のため"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の内心を維持する。駅裏の小区画の土地の所有権は維持する。X社からの申し出はあったが、海外の不動産投資会社というだけで、具体的な開発計画やメリットが不明瞭。現時点では保有を続け、様子を見るのが賢明と判断。よって、「出さない」を選択する。"
+    },
+    {
+      "month": 17,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "私どもは海外の不動産投資会社です。貴殿が所有する駅裏の小区画の土地の所有権を譲渡いただければ、A市での新たな生活基盤構築を支援いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "具体的な計画不明瞭のため、現時点では売却しない",
+      "thought_at_decision": "第12月時点の内心を維持するという指示だが、第17月時点の「今の自分の内心」としてX社からの申し出を検討した結果、「出さない」を選択するとある。これは矛盾している。指示の「第12月時点の内心を維持する」という部分を優先し、X社からの申し出はあったものの、具体的な計画が不明瞭なため、現時点では保有を続けると判断するのが自然だろう。よって、Listingは「出さない」とする。Sellについても、同様の理由で「売らない」とする。"
+    },
+    {
+      "month": 18,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の内心を維持するという指示に従い、X社からの申し出はあったものの、具体的な計画が不明瞭なため、現時点では保有を続ける。したがって、Listingは「出さない」とし、Sellについても「売らない」と判断する。"
+    },
+    {
+      "month": 19,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の指示に従い、引き続き様子見。X社の計画が具体化するまでは、現時点では不動産を売りに出さない。今後も状況を注視する。"
+    },
+    {
+      "month": 20,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の指示に従い、引き続き様子見。X社の計画が具体化するまでは、現時点では不動産を売りに出さない。今後も状況を注視する。今回は売りに出すものはない。"
+    },
+    {
+      "month": 21,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の指示を引き継ぎ、引き続き様子見。X社の計画が具体化するまでは、現時点では不動産を売りに出さない。今後も状況を注視する。今回は売りに出すものはない。"
+    },
+    {
+      "month": 22,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の指示を引き継ぎ、引き続き様子見。X社の計画が具体化するまでは、現時点では不動産を売りに出さない。今後も状況を注視する。今回は売りに出すものはない。"
+    },
+    {
+      "month": 23,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の指示を引き継ぎ、引き続き様子見。X社の計画が具体化するまでは、現時点では不動産を売りに出さない。今後も状況を注視する。今回は売りに出すものはない。"
+    },
+    {
+      "month": 24,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月時点の指示を引き継ぎ、引き続き様子見。X社の計画が具体化するまでは、現時点では不動産を売りに出さない。今後も状況を注視する。今回は売りに出すものはない。"
+    },
+    {
+      "month": 25,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡いただければ、A市での新たな生活基盤構築を支援いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "具体性に欠けるため、応じかねます。",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 26,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "引き続き様子見"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 27,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子見を続ける"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 28,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子見を続ける"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 29,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 30,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "引き続き様子見"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 31,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子見を続ける"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 32,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡いただければ、A市での新たな生活基盤構築と地域経済への貢献を支援いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "計画の具体性不明瞭のため",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 33,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡いただければ、A市での新たな生活基盤構築と地域経済への貢献を支援いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "計画の具体性が不明瞭なため、現時点では売却しない",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 34,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿が所有する駅裏の小区画の土地の所有権を譲渡いただければ、A市での新たな生活基盤構築と地域経済への貢献を支援いたします。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "計画の具体性が不明なため",
+      "thought_at_decision": "第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 35,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子見を続ける"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第35月。第12月からの指示通り、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    },
+    {
+      "month": 36,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子見を継続する"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "第35月からの内心を引き継ぎ、引き続き様子見の姿勢を維持する。X社からの申し出はあったが、彼らの計画の具体性やA市での影響力はまだ不明瞭である。現時点では、所有権を移譲するリスクを冒す必要はない。よって、売り出しは行わず、申し出も断る。来月以降の状況をさらに観察する。"
+    }
+  ]
+}

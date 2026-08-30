@@ -1,0 +1,37 @@
+{
+  "agent_id": "CH",
+  "name": "学園南の地主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "学園南の家"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "学園南の家": "出さない"
+      },
+      "listing_reasons": {
+        "学園南の家": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "まだ不動産を売るかどうか決める段階ではない。1か月目なので、まずは様子を見る。学園南の家は土地だけ所有しており、建物は別の方が所有している。借りている家族との関係もまだ浅いので、すぐに売却を検討する必要はないだろう。来月以降、状況を見て判断したい。"
+    }
+  ]
+}

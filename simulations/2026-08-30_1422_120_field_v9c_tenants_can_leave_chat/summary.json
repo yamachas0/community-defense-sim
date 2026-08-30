@@ -1,0 +1,167 @@
+{
+  "run_name": "field_v9c_tenants_can_leave_chat",
+  "scenario_version": "field_v9c",
+  "chat": true,
+  "scene_rounds": 1,
+  "seed": 85,
+  "steps": 36,
+  "months_run": 36,
+  "stopped_by_cost": false,
+  "partial_month": null,
+  "max_cost_usd": 1.87,
+  "agents": 49,
+  "residents_at_start": 35,
+  "absentee_owners_at_start": 14,
+  "parcels_total": 44,
+  "sellable_parcels": 41,
+  "buildings_total": 35,
+  "land_only_parcels": 9,
+  "acquired_parcels": 3,
+  "acquired_land": 1,
+  "acquired_buildings": 3,
+  "acquired_both": 1,
+  "transfers_total": 3,
+  "sold_agents": 3,
+  "left_agents": 3,
+  "in_town_end": 32,
+  "absentee_owners_end": 15,
+  "no_user_parcels_end": 5,
+  "offers_total": 960,
+  "offers_accepted": 3,
+  "offers_declined": 956,
+  "offers_no_answer": 1,
+  "offers_to_in_town": 567,
+  "offers_to_absentee": 393,
+  "sold_from_in_town": 3,
+  "sold_from_absentee": 0,
+  "accept_rate_in_town": 0.0053,
+  "accept_rate_absentee": 0.0,
+  "offers_by_kind": {
+    "土地": 278,
+    "建物": 141,
+    "両方": 541
+  },
+  "sold_by_kind": {
+    "土地": 0,
+    "建物": 2,
+    "両方": 1
+  },
+  "listings_total": 77,
+  "listings_by_kind": {
+    "土地": 2,
+    "建物": 54,
+    "両方": 21
+  },
+  "listing_choice_counts": {
+    "出さない": 1620,
+    "土地だけ": 2,
+    "建物だけ": 54,
+    "両方": 21,
+    "no_answer": 2
+  },
+  "notices_total": 0,
+  "utterances_total": 399,
+  "no_answer": 2,
+  "plan_no_answer": 0,
+  "sell_no_answer": 1,
+  "invalid_listing": 0,
+  "listing_missing": 2,
+  "invalid_sell": 1,
+  "invalid_venue": 0,
+  "truncated": 1,
+  "parse_fail": 0,
+  "acquirer_missing_targets": 0,
+  "acquirer_dup_rows": 9,
+  "acquirer_off_range": 0,
+  "acquirer_chunk_fail": 0,
+  "acquirer_empty_text": 0,
+  "acquirer_invalid_offer": 54,
+  "acquirer_missing_parcel": 0,
+  "declines_delivered": 953,
+  "reason_counts": {
+    "listing_total": 1699,
+    "listing_blank": 685,
+    "sell_total": 960,
+    "sell_blank": 4,
+    "acquirer_total": 1318,
+    "acquirer_blank": 0
+  },
+  "common_prefix_tokens": 2091,
+  "cached_ratio": 0.5776652378706014,
+  "checkpoints_written": 36,
+  "request_timeout_sec": 60.0,
+  "timeout_retries": 0,
+  "timeout_giveups": 0,
+  "elapsed_sec": 1070.8,
+  "usage": {
+    "calls": 3553,
+    "input_tokens": 9814790,
+    "cached_tokens": 5669663,
+    "output_tokens": 669567,
+    "errors": 0,
+    "by_tag": {
+      "v9:acquirer:acquirer": {
+        "calls": 144,
+        "input": 1104715,
+        "cached": 161178,
+        "output": 127244
+      },
+      "v9:plan:plan": {
+        "calls": 1243,
+        "input": 3110792,
+        "cached": 2213538,
+        "output": 147346
+      },
+      "v9:scene_r1:scene": {
+        "calls": 485,
+        "input": 1185270,
+        "cached": 847098,
+        "output": 80895
+      },
+      "v9:decide:decide": {
+        "calls": 1309,
+        "input": 3370077,
+        "cached": 1764637,
+        "output": 262119
+      },
+      "v9:decide:tenant": {
+        "calls": 372,
+        "input": 1043936,
+        "cached": 683212,
+        "output": 51963
+      }
+    }
+  },
+  "cost_usd": 0.739,
+  "reason_written_listing": 1014,
+  "reason_rate_listing": 0.5968,
+  "reason_written_sell": 956,
+  "reason_rate_sell": 0.9958,
+  "reason_written_acquirer": 1318,
+  "reason_rate_acquirer": 1.0,
+  "acquirer_undeliverable_promise": 0,
+  "undelivered_total": 54,
+  "undelivered_by_reason": {
+    "相手がその区画のその種別の所有権を持っていない": 54,
+    "この世界で実行される仕組みが無い約束が含まれている": 0
+  },
+  "tenant_calls_total": 372,
+  "tenant_left_total": 2,
+  "tenant_no_answer": 0,
+  "invalid_leave": 0,
+  "tenant_leave_counts": {
+    "出る": 2,
+    "出ない": 370,
+    "no_answer": 0
+  },
+  "messages_total": 554,
+  "messages_tenant_to_landlord": 283,
+  "messages_landlord_to_tenant": 271,
+  "vacancy_notices_total": 2,
+  "vacancy_notices_to_acquirer": 1,
+  "undelivered_lines": 1,
+  "vacated_parcels_end": [
+    "湯坂奥の空き家",
+    "駅前通りの家"
+  ]
+}

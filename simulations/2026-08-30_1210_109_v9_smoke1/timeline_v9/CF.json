@@ -1,0 +1,37 @@
+{
+  "agent_id": "CF",
+  "name": "波止場通りの元店舗の家主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "波止場通りの元店舗"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "貴殿の所有する波止場通りの元店舗について、所有権の移転を希望いたします。",
+      "offer_parcel": "波止場通りの元店舗",
+      "offer_kind": "両方",
+      "listings": {
+        "波止場通りの元店舗": "出さない"
+      },
+      "listing_reasons": {
+        "波止場通りの元店舗": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "まだ様子を見たい",
+      "thought_at_decision": "初めての月で、特に街への関心もまだ低い。X社からの申し出は興味深いが、まだ様子を見たい。不動産を積極的に売り出す必要はない。まずは現状維持で、様子を見ることにする。波止場通りの元店舗は貸しているので、すぐに手放す必要はないだろう。"
+    }
+  ]
+}

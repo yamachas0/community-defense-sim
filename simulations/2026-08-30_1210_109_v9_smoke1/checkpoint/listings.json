@@ -1,0 +1,42 @@
+[
+  {
+    "step": 1,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "in_town": true,
+    "parcel": "駅裏の小区画",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "in_town": true,
+    "parcel": "学園南の家",
+    "listing": "建物だけ",
+    "kind": "建物",
+    "sold_same_month": false
+  },
+  {
+    "step": 1,
+    "agent_id": "CD",
+    "name": "灯台下の宿の家主",
+    "in_town": false,
+    "parcel": "灯台下の宿",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": true
+  },
+  {
+    "step": 1,
+    "agent_id": "CE",
+    "name": "本町通りの元店舗の家主",
+    "in_town": false,
+    "parcel": "本町通りの元店舗",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  }
+]

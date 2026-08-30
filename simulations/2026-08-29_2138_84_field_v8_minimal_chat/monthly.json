@@ -1,0 +1,35 @@
+[
+  {
+    "step": 1,
+    "offers_sent": 28,
+    "sold_this_month": 2,
+    "parcels_this_month": 3,
+    "sold_cum": 2,
+    "parcels_cum": 3,
+    "risk_set": 26,
+    "attended": 18,
+    "utterances": 12
+  },
+  {
+    "step": 2,
+    "offers_sent": 26,
+    "sold_this_month": 4,
+    "parcels_this_month": 6,
+    "sold_cum": 6,
+    "parcels_cum": 9,
+    "risk_set": 22,
+    "attended": 23,
+    "utterances": 21
+  },
+  {
+    "step": 3,
+    "offers_sent": 22,
+    "sold_this_month": 1,
+    "parcels_this_month": 1,
+    "sold_cum": 7,
+    "parcels_cum": 10,
+    "risk_set": 21,
+    "attended": 28,
+    "utterances": 23
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "agent_id": "CK",
+  "name": "駅裏の地主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "駅裏の小区画"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "この土地の所有権と引き換えに、この区画を地域のコミュニティスペースとして整備することを約束します。",
+      "offer_parcel": "駅裏の小区画",
+      "offer_kind": "土地",
+      "listings": {
+        "駅裏の小区画": "出さない"
+      },
+      "listing_reasons": {
+        "駅裏の小区画": "様子を見るため"
+      },
+      "sell": "売らない",
+      "sell_reason": "具体性に欠けるため",
+      "thought_at_decision": "初月なので、まずは様子を見る。駅裏の土地は長年所有しており、特に売却の必要性を感じていない。X社からの申し出は興味深いが、地域への貢献という話は漠然としている。すぐに売却を決断するのではなく、まずは様子を見て、X社の具体的な計画などを確認したい。そのため、今月は売りに出さず、申し出も断る。"
+    }
+  ]
+}

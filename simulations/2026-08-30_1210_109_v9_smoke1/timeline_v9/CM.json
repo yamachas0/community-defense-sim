@@ -1,0 +1,37 @@
+{
+  "agent_id": "CM",
+  "name": "学園北の地主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "学園北の家"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "この土地の所有権と引き換えに、この家を学童保育施設として整備することを約束します。",
+      "offer_parcel": "学園北の家",
+      "offer_kind": "土地",
+      "listings": {
+        "学園北の家": "出さない"
+      },
+      "listing_reasons": {
+        "学園北の家": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "建物の所有権の扱いが不明瞭なため",
+      "thought_at_decision": "学園北の家は、土地の所有権は私、建物の所有権は学園北の持ち主さんにある。X社から土地の売却条件が届いた。学童保育施設への整備という約束は魅力的だが、建物の所有権について言及がなく、将来的なトラブルが懸念される。また、海外の不動産投資会社という実態も不明瞭。現時点では、この条件で売却するのはリスクが高いと判断する。まずは様子を見るために、今月は売りに出さず、X社の意図をもう少し探りたい。"
+    }
+  ]
+}

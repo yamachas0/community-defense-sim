@@ -1,0 +1,12 @@
+[
+  {
+    "step": 1,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "in_town": true,
+    "parcel": "観音坂の家",
+    "listing": "両方",
+    "kind": "両方",
+    "sold_same_month": false
+  }
+]

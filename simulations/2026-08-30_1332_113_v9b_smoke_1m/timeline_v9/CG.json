@@ -1,0 +1,37 @@
+{
+  "agent_id": "CG",
+  "name": "北団地の地主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "北団地の中古住宅"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "北団地の中古住宅": "出さない"
+      },
+      "listing_reasons": {
+        "北団地の中古住宅": ""
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "まだ何も所有していないので、まずは様子を見る。売りに出す必要はない。"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "run_name": "v9b_smoke_1m",
+  "scenario_version": "field_v9b",
+  "chat": true,
+  "scene_rounds": 1,
+  "seed": 85,
+  "steps": 1,
+  "months_run": 1,
+  "stopped_by_cost": false,
+  "partial_month": null,
+  "max_cost_usd": 0.06,
+  "agents": 49,
+  "residents_at_start": 35,
+  "absentee_owners_at_start": 14,
+  "parcels_total": 44,
+  "sellable_parcels": 41,
+  "buildings_total": 35,
+  "land_only_parcels": 9,
+  "acquired_parcels": 2,
+  "acquired_land": 2,
+  "acquired_buildings": 1,
+  "acquired_both": 1,
+  "transfers_total": 2,
+  "sold_agents": 2,
+  "left_agents": 0,
+  "in_town_end": 35,
+  "absentee_owners_end": 13,
+  "no_user_parcels_end": 2,
+  "offers_total": 21,
+  "offers_accepted": 2,
+  "offers_declined": 19,
+  "offers_no_answer": 0,
+  "offers_to_in_town": 11,
+  "offers_to_absentee": 10,
+  "sold_from_in_town": 0,
+  "sold_from_absentee": 2,
+  "accept_rate_in_town": 0.0,
+  "accept_rate_absentee": 0.2,
+  "offers_by_kind": {
+    "土地": 6,
+    "建物": 1,
+    "両方": 14
+  },
+  "sold_by_kind": {
+    "土地": 1,
+    "建物": 0,
+    "両方": 1
+  },
+  "listings_total": 8,
+  "listings_by_kind": {
+    "土地": 3,
+    "建物": 2,
+    "両方": 3
+  },
+  "listing_choice_counts": {
+    "出さない": 40,
+    "土地だけ": 3,
+    "建物だけ": 2,
+    "両方": 3,
+    "no_answer": 0
+  },
+  "notices_total": 0,
+  "utterances_total": 13,
+  "no_answer": 0,
+  "plan_no_answer": 1,
+  "sell_no_answer": 0,
+  "invalid_listing": 0,
+  "listing_missing": 0,
+  "invalid_sell": 0,
+  "invalid_venue": 1,
+  "truncated": 1,
+  "parse_fail": 0,
+  "acquirer_missing_targets": 0,
+  "acquirer_dup_rows": 5,
+  "acquirer_off_range": 0,
+  "acquirer_chunk_fail": 0,
+  "acquirer_empty_text": 0,
+  "acquirer_invalid_offer": 10,
+  "acquirer_missing_parcel": 0,
+  "declines_delivered": 19,
+  "reason_counts": {
+    "listing_total": 48,
+    "listing_blank": 32,
+    "sell_total": 21,
+    "sell_blank": 0,
+    "acquirer_total": 42,
+    "acquirer_blank": 0
+  },
+  "common_prefix_tokens": 1934,
+  "cached_ratio": 0.460430915754336,
+  "checkpoints_written": 1,
+  "request_timeout_sec": 60.0,
+  "timeout_retries": 0,
+  "timeout_giveups": 0,
+  "elapsed_sec": 32.3,
+  "usage": {
+    "calls": 92,
+    "input_tokens": 214195,
+    "cached_tokens": 98622,
+    "output_tokens": 19586,
+    "errors": 0,
+    "by_tag": {
+      "v9:acquirer:acquirer": {
+        "calls": 4,
+        "input": 14188,
+        "cached": 841,
+        "output": 4133
+      },
+      "v9:plan:plan": {
+        "calls": 35,
+        "input": 77802,
+        "cached": 32913,
+        "output": 5577
+      },
+      "v9:scene_r1:scene": {
+        "calls": 16,
+        "input": 35976,
+        "cached": 24825,
+        "output": 2593
+      },
+      "v9:decide:decide": {
+        "calls": 37,
+        "input": 86229,
+        "cached": 40043,
+        "output": 7283
+      }
+    }
+  },
+  "cost_usd": 0.0204,
+  "reason_written_listing": 16,
+  "reason_rate_listing": 0.3333,
+  "reason_written_sell": 21,
+  "reason_rate_sell": 1.0,
+  "reason_written_acquirer": 42,
+  "reason_rate_acquirer": 1.0,
+  "acquirer_undeliverable_promise": 5,
+  "undelivered_total": 15,
+  "undelivered_by_reason": {
+    "相手がその区画のその種別の所有権を持っていない": 10,
+    "この世界で実行される仕組みが無い約束が含まれている": 5
+  }
+}

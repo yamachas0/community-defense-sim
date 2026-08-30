@@ -1,0 +1,52 @@
+[
+  {
+    "step": 18,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "parcel": "駅前通りの家",
+    "kind": "建物",
+    "moved": [
+      "建物"
+    ],
+    "before": {
+      "建物": "駅前通りの持ち主さん"
+    },
+    "left_town": false,
+    "was_user": true,
+    "user_after": "駅前通りの持ち主さん"
+  },
+  {
+    "step": 30,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "parcel": "学園西の家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "学園西のご夫婦",
+      "建物": "学園西のご夫婦"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 31,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "parcel": "駅裏の小区画",
+    "kind": "建物",
+    "moved": [
+      "建物"
+    ],
+    "before": {
+      "建物": "駅裏の持ち主さん"
+    },
+    "left_town": false,
+    "was_user": true,
+    "user_after": "駅裏の持ち主さん"
+  }
+]

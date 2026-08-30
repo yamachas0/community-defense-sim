@@ -1,0 +1,398 @@
+[
+  {
+    "parcel": "湯坂上の古家",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "湯坂上のご夫婦",
+    "building": "湯坂上のご夫婦",
+    "tenant": null,
+    "user": "湯坂上のご夫婦"
+  },
+  {
+    "parcel": "湯坂上の空き店舗",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "湯坂上のご夫婦",
+    "building": "湯坂上のご夫婦",
+    "tenant": "湯坂上の借り店主",
+    "user": "湯坂上の借り店主"
+  },
+  {
+    "parcel": "駅前通りの家",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "駅前通りの地主",
+    "building": "X社",
+    "tenant": null,
+    "user": null
+  },
+  {
+    "parcel": "観音坂の家",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "観音坂の持ち主さん",
+    "building": "観音坂の持ち主さん",
+    "tenant": null,
+    "user": "観音坂の持ち主さん"
+  },
+  {
+    "parcel": "観音坂の空き地",
+    "district": "温泉丘陵地区",
+    "has_building": false,
+    "land": "観音坂の持ち主さん",
+    "building": null,
+    "tenant": null,
+    "user": "観音坂の持ち主さん"
+  },
+  {
+    "parcel": "湯の元の古家",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "湯の元のひとり暮らしさん",
+    "building": "湯の元のひとり暮らしさん",
+    "tenant": null,
+    "user": "湯の元のひとり暮らしさん"
+  },
+  {
+    "parcel": "学園北の家",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "学園北の地主",
+    "building": "学園北の持ち主さん",
+    "tenant": null,
+    "user": "学園北の持ち主さん"
+  },
+  {
+    "parcel": "駅裏の小区画",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "駅裏の地主",
+    "building": "X社",
+    "tenant": "駅裏の持ち主さん",
+    "user": "駅裏の持ち主さん"
+  },
+  {
+    "parcel": "一番街の家",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "一番街の持ち主さん",
+    "building": "一番街の持ち主さん",
+    "tenant": null,
+    "user": "一番街の持ち主さん"
+  },
+  {
+    "parcel": "一番街の資材置場",
+    "district": "中央駅前地区",
+    "has_building": false,
+    "land": "一番街の持ち主さん",
+    "building": null,
+    "tenant": null,
+    "user": "一番街の持ち主さん"
+  },
+  {
+    "parcel": "潮見横丁の改装した古家",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "潮見横丁の地主",
+    "building": "潮見横丁の持ち主さん",
+    "tenant": null,
+    "user": "潮見横丁の持ち主さん"
+  },
+  {
+    "parcel": "本町通りの家",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "本町通りの持ち主さん",
+    "building": "本町通りの持ち主さん",
+    "tenant": null,
+    "user": "本町通りの持ち主さん"
+  },
+  {
+    "parcel": "本町通りの元店舗",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "本町通りの元店舗の家主",
+    "building": "本町通りの元店舗の家主",
+    "tenant": "本町通りの借り店主",
+    "user": "本町通りの借り店主"
+  },
+  {
+    "parcel": "学園南の家",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "学園南の地主",
+    "building": "学園南の持ち主さん",
+    "tenant": null,
+    "user": "学園南の持ち主さん"
+  },
+  {
+    "parcel": "湯坂下の家",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "湯坂下の地主",
+    "building": "湯坂下の持ち主さん",
+    "tenant": null,
+    "user": "湯坂下の持ち主さん"
+  },
+  {
+    "parcel": "波止場通りの元店舗",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "波止場通りの元店舗の家主",
+    "building": "波止場通りの元店舗の家主",
+    "tenant": "波止場通りの借り店主",
+    "user": "波止場通りの借り店主"
+  },
+  {
+    "parcel": "波止場通りの家",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "波止場通りのご夫婦",
+    "building": "波止場通りのご夫婦",
+    "tenant": null,
+    "user": "波止場通りのご夫婦"
+  },
+  {
+    "parcel": "北団地の中古住宅",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "北団地の地主",
+    "building": "北団地の持ち主さん",
+    "tenant": null,
+    "user": "北団地の持ち主さん"
+  },
+  {
+    "parcel": "線路沿いの実家",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "線路沿いの持ち主さん",
+    "building": "線路沿いの持ち主さん",
+    "tenant": null,
+    "user": "線路沿いの持ち主さん"
+  },
+  {
+    "parcel": "岬道の家",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "岬道の持ち主さん",
+    "building": "岬道の持ち主さん",
+    "tenant": null,
+    "user": "岬道の持ち主さん"
+  },
+  {
+    "parcel": "学園西の家",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "X社",
+    "building": "X社",
+    "tenant": null,
+    "user": null
+  },
+  {
+    "parcel": "学園西の空き家",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "学園西のご夫婦",
+    "building": "学園西のご夫婦",
+    "tenant": "学園西の借家のご家族",
+    "user": "学園西の借家のご家族"
+  },
+  {
+    "parcel": "浜町の旅館",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "浜町の旅館のご主人",
+    "building": "浜町の旅館のご主人",
+    "tenant": null,
+    "user": "浜町の旅館のご主人"
+  },
+  {
+    "parcel": "浜町の旅館の駐車場",
+    "district": "湾岸観光地区",
+    "has_building": false,
+    "land": "浜町の旅館のご主人",
+    "building": null,
+    "tenant": null,
+    "user": "浜町の旅館のご主人"
+  },
+  {
+    "parcel": "駅前広場の店舗兼住宅",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "駅前広場の食堂のご夫婦",
+    "building": "駅前広場の食堂のご夫婦",
+    "tenant": null,
+    "user": "駅前広場の食堂のご夫婦"
+  },
+  {
+    "parcel": "湯の元前の店",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "湯の元前の店のご主人",
+    "building": "湯の元前の店のご主人",
+    "tenant": null,
+    "user": "湯の元前の店のご主人"
+  },
+  {
+    "parcel": "学園前の貸オフィス",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "学園前の貸オフィスの家主",
+    "building": "学園前の貸オフィスの家主",
+    "tenant": "学園前の貸オフィスの支配人",
+    "user": "学園前の貸オフィスの支配人"
+  },
+  {
+    "parcel": "駅裏北の月極駐車場",
+    "district": "中央駅前地区",
+    "has_building": false,
+    "land": "駅裏の駐車場の地主",
+    "building": null,
+    "tenant": "駅裏北の駐車場の会社",
+    "user": "駅裏北の駐車場の会社"
+  },
+  {
+    "parcel": "商店街裏の時間貸し駐車場",
+    "district": "中央駅前地区",
+    "has_building": false,
+    "land": "駅裏の駐車場の地主",
+    "building": null,
+    "tenant": "駅裏北の駐車場の会社",
+    "user": "駅裏北の駐車場の会社"
+  },
+  {
+    "parcel": "湾岸大通りのホテル",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "湾岸のホテルの所有会社",
+    "building": "湾岸のホテルの所有会社",
+    "tenant": "湾岸大通りのホテルの支配人",
+    "user": "湾岸大通りのホテルの支配人"
+  },
+  {
+    "parcel": "湾岸大通りの社員寮",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "湾岸のホテルの所有会社",
+    "building": "湾岸のホテルの所有会社",
+    "tenant": "湾岸の社員寮の住人",
+    "user": "湾岸の社員寮の住人"
+  },
+  {
+    "parcel": "浜辺の街区公園",
+    "district": "湾岸観光地区",
+    "has_building": false,
+    "land": "浜辺公園の管理者",
+    "building": null,
+    "tenant": null,
+    "user": "浜辺公園の管理者"
+  },
+  {
+    "parcel": "旧西小学校の校舎",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "旧西小学校の管理者",
+    "building": "旧西小学校の管理者",
+    "tenant": null,
+    "user": "旧西小学校の管理者"
+  },
+  {
+    "parcel": "西地区の公民館",
+    "district": "北部学術・生活地区",
+    "has_building": true,
+    "land": "旧西小学校の管理者",
+    "building": "旧西小学校の管理者",
+    "tenant": null,
+    "user": "旧西小学校の管理者"
+  },
+  {
+    "parcel": "灯台下の宿",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "灯台下の宿の家主",
+    "building": "灯台下の宿の家主",
+    "tenant": "灯台下の宿の主人",
+    "user": "灯台下の宿の主人"
+  },
+  {
+    "parcel": "宮の下の共同浴場",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "宮の下の共同浴場の組合",
+    "building": "宮の下の共同浴場の組合",
+    "tenant": null,
+    "user": "宮の下の共同浴場の組合"
+  },
+  {
+    "parcel": "宮の下の源泉地",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "宮の下の共同浴場の組合",
+    "building": "宮の下の共同浴場の組合",
+    "tenant": null,
+    "user": "宮の下の共同浴場の組合"
+  },
+  {
+    "parcel": "船着場裏の駐車場",
+    "district": "湾岸観光地区",
+    "has_building": false,
+    "land": "船着場裏の不在地主",
+    "building": null,
+    "tenant": null,
+    "user": null
+  },
+  {
+    "parcel": "船着場裏の資材置場",
+    "district": "湾岸観光地区",
+    "has_building": false,
+    "land": "船着場裏の不在地主",
+    "building": null,
+    "tenant": null,
+    "user": null
+  },
+  {
+    "parcel": "湯坂奥の空き家",
+    "district": "温泉丘陵地区",
+    "has_building": true,
+    "land": "湯坂奥の空き家の共有代表",
+    "building": "湯坂奥の空き家の共有代表",
+    "tenant": null,
+    "user": null
+  },
+  {
+    "parcel": "神明社の境内地",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "神明社の自治会長",
+    "building": "神明社の自治会長",
+    "tenant": null,
+    "user": "神明社の自治会長"
+  },
+  {
+    "parcel": "神明社前の集会所",
+    "district": "湾岸観光地区",
+    "has_building": true,
+    "land": "神明社の自治会長",
+    "building": "神明社の自治会長",
+    "tenant": null,
+    "user": "神明社の自治会長"
+  },
+  {
+    "parcel": "魚市場前の診療所",
+    "district": "中央駅前地区",
+    "has_building": true,
+    "land": "魚市場前の診療所の院長",
+    "building": "魚市場前の診療所の院長",
+    "tenant": null,
+    "user": "魚市場前の診療所の院長"
+  },
+  {
+    "parcel": "魚市場前の診療所の駐車場",
+    "district": "中央駅前地区",
+    "has_building": false,
+    "land": "魚市場前の診療所の院長",
+    "building": null,
+    "tenant": null,
+    "user": "魚市場前の診療所の院長"
+  }
+]

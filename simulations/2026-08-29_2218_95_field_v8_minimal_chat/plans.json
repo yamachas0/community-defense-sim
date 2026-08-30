@@ -1,0 +1,8642 @@
+[
+  {
+    "step": 1,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 1,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 2,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 3,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 4,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 5,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 6,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 7,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 8,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 9,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 10,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 11,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 12,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 13,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 14,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 15,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 16,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 17,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 18,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 19,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 20,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 21,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 22,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 23,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 24,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 25,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 26,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 27,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 28,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 29,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 30,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 31,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 32,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 33,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 34,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 35,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "B",
+    "name": "駅前通りの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "C",
+    "name": "観音坂の持ち主さん",
+    "go": "今月はどこにも行かない",
+    "go_label": "今月はどこにも行かない",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "E",
+    "name": "学園北の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "H",
+    "name": "潮見横丁の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "I",
+    "name": "本町通りの持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "J",
+    "name": "学園南の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "M",
+    "name": "北団地の持ち主さん",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "Q",
+    "name": "浜町の旅館のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "go": "V06",
+    "go_label": "公共施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "go": "V09",
+    "go_label": "商業施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "W",
+    "name": "浜辺公園の管理者",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "X",
+    "name": "旧西小学校の管理者",
+    "go": "V14",
+    "go_label": "交通拠点",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "Y",
+    "name": "灯台下の宿の主人",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "Z",
+    "name": "宮の下の共同浴場の組合",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "AB",
+    "name": "湯坂奥の空き家の共有代表",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "go": "V15",
+    "go_label": "医療施設",
+    "thought": "今月のこと。"
+  },
+  {
+    "step": 36,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "go": "V12",
+    "go_label": "公園",
+    "thought": "今月のこと。"
+  }
+]

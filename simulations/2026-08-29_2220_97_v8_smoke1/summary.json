@@ -1,0 +1,64 @@
+{
+  "run_name": "v8_smoke1",
+  "scenario_version": "field_v8",
+  "chat": true,
+  "scene_rounds": 1,
+  "seed": 85,
+  "steps": 1,
+  "agents": 30,
+  "sellable_agents": 28,
+  "parcels_total": 44,
+  "sellable_parcels": 41,
+  "acquired_parcels": 0,
+  "sold_agents": 0,
+  "final_unsold_ratio": 1.0,
+  "offers_total": 0,
+  "offers_accepted": 0,
+  "offers_declined": 0,
+  "offers_no_answer": 0,
+  "heard_per_person_month": 13.17,
+  "attended_mean": 25.0,
+  "no_answer": 0,
+  "truncated": 0,
+  "invalid_venue": 0,
+  "parse_fail": 0,
+  "common_prefix_tokens": 1349,
+  "cache_created": 0,
+  "cache_failed": 0,
+  "cached_ratio": 0.3541983528802064,
+  "elapsed_sec": 15.9,
+  "usage": {
+    "calls": 86,
+    "input_tokens": 177522,
+    "cached_tokens": 62878,
+    "output_tokens": 11289,
+    "errors": 0,
+    "by_tag": {
+      "v8:acquirer:acquirer": {
+        "calls": 3,
+        "input": 6242,
+        "cached": 0,
+        "output": 953
+      },
+      "v8:plan:plan": {
+        "calls": 30,
+        "input": 48081,
+        "cached": 19301,
+        "output": 2759
+      },
+      "v8:scene_r1:scene": {
+        "calls": 25,
+        "input": 43816,
+        "cached": 17157,
+        "output": 3795
+      },
+      "v8:decide:decide": {
+        "calls": 28,
+        "input": 79383,
+        "cached": 26420,
+        "output": 3782
+      }
+    }
+  },
+  "cost_usd": 0.0166
+}
