@@ -385,7 +385,7 @@ def legend_row(fig, y: float) -> None:
     ax.text((x + sw + 9) / W, 0.51, t, va="center", ha="left",
             fontsize=px(size), color=FG)
     x += sw + 9 + sum(_w(c) for c in t) * size + 26
-    ax.text(x / W, 0.51, "●＝普段町にいる人が使っている（創発に参加）",
+    ax.text(x / W, 0.51, "●＝普段町にいる人が使っている",
             va="center", ha="left", fontsize=px(size), color=FG)
 
 
@@ -420,7 +420,8 @@ def draw_progress(fig, run: Run, m: int) -> None:
             color=DIM, va="top", ha="center")
 
 
-def draw_month(run: Run, m: int, out: str) -> str:
+def draw_month(run: Run, m: int, out: str,
+               subtitle: Optional[str] = None) -> str:
     plt.rcParams["font.family"] = M._pick_font()
     plt.rcParams["axes.unicode_minus"] = False
     fig = new_fig()
@@ -435,8 +436,9 @@ def draw_month(run: Run, m: int, out: str) -> str:
     hd.text(0.5, 0.52, f"第 {m} 月", fontsize=px(112), color=FG,
             va="center", ha="center", fontweight="bold")
     y_, mo_ = divmod(m - 1, 12)
-    hd.text(0.5, 0.10, f"開始から {m} か月目　／　"
-            f"{last // 12}年のうち {y_}年{mo_ + 1}か月",
+    hd.text(0.5, 0.10, subtitle if subtitle is not None else
+            (f"開始から {m} か月目　／　"
+             f"{last // 12}年のうち {y_}年{mo_ + 1}か月"),
             fontsize=px(27), color=MUTED, va="center", ha="center")
     hd.text(22 / W, 0.68, TITLE_MAIN_1 + TITLE_MAIN_2, fontsize=px(28),
             color=ACCENT, va="center", ha="left")
@@ -446,7 +448,7 @@ def draw_month(run: Run, m: int, out: str) -> str:
             f"A市・{run.summary.get('agents')}人・"
             f"{run.summary.get('parcels_total')}区画",
             fontsize=px(28), color=MUTED, va="center", ha="right")
-    hd.text(1 - 22 / W, 0.40, "X社＝町の外の不動産投資会社",
+    hd.text(1 - 22 / W, 0.40, "X社＝海外の不動産投資会社",
             fontsize=px(25), color=M.COLOR[M.T_X], va="center", ha="right")
 
     draw_progress(fig, run, m)

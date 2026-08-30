@@ -231,5 +231,49 @@ def build(force: bool = False) -> Tuple[str, str]:
     return town, xco
 
 
+OWNER = os.path.join(ASSETS, "owner")
+
+
+def owner_bg(src: str, out: str, alpha: float = 0.35, mode: str = "cover",
+             bias: float = 0.5, box=None, anchor: float = 0.5,
+             sat: Optional[float] = None) -> str:
+    """施主支給の画像を背景に仕立てる（グレー化＋黒に沈める）。
+
+    mode="cover" … 16:9 に切り抜いて全面に敷く（bias=切り抜きの上下位置）
+    mode="contain" … 縦横比を保ったまま収める（余白は黒）。地図はこちら。
+    """
+    if sat is None:
+        img = Image.open(src).convert("L").convert("RGB")
+    else:
+        # 色は残したまま彩度だけ落とす（締めの赤を「見えるが強烈でない」に）。
+        from PIL import ImageEnhance
+        img = ImageEnhance.Color(
+            Image.open(src).convert("RGB")).enhance(sat)
+    if box is not None:
+        img = img.crop(box)
+    sw, sh = img.size
+    if mode == "cover":
+        th = int(round(sw * H / W))
+        if th <= sh:
+            top = int(round((sh - th) * bias))
+            img = img.crop((0, top, sw, top + th))
+        else:
+            tw = int(round(sh * W / H))
+            left = int(round((sw - tw) * 0.5))
+            img = img.crop((left, 0, left + tw, sh))
+        img = img.resize((W, H), Image.LANCZOS)
+    else:
+        k = min(W / sw, H / sh)
+        img = img.resize((max(1, int(sw * k)), max(1, int(sh * k))),
+                         Image.LANCZOS)
+        canvas = Image.new("RGB", (W, H), (0, 0, 0))
+        canvas.paste(img, (int(round((W - img.size[0]) * anchor)),
+                           (H - img.size[1]) // 2))
+        img = canvas
+    black = Image.new("RGB", (W, H), (0, 0, 0))
+    Image.blend(black, img, max(0.0, min(1.0, alpha))).save(out)
+    return out
+
+
 if __name__ == "__main__":
     build()

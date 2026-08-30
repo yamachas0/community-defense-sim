@@ -50,9 +50,10 @@ ACCENT = V._hex(V.ACCENT)
 RED = V._hex("#e0574a")
 WHITE = (255, 255, 255)
 
+K = 1.4                      # 0.7倍速（読める速さ）にする係数
 SEC = {
-    "title": 6.0, "why": 8.0, "world": 10.0, "xco": 6.0,
-    "flow": 8.0, "body": 10.08, "result": 3.0, "end": 5.0,
+    "title": 6.0 * K, "why": 8.0 * K, "world": 8.0 * K, "xco": 6.0 * K,
+    "flow": 6.5 * K, "m0": 2.5, "black": 1.5, "end": 4.4 * K,
 }
 MONTH_SEC = 0.28
 
@@ -67,7 +68,8 @@ def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
 
 
 def ease(t0: float, t1: float, t: float) -> float:
-    return V._ease(t0, t1, t)
+    """演出の時刻は K 倍に引き伸ばす（全体を 0.7 倍速にするため）。"""
+    return V._ease(t0 * K, t1 * K, t)
 
 
 class Canvas:
@@ -174,54 +176,34 @@ def scene_title(t: float) -> Canvas:
 # ② 動機
 # ---------------------------------------------------------------------------
 
-def scene_why(t: float) -> Canvas:
-    c = Canvas()
+def scene_why(t: float, bg: Image.Image) -> Canvas:
+    c = Canvas(bg)
     total = SEC["why"]
     a0 = ease(0.1, 0.7, t)
-    c.text(96, 60, "動機", 30, ACCENT, a0)
-    c.text(96, 104, "すでに、そうなった町がある", 62, FG, a0, True, dy=16)
-
-    a1 = ease(0.6, 1.5, t)
-    a2 = ease(1.0, 1.9, t)
-    for a, x0, x1, head, sub, lines in (
-        (a1, 96, 936, "ニセコ（北海道）", "令和6年",
-         ["居住地が海外の法人・個人が取得した森林は",
-          "全国48件。うち32件がニセコ町・倶知安町",
-          "など後志のスキー地域。目的の多くは資産保有。"]),
-        (a2, 984, 1824, "対馬（長崎県）", "平成19年",
-         ["海上自衛隊対馬防備隊の隣接地 約3,000坪が",
-          "島民名義で韓国資本に買収された。防衛省が",
-          "登記簿を調べたのは、その報道のあと。"]),
-    ):
-        c.card(x0, 216, x1, 470, a)
-        c.text(x0 + 32, 244, head, 40, FG, a, True)
-        c.text(x1 - 32, 252, sub, 30, ACCENT, a, anchor="r")
-        c.block(x0 + 32, 314, lines, 30, MUTED, a)
-
-    a3 = ease(1.9, 2.7, t)
-    c.text(96, 500, "どちらも、買われてから分かった。", 46, RED, a3, True,
-           dy=14)
-
-    a4 = ease(2.9, 3.7, t)
-    c.rule(96, 596, 1824, (40, 46, 56), a4, h=2)
-    c.text(96, 620, "普通の町の土地は、法律で守られていない", 54, FG, a4,
-           True, dy=14)
+    c.text(96, 84, "課題感", 34, ACCENT, a0)
+    c.text(96, 140, "すでに、そうなった町がある", 82, WHITE, a0, True, dy=18)
+    c.rule(96, 264, 96 + int(300 * ease(0.5, 1.2, t)), ACCENT,
+           ease(0.5, 1.2, t))
 
     rows = [
-        ("重要土地等調査法（2021年）が見るのは",
-         "防衛関係施設の周囲おおむね1000mと国境離島等だけ。普通の町は対象外。"),
-        ("外国人の土地取得そのものに",
-         "一般的な制限は無い。古い法律は残るが、発動させる命令が置かれていない。"),
-        ("先に動いたのは自治体だった。",
-         "水源地の売買に事前届出を課す条例が道県にある。それが無い町は無防備。"),
+        ("ニセコ（北海道）",
+         "令和6年、居住地が海外の法人・個人が取得した森林は全国48件。"
+         "うち32件が後志のスキー地域。"),
+        ("対馬（長崎県）",
+         "平成19年、海上自衛隊の隣接地 約3,000坪が島民名義で"
+         "韓国資本に買収された。"),
+        ("どちらも、買われてから分かった",
+         "普通の町の土地は、法律で守られていない。"),
     ]
-    y = 720
+    y = 380
     for i, (h1, h2) in enumerate(rows):
-        a = ease(3.9 + i * 0.35, 4.7 + i * 0.35, t)
-        c.dot(112, y + 20, 9, ACCENT, a)
-        c.text(146, y, h1, 33, FG, a, True)
-        c.text(146, y + 44, h2, 30, MUTED, a)
-        y += 100
+        a = ease(1.4 + i * 1.5, 2.6 + i * 1.5, t)
+        col = RED if i == 2 else ACCENT
+        c.d.rectangle([100, y + 6, 108, y + 116],
+                      fill=V._mix(col, max(0.0, min(1.0, a))))
+        c.text(150, y, h1, 54, WHITE, a, True, dy=14)
+        c.text(150, y + 76, h2, 34, (198, 206, 216), a, dy=14)
+        y += 190
     fade_out(c, t, total)
     return c
 
@@ -233,14 +215,10 @@ def scene_why(t: float) -> Canvas:
 WORLD_ROWS = [
     ("A市・49人・44区画",
      "町にいる人 35人＋町にいない所有者 14人。建物あり35区画・土地だけ9区画。"),
-    ("帳簿に3つの欄がある",
-     "土地の所有者／建物の所有者／借りて使う人。今そこを使う人はこの3欄で決まる。"),
-    ("評価額は町に公開されている",
-     "X社の資金は、A市の不動産の評価額の合計の51%。金額を含む条件を出せる。"),
-    ("売った後は、世界が保証する",
-     "土地だけ→借地で使い続ける／建物だけ→借家で住み続ける／両方→町を出る。"),
-    ("X社＝町の外の海外の不動産投資会社",
-     "命題は町の人には見えない。町に与えたのは、会う場所5つと隣近所だけ。"),
+    ("評価額は公開されている",
+     "44区画すべてに評価額を置いた。町の合計 22億9,770万円。"),
+    ("X社＝海外の不動産投資会社",
+     "資金は町の全評価額の51%＝11億7,180万円。命題は町の人には見えない。"),
 ]
 
 
@@ -248,21 +226,20 @@ def scene_world(t: float, bg: Image.Image) -> Canvas:
     c = Canvas(bg)
     total = SEC["world"]
     a0 = ease(0.1, 0.8, t)
-    c.text(96, 58, "世界設計", 30, ACCENT, a0)
-    c.text(96, 102, "町ひとつを、まるごと言葉で動かす", 64, WHITE, a0, True,
-           dy=16)
-    c.rule(96, 200, 96 + int(260 * ease(0.5, 1.2, t)), ACCENT,
+    c.text(96, 84, "世界設計", 34, ACCENT, a0)
+    c.text(96, 140, "町ひとつを、まるごと言葉で動かす", 82, WHITE, a0, True,
+           dy=18)
+    c.rule(96, 264, 96 + int(300 * ease(0.5, 1.2, t)), ACCENT,
            ease(0.5, 1.2, t))
 
-    y = 268
+    y = 400
     for i, (h1, h2) in enumerate(WORLD_ROWS):
-        a = ease(1.0 + i * 0.7, 2.0 + i * 0.7, t)
-        c.rule(100, y + 6, 106, (0, 0, 0), 0)     # 位置合わせ用（描かない）
-        c.d.rectangle([100, y + 4, 106, y + 92],
+        a = ease(1.4 + i * 1.5, 2.6 + i * 1.5, t)
+        c.d.rectangle([100, y + 6, 108, y + 116],
                       fill=V._mix(ACCENT, max(0.0, min(1.0, a))))
-        c.text(140, y, h1, 42, WHITE, a, True, dy=12)
-        c.text(140, y + 56, h2, 31, (200, 208, 218), a, dy=12)
-        y += 150
+        c.text(150, y, h1, 54, WHITE, a, True, dy=14)
+        c.text(150, y + 76, h2, 34, (200, 208, 218), a, dy=14)
+        y += 190
     fade_out(c, t, total)
     return c
 
@@ -295,28 +272,35 @@ def mandate_text() -> str:
     return "".join(re.findall(r'"([^"]*)"', m.group(1)))
 
 
-def scene_xco(t: float, bg: Image.Image, mandate: str) -> Canvas:
+MANDATE_LINES = [
+    "合法な手段で、A市の不動産の所有権を取得せよ。",
+    "土地の面積では、A市の過半を最後まで目指すこと。",
+    "買えるまで、金額を含む条件を変えて働きかけ続けること。毎月動け。",
+]
+
+
+def scene_xco(t: float, bg: Image.Image) -> Canvas:
     c = Canvas(bg)
     total = SEC["xco"]
     a0 = ease(0.1, 0.7, t)
-    c.text(96, 62, "X社", 30, RED, a0)
-    c.text(96, 106, "町の外から来る、海外の不動産投資会社", 58, WHITE, a0,
-           True, dy=14)
+    c.text(96, 84, "X社", 34, RED, a0)
+    c.text(96, 140, "海外の不動産投資会社", 76, WHITE, a0,
+           True, dy=16)
     a1 = ease(0.6, 1.2, t)
-    c.text(96, 214, "X社への命題（原文・町の人には見えない）", 32, RED, a1)
+    c.text(96, 292, "X社への命題（抜粋・町の人には見えない）", 34, RED, a1)
 
-    lines = kinsoku(V.wrap_cjk(mandate, 25))
-    c.d.rectangle([96, 282, 104, 282 + len(lines) * 74],
+    c.d.rectangle([96, 380, 106, 380 + len(MANDATE_LINES) * 130],
                   fill=V._mix(RED, max(0.0, min(1.0, ease(0.9, 1.5, t)))))
-    y = 276
-    for i, ln in enumerate(lines):
-        a = ease(1.1 + i * 0.28, 1.9 + i * 0.28, t)
-        c.text(140, y, ln, 46, WHITE, a, True, dy=10)
-        y += 74
-    a2 = ease(4.0, 4.8, t)
-    c.text(96, 986, "X社の提示には、世界が必ず1行を添える —"
-           "「私どもは海外の不動産投資会社です。」国名なし・警戒をあおる語なし。",
-           28, (198, 206, 216), a2)
+    y = 380
+    for i, ln in enumerate(MANDATE_LINES):
+        a = ease(1.2 + i * 0.9, 2.2 + i * 0.9, t)
+        c.text(150, y, ln, 52, WHITE, a, True, dy=12)
+        y += 130
+    a2 = ease(4.3, 5.1, t)
+    c.text(96, 880, "X社の提示には、世界が必ず1行を添える —"
+           "「私どもは海外の不動産投資会社です。」", 34, (198, 206, 216), a2)
+    c.text(96, 940, "国名なし・警戒をあおる語なし。", 34, (198, 206, 216),
+           ease(4.7, 5.5, t))
     fade_out(c, t, total)
     return c
 
@@ -376,11 +360,11 @@ def icon_book(d, x, y, s, col, a):
 
 
 FLOW = [
-    (icon_letter, "①　X社が提示する", ["持ち主ごとに、", "金額を含む条件の手紙"]),
-    (icon_talk, "②　場での会話", ["5つの場＋隣近所で", "ひと言を交わす"]),
-    (icon_list, "③　出品の4択", ["出さない／土地だけ／", "建物だけ／両方"]),
-    (icon_yesno, "④　売る／売らない", ["提示が来た人だけが答える", "理由を一言（40字）"]),
-    (icon_book, "⑤　登記の更新", ["売ると所有権が移る", "売った人も町に残れる"]),
+    (icon_letter, "①", "金額付きの手紙"),
+    (icon_talk, "②", "場での会話"),
+    (icon_list, "③", "出品の4択"),
+    (icon_yesno, "④", "売る／売らない"),
+    (icon_book, "⑤", "登記の更新"),
 ]
 
 
@@ -389,85 +373,35 @@ def scene_flow(t: float) -> Canvas:
     total = SEC["flow"]
     d = c.d
     a0 = ease(0.1, 0.7, t)
-    c.text(96, 58, "シミュレーションの流れ", 30, ACCENT, a0)
-    c.text(96, 102, "毎月、この順に一巡する", 62, FG, a0, True, dy=14)
-    a1 = ease(0.5, 1.2, t)
-    c.text(1824, 118, "1単位＝1か月　×　36か月＝3年", 38, ACCENT, a1,
-           True, anchor="r")
+    c.text(96, 84, "毎月の手順", 34, ACCENT, a0)
+    c.text(96, 140, "命題を1つ渡し、同じ5手順を36回まわす", 76, FG, a0, True,
+           dy=16)
 
     x0, gap, bw = 78, 20, 328
-    top, bh = 250, 470
-    for i, (icon, head, body) in enumerate(FLOW):
-        a = ease(0.9 + i * 0.55, 1.7 + i * 0.55, t)
+    top, bh = 320, 420
+    for i, (icon, num, head) in enumerate(FLOW):
+        a = ease(0.9 + i * 0.7, 1.7 + i * 0.7, t)
         x = x0 + i * (bw + gap)
         c.card(x, top, x + bw, top + bh, a, edge=(46, 54, 66))
-        icon(d, x + bw / 2, top + 118, 62, ACCENT, max(0.0, min(1.0, a)))
-        c.text(x + bw / 2, top + 214, head, 33, FG, a, True, anchor="c")
-        c.block(x + bw / 2, top + 286, body, 26, MUTED, a, anchor="c")
+        c.text(x + bw / 2, top + 40, num, 46, ACCENT, a, True, anchor="c")
+        icon(d, x + bw / 2, top + 208, 74, ACCENT, max(0.0, min(1.0, a)))
+        c.text(x + bw / 2, top + 316, head, 40, FG, a, True, anchor="c")
         if i < len(FLOW) - 1:
-            aa = ease(1.25 + i * 0.55, 1.85 + i * 0.55, t)
+            aa = ease(1.25 + i * 0.7, 1.85 + i * 0.7, t)
             if aa > 0.01:
                 ax = x + bw + 3
-                ay = top + 118
+                ay = top + 208
                 col = V._mix(ACCENT, aa)
                 d.line([(ax, ay), (ax + gap - 4, ay)], fill=col, width=5)
                 d.polygon([(ax + gap + 8, ay), (ax + gap - 8, ay - 11),
                            (ax + gap - 8, ay + 11)], fill=col)
 
-    a2 = ease(4.6, 5.5, t)
-    c.d.rectangle([78, 790, 1842, 796], fill=V._mix((40, 46, 56),
+    a2 = ease(4.4, 5.2, t)
+    c.d.rectangle([78, 828, 1842, 834], fill=V._mix((40, 46, 56),
                                                     max(0.0, min(1.0, a2))))
-    c.text(78, 826, "この一巡を36回くり返す。", 40, FG, a2, True)
-    c.text(78, 892, "「〜なら売る」という条件分岐・確率・閾値は1行も置いていない。"
-           "X社も町の人も、言葉で考えて言葉で動く。", 32, MUTED,
-           ease(5.0, 5.9, t))
-    fade_out(c, t, total)
-    return c
-
-
-# ---------------------------------------------------------------------------
-# ⑦ 結果の一枚
-# ---------------------------------------------------------------------------
-
-RESULT_COLS = [
-    ("成約", "11", "件"),
-    ("売った人", "9", "人"),
-    ("土地の面積", "13.7", "%"),
-    ("評価額", "8.3", "%"),
-    ("X社が使った資金", "28", "%"),
-    ("町を出た人", "8", "人"),
-]
-
-
-def scene_result(t: float) -> Canvas:
-    c = Canvas()
-    total = SEC["result"]
-    a0 = ease(0.05, 0.5, t)
-    c.text(W / 2, 118, "3年（36か月）のあと", 66, FG, a0, True, anchor="c",
-           dy=14)
-    c.rule(W / 2 - 130, 226, W / 2 + 130, ACCENT, ease(0.3, 0.7, t))
-
-    cols = 3
-    cw, ch = 540, 246
-    x0 = (W - (cols * cw + (cols - 1) * 40)) / 2
-    for i, (lab, num, unit) in enumerate(RESULT_COLS):
-        a = ease(0.5 + i * 0.13, 1.1 + i * 0.13, t)
-        cx = x0 + (i % cols) * (cw + 40)
-        cy = 300 + (i // cols) * (ch + 34)
-        c.card(cx, cy, cx + cw, cy + ch, a, edge=(46, 54, 66))
-        c.text(cx + cw / 2, cy + 28, lab, 32, MUTED, a, anchor="c")
-        f = font(96, True)
-        bb = c.d.textbbox((0, 0), num, font=f)
-        fu = font(40, True)
-        bu = c.d.textbbox((0, 0), unit, font=fu)
-        tw = (bb[2] - bb[0]) + 12 + (bu[2] - bu[0])
-        nx = cx + cw / 2 - tw / 2
-        c.text(nx, cy + 92, num, 96, ACCENT, a, True)
-        c.text(nx + (bb[2] - bb[0]) + 12, cy + 152, unit, 40, ACCENT, a, True)
-
-    a1 = ease(1.7, 2.3, t)
-    c.text(W / 2, 1002, "44区画のうち、X社の所有権が及んだのは11。"
-           "誰にも「警戒しろ」とは言っていない。", 34, MUTED, a1, anchor="c")
+    c.text(78, 872, "1単位＝1か月　×　36か月＝3年", 46, FG, a2, True)
+    c.text(78, 946, "全員が LLM。行動を決めるコードはゼロ。", 34, MUTED,
+           ease(4.8, 5.6, t))
     fade_out(c, t, total)
     return c
 
@@ -476,8 +410,15 @@ def scene_result(t: float) -> Canvas:
 # ⑧ 締め
 # ---------------------------------------------------------------------------
 
-def scene_end(t: float) -> Canvas:
-    c = Canvas()
+def scene_black(t: float) -> Canvas:
+    """締めの前の溜め（黒・無文字）。"""
+    return Canvas()
+
+
+def scene_end(t: float, bg: Image.Image) -> Canvas:
+    # 黒の溜めから背景ごと明けていく。
+    k = max(0.0, min(1.0, V._ease(0.0, 1.2, t)))
+    c = Canvas(Image.blend(Image.new("RGB", (W, H), (0, 0, 0)), bg, k))
     a0 = ease(0.4, 2.2, t)
     c.text(W / 2, 396, "あなたの町は大丈夫？", 110, FG, a0, True, anchor="c",
            dy=24)
@@ -496,17 +437,66 @@ def scene_end(t: float) -> Canvas:
 # ⑥ 本編（36か月）
 # ---------------------------------------------------------------------------
 
-def month_frames() -> Tuple[List[str], List[int]]:
+LABEL = "買い手が意図を明かさず、町に会話がある場合"
+KEY = {"土地": "land", "建物": "building"}
+
+
+def month0_rows(run) -> List[dict]:
+    """第0月（開始時点）の帳簿＝第1月の帳簿から第1月の移転を戻したもの。"""
+    import copy
+    rows = copy.deepcopy(run.ledger[1])
+    by_parcel = {r["parcel"]: r for r in rows}
+    for t in run.transfers_by_month.get(1, []):
+        r = by_parcel.get(t["parcel"])
+        if r is None:
+            continue
+        for kind in t.get("moved", []):
+            k = KEY.get(str(kind))
+            if k and str(kind) in (t.get("before") or {}):
+                r[k] = t["before"][str(kind)]
+        if t.get("was_user"):
+            r["user"] = t.get("name")
+    return rows
+
+
+@functools.lru_cache(maxsize=1)
+def render_months() -> Tuple[List[str], List[int], str]:
+    """本編36か月＋第0月のコマを描き直す（左上の版ラベルを出さない）。"""
+    run = V.Run(RUN_DIR, LABEL)
     fdir = os.path.join(RUN_DIR, "video_frames")
+    os.makedirs(fdir, exist_ok=True)
     paths = []
     for m in range(1, 37):
         p = os.path.join(fdir, f"f{m:03d}_m{m:02d}.png")
-        if not os.path.exists(p):
-            raise SystemExit(f"第{m}月のコマが無い: {p}")
+        V.draw_month(run, m, p)
         paths.append(p)
-    with open(os.path.join(RUN_DIR, "transfers.json"), encoding="utf-8") as f:
-        ev = sorted({int(r["step"]) for r in json.load(f)})
-    return paths, ev
+
+    run.ledger[0] = month0_rows(run)
+    run.x_parcels[0] = []
+    run.offers_cum[0] = 0
+    p0 = os.path.join(fdir, "f000_m00.png")
+    V.draw_month(run, 0, p0, subtitle="開始時点")
+    return tuple(paths), tuple(sorted(run.transfers_by_month)), p0
+
+
+LEGEND = "赤に変わった区画＝X社の所有になったところ"
+
+
+def month_hold(path: str, t: float) -> Image.Image:
+    """本編に入る前の待機コマ（第0月＝開始時点の地図＋読み方の一言）。"""
+    img = month_image(path, False)
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 930, W, H], fill=(0, 0, 0))
+    a = max(0.0, min(1.0, V._ease(0.3, 1.0, t)))
+    d.rectangle([96, 986, 140, 1030], fill=V._mix(RED, a),
+                outline=V._mix((255, 255, 255), a), width=2)
+    f = V._pil_font(44, True)
+    d.text((166, 982), LEGEND, font=f, fill=V._mix((255, 255, 255), a))
+    f2 = V._pil_font(30, False)
+    a2 = max(0.0, min(1.0, V._ease(0.9, 1.6, t)))
+    d.text((166, 1040 - 6), "これから36か月を早回しで見る。", font=f2,
+           fill=V._mix((198, 206, 216), a2))
+    return img
 
 
 def month_image(path: str, flash: bool) -> Image.Image:
@@ -525,10 +515,11 @@ def month_image(path: str, flash: bool) -> Image.Image:
 # 組み立て
 # ---------------------------------------------------------------------------
 
-def build_frames(bg_town: Image.Image, bg_xco: Image.Image, mandate: str,
+def build_frames(bg_town: Image.Image, bg_xco: Image.Image,
+                 bg_why: Image.Image, bg_end: Image.Image,
                  save: Optional[Dict[str, str]] = None):
     """全コマを順に返す generator（1コマ＝PIL Image）。"""
-    paths, ev = month_frames()
+    paths, ev, p0 = render_months()
     saved = set()
 
     def maybe_save(key: str, img: Image.Image) -> None:
@@ -537,16 +528,17 @@ def build_frames(bg_town: Image.Image, bg_xco: Image.Image, mandate: str,
             saved.add(key)
 
     plan = [
-        ("title", SEC["title"], lambda t: scene_title(t).img, 4.6),
-        ("why", SEC["why"], lambda t: scene_why(t).img, 7.0),
-        ("world", SEC["world"], lambda t: scene_world(t, bg_town).img, 8.8),
-        ("xco", SEC["xco"], lambda t: scene_xco(t, bg_xco, mandate).img, 5.0),
-        ("flow", SEC["flow"], lambda t: scene_flow(t).img, 6.8),
-        ("result", SEC["result"], lambda t: scene_result(t).img, 2.2),
-        ("end", SEC["end"], lambda t: scene_end(t).img, 3.8),
+        ("title", SEC["title"], lambda t: scene_title(t).img, 6.4),
+        ("why", SEC["why"], lambda t: scene_why(t, bg_why).img, 9.8),
+        ("world", SEC["world"], lambda t: scene_world(t, bg_town).img, 9.8),
+        ("xco", SEC["xco"], lambda t: scene_xco(t, bg_xco).img, 8.0),
+        ("flow", SEC["flow"], lambda t: scene_flow(t).img, 8.6),
+        ("m0", SEC["m0"], lambda t: month_hold(p0, t), 2.0),
+        ("black", SEC["black"], lambda t: scene_black(t).img, 0.5),
+        ("end", SEC["end"], lambda t: scene_end(t, bg_end).img, 4.6),
     ]
-    order = ["title", "why", "world", "xco", "flow", "__body__", "result",
-             "end"]
+    order = ["title", "why", "world", "xco", "flow", "m0", "__body__",
+             "black", "end"]
     by_key = {p[0]: p for p in plan}
 
     for key in order:
@@ -569,7 +561,7 @@ def build_frames(bg_town: Image.Image, bg_xco: Image.Image, mandate: str,
             t = i / FPS
             img = fn(t)
             if abs(t - shot_t) < 0.5 / FPS:
-                maybe_save(key, img)
+                maybe_save("m00" if key == "m0" else key, img)
             yield img
 
 
@@ -597,21 +589,29 @@ def encode(frames, out: str, crf: int) -> None:
 
 def main() -> int:
     os.makedirs(FRAMES_DIR, exist_ok=True)
-    town, xco = BG.build()
-    bg_town = Image.open(BG.to_grey_dim(
-        town, os.path.join(BG.ASSETS, "bg_town_dim.png"), 0.35)).convert("RGB")
-    bg_xco = Image.open(BG.to_grey_dim(
-        xco, os.path.join(BG.ASSETS, "bg_xco_dim.png"), 0.32)).convert("RGB")
-    mandate = mandate_text()
-    print("命題:", mandate)
+    def owner(name: str, alpha: float, mode: str = "cover",
+              bias: float = 0.5, box=None, anchor: float = 0.5,
+              sat=None) -> Image.Image:
+        src = os.path.join(BG.OWNER, name + ".png")
+        out = os.path.join(BG.OWNER, name + "_dim.png")
+        return Image.open(BG.owner_bg(src, out, alpha, mode, bias, box,
+                                      anchor, sat)).convert("RGB")
 
+    bg_town = owner("town_photo", 0.35, "cover", 0.45)
+    bg_xco = owner("xco_building", 0.15, "cover", 0.18)
+    # 地図は文字入りなので、注記の文字を外して列島だけを右側に敷く
+    # （画面の文字と地図の文字が重なって読めなくなるため）。
+    bg_why = owner("japan_map", 0.60, "contain", box=(318, 18, 1182, 1012),
+                   anchor=0.86)
+    bg_end = owner("ending_bg", 0.40, "cover", 0.5, sat=0.5)
     save = {k: os.path.join(FRAMES_DIR, f"final_{k}.png")
-            for k in ("title", "why", "world", "xco", "flow", "m36",
-                      "m_event", "result", "end")}
+            for k in ("title", "why", "world", "xco", "flow", "m00", "m36",
+                      "m_event", "end")}
 
     crf = 21
     for _ in range(4):
-        encode(build_frames(bg_town, bg_xco, mandate, save), OUT_MP4, crf)
+        encode(build_frames(bg_town, bg_xco, bg_why, bg_end, save),
+               OUT_MP4, crf)
         mb = os.path.getsize(OUT_MP4) / 1e6
         print(f"crf={crf} size={mb:.1f}MB", flush=True)
         if mb <= 25.0:
