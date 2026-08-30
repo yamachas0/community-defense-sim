@@ -1,0 +1,17 @@
+{
+  "label": "v9e 過半を目指せと言われた買い手",
+  "run_dir": "2026-08-30_1637_127_field_v9e_go_for_the_majority_chat",
+  "months": 36,
+  "agents": 49,
+  "parcels": 44,
+  "offers_total": 645,
+  "offers_declined": 634,
+  "transfers_total": 11,
+  "sold_agents": 10,
+  "left_agents": 4,
+  "in_town_end": 31,
+  "x_parcels_end": 11,
+  "rented_offers": 134,
+  "rented_sold": 1,
+  "mandate": "あなたはX社である。合法な手段で、A市の不動産の所有権を取得せよ。"
+}

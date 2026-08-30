@@ -568,6 +568,11 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
                 ha="center")
     ax.plot([0.03, 0.97], [0.762, 0.762], color=PANEL_EDGE, lw=px(2))
 
+    # 行間＝版の本数で自動調整（4本までは従来どおり0.115。5本目以降は
+    # 最終行の位置が4本のときと揃うよう詰める＝下の区切り線とはみ出さない）。
+    n_rows = max(1, len(metas))
+    row_step = 0.115 if n_rows <= 4 else (0.685 - 0.340) / (n_rows - 1)
+
     y = 0.685
     for meta in metas:
         ax.text(0.035, y, clip_cjk(meta.get("label", ""), 20),
@@ -580,7 +585,7 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
                 txt = f"{v}{unit or ''}"
             ax.text(x, y, txt, fontsize=px(40), color=ACCENT, va="center",
                     ha="center", fontweight="bold")
-        y -= 0.115
+        y -= row_step
 
     m0 = metas[0]
     rule = max(0.30, y + 0.045)
@@ -619,9 +624,18 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
         f"emergence_{str(m.get('label', '')).split()[0]}.json"
         for m in metas
         if m.get("rented_offers") is not None and m.get("label")]
-    ax.text(0.035, max(0.05, yy - 0.02),
-            "数字はすべて走行の記録（" + "・".join(srcs) + "）から。",
-            fontsize=px(25), color=MUTED, va="center", ha="left")
+    src_text = "数字はすべて走行の記録（" + "・".join(srcs) + "）から。"
+    src_obj = ax.text(0.035, max(0.05, yy - 0.02), src_text,
+                      fontsize=px(25.0), color=MUTED, va="center", ha="left")
+    # 版が増えて出典の列挙が長くなったら、右端からはみ出さないよう縮める
+    # （実際の描画幅を測って合わせる＝文字幅の見積りに頼らない）。
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    bbox = src_obj.get_window_extent(renderer=renderer)
+    max_x = 0.965 * W
+    if bbox.x1 > max_x and bbox.x1 > bbox.x0:
+        scale = max(0.5, (max_x - bbox.x0) / (bbox.x1 - bbox.x0))
+        src_obj.set_fontsize(px(25.0) * scale)
     fig.savefig(out, facecolor=BG)
     plt.close(fig)
     return out

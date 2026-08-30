@@ -1,0 +1,112 @@
+[
+  {
+    "step": 1,
+    "to": "潮見横丁の持ち主さん",
+    "to_id": "H",
+    "parcel": "潮見横丁の改装した古家",
+    "kind": "建物",
+    "amount": 6000000,
+    "valuation": 5300000,
+    "budget_left_after": 1165800000
+  },
+  {
+    "step": 1,
+    "to": "学園南の地主",
+    "to_id": "CH",
+    "parcel": "学園南の家",
+    "kind": "土地",
+    "amount": 7200000,
+    "valuation": 7200000,
+    "budget_left_after": 1158600000
+  },
+  {
+    "step": 1,
+    "to": "駅前通りの地主",
+    "to_id": "CL",
+    "parcel": "駅前通りの家",
+    "kind": "土地",
+    "amount": 21600000,
+    "valuation": 21600000,
+    "budget_left_after": 1137000000
+  },
+  {
+    "step": 1,
+    "to": "湯坂下の地主",
+    "to_id": "CN",
+    "parcel": "湯坂下の家",
+    "kind": "土地",
+    "amount": 9900000,
+    "valuation": 9900000,
+    "budget_left_after": 1127100000
+  },
+  {
+    "step": 2,
+    "to": "観音坂の持ち主さん",
+    "to_id": "C",
+    "parcel": "観音坂の空き地",
+    "kind": "土地",
+    "amount": 12100000,
+    "valuation": 11000000,
+    "budget_left_after": 1115000000
+  },
+  {
+    "step": 4,
+    "to": "駅裏の持ち主さん",
+    "to_id": "F",
+    "parcel": "駅裏の小区画",
+    "kind": "建物",
+    "amount": 5830000,
+    "valuation": 5300000,
+    "budget_left_after": 1109170000
+  },
+  {
+    "step": 18,
+    "to": "岬道の持ち主さん",
+    "to_id": "O",
+    "parcel": "岬道の家",
+    "kind": "両方",
+    "amount": 15120000,
+    "valuation": 19700000,
+    "budget_left_after": 1094050000
+  },
+  {
+    "step": 19,
+    "to": "神明社の自治会長",
+    "to_id": "AC",
+    "parcel": "神明社前の集会所",
+    "kind": "両方",
+    "amount": 33700000,
+    "valuation": 33700000,
+    "budget_left_after": 1060350000
+  },
+  {
+    "step": 22,
+    "to": "一番街の持ち主さん",
+    "to_id": "G",
+    "parcel": "一番街の家",
+    "kind": "両方",
+    "amount": 29150000,
+    "valuation": 26900000,
+    "budget_left_after": 1031200000
+  },
+  {
+    "step": 23,
+    "to": "神明社の自治会長",
+    "to_id": "AC",
+    "parcel": "神明社の境内地",
+    "kind": "建物",
+    "amount": 7200000,
+    "valuation": 7200000,
+    "budget_left_after": 1024000000
+  },
+  {
+    "step": 35,
+    "to": "学園北の地主",
+    "to_id": "CM",
+    "parcel": "学園北の家",
+    "kind": "土地",
+    "amount": 10000000,
+    "valuation": 7200000,
+    "budget_left_after": 1014000000
+  }
+]

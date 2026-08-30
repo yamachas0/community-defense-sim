@@ -1,0 +1,35 @@
+[
+  {
+    "step": 18,
+    "agent_id": "O",
+    "name": "岬道の持ち主さん",
+    "parcel": "岬道の家",
+    "still_owns": []
+  },
+  {
+    "step": 19,
+    "agent_id": "AC",
+    "name": "神明社の自治会長",
+    "parcel": "神明社前の集会所",
+    "still_owns": [
+      "神明社の境内地"
+    ]
+  },
+  {
+    "step": 22,
+    "agent_id": "G",
+    "name": "一番街の持ち主さん",
+    "parcel": "一番街の家",
+    "still_owns": [
+      "一番街の資材置場"
+    ]
+  },
+  {
+    "step": 35,
+    "agent_id": "BF",
+    "name": "湾岸の社員寮の住人",
+    "parcel": "湾岸大通りの社員寮",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  }
+]

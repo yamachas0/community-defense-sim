@@ -1,0 +1,68 @@
+# A市フィールド v9e - 過半を目指せと言われた買い手（会話あり・seed 85・36か月）
+# 設計の正: docs/world_design_v9e.md（土台 = docs/world_design_v9d.md）
+#
+# v9d との差（施主確定 2026-08-30 19:32 / 19:34）: X社の user プロンプトだけ。
+#   1. 命題を差し替え（評価額と面積の両方で過半を最後まで目指す・資金は使い切ってよい）
+#   2. 登記簿に区画の面積を載せる（評価額と同じく公開されている事実）
+#   3. 毎月「いまの取得割合（評価額%・土地の面積%）と残り月数」を事実で返す
+# 世界（町の人・名簿・門番・会話・出品・評価額・資金51%・月内の提示合計の規則）は
+# v9d と1文字も違わない。
+run_name: field_v9e_go_for_the_majority_chat
+scenario_version: field_v9e
+seed: 85
+steps: 36
+personas_file: configs/personas_v9c.yaml
+
+# 場での会話の有無。false にすると場での会話を飛ばす（隣近所の配送も止まる）。
+# **行き先を選ぶコールは false でも残す**。
+chat: true
+# 1か月に各自が場で話す回数（v8d と同じ 1）。
+scene_rounds: 1
+# X社のコールを何人ずつに区切るか（出力の切れを避けるためだけの分割）。
+acquirer_chunk: 10
+# X社の理由欄。費用が上限に収まらないときの唯一の削りしろ（世界の側は1文字も変えない）。
+acquirer_reason: true
+
+# 手元集計の費用がこれを超えたら止める（月末だけでなく場面と場面のあいだでも見る）。
+# 施主の絶対上限 = 手元 $2.0（施主 2026-08-30 11:34 で $1.0 から引き上げ）。
+# 判定は月内3か所でしか走らないので、最悪は月末コール1回ぶん
+# （49コール x 出力上限2,200トークン = 約$0.043）超過しうる。
+# 実走時は「$2.0 からスモークの実測を引いた値」を --max-cost で渡す（既定 2.0）。
+max_cost_usd: 2.0
+
+llm:
+  provider: google
+  model: gemini-2.5-flash-lite
+  temperature: 0.75
+  max_tokens: 2200
+  parallel_workers: 4
+  # 1コールの締切（秒）。google-genai の HttpOptions(timeout=...) に渡る。
+  # 超えたら1回だけやり直し、それでも駄目なら「答えが返らなかった」として数える。
+  request_timeout_sec: 60
+  # 明示キャッシュ（CachedContent）は使わない。暗黙キャッシュは効きうる（v8d 実測 42%）。
+  enable_cache: false
+  batch_classify: false
+  batch_agents: false
+
+world:
+  town_name: A市
+  background: |
+    A市は湾岸にある人口約12万人の温泉観光都市である。対岸の空港では
+    スペースポート構想が進むが、時期と需要規模は確定していない。
+    市内では人口減少、高齢化、相続、築古建物の改修負担、旅館と商店の
+    後継者不足が同時に進む。住民、事業者、行政は、それぞれ通常の日常を送っている。
+    個々の取引・会話が将来どうなるかは開始時点では決まっていない。
+
+social:
+  # 公共の場5か所（v8d と同一）+「今月はどこにも行かない」。
+  venues:
+    - {id: V06, label: 公共施設, note: 市役所と公民館}
+    - {id: V14, label: 交通拠点, note: 駅とバス停}
+    - {id: V09, label: 商業施設, note: 店や飲食店が並ぶ通り}
+    - {id: V12, label: 公園,     note: 広場とベンチ}
+    - {id: V15, label: 医療施設, note: 診療所}
+
+cost:
+  price_table:
+    gemini-2.5-flash-lite: {input: 0.10, output: 0.40, cache_read: 0.01, cache_storage_hour: 1.00}
+  safety_factor: 2.0
