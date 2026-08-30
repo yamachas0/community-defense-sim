@@ -1,0 +1,138 @@
+[
+  {
+    "step": 1,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "parcel": "湯の元の古家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯の元のひとり暮らしさん",
+      "建物": "湯の元のひとり暮らしさん"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 1,
+    "agent_id": "CA",
+    "name": "駅裏の駐車場の地主",
+    "parcel": "駅裏北の月極駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "駅裏の駐車場の地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "駅裏北の駐車場の会社"
+  },
+  {
+    "step": 2,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "parcel": "湯の元前の店",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯の元前の店のご主人",
+      "建物": "湯の元前の店のご主人"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 4,
+    "agent_id": "CI",
+    "name": "潮見横丁の地主",
+    "parcel": "潮見横丁の改装した古家",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "潮見横丁の地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "潮見横丁の持ち主さん"
+  },
+  {
+    "step": 8,
+    "agent_id": "CF",
+    "name": "波止場通りの元店舗の家主",
+    "parcel": "波止場通りの元店舗",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "波止場通りの元店舗の家主",
+      "建物": "波止場通りの元店舗の家主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "波止場通りの借り店主"
+  },
+  {
+    "step": 17,
+    "agent_id": "F",
+    "name": "駅裏の持ち主さん",
+    "parcel": "駅裏の小区画",
+    "kind": "建物",
+    "moved": [
+      "建物"
+    ],
+    "before": {
+      "建物": "駅裏の持ち主さん"
+    },
+    "left_town": false,
+    "was_user": true,
+    "user_after": "駅裏の持ち主さん"
+  },
+  {
+    "step": 34,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "parcel": "魚市場前の診療所",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "魚市場前の診療所の院長",
+      "建物": "魚市場前の診療所の院長"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 35,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "parcel": "魚市場前の診療所の駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "魚市場前の診療所の院長"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": null
+  }
+]

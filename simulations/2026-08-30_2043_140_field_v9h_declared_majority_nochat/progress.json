@@ -1,0 +1,362 @@
+[
+  {
+    "step": 1,
+    "acquired_value": 48500000,
+    "acquired_area": 480,
+    "value_share": 0.0211,
+    "area_share": 0.0253,
+    "spent_cum": 51000000,
+    "budget_left": 1120800000,
+    "budget_used_share": 0.0435
+  },
+  {
+    "step": 2,
+    "acquired_value": 62100000,
+    "acquired_area": 630,
+    "value_share": 0.027,
+    "area_share": 0.0332,
+    "spent_cum": 65080000,
+    "budget_left": 1106720000,
+    "budget_used_share": 0.0555
+  },
+  {
+    "step": 3,
+    "acquired_value": 62100000,
+    "acquired_area": 630,
+    "value_share": 0.027,
+    "area_share": 0.0332,
+    "spent_cum": 65080000,
+    "budget_left": 1106720000,
+    "budget_used_share": 0.0555
+  },
+  {
+    "step": 4,
+    "acquired_value": 76500000,
+    "acquired_area": 810,
+    "value_share": 0.0333,
+    "area_share": 0.0427,
+    "spent_cum": 81640000,
+    "budget_left": 1090160000,
+    "budget_used_share": 0.0697
+  },
+  {
+    "step": 5,
+    "acquired_value": 76500000,
+    "acquired_area": 810,
+    "value_share": 0.0333,
+    "area_share": 0.0427,
+    "spent_cum": 81640000,
+    "budget_left": 1090160000,
+    "budget_used_share": 0.0697
+  },
+  {
+    "step": 6,
+    "acquired_value": 76500000,
+    "acquired_area": 810,
+    "value_share": 0.0333,
+    "area_share": 0.0427,
+    "spent_cum": 81640000,
+    "budget_left": 1090160000,
+    "budget_used_share": 0.0697
+  },
+  {
+    "step": 7,
+    "acquired_value": 76500000,
+    "acquired_area": 810,
+    "value_share": 0.0333,
+    "area_share": 0.0427,
+    "spent_cum": 81640000,
+    "budget_left": 1090160000,
+    "budget_used_share": 0.0697
+  },
+  {
+    "step": 8,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 9,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 10,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 11,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 12,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 13,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 14,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 15,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 16,
+    "acquired_value": 93900000,
+    "acquired_area": 960,
+    "value_share": 0.0409,
+    "area_share": 0.0506,
+    "spent_cum": 100960000,
+    "budget_left": 1070840000,
+    "budget_used_share": 0.0862
+  },
+  {
+    "step": 17,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 18,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 19,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 20,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 21,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 22,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 23,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 24,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 25,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 26,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 27,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 28,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 29,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 30,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 31,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 32,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 33,
+    "acquired_value": 99200000,
+    "acquired_area": 960,
+    "value_share": 0.0432,
+    "area_share": 0.0506,
+    "spent_cum": 107960000,
+    "budget_left": 1063840000,
+    "budget_used_share": 0.0921
+  },
+  {
+    "step": 34,
+    "acquired_value": 184600000,
+    "acquired_area": 1360,
+    "value_share": 0.0803,
+    "area_share": 0.0717,
+    "spent_cum": 160232000,
+    "budget_left": 1011568000,
+    "budget_used_share": 0.1367
+  },
+  {
+    "step": 35,
+    "acquired_value": 220600000,
+    "acquired_area": 1660,
+    "value_share": 0.096,
+    "area_share": 0.0876,
+    "spent_cum": 214232000,
+    "budget_left": 957568000,
+    "budget_used_share": 0.1828
+  },
+  {
+    "step": 36,
+    "acquired_value": 220600000,
+    "acquired_area": 1660,
+    "value_share": 0.096,
+    "area_share": 0.0876,
+    "spent_cum": 214232000,
+    "budget_left": 957568000,
+    "budget_used_share": 0.1828
+  }
+]

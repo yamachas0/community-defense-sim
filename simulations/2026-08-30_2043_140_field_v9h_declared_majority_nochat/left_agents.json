@@ -1,0 +1,25 @@
+[
+  {
+    "step": 1,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "parcel": "湯の元の古家",
+    "still_owns": []
+  },
+  {
+    "step": 2,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "parcel": "湯の元前の店",
+    "still_owns": []
+  },
+  {
+    "step": 34,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "parcel": "魚市場前の診療所",
+    "still_owns": [
+      "魚市場前の診療所の駐車場"
+    ]
+  }
+]
