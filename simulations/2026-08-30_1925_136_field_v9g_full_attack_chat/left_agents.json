@@ -1,0 +1,71 @@
+[
+  {
+    "step": 1,
+    "agent_id": "S",
+    "name": "湯の元前の店のご主人",
+    "parcel": "湯の元前の店",
+    "still_owns": []
+  },
+  {
+    "step": 4,
+    "agent_id": "T",
+    "name": "学園前の貸オフィスの支配人",
+    "parcel": "学園前の貸オフィス",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  },
+  {
+    "step": 15,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "parcel": "湯の元の古家",
+    "still_owns": []
+  },
+  {
+    "step": 24,
+    "agent_id": "K",
+    "name": "湯坂下の持ち主さん",
+    "parcel": "湯坂下の家",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  },
+  {
+    "step": 30,
+    "agent_id": "N",
+    "name": "線路沿いの持ち主さん",
+    "parcel": "線路沿いの実家",
+    "still_owns": []
+  },
+  {
+    "step": 35,
+    "agent_id": "U",
+    "name": "駅裏北の駐車場の会社",
+    "parcel": "駅裏北の月極駐車場・商店街裏の時間貸し駐車場",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  },
+  {
+    "step": 35,
+    "agent_id": "BD",
+    "name": "本町通りの借り店主",
+    "parcel": "本町通りの元店舗",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  },
+  {
+    "step": 35,
+    "agent_id": "BF",
+    "name": "湾岸の社員寮の住人",
+    "parcel": "湾岸大通りの社員寮",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  },
+  {
+    "step": 36,
+    "agent_id": "V",
+    "name": "湾岸大通りのホテルの支配人",
+    "parcel": "湾岸大通りのホテル",
+    "still_owns": [],
+    "how": "借りて使っていた人がA市を出た"
+  }
+]

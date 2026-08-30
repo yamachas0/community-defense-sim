@@ -1,0 +1,92 @@
+[
+  {
+    "step": 1,
+    "to": "湯の元前の店のご主人",
+    "to_id": "S",
+    "parcel": "湯の元前の店",
+    "kind": "両方",
+    "amount": 13600000,
+    "valuation": 13600000,
+    "budget_left_after": 2284100000
+  },
+  {
+    "step": 1,
+    "to": "魚市場前の診療所の院長",
+    "to_id": "AD",
+    "parcel": "魚市場前の診療所の駐車場",
+    "kind": "土地",
+    "amount": 43200000,
+    "valuation": 36000000,
+    "budget_left_after": 2240900000
+  },
+  {
+    "step": 1,
+    "to": "波止場通りの元店舗の家主",
+    "to_id": "CF",
+    "parcel": "波止場通りの元店舗",
+    "kind": "両方",
+    "amount": 17400000,
+    "valuation": 17400000,
+    "budget_left_after": 2223500000
+  },
+  {
+    "step": 4,
+    "to": "駅裏の持ち主さん",
+    "to_id": "F",
+    "parcel": "駅裏の小区画",
+    "kind": "建物",
+    "amount": 8000000,
+    "valuation": 5300000,
+    "budget_left_after": 2215500000
+  },
+  {
+    "step": 15,
+    "to": "湯の元のひとり暮らしさん",
+    "to_id": "D",
+    "parcel": "湯の元の古家",
+    "kind": "両方",
+    "amount": 15000000,
+    "valuation": 12500000,
+    "budget_left_after": 2200500000
+  },
+  {
+    "step": 18,
+    "to": "北団地の持ち主さん",
+    "to_id": "M",
+    "parcel": "北団地の中古住宅",
+    "kind": "建物",
+    "amount": 6360000,
+    "valuation": 5300000,
+    "budget_left_after": 2194140000
+  },
+  {
+    "step": 23,
+    "to": "湯坂下の持ち主さん",
+    "to_id": "K",
+    "parcel": "湯坂下の家",
+    "kind": "建物",
+    "amount": 7950000,
+    "valuation": 5300000,
+    "budget_left_after": 2186190000
+  },
+  {
+    "step": 27,
+    "to": "観音坂の持ち主さん",
+    "to_id": "C",
+    "parcel": "観音坂の家",
+    "kind": "建物",
+    "amount": 6890000,
+    "valuation": 5300000,
+    "budget_left_after": 2179300000
+  },
+  {
+    "step": 30,
+    "to": "線路沿いの持ち主さん",
+    "to_id": "N",
+    "parcel": "線路沿いの実家",
+    "kind": "両方",
+    "amount": 31980000,
+    "valuation": 26900000,
+    "budget_left_after": 2147320000
+  }
+]
