@@ -25,7 +25,7 @@
 | 同・PDF | https://yamachas0.github.io/community-defense-sim-report/0105_KentaYamakawa_CommunityDefense_Slides.pdf |
 | 4パターンの全記録 | https://yamachas0.github.io/community-defense-sim-report/reports.html |
 | 動画 | [`docs/submission/0105_KentaYamakawa_CommunityDefense_Demo.mp4`](docs/submission/0105_KentaYamakawa_CommunityDefense_Demo.mp4) |
-| YouTube | （提出時に記載） |
+| YouTube（限定公開） | https://youtu.be/fFF_1-YVw1I |
 
 走行データの所在：
 
