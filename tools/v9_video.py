@@ -585,29 +585,36 @@ def draw_compare(metas: List[Dict[str, Any]], out: str) -> str:
     m0 = metas[0]
     rule = max(0.30, y + 0.045)
     ax.plot([0.03, 0.97], [rule, rule], color=PANEL_EDGE, lw=px(2))
-    notes = []
+    col_a: List[str] = []
     first = True
     for meta in metas:
         if meta.get("rented_offers") is None:
             continue
         head = str(meta.get("label", "")).split()[0] if meta.get("label") else ""
         what = "他人が借りて使う区画への提示" if first else "同"
-        notes.append(f"{head}：{what} {meta['rented_offers']}件 → "
+        col_a.append(f"{head}：{what} {meta['rented_offers']}件 → "
                      f"成約 {meta['rented_sold']}件")
         first = False
+    col_b: List[str] = []
     first = True
     for meta in metas:
         head = str(meta.get("label", "")).split()[0] if meta.get("label") else ""
         what = ("断られた提示" if first else "同")
         tail = ("／3年後に町にいる人" if first else "／")
-        notes.append(f"{head}：{what} {meta.get('offers_declined')}件"
+        col_b.append(f"{head}：{what} {meta.get('offers_declined')}件"
                      f"{tail}{meta.get('in_town_end')}人")
         first = False
-    yy = rule - 0.075
-    for t in notes:
-        ax.text(0.035, yy, t, fontsize=px(32), color=FG, va="center",
-                ha="left")
-        yy -= 0.062
+    n_note = max(len(col_a), len(col_b))
+    top = rule - 0.075
+    step = min(0.062, max(0.036, (top - 0.075) / max(1, n_note)))
+    size = 32.0 if step >= 0.058 else 28.0
+    for cx, col in ((0.035, col_a), (0.520, col_b)):
+        yy = top
+        for t in col:
+            ax.text(cx, yy, t, fontsize=px(size), color=FG, va="center",
+                    ha="left")
+            yy -= step
+    yy = top - step * n_note
     srcs = ["summary.json"] + [
         f"emergence_{str(m.get('label', '')).split()[0]}.json"
         for m in metas
