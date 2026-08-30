@@ -1,0 +1,104 @@
+[
+  {
+    "step": 1,
+    "agent_id": "CC",
+    "name": "湾岸のホテルの所有会社",
+    "parcel": "湾岸大通りの社員寮",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湾岸のホテルの所有会社",
+      "建物": "湾岸のホテルの所有会社"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "湾岸の社員寮の住人"
+  },
+  {
+    "step": 5,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "parcel": "湯の元の古家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯の元のひとり暮らしさん",
+      "建物": "湯の元のひとり暮らしさん"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 7,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "parcel": "駅前広場の店舗兼住宅",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "駅前広場の食堂のご夫婦",
+      "建物": "駅前広場の食堂のご夫婦"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 7,
+    "agent_id": "AD",
+    "name": "魚市場前の診療所の院長",
+    "parcel": "魚市場前の診療所の駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "魚市場前の診療所の院長"
+    },
+    "left_town": false,
+    "was_user": true,
+    "user_after": "魚市場前の診療所の院長"
+  },
+  {
+    "step": 15,
+    "agent_id": "CH",
+    "name": "学園南の地主",
+    "parcel": "学園南の家",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "学園南の地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "学園南の持ち主さん"
+  },
+  {
+    "step": 30,
+    "agent_id": "CL",
+    "name": "駅前通りの地主",
+    "parcel": "駅前通りの家",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "駅前通りの地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "駅前通りの持ち主さん"
+  }
+]

@@ -1,0 +1,749 @@
+{
+  "agent_id": "D",
+  "name": "湯の元のひとり暮らしさん",
+  "role": "住民",
+  "district": "温泉丘陵地区",
+  "resident_at_start": true,
+  "sellable": true,
+  "owned_at_start": [
+    "湯の元の古家"
+  ],
+  "used_at_start": [],
+  "neighbours": [
+    "観音坂の持ち主さん",
+    "学園南の持ち主さん",
+    "湯坂奥の借家のひとり"
+  ],
+  "left_month": 5,
+  "sold": [
+    {
+      "month": 5,
+      "parcel": "湯の元の古家",
+      "kind": "両方"
+    }
+  ],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "海外の不動産投資会社から、土地と建物の両方を、将来にわたりそのまま使用できることを条件に譲渡してほしいという申し出があった。これはどういうことだろうか。高齢になり、坂道や家の段差もつらくなってきた。県外の家族からは同居を勧められている。この申し出は、今の住まいを維持しつつ、将来的な住み替えや、あるいは資産の整理につながる可能性もある。しかし、生まれてからずっと住み慣れたこの町を離れることになるのか、という気持ちもある。まずはこの申し出について、もう少し情報を集めたい。共同浴場の世話も続けているので、すぐに町を出るわけにはいかない。今月は、この申し出をどうするか考えるための情報収集に充てたい。公共施設で相談できることはあるだろうか。あるいは、いったん保留にして、来月以降の動きを考えるか。まずは、この申し出がどういう意味を持つのか、慎重に考えたい。来月以降、この申し出について返答するか、あるいは無視するかを決めることになるだろう。まずは、この申し出について、冷静に検討するための時間を確保したい。",
+      "went": "今月はどこにも行かない",
+      "notices": [],
+      "said": [],
+      "heard": [
+        {
+          "from": "学園南の持ち主さん",
+          "route": "隣近所",
+          "at": "商業施設",
+          "text": "こんにちは。この辺りは初めてなので、色々教えていただけると嬉しいです。"
+        }
+      ],
+      "offer": "貴殿の所有する湯の元の古家の土地と建物の所有権を、将来にわたり貴殿がそのまま使用できることを条件に譲渡いただきたい。",
+      "offer_parcel": "湯の元の古家",
+      "offer_kind": "両方",
+      "listings": {
+        "湯の元の古家": "出さない"
+      },
+      "listing_reasons": {
+        "湯の元の古家": "情報収集のため保留"
+      },
+      "sell": "売らない",
+      "sell_reason": "すぐに町を出る決断はできない",
+      "thought_at_decision": "海外の不動産投資会社から、湯の元の古家（土地・建物両方）の譲渡の申し出があった。将来にわたりそのまま使用できることを条件とのこと。高齢になり、坂道や段差が辛くなってきたため、県外の家族からの同居の勧めもあり、住み替えや資産整理の可能性も考えている。しかし、長年住み慣れたこの町をすぐに離れるのは惜しい気持ちもある。共同浴場の世話もあるため、今すぐ決断はできない。まずはこの申し出の意味を理解し、情報を集めたい。来月以降に返答するかどうかを判断したい。そのため、今月は「出さない」を選択し、売却の意思表示は保留する。X社からの申し出に対しては、「売らない」を選択する。すぐに町を出る決断はできず、共同浴場の世話もあるため、現状維持を優先する。この理由をX社に伝える。"
+    },
+    {
+      "month": 2,
+      "thought_at_plan": "海外の不動産投資会社からの申し出は、将来にわたりそのまま使用できることを条件としている。これは、私が町を出ずに住み替えをするか、あるいは町に住み続けることを許容する可能性を示唆している。しかし、高齢になり身体的な負担が増しているため、この機会に資産整理や住み替えを真剣に検討する必要がある。県外の家族からの同居の勧めもある。共同浴場の世話はまだ続けたいが、長年住み慣れたこの町を離れるのは惜しい気持ちもある。来月以降に返答するかどうかを判断するため、今月は売却の意思表示を保留する。X社からの申し出に対しては、「売らない」を選択し、その理由を伝える。",
+      "went": "今月はどこにも行かない",
+      "notices": [],
+      "said": [],
+      "heard": [
+        {
+          "from": "観音坂の持ち主さん",
+          "route": "隣近所",
+          "at": "公共施設",
+          "text": "観音坂の空き家と空き地について、海外からの不動産投資会社から条件付きの譲渡の申し出があったのですが、市としての見解や、空き家対策についてお伺いしたいことがあります。"
+        },
+        {
+          "from": "学園南の持ち主さん",
+          "route": "隣近所",
+          "at": "商業施設",
+          "text": "皆さん、こんにちは。この辺りのお店にはまだ伺ったことのないところも多いので、色々見て回ろうと思っています。"
+        }
+      ],
+      "offer": "貴殿の所有する湯の元の古家の土地と建物の所有権を、将来にわたり貴殿がそのまま使用できることを条件に譲渡いただきたい。",
+      "offer_parcel": "湯の元の古家",
+      "offer_kind": "両方",
+      "listings": {
+        "湯の元の古家": "出さない"
+      },
+      "listing_reasons": {
+        "湯の元の古家": ""
+      },
+      "sell": "売らない",
+      "sell_reason": "まだ決断できないため。",
+      "thought_at_decision": "湯の元の古家について、海外の不動産投資会社X社から「将来にわたりそのまま使用できること」を条件に譲渡の申し出があった。これは、私が町を出ずに住み続けられる可能性を示唆している。しかし、82歳という年齢と身体的な負担を考えると、資産整理や住み替えも視野に入れるべき時期である。県外の家族からの同居の勧めもある。共同浴場の世話は続けたいが、長年住み慣れたこの町を離れるのは惜しい。来月以降に返答するため、今月は売却の意思表示を保留し、「売らない」と返答する。理由としては、まだ決断できないことを伝える。"
+    },
+    {
+      "month": 3,
+      "thought_at_plan": "前月、海外の不動産投資会社X社から、湯の元の古家について「将来にわたりそのまま使用できること」を条件に譲渡の申し出があった。この条件は、私が町を出ずに住み続けられる可能性を示唆しており、ありがたい。しかし、82歳という年齢と身体的な負担を考えると、資産整理や住み替えも視野に入れるべき時期である。県外の家族からの同居の勧めもある。共同浴場の世話は続けたいが、長年住み慣れたこの町を離れるのは惜しい。来月以降に返答するため、今月は売却の意思表示を保留し、「売らない」と返答する。理由としては、まだ決断できないことを伝える。",
+      "went": "今月はどこにも行かない",
+      "notices": [],
+      "said": [],
+      "heard": [
+        {
+          "from": "観音坂の持ち主さん",
+          "route": "隣近所",
+          "at": "公共施設",
+          "text": "X社からの条件について、もう少し情報を集めたいと考えています。すぐに売却を決断するのは難しいので、今回は見送らせていただきます。"
+        },
+        {
+          "from": "学園南の持ち主さん",
+          "route": "隣近所",
+          "at": "商業施設",
+          "text": "皆さん、こんにちは。この辺りでお子さんが学校に通っている方はいらっしゃいますか？情報交換ができればと思いまして。"
+        }
+      ],
+      "offer": "貴殿の所有する湯の元の古家の土地と建物の所有権を、将来にわたり貴殿がそのまま使用できることを条件に譲渡いただきたい。",
+      "offer_parcel": "湯の元の古家",
+      "offer_kind": "両方",
+      "listings": {
+        "湯の元の古家": "出さない"
+      },
+      "listing_reasons": {
+        "湯の元の古家": "まだ決断できないため"
+      },
+      "sell": "売らない",
+      "sell_reason": "まだ決断できないため",
+      "thought_at_decision": "海外の不動産投資会社X社から、湯の元の古家について、私が住み続けられることを条件に譲渡の申し出があった。これはありがたい条件だが、82歳という年齢と体力的なことを考えると、資産整理や住み替えも検討すべき時期である。家族からの同居の勧めもあり、町を離れることも視野に入れなければならない。共同浴場の世話は続けたいので、すぐに決断するのは難しい。来月以降に改めて検討するため、今月は「売らない」と返答し、保留とする。"
+    },
+    {
+      "month": 4,
+      "thought_at_plan": "海外の不動産投資会社X社からの申し出は、住み続けられるという条件が付いているため、すぐに手放す必要はない。しかし、年齢を考えると、将来的な住み替えや町を離れることも視野に入れるべきだ。共同浴場の世話は続けたいという思いもあり、即断は難しい。来月以降、家族とも相談し、より具体的に検討を進めたい。そのため、今月は「売らない」を選択し、一旦保留とする。来月以降の検討のために、共同浴場へ顔を出すことにする。",
+      "went": "公共施設",
+      "notices": [],
+      "said": [
+        {
+          "text": "来月は、共同浴場へ顔を出そうと思っています。皆さんも、お時間があればぜひ。",
+          "at": "公共施設",
+          "to": [
+            "湯坂奥の空き家の共有代表",
+            "神明社の自治会長"
+          ],
+          "thought": "来月、共同浴場へ行くことを決めた。その前に、この公共施設で会った人たちに、来月の予定を伝えておこう。特に、共同浴場の世話をしている身として、自治会長には伝えておくべきだろう。空き家の共有代表にも、共同浴場のことや、将来的に町を離れる可能性についても、それとなく話しておきたい。"
+        }
+      ],
+      "heard": [
+        {
+          "from": "湯坂奥の空き家の共有代表",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "湯坂奥の空き家の件で、海外の投資会社から条件が届いたと聞きました。まだきょうだいと話せていないので、今回は見送らせていただきます。"
+        },
+        {
+          "from": "神明社の自治会長",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "浜辺公園の管理者さん、行政の空き家対策や地域活性化について、もう少し詳しくお伺いしたいのですが、ご都合はいかがでしょうか。"
+        },
+        {
+          "from": "観音坂の持ち主さん",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "浜辺公園の管理者さん、観音坂の不動産について、X社から届いている譲渡条件の件ですが、市の見解をもう少し詳しくお伺いしたいのですが。"
+        },
+        {
+          "from": "学園北の持ち主さん",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "浜辺公園の管理者さん、先月お話しした空き家対策の件ですが、何か具体的な進展はありましたか？学園北地区の現状と照らし合わせて、参考にできる情報があれば伺いたいです。"
+        },
+        {
+          "from": "学園南の持ち主さん",
+          "route": "隣近所",
+          "at": "商業施設",
+          "text": "皆様、いつもお世話になっております。子供たちの学校の件で、またご相談させていただくことがあるかもしれません。どうぞよろしくお願いいたします。"
+        },
+        {
+          "from": "浜辺公園の管理者",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "皆様、本日はお集まりいただきありがとうございます。浜辺公園の管理者として、A市の空き家問題や後継者不足について、皆様のご意見を伺えればと思っております。特に、地域活性化のためにどのような取り組みが可能か、皆様のお考えをお聞かせいただけますでしょうか。"
+        }
+      ],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {
+        "湯の元の古家": "両方"
+      },
+      "listing_reasons": {
+        "湯の元の古家": "坂道や段差がつらく、維持が負担になってきたため"
+      },
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": "来月、共同浴場へ行くことを決めた。その前に、この公共施設で会った人たちに、来月の予定を伝えておこう。特に、共同浴場の世話をしている身として、自治会長には伝えておくべきだろう。空き家の共有代表にも、共同浴場のことや、将来的に町を離れる可能性についても、それとなく話しておきたい。坂道と家の段差がつらくなってきたので、そろそろ身辺整理を始める時期かもしれない。湯の元の古家は、このまま所有し続けるのは負担になってきた。県外の家族も心配しているし、一度売りに出してみることを検討しよう。"
+    },
+    {
+      "month": 5,
+      "thought_at_plan": "県外の家族からの同居の勧めもあり、身体の衰えも感じている。湯の元の古家をこのまま所有し続けるのは負担になってきた。X社から両方の所有権譲渡の条件が届いた。将来にわたりそのまま使用できることを条件に、とのことなので、この条件で売ることを前向きに検討しよう。まずは、この条件について自治会長に相談したい。共同浴場の世話をしている身としても、町の未来について話しておきたい。",
+      "went": "公共施設",
+      "notices": [],
+      "said": [
+        {
+          "text": "自治会長さん、少しご相談したいことがあります。実は、湯の元の古家について、X社から両方の所有権譲渡の条件が届きました。将来にわたってそのまま使用できることが条件なのですが、この条件で売却することを考えています。共同浴場の世話も長く続けてきましたが、そろそろ町の未来についても、自治会長さんとお話ししておきたいのです。",
+          "at": "公共施設",
+          "to": [
+            "神明社の自治会長"
+          ],
+          "thought": "県外の家族からの同居の勧めと、自身の身体の衰えを感じている。湯の元の古家を所有し続ける負担は大きい。X社から両方の所有権譲渡の条件が届き、将来にわたりそのまま使用できることを条件にとのこと。この条件で売却することを前向きに検討したい。まずは、この条件について自治会長に相談し、共同浴場の世話をしている身としても町の未来について意見交換したい。"
+        }
+      ],
+      "heard": [
+        {
+          "from": "湯坂奥の空き家の共有代表",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "海外からの投資会社から条件が届きましたが、まだきょうだいとの話し合いがついておりません。そのため、現時点での売却は見送りたいと考えております。"
+        },
+        {
+          "from": "神明社の自治会長",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "浜辺公園の管理者さん、少しお話よろしいでしょうか。行政の空き家対策や地域活性化について、いくつかお伺いしたいことがあるのですが。"
+        },
+        {
+          "from": "観音坂の持ち主さん",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "観音坂の家について、X社から条件が届いたのですが、このまま使用を続けられるという条件で、譲渡を検討しています。詳細について、もう少し確認したいことがあるのですが。"
+        },
+        {
+          "from": "学園北の持ち主さん",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "浜辺公園の管理者さん、こんにちは。空き家対策の件ですが、具体的な進捗や地域住民への影響について、もう少し詳しくお聞かせいただけますか？"
+        },
+        {
+          "from": "学園南の持ち主さん",
+          "route": "隣近所",
+          "at": "商業施設",
+          "text": "皆さん、こんにちは。最近、街の様子が少しずつ変わってきているように感じますが、皆さんはどう思われますか？"
+        },
+        {
+          "from": "浜辺公園の管理者",
+          "route": "居合わせ",
+          "at": "公共施設",
+          "text": "湯坂奥の空き家について、現状と皆さんのご意見を伺えませんか？"
+        }
+      ],
+      "offer": "将来にわたり貴殿がそのまま使用できることを条件に、貴殿の所有する湯の元の古家の土地と建物の所有権を譲渡いただきたい。",
+      "offer_parcel": "湯の元の古家",
+      "offer_kind": "両方",
+      "listings": {
+        "湯の元の古家": "両方"
+      },
+      "listing_reasons": {
+        "湯の元の古家": "身体の衰えと負担のため"
+      },
+      "sell": "売る",
+      "sell_reason": "家族の勧めと将来の利用条件のため",
+      "thought_at_decision": "県外の家族からの同居の勧めと、自身の身体の衰えを感じており、湯の元の古家を所有し続ける負担は大きい。X社からの「将来にわたりそのまま使用できること」を条件とした両方の所有権譲渡の申し出は魅力的だ。共同浴場の世話をしている身としても、町の未来について自治会長と意見交換したい。この条件で売却することを前向きに検討する。"
+    },
+    {
+      "month": 6,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 7,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 8,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 9,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 10,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 11,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 12,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 13,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 14,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 15,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 16,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 17,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 18,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 19,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 20,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 21,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 22,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 23,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 24,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 25,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 26,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 27,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 28,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 29,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 30,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 31,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 32,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 33,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 34,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 35,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    },
+    {
+      "month": 36,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    }
+  ]
+}

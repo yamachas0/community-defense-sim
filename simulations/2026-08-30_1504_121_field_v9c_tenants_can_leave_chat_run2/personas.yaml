@@ -1,0 +1,826 @@
+# A市 名簿 v9c = personas_v9.yaml + 町にいない所有者14人のペルソナ追記のみ
+# 追記の正 = docs/personas_absentee_v9c_draft.md（施主 OK 2026-08-30 13:31・草案そのまま）
+# 町にいる人35体・区画44件・権利の割り付けは personas_v9.yaml と1文字も違わない。
+meta:
+  version: v9
+  frozen: true
+  based_on: configs/personas_v8.yaml
+  n_agents: 49
+  n_residents: 35
+  n_absentee_owners: 14
+  n_parcels: 44
+  n_buildings: 35
+  n_land_only: 9
+parcels:
+- name: 湯坂上の古家
+  district: 温泉丘陵地区
+  building: true
+  land: A
+  bld_owner: A
+  tenant: null
+- name: 湯坂上の空き店舗
+  district: 温泉丘陵地区
+  building: true
+  land: A
+  bld_owner: A
+  tenant: BA
+- name: 駅前通りの家
+  district: 中央駅前地区
+  building: true
+  land: CL
+  bld_owner: B
+  tenant: null
+- name: 観音坂の家
+  district: 温泉丘陵地区
+  building: true
+  land: C
+  bld_owner: C
+  tenant: null
+- name: 観音坂の空き地
+  district: 温泉丘陵地区
+  building: false
+  land: C
+  bld_owner: null
+  tenant: null
+- name: 湯の元の古家
+  district: 温泉丘陵地区
+  building: true
+  land: D
+  bld_owner: D
+  tenant: null
+- name: 学園北の家
+  district: 北部学術・生活地区
+  building: true
+  land: CM
+  bld_owner: E
+  tenant: null
+- name: 駅裏の小区画
+  district: 中央駅前地区
+  building: true
+  land: CK
+  bld_owner: F
+  tenant: null
+- name: 一番街の家
+  district: 中央駅前地区
+  building: true
+  land: G
+  bld_owner: G
+  tenant: null
+- name: 一番街の資材置場
+  district: 中央駅前地区
+  building: false
+  land: G
+  bld_owner: null
+  tenant: null
+- name: 潮見横丁の改装した古家
+  district: 湾岸観光地区
+  building: true
+  land: CI
+  bld_owner: H
+  tenant: null
+- name: 本町通りの家
+  district: 中央駅前地区
+  building: true
+  land: I
+  bld_owner: I
+  tenant: null
+- name: 本町通りの元店舗
+  district: 中央駅前地区
+  building: true
+  land: CE
+  bld_owner: CE
+  tenant: BD
+- name: 学園南の家
+  district: 北部学術・生活地区
+  building: true
+  land: CH
+  bld_owner: J
+  tenant: null
+- name: 湯坂下の家
+  district: 温泉丘陵地区
+  building: true
+  land: CN
+  bld_owner: K
+  tenant: null
+- name: 波止場通りの元店舗
+  district: 湾岸観光地区
+  building: true
+  land: CF
+  bld_owner: CF
+  tenant: BE
+- name: 波止場通りの家
+  district: 湾岸観光地区
+  building: true
+  land: L
+  bld_owner: L
+  tenant: null
+- name: 北団地の中古住宅
+  district: 北部学術・生活地区
+  building: true
+  land: CG
+  bld_owner: M
+  tenant: null
+- name: 線路沿いの実家
+  district: 中央駅前地区
+  building: true
+  land: N
+  bld_owner: N
+  tenant: null
+- name: 岬道の家
+  district: 湾岸観光地区
+  building: true
+  land: O
+  bld_owner: O
+  tenant: null
+- name: 学園西の家
+  district: 北部学術・生活地区
+  building: true
+  land: P
+  bld_owner: P
+  tenant: null
+- name: 学園西の空き家
+  district: 北部学術・生活地区
+  building: true
+  land: P
+  bld_owner: P
+  tenant: BB
+- name: 浜町の旅館
+  district: 湾岸観光地区
+  building: true
+  land: Q
+  bld_owner: Q
+  tenant: null
+- name: 浜町の旅館の駐車場
+  district: 湾岸観光地区
+  building: false
+  land: Q
+  bld_owner: null
+  tenant: null
+- name: 駅前広場の店舗兼住宅
+  district: 中央駅前地区
+  building: true
+  land: R
+  bld_owner: R
+  tenant: null
+- name: 湯の元前の店
+  district: 温泉丘陵地区
+  building: true
+  land: S
+  bld_owner: S
+  tenant: null
+- name: 学園前の貸オフィス
+  district: 北部学術・生活地区
+  building: true
+  land: CB
+  bld_owner: CB
+  tenant: T
+- name: 駅裏北の月極駐車場
+  district: 中央駅前地区
+  building: false
+  land: CA
+  bld_owner: null
+  tenant: U
+- name: 商店街裏の時間貸し駐車場
+  district: 中央駅前地区
+  building: false
+  land: CA
+  bld_owner: null
+  tenant: U
+- name: 湾岸大通りのホテル
+  district: 湾岸観光地区
+  building: true
+  land: CC
+  bld_owner: CC
+  tenant: V
+- name: 湾岸大通りの社員寮
+  district: 湾岸観光地区
+  building: true
+  land: CC
+  bld_owner: CC
+  tenant: BF
+- name: 浜辺の街区公園
+  district: 湾岸観光地区
+  building: false
+  land: W
+  bld_owner: null
+  tenant: null
+- name: 旧西小学校の校舎
+  district: 北部学術・生活地区
+  building: true
+  land: X
+  bld_owner: X
+  tenant: null
+- name: 西地区の公民館
+  district: 北部学術・生活地区
+  building: true
+  land: X
+  bld_owner: X
+  tenant: null
+- name: 灯台下の宿
+  district: 湾岸観光地区
+  building: true
+  land: CD
+  bld_owner: CD
+  tenant: Y
+- name: 宮の下の共同浴場
+  district: 温泉丘陵地区
+  building: true
+  land: Z
+  bld_owner: Z
+  tenant: null
+- name: 宮の下の源泉地
+  district: 温泉丘陵地区
+  building: true
+  land: Z
+  bld_owner: Z
+  tenant: null
+- name: 船着場裏の駐車場
+  district: 湾岸観光地区
+  building: false
+  land: AA
+  bld_owner: null
+  tenant: null
+- name: 船着場裏の資材置場
+  district: 湾岸観光地区
+  building: false
+  land: AA
+  bld_owner: null
+  tenant: null
+- name: 湯坂奥の空き家
+  district: 温泉丘陵地区
+  building: true
+  land: AB
+  bld_owner: AB
+  tenant: BC
+- name: 神明社の境内地
+  district: 湾岸観光地区
+  building: true
+  land: AC
+  bld_owner: AC
+  tenant: null
+- name: 神明社前の集会所
+  district: 湾岸観光地区
+  building: true
+  land: AC
+  bld_owner: AC
+  tenant: null
+- name: 魚市場前の診療所
+  district: 中央駅前地区
+  building: true
+  land: AD
+  bld_owner: AD
+  tenant: null
+- name: 魚市場前の診療所の駐車場
+  district: 中央駅前地区
+  building: false
+  land: AD
+  bld_owner: null
+  tenant: null
+agents:
+- id: A
+  district: 温泉丘陵地区
+  name: 湯坂上のご夫婦
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '74歳の夫婦世帯。町内会と共同浴場の世話に関わっている。
+
+    建物の傷みと、県外で暮らす子どものことが気になっている。この土地に生まれ育った。
+
+    '
+- id: B
+  district: 中央駅前地区
+  name: 駅前通りの持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '43歳。病院に勤め、中学生の子どもと2人で暮らす。駅前通りに20年以上住んでいる。
+
+    家事と仕事と子育てが日常の中心で、公民館の地域行事にも顔を出す。
+
+    '
+- id: C
+  district: 温泉丘陵地区
+  name: 観音坂の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '57歳。観光施設の設備管理職。相続した家と空き地の草刈り・手入れが体力的に負担になっている。
+
+    飲食店に地元の知人が多い。市内に30年余り住む。
+
+    '
+- id: D
+  district: 温泉丘陵地区
+  name: 湯の元のひとり暮らしさん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '82歳の単身世帯。共同浴場の世話を続けている。坂道と家の段差がつらくなってきた。
+
+    県外の家族から同居を勧められている。生まれてからずっとこの町にいる。
+
+    '
+- id: E
+  district: 北部学術・生活地区
+  name: 学園北の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '35歳。大学の研究支援職。配偶者と2人暮らし。北部に移って6年。
+
+    公開されている政策資料に仕事で接する。日常は勤務と家事が中心。
+
+    '
+- id: F
+  district: 中央駅前地区
+  name: 駅裏の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '48歳。ホテルの予約部門で交代勤務。母と同居して介護をしている。
+
+    相続した小区画の建物の維持に手が回らない。市内在住15年。
+
+    '
+- id: G
+  district: 中央駅前地区
+  name: 一番街の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '61歳。自営の建築設備業。修繕の腕があり、商工会と町内会の付き合いが多い。
+
+    家と資材置場を持つ。この町で二代目。
+
+    '
+- id: H
+  district: 湾岸観光地区
+  name: 潮見横丁の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '31歳。県外から移住したリモートワーカー。在住3年。古い住宅を自分で改装して住んでいる。
+
+    湾岸の喫茶店を仕事場にしている。
+
+    '
+- id: I
+  district: 中央駅前地区
+  name: 本町通りの持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '68歳の元市職員。行政の手続きに詳しい。退職後は散歩・通院・家の管理が中心。
+
+    家と、空いたままの元店舗を持つ。市内在住40年。
+
+    '
+- id: J
+  district: 北部学術・生活地区
+  name: 学園南の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '39歳。夫婦と小学生2人の世帯。北部に移って2年と日が浅い。
+
+    学校・仕事・家事と、保護者仲間との付き合いを大切にしている。
+
+    '
+- id: K
+  district: 温泉丘陵地区
+  name: 湯坂下の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '52歳。家族経営の旅館に従業員として勤める。丘陵の住宅を相続した。
+
+    進学を控えた子どもの生活が暮らしの中心。市内在住25年。
+
+    '
+- id: L
+  district: 湾岸観光地区
+  name: 波止場通りのご夫婦
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '66歳の夫婦世帯。湾岸で営んだ土産店を引退し、元店舗は使う人に任せている。
+
+    その相手や旧知の商店主、旅館関係者との付き合いが続いている。
+
+    '
+- id: M
+  district: 北部学術・生活地区
+  name: 北団地の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '28歳。空港関連の会社に勤める。移り住んで1年。
+
+    通勤と趣味が中心で、地元の人間関係にはまだ深く入っていない。
+
+    '
+- id: N
+  district: 中央駅前地区
+  name: 線路沿いの持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '46歳。介護職。駅前の実家で父と暮らす。古い家の傷みと父の世話を同時に抱えている。
+
+    近所の飲食店や共同浴場を日常的に使う。生まれ育った家に住んでいる。
+
+    '
+- id: O
+  district: 湾岸観光地区
+  name: 岬道の持ち主さん
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '59歳。県外企業の支店勤務で、転勤の可能性がある。湾岸に住宅を持つ。
+
+    地域行事への参加は少ない。この町に来て4年。
+
+    '
+- id: P
+  district: 北部学術・生活地区
+  name: 学園西のご夫婦
+  kind: 個人
+  role_label: 住民
+  resident: true
+  persona: '70歳の夫婦世帯。自治会の世話役をし、大学の国際交流ボランティアも手伝う。
+
+    自宅とは別に、空室のままの古い住宅を持つ。市内在住45年。
+
+    '
+- id: Q
+  district: 湾岸観光地区
+  name: 浜町の旅館のご主人
+  kind: 個人
+  role_label: 旅館経営（家族経営）
+  resident: true
+  persona: '家族で温泉旅館を営む。建物の傷み、予約、従業員の手配、仕入れが日常の課題。
+
+    旅館組合の会議室をよく使い、同業者との連絡が多い。三代続いている。
+
+    '
+- id: R
+  district: 中央駅前地区
+  name: 駅前広場の食堂のご夫婦
+  kind: 個人
+  role_label: 飲食店経営
+  resident: true
+  persona: '夫婦で駅前の食堂を営む。地元客と観光客の双方が訪れる。人手の確保が課題。
+
+    店舗兼住宅は自分たちの名義。開業から28年。
+
+    '
+- id: S
+  district: 温泉丘陵地区
+  name: 湯の元前の店のご主人
+  kind: 個人
+  role_label: 食品・日用品店経営
+  resident: true
+  persona: '共同浴場の前で食品と日用品の店を営み、高齢の住民には配達もしている。
+
+    後継者は決まっていない。店の建物は自分の名義。開業から35年。
+
+    '
+- id: T
+  district: 北部学術・生活地区
+  name: 学園前の貸オフィスの支配人
+  kind: 会社
+  role_label: 貸オフィス運営
+  resident: true
+  persona: '北部でコワーキング施設を運営する会社。研究者や小規模事業者が利用する。
+
+    開業から日が浅く、営業・会員対応・イベント企画・設備管理を少人数で回している。
+
+    '
+- id: U
+  district: 中央駅前地区
+  name: 駅裏北の駐車場の会社
+  kind: 会社
+  role_label: 駐車場運営
+  resident: true
+  persona: '市内で月極と時間貸しの駐車場を運営する会社。従業員3人。
+
+    巡回・清掃・料金機の保守が日常業務で、利用台数は年々減っている。開業18年。
+
+    '
+- id: V
+  district: 湾岸観光地区
+  name: 湾岸大通りのホテルの支配人
+  kind: 会社
+  role_label: ホテル運営
+  resident: true
+  persona: '湾岸でビジネスホテルを運営する会社。客室70室、従業員12人。
+
+    稼働率、清掃の人手、設備の更新期が日常の課題。社員寮も持つ。開業22年。
+
+    '
+- id: W
+  district: 湾岸観光地区
+  name: 浜辺公園の管理者
+  kind: 行政
+  role_label: 行政（都市政策・土地利用・空き家対策）
+  resident: true
+  sellable: false
+  persona: 'A市の都市政策・土地利用・空き家対策の担当。窓口、資料作成、庁内調整、議会対応が通常業務。
+
+    担当になって3年。
+
+    '
+- id: X
+  district: 北部学術・生活地区
+  name: 旧西小学校の管理者
+  kind: 行政
+  role_label: 行政（観光・産業・企業対応）
+  resident: true
+  sellable: false
+  persona: 'A市の観光・産業・企業対応の担当。事業者相談、会議、計画資料、誘致業務を行う。
+
+    担当になって2年。
+
+    '
+- id: Y
+  district: 湾岸観光地区
+  name: 灯台下の宿の主人
+  kind: 会社
+  role_label: 宿（小規模ゲストハウス）運営
+  resident: true
+  persona: '湾岸で小さなゲストハウスを営む会社。開業5年、従業員2人。
+
+    湾岸を歩いて回る客が中心。建物は築古で、雨漏りの手当てが続いている。
+
+    '
+- id: Z
+  district: 温泉丘陵地区
+  name: 宮の下の共同浴場の組合
+  kind: 会社（組合）
+  role_label: 共同浴場運営
+  resident: true
+  persona: '地域の会員制で共同浴場を運営する組合。源泉の権利を持つ。
+
+    利用者の高齢化と燃料の手配が日常の課題。組合の設立から60年以上。
+
+    '
+- id: AA
+  district: 湾岸観光地区
+  name: 船着場裏の不在地主
+  kind: 個人
+  role_label: 不在地主
+  resident: false
+  persona: '県外に住み、年に1回この町へ来る。地域の付き合いは無い。
+
+    駐車場と資材置場の管理は近隣の人に頼んでいる。土地は祖父から受け継いだ。
+
+    祖父が漁業に使っていた土地で、古い写真には木造の物置と船の道具が写っている。仏壇には祖父の位牌があり、法要のたびにこの土地の話が出る。自分の子どもはこの土地を見たことがなく、跡を継ぐ意思を示したこともない。管理を頼んでいる近隣の人も高齢になり、去年から体調を崩して顔を出す回数が減った。
+
+    '
+- id: AB
+  district: 温泉丘陵地区
+  name: 湯坂奥の空き家の共有代表
+  kind: 個人
+  role_label: 相続共有の空き家（きょうだい3人の共有代表）
+  resident: true
+  persona: '45歳。きょうだい3人で相続した空き家の共有代表。他の共有者と意見が揃わない。
+
+    年に数回、風を通しに行くだけ。借り手はいない。市内在住。
+
+    '
+- id: AC
+  district: 湾岸観光地区
+  name: 神明社の自治会長
+  kind: 会社（任意団体）
+  role_label: 自治会（集会所・境内地）
+  resident: true
+  persona: '自治会長で、氏子総代も兼ねる。祭りと清掃の運営が主な仕事。
+
+    会員は高齢化し、担い手が減っている。境内地と集会所を自治会名義で持つ。
+
+    '
+- id: AD
+  district: 中央駅前地区
+  name: 魚市場前の診療所の院長
+  kind: 個人
+  role_label: 診療所経営
+  resident: true
+  persona: '62歳。後継者はいない。高齢の患者の通院を支えている。
+
+    医療設備が更新の時期に来ている。開業から30年。
+
+    '
+- id: BA
+  district: 温泉丘陵地区
+  name: 湯坂上の借り店主
+  kind: 個人
+  role_label: 雑貨店（借り店舗）
+  resident: true
+  persona: '39歳。空き店舗を借りて雑貨と土産の店を開いて3年。夫と2人暮らし。
+
+    前は市外の店に勤めていた。
+
+    '
+- id: BB
+  district: 北部学術・生活地区
+  name: 学園西の借家のご家族
+  kind: 個人
+  role_label: 住民（借家）
+  resident: true
+  persona: '37歳。配偶者と小学生2人。学園西の家を借りて4年。市外の職場へ車で通う。
+
+    '
+- id: BC
+  district: 温泉丘陵地区
+  name: 湯坂奥の借家のひとり
+  kind: 個人
+  role_label: 住民（借家）
+  resident: true
+  persona: '51歳。単身。湯坂奥の家を借りて2年。夜勤のある仕事で、日中は家にいることが多い。
+
+    '
+- id: BD
+  district: 中央駅前地区
+  name: 本町通りの借り店主
+  kind: 個人
+  role_label: 古着と喫茶（借り店舗）
+  resident: true
+  persona: '33歳。元店舗を借りて古着と喫茶の店を開いて1年半。市外から移ってきた。
+
+    '
+- id: BE
+  district: 湾岸観光地区
+  name: 波止場通りの借り店主
+  kind: 個人
+  role_label: 釣具店と食堂（借り店舗）
+  resident: true
+  persona: '58歳。元店舗を借りて釣具店と食堂を営んで9年。漁協の人の出入りが多い。
+
+    '
+- id: BF
+  district: 湾岸観光地区
+  name: 湾岸の社員寮の住人
+  kind: 個人
+  role_label: 住民（社員寮）
+  resident: true
+  persona: '26歳。ホテルに勤め、社員寮に住んで3年。休みの日は湾岸を歩く。
+
+    '
+- id: CA
+  district: 市外
+  name: 駅裏の駐車場の地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '62歳。市外の県庁所在地に住む。駅裏北と商店街裏の2つの土地を父から受け継ぎ、
+
+    駐車場を運営する会社に貸している。現地へ来るのは年に一度。所有して21年。
+
+    父が現役の頃からこの土地を知っており、法事で親族が集まると駐車場の話題になる。貸している会社の担当者とは電話で近況を伝え合う仲になっている。自分の子どもは駐車場の仕事にも土地にも関わっていない。貸している会社は利用台数の減少が続いており、巡回の頻度を見直す相談を受けたことがある。
+
+    '
+- id: CB
+  district: 市外
+  name: 学園前の貸オフィスの家主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '58歳。市外に住む。学園前の土地と建物を持ち、運営する会社に貸している。
+
+    運営には関わらない。所有して12年。
+
+    建物は自分が地元の工務店に頼んで建てたもので、竣工時の写真をいまも手元に残している。運営する会社の代表とは契約更新のたびに顔を合わせる関係が続いている。運営には関わらない取り決めのため、日々の利用状況は会社からの報告でしか知らない。自分の子どもたちはこの建物を見たことがなく、跡を継ぐ話は出ていない。
+
+    '
+- id: CC
+  district: 市外
+  name: 湾岸のホテルの所有会社
+  kind: 会社
+  role_label: 町外の所有者
+  resident: false
+  persona: '市外に本社を置く会社。湾岸大通りのホテルと社員寮の土地と建物を持ち、
+
+    運営する会社に貸している。社員がこの町に常駐したことはない。取得して9年。
+
+    取得時の稟議書には、宇宙港計画を見据えた長期保有という方針が記されている。担当部署は年に数回、運営会社からの定期報告を確認する業務を続けている。建物は開業から22年が経ち、空調と配管の更新時期が近づいている。社内では担当者の異動が続いており、この物件を直接知る社員はいまはいない。
+
+    '
+- id: CD
+  district: 市外
+  name: 灯台下の宿の家主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '71歳。市外の息子夫婦の近くで暮らす。生まれはこの町。灯台下の土地と建物を持ち、
+
+    ゲストハウスを営む会社に貸している。所有して40年余り。
+
+    灯台下の土地は自分が生まれた家があった場所で、法要で親族が集まるとこの土地の話が出る。宿を営む主人とは、契約更新のたびに近況を伝え合っている。建物は築古で雨漏りの手当てが続いており、修繕の相談を受けることが増えた。自分は市外の息子夫婦の近くで暮らし、この土地を継ぐ孫はまだ生まれていない。
+
+    '
+- id: CE
+  district: 市外
+  name: 本町通りの元店舗の家主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '67歳。市外に住む。本町通りの土地と建物を相続し、店を開く人に貸している。
+
+    年に数回、様子を見に来る。所有して14年。
+
+    本町通りの建物は親から相続したもので、実家の間取りや柱の傷にはまだ子どもの頃の記憶が残っている。様子を見に来るたびに、店を営む借り主と立ち話をしている。借りている店主は開業してまだ1年半で、これまでの店とは客層も業種も違う。自分の子どもは市外で暮らしており、この建物に関わったことはない。
+
+    '
+- id: CF
+  district: 市外
+  name: 波止場通りの元店舗の家主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '64歳。市外に住む。波止場通りの土地と建物を持ち、店を営む人に貸している。所有して23年。
+
+    波止場通りの建物を持って23年になり、貸している釣具店の主人とは開業当初から顔なじみの間柄が続いている。漁協の人の出入りが多い店だと聞いている。自分は市外に住んで長く、建物の様子は借り主からの連絡でしか知らない。子どもたちはこの土地に来たことがなく、跡を継ぐ話をしたこともない。
+
+    '
+- id: CG
+  district: 市外
+  name: 北団地の地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '55歳。市外に住む。北団地の土地を持ち、建物を持つ人に貸している。祖父からの土地。
+
+    祖父から受け継いだ土地には代々の墓があり、法要のたびに親族がこの土地の話をする。土地を借りて家を建てた住人とは、契約更新の連絡でやり取りをしている。土地を借りている住人はこの町に移って1年で、地元の付き合いはまだ深くないと聞いている。自分の子どもはこの土地を見たことがなく、関心を示したこともない。
+
+    '
+- id: CH
+  district: 市外
+  name: 学園南の地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '48歳。市外に住む。学園南の土地を持ち、建物を持つ人に貸している。所有して16年。
+
+    学園南の土地を持って16年になり、土地を借りて家を建てた家族とは、更新の連絡のたびに子どもの成長を聞いている。土地は大学に近い一角にあり、他の所有者から立地を尋ねられることがある。自分は所有して以来、この土地を実際に訪れたことは数えるほどしかない。借りている家族は北部に移って2年と日が浅く、この土地との付き合いも同じくらいの年月しかない。
+
+    '
+- id: CI
+  district: 市外
+  name: 潮見横丁の地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '73歳。市外の施設で暮らす。潮見横丁の土地を持ち、建物を持つ人に貸している。
+
+    この町で生まれ育った。
+
+    この町で生まれ育ち、潮見横丁の土地には子どもの頃に遊んだ路地の記憶がある。土地を借りて家を改装した住人とは、施設に入る前は縁側で話をする間柄だった。施設に入ってからは現地に行くことができておらず、様子は人づてに聞くだけになっている。自分の子どもたちは市外で暮らし、この土地に関わったことはない。
+
+    '
+- id: CK
+  district: 市外
+  name: 駅裏の地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '69歳。市外に住む。駅裏の土地を持ち、建物を持つ人に貸している。所有して30年。
+
+    駅裏の土地を持って30年になり、土地を借りて建物を維持している住人とは、更新の連絡のたびに近況を伝え合っている。母親の介護をしながら建物を守っていると聞いている。借りている住人は相続した建物の維持に手が回らないと話しており、修繕の相談を受けることが増えた。自分の子どもはこの土地に関わったことがなく、市外で暮らしている。
+
+    '
+- id: CL
+  district: 市外
+  name: 駅前通りの地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '52歳。市外に住む。駅前通りの土地を持ち、建物を持つ人に貸している。所有して11年。
+
+    駅前通りの土地を持って11年になり、土地を借りて長く住んでいる住人とは、更新の連絡のたびに顔を合わせてきた。地域の行事にも顔を出していると聞いている。自分はこの土地に住んだことがなく、様子は連絡でしか知らない。子どもたちはこの土地に関心を持ったことがなく、跡を継ぐ話をしたこともない。
+
+    '
+- id: CM
+  district: 市外
+  name: 学園北の地主
+  kind: 会社
+  role_label: 町外の所有者
+  resident: false
+  persona: '市外の不動産会社。学園北の土地を持ち、建物を持つ人に貸している。取得して8年。
+
+    取得時の資料には、大学周辺の宅地需要を見込んだ保有方針が記されている。担当者は年に一度、土地を借りている住人からの更新連絡を確認する業務を続けている。社内では担当者の異動が続いており、この土地を直接訪れたことのある社員はいまはいない。取得から8年で保有件数の一覧に載る土地の一つになっている。
+
+    '
+- id: CN
+  district: 市外
+  name: 湯坂下の地主
+  kind: 個人
+  role_label: 町外の所有者
+  resident: false
+  persona: '78歳。市外の娘の家の近くに移って暮らす。湯坂下の土地を持ち、建物を持つ人に貸している。
+
+    この町で生まれ育った。
+
+    この町で生まれ育ち、湯坂下の土地には嫁ぐ前に暮らした家の記憶が残っている。土地を借りて家を継いだ住人とは、法事の場で顔を合わせる間柄が続いている。娘の家の近くに移ってからは坂道を上ることができず、現地の様子は連絡でしか分からなくなった。借りている住人は子どもの進学のことで頭がいっぱいだと聞いている。
+
+    '

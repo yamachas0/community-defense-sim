@@ -10,7 +10,7 @@
 （v9c は同じ設定で2本走らせ、3件と6件でした）。
 **町は会話で守ったのではなく、渡す理由が世界に無かった**というのが、この3本から言えることです。
 
-※ リポジトリ名 `quiet-acquisition` は開発中の内部名です。
+※ 旧リポジトリ名 `quiet-acquisition` は開発中の内部名でした。
 
 ---
 
@@ -18,8 +18,8 @@
 
 | | リンク |
 |---|---|
-| 発表スライド（26枚・スマホ可） | https://yamachas0.github.io/quiet-acquisition-report/slides.html |
-| 同・PDF | https://yamachas0.github.io/quiet-acquisition-report/slides.pdf<br>（提出名 https://yamachas0.github.io/quiet-acquisition-report/0105_KentaYamakawa_CommunityDefense_Slides.pdf ） |
+| 発表スライド（26枚・スマホ可） | https://yamachas0.github.io/community-defense-sim-report/slides.html |
+| 同・PDF | https://yamachas0.github.io/community-defense-sim-report/slides.pdf<br>（提出名 https://yamachas0.github.io/community-defense-sim-report/0105_KentaYamakawa_CommunityDefense_Slides.pdf ） |
 | 動画 | [`docs/submission/video_v9_v9b.mp4`](docs/submission/video_v9_v9b.mp4) （最終版は差し替え予定） |
 | 結果 v9 | [`docs/v9_run.md`](docs/v9_run.md) |
 | 結果 v9b | [`docs/v9b_run.md`](docs/v9b_run.md) |

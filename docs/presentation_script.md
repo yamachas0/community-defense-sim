@@ -1,6 +1,6 @@
 # 「静かな占領」5分プレゼン台本 — 2つの世界（CTO 2026-08-29・**これが最新**）
 
-画面＝`present.html`（Pages: https://yamachas0.github.io/quiet-acquisition-report/present.html ）。
+画面＝`present.html`（Pages: https://yamachas0.github.io/community-defense-sim-report/present.html ）。
 **数値は全部この画面に出ているものだけ**を読む。素人語で話す（色の名前・レベル・分類の話はしない）。
 旧版（v5e2 までの台本）はこのファイルの後ろにそのまま残してある。
 
