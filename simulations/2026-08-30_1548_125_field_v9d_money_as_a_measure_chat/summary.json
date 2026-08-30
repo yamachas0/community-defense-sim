@@ -1,0 +1,182 @@
+{
+  "run_name": "field_v9d_money_as_a_measure_chat",
+  "scenario_version": "field_v9d",
+  "chat": true,
+  "scene_rounds": 1,
+  "seed": 85,
+  "steps": 36,
+  "months_run": 36,
+  "stopped_by_cost": false,
+  "partial_month": null,
+  "max_cost_usd": 1.87,
+  "agents": 49,
+  "residents_at_start": 35,
+  "absentee_owners_at_start": 14,
+  "parcels_total": 44,
+  "sellable_parcels": 41,
+  "buildings_total": 35,
+  "land_only_parcels": 9,
+  "acquired_parcels": 8,
+  "acquired_land": 8,
+  "acquired_buildings": 6,
+  "acquired_both": 6,
+  "transfers_total": 8,
+  "sold_agents": 5,
+  "left_agents": 4,
+  "in_town_end": 31,
+  "absentee_owners_end": 12,
+  "no_user_parcels_end": 6,
+  "offers_total": 710,
+  "offers_accepted": 8,
+  "offers_declined": 702,
+  "offers_no_answer": 0,
+  "offers_to_in_town": 332,
+  "offers_to_absentee": 378,
+  "sold_from_in_town": 4,
+  "sold_from_absentee": 4,
+  "accept_rate_in_town": 0.012,
+  "accept_rate_absentee": 0.0106,
+  "offers_by_kind": {
+    "土地": 271,
+    "建物": 11,
+    "両方": 428
+  },
+  "sold_by_kind": {
+    "土地": 2,
+    "建物": 0,
+    "両方": 6
+  },
+  "listings_total": 119,
+  "listings_by_kind": {
+    "土地": 48,
+    "建物": 51,
+    "両方": 20
+  },
+  "listing_choice_counts": {
+    "出さない": 1370,
+    "土地だけ": 48,
+    "建物だけ": 51,
+    "両方": 20,
+    "no_answer": 0
+  },
+  "notices_total": 6,
+  "utterances_total": 326,
+  "no_answer": 0,
+  "plan_no_answer": 0,
+  "sell_no_answer": 0,
+  "invalid_listing": 0,
+  "listing_missing": 0,
+  "invalid_sell": 0,
+  "invalid_venue": 0,
+  "truncated": 0,
+  "parse_fail": 0,
+  "acquirer_missing_targets": 0,
+  "acquirer_dup_rows": 6,
+  "acquirer_off_range": 0,
+  "acquirer_chunk_fail": 0,
+  "acquirer_empty_text": 0,
+  "acquirer_invalid_offer": 54,
+  "acquirer_missing_parcel": 0,
+  "declines_delivered": 699,
+  "reason_counts": {
+    "listing_total": 1489,
+    "listing_blank": 679,
+    "sell_total": 710,
+    "sell_blank": 3,
+    "acquirer_total": 1185,
+    "acquirer_blank": 0
+  },
+  "common_prefix_tokens": 2220,
+  "cached_ratio": 0.532281374520654,
+  "checkpoints_written": 36,
+  "request_timeout_sec": 60.0,
+  "timeout_retries": 0,
+  "timeout_giveups": 0,
+  "elapsed_sec": 1021.6,
+  "usage": {
+    "calls": 3231,
+    "input_tokens": 9606840,
+    "cached_tokens": 5113542,
+    "output_tokens": 613091,
+    "errors": 0,
+    "by_tag": {
+      "v9:acquirer:acquirer": {
+        "calls": 144,
+        "input": 1277138,
+        "cached": 160409,
+        "output": 126535
+      },
+      "v9:plan:plan": {
+        "calls": 1168,
+        "input": 3074872,
+        "cached": 2017839,
+        "output": 140915
+      },
+      "v9:scene_r1:scene": {
+        "calls": 387,
+        "input": 998317,
+        "cached": 676310,
+        "output": 69327
+      },
+      "v9:decide:decide": {
+        "calls": 1179,
+        "input": 3240651,
+        "cached": 1619585,
+        "output": 227488
+      },
+      "v9:decide:tenant": {
+        "calls": 353,
+        "input": 1015862,
+        "cached": 639399,
+        "output": 48826
+      }
+    }
+  },
+  "cost_usd": 0.7457,
+  "reason_written_listing": 810,
+  "reason_rate_listing": 0.544,
+  "reason_written_sell": 707,
+  "reason_rate_sell": 0.9958,
+  "reason_written_acquirer": 1185,
+  "reason_rate_acquirer": 1.0,
+  "acquirer_undeliverable_promise": 0,
+  "undelivered_total": 91,
+  "undelivered_by_reason": {
+    "相手がその区画のその種別の所有権を持っていない": 54,
+    "この世界で実行される仕組みが無い約束が含まれている": 0
+  },
+  "tenant_calls_total": 353,
+  "tenant_left_total": 1,
+  "tenant_no_answer": 0,
+  "invalid_leave": 0,
+  "tenant_leave_counts": {
+    "出る": 1,
+    "出ない": 352,
+    "no_answer": 0
+  },
+  "messages_total": 307,
+  "messages_tenant_to_landlord": 160,
+  "messages_landlord_to_tenant": 147,
+  "vacancy_notices_total": 1,
+  "vacancy_notices_to_acquirer": 1,
+  "undelivered_lines": 0,
+  "vacated_parcels_end": [
+    "灯台下の宿"
+  ],
+  "valuation_total": 2297700000,
+  "budget_total": 1171800000,
+  "budget_share": 0.51,
+  "spent_total": 112840000,
+  "budget_left": 1058960000,
+  "acquirer_over_budget": 37,
+  "acquirer_bad_amount": 0,
+  "paid_deals": 8,
+  "offer_ratio_mean": 1.0775,
+  "wallets_nonzero": {
+    "湯坂上のご夫婦": 25630000,
+    "湯の元のひとり暮らしさん": 12500000,
+    "学園西のご夫婦": 22510000,
+    "船着場裏の不在地主": 19000000,
+    "灯台下の宿の家主": 33200000
+  }
+}

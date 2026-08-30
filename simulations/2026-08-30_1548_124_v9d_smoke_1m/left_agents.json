@@ -1,0 +1,16 @@
+[
+  {
+    "step": 1,
+    "agent_id": "L",
+    "name": "波止場通りのご夫婦",
+    "parcel": "波止場通りの家",
+    "still_owns": []
+  },
+  {
+    "step": 1,
+    "agent_id": "R",
+    "name": "駅前広場の食堂のご夫婦",
+    "parcel": "駅前広場の店舗兼住宅",
+    "still_owns": []
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "step": 1,
+    "agent_id": "D",
+    "name": "湯の元のひとり暮らしさん",
+    "parcel": "湯の元の古家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯の元のひとり暮らしさん",
+      "建物": "湯の元のひとり暮らしさん"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 1,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "parcel": "船着場裏の資材置場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "船着場裏の不在地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": null
+  },
+  {
+    "step": 1,
+    "agent_id": "CD",
+    "name": "灯台下の宿の家主",
+    "parcel": "灯台下の宿",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "灯台下の宿の家主",
+      "建物": "灯台下の宿の家主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "灯台下の宿の主人"
+  },
+  {
+    "step": 2,
+    "agent_id": "AA",
+    "name": "船着場裏の不在地主",
+    "parcel": "船着場裏の駐車場",
+    "kind": "土地",
+    "moved": [
+      "土地"
+    ],
+    "before": {
+      "土地": "船着場裏の不在地主"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": null
+  },
+  {
+    "step": 6,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "parcel": "学園西の空き家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "学園西のご夫婦",
+      "建物": "学園西のご夫婦"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "学園西の借家のご家族"
+  },
+  {
+    "step": 7,
+    "agent_id": "P",
+    "name": "学園西のご夫婦",
+    "parcel": "学園西の家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "学園西のご夫婦",
+      "建物": "学園西のご夫婦"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 15,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "parcel": "湯坂上の古家",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯坂上のご夫婦",
+      "建物": "湯坂上のご夫婦"
+    },
+    "left_town": true,
+    "was_user": true,
+    "user_after": null
+  },
+  {
+    "step": 16,
+    "agent_id": "A",
+    "name": "湯坂上のご夫婦",
+    "parcel": "湯坂上の空き店舗",
+    "kind": "両方",
+    "moved": [
+      "土地",
+      "建物"
+    ],
+    "before": {
+      "土地": "湯坂上のご夫婦",
+      "建物": "湯坂上のご夫婦"
+    },
+    "left_town": false,
+    "was_user": false,
+    "user_after": "湯坂上の借り店主"
+  }
+]

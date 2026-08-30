@@ -1,0 +1,38 @@
+{
+  "agent_id": "T",
+  "name": "学園前の貸オフィスの支配人",
+  "role": "貸オフィス運営",
+  "district": "北部学術・生活地区",
+  "resident_at_start": true,
+  "sellable": true,
+  "owned_at_start": [],
+  "used_at_start": [
+    "学園前の貸オフィス"
+  ],
+  "neighbours": [
+    "駅前通りの持ち主さん",
+    "学園南の持ち主さん",
+    "学園西の借家のご家族",
+    "湯坂奥の借家のひとり"
+  ],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "今月は開業したばかりのコワーキングスペースの運営に集中する。会員募集や設備の状態確認、来月のイベント準備など、やるべきことが多い。まずはオフィスで現状把握と今後の計画を立てることから始めよう。",
+      "went": "今月はどこにも行かない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "",
+      "offer_parcel": "",
+      "offer_kind": "",
+      "listings": {},
+      "listing_reasons": {},
+      "sell": "問われていない",
+      "sell_reason": "",
+      "thought_at_decision": ""
+    }
+  ]
+}

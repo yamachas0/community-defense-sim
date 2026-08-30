@@ -1,0 +1,37 @@
+{
+  "agent_id": "CF",
+  "name": "波止場通りの元店舗の家主",
+  "role": "町外の所有者",
+  "district": "市外",
+  "resident_at_start": false,
+  "sellable": true,
+  "owned_at_start": [
+    "波止場通りの元店舗"
+  ],
+  "used_at_start": [],
+  "neighbours": [],
+  "left_month": null,
+  "sold": [],
+  "months": [
+    {
+      "month": 1,
+      "thought_at_plan": "",
+      "went": "問われていない",
+      "notices": [],
+      "said": [],
+      "heard": [],
+      "offer": "提示額は土地と建物の評価額の合計額と同一です。",
+      "offer_parcel": "波止場通りの元店舗",
+      "offer_kind": "両方",
+      "listings": {
+        "波止場通りの元店舗": "出さない"
+      },
+      "listing_reasons": {
+        "波止場通りの元店舗": "まずは様子を見るため"
+      },
+      "sell": "売らない",
+      "sell_reason": "評価額と同額だが、今すぐ売却する理由はない",
+      "thought_at_decision": "初月なので、まずは様子を見る。店舗の借り主との関係は悪くないが、市外に住んでおり、建物の維持管理も借主任せになっている。X社からの提示額は評価額と同額であり、悪くない条件だが、すぐに売却する必要性は感じない。まずはこのまま様子を見て、来月以降の状況を判断したい。"
+    }
+  ]
+}

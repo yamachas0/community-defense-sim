@@ -1,7 +1,7 @@
 # 提出スライド構成（10枚）— 「静かな占領」
 
 作成 2026-08-30。**数字はすべて `numbers_sheet.md` の記号（A1・B2 など）で紐付けてある。手打ちしない。**
-図は同じフォルダの PNG。公開画面＝ https://yamachas0.github.io/quiet-acquisition-report/present.html
+図は同じフォルダの PNG。公開画面＝ https://yamachas0.github.io/community-defense-sim-report/present.html
 
 **言い方の約束**：素人語で話す。**内部の記号（4色・S1〜S3・strict/loose・偽陽性率・HH01 のようなID）は
 スライドにも口にも出さない。** 使う言葉は「ストーリー」「部品」「2つの時計」「経路なし／経路あり」「最小の町」。

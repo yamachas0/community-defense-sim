@@ -33,7 +33,7 @@
 
 ## 2026-08-27 — field_v4.1b（金額は無いまま、仲介への相談経路を足した版）
 
-公開レポート: https://yamachas0.github.io/quiet-acquisition-report/
+公開レポート: https://yamachas0.github.io/community-defense-sim-report/
 設計の正: `docs/world_design_v4_1b_broker_consult.md`（判定は実走前に固定）
 
 ### 結論（先に読む）
@@ -144,7 +144,7 @@ v4.1b では runA の行政（MU02）が **第1月から 100㎡** を閾値に�
 
 ## 2026-08-27 — field_v4.1（金額を持たない世界・思考レイヤー）
 
-公開レポート: https://yamachas0.github.io/quiet-acquisition-report/ （前便 v4-mini は `v4_mini.html` に退避）
+公開レポート: https://yamachas0.github.io/community-defense-sim-report/ （前便 v4-mini は `v4_mini.html` に退避）
 
 ### この版で変えたこと
 

@@ -6,8 +6,8 @@
 49人（町に住む35人＋町の外に住んで区画だけを持つ所有者14人）と44区画の町に、
 海外の不動産投資会社「X社」が1社だけ現れ、毎月それぞれの持ち主に買い取りの条件を出します。
 町の人は町の中で話し、月末に売るか売らないかを自分で決めます。36か月＝3年。
-設定を変えた3本（v9／v9b／v9c）を走らせた結果、**3年で動いたのは44区画のうち3〜6**でした
-（v9c は同じ設定で2本走らせ、3件と6件でした）。
+設定を変えた3本（v9／v9b／v9c）を走らせた結果、**3年で動いたのは44区画のうち3〜8**でした
+（v9c は同じ設定で2本走らせ、3件と6件でした。お金をものさしとして入れた v9d で8件）。
 **町は会話で守ったのではなく、渡す理由が世界に無かった**というのが、この3本から言えることです。
 
 ※ 旧リポジトリ名 `quiet-acquisition` は開発中の内部名でした。
@@ -18,12 +18,17 @@
 
 | | リンク |
 |---|---|
-| 発表スライド（26枚・スマホ可） | https://yamachas0.github.io/community-defense-sim-report/slides.html |
-| 同・PDF | https://yamachas0.github.io/community-defense-sim-report/slides.pdf<br>（提出名 https://yamachas0.github.io/community-defense-sim-report/0105_KentaYamakawa_CommunityDefense_Slides.pdf ） |
+| 発表スライド（提出版・10枚・スマホ可） | https://yamachas0.github.io/community-defense-sim-report/slides10.html |
+| 同・PDF | https://yamachas0.github.io/community-defense-sim-report/0105_KentaYamakawa_CommunityDefense_Slides.pdf |
+| 発表スライド（フル版・26枚） | https://yamachas0.github.io/community-defense-sim-report/slides.html |
+| 同・PDF | https://yamachas0.github.io/community-defense-sim-report/slides_full.pdf |
 | 動画 | [`docs/submission/video_v9_v9b.mp4`](docs/submission/video_v9_v9b.mp4) （最終版は差し替え予定） |
 | 結果 v9 | [`docs/v9_run.md`](docs/v9_run.md) |
 | 結果 v9b | [`docs/v9b_run.md`](docs/v9b_run.md) |
 | 結果 v9c | [`docs/v9c_run.md`](docs/v9c_run.md) |
+| 結果 v9d | [`docs/v9d_run.md`](docs/v9d_run.md) |
+| 差分 | [`docs/v9d_diff_from_v9c.md`](docs/v9d_diff_from_v9c.md) |
+| 設計 | [`docs/world_design_v9d.md`](docs/world_design_v9d.md) |
 
 版ごとの差分は [`docs/v9_diff_from_v8d.md`](docs/v9_diff_from_v8d.md) ／
 [`docs/v9b_diff_from_v9.md`](docs/v9b_diff_from_v9.md) ／
@@ -120,6 +125,22 @@ X社が575回書いた「支援」が、そのまま最多の断り理由にな�
 **人生を持った家主14人は、393件の手紙に1件も応じませんでした**（断りは「長期保有方針のため」19件など）。
 借り手と家主の一言は554通・返事率95.8%で、中身は季節の挨拶と近況が大半でした。
 
+### v9d ― お金をものさしとして入れた町（[`docs/v9d_run.md`](docs/v9d_run.md)）
+
+44区画の土地・建物に**公開の評価額**を付けた版（合計 **22億9,770万円**。別府市の公示地価を土台に、
+地区5段階×用途×築年で機械的に置いた仮の値。走行前に凍結）。X社の手紙には**金額が必須**になり、
+いくらにするかはX社が自分で決める。X社の資金は**全評価額の51%＝11億7,180万円**で、成約するたびに
+減り、同じ月に配る提示の合計も残額を超えない。売った人の記録には金額が入るだけで、賃料も税も
+支出もない。
+
+手紙は **710件**（両方428・土地271・建物11）、値付けの中央値は**評価額の1.10倍**（93%が評価額以上）。
+それでも**評価額以上の提示662件のうち655件が断られ**、動いたのは **8件・5人**（両方6・土地2）
+＝評価額にして町の **4.9%** だけだった。開始時から町にいない持ち主は2人・3件が動いたが、
+そのうち1人（灯台下の宿の家主）は**お金の無い v9b でも同じ区画を売っている**人であり、
+金だけの効果とは言えない。X社の資金は **9.6%** しか使われず、湾岸大通りのホテル（評価額6.6億円）へは
+「同じ月の提示合計は残額を超えない」という規則で**37回とも止められた**。町を出た人は4人、
+費用は **$0.7457**。
+
 ### 版の比較
 
 | | X社の手紙 | 動いた | 町を出た人 | 断りの最多語 | 条件文の「支援」 |
@@ -128,6 +149,7 @@ X社が575回書いた「支援」が、そのまま最多の断り理由にな�
 | v9b | 809件 | 5件・4人 | 1人 | 条件 96 | 0回 |
 | v9c | 960件 | 3件・3人 | 3人 | 条件 137 | 0回 |
 | v9c（2本目・同設定） | 785件 | 6件・6人 | 3人 | 条件 166 | 0回 |
+| v9d | 710件 | 8件・5人 | 4人 | 時期・将来的な価値上昇 | 0回 |
 
 **v9・v9b は1本ずつ、seedは1つです。** 成約3〜6件という差は揺れと区別できません。
 分子が1桁の数字に統計的な意味を持たせてはいけません（仮説としてだけ持ち出すこと）。
@@ -157,7 +179,7 @@ python run_v9c.py --provider mock --steps 3
 python run_v9c.py --steps 36 --workers 4 --max-cost 1.9
 ```
 
-v9・v9b を走らせるなら `run_v9.py` / `run_v9b.py` を同じ引数で使います。
+v9・v9b・v9d を走らせるなら `run_v9.py` / `run_v9b.py` / `run_v9d.py` を同じ引数で使います。
 `--max-cost` は手元集計の費用がその額に達したら打ち切る保険です。
 
 **テスト（外部依存なし・API を叩かない）**
@@ -190,7 +212,7 @@ src/                 世界の帳簿・エージェントの器・プロンプ�
 configs/             ラン設定（config_field_v9*.yaml）と名簿（personas_v9*.yaml）
 run_v9.py            v9 の実行入口（run_v9b.py / run_v9c.py も同じ形）
 tools/               決定論の集計・図・動画・コスト見積り（v9_emergence.py / v9_fig.py / v9_map.py / v9_video.py）
-docs/                設計（world_design_v9*.md）・結果（v9*_run.md）・差分（v9*_diff_*.md）・引き継ぎ
+docs/                設計（world_design_v9*.md、v9d 含む）・結果（v9*_run.md、v9d 含む）・差分（v9*_diff_*.md、v9d 含む）・引き継ぎ
 docs/submission/     提出用の集計 JSON・図・動画
 simulations/         ラン成果物（1ラン1フォルダ・自己完結。生ログ・帳簿・時系列）
 tests/               回帰テスト（帳簿・配達の門番・応答解析）
@@ -220,6 +242,10 @@ tests/               回帰テスト（帳簿・配達の門番・応答解析�
 6. **理由を書かせること自体が介入です。** 同じく、v9c で毎月「A市を出るか」と問うこと自体が介入です
    （促し文は置いていませんが、問いの存在が退場を毎月思い出させます）。
 7. LLM は `gemini-2.5-flash-lite`・temperature 0.75。応答の揺れはそのまま結果に乗ります。
+8. **v9d の評価額表と資金51%は置き数字です。** 別府市の公示地価を土台にした仮の値で、実在の物件
+   ではありません。評価額を公開した時点でそれ自体が目印になり、X社が値付けを1.10倍に寄せたのは
+   「評価額を見せたこの世界での結果」です。お金が動くのは所有権が移るときだけで、賃料・税・生活費
+   は無く、**金に困って売る筋はこの世界に存在しません**。v9d も1本しか走らせていません。
 
 ---
 

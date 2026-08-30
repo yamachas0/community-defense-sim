@@ -38,4 +38,4 @@
 
 ---
 
-*数字の出典は同じフォルダの `numbers_sheet.md`。集計は判定用のAIを1本も使わない決定論（`tools/two_worlds.py`）。公開画面 https://yamachas0.github.io/quiet-acquisition-report/present.html*
+*数字の出典は同じフォルダの `numbers_sheet.md`。集計は判定用のAIを1本も使わない決定論（`tools/two_worlds.py`）。公開画面 https://yamachas0.github.io/community-defense-sim-report/present.html*
