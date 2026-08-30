@@ -49,12 +49,35 @@ WHITE = (255, 255, 255)
 BODY = (200, 208, 218)
 
 K = 1.4                      # 0.7倍速（読める速さ）にする係数
+AUDIO_DIR = os.path.join(ROOT, "docs", "submission", "video_assets", "audio")
+BGM = os.path.join(AUDIO_DIR, "bgm_pad.wav")
+SILENT_MP4 = os.path.join(ROOT, "docs", "submission", "video_assets",
+                          "_silent_v7.mp4")
+
+# ナレーション（v7・全部 Kore で一度に撮ったもの）
+NAR = {k: os.path.join(AUDIO_DIR, f"nar_v7_{k}.wav")
+       for k in ("01", "02", "03", "04", "05", "06", "07", "08")}
+LEAD = 0.4                   # シーン頭からナレーションが始まるまでの間
+
+
+def wav_sec(path: str) -> float:
+    import wave
+    with wave.open(path, "rb") as w:
+        return w.getnframes() / float(w.getframerate())
+
+
+NAR_SEC = {k: wav_sec(v) for k, v in NAR.items()}
+
 SEC = {
-    # ナレーション（v6）が収まる長さ。値はナレーション実測長＋余白。
     "title": 10.0, "why": 11.0, "world": 9.9, "flow": 13.2,
-    "m0": 2.0, "m36": 4.8, "black": 1.5, "end": 5.6,
+    "m0": 2.0, "m36": 4.8, "summary": 10.0, "black": 1.5, "end": 5.6,
 }
 MONTH_SEC = 0.34
+# ナレーションが収まる長さへ伸ばす（声が切れない）。
+for _key, _num, _tail in (("title", "01", 0.8), ("why", "02", 0.8),
+                          ("world", "03", 0.8), ("flow", "04", 0.8),
+                          ("m36", "06", 0.8), ("summary", "07", 0.6)):
+    SEC[_key] = max(SEC[_key], LEAD + NAR_SEC[_num] + _tail)
 
 
 # ---------------------------------------------------------------------------
@@ -356,7 +379,57 @@ def scene_flow(t: float, xco_small: Image.Image) -> Canvas:
 
 
 # ---------------------------------------------------------------------------
-# ⑥ 締め
+# ⑥ 検証まとめ（スライド P10）
+# ---------------------------------------------------------------------------
+
+SUMMARY_SLIDE = os.path.join(ROOT, "docs", "submission", "video_assets",
+                             "summary_slide_p10.png")
+# P10（1280x745 に切ったもの）の中の区画。順に出していく。
+SUM_BOXES = [
+    ("head", (0, 0, 1280, 96), 0.2, 1.0),
+    ("p1", (0, 96, 344, 420), 1.4, 2.3),
+    ("p2", (344, 96, 638, 420), 3.4, 4.3),
+    ("p3", (638, 96, 932, 420), 5.4, 6.3),
+    ("p4", (932, 96, 1280, 420), 7.4, 8.3),
+    ("box", (0, 420, 1280, 552), 10.0, 11.4),
+    ("more", (0, 552, 1280, 745), 16.0, 17.4),
+]
+
+
+def summary_layout(slide: Image.Image) -> Tuple[Image.Image, float, int, int]:
+    """P10 を画面に収め、元画像座標→画面座標の倍率とずれを返す。"""
+    sw, sh = slide.size
+    k = min(W / sw, H / sh)
+    im = slide.resize((int(sw * k), int(sh * k)), Image.LANCZOS)
+    full = Image.new("RGB", (W, H), (0, 0, 0))
+    ox, oy = (W - im.size[0]) // 2, (H - im.size[1]) // 2
+    full.paste(im, (ox, oy))
+    return full, k, ox, oy
+
+
+def scene_summary(t: float, lay) -> Canvas:
+    full, k, ox, oy = lay
+    total = SEC["summary"]
+    c = Canvas()
+    # ナレーションの長さに合わせて、出す間隔を引き伸ばす。
+    ks = max(1.0, (total - 4.0) / SUM_BOXES[-1][3])
+    for _name, (x0, y0, x1, y1), t0, t1 in SUM_BOXES:
+        a = max(0.0, min(1.0, V._ease(t0 * ks, t1 * ks, t)))
+        if a <= 0.01:
+            continue
+        box = (int(x0 * k) + ox, int(y0 * k) + oy,
+               int(x1 * k) + ox, int(y1 * k) + oy)
+        part = full.crop(box)
+        if a < 0.999:
+            part = Image.blend(Image.new("RGB", part.size, (0, 0, 0)), part, a)
+        c.img.paste(part, (box[0], box[1]))
+    c.d = ImageDraw.Draw(c.img)
+    fade_out(c, t, total)
+    return c
+
+
+# ---------------------------------------------------------------------------
+# ⑦ 締め
 # ---------------------------------------------------------------------------
 
 def scene_black(t: float) -> Canvas:
@@ -484,11 +557,13 @@ def build_frames(assets: Dict[str, Image.Image],
                           "これから36か月を早回しで見る。", True), 1.6),
         ("m36", SEC["m36"], lambda t: banner(m36_img, t, END_LINE, "", False),
          2.4),
+        ("summary", SEC["summary"],
+         lambda t: scene_summary(t, assets["summary"]).img, 12.0),
         ("black", SEC["black"], lambda t: scene_black(t).img, 0.5),
         ("end", SEC["end"], lambda t: scene_end(t, assets["end"]).img, 4.6),
     ]
     order = ["title", "why", "world", "flow", "m0", "__body__", "m36",
-             "black", "end"]
+             "summary", "black", "end"]
     by_key = {p[0]: p for p in plan}
 
     for key in order:
@@ -531,6 +606,38 @@ def encode(frames, out: str, crf: int) -> None:
     print(f"  {n} コマ（{n / FPS:.2f}秒）", flush=True)
 
 
+def narration_plan() -> List[Tuple[float, str]]:
+    """各ナレーションの開始秒（シーンの並びから決める）。"""
+    order = ["title", "why", "world", "flow", "m0", "__body__", "m36",
+             "summary", "black", "end"]
+    at = {}
+    t = 0.0
+    for key in order:
+        at[key] = t
+        t += (MONTH_SEC * 36) if key == "__body__" else SEC[key]
+    plan = [
+        (at["title"] + LEAD, NAR["01"]),
+        (at["why"] + LEAD, NAR["02"]),
+        (at["world"] + LEAD, NAR["03"]),
+        (at["flow"] + LEAD, NAR["04"]),
+        (at["m0"] + LEAD, NAR["05"]),
+        (at["m36"] + LEAD, NAR["06"]),
+        (at["summary"] + LEAD, NAR["07"]),
+        (at["end"] + 1.0, NAR["08"]),
+    ]
+    print("ナレーション配置（秒）", flush=True)
+    for start, wav in plan:
+        print(f"  {start:7.2f}  +{wav_sec(wav):5.2f}  "
+              f"{os.path.basename(wav)}", flush=True)
+    print(f"  全体 {t:.2f}秒", flush=True)
+    return plan
+
+
+def mix_narration(silent: str, out: str) -> None:
+    import mix_audio
+    mix_audio.mix(silent, narration_plan(), BGM, out)
+
+
 def raw(name: str) -> Image.Image:
     return Image.open(os.path.join(BG.OWNER, name + ".png")).convert("RGB")
 
@@ -550,13 +657,17 @@ def main() -> int:
             (W, H), Image.LANCZOS),
         "end": Image.open(BG.owner_bg(end_src, end_out, 0.42, "cover", 0.5,
                                       None, 0.5, 0.45)).convert("RGB"),
+        "summary": summary_layout(
+            Image.open(SUMMARY_SLIDE).convert("RGB")),
     }
     save = {k: os.path.join(FRAMES_DIR, f"final_{k}.png")
-            for k in ("title", "why", "world", "flow", "m00", "m36", "end")}
+            for k in ("title", "why", "world", "flow", "m00", "m36",
+                      "summary", "end")}
 
     crf = 21
     for _ in range(4):
-        encode(build_frames(assets, save), OUT_MP4, crf)
+        encode(build_frames(assets, save), SILENT_MP4, crf)
+        mix_narration(SILENT_MP4, OUT_MP4)
         mb = os.path.getsize(OUT_MP4) / 1e6
         print(f"crf={crf} size={mb:.1f}MB", flush=True)
         if mb <= 25.0:
